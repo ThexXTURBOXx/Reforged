@@ -22,6 +22,7 @@ public class ItemNestOfBees extends ReforgedItem {
 	public static final int COOLDOWN = 40;
 	public static final float INACCUARY = 3f;
 	public static final float DAMAGE = 2.5f;
+	public static final float ARROW_SPEED = 1.75f;
 	
 	public ItemNestOfBees() {
 		
@@ -47,7 +48,7 @@ public class ItemNestOfBees extends ReforgedItem {
 			EntityArrow arrow = new EntityArrow(world, shooter, 1f);
 			arrow.setDamage(DAMAGE);
 			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ,
-					1f + itemRand.nextFloat() / 2f, INACCUARY);
+					ARROW_SPEED + itemRand.nextFloat() / 2f, INACCUARY);
 			world.spawnEntityInWorld(arrow);
 		}
 	}
