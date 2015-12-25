@@ -2,7 +2,6 @@ package org.silvercatcher.reforged.weapons;
 
 import java.util.List;
 
-import org.silvercatcher.reforged.ReforgedItem;
 import org.silvercatcher.reforged.ReforgedItems;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,7 +42,7 @@ public class ItemNestOfBees extends ReforgedItem {
 	
 	protected void shoot(World world, EntityPlayer shooter) {
 		
-        world.playSoundAtEntity(shooter, "fireworks.launch", 2.0f, 1.0f);
+        world.playSoundAtEntity(shooter, "item.fireCharge.use", 0.5f, 1.0f);
 		if(!world.isRemote) {
 			EntityArrow arrow = new EntityArrow(world, shooter, 1f);
 			arrow.setDamage(DAMAGE);
@@ -51,6 +50,7 @@ public class ItemNestOfBees extends ReforgedItem {
 					ARROW_SPEED + itemRand.nextFloat() / 2f, INACCUARY);
 			world.spawnEntityInWorld(arrow);
 		}
+        world.playSoundAtEntity(shooter, "fireworks.launch", 3.0f, 1.0f);
 	}
 	
 	@Override
@@ -85,11 +85,6 @@ public class ItemNestOfBees extends ReforgedItem {
 		stack.getTagCompound().setLong(CompoundTags.LAST_USE, worldIn.getTotalWorldTime());
 		stack.damageItem(1, playerIn);
 		return stack;
-	}
-	
-	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
-		return COOLDOWN;
 	}
 	
 	@Override

@@ -9,13 +9,13 @@ public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		
-		ReforgedItems.init();
+		ReforgedItems.createItems();
 		ReforgedItems.registerItems();
 	}
 	
 	public void init(FMLInitializationEvent event) {
 		
-		System.out.println("init --------------------------------- " + event.getSide());
+		ReforgedItems.registerRecipes();
 	}
 	
 	protected void registerRenderers() {}

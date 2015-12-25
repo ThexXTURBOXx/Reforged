@@ -1,8 +1,8 @@
 package org.silvercatcher.reforged.proxy;
 
-import org.silvercatcher.reforged.ReforgedItem;
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.weapons.ReforgedItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
