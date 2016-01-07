@@ -31,6 +31,8 @@ public class ItemNestOfBees extends ReforgedItem implements IReloadable {
 		
 		super("nest_of_bees");
 		loadState = LoadStates.EMPTY;
+		setMaxStackSize(1);
+		setMaxDamage(100);
 	}
 
 	@Override

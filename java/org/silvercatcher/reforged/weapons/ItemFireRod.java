@@ -17,7 +17,7 @@ public class ItemFireRod extends ReforgedItem {
 	
 	public ItemFireRod() {
 		super("firerod");
-		
+		setMaxStackSize(32);
 	}
 
 	@Override

@@ -18,7 +18,8 @@ public class ItemBattleAxe extends MaterialItem {
 
 	public ItemBattleAxe(ToolMaterial material) {
 		super("battleaxe", material);
-		
+		setMaxDamage(40);
+		setMaxStackSize(1);
 	}
 
 	@Override
@@ -62,5 +63,25 @@ public class ItemBattleAxe extends MaterialItem {
 		modifiers.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
 				new AttributeModifier(itemModifierUUID, "Weapon Modifier", 4, 0));
 		return modifiers;
+	}
+
+	@Override
+	protected int getMaxDamageForMaterial(ToolMaterial material) {
+		
+		switch(material) {
+		
+		case EMERALD: return 100;
+		
+		case GOLD: return 40;
+		
+		case IRON: return 70;
+		
+		case STONE: return 50;
+		
+		case WOOD: return 40;
+		
+		default: return -1;
+		
+		}
 	}
 }

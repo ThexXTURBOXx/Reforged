@@ -10,6 +10,8 @@ public abstract class MaterialItem extends ReforgedItem {
 		this.material = material;
 	}
 
+	protected abstract int getMaxDamageForMaterial(ToolMaterial material);
+	
 	public static String getNameWithMaterial(String base, ToolMaterial material) {
 		
 		String materialPrefix = "";
