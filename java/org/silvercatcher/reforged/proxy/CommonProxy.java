@@ -23,7 +23,5 @@ public class CommonProxy {
 	}
 	
 	protected void registerRenderers() {}
-	public void generateMysteriousParticles(Entity theEntity) {
-		
 	}
 }
