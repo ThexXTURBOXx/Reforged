@@ -2,13 +2,13 @@
 {
   "modid": "reforged",
   "name": "Reforged",
-  "description": "The revive of Balkon's Weapon Mod for 1.8",
+  "description": "A successor (not port) of Balkonn's Weapon Mod, will add primitive, medieval and some gunpowder weapons.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
   "authorList": ["Silvercatcher", "ThexXTURBOXx"],
-  "credits": "",
+  "credits": "Snow_Yoshi98 and baddaspig for textures",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
