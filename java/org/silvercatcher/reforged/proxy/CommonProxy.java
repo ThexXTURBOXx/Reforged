@@ -1,8 +1,10 @@
 package org.silvercatcher.reforged.proxy;
 
 import org.silvercatcher.reforged.ReforgedItems;
+import org.silvercatcher.reforged.ReforgedMod;
 
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy {
@@ -19,4 +21,7 @@ public class CommonProxy {
 	}
 	
 	protected void registerRenderers() {}
+	public void generateMysteriousParticles(Entity theEntity) {
+		
+	}
 }
