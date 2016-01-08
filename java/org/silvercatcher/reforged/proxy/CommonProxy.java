@@ -13,6 +13,8 @@ public class CommonProxy {
 		
 		ReforgedItems.createItems();
 		ReforgedItems.registerItems();
+		//Version Checker
+		FMLInterModComms.sendRuntimeMessage(ReforgedMod.ID, "VersionChecker", "addVersionCheck", "https://raw.githubusercontent.com/ThexXTURBOXx/Reforged/master/version.json");
 	}
 	
 	public void init(FMLInitializationEvent event) {
