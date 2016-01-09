@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.silvercatcher.reforged.weapons.ItemBattleAxe;
+import org.silvercatcher.reforged.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.weapons.ItemFireRod;
 import org.silvercatcher.reforged.weapons.ItemNestOfBees;
 import org.silvercatcher.reforged.weapons.ReforgedItem;
@@ -19,6 +20,8 @@ public class ReforgedItems {
 	
 	public static ReforgedItem IRON_BATTLE_AXE;
 	
+	public static ReforgedItem BOOMERANG;
+	
 	public static List<ReforgedItem> registratonList = new ArrayList<ReforgedItem>();
 	
 	public static void createItems() {
@@ -26,6 +29,7 @@ public class ReforgedItems {
 		registratonList.add(NEST_OF_BEES = new ItemNestOfBees());
 		registratonList.add(FIREROD = new ItemFireRod());
 		registratonList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
+		registratonList.add(BOOMERANG = new ItemBoomerang("boomerang"));
 		
 	}
 	

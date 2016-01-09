@@ -2,13 +2,17 @@ package org.silvercatcher.reforged.proxy;
 
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
+import org.silvercatcher.reforged.render.RendererBoomerang;
+import org.silvercatcher.reforged.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.weapons.ReforgedItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -36,5 +40,9 @@ public class ClientProxy extends CommonProxy {
 			mesher.register(item, 0, new ModelResourceLocation(ReforgedMod.ID + ":" 
 					+ item.getName(), "inventory"));
 		}
+		
+		//Turbo Stuff
+		//Boomerang
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoomerang.class, new RendererBoomerang(Minecraft.getMinecraft().getRenderManager()));
 	}
 }
