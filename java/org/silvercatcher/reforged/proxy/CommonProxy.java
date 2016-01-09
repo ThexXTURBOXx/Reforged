@@ -2,7 +2,7 @@ package org.silvercatcher.reforged.proxy;
 
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.entities.EntityWoodenBoomerang;
 import org.silvercatcher.reforged.weapons.ItemBoomerang;
 
 import net.minecraft.client.Minecraft;
@@ -21,7 +21,7 @@ public class CommonProxy {
 		
 		ReforgedItems.createItems();
 		ReforgedItems.registerItems();
-		regTurboEntities();
+		registerEntities();
 		//Version Checker
 		FMLInterModComms.sendRuntimeMessage(ReforgedMod.ID, "VersionChecker", "addVersionCheck", "https://raw.githubusercontent.com/ThexXTURBOXx/Reforged/master/version.json");
 	}
@@ -33,7 +33,7 @@ public class CommonProxy {
 	
 	protected void registerRenderers() {}
 	
-	private void regTurboEntities() {
-		EntityRegistry.registerModEntity(EntityBoomerang.class, "FlyingBoomerang", 1, ReforgedMod.instance, 120, 3, true );
+	private void registerEntities() {
+		EntityRegistry.registerModEntity(EntityWoodenBoomerang.class, "FlyingWoodenBoomerang", 1, ReforgedMod.instance, 120, 3, true );
 	}
 }

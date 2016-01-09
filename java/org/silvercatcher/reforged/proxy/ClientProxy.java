@@ -2,7 +2,7 @@ package org.silvercatcher.reforged.proxy;
 
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.entities.EntityWoodenBoomerang;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
 import org.silvercatcher.reforged.render.RendererBoomerang;
 import org.silvercatcher.reforged.weapons.ItemBoomerang;
@@ -43,6 +43,6 @@ public class ClientProxy extends CommonProxy {
 		
 		//Turbo Stuff
 		//Boomerang
-		RenderingRegistry.registerEntityRenderingHandler(EntityBoomerang.class, new RendererBoomerang(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityWoodenBoomerang.class, new RendererBoomerang(Minecraft.getMinecraft().getRenderManager()));
 	}
 }
