@@ -9,18 +9,18 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityBoomerang extends EntityThrowable
+public class EntityWoodenBoomerang extends EntityThrowable
 {
 	
-    public EntityBoomerang(World par1World)
+    public EntityWoodenBoomerang(World par1World)
     {
         super(par1World);
     }
-    public EntityBoomerang(World par1World, EntityLivingBase par2EntityLivingBase)
+    public EntityWoodenBoomerang(World par1World, EntityLivingBase par2EntityLivingBase)
     {
         super(par1World, par2EntityLivingBase);
     }
-    public EntityBoomerang(World par1World, double par2, double par4, double par6)
+    public EntityWoodenBoomerang(World par1World, double par2, double par4, double par6)
     {
         super(par1World, par2, par4, par6);
         
