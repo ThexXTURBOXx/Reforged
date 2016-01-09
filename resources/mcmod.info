@@ -2,7 +2,7 @@
 {
   "modid": "reforged",
   "name": "Reforged",
-  "description": "A successor (not port) of Balkonn's Weapon Mod, will add primitive, medieval and some gunpowder weapons.",
+  "description": "A successor (not port) of Balkon's Weapon Mod, will add primitive, medieval and some gunpowder weapons.",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
