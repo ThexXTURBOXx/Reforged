@@ -41,11 +41,11 @@ public class EntityDiamondBoomerang extends EntityThrowable
         if (!this.worldObj.isRemote)
         {
         	Random r = new Random();
-        	if(r.nextInt(1001) == 1) {
-        		this.playSound("mob.blaze.hit", 0.5F, 0.4F);
+        	if(r.nextInt(1001) != 1) {
+            	this.playSound("liquid.lavapop", 0.5F, 0.4F);
             	this.entityDropItem(new ItemStack(ReforgedItems.DIAMOND_BOOMERANG), 0.0F);        		
         	} else {
-            	this.playSound("liquid.lavapop", 0.5F, 0.4F);
+        		this.playSound("mob.blaze.hit", 0.5F, 0.4F);
         	}
         	this.setDead();
         }

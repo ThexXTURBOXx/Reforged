@@ -42,10 +42,10 @@ public class EntityWoodenBoomerang extends EntityThrowable
         {
         	Random r = new Random();
         	if(r.nextInt(1001) <= 500) {
-        		this.playSound("mob.blaze.hit", 0.5F, 0.4F);
+            	this.playSound("liquid.lavapop", 0.5F, 0.4F);
             	this.entityDropItem(new ItemStack(ReforgedItems.WOODEN_BOOMERANG), 0.0F);        		
         	} else {
-            	this.playSound("liquid.lavapop", 0.5F, 0.4F);
+        		this.playSound("mob.blaze.hit", 0.5F, 0.4F);
         	}
         	this.setDead();
         }
