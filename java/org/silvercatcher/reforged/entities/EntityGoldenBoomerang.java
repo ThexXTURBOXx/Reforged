@@ -13,18 +13,18 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityWoodenBoomerang extends EntityThrowable
+public class EntityGoldenBoomerang extends EntityThrowable
 {
 	
-    public EntityWoodenBoomerang(World par1World)
+    public EntityGoldenBoomerang(World par1World)
     {
         super(par1World);
     }
-    public EntityWoodenBoomerang(World par1World, EntityLivingBase par2EntityLivingBase)
+    public EntityGoldenBoomerang(World par1World, EntityLivingBase par2EntityLivingBase)
     {
         super(par1World, par2EntityLivingBase);
     }
-    public EntityWoodenBoomerang(World par1World, double par2, double par4, double par6)
+    public EntityGoldenBoomerang(World par1World, double par2, double par4, double par6)
     {
         super(par1World, par2, par4, par6);
         
@@ -35,15 +35,15 @@ public class EntityWoodenBoomerang extends EntityThrowable
     {
         if (par1MovingObjectPosition.entityHit != null)
         {
-            byte damageBoomerang = 2;
+            byte damageBoomerang = 3;
             par1MovingObjectPosition.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(this, this.getThrower()), damageBoomerang);
         }
         if (!this.worldObj.isRemote)
         {
         	Random r = new Random();
-        	if(r.nextInt(1001) <= 500) {
+        	if(r.nextInt(1000) >= 250) {
             	this.playSound("liquid.lavapop", 0.5F, 0.4F);
-            	this.entityDropItem(new ItemStack(ReforgedItems.WOODEN_BOOMERANG), 0.0F);        		
+            	this.entityDropItem(new ItemStack(ReforgedItems.GOLDEN_BOOMERANG), 0.0F);        		
         	} else {
         		this.playSound("mob.blaze.hit", 0.5F, 0.4F);
         	}
