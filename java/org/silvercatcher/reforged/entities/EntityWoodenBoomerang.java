@@ -1,5 +1,7 @@
 package org.silvercatcher.reforged.entities;
 
+import java.util.Random;
+
 import org.silvercatcher.reforged.ReforgedMod;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -36,7 +38,8 @@ public class EntityWoodenBoomerang extends EntityThrowable
         }
         if (!this.worldObj.isRemote)
         {
-            this.setDead();
+        	this.playSound("liquid.lavapop", 0.5F, 0.4F);
+        	this.setDead();
         }
     }
     
