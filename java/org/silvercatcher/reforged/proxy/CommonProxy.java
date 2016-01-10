@@ -2,6 +2,10 @@ package org.silvercatcher.reforged.proxy;
 
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.entities.EntityDiamondBoomerang;
+import org.silvercatcher.reforged.entities.EntityGoldenBoomerang;
+import org.silvercatcher.reforged.entities.EntityIronBoomerang;
+import org.silvercatcher.reforged.entities.EntityStoneBoomerang;
 import org.silvercatcher.reforged.entities.EntityWoodenBoomerang;
 import org.silvercatcher.reforged.weapons.ItemBoomerang;
 
@@ -35,5 +39,9 @@ public class CommonProxy {
 	
 	private void registerEntities() {
 		EntityRegistry.registerModEntity(EntityWoodenBoomerang.class, "FlyingWoodenBoomerang", 1, ReforgedMod.instance, 120, 3, true );
+		EntityRegistry.registerModEntity(EntityStoneBoomerang.class, "FlyingStoneBoomerang", 2, ReforgedMod.instance, 120, 3, true );
+		EntityRegistry.registerModEntity(EntityGoldenBoomerang.class, "FlyingGoldenBoomerang", 3, ReforgedMod.instance, 120, 3, true );
+		EntityRegistry.registerModEntity(EntityIronBoomerang.class, "FlyingIronBoomerang", 4, ReforgedMod.instance, 120, 3, true );
+		EntityRegistry.registerModEntity(EntityDiamondBoomerang.class, "FlyingDiamondBoomerang", 5, ReforgedMod.instance, 120, 3, true );
 	}
 }

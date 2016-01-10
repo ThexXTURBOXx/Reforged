@@ -2,9 +2,17 @@ package org.silvercatcher.reforged.proxy;
 
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.entities.EntityDiamondBoomerang;
+import org.silvercatcher.reforged.entities.EntityGoldenBoomerang;
+import org.silvercatcher.reforged.entities.EntityIronBoomerang;
+import org.silvercatcher.reforged.entities.EntityStoneBoomerang;
 import org.silvercatcher.reforged.entities.EntityWoodenBoomerang;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
-import org.silvercatcher.reforged.render.RendererBoomerang;
+import org.silvercatcher.reforged.render.RendererDiamondBoomerang;
+import org.silvercatcher.reforged.render.RendererGoldenBoomerang;
+import org.silvercatcher.reforged.render.RendererIronBoomerang;
+import org.silvercatcher.reforged.render.RendererStoneBoomerang;
+import org.silvercatcher.reforged.render.RendererWoodenBoomerang;
 import org.silvercatcher.reforged.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.weapons.ReforgedItem;
 
@@ -41,8 +49,11 @@ public class ClientProxy extends CommonProxy {
 					+ item.getName(), "inventory"));
 		}
 		
-		//Turbo Stuff
-		//Boomerang
-		RenderingRegistry.registerEntityRenderingHandler(EntityWoodenBoomerang.class, new RendererBoomerang(Minecraft.getMinecraft().getRenderManager()));
+		//Boomerangs
+		RenderingRegistry.registerEntityRenderingHandler(EntityWoodenBoomerang.class, new RendererWoodenBoomerang(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityStoneBoomerang.class, new RendererStoneBoomerang(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityGoldenBoomerang.class, new RendererGoldenBoomerang(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityIronBoomerang.class, new RendererIronBoomerang(Minecraft.getMinecraft().getRenderManager()));
+		RenderingRegistry.registerEntityRenderingHandler(EntityDiamondBoomerang.class, new RendererDiamondBoomerang(Minecraft.getMinecraft().getRenderManager()));
 	}
 }

@@ -2,7 +2,7 @@ package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.entities.EntityWoodenBoomerang;
+import org.silvercatcher.reforged.entities.EntityStoneBoomerang;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
@@ -13,13 +13,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class RendererBoomerang extends Render {
+public class RendererStoneBoomerang extends Render {
 
-	public RendererBoomerang(RenderManager renderManager) {
+	public RendererStoneBoomerang(RenderManager renderManager) {
 		super(renderManager);
 	}
 	
-	private void renderBoomerang(EntityWoodenBoomerang entityarrow, double d0, double d1, double d2, float f, float f1) {
+	private void renderBoomerang(EntityStoneBoomerang entityarrow, double d0, double d1, double d2, float f, float f1) {
 		bindEntityTexture(entityarrow);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) d0, (float) d1, (float) d2);
@@ -92,12 +92,12 @@ public class RendererBoomerang extends Render {
 	@Override
 	public void doRender(Entity entity, double d0, double d1, double d2,
 	 float f, float f1) {
-		renderBoomerang((EntityWoodenBoomerang) entity, d0, d1, d2, f, f1);
+		renderBoomerang((EntityStoneBoomerang) entity, d0, d1, d2, f, f1);
 	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		ResourceLocation BOOMERANG = new ResourceLocation(ReforgedMod.ID, "textures/entity/wooden_boomerang.png");
+		ResourceLocation BOOMERANG = new ResourceLocation(ReforgedMod.ID, "textures/entity/stone_boomerang.png");
 		return BOOMERANG;
 	}
 }
