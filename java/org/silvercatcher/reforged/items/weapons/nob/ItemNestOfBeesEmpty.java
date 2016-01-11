@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemNestOfBeesEmpty extends NestOfBeesBase {
 
 	public ItemNestOfBeesEmpty() {
-		super("empty");
+		super("_empty");
 	}
 
 	@SuppressWarnings("rawtypes")

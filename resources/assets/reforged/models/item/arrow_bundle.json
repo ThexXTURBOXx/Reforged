@@ -1,7 +1,7 @@
 {
-    "parent": "minecraft:iron_sword",
+    "parent": "reforged:builtin/generated",
     "textures": {
-        "layer0": "reforged:items/firerod"
+        "layer0": "reforged:items/arrow_bundle"
     },
     "display": {
         "thirdperson": {
@@ -12,7 +12,7 @@
         "firstperson": {
             "rotation": [ 0, -135, 25 ],
             "translation": [ 0, 4, 2 ],
-            "scale": [ 1.8, 1.8, 1.8 ]
+            "scale": [ 2.8, 2.8, 2.8 ]
         }
     }
 }

@@ -25,15 +25,22 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemNestOfBees extends NestOfBeesBase {
 
-	public static ItemNestOfBees EMPTY = new ItemNestOfBees() {
-		
-
-	};
+	private static int delay = 3;
+	private static int buildup = 20;
+	
+	private boolean activated;
 	
 	public ItemNestOfBees() {
 		super("");
 	}
 
+	@SuppressWarnings("rawtypes")
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+		
+		tooltip.add("Loaded");
+	}
+	
 	@Override
 	public void registerRecipes() {
 		
@@ -45,13 +52,38 @@ public class ItemNestOfBees extends NestOfBeesBase {
 		
 		return 1f;
 	}
-
+	
 	@Override
-	public void getSubItems(Item itemIn, CreativeTabs tab, @SuppressWarnings("rawtypes") List subItems) {
+	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
 		
-		subItems.add(new ItemStack(itemIn, 1, 0));
-		subItems.add(new ItemStack(EMPTY, 1, 1));
-		subItems.add(new ItemStack(itemIn, 1, 2));
+		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
+		
+		return itemStackIn;
+	}
+	
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+		
+		return activated ? delay : buildup;
+	}
+	
+	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
+		
+		shoot(worldIn, playerIn);
+	}
+	
+	protected void shoot(World world, EntityPlayer shooter) {
+		
+        world.playSoundAtEntity(shooter, "item.fireCharge.use", 0.5f, 1.0f);
+		if(!world.isRemote) {
+			EntityArrow arrow = new EntityArrow(world, shooter, 1f);
+			arrow.setDamage(6);
+			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ,
+					3 + itemRand.nextFloat() / 2f, 1.5f);
+			world.spawnEntityInWorld(arrow);
+		}
+        world.playSoundAtEntity(shooter, "fireworks.launch", 3.0f, 1.0f);
 	}
 	
 	/*
@@ -89,18 +121,7 @@ public class ItemNestOfBees extends NestOfBeesBase {
 				'w', Items.stick);
 	}
 	
-	protected void shoot(World world, EntityPlayer shooter) {
-		
-        world.playSoundAtEntity(shooter, "item.fireCharge.use", 0.5f, 1.0f);
-		if(!world.isRemote) {
-			EntityArrow arrow = new EntityArrow(world, shooter, 1f);
-			arrow.setDamage(DAMAGE);
-			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ,
-					ARROW_SPEED + itemRand.nextFloat() / 2f, INACCUARY);
-			world.spawnEntityInWorld(arrow);
-		}
-        world.playSoundAtEntity(shooter, "fireworks.launch", 3.0f, 1.0f);
-	}
+
 	
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {

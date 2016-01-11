@@ -5,7 +5,7 @@ import org.silvercatcher.reforged.items.ReforgedItem;
 public abstract class NestOfBeesBase extends ReforgedItem {
 
 	public NestOfBeesBase(String variant) {
-		super("nest_of_bees_" + variant);
+		super("nest_of_bees" + variant);
 		setMaxStackSize(1);
 		setMaxDamage(100);
 	}

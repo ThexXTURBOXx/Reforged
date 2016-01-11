@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.silvercatcher.reforged.items.ReforgedItem;
+import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
 import org.silvercatcher.reforged.items.weapons.nob.ItemNestOfBees;
+import org.silvercatcher.reforged.items.weapons.nob.ItemNestOfBeesEmpty;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -15,7 +17,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ReforgedItems {
 
-
+	public static ReforgedItem ARROW_BUNDLE;
+	
 	public static ReforgedItem NEST_OF_BEES;
 	public static ReforgedItem NEST_OF_BEES_EMPTY;
 
@@ -38,8 +41,11 @@ public class ReforgedItems {
 	
 	public static void createItems() {
 		
+		registratonList.add(ARROW_BUNDLE = new ItemArrowBundle());
+		
 		registratonList.add(NEST_OF_BEES = new ItemNestOfBees());
-
+		registratonList.add(NEST_OF_BEES_EMPTY = new ItemNestOfBeesEmpty());
+		
 		registratonList.add(FIREROD = new ItemFireRod());
 		
 		registratonList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
