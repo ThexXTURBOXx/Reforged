@@ -3,7 +3,7 @@ package org.silvercatcher.reforged.gui;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.Color;
 import org.lwjgl.util.ReadableColor;
-import org.silvercatcher.reforged.weapons.IReloadable;
+import org.silvercatcher.reforged.items.weapons.IReloadable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;

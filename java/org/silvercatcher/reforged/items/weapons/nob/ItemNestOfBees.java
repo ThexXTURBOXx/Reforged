@@ -1,23 +1,92 @@
-package org.silvercatcher.reforged.weapons;
+package org.silvercatcher.reforged.items.weapons.nob;
 
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedItems;
+import org.silvercatcher.reforged.items.CompoundTags;
+import org.silvercatcher.reforged.items.ReforgedItem;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.RecipesBanners;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemNestOfBees extends ReforgedItem implements IReloadable {
+public class ItemNestOfBees extends NestOfBeesBase {
 
+	private static int delay = 3;
+	private static int buildup = 20;
+	
+	private boolean activated;
+	
+	public ItemNestOfBees() {
+		super("");
+	}
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+		
+		tooltip.add("Loaded");
+	}
+	
+	@Override
+	public void registerRecipes() {
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(this), Items.diamond);
+	}
+
+	@Override
+	public float getHitDamage() {
+		
+		return 1f;
+	}
+	
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
+		
+		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
+		
+		return itemStackIn;
+	}
+	
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+		
+		return activated ? delay : buildup;
+	}
+	
+	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
+		
+		shoot(worldIn, playerIn);
+	}
+	
+	protected void shoot(World world, EntityPlayer shooter) {
+		
+        world.playSoundAtEntity(shooter, "item.fireCharge.use", 0.5f, 1.0f);
+		if(!world.isRemote) {
+			EntityArrow arrow = new EntityArrow(world, shooter, 1f);
+			arrow.setDamage(6);
+			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ,
+					3 + itemRand.nextFloat() / 2f, 1.5f);
+			world.spawnEntityInWorld(arrow);
+		}
+        world.playSoundAtEntity(shooter, "fireworks.launch", 3.0f, 1.0f);
+	}
+	
+	/*
 	public static final int ROUND_DELAY = 8;
 	public static final float INACCUARY = 3f;
 	public static final float DAMAGE = 2.5f;
@@ -35,10 +104,15 @@ public class ItemNestOfBees extends ReforgedItem implements IReloadable {
 		setMaxDamage(100);
 	}
 
+
+	
 	@Override
 	public void registerRecipes() {
 		
-		GameRegistry.addShapedRecipe(new ItemStack(ReforgedItems.NEST_OF_BEES),
+		ItemStack emptyNoB = new ItemStack(this, );
+		
+		GameRegistry.a
+		GameRegistry.addShapedRecipe(emptyNoB,
 				"slw",
 				"slw",
 				"slw",
@@ -47,18 +121,7 @@ public class ItemNestOfBees extends ReforgedItem implements IReloadable {
 				'w', Items.stick);
 	}
 	
-	protected void shoot(World world, EntityPlayer shooter) {
-		
-        world.playSoundAtEntity(shooter, "item.fireCharge.use", 0.5f, 1.0f);
-		if(!world.isRemote) {
-			EntityArrow arrow = new EntityArrow(world, shooter, 1f);
-			arrow.setDamage(DAMAGE);
-			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ,
-					ARROW_SPEED + itemRand.nextFloat() / 2f, INACCUARY);
-			world.spawnEntityInWorld(arrow);
-		}
-        world.playSoundAtEntity(shooter, "fireworks.launch", 3.0f, 1.0f);
-	}
+
 	
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
@@ -71,6 +134,7 @@ public class ItemNestOfBees extends ReforgedItem implements IReloadable {
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
 		
+		itemStackIn.onCrafting(worldIn, playerIn, MAX_AMMO);
 		NBTTagCompound nbt = initReloadTags(itemStackIn);
 
 		if(playerIn.isSneaking()) {
@@ -140,27 +204,8 @@ public class ItemNestOfBees extends ReforgedItem implements IReloadable {
 	}
 
 	@Override
-	public NBTTagCompound initReloadTags(ItemStack stack) {
-		
-		NBTTagCompound nbt = stack.getTagCompound();
-		
-		if(nbt == null) {
-			nbt = new NBTTagCompound();
-			nbt.setInteger(CompoundTags.AMMUNITION, 0);
-			nbt.setInteger(CompoundTags.RELOAD, getReloadTotal());
-			stack.setTagCompound(nbt);
-		}
-		return nbt;
+	public float getHitDamage() {
+		return 1f;
 	}
-	
-	@Override
-	public int getReloadTotal() {
-		return 40;
-	}
-
-	@Override
-	public int getReloadDone(ItemStack stack) {
-		
-		return initReloadTags(stack).getInteger(CompoundTags.RELOAD);
-	}
+	*/
 }

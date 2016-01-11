@@ -2,24 +2,35 @@ package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.entities.EntityStoneBoomerang;
+import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
-public class RendererStoneBoomerang extends Render {
+public class RenderBoomerang extends Render {
 
-	public RendererStoneBoomerang(RenderManager renderManager) {
+	private static ResourceLocation wood_texture = 
+			new ResourceLocation(ReforgedMod.ID, "textures/entity/wooden_boomerang.png");
+	private static ResourceLocation stone_texture = 
+			new ResourceLocation(ReforgedMod.ID, "textures/entity/stone_boomerang.png");
+	private static ResourceLocation iron_texture = 
+			new ResourceLocation(ReforgedMod.ID, "textures/entity/iron_boomerang.png");
+	private static ResourceLocation gold_texture = 
+			new ResourceLocation(ReforgedMod.ID, "textures/entity/golden_boomerang.png");
+	private static ResourceLocation diamon_texture = 
+			new ResourceLocation(ReforgedMod.ID, "textures/entity/diamond_boomerang.png");
+
+	public RenderBoomerang(RenderManager renderManager) {
 		super(renderManager);
 	}
 	
-	private void renderBoomerang(EntityStoneBoomerang entityarrow, double d0, double d1, double d2, float f, float f1) {
+	private void renderBoomerang(EntityBoomerang entityarrow, double d0, double d1, double d2, float f, float f1) {
+		
 		bindEntityTexture(entityarrow);
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) d0, (float) d1, (float) d2);
@@ -92,12 +103,27 @@ public class RendererStoneBoomerang extends Render {
 	@Override
 	public void doRender(Entity entity, double d0, double d1, double d2,
 	 float f, float f1) {
-		renderBoomerang((EntityStoneBoomerang) entity, d0, d1, d2, f, f1);
+		renderBoomerang((EntityBoomerang) entity, d0, d1, d2, f, f1);
 	}
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		ResourceLocation BOOMERANG = new ResourceLocation(ReforgedMod.ID, "textures/entity/stone_boomerang.png");
-		return BOOMERANG;
+		
+		return wood_texture;
+		/*
+		//todo: find a better way and burn this...
+		
+		if(((EntityBoomerang) entity).getMaterial() == null) {
+			System.err.println("wtf!");
+			System.exit(1);
+		}
+		switch((((EntityBoomerang) entity).getMaterial())) {
+		case EMERALD: return diamon_texture;
+		case GOLD: return gold_texture;
+		case IRON: return iron_texture;
+		case STONE: return stone_texture;
+		case WOOD: return wood_texture;
+		default: throw new IllegalArgumentException("Dafuq is dis...");
+		}*/
 	}
 }

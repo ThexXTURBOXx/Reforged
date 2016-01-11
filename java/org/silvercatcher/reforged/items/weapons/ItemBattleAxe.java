@@ -1,4 +1,6 @@
-package org.silvercatcher.reforged.weapons;
+package org.silvercatcher.reforged.items.weapons;
+
+import org.silvercatcher.reforged.items.MaterialItem;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -18,7 +20,7 @@ public class ItemBattleAxe extends MaterialItem {
 
 	public ItemBattleAxe(ToolMaterial material) {
 		super("battleaxe", material);
-		setMaxDamage(40);
+		setMaxDamage(getMaxDamageForMaterial(material));
 		setMaxStackSize(1);
 	}
 
@@ -36,14 +38,13 @@ public class ItemBattleAxe extends MaterialItem {
 	@Override
 	public float getStrVsBlock(ItemStack stack, Block block) {
 		
-		return effectiveAgainst(block) ? 4f : super.getStrVsBlock(stack, block);
+		return effectiveAgainst(block) ? material.getEfficiencyOnProperMaterial() + 0.5f : 1f;
 	}
 	
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, Block blockIn, BlockPos pos,
 			EntityLivingBase playerIn) {
 		
-		System.out.println("block destroyed");
 		stack.damageItem(effectiveAgainst(blockIn) ? 2 : 3, playerIn);
 		return true;
 	}
@@ -61,27 +62,19 @@ public class ItemBattleAxe extends MaterialItem {
 		Multimap modifiers = super.getAttributeModifiers(stack);
 
 		modifiers.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
-				new AttributeModifier(itemModifierUUID, "Weapon Modifier", 4, 0));
+				new AttributeModifier(itemModifierUUID, "Weapon Modifier", getHitDamage(), 0));
 		return modifiers;
 	}
 
 	@Override
 	protected int getMaxDamageForMaterial(ToolMaterial material) {
 		
-		switch(material) {
+		return (int) (material.getMaxUses() * 1.2f);
+	}
+
+	@Override
+	public float getHitDamage() {
 		
-		case EMERALD: return 100;
-		
-		case GOLD: return 40;
-		
-		case IRON: return 70;
-		
-		case STONE: return 50;
-		
-		case WOOD: return 40;
-		
-		default: return -1;
-		
-		}
+		return material.getDamageVsEntity() + 2f;
 	}
 }

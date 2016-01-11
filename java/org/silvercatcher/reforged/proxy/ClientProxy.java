@@ -2,27 +2,21 @@ package org.silvercatcher.reforged.proxy;
 
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.entities.EntityDiamondBoomerang;
-import org.silvercatcher.reforged.entities.EntityGoldenBoomerang;
-import org.silvercatcher.reforged.entities.EntityIronBoomerang;
-import org.silvercatcher.reforged.entities.EntityStoneBoomerang;
-import org.silvercatcher.reforged.entities.EntityWoodenBoomerang;
+import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
-import org.silvercatcher.reforged.render.RendererDiamondBoomerang;
-import org.silvercatcher.reforged.render.RendererGoldenBoomerang;
-import org.silvercatcher.reforged.render.RendererIronBoomerang;
-import org.silvercatcher.reforged.render.RendererStoneBoomerang;
-import org.silvercatcher.reforged.render.RendererWoodenBoomerang;
-import org.silvercatcher.reforged.weapons.ItemBoomerang;
-import org.silvercatcher.reforged.weapons.ReforgedItem;
+import org.silvercatcher.reforged.items.ReforgedItem;
+import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
+import org.silvercatcher.reforged.render.RenderBoomerang;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ClientProxy extends CommonProxy {
 
@@ -36,24 +30,34 @@ public class ClientProxy extends CommonProxy {
 	public void init(FMLInitializationEvent event) {
 
 		super.init(event);
-		registerRenderers();
+		registerItemRenderers();
+		registerEntityRenderers();
 	}
 	
 	@Override
-	protected void registerRenderers() {
+	protected void registerItemRenderers() {
 		
 		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 		
+		String inventory = "inventory";
+		
 		for(ReforgedItem item : ReforgedItems.registratonList) {
 			mesher.register(item, 0, new ModelResourceLocation(ReforgedMod.ID + ":" 
-					+ item.getName(), "inventory"));
+					+ item.getName(), inventory));
 		}
 		
-		//Boomerangs
-		RenderingRegistry.registerEntityRenderingHandler(EntityWoodenBoomerang.class, new RendererWoodenBoomerang(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityStoneBoomerang.class, new RendererStoneBoomerang(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityGoldenBoomerang.class, new RendererGoldenBoomerang(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityIronBoomerang.class, new RendererIronBoomerang(Minecraft.getMinecraft().getRenderManager()));
-		RenderingRegistry.registerEntityRenderingHandler(EntityDiamondBoomerang.class, new RendererDiamondBoomerang(Minecraft.getMinecraft().getRenderManager()));
+		mesher.register(ReforgedItems.NEST_OF_BEES, 1, new ModelResourceLocation(ReforgedMod.ID
+				+ ReforgedItems.NEST_OF_BEES.getName() + "_empty", inventory));
+		
+		mesher.register(ReforgedItems.NEST_OF_BEES, 2, new ModelResourceLocation(ReforgedMod.ID
+				+ ReforgedItems.NEST_OF_BEES.getName() + "_powder", inventory));
+	}
+	
+	@Override
+	protected void registerEntityRenderers() {
+		
+		RenderManager manager = Minecraft.getMinecraft().getRenderManager();
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityBoomerang.class, new RenderBoomerang(manager));
 	}
 }

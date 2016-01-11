@@ -1,4 +1,4 @@
-package org.silvercatcher.reforged.weapons;
+package org.silvercatcher.reforged.items;
 
 import org.silvercatcher.reforged.ReforgedMod;
 
@@ -34,4 +34,7 @@ public abstract class ReforgedItem extends Item {
 	}
 	
 	public abstract void registerRecipes();
+	
+	public abstract float getHitDamage();
+
 }
