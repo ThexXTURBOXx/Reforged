@@ -75,6 +75,6 @@ public class ItemBattleAxe extends MaterialItem {
 	@Override
 	public float getHitDamage() {
 		
-		return material.getDamageVsEntity() + 2f;
+		return material.getDamageVsEntity() * 1.5f + 2f;
 	}
 }

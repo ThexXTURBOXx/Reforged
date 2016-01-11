@@ -23,4 +23,6 @@ public class CompoundTags {
 
 	/** saves the material of an item that is currently an entity */
 	public static final String ITEM_MATERIAL=	"item_material";
+	
+	public static final String ACTIVATED	=	"activated";
 }
