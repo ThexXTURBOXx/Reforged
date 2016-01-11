@@ -62,8 +62,8 @@ public class ItemBoomerang extends MaterialItem
 	 * for ranged combat damage, see {@link EntityBoomerang#getImpactDamage}
 	 */
 	@Override
-	public int getHitDamage() {
+	public float getHitDamage() {
 		
-		return Math.min(1, (int) (material.getDamageVsEntity() * 0.25f));
+		return Math.min(1f, (material.getDamageVsEntity() * 0.25f));
 	}
 }

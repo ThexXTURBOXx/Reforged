@@ -166,7 +166,7 @@ public class ItemNestOfBees extends ReforgedItem implements IReloadable {
 	}
 
 	@Override
-	public int getHitDamage() {
-		return 1;
+	public float getHitDamage() {
+		return 1f;
 	}
 }

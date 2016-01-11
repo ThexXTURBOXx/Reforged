@@ -64,7 +64,7 @@ public class ItemFireRod extends ReforgedItem {
 	}
 
 	@Override
-	public int getHitDamage() {
-		return 2;
+	public float getHitDamage() {
+		return 1.5f;
 	}
 }
