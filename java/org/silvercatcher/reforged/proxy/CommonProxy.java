@@ -2,11 +2,7 @@ package org.silvercatcher.reforged.proxy;
 
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.entities.EntityDiamondBoomerang;
-import org.silvercatcher.reforged.entities.EntityGoldenBoomerang;
-import org.silvercatcher.reforged.entities.EntityIronBoomerang;
-import org.silvercatcher.reforged.entities.EntityStoneBoomerang;
-import org.silvercatcher.reforged.entities.EntityWoodenBoomerang;
+import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.weapons.ItemBoomerang;
 
 import net.minecraft.client.Minecraft;
@@ -19,8 +15,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
 	
-	ItemBoomerang boomerang;
-
 	public void preInit(FMLPreInitializationEvent event) {
 		
 		ReforgedItems.createItems();
@@ -38,10 +32,14 @@ public class CommonProxy {
 	protected void registerRenderers() {}
 	
 	private void registerEntities() {
+	
+		EntityRegistry.registerModEntity(EntityBoomerang.class, "FlyingBoomerang", 0, ReforgedMod.instance, 120, 3, true);
+		/*
 		EntityRegistry.registerModEntity(EntityWoodenBoomerang.class, "FlyingWoodenBoomerang", 1, ReforgedMod.instance, 120, 3, true );
 		EntityRegistry.registerModEntity(EntityStoneBoomerang.class, "FlyingStoneBoomerang", 2, ReforgedMod.instance, 120, 3, true );
 		EntityRegistry.registerModEntity(EntityGoldenBoomerang.class, "FlyingGoldenBoomerang", 3, ReforgedMod.instance, 120, 3, true );
 		EntityRegistry.registerModEntity(EntityIronBoomerang.class, "FlyingIronBoomerang", 4, ReforgedMod.instance, 120, 3, true );
 		EntityRegistry.registerModEntity(EntityDiamondBoomerang.class, "FlyingDiamondBoomerang", 5, ReforgedMod.instance, 120, 3, true );
+		*/
 	}
 }

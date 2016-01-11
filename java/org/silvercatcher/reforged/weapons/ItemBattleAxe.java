@@ -84,4 +84,11 @@ public class ItemBattleAxe extends MaterialItem {
 		
 		}
 	}
+
+	@Override
+	public int getHitDamage() {
+		
+		//todo: consider material
+		return 5;
+	}
 }

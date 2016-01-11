@@ -34,4 +34,7 @@ public abstract class ReforgedItem extends Item {
 	}
 	
 	public abstract void registerRecipes();
+	
+	public abstract int getHitDamage();
+
 }

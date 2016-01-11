@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.weapons;
 
 import java.util.List;
 
+import org.silvercatcher.reforged.CompoundTags;
 import org.silvercatcher.reforged.ReforgedItems;
 
 import net.minecraft.client.Minecraft;
@@ -162,5 +163,10 @@ public class ItemNestOfBees extends ReforgedItem implements IReloadable {
 	public int getReloadDone(ItemStack stack) {
 		
 		return initReloadTags(stack).getInteger(CompoundTags.RELOAD);
+	}
+
+	@Override
+	public int getHitDamage() {
+		return 1;
 	}
 }

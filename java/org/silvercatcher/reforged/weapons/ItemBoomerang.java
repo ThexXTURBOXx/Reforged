@@ -2,11 +2,7 @@ package org.silvercatcher.reforged.weapons;
 
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.entities.EntityDiamondBoomerang;
-import org.silvercatcher.reforged.entities.EntityGoldenBoomerang;
-import org.silvercatcher.reforged.entities.EntityIronBoomerang;
-import org.silvercatcher.reforged.entities.EntityStoneBoomerang;
-import org.silvercatcher.reforged.entities.EntityWoodenBoomerang;
+import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
 import net.minecraft.client.Minecraft;
@@ -28,38 +24,17 @@ public class ItemBoomerang extends MaterialItem
 	{
 		super("boomerang", material);
 		setMaxDamage(getMaxDamageForMaterial(material));
-		setCreativeTab(ReforgedMod.tabReforged);
-		}
+	}
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,EntityPlayer par3EntityPlayer) {
-	    if(par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.consumeInventoryItem(this))
+	   
+		if(par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.consumeInventoryItem(this))
 	    {
 	        par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-	        if (!par2World.isRemote)
-	        {
-	        	IChatComponent ErrorMessage = new ChatComponentText("Looks like a bug... Just report it");
+	        if (!par2World.isRemote) {
 	        	
-	        	switch(material) {
-	    		
-	    		case EMERALD: par2World.spawnEntityInWorld(new EntityDiamondBoomerang(par2World, par3EntityPlayer));
-	    		break;
-	    		
-	    		case GOLD: par2World.spawnEntityInWorld(new EntityGoldenBoomerang(par2World, par3EntityPlayer));
-	    		break;
-	    		
-	    		case IRON: par2World.spawnEntityInWorld(new EntityIronBoomerang(par2World, par3EntityPlayer));
-	    		break;
-	    		
-	    		case STONE: par2World.spawnEntityInWorld(new EntityStoneBoomerang(par2World, par3EntityPlayer));
-	    		break;
-	    		
-	    		case WOOD: par2World.spawnEntityInWorld(new EntityWoodenBoomerang(par2World, par3EntityPlayer));
-	    		break;
-	    		
-	    		default: par3EntityPlayer.addChatMessage(ErrorMessage);
-	        	
-	        	}
+	        	par2World.spawnEntityInWorld(new EntityBoomerang(par2World, par3EntityPlayer, par1ItemStack));
 	        }
 	    }
 	    return par1ItemStack;
@@ -92,5 +67,12 @@ public class ItemBoomerang extends MaterialItem
 		
 		default: return -1;		
 		}
+	}
+
+	@Override
+	public int getHitDamage() {
+		
+		//todo: consider material
+		return 4;
 	}
 }

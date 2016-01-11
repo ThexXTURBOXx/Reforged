@@ -21,14 +21,11 @@ public class ReforgedItems {
 	public static ReforgedItem IRON_BATTLE_AXE;
 	
 	public static ReforgedItem WOODEN_BOOMERANG;
-	
 	public static ReforgedItem STONE_BOOMERANG;
-	
 	public static ReforgedItem GOLDEN_BOOMERANG;
-	
 	public static ReforgedItem IRON_BOOMERANG;
-	
 	public static ReforgedItem DIAMOND_BOOMERANG;
+	
 	
 	public static List<ReforgedItem> registratonList = new ArrayList<ReforgedItem>();
 	
@@ -37,6 +34,7 @@ public class ReforgedItems {
 		registratonList.add(NEST_OF_BEES = new ItemNestOfBees());
 		registratonList.add(FIREROD = new ItemFireRod());
 		registratonList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
+		
 		registratonList.add(WOODEN_BOOMERANG = new ItemBoomerang(ToolMaterial.WOOD));
 		registratonList.add(STONE_BOOMERANG = new ItemBoomerang(ToolMaterial.STONE));
 		registratonList.add(GOLDEN_BOOMERANG = new ItemBoomerang(ToolMaterial.GOLD));

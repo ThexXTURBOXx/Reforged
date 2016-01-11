@@ -62,4 +62,9 @@ public class ItemFireRod extends ReforgedItem {
 		--stack.stackSize;
 		return false;
 	}
+
+	@Override
+	public int getHitDamage() {
+		return 2;
+	}
 }
