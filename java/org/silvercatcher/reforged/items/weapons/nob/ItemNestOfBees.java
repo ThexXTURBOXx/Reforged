@@ -1,4 +1,4 @@
-package org.silvercatcher.reforged.items.weapons;
+package org.silvercatcher.reforged.items.weapons.nob;
 
 import java.util.List;
 
@@ -7,10 +7,12 @@ import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ReforgedItem;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.RecipesBanners;
@@ -21,12 +23,15 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemNestOfBees extends ReforgedItem {
+public class ItemNestOfBees extends NestOfBeesBase {
 
+	public static ItemNestOfBees EMPTY = new ItemNestOfBees() {
+		
+
+	};
+	
 	public ItemNestOfBees() {
-		super("nest_of_bees");
-		setMaxDamage(100);
-		setMaxStackSize(1);
+		super("");
 	}
 
 	@Override
@@ -41,7 +46,13 @@ public class ItemNestOfBees extends ReforgedItem {
 		return 1f;
 	}
 
-	
+	@Override
+	public void getSubItems(Item itemIn, CreativeTabs tab, @SuppressWarnings("rawtypes") List subItems) {
+		
+		subItems.add(new ItemStack(itemIn, 1, 0));
+		subItems.add(new ItemStack(EMPTY, 1, 1));
+		subItems.add(new ItemStack(itemIn, 1, 2));
+	}
 	
 	/*
 	public static final int ROUND_DELAY = 8;

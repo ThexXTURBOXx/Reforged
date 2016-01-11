@@ -7,7 +7,7 @@ import org.silvercatcher.reforged.items.ReforgedItem;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
-import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
+import org.silvercatcher.reforged.items.weapons.nob.ItemNestOfBees;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -17,6 +17,7 @@ public class ReforgedItems {
 
 
 	public static ReforgedItem NEST_OF_BEES;
+	public static ReforgedItem NEST_OF_BEES_EMPTY;
 
 	public static ReforgedItem FIREROD;
 	
@@ -38,6 +39,7 @@ public class ReforgedItems {
 	public static void createItems() {
 		
 		registratonList.add(NEST_OF_BEES = new ItemNestOfBees());
+
 		registratonList.add(FIREROD = new ItemFireRod());
 		
 		registratonList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
