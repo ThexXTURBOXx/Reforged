@@ -36,7 +36,7 @@ public class ItemBattleAxe extends MaterialItem {
 	@Override
 	public float getStrVsBlock(ItemStack stack, Block block) {
 		
-		return effectiveAgainst(block) ? 4f : super.getStrVsBlock(stack, block);
+		return effectiveAgainst(block) ? material.getEfficiencyOnProperMaterial() + 0.5f : 1f;
 	}
 	
 	@Override
