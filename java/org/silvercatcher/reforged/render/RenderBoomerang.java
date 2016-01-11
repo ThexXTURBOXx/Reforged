@@ -3,7 +3,7 @@ package org.silvercatcher.reforged.render;
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
-import org.silvercatcher.reforged.weapons.ItemBoomerang;
+import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;

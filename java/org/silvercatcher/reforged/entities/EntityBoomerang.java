@@ -2,11 +2,11 @@ package org.silvercatcher.reforged.entities;
 
 import javax.tools.Tool;
 
-import org.silvercatcher.reforged.CompoundTags;
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.weapons.ItemBoomerang;
-import org.silvercatcher.reforged.weapons.ReforgedItem;
+import org.silvercatcher.reforged.items.CompoundTags;
+import org.silvercatcher.reforged.items.ReforgedItem;
+import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;

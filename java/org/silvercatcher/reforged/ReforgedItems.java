@@ -3,16 +3,18 @@ package org.silvercatcher.reforged;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.silvercatcher.reforged.weapons.ItemBattleAxe;
-import org.silvercatcher.reforged.weapons.ItemBoomerang;
-import org.silvercatcher.reforged.weapons.ItemFireRod;
-import org.silvercatcher.reforged.weapons.ItemNestOfBees;
-import org.silvercatcher.reforged.weapons.ReforgedItem;
+import org.silvercatcher.reforged.items.ReforgedItem;
+import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
+import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
+import org.silvercatcher.reforged.items.weapons.ItemFireRod;
+import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ReforgedItems {
+
 
 	public static ReforgedItem NEST_OF_BEES;
 

@@ -1,4 +1,4 @@
-package org.silvercatcher.reforged.weapons;
+package org.silvercatcher.reforged.items;
 
 public abstract class MaterialItem extends ReforgedItem {
 

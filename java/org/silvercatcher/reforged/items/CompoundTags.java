@@ -1,4 +1,4 @@
-package org.silvercatcher.reforged;
+package org.silvercatcher.reforged.items;
 
 public class CompoundTags {
 

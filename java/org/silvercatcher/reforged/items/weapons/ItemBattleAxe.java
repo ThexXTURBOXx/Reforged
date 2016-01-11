@@ -1,4 +1,6 @@
-package org.silvercatcher.reforged.weapons;
+package org.silvercatcher.reforged.items.weapons;
+
+import org.silvercatcher.reforged.items.MaterialItem;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;

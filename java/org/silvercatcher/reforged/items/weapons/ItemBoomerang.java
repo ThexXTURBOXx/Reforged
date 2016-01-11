@@ -1,8 +1,9 @@
-package org.silvercatcher.reforged.weapons;
+package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.items.MaterialItem;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
 import net.minecraft.client.Minecraft;
