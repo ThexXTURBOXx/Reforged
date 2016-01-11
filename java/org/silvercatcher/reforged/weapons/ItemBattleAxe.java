@@ -18,7 +18,7 @@ public class ItemBattleAxe extends MaterialItem {
 
 	public ItemBattleAxe(ToolMaterial material) {
 		super("battleaxe", material);
-		setMaxDamage(40);
+		setMaxDamage(getMaxDamageForMaterial(material));
 		setMaxStackSize(1);
 	}
 
@@ -68,27 +68,12 @@ public class ItemBattleAxe extends MaterialItem {
 	@Override
 	protected int getMaxDamageForMaterial(ToolMaterial material) {
 		
-		switch(material) {
-		
-		case EMERALD: return 100;
-		
-		case GOLD: return 40;
-		
-		case IRON: return 70;
-		
-		case STONE: return 50;
-		
-		case WOOD: return 40;
-		
-		default: return -1;
-		
-		}
+		return (int) (material.getMaxUses() * 1.2f);
 	}
 
 	@Override
 	public int getHitDamage() {
 		
-		//todo: consider material
-		return 5;
+		return material.getMaxUses() + 2;
 	}
 }

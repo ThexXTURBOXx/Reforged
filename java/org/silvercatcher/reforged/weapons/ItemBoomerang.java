@@ -53,26 +53,17 @@ public class ItemBoomerang extends MaterialItem
 
 	@Override
 	protected int getMaxDamageForMaterial(ToolMaterial material) {
-		switch(material) {
 		
-		case EMERALD: return 100;
-		
-		case GOLD: return 40;
-		
-		case IRON: return 70;
-		
-		case STONE: return 50;
-		
-		case WOOD: return 40;
-		
-		default: return -1;		
-		}
+		return (int) (material.getMaxUses() * 0.8f);
 	}
 
+	/**
+	 * this is weak melee combat damage!
+	 * for ranged combat damage, see {@link EntityBoomerang#getImpactDamage}
+	 */
 	@Override
 	public int getHitDamage() {
 		
-		//todo: consider material
-		return 4;
+		return Math.min(1, (int) (material.getDamageVsEntity() * 0.25f));
 	}
 }
