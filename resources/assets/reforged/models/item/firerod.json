@@ -1,5 +1,5 @@
 {
-    "parent": "minecraft:iron_sword",
+    "parent": "reforged:builtin/generated",
     "textures": {
         "layer0": "reforged:items/firerod"
     },
