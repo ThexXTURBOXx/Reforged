@@ -8,6 +8,7 @@ import org.silvercatcher.reforged.items.ReforgedItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
@@ -26,7 +27,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ItemNestOfBees extends NestOfBeesBase {
 
 	private static int delay = 4;
-	private static int buildup = 20;
+	private static int buildup = 25;
 	
 	
 	public ItemNestOfBees() {
@@ -74,31 +75,40 @@ public class ItemNestOfBees extends NestOfBeesBase {
 		return giveCompound(stack).getBoolean(CompoundTags.ACTIVATED) ? delay : buildup;
 	}
 	
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		
+		if(worldIn.getTotalWorldTime() % delay == 0 && entityIn instanceof EntityPlayer) {
 
+			EntityPlayer player = (EntityPlayer) entityIn;
+			
+			NBTTagCompound compound = giveCompound(stack);
+			
+			int arrows = compound.getInteger(CompoundTags.AMMUNITION);
+			
+			if(compound.getBoolean(CompoundTags.ACTIVATED) && arrows > 0) {
+				shoot(worldIn, player);
+				stack.damageItem(1, player);
+				arrows--;
+			}
+			
+			compound.setInteger(CompoundTags.AMMUNITION, arrows);
+			
+			if(arrows == 0) {
+				stack.setItem(ReforgedItems.NEST_OF_BEES_EMPTY);
+			}
+		}
+	}
+	
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
 		
 		NBTTagCompound compound = giveCompound(stack);
 		
-		boolean activated = compound.getBoolean(CompoundTags.ACTIVATED);
-		int arrows = compound.getInteger(CompoundTags.AMMUNITION);
-
-		if(activated) {
-			if(arrows > 0) {
-				shoot(worldIn, playerIn);
-				stack.damageItem(1, playerIn);
-				compound.setInteger(CompoundTags.AMMUNITION, arrows -1);
-			} else {
-				activated = false;
-			}
-		} else {
-			activated = arrows > 0;
-	        worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 0.75f, 1.0f);
+		if(compound.getInteger(CompoundTags.AMMUNITION) > 0) {
+			compound.setBoolean(CompoundTags.ACTIVATED, true);
+	        worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 3.0f, 1.0f);
 		}
-		if(activated) {
-			playerIn.setItemInUse(stack, delay);
-		}
-		compound.setBoolean(CompoundTags.ACTIVATED, activated);
 		return stack;
 	}
 	
