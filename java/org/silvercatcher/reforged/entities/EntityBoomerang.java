@@ -36,7 +36,7 @@ public class EntityBoomerang extends EntityThrowable {
 			this.material = ((ItemBoomerang) stack.getItem()).getMaterial();
 			this.itemDamage = stack.getItemDamage();
 		} else {
-			throw new IllegalArgumentException("Cannot created boomerang entity from Item: " + stack.getItem());
+			throw new IllegalArgumentException("Cannot create boomerang entity from Item: " + stack.getItem());
 		}
 	}
 	
