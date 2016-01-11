@@ -1,5 +1,7 @@
 package org.silvercatcher.reforged.entities;
 
+import java.util.Random;
+
 import javax.tools.Tool;
 
 import org.silvercatcher.reforged.ReforgedItems;
@@ -8,14 +10,17 @@ import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ReforgedItem;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -23,6 +28,7 @@ public class EntityBoomerang extends EntityThrowable {
 	
 	private ToolMaterial material;
 	private int itemDamage;
+	private Random r;
 
 	public EntityBoomerang(World worldIn) {
 		super(worldIn);
@@ -45,49 +51,103 @@ public class EntityBoomerang extends EntityThrowable {
 		return material;
 	}
 	
-	public int getItemDamage() {
+	public int getItemDamage(ToolMaterial material) {
 		
-		return itemDamage;
-	}
-
-	@Override
-	protected void onImpact(MovingObjectPosition target) {
-	
-		if(target.entityHit == null) {
-			// let's see
-		} else {
-			
-			target.entityHit.attackEntityFrom(DamageSource.causeThornsDamage(getThrower()), getImpactDamage());
-		}
+		switch(material) {
 		
-		if(!worldObj.isRemote) {
-			
-			playSound("random.pop", 0.5F, 0.4F);
-			Item item = null;
-			switch(material) {
-			case EMERALD: item = ReforgedItems.DIAMOND_BOOMERANG;
-				break;
-			case GOLD: item = ReforgedItems.GOLDEN_BOOMERANG;
-				break;
-			case IRON: item = ReforgedItems.IRON_BOOMERANG;
-				break;
-			case STONE: item = ReforgedItems.STONE_BOOMERANG;
-				break;
-			case WOOD: item = ReforgedItems.WOODEN_BOOMERANG;
-				break;
-			default:
-				break;
-			
-			}
-			ItemStack dropStack = new ItemStack(item);
-			dropStack.setItemDamage(itemDamage);
-			entityDropItem(dropStack, 0.5f);
-			setDead();
+		case EMERALD: return 10;
+		
+		case GOLD: return 6;
+		
+		case IRON: return 6;
+		
+		case STONE: return 4;
+		
+		case WOOD: return 2;
+		
+		default: return 0;
+		
 		}
 	}
 	
 	private float getImpactDamage() {
 		return 4;
+	}
+
+	@Override
+	protected void onImpact(MovingObjectPosition target) {
+	
+		//Target is entity or block?
+		if(target.entityHit == null) {
+			//It's a block
+		} else {
+			//It's a entity
+			target.entityHit.attackEntityFrom(DamageSource.causeThornsDamage(getThrower()), getImpactDamage());
+		}
+		
+		if(!worldObj.isRemote) {
+			Item item;
+			switch(material) {
+			case EMERALD: if(r.nextInt(1000) <= 500) {
+				item = ReforgedItems.DIAMOND_BOOMERANG;
+				playSound("random.pop", 0.5F, 0.4F);
+				ItemStack dropStack = new ItemStack(item);
+				dropStack.setItemDamage(itemDamage);
+				entityDropItem(dropStack, 0.5f);
+				setDead();
+			} else {
+				item = null; this.playSound("mob.blaze.hit", 0.5F, 0.4F);
+			}
+				break;
+			case GOLD: if(r.nextInt(1000) <= 500) {
+				item = ReforgedItems.GOLDEN_BOOMERANG;
+				playSound("random.pop", 0.5F, 0.4F);
+				ItemStack dropStack = new ItemStack(item);
+				dropStack.setItemDamage(itemDamage);
+				entityDropItem(dropStack, 0.5f);
+				setDead();
+			} else {
+				item = null; this.playSound("mob.blaze.hit", 0.5F, 0.4F);
+			}
+				break;
+			case IRON: if(r.nextInt(1000) <= 50) {
+				item = ReforgedItems.IRON_BOOMERANG;
+				playSound("random.pop", 0.5F, 0.4F);
+				ItemStack dropStack = new ItemStack(item);
+				dropStack.setItemDamage(itemDamage);
+				entityDropItem(dropStack, 0.5f);
+				setDead();
+			} else {
+				item = null; this.playSound("mob.blaze.hit", 0.5F, 0.4F);
+			}
+				break;
+			case STONE: if(r.nextInt(1000) <= 250) {
+				item = ReforgedItems.STONE_BOOMERANG;
+				playSound("random.pop", 0.5F, 0.4F);
+				ItemStack dropStack = new ItemStack(item);
+				dropStack.setItemDamage(itemDamage);
+				entityDropItem(dropStack, 0.5f);
+				setDead();
+			} else {
+				item = null; this.playSound("mob.blaze.hit", 0.5F, 0.4F);
+			}
+				break;
+			case WOOD: if(r.nextInt(1000) <= 500) {
+				item = ReforgedItems.WOODEN_BOOMERANG;
+				playSound("random.pop", 0.5F, 0.4F);
+				ItemStack dropStack = new ItemStack(item);
+				dropStack.setItemDamage(itemDamage);
+				entityDropItem(dropStack, 0.5f);
+				setDead();
+			} else {
+				item = null; this.playSound("mob.blaze.hit", 0.5F, 0.4F);
+			}
+				break;
+			default: item = null;
+				break;
+			
+			}
+		}
 	}
 
 	@Override
