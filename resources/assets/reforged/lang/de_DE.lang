@@ -1,7 +1,13 @@
 itemGroup.reforged=Reforged
 item.nest_of_bees.name=Bienennest
+item.nest_of_bees_empty.name=Bienennest
 item.firerod.name=Feuerstab
+item.arrow_bundle.name=Pfeilbündel
+item.wooden_battleaxe.name=Holzstreitaxt
+item.stone_battleaxe.name=Steinstreitaxt
 item.iron_battleaxe.name=Eisenstreitaxt
+item.golden_battleaxe.name=Goldstreitaxt
+item.diamond_battleaxe.name=Diamantstreitaxt
 item.wooden_boomerang.name=Holzbumerang
 item.stone_boomerang.name=Steinbumerang
 item.golden_boomerang.name=Goldbumerang
