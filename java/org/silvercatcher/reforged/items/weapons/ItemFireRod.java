@@ -50,6 +50,7 @@ public class ItemFireRod extends ReforgedItem {
 			
 			if(!(worldIn.canBlockSeeSky(pos) && worldIn.isRaining()) &&  worldIn.isAirBlock(target)) {
 				worldIn.setBlockState(target, Blocks.fire.getDefaultState());
+				--stack.stackSize;
 			}
 		}
 		return true;

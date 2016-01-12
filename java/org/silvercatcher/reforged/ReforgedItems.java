@@ -8,6 +8,7 @@ import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
+import org.silvercatcher.reforged.items.weapons.ItemMusket;
 import org.silvercatcher.reforged.items.weapons.nob.ItemNestOfBees;
 import org.silvercatcher.reforged.items.weapons.nob.ItemNestOfBeesEmpty;
 
@@ -23,6 +24,8 @@ public class ReforgedItems {
 	public static ReforgedItem NEST_OF_BEES_EMPTY;
 
 	public static ReforgedItem FIREROD;
+	
+	public static ReforgedItem MUSKET;
 	
 	public static ReforgedItem WOODEN_BATTLE_AXE;
 	public static ReforgedItem STONE_BATTLE_AXE;
@@ -47,6 +50,8 @@ public class ReforgedItems {
 		registratonList.add(NEST_OF_BEES_EMPTY = new ItemNestOfBeesEmpty());
 		
 		registratonList.add(FIREROD = new ItemFireRod());
+		
+		registratonList.add(MUSKET = new ItemMusket());
 		
 		registratonList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
 		registratonList.add(STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));

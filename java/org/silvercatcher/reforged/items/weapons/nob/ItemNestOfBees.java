@@ -78,6 +78,7 @@ public class ItemNestOfBees extends NestOfBeesBase {
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		
+		//todo: find better way for delay
 		if(worldIn.getTotalWorldTime() % delay == 0 && entityIn instanceof EntityPlayer) {
 
 			EntityPlayer player = (EntityPlayer) entityIn;
