@@ -22,7 +22,7 @@ public class RenderBoomerang extends Render {
 			new ResourceLocation(ReforgedMod.ID, "textures/entity/iron_boomerang.png");
 	private static ResourceLocation gold_texture = 
 			new ResourceLocation(ReforgedMod.ID, "textures/entity/golden_boomerang.png");
-	private static ResourceLocation diamon_texture = 
+	private static ResourceLocation diamond_texture = 
 			new ResourceLocation(ReforgedMod.ID, "textures/entity/diamond_boomerang.png");
 
 	public RenderBoomerang(RenderManager renderManager) {
@@ -118,7 +118,7 @@ public class RenderBoomerang extends Render {
 			System.exit(1);
 		}
 		switch((((EntityBoomerang) entity).getMaterial())) {
-		case EMERALD: return diamon_texture;
+		case EMERALD: return diamond_texture;
 		case GOLD: return gold_texture;
 		case IRON: return iron_texture;
 		case STONE: return stone_texture;
