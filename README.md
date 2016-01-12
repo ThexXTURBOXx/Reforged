@@ -5,4 +5,4 @@ We have taken some textures of BalkondeurAlpha to test WIP-Things. <br>
 Other textures are by Snow_Yoshi98 and baddaspig. <br>
 <br>
 Reforged - Balkon's Weapon Mod for 1.8? <br>
-Yes, it is! But it is in early development. Much things won't work properly.
+Yes, it is! But it is in early development. Much things won't work properly. Use at your own risk, could crash your world never to be played again!

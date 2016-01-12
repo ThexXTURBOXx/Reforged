@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.proxy;
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
 import net.minecraft.client.Minecraft;
@@ -35,8 +36,9 @@ public class CommonProxy {
 	protected void registerEntityRenderers() {}
 	
 	private void registerEntities() {
-	
-		EntityRegistry.registerModEntity(EntityBoomerang.class, "Boomerang", 0, ReforgedMod.instance, 120, 3, true);
+		int c = 1;
+		EntityRegistry.registerModEntity(EntityBoomerang.class, "Boomerang", c++, ReforgedMod.instance, 120, 3, true);
+		EntityRegistry.registerModEntity(EntityBulletMusket.class, "BulletMusket", c++, ReforgedMod.instance, 120, 3, true);
 
 	}
 }
