@@ -3,10 +3,13 @@ package org.silvercatcher.reforged.proxy;
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
 import org.silvercatcher.reforged.items.ReforgedItem;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.render.RenderBoomerang;
+import org.silvercatcher.reforged.render.RenderBulletMusket;
+import org.silvercatcher.reforged.render.ModelBulletMusket;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -59,5 +62,6 @@ public class ClientProxy extends CommonProxy {
 		RenderManager manager = Minecraft.getMinecraft().getRenderManager();
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityBoomerang.class, new RenderBoomerang(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityBulletMusket.class, new RenderBulletMusket(manager));
 	}
 }
