@@ -8,6 +8,7 @@ import org.silvercatcher.reforged.items.ReforgedItem;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
@@ -25,20 +26,26 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemNestOfBees extends NestOfBeesBase {
 
-	private static int delay = 3;
-	private static int buildup = 20;
+	private static int delay = 4;
+	private static int buildup = 25;
 	
-	private boolean activated;
 	
 	public ItemNestOfBees() {
 		super("");
 	}
-
+	
+	@Override
+	public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+		
+		NBTTagCompound compound = giveCompound(stack);
+		compound.setInteger(CompoundTags.AMMUNITION, 32);
+	}
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
 		
-		tooltip.add("Loaded");
+		tooltip.add("Arrows: " + giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
 	}
 	
 	@Override
@@ -55,30 +62,61 @@ public class ItemNestOfBees extends NestOfBeesBase {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-		
+						
 		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 		
 		return itemStackIn;
 	}
 	
+
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
 		
-		return activated ? delay : buildup;
+		return giveCompound(stack).getBoolean(CompoundTags.ACTIVATED) ? delay : buildup;
 	}
 	
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		
-		shoot(worldIn, playerIn);
+		if(worldIn.getTotalWorldTime() % delay == 0 && entityIn instanceof EntityPlayer) {
+
+			EntityPlayer player = (EntityPlayer) entityIn;
+			
+			NBTTagCompound compound = giveCompound(stack);
+			
+			int arrows = compound.getInteger(CompoundTags.AMMUNITION);
+			
+			if(compound.getBoolean(CompoundTags.ACTIVATED) && arrows > 0) {
+				shoot(worldIn, player);
+				stack.damageItem(1, player);
+				arrows--;
+			}
+			
+			compound.setInteger(CompoundTags.AMMUNITION, arrows);
+			
+			if(arrows == 0) {
+				stack.setItem(ReforgedItems.NEST_OF_BEES_EMPTY);
+			}
+		}
+	}
+	
+	@Override
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+		
+		NBTTagCompound compound = giveCompound(stack);
+		
+		if(compound.getInteger(CompoundTags.AMMUNITION) > 0) {
+			compound.setBoolean(CompoundTags.ACTIVATED, true);
+	        worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 3.0f, 1.0f);
+		}
+		return stack;
 	}
 	
 	protected void shoot(World world, EntityPlayer shooter) {
 		
-        world.playSoundAtEntity(shooter, "item.fireCharge.use", 0.5f, 1.0f);
 		if(!world.isRemote) {
 			EntityArrow arrow = new EntityArrow(world, shooter, 1f);
-			arrow.setDamage(6);
+			arrow.setDamage(2);
 			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ,
 					3 + itemRand.nextFloat() / 2f, 1.5f);
 			world.spawnEntityInWorld(arrow);

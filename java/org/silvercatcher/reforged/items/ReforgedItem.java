@@ -5,6 +5,7 @@ import org.silvercatcher.reforged.ReforgedMod;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
 public abstract class ReforgedItem extends Item {
@@ -36,5 +37,22 @@ public abstract class ReforgedItem extends Item {
 	public abstract void registerRecipes();
 	
 	public abstract float getHitDamage();
+	
+	/**
+	 * make sure we get no NPEs by using this method!
+	 * if anyone knows a less stupid way, tell me!
+	 * 
+	 * @param stack
+	 * @return
+	 */
+	public NBTTagCompound giveCompound(ItemStack stack) {
+		
+		NBTTagCompound compound = stack.getTagCompound();
+		if(compound == null) {
+			compound = new NBTTagCompound();
+			stack.setTagCompound(compound);
+		}
+		return compound;
+	}
 
 }
