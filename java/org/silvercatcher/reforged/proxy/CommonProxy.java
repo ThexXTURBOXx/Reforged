@@ -4,15 +4,12 @@ import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
-import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
+import org.silvercatcher.reforged.entities.EntityJavelin;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
 	
@@ -36,9 +33,10 @@ public class CommonProxy {
 	protected void registerEntityRenderers() {}
 	
 	private void registerEntities() {
-		int c = 1;
-		EntityRegistry.registerModEntity(EntityBoomerang.class, "Boomerang", c++, ReforgedMod.instance, 120, 3, true);
-		EntityRegistry.registerModEntity(EntityBulletMusket.class, "BulletMusket", c++, ReforgedMod.instance, 120, 3, true);
+		int encount = 1;
+		EntityRegistry.registerModEntity(EntityBoomerang.class, "Boomerang", encount++, ReforgedMod.instance, 120, 3, true);
+		EntityRegistry.registerModEntity(EntityJavelin.class, "Javelin", encount++, ReforgedMod.instance, 120, 3, true);
+		EntityRegistry.registerModEntity(EntityBulletMusket.class, "BulletMusket", encount++, ReforgedMod.instance, 120, 3, true);
 
 	}
 }

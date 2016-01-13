@@ -9,6 +9,7 @@ import org.silvercatcher.reforged.items.others.ItemBulletMusket;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
+import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 import org.silvercatcher.reforged.items.weapons.ItemMusket;
 import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
 
@@ -39,6 +40,8 @@ public class ReforgedItems {
 	public static ReforgedItem GOLDEN_BOOMERANG;
 	public static ReforgedItem DIAMOND_BOOMERANG;
 	
+	public static ReforgedItem JAVELIN;
+	
 	public static ReforgedItem TEMPORARY;
 	
 	
@@ -66,6 +69,8 @@ public class ReforgedItems {
 		registratonList.add(GOLDEN_BOOMERANG = new ItemBoomerang(ToolMaterial.GOLD));
 		registratonList.add(IRON_BOOMERANG = new ItemBoomerang(ToolMaterial.IRON));
 		registratonList.add(DIAMOND_BOOMERANG = new ItemBoomerang(ToolMaterial.EMERALD));
+		
+		registratonList.add(JAVELIN = new ItemJavelin());
 		
 		registratonList.add(TEMPORARY = new ItemBulletMusket());
 		

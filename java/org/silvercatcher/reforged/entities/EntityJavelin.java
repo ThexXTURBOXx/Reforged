@@ -24,17 +24,17 @@ import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class EntityBulletMusket extends EntityThrowable {
+public class EntityJavelin extends EntityThrowable {
 	
 	private ToolMaterial material;
 	private int itemDamage;
 	private Random r;
 
-	public EntityBulletMusket(World worldIn) {
+	public EntityJavelin(World worldIn) {
 		super(worldIn);
 	}
 	
-	public EntityBulletMusket(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
+	public EntityJavelin(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		
 		super(worldIn, throwerIn);
 	}
@@ -49,10 +49,5 @@ public class EntityBulletMusket extends EntityThrowable {
 			target.entityHit.attackEntityFrom(DamageSource.causeThornsDamage(getThrower()), 4);
 		}
 		this.setDead();
-	}
-	
-	@Override
-	protected float getGravityVelocity() {
-		return 0;
 	}
 }
