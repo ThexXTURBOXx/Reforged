@@ -51,7 +51,7 @@ public class ItemNestOfBees extends NestOfBeesBase {
 	@Override
 	public void registerRecipes() {
 		
-		GameRegistry.addShapelessRecipe(new ItemStack(this), Items.diamond);
+		GameRegistry.addRecipe(new NestOfBeesLoadRecipe());
 	}
 
 	@Override
