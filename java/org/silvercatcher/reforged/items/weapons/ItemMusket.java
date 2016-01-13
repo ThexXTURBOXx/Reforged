@@ -2,6 +2,8 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
 
+import org.silvercatcher.reforged.ReforgedItems;
+import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ReforgedItem;
 
@@ -35,7 +37,7 @@ public class ItemMusket extends ReforgedItem {
 		
 		if(loadState == empty) {
 			
-			if(playerIn.inventory.consumeInventoryItem(Items.arrow)) {
+			if(playerIn.inventory.consumeInventoryItem(ReforgedItems.TEMPORARY)) {
 				
 				loadState = loading;
 			
@@ -61,9 +63,11 @@ public class ItemMusket extends ReforgedItem {
 			
 			if(!worldIn.isRemote) {
 				
-				EntityArrow projectile = new EntityArrow(worldIn, playerIn, 2.5f);
+				EntityBulletMusket projectile = new EntityBulletMusket(worldIn, playerIn, stack);
 				
 				worldIn.spawnEntityInWorld(projectile);
+				
+				stack.attemptDamageItem(5, itemRand);
 			}
 			giveCompound(stack).setByte(CompoundTags.AMMUNITION, empty);
 		}
@@ -120,6 +124,12 @@ public class ItemMusket extends ReforgedItem {
 		if(loadState == loading) return 40;
 
 		return super.getMaxItemUseDuration(stack);
+	}
+	
+	@Override
+	public int getItemEnchantability() {
+		
+		return ToolMaterial.IRON.getEnchantability();
 	}
 	
 	@Override
