@@ -95,14 +95,15 @@ public class ItemNestOfBees extends ReforgedItem {
 			
 			int arrows = compound.getInteger(CompoundTags.AMMUNITION);
 			
-			if(compound.getBoolean(CompoundTags.ACTIVATED) && arrows > 0) {
+			if(arrows == 0) compound.setBoolean(CompoundTags.ACTIVATED, false);
+			
+			if(compound.getBoolean(CompoundTags.ACTIVATED)) {
 				shoot(worldIn, player);
 				stack.damageItem(1, player);
 				arrows--;
 			}
 			
 			compound.setInteger(CompoundTags.AMMUNITION, arrows);
-			compound.setBoolean(CompoundTags.ACTIVATED, arrows > 0);
 		}
 	}
 	
