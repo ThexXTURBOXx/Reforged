@@ -24,6 +24,6 @@ public class ItemArrowBundle extends ReforgedItem {
 
 	@Override
 	public float getHitDamage() {
-		return 1f;
+		return 0.5f;
 	}
 }

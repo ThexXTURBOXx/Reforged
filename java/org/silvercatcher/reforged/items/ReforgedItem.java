@@ -2,6 +2,10 @@ package org.silvercatcher.reforged.items;
 
 import org.silvercatcher.reforged.ReforgedMod;
 
+import com.google.common.collect.Multimap;
+
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -18,8 +22,9 @@ public abstract class ReforgedItem extends Item {
 		this.name = name;
 		setCreativeTab(ReforgedMod.tabReforged);
 		setUnlocalizedName(name);
+		mapEnchantments();
 	}
-	
+		
 	public final String getName() { return name; }
 	
 	@Override
@@ -34,6 +39,8 @@ public abstract class ReforgedItem extends Item {
 		return itemStackIn;
 	}
 	
+	protected void mapEnchantments() {}
+
 	public abstract void registerRecipes();
 	
 	public abstract float getHitDamage();
@@ -55,4 +62,14 @@ public abstract class ReforgedItem extends Item {
 		return compound;
 	}
 
+	@SuppressWarnings("rawtypes")
+	@Override
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		
+		Multimap modifiers = super.getAttributeModifiers(stack);
+
+		modifiers.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
+				new AttributeModifier(itemModifierUUID, "Weapon Modifier", getHitDamage(), 0));
+		return modifiers;
+	}
 }

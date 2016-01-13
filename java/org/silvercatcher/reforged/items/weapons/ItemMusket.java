@@ -7,6 +7,7 @@ import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ReforgedItem;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
@@ -37,13 +38,14 @@ public class ItemMusket extends ReforgedItem {
 		
 		if(loadState == empty) {
 			
-			if(playerIn.inventory.consumeInventoryItem(ReforgedItems.TEMPORARY)) {
+			if(playerIn.capabilities.isCreativeMode ||
+					playerIn.inventory.consumeInventoryItem(ReforgedItems.TEMPORARY)) {
 				
 				loadState = loading;
 			
 			} else {
 				
-				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 2.0f, 1.0f);
+				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
 			}
 		}
 		
@@ -60,9 +62,11 @@ public class ItemMusket extends ReforgedItem {
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
 		if(loadState == loaded) {
-			
+
+			worldIn.playSoundAtEntity(playerIn, "ambient.weather.thunder", 1f, 1f);
+
 			if(!worldIn.isRemote) {
-				
+
 				EntityBulletMusket projectile = new EntityBulletMusket(worldIn, playerIn, stack);
 				
 				worldIn.spawnEntityInWorld(projectile);
@@ -103,7 +107,8 @@ public class ItemMusket extends ReforgedItem {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		tooltip.add("Loadstate: " + loadState);
+		tooltip.add("Loadstate: " + (loadState == empty ? "empty"
+				: (loadState == loaded ? "loaded" : "loading")));
 	}
 	
 	@Override
@@ -124,6 +129,12 @@ public class ItemMusket extends ReforgedItem {
 		if(loadState == loading) return 40;
 
 		return super.getMaxItemUseDuration(stack);
+	}
+	
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		
+		return (repair.getItem() == Items.iron_ingot);
 	}
 	
 	@Override

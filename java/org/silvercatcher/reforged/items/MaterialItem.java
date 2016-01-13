@@ -1,5 +1,7 @@
 package org.silvercatcher.reforged.items;
 
+import net.minecraft.item.ItemStack;
+
 public abstract class MaterialItem extends ReforgedItem {
 
 	protected final ToolMaterial material;
@@ -42,5 +44,18 @@ public abstract class MaterialItem extends ReforgedItem {
 			break;
 		}
 		return materialPrefix + "_" + base;
+	}
+	
+	@Override
+	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
+		
+		return (repair.getItem() != null && repair.getItem()
+				== material.getRepairItemStack().getItem());
+	}
+	
+	@Override
+	public int getItemEnchantability() {
+		
+		return material.getEnchantability();
 	}
 }
