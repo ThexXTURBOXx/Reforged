@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.proxy;
 
-import org.silvercatcher.reforged.ReforgedItems;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
@@ -33,7 +33,7 @@ public class ClientProxy extends CommonProxy {
 
 		super.init(event);
 		registerItemRenderers();
-		registerEntityRenderers();
+		registerEntityRenderers(Minecraft.getMinecraft().getRenderManager());
 	}
 	
 	@Override
@@ -43,25 +43,22 @@ public class ClientProxy extends CommonProxy {
 		
 		String inventory = "inventory";
 		
-		for(ReforgedItem item : ReforgedItems.registratonList) {
+		for(ReforgedItem item : ReforgedRegistry.registratonList) {
 			mesher.register(item, 0, new ModelResourceLocation(ReforgedMod.ID + ":" 
 					+ item.getName(), inventory));
 		}
 		
-		mesher.register(ReforgedItems.NEST_OF_BEES, 1, new ModelResourceLocation(ReforgedMod.ID
-				+ ReforgedItems.NEST_OF_BEES.getName() + "_empty", inventory));
+		mesher.register(ReforgedRegistry.NEST_OF_BEES, 1, new ModelResourceLocation(ReforgedMod.ID
+				+ ReforgedRegistry.NEST_OF_BEES.getName() + "_empty", inventory));
 		
-		mesher.register(ReforgedItems.NEST_OF_BEES, 2, new ModelResourceLocation(ReforgedMod.ID
-				+ ReforgedItems.NEST_OF_BEES.getName() + "_powder", inventory));
+		mesher.register(ReforgedRegistry.NEST_OF_BEES, 2, new ModelResourceLocation(ReforgedMod.ID
+				+ ReforgedRegistry.NEST_OF_BEES.getName() + "_powder", inventory));
 	}
 	
 	@Override
-	protected void registerEntityRenderers() {
-		
-		RenderManager manager = Minecraft.getMinecraft().getRenderManager();
-		
-		RenderingRegistry.registerEntityRenderingHandler(EntityBoomerang.class, new RenderBoomerang(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderJavelin(manager));
-		RenderingRegistry.registerEntityRenderingHandler(EntityBulletMusket.class, new RenderBulletMusket(manager));
+	protected void registerEntityRenderers(RenderManager manager) {
+		ReforgedRegistry.registerEntityRenderers(EntityBoomerang.class, new RenderBoomerang(manager));
+		ReforgedRegistry.registerEntityRenderers(EntityBulletMusket.class, new RenderBulletMusket(manager));
+		ReforgedRegistry.registerEntityRenderers(EntityJavelin.class, new RenderJavelin(manager));
 	}
 }

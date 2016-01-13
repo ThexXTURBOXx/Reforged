@@ -2,7 +2,7 @@ package org.silvercatcher.reforged.items.recipes;
 
 import java.util.LinkedList;
 
-import org.silvercatcher.reforged.ReforgedItems;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.CompoundTags;
 
 import net.minecraft.client.Minecraft;
@@ -47,10 +47,10 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			ItemStack stack = inventory.getStackInSlot(i);
 			
 			if(stack != null) {
-				if(stack.getItem() == ReforgedItems.NEST_OF_BEES) {
+				if(stack.getItem() == ReforgedRegistry.NEST_OF_BEES) {
 					nestsOfBees++;
 					output = stack.copy();
-				} else if(stack.getItem() == ReforgedItems.ARROW_BUNDLE) {
+				} else if(stack.getItem() == ReforgedRegistry.ARROW_BUNDLE) {
 					arrowBundles++;
 				} else {
 					// we don't want any other stuff!
@@ -80,10 +80,10 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			
 			if(stack != null) {
 				Item item = stack.getItem();
-				if(item == ReforgedItems.NEST_OF_BEES) {
+				if(item == ReforgedRegistry.NEST_OF_BEES) {
 					output = stack.copy();
 				} else {
-					if(item == ReforgedItems.ARROW_BUNDLE) {
+					if(item == ReforgedRegistry.ARROW_BUNDLE) {
 						arrowBundleIndizes.add(i);
 						input[i] = stack.copy();
 					}
@@ -91,7 +91,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			}
 		}
 		
-		NBTTagCompound compound = ReforgedItems.NEST_OF_BEES.giveCompound(output);
+		NBTTagCompound compound = ReforgedRegistry.NEST_OF_BEES.giveCompound(output);
 		
 		int arrows = compound.getInteger(CompoundTags.AMMUNITION);
 		

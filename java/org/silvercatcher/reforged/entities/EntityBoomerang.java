@@ -4,7 +4,7 @@ import java.util.Random;
 
 import javax.tools.Tool;
 
-import org.silvercatcher.reforged.ReforgedItems;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ReforgedItem;
@@ -89,7 +89,7 @@ public class EntityBoomerang extends EntityThrowable {
 			Item item;
 			switch(material) {
 			case EMERALD: if(r.nextInt(1000) <= 500) {
-				item = ReforgedItems.DIAMOND_BOOMERANG;
+				item = ReforgedRegistry.DIAMOND_BOOMERANG;
 				playSound("random.pop", 0.5F, 0.4F);
 				ItemStack dropStack = new ItemStack(item);
 				dropStack.setItemDamage(itemDamage);
@@ -100,7 +100,7 @@ public class EntityBoomerang extends EntityThrowable {
 			}
 				break;
 			case GOLD: if(r.nextInt(1000) <= 500) {
-				item = ReforgedItems.GOLDEN_BOOMERANG;
+				item = ReforgedRegistry.GOLDEN_BOOMERANG;
 				playSound("random.pop", 0.5F, 0.4F);
 				ItemStack dropStack = new ItemStack(item);
 				dropStack.setItemDamage(itemDamage);
@@ -111,7 +111,7 @@ public class EntityBoomerang extends EntityThrowable {
 			}
 				break;
 			case IRON: if(r.nextInt(1000) <= 50) {
-				item = ReforgedItems.IRON_BOOMERANG;
+				item = ReforgedRegistry.IRON_BOOMERANG;
 				playSound("random.pop", 0.5F, 0.4F);
 				ItemStack dropStack = new ItemStack(item);
 				dropStack.setItemDamage(itemDamage);
@@ -122,7 +122,7 @@ public class EntityBoomerang extends EntityThrowable {
 			}
 				break;
 			case STONE: if(r.nextInt(1000) <= 250) {
-				item = ReforgedItems.STONE_BOOMERANG;
+				item = ReforgedRegistry.STONE_BOOMERANG;
 				playSound("random.pop", 0.5F, 0.4F);
 				ItemStack dropStack = new ItemStack(item);
 				dropStack.setItemDamage(itemDamage);
@@ -133,7 +133,7 @@ public class EntityBoomerang extends EntityThrowable {
 			}
 				break;
 			case WOOD: if(r.nextInt(1000) <= 500) {
-				item = ReforgedItems.WOODEN_BOOMERANG;
+				item = ReforgedRegistry.WOODEN_BOOMERANG;
 				playSound("random.pop", 0.5F, 0.4F);
 				ItemStack dropStack = new ItemStack(item);
 				dropStack.setItemDamage(itemDamage);
