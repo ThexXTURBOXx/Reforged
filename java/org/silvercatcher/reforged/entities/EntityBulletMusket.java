@@ -40,9 +40,19 @@ public class EntityBulletMusket extends EntityThrowable {
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition p_70184_1_) {
-		
+	protected void onImpact(MovingObjectPosition target) {
+		//Target is entity or block?
+		if(target.entityHit == null) {
+			//It's a block
+		} else {
+			//It's a entity
+			target.entityHit.attackEntityFrom(DamageSource.causeThornsDamage(getThrower()), 4);
+		}
 		this.setDead();
-		
+	}
+	
+	@Override
+	protected float getGravityVelocity() {
+		return 0;
 	}
 }
