@@ -4,12 +4,12 @@ import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
+import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
 import org.silvercatcher.reforged.items.ReforgedItem;
-import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.render.RenderBoomerang;
 import org.silvercatcher.reforged.render.RenderBulletMusket;
-import org.silvercatcher.reforged.render.ModelBulletMusket;
+import org.silvercatcher.reforged.render.RenderJavelin;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -19,7 +19,6 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ClientProxy extends CommonProxy {
 
@@ -62,6 +61,7 @@ public class ClientProxy extends CommonProxy {
 		RenderManager manager = Minecraft.getMinecraft().getRenderManager();
 		
 		RenderingRegistry.registerEntityRenderingHandler(EntityBoomerang.class, new RenderBoomerang(manager));
+		RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new RenderJavelin(manager));
 		RenderingRegistry.registerEntityRenderingHandler(EntityBulletMusket.class, new RenderBulletMusket(manager));
 	}
 }
