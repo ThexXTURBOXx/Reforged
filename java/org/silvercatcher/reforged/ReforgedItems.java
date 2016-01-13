@@ -10,8 +10,7 @@ import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.items.weapons.ItemBulletMusket;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
 import org.silvercatcher.reforged.items.weapons.ItemMusket;
-import org.silvercatcher.reforged.items.weapons.nob.ItemNestOfBees;
-//import org.silvercatcher.reforged.items.weapons.nob.ItemNestOfBeesEmpty;
+import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
