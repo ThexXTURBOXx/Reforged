@@ -1,4 +1,4 @@
-package org.silvercatcher.reforged.items.weapons;
+package org.silvercatcher.reforged.items.others;
 
 import org.silvercatcher.reforged.ReforgedItems;
 import org.silvercatcher.reforged.ReforgedMod;

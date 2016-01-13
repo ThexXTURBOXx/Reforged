@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.silvercatcher.reforged.items.ReforgedItem;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
+import org.silvercatcher.reforged.items.others.ItemBulletMusket;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
-import org.silvercatcher.reforged.items.weapons.ItemBulletMusket;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
 import org.silvercatcher.reforged.items.weapons.ItemMusket;
 import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;

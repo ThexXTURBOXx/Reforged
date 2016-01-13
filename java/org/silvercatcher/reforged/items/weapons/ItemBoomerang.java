@@ -24,6 +24,7 @@ public class ItemBoomerang extends MaterialItem
 	public ItemBoomerang(ToolMaterial material)
 	{
 		super("boomerang", material);
+		setMaxStackSize(1);
 		setMaxDamage(getMaxDamageForMaterial(material));
 	}
 	
@@ -65,6 +66,6 @@ public class ItemBoomerang extends MaterialItem
 	@Override
 	public float getHitDamage() {
 		
-		return Math.min(1f, (material.getDamageVsEntity() * 0.25f));
+		return Math.max(1f, (0.5f + material.getDamageVsEntity() * 0.5f));
 	}
 }
