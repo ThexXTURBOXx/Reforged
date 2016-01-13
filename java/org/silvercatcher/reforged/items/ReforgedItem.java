@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public abstract class ReforgedItem extends Item {
 
@@ -24,6 +25,7 @@ public abstract class ReforgedItem extends Item {
 		setUnlocalizedName(name);
 		mapEnchantments();
 	}
+
 		
 	public final String getName() { return name; }
 	

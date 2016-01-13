@@ -87,7 +87,7 @@ public class ItemNestOfBees extends ReforgedItem {
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		
 		//todo: find better way for delay
-		if(worldIn.getTotalWorldTime() % delay == 0 && entityIn instanceof EntityPlayer) {
+		if(entityIn instanceof EntityPlayer) {
 
 			EntityPlayer player = (EntityPlayer) entityIn;
 			
@@ -102,6 +102,7 @@ public class ItemNestOfBees extends ReforgedItem {
 			}
 			
 			compound.setInteger(CompoundTags.AMMUNITION, arrows);
+			compound.setBoolean(CompoundTags.ACTIVATED, arrows > 0);
 		}
 	}
 	

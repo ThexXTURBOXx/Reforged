@@ -38,9 +38,9 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 	public boolean matches(InventoryCrafting inventory, World world) {
 		
 		printInventory("match", inventory);
-		
+				
 		int nestsOfBees = 0;
-		int arrowBundles = 1;
+		int arrowBundles = 0;
 		
 		for(int i = 0; i < inventory.getSizeInventory(); i++) {
 			
@@ -49,6 +49,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			if(stack != null) {
 				if(stack.getItem() == ReforgedItems.NEST_OF_BEES) {
 					nestsOfBees++;
+					output = stack.copy();
 				} else if(stack.getItem() == ReforgedItems.ARROW_BUNDLE) {
 					arrowBundles++;
 				} else {
@@ -67,11 +68,11 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 		printInventory("result", inventory);
 		
 		int size = inventory.getSizeInventory();
-		// we can assume that the ingredients match, at least one NoB has to be there...I hope
-		ItemStack nestOfBees = null;
 		
 		// remember where to get arrow bundles....better idea?
 		LinkedList<Integer> arrowBundleIndizes = new LinkedList<Integer>();
+		
+		input = new ItemStack[size];
 		
 		for(int i = 0; i < size; i++) {
 			
@@ -80,33 +81,44 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			if(stack != null) {
 				Item item = stack.getItem();
 				if(item == ReforgedItems.NEST_OF_BEES) {
-					nestOfBees = stack;
-				} else if(item == ReforgedItems.ARROW_BUNDLE) {
-					arrowBundleIndizes.add(i);
+					output = stack.copy();
+				} else {
+					if(item == ReforgedItems.ARROW_BUNDLE) {
+						arrowBundleIndizes.add(i);
+						input[i] = stack.copy();
+					}
 				}
 			}
 		}
 		
-		NBTTagCompound compound = ReforgedItems.NEST_OF_BEES.giveCompound(nestOfBees);
+		NBTTagCompound compound = ReforgedItems.NEST_OF_BEES.giveCompound(output);
 		
 		int arrows = compound.getInteger(CompoundTags.AMMUNITION);
 		
 		// please terminate, please terminate,...
-		while(!arrowBundleIndizes.isEmpty() && arrows < 32 - 7) {
-			arrows += 8;
-			input[arrowBundleIndizes.removeFirst()] = null;
-		}
-		
-		compound.setInteger(CompoundTags.AMMUNITION, arrows);
-		input = new ItemStack[inventory.getSizeInventory()];
+		while(!arrowBundleIndizes.isEmpty()) {
+			
+			int arrowBundleSlot = arrowBundleIndizes.removeFirst();
+			
+			ItemStack arrowBundleStack = inventory.getStackInSlot(arrowBundleSlot);
+			
+			int use = (32 - arrows) / 8;
+			if(use <= 0) break;
+			
+			arrows += Math.min(use, arrowBundleStack.stackSize) * 8;
 
-		return nestOfBees;
+			input[arrowBundleSlot].stackSize -= use;
+		}
+
+		compound.setInteger(CompoundTags.AMMUNITION, arrows);
+
+		return output;
 	}
 
 	@Override
 	public int getRecipeSize() {
 		
-		return input.length;
+		return 9;
 	}
 
 	@Override
@@ -120,6 +132,6 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 		
 		printInventory("remain", inventory);
 		
-		return input;
+		return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
 	}
 }
