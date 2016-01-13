@@ -65,7 +65,7 @@ public class ItemNestOfBees extends ReforgedItem {
 	@Override
 	public float getHitDamage() {
 		
-		return 1f;
+		return 0f;
 	}
 	
 	@Override
