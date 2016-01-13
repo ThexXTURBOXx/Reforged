@@ -68,7 +68,7 @@ public class ItemMusket extends ReforgedItem {
 			giveCompound(stack).setByte(CompoundTags.AMMUNITION, empty);
 		}
 	}
-	
+
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
 		
