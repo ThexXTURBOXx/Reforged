@@ -24,22 +24,16 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ItemNestOfBees extends NestOfBeesBase {
+public class ItemNestOfBees extends ReforgedItem {
 
 	private static int delay = 4;
 	private static int buildup = 25;
 	
 	
 	public ItemNestOfBees() {
-		super("");
+		super("nest_of_bees");
 	}
 	
-	@Override
-	public void onCreated(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-		
-		NBTTagCompound compound = giveCompound(stack);
-		compound.setInteger(CompoundTags.AMMUNITION, 32);
-	}
 	
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -50,6 +44,17 @@ public class ItemNestOfBees extends NestOfBeesBase {
 	
 	@Override
 	public void registerRecipes() {
+		
+		// for testing!
+		ItemStack testStack = new ItemStack(this);
+		NBTTagCompound nbt = new NBTTagCompound();
+		nbt.setInteger(CompoundTags.AMMUNITION, 16);
+		
+		GameRegistry.addRecipe(testStack,
+				"   ",
+				" d ",
+				"   ",
+				'd', Items.diamond);
 		
 		GameRegistry.addRecipe(new NestOfBeesLoadRecipe());
 	}
@@ -94,10 +99,6 @@ public class ItemNestOfBees extends NestOfBeesBase {
 			}
 			
 			compound.setInteger(CompoundTags.AMMUNITION, arrows);
-			
-			if(arrows == 0) {
-				stack.setItem(ReforgedItems.NEST_OF_BEES_EMPTY);
-			}
 		}
 	}
 	

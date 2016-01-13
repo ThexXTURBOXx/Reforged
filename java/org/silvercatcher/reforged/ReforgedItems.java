@@ -11,7 +11,7 @@ import org.silvercatcher.reforged.items.weapons.ItemBulletMusket;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
 import org.silvercatcher.reforged.items.weapons.ItemMusket;
 import org.silvercatcher.reforged.items.weapons.nob.ItemNestOfBees;
-import org.silvercatcher.reforged.items.weapons.nob.ItemNestOfBeesEmpty;
+//import org.silvercatcher.reforged.items.weapons.nob.ItemNestOfBeesEmpty;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
@@ -22,7 +22,7 @@ public class ReforgedItems {
 	public static ReforgedItem ARROW_BUNDLE;
 	
 	public static ReforgedItem NEST_OF_BEES;
-	public static ReforgedItem NEST_OF_BEES_EMPTY;
+//	public static ReforgedItem NEST_OF_BEES_EMPTY;
 
 	public static ReforgedItem FIREROD;
 	
@@ -50,7 +50,7 @@ public class ReforgedItems {
 		registratonList.add(ARROW_BUNDLE = new ItemArrowBundle());
 		
 		registratonList.add(NEST_OF_BEES = new ItemNestOfBees());
-		registratonList.add(NEST_OF_BEES_EMPTY = new ItemNestOfBeesEmpty());
+//		registratonList.add(NEST_OF_BEES_EMPTY = new ItemNestOfBeesEmpty());
 		
 		registratonList.add(FIREROD = new ItemFireRod());
 		
