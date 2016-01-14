@@ -18,6 +18,6 @@ public class ReforgedTab extends CreativeTabs {
 	@Override
 	public Item getTabIconItem() {
 
-		return ReforgedItems.NEST_OF_BEES;
+		return ReforgedRegistry.NEST_OF_BEES;
 	}
 }

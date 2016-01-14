@@ -2,7 +2,7 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
 
-import org.silvercatcher.reforged.ReforgedItems;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ReforgedItem;
@@ -39,7 +39,7 @@ public class ItemMusket extends ReforgedItem {
 		if(loadState == empty) {
 			
 			if(playerIn.capabilities.isCreativeMode ||
-					playerIn.inventory.consumeInventoryItem(ReforgedItems.TEMPORARY)) {
+					playerIn.inventory.consumeInventoryItem(ReforgedRegistry.TEMPORARY)) {
 				
 				loadState = loading;
 			

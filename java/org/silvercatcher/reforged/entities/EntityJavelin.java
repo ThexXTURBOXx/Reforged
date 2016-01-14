@@ -4,7 +4,7 @@ import java.util.Random;
 
 import javax.tools.Tool;
 
-import org.silvercatcher.reforged.ReforgedItems;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ReforgedItem;
