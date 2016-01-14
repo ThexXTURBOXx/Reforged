@@ -2,7 +2,7 @@
 	"versionList": [
 		{
 			"mcVersion":"Minecraft 1.8",
-			"modVersion":"0.1-new",
+			"modVersion":"0.5.1",
 			"changeLog": [
                 "First version."
 			],
