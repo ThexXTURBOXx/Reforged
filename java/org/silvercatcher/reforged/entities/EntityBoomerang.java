@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class EntityBoomerang extends EntityThrowable {
 	
-	private ToolMaterial material;
+	public static ToolMaterial material;
 	private int itemDamage;
 	private Random r;
 
@@ -88,61 +88,47 @@ public class EntityBoomerang extends EntityThrowable {
 		
 		if(!worldObj.isRemote) {
 			Item item;
+			ItemStack dropStack;
 			switch(material) {
-			case EMERALD: if(r.nextInt(1000) <= 500) {
+			case EMERALD:
 				item = ReforgedRegistry.DIAMOND_BOOMERANG;
 				playSound("random.pop", 0.5F, 0.4F);
-				ItemStack dropStack = new ItemStack(item);
+				dropStack = new ItemStack(item);
 				dropStack.setItemDamage(itemDamage);
 				entityDropItem(dropStack, 0.5f);
 				setDead();
-			} else {
-				item = null; this.playSound("mob.blaze.hit", 0.5F, 0.4F);
-			}
 				break;
-			case GOLD: if(r.nextInt(1000) <= 500) {
+			case GOLD:
 				item = ReforgedRegistry.GOLDEN_BOOMERANG;
 				playSound("random.pop", 0.5F, 0.4F);
-				ItemStack dropStack = new ItemStack(item);
+				dropStack = new ItemStack(item);
 				dropStack.setItemDamage(itemDamage);
 				entityDropItem(dropStack, 0.5f);
 				setDead();
-			} else {
-				item = null; this.playSound("mob.blaze.hit", 0.5F, 0.4F);
-			}
 				break;
-			case IRON: if(r.nextInt(1000) <= 50) {
+			case IRON:
 				item = ReforgedRegistry.IRON_BOOMERANG;
 				playSound("random.pop", 0.5F, 0.4F);
-				ItemStack dropStack = new ItemStack(item);
+				dropStack = new ItemStack(item);
 				dropStack.setItemDamage(itemDamage);
 				entityDropItem(dropStack, 0.5f);
 				setDead();
-			} else {
-				item = null; this.playSound("mob.blaze.hit", 0.5F, 0.4F);
-			}
 				break;
-			case STONE: if(r.nextInt(1000) <= 250) {
+			case STONE:
 				item = ReforgedRegistry.STONE_BOOMERANG;
 				playSound("random.pop", 0.5F, 0.4F);
-				ItemStack dropStack = new ItemStack(item);
+				dropStack = new ItemStack(item);
 				dropStack.setItemDamage(itemDamage);
 				entityDropItem(dropStack, 0.5f);
 				setDead();
-			} else {
-				item = null; this.playSound("mob.blaze.hit", 0.5F, 0.4F);
-			}
 				break;
-			case WOOD: if(r.nextInt(1000) <= 500) {
+			case WOOD:
 				item = ReforgedRegistry.WOODEN_BOOMERANG;
 				playSound("random.pop", 0.5F, 0.4F);
-				ItemStack dropStack = new ItemStack(item);
+				dropStack = new ItemStack(item);
 				dropStack.setItemDamage(itemDamage);
 				entityDropItem(dropStack, 0.5f);
 				setDead();
-			} else {
-				item = null; this.playSound("mob.blaze.hit", 0.5F, 0.4F);
-			}
 				break;
 			default: item = null;
 				break;
