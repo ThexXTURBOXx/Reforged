@@ -38,6 +38,5 @@ public class CommonProxy {
 		ReforgedRegistry.registerEntity(EntityBoomerang.class, "Boomerang", count++);
 		ReforgedRegistry.registerEntity(EntityJavelin.class, "Javelin", count++);
 		ReforgedRegistry.registerEntity(EntityBulletMusket.class, "BulletMusket", count++);
-
 	}
 }
