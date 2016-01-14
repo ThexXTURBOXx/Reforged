@@ -6,10 +6,16 @@ import org.silvercatcher.reforged.items.ReforgedItem;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -28,18 +34,18 @@ public class ItemJavelin extends ReforgedItem {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,EntityPlayer par3EntityPlayer) {
-	   
-		if(par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.consumeInventoryItem(this))
-	    {
-	        par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-	        if (!par2World.isRemote) {
-	        	
-	        	par2World.spawnEntityInWorld(new EntityJavelin(par2World, par3EntityPlayer, par1ItemStack));
-	        }
-	    }
-	    return par1ItemStack;
-	}
+	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+    {
+        net.minecraftforge.event.entity.player.ArrowNockEvent event = new net.minecraftforge.event.entity.player.ArrowNockEvent(playerIn, itemStackIn);
+        if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) return event.result;
+
+        if (playerIn.capabilities.isCreativeMode || playerIn.inventory.hasItem(this))
+        {
+            playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
+        }
+
+        return itemStackIn;
+    }
 	
 	@Override
 	public void registerRecipes() {
@@ -50,4 +56,30 @@ public class ItemJavelin extends ReforgedItem {
 	public float getHitDamage() {
 		return 4;
 	}
+	
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack)
+    {
+        return EnumAction.BOW;
+    }
+	
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack)
+    {
+        return 72000;
+    }
+	
+	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft)
+    {
+		if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(this))
+    {
+        worldIn.playSoundAtEntity(playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        if (!worldIn.isRemote) {
+        	
+        	worldIn.spawnEntityInWorld(new EntityJavelin(worldIn, playerIn, stack));
+        }
+    }
+    }
+
 }
