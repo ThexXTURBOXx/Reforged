@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class EntityBoomerang extends EntityThrowable {
 	
-	public static ToolMaterial material;
+	private ToolMaterial material;
 	private int itemDamage;
 	private Random r;
 
