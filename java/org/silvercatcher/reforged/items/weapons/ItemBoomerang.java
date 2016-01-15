@@ -29,7 +29,6 @@ public class ItemBoomerang extends MaterialItem
         	
 	        if (!par2World.isRemote) {
 	        	
-	        	System.out.println(par1ItemStack);
 	        	EntityBoomerang boomerang = new EntityBoomerang(par2World, par3EntityPlayer, throwStack);
 	        	par2World.spawnEntityInWorld(boomerang);
 	        }

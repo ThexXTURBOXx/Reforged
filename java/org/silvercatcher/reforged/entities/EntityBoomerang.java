@@ -67,7 +67,8 @@ public class EntityBoomerang extends EntityThrowable {
 	}
 
 	private float getImpactDamage() {
-		return 4;
+		
+		return getMaterial().getDamageVsEntity()  + 3;
 	}
 
 	@Override
