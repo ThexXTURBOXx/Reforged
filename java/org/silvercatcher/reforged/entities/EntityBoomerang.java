@@ -42,10 +42,8 @@ public class EntityBoomerang extends EntityThrowable {
 	public EntityBoomerang(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		
 		super(worldIn, throwerIn);
-		
-		if(stack == null || !(stack.getItem() instanceof ItemBoomerang)) {
-			throw new IllegalArgumentException("Invalid Itemstack!");
-		}
+
+		setItemStack(stack);
 	}
 	
 	@Override
@@ -63,9 +61,12 @@ public class EntityBoomerang extends EntityThrowable {
 		return dataWatcher.getWatchableObjectItemStack(5);
 	}
 	
-	public void setItemStack(ItemStack itemStack) {
+	public void setItemStack(ItemStack stack) {
 		
-		dataWatcher.updateObject(5, itemStack);
+		if(stack == null || !(stack.getItem() instanceof ItemBoomerang)) {
+			throw new IllegalArgumentException("Invalid Itemstack!");
+		}
+		dataWatcher.updateObject(5, stack);
 	}
 	
 	private void printDatawatcher() {
@@ -98,9 +99,15 @@ public class EntityBoomerang extends EntityThrowable {
 			}
 			setDead();
 		} else {
-			//It's a entity
+			//It's an entity
 			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(
 					target.entityHit, getThrower()), getImpactDamage());
+			ItemStack stack = getItemStack();
+			if(stack.attemptDamageItem(1, rand)) {
+				setDead();
+			} else {
+				setItemStack(stack);
+			}
 		}
 	}
 

@@ -31,14 +31,17 @@ public class ItemBoomerang extends MaterialItem
 	@Override
 	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,EntityPlayer par3EntityPlayer) {
 	   
+		// import, otherwise references will cause chaos!
+		ItemStack throwStack = par1ItemStack.copy();
+		
 		if(par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.consumeInventoryItem(this))
 	    {
 	        par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
         	
 	        if (!par2World.isRemote) {
 	        	
-	        	EntityBoomerang boomerang = new EntityBoomerang(par2World, par3EntityPlayer, par1ItemStack);
-	        	boomerang.setItemStack(par1ItemStack);
+	        	System.out.println(par1ItemStack);
+	        	EntityBoomerang boomerang = new EntityBoomerang(par2World, par3EntityPlayer, throwStack);
 	        	par2World.spawnEntityInWorld(boomerang);
 	        }
 	    }

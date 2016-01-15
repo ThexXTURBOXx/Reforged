@@ -4,6 +4,7 @@ import org.silvercatcher.reforged.ReforgedMod;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,6 +40,13 @@ public abstract class ReforgedItem extends Item {
 		
 		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 		return itemStackIn;
+	}
+	
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		
+		stack.attemptDamageItem(1, itemRand);
+		return false;
 	}
 	
 	protected void mapEnchantments() {}
