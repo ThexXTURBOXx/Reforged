@@ -51,7 +51,9 @@ public class RenderBoomerang extends Render
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		
-		switch(EntityBoomerang.material) {
+		EntityBoomerang entityBoomerang = (EntityBoomerang) entity;
+		
+		switch(entityBoomerang.getMaterial()) {
 		
 		case EMERALD: return diamond;
 		

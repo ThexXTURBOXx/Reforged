@@ -34,9 +34,12 @@ public class ItemBoomerang extends MaterialItem
 		if(par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.consumeInventoryItem(this))
 	    {
 	        par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+        	
 	        if (!par2World.isRemote) {
 	        	
-	        	par2World.spawnEntityInWorld(new EntityBoomerang(par2World, par3EntityPlayer, par1ItemStack));
+	        	EntityBoomerang boomerang = new EntityBoomerang(par2World, par3EntityPlayer, par1ItemStack);
+	        	boomerang.setItemStack(par1ItemStack);
+	        	par2World.spawnEntityInWorld(boomerang);
 	        }
 	    }
 	    return par1ItemStack;
