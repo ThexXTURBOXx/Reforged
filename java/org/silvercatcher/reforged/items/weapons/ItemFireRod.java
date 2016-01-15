@@ -2,7 +2,6 @@ package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.items.ReforgedItem;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

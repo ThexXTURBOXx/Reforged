@@ -2,28 +2,18 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ReforgedItem;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
-import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.RecipesBanners;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ItemNestOfBees extends ReforgedItem {
 

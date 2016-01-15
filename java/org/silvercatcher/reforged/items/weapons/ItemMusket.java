@@ -7,12 +7,9 @@ import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ReforgedItem;
 
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;

@@ -1,25 +1,10 @@
 package org.silvercatcher.reforged.items.others;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
-import org.silvercatcher.reforged.items.MaterialItem;
 import org.silvercatcher.reforged.items.ReforgedItem;
-import org.silvercatcher.reforged.proxy.CommonProxy;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.entity.DataWatcher;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import scala.reflect.api.Trees.SelectFromTypeTreeExtractor;
 
 public class ItemBulletMusket extends ReforgedItem
 {

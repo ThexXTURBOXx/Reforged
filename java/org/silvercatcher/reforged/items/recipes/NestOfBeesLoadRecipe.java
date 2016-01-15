@@ -6,7 +6,6 @@ import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.CompoundTags;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

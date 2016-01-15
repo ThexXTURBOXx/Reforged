@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
 
 public class CommonProxy {
 	

@@ -1,7 +1,6 @@
 package org.silvercatcher.reforged.gui;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.Color;
 import org.lwjgl.util.ReadableColor;
 import org.silvercatcher.reforged.items.weapons.IReloadable;
 
@@ -9,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 

@@ -3,9 +3,6 @@ package org.silvercatcher.reforged;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.silvercatcher.reforged.entities.EntityBoomerang;
-import org.silvercatcher.reforged.entities.EntityBulletMusket;
-import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.items.ReforgedItem;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;
@@ -15,14 +12,7 @@ import org.silvercatcher.reforged.items.weapons.ItemFireRod;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 import org.silvercatcher.reforged.items.weapons.ItemMusket;
 import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
-import org.silvercatcher.reforged.render.RenderBoomerang;
-import org.silvercatcher.reforged.render.RenderBulletMusket;
-import org.silvercatcher.reforged.render.RenderJavelin;
-
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
