@@ -89,20 +89,18 @@ public class EntityBoomerang extends EntityThrowable {
 
 	@Override
 	protected void onImpact(MovingObjectPosition target) {
-	
-		if(onGround) return;
-		
+			
 		//Target is entity or block?
 		if(target.entityHit == null) {
 			//It's a block
+			if(!worldObj.isRemote) {
+				entityDropItem(getItemStack(), 0.5f);
+			}
+			setDead();
 		} else {
 			//It's a entity
 			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(
 					target.entityHit, getThrower()), getImpactDamage());
-		}
-		
-		if(!worldObj.isRemote) {
-			entityDropItem(getItemStack(), 0.5f);
 		}
 	}
 
