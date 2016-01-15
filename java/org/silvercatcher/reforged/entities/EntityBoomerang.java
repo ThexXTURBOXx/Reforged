@@ -123,5 +123,4 @@ public class EntityBoomerang extends EntityThrowable {
 		
 		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
 	}
-
 }

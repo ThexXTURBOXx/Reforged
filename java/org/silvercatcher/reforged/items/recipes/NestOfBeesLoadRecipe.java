@@ -37,7 +37,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 	@Override
 	public boolean matches(InventoryCrafting inventory, World world) {
 		
-		printInventory("match", inventory);
+		//printInventory("match", inventory);
 				
 		int nestsOfBees = 0;
 		int arrowBundles = 0;
@@ -65,7 +65,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventory) {
 
-		printInventory("result", inventory);
+		//printInventory("result", inventory);
 		
 		int size = inventory.getSizeInventory();
 		
@@ -130,7 +130,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 	@Override
 	public ItemStack[] getRemainingItems(InventoryCrafting inventory) {
 		
-		printInventory("remain", inventory);
+		//printInventory("remain", inventory);
 		
 		return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
 	}
