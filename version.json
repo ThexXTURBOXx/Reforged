@@ -6,8 +6,8 @@
 			"changeLog": [
                 "First version."
 			],
-			"updateURL":"https://github.com/TheOnlySilverClaw/Reforged",
-			"isDirectLink":"false",
+			"updateURL":"https://github.com/TheOnlySilverClaw/Reforged/releases/download/v0.5.3-alpha/reforged-0.5.3-alpha.jar",
+			"isDirectLink":"true",
 			"newFileName":""
 		}
 	]
