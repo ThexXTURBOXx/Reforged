@@ -1,12 +1,12 @@
 package org.silvercatcher.reforged.items.others;
 
-import org.silvercatcher.reforged.items.ReforgedItem;
+import org.silvercatcher.reforged.items.ItemReforged;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemArrowBundle extends ReforgedItem {
+public class ItemArrowBundle extends ItemReforged {
 
 	
 	public ItemArrowBundle() {

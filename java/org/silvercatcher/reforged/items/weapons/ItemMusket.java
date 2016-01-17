@@ -5,7 +5,7 @@ import java.util.List;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.items.CompoundTags;
-import org.silvercatcher.reforged.items.ReforgedItem;
+import org.silvercatcher.reforged.items.ItemReforged;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public class ItemMusket extends ReforgedItem {
+public class ItemMusket extends ItemReforged {
 
 	// let's see...
 	byte empty		= 0;

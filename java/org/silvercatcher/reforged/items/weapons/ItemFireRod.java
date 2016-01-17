@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.items.ReforgedItem;
+import org.silvercatcher.reforged.items.ItemReforged;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,7 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemFireRod extends ReforgedItem {
+public class ItemFireRod extends ItemReforged {
 
 	public static final int FIRE_DURATION = 6;
 	

@@ -3,11 +3,12 @@ package org.silvercatcher.reforged;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.silvercatcher.reforged.items.ReforgedItem;
+import org.silvercatcher.reforged.items.ItemReforged;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
+import org.silvercatcher.reforged.items.weapons.ItemCeremonialDagger;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 import org.silvercatcher.reforged.items.weapons.ItemMusket;
@@ -20,40 +21,42 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ReforgedRegistry {
 
-	public static ReforgedItem ARROW_BUNDLE;
+	public static ItemReforged ARROW_BUNDLE;
 	
-	public static ReforgedItem NEST_OF_BEES;
-//	public static ReforgedItem NEST_OF_BEES_EMPTY;
+	public static ItemReforged NEST_OF_BEES;
 
-	public static ReforgedItem FIREROD;
+	public static ItemReforged CEREMONIAL_DAGGER;
 	
-	public static ReforgedItem MUSKET;
+	public static ItemReforged FIREROD;
 	
-	public static ReforgedItem WOODEN_BATTLE_AXE;
-	public static ReforgedItem STONE_BATTLE_AXE;
-	public static ReforgedItem IRON_BATTLE_AXE;
-	public static ReforgedItem GOLDEN_BATTLE_AXE;
-	public static ReforgedItem DIAMOND_BATTLE_AXE;
+	public static ItemReforged MUSKET;
 	
-	public static ReforgedItem WOODEN_BOOMERANG;
-	public static ReforgedItem STONE_BOOMERANG;
-	public static ReforgedItem IRON_BOOMERANG;
-	public static ReforgedItem GOLDEN_BOOMERANG;
-	public static ReforgedItem DIAMOND_BOOMERANG;
+	public static ItemReforged WOODEN_BATTLE_AXE;
+	public static ItemReforged STONE_BATTLE_AXE;
+	public static ItemReforged IRON_BATTLE_AXE;
+	public static ItemReforged GOLDEN_BATTLE_AXE;
+	public static ItemReforged DIAMOND_BATTLE_AXE;
 	
-	public static ReforgedItem JAVELIN;
+	public static ItemReforged WOODEN_BOOMERANG;
+	public static ItemReforged STONE_BOOMERANG;
+	public static ItemReforged IRON_BOOMERANG;
+	public static ItemReforged GOLDEN_BOOMERANG;
+	public static ItemReforged DIAMOND_BOOMERANG;
 	
-	public static ReforgedItem TEMPORARY;
+	public static ItemReforged JAVELIN;
+	
+	public static ItemReforged TEMPORARY;
 	
 	
-	public static List<ReforgedItem> registratonList = new ArrayList<ReforgedItem>();
+	public static List<ItemReforged> registratonList = new ArrayList<ItemReforged>();
 	
 	public static void createItems() {
 		
 		registratonList.add(ARROW_BUNDLE = new ItemArrowBundle());
 		
 		registratonList.add(NEST_OF_BEES = new ItemNestOfBees());
-//		registratonList.add(NEST_OF_BEES_EMPTY = new ItemNestOfBeesEmpty());
+
+		registratonList.add(CEREMONIAL_DAGGER = new ItemCeremonialDagger());
 		
 		registratonList.add(FIREROD = new ItemFireRod());
 		
@@ -79,14 +82,14 @@ public class ReforgedRegistry {
 	
 	public static void registerItems() {
 		
-		for(ReforgedItem item : registratonList) {
+		for(ItemReforged item : registratonList) {
 			GameRegistry.registerItem(item, item.getName());
 		}
 	}
 	
 	public static void registerRecipes() {
 		
-		for(ReforgedItem item : registratonList) {
+		for(ItemReforged item : registratonList) {
 			item.registerRecipes();
 		}
 	}

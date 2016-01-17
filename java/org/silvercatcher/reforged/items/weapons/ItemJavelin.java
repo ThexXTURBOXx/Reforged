@@ -1,14 +1,14 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.entities.EntityJavelin;
-import org.silvercatcher.reforged.items.ReforgedItem;
+import org.silvercatcher.reforged.items.ItemReforged;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemJavelin extends ReforgedItem {
+public class ItemJavelin extends ItemReforged {
 
 	public ItemJavelin() {
 		super("spear");

@@ -1,12 +1,12 @@
 package org.silvercatcher.reforged.items.others;
 
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
-import org.silvercatcher.reforged.items.ReforgedItem;
+import org.silvercatcher.reforged.items.ItemReforged;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemBulletMusket extends ReforgedItem
+public class ItemBulletMusket extends ItemReforged
 {
 	public ItemBulletMusket()
 	{
