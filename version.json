@@ -2,11 +2,11 @@
 	"versionList": [
 		{
 			"mcVersion":"Minecraft 1.8",
-			"modVersion":"0.5.3-alpha",
+			"modVersion":"0.5.4-alpha",
 			"changeLog": [
-                "First version."
+                "Added Holy Cross."
 			],
-			"updateURL":"https://github.com/TheOnlySilverClaw/Reforged/releases/download/v0.5.3-alpha/reforged-0.5.3-alpha.jar",
+			"updateURL":"https://github.com/TheOnlySilverClaw/Reforged/releases/download/v0.5.4-alpha/reforged-0.5.4-alpha.jar",
 			"isDirectLink":"true",
 			"newFileName":""
 		}

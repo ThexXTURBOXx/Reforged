@@ -8,7 +8,7 @@ import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
-import org.silvercatcher.reforged.items.weapons.ItemCeremonialDagger;
+import org.silvercatcher.reforged.items.weapons.ItemHolyCross;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 import org.silvercatcher.reforged.items.weapons.ItemMusket;
@@ -25,7 +25,7 @@ public class ReforgedRegistry {
 	
 	public static ItemReforged NEST_OF_BEES;
 
-	public static ItemReforged CEREMONIAL_DAGGER;
+	public static ItemReforged HOLY_CROSS;
 	
 	public static ItemReforged FIREROD;
 	
@@ -56,7 +56,7 @@ public class ReforgedRegistry {
 		
 		registratonList.add(NEST_OF_BEES = new ItemNestOfBees());
 
-		registratonList.add(CEREMONIAL_DAGGER = new ItemCeremonialDagger());
+		registratonList.add(HOLY_CROSS = new ItemHolyCross());
 		
 		registratonList.add(FIREROD = new ItemFireRod());
 		

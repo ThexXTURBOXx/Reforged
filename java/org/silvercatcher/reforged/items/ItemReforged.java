@@ -44,7 +44,9 @@ public abstract class ItemReforged extends Item {
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		
-		stack.attemptDamageItem(1, itemRand);
+		if(stack.attemptDamageItem(1, itemRand)) {
+			stack.stackSize--;
+		}
 		return false;
 	}
 	
