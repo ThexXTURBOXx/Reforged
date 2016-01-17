@@ -33,7 +33,7 @@ public class EntityBoomerang extends EntityThrowable {
 	
 		super.entityInit();
 		
-		// id 5 = ItemStack of Boomerang, type 5 = Itemstack
+		// id 5 = ItemStack of Boomerang, type 5 = ItemStack
 		dataWatcher.addObjectByDataType(5, 5);
 
 	}
