@@ -6,7 +6,7 @@ import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
-import org.silvercatcher.reforged.items.ReforgedItem;
+import org.silvercatcher.reforged.items.ItemReforged;
 import org.silvercatcher.reforged.render.RenderBoomerang;
 import org.silvercatcher.reforged.render.RenderBulletMusket;
 import org.silvercatcher.reforged.render.RenderJavelin;
@@ -42,7 +42,7 @@ public class ClientProxy extends CommonProxy {
 		
 		String inventory = "inventory";
 		
-		for(ReforgedItem item : ReforgedRegistry.registratonList) {
+		for(ItemReforged item : ReforgedRegistry.registratonList) {
 			mesher.register(item, 0, new ModelResourceLocation(ReforgedMod.ID + ":" 
 					+ item.getName(), inventory));
 		}

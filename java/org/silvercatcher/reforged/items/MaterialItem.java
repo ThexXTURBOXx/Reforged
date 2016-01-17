@@ -2,7 +2,7 @@ package org.silvercatcher.reforged.items;
 
 import net.minecraft.item.ItemStack;
 
-public abstract class MaterialItem extends ReforgedItem {
+public abstract class MaterialItem extends ItemReforged {
 
 	protected final ToolMaterial material;
 	

@@ -13,11 +13,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-public abstract class ReforgedItem extends Item {
+public abstract class ItemReforged extends Item {
 
 	protected final String name;
 	
-	public ReforgedItem(String name) {
+	public ItemReforged(String name) {
 
 		super();
 		this.name = name;
@@ -44,7 +44,9 @@ public abstract class ReforgedItem extends Item {
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		
-		stack.attemptDamageItem(1, itemRand);
+		if(stack.attemptDamageItem(1, itemRand)) {
+			stack.stackSize--;
+		}
 		return false;
 	}
 	

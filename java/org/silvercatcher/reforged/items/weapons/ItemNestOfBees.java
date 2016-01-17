@@ -3,7 +3,7 @@ package org.silvercatcher.reforged.items.weapons;
 import java.util.List;
 
 import org.silvercatcher.reforged.items.CompoundTags;
-import org.silvercatcher.reforged.items.ReforgedItem;
+import org.silvercatcher.reforged.items.ItemReforged;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
 
 import net.minecraft.entity.Entity;
@@ -15,7 +15,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemNestOfBees extends ReforgedItem {
+public class ItemNestOfBees extends ItemReforged {
 
 	private static int delay = 4;
 	private static int buildup = 25;
