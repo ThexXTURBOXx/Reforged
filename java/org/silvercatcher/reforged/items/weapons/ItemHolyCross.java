@@ -76,7 +76,7 @@ public class ItemHolyCross extends ItemReforged {
 		
 		if(!toPunish.isEmpty()) {
 			
-			worldIn.setThunderStrength(itemRand.nextFloat());
+			worldIn.setThunderStrength(1f);
 		}
 		
 		return itemStackIn;
@@ -91,7 +91,16 @@ public class ItemHolyCross extends ItemReforged {
 		
 		if(count % DELAY == 0) {
 		
-			EntityLivingBase target = toPunish.removeFirst();
+			EntityLivingBase target = null;
+			
+			// make sure we do not target entities that died in the meantime
+			do {
+				target = toPunish.removeFirst();
+				if(!target.isDead) break;
+			} while(!toPunish.isEmpty());
+			
+			if(target == null || target.isDead) return;
+			
 			EntityLightningBolt lightning = new EntityLightningBolt(world,
 					target.posX, target.posY, target.posZ);
 			
@@ -102,7 +111,8 @@ public class ItemHolyCross extends ItemReforged {
 			}
 			
 			if(stack.attemptDamageItem(1, itemRand)) {
-				stack.stackSize--;
+				player.renderBrokenItemStack(stack);
+				player.destroyCurrentEquippedItem();
 			}
 			
 			if(!target.isDead) {
