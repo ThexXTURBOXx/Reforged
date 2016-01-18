@@ -2,6 +2,6 @@
     "parent": "reforged:item/battleaxe",
 
     "textures": {
-        "layer0": "reforged:items/battleaxe_stone"
+        "layer0": "reforged:items/stone_battleaxe"
     }
 }

@@ -1,7 +1,7 @@
 {
     "parent": "reforged:builtin/generated",
     "textures": {
-        "layer0": "reforged:items/crappy_cross"
+        "layer0": "reforged:items/wooden_holy_cross"
     },
     "display": {
         "thirdperson": {
