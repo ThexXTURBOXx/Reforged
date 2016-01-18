@@ -1,0 +1,7 @@
+{
+    "parent": "reforged:item/spear",
+
+    "textures": {
+        "layer0": "reforged:items/iron_spear"
+    }
+}

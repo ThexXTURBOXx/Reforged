@@ -5,12 +5,12 @@
     },
     "display": {
         "thirdperson": {
-            "rotation": [ 200, 0, 45 ],
-            "translation": [ 0, 1.25, -3.5 ],
+            "rotation": [ 165, 80, 300 ],
+            "translation": [ 0.0, 2.25, -3.25 ],
             "scale": [ 2.0, 2.0, 2.0 ]
         },
         "firstperson": {
-            "rotation": [ 0, -135, 25 ],
+            "rotation": [ 10, 210, 75 ],
             "translation": [ 0, 4, 2 ],
             "scale": [ 2.8, 2.8, 2.8 ]
         }
