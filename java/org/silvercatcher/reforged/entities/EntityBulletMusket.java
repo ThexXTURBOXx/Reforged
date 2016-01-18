@@ -11,10 +11,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 public class EntityBulletMusket extends EntityThrowable {
-	
-	private ToolMaterial material;
-	private int itemDamage;
-	private Random r;
+
 
 	public EntityBulletMusket(World worldIn) {
 		super(worldIn);
@@ -31,14 +28,14 @@ public class EntityBulletMusket extends EntityThrowable {
 		if(target.entityHit == null) {
 			//It's a block
 		} else {
-			//It's a entity
+			//It's an entity
 			target.entityHit.attackEntityFrom(DamageSource.causeThornsDamage(getThrower()), 4);
 		}
-		this.setDead();
+		setDead();
 	}
 	
 	@Override
 	protected float getGravityVelocity() {
-		return 0;
+		return 0.005f;
 	}
 }

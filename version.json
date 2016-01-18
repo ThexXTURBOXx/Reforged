@@ -2,11 +2,13 @@
 	"versionList": [
 		{
 			"mcVersion":"Minecraft 1.8",
-			"modVersion":"0.5.4-alpha",
+			"modVersion":"0.5.5-alpha",
 			"changeLog": [
-                "Added Holy Cross."
+                "Tried to improve item rotations.",
+                "Fixed bullet rendering.",
+                "Lots of small stuff."
 			],
-			"updateURL":"https://github.com/TheOnlySilverClaw/Reforged/releases/download/v0.5.4-alpha/reforged-0.5.4-alpha.jar",
+			"updateURL":"https://github.com/TheOnlySilverClaw/Reforged/releases/download/v0.5.5-alpha/reforged-0.5.5-ALPHA.jar",
 			"isDirectLink":"true",
 			"newFileName":""
 		}

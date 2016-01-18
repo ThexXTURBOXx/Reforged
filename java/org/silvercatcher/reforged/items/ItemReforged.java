@@ -45,7 +45,8 @@ public abstract class ItemReforged extends Item {
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		
 		if(stack.attemptDamageItem(1, itemRand)) {
-			stack.stackSize--;
+			player.renderBrokenItemStack(stack);
+			player.destroyCurrentEquippedItem();
 		}
 		return false;
 	}

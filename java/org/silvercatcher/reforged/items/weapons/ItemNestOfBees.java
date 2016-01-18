@@ -9,7 +9,10 @@ import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -45,10 +48,12 @@ public class ItemNestOfBees extends ItemReforged {
 		nbt.setInteger(CompoundTags.AMMUNITION, 16);
 		
 		GameRegistry.addRecipe(testStack,
-				"   ",
-				" d ",
-				"   ",
-				'd', Items.diamond);
+				"lwl",
+				"lsl",
+				"lll",
+				'l', Items.leather,
+				's', Items.string,
+				'w', Item.getItemFromBlock(Blocks.planks));
 		
 		GameRegistry.addRecipe(new NestOfBeesLoadRecipe());
 	}
@@ -130,5 +135,16 @@ public class ItemNestOfBees extends ItemReforged {
 	public int getAmmoCount(ItemStack stack) {
 		
 		return getAmmoCount(giveCompound(stack));
+	}
+	
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack) {
+		
+		NBTTagCompound compund = giveCompound(stack);
+		
+		if(compund.getBoolean(CompoundTags.ACTIVATED)) {
+			return EnumAction.BOW;
+		}
+		return EnumAction.NONE;
 	}
 }

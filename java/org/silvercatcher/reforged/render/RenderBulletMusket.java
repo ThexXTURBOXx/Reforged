@@ -17,7 +17,8 @@ public class RenderBulletMusket extends Render
 {
 	protected ModelBase model;
 	
-	private static final ResourceLocation texture = new ResourceLocation(ReforgedMod.ID + ":textures/entity/bulletmusket.png");
+	private static final ResourceLocation texture = new ResourceLocation(
+			ReforgedMod.ID + ":textures/entity/bullet_musket.png");
 
 	public RenderBulletMusket(RenderManager renderManager) {
 		super(renderManager);

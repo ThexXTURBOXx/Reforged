@@ -68,7 +68,10 @@ public class ItemMusket extends ItemReforged {
 				
 				worldIn.spawnEntityInWorld(projectile);
 				
-				stack.attemptDamageItem(5, itemRand);
+				if(stack.attemptDamageItem(5, itemRand)) {
+					playerIn.renderBrokenItemStack(stack);
+					playerIn.destroyCurrentEquippedItem();
+				}
 			}
 			giveCompound(stack).setByte(CompoundTags.AMMUNITION, empty);
 		}

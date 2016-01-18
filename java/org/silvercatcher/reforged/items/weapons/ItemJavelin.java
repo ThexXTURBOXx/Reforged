@@ -11,7 +11,7 @@ import net.minecraft.world.World;
 public class ItemJavelin extends ItemReforged {
 
 	public ItemJavelin() {
-		super("spear");
+		super("javelin");
 		setMaxStackSize(64);
 	}
 	
