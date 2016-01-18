@@ -1,8 +1,6 @@
 {
     "parent": "reforged:builtin/generated",
-    "textures": {
-        "layer0": "reforged:items/spear"
-    },
+    
     "display": {
         "thirdperson": {
             "rotation": [ 165, 80, 300 ],
