@@ -14,4 +14,7 @@ item.stone_boomerang.name=Stone Boomerang
 item.golden_boomerang.name=Golden Boomerang
 item.iron_boomerang.name=Iron Boomerang
 item.diamond_boomerang.name=Diamond Boomerang
-item.spear.name=Javelinitem.copper_boomerang.name=Copper Boomerang
+item.copper_boomerang.name=Copper Boomerang
+item.javelin.name=Javelin
+item.bullet_musket.name=Musket Ball
+item.musket.name=Musket
