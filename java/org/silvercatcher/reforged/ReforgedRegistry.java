@@ -15,11 +15,16 @@ import org.silvercatcher.reforged.items.weapons.ItemMusket;
 import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ReforgedRegistry {
+	
+	public static ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 2, 200, 5.0F, 1.5F, 10);
 
 	public static ItemReforged ARROW_BUNDLE;
 	
@@ -36,17 +41,18 @@ public class ReforgedRegistry {
 	public static ItemReforged IRON_BATTLE_AXE;
 	public static ItemReforged GOLDEN_BATTLE_AXE;
 	public static ItemReforged DIAMOND_BATTLE_AXE;
+	public static ItemReforged COPPER_BATTLE_AXE = new ItemBattleAxe(COPPER);
 	
 	public static ItemReforged WOODEN_BOOMERANG;
 	public static ItemReforged STONE_BOOMERANG;
 	public static ItemReforged IRON_BOOMERANG;
 	public static ItemReforged GOLDEN_BOOMERANG;
 	public static ItemReforged DIAMOND_BOOMERANG;
+	public static ItemReforged COPPER_BOOMERANG = new ItemBoomerang(COPPER);
 	
-	public static ItemReforged JAVELIN;
+	public static ItemReforged JAVELIN;	
 	
 	public static ItemReforged TEMPORARY;
-	
 	
 	public static List<ItemReforged> registratonList = new ArrayList<ItemReforged>();
 	
@@ -98,8 +104,13 @@ public class ReforgedRegistry {
 		EntityRegistry.registerModEntity(c, name, counter, ReforgedMod.instance, 120, 3, true);		
 	}	
 	
-	public static void registerEntityRenderers(Class entityclass, Render renderclass) {
+	public static void registerEntityRenderer(Class entityclass, Render renderclass) {
 		RenderingRegistry.registerEntityRenderingHandler(entityclass, renderclass);
+	}
+	
+	public static void registerEventHandler(ReforgedEvents eventclass) {
+		FMLCommonHandler.instance().bus().register(eventclass);
+	    MinecraftForge.EVENT_BUS.register(eventclass);
 	}
 	
 }

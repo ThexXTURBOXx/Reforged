@@ -8,9 +8,10 @@ item.stone_battleaxe.name=Steinstreitaxt
 item.iron_battleaxe.name=Eisenstreitaxt
 item.golden_battleaxe.name=Goldstreitaxt
 item.diamond_battleaxe.name=Diamantstreitaxt
+item.copper_battleaxe.name=Kupferstreitaxt
 item.wooden_boomerang.name=Holzbumerang
 item.stone_boomerang.name=Steinbumerang
 item.golden_boomerang.name=Goldbumerang
 item.iron_boomerang.name=Eisenbumerang
 item.diamond_boomerang.name=Diamantbumerang
-item.spear.name=Wurfspeer
+item.spear.name=Wurfspeeritem.copper_boomerang.name=Kupferbumerang

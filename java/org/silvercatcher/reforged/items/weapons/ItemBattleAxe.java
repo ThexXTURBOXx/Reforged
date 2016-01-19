@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.MaterialItem;
 
 import net.minecraft.block.Block;
@@ -10,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemBattleAxe extends MaterialItem {
 
@@ -27,13 +29,21 @@ public class ItemBattleAxe extends MaterialItem {
 	
 	@Override
 	public void registerRecipes() {
-		
+		if(material.getRepairItemStack() != null) {
 		GameRegistry.addRecipe(new ItemStack(this),
 				"xxx",
 				"xsx",
 				" s ",
 				'x', material.getRepairItemStack(),
 				's', Items.stick);
+	} else if(material == ReforgedRegistry.COPPER) {
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), true, new Object[]{
+				"xxx",
+				"xsx",
+				" s ",
+				'x', "ingotCopper",
+				's', Items.stick}));
+	}
 	}
 
 	@Override
