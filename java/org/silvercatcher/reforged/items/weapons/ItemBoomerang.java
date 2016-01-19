@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.items.MaterialItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -7,6 +8,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ItemBoomerang extends MaterialItem
 {
@@ -38,13 +41,21 @@ public class ItemBoomerang extends MaterialItem
 
 	@Override
 	public void registerRecipes() {
-		GameRegistry.addRecipe(new ItemStack(this),
-			"xww",
-			"  w",
-			"  x",
-			'x', material.getRepairItemStack(),
-			'w', Items.stick);
-		
+		if(material.getRepairItemStack() != null) {
+			GameRegistry.addRecipe(new ItemStack(this),
+					"xww",
+					"  w",
+					"  x",
+					'x', material.getRepairItemStack(),
+					'w', Items.stick);
+		} else if(material == ReforgedRegistry.COPPER) {
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), true, new Object[]{
+					"xww",
+					"  w",
+					"  x",
+					'x', "ingotCopper",
+					'w', Items.stick}));
+		}
 	}
 
 	@Override

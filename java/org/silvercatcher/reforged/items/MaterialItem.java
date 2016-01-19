@@ -1,6 +1,9 @@
 package org.silvercatcher.reforged.items;
 
+import org.silvercatcher.reforged.ReforgedRegistry;
+
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.EnumHelper;
 
 public abstract class MaterialItem extends ItemReforged {
 
@@ -40,7 +43,9 @@ public abstract class MaterialItem extends ItemReforged {
 		case WOOD:
 			materialPrefix = "wooden";
 			break;
-		default:
+		default: if(material == ReforgedRegistry.COPPER) {
+			materialPrefix = "copper";
+		}
 			break;
 		}
 		return materialPrefix + "_" + base;
