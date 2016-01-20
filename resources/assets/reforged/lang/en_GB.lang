@@ -3,18 +3,28 @@ item.nest_of_bees.name=Nest of Bees
 item.holy_cross.name=Holy Cross
 item.firerod.name=Firerod
 item.arrow_bundle.name=Arrow Bundle
+
 item.wooden_battleaxe.name=Wooden Battleaxe
 item.stone_battleaxe.name=Stone Battleaxe
 item.iron_battleaxe.name=Iron Battleaxe
 item.golden_battleaxe.name=Golden Battleaxe
 item.diamond_battleaxe.name=Diamond Battleaxe
 item.copper_battleaxe.name=Copper Battleaxe
+
 item.wooden_boomerang.name=Wooden Boomerang
 item.stone_boomerang.name=Stone Boomerang
 item.golden_boomerang.name=Golden Boomerang
 item.iron_boomerang.name=Iron Boomerang
-item.diamond_boomerang.name=Diamond Boomerang
+item.diamond_boomerang.name=Diamond 
 item.copper_boomerang.name=Copper Boomerang
+
+item.wooden_saber.name=Wooden Saber
+item.stone_saber.name=Stone Saber
+item.golden_saber.name=Golden Saber
+item.iron_saber.name=Iron Saber
+item.diamond_saber.name=Diamond Saber
+item.copper_saber.name=Copper Saber
+
 item.javelin.name=Javelin
 item.bullet_musket.name=Musket Ball
 item.musket.name=Musket
