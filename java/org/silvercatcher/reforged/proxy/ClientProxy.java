@@ -56,8 +56,8 @@ public class ClientProxy extends CommonProxy {
 	
 	@Override
 	protected void registerEntityRenderers(RenderManager manager) {
-		ReforgedRegistry.registerEntityRenderers(EntityBoomerang.class, new RenderBoomerang(manager));
-		ReforgedRegistry.registerEntityRenderers(EntityBulletMusket.class, new RenderBulletMusket(manager));
-		ReforgedRegistry.registerEntityRenderers(EntityJavelin.class, new RenderJavelin(manager));
+		ReforgedRegistry.registerEntityRenderer(EntityBoomerang.class, new RenderBoomerang(manager));
+		ReforgedRegistry.registerEntityRenderer(EntityBulletMusket.class, new RenderBulletMusket(manager));
+		ReforgedRegistry.registerEntityRenderer(EntityJavelin.class, new RenderJavelin(manager));
 	}
 }

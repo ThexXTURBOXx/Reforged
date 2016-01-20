@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.models.ModelBoomerang;
 
@@ -23,6 +24,7 @@ public class RenderBoomerang extends Render
 	private static final ResourceLocation iron = new ResourceLocation(ReforgedMod.ID + ":textures/entity/iron_boomerang.png");
 	private static final ResourceLocation gold = new ResourceLocation(ReforgedMod.ID + ":textures/entity/golden_boomerang.png");
 	private static final ResourceLocation diamond = new ResourceLocation(ReforgedMod.ID + ":textures/entity/diamond_boomerang.png");
+	private static final ResourceLocation copper = new ResourceLocation(ReforgedMod.ID + ":textures/entity/copper_boomerang.png");
 
 	public RenderBoomerang(RenderManager renderManager) {
 		super(renderManager);
@@ -64,7 +66,8 @@ public class RenderBoomerang extends Render
 		
 		case WOOD: return wood;
 		
-		default: return null;
+		default: if(entityBoomerang.getMaterial() == ReforgedRegistry.COPPER) {return copper;
+		} else {return null;}
 		
 		}
 	}
