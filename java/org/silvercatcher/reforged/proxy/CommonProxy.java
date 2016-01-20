@@ -2,11 +2,14 @@ package org.silvercatcher.reforged.proxy;
 
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.ReforgedMonsterArmourer;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -24,6 +27,8 @@ public class CommonProxy {
 		//Version Checker
 		FMLInterModComms.sendRuntimeMessage(ReforgedMod.ID, "VersionChecker", "addVersionCheck",
 				"https://raw.githubusercontent.com/ThexXTURBOXx/Reforged/master/version.json");
+		
+		MinecraftForge.EVENT_BUS.register(new ReforgedMonsterArmourer());
 	}
 
 	public void init(FMLInitializationEvent event) {
@@ -43,6 +48,7 @@ public class CommonProxy {
 	protected void registerEntityRenderers(RenderManager manager) {}
 	
 	private void registerEntities() {
+
 		int count = 1;
 		ReforgedRegistry.registerEntity(EntityBoomerang.class, "Boomerang", count++);
 		ReforgedRegistry.registerEntity(EntityJavelin.class, "Javelin", count++);
