@@ -13,6 +13,8 @@ import org.silvercatcher.reforged.items.weapons.ItemFireRod;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 import org.silvercatcher.reforged.items.weapons.ItemMusket;
 import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
+import org.silvercatcher.reforged.items.weapons.ItemSaber;
+
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.MinecraftForge;
@@ -50,6 +52,12 @@ public class ReforgedRegistry {
 	public static ItemReforged DIAMOND_BOOMERANG;
 	public static ItemReforged COPPER_BOOMERANG = new ItemBoomerang(COPPER);
 	
+	public static ItemReforged WOODEN_SABER;
+	public static ItemReforged STONE_SABER;
+	public static ItemReforged IRON_SABER;
+	public static ItemReforged GOLDEN_SABER;
+	public static ItemReforged DIAMOND_SABER;
+	
 	public static ItemReforged JAVELIN;	
 	
 	public static ItemReforged TEMPORARY;
@@ -79,6 +87,12 @@ public class ReforgedRegistry {
 		registratonList.add(GOLDEN_BOOMERANG = new ItemBoomerang(ToolMaterial.GOLD));
 		registratonList.add(IRON_BOOMERANG = new ItemBoomerang(ToolMaterial.IRON));
 		registratonList.add(DIAMOND_BOOMERANG = new ItemBoomerang(ToolMaterial.EMERALD));
+		
+		registratonList.add(WOODEN_SABER = new ItemSaber(ToolMaterial.WOOD));
+		registratonList.add(STONE_SABER = new ItemSaber(ToolMaterial.STONE));
+		registratonList.add(GOLDEN_SABER = new ItemSaber(ToolMaterial.GOLD));
+		registratonList.add(IRON_SABER = new ItemSaber(ToolMaterial.IRON));
+		registratonList.add(DIAMOND_SABER = new ItemSaber(ToolMaterial.EMERALD));
 		
 		registratonList.add(JAVELIN = new ItemJavelin());
 		
