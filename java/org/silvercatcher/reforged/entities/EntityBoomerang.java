@@ -36,10 +36,6 @@ public class EntityBoomerang extends EntityThrowable {
 		setItemStack(stack);
 	}
 	
-	private EntityLivingBase getThrowerAfterSave() {
-		return this.getEntityWorld().getPlayerEntityByName(new NBTTagCompound().getString("ownerName"));
-	}
-	
 	@Override
 	protected void entityInit() {
 	
@@ -88,19 +84,19 @@ public class EntityBoomerang extends EntityThrowable {
 	@Override
 	public void onUpdate() {
 		if(!getEntityWorld().isRemote) {
-		super.onUpdate();
-		double dx = this.posX - this.getThrowerAfterSave().posX;
-		double dy = this.posY - this.getThrowerAfterSave().posY - this.getThrowerAfterSave().getEyeHeight();
-		double dz = this.posZ - this.getThrowerAfterSave().posZ;
-		
-		double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
-		dx /= d;
-		dy /= d;
-		dz /= d;
-		
-		motionX -= returnStrength * dx;
-		motionY -= returnStrength * dy;
-		motionZ -= returnStrength * dz;
+			super.onUpdate();
+			double dx = this.posX - this.getThrower().posX;
+			double dy = this.posY - this.getThrower().posY - this.getThrower().getEyeHeight();
+			double dz = this.posZ - this.getThrower().posZ;
+			
+			double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
+			dx /= d;
+			dy /= d;
+			dz /= d;
+			
+			motionX -= returnStrength * dx;
+			motionY -= returnStrength * dy;
+			motionZ -= returnStrength * dz;
 		}
 	}
 	
@@ -121,15 +117,21 @@ public class EntityBoomerang extends EntityThrowable {
 			setDead();
 		} else {
 			//It's an entity
-			if(target.entityHit != this.getThrowerAfterSave()) {
-			target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(
-					target.entityHit, this.getThrowerAfterSave()), getImpactDamage());
-			}
-			ItemStack stack = getItemStack();
-			if(stack.attemptDamageItem(1, rand)) {
-				setDead();
+			if(target.entityHit != this.getThrower()) {
+				//It's an hit entity
+				target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(
+						target.entityHit, this.getThrower()), getImpactDamage());
+				ItemStack stack = getItemStack();
+				if(stack.attemptDamageItem(1, rand)) {
+					this.setDead();
+				} else {
+					setItemStack(stack);
+				}
 			} else {
-				setItemStack(stack);
+				//It's the thrower himself
+				this.setDead();
+				ItemStack stack = getItemStack();
+				entityDropItem(stack, 0.0F);
 			}
 		}
 	}
