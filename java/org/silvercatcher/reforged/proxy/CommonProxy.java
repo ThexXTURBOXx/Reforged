@@ -1,14 +1,13 @@
 package org.silvercatcher.reforged.proxy;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.ReforgedEvents;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedMonsterArmourer;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.MinecraftForge;
@@ -31,8 +30,6 @@ public class CommonProxy {
 		//Version Checker
 		FMLInterModComms.sendRuntimeMessage(ReforgedMod.ID, "VersionChecker", "addVersionCheck",
 				"https://raw.githubusercontent.com/TheOnlySilverClaw/Reforged/master/version.json");
-		
-		MinecraftForge.EVENT_BUS.register(new ReforgedMonsterArmourer());
 	}
 
 	public void init(FMLInitializationEvent event) {
