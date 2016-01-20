@@ -1,7 +1,18 @@
 {
-    "parent": "reforged:item/spear",
-
+    "parent": "reforged:builtin/generated",
     "textures": {
-        "layer0": "reforged:items/iron_spear"
+        "layer0": "reforged:items/primitive_javelin"
+    },
+    "display": {
+        "thirdperson": {
+            "rotation": [ 165, 80, 210 ],
+            "translation": [ 0.0, 2.25, -3.25 ],
+            "scale": [ 2.0, 2.0, 2.0 ]
+        },
+        "firstperson": {
+            "rotation": [ 10, 210, 75 ],
+            "translation": [ 0, 4, 2 ],
+            "scale": [ 2.8, 2.8, 2.8 ]
+        }
     }
 }
