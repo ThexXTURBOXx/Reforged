@@ -10,14 +10,10 @@ public class ReforgedTab extends CreativeTabs {
 		super(ReforgedMod.ID);
 	}
 	
-	protected ReforgedTab(String label) {
-		super(label);
-		
-	}
 
 	@Override
 	public Item getTabIconItem() {
 
-		return ReforgedRegistry.NEST_OF_BEES;
+		return ReforgedRegistry.IRON_BATTLE_AXE;
 	}
 }
