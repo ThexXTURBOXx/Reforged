@@ -39,11 +39,14 @@ public class EntityBoomerang extends EntityThrowable {
 	@Override
 	protected void entityInit() {
 	
+		
 		super.entityInit();
 		
 		// id 5 = ItemStack of Boomerang, type 5 = ItemStack
 		dataWatcher.addObjectByDataType(5, 5);
 
+		// id 6 = Name of Thrower, type 4 = String
+		dataWatcher.addObjectByDataType(6, 4);;
 	}
 
 	public ItemStack getItemStack() {
@@ -59,6 +62,16 @@ public class EntityBoomerang extends EntityThrowable {
 		dataWatcher.updateObject(5, stack);
 	}
 	
+	public String getThrowerName() {
+		
+		return dataWatcher.getWatchableObjectString(6);
+	}
+	
+	public void setThrowerName(String name) {
+		
+		dataWatcher.updateObject(6, name);
+	}
+	
 	private void printDatawatcher() {
 		
 		System.out.println("##########");
@@ -66,6 +79,7 @@ public class EntityBoomerang extends EntityThrowable {
 			WatchableObject wo = (WatchableObject) o;
 			System.out.println(wo.getDataValueId() + ": (" + wo.getObjectType() + ") " + wo.getObject());
 		}
+		
 		System.out.println("++++++++++++++++");
 	}
 	
@@ -140,6 +154,8 @@ public class EntityBoomerang extends EntityThrowable {
 	public void writeEntityToNBT(NBTTagCompound tagCompound) {
 		
 		super.writeEntityToNBT(tagCompound);
+		
+		tagCompound.setTag("thrower", getThrower().getEntityData());
 		
 		if(getItemStack() != null) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
