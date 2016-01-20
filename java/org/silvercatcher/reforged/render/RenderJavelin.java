@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.ReforgedResources.Textures;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.models.ModelJavelin;
 
@@ -18,8 +19,6 @@ public class RenderJavelin extends Render
 {
 	protected ModelBase model;
 	
-	private static final ResourceLocation texture = new ResourceLocation(ReforgedMod.ID + ":textures/entity/javelin.png");
-
 	public RenderJavelin(RenderManager renderManager) {
 		super(renderManager);
 		this.model = new ModelJavelin();
@@ -44,6 +43,6 @@ public class RenderJavelin extends Render
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+		return Textures.JAVELIN;
 	}
 }

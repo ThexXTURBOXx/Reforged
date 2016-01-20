@@ -3,10 +3,12 @@ package org.silvercatcher.reforged.render;
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.ReforgedResources.Textures;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.models.ModelBoomerang;
 
 import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -17,18 +19,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderBoomerang extends Render
 {
-	protected ModelBase model;
-	
-	private static final ResourceLocation wood = new ResourceLocation(ReforgedMod.ID + ":textures/entity/wooden_boomerang.png");
-	private static final ResourceLocation stone = new ResourceLocation(ReforgedMod.ID + ":textures/entity/stone_boomerang.png");
-	private static final ResourceLocation iron = new ResourceLocation(ReforgedMod.ID + ":textures/entity/iron_boomerang.png");
-	private static final ResourceLocation gold = new ResourceLocation(ReforgedMod.ID + ":textures/entity/golden_boomerang.png");
-	private static final ResourceLocation diamond = new ResourceLocation(ReforgedMod.ID + ":textures/entity/diamond_boomerang.png");
-	private static final ResourceLocation copper = new ResourceLocation(ReforgedMod.ID + ":textures/entity/copper_boomerang.png");
+	protected ModelBoomerang model = new ModelBoomerang();
 
 	public RenderBoomerang(RenderManager renderManager) {
 		super(renderManager);
-		this.model = new ModelBoomerang();
 	}
 	
 	
@@ -45,7 +39,7 @@ public class RenderBoomerang extends Render
 		bindTexture(getEntityTexture(B));
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
-		model.render(B, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0475F);
+		model.render(B, 0, 0, 0, 0, 0, 0.0475F);
 		GL11.glPopMatrix();
 	}
 
@@ -56,17 +50,17 @@ public class RenderBoomerang extends Render
 		
 		switch(entityBoomerang.getMaterial()) {
 		
-		case EMERALD: return diamond;
+		case EMERALD: return Textures.DIAMOND_BOOMERANG;
 		
-		case GOLD: return gold;
+		case GOLD: return Textures.GOLDEN_BOOMERANG;
 		
-		case IRON: return iron;
+		case IRON: return Textures.IRON_BOOMERANG;
 		
-		case STONE: return stone;
+		case STONE: return Textures.STONE_BOOMERANG;
 		
-		case WOOD: return wood;
+		case WOOD: return Textures.WOODEN_BOOMERANG;
 		
-		default: if(entityBoomerang.getMaterial() == ReforgedRegistry.COPPER) {return copper;
+		default: if(entityBoomerang.getMaterial() == ReforgedRegistry.COPPER) {return Textures.COPPER_BOOMERANG;
 		} else {return null;}
 		
 		}
