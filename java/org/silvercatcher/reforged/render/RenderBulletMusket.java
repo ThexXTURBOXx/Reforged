@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.ReforgedResources.Textures;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.models.ModelBulletMusket;
 import net.minecraft.client.model.ModelBase;
@@ -16,9 +17,6 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderBulletMusket extends Render
 {
 	protected ModelBase model;
-	
-	private static final ResourceLocation texture = new ResourceLocation(
-			ReforgedMod.ID + ":textures/entity/bullet_musket.png");
 
 	public RenderBulletMusket(RenderManager renderManager) {
 		super(renderManager);
@@ -44,6 +42,6 @@ public class RenderBulletMusket extends Render
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return texture;
+		return Textures.BULLET_MUSKET;
 	}
 }
