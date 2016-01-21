@@ -22,6 +22,7 @@ public class EntityJavelin extends EntityThrowable {
 	
 	public EntityJavelin(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		super(worldIn, throwerIn);
+		this.setPositionAndRotation(throwerIn.posX, throwerIn.posY, throwerIn.posZ, throwerIn.rotationYaw, throwerIn.rotationPitch);
 	}
 
 	@Override

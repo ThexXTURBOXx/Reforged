@@ -27,6 +27,7 @@ public class EntityBoomerang extends EntityThrowable {
 		setItemStack(stack);
 		setThrowerName(getThrowerIn.getName());
 		setCoords(getThrowerIn.posX, getThrowerIn.posY, getThrowerIn.posZ);
+		this.setPositionAndRotation(getThrowerIn.posX, getThrowerIn.posY, getThrowerIn.posZ, getThrowerIn.rotationYaw, getThrowerIn.rotationPitch);
 	}
 	
 	@Override
