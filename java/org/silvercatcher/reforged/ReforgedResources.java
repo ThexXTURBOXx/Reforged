@@ -1,5 +1,7 @@
 package org.silvercatcher.reforged;
 
+import org.silvercatcher.reforged.proxy.CommonProxy;
+
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -19,5 +21,10 @@ public abstract class ReforgedResources
 		public static final ResourceLocation BULLET_MUSKET = new ResourceLocation(ReforgedMod.ID + ":textures/entity/bullet_musket.png");
 		
 		public static final ResourceLocation JAVELIN = new ResourceLocation(ReforgedMod.ID + ":textures/entity/javelin.png");
+	}
+	
+	public static abstract class GlobalValues
+	{
+		public static final int DISTANCE_BOOMERANG = CommonProxy.boomerang_distance;
 	}
 }
