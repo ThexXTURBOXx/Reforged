@@ -8,6 +8,7 @@ import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import net.minecraft.entity.DataWatcher.WatchableObject;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item.ToolMaterial;
@@ -28,7 +29,6 @@ public class EntityBoomerang extends EntityThrowable {
 		
 		super(worldIn);
 	}
-	
 	
 	public EntityBoomerang(World worldIn, EntityLivingBase getThrowerIn, ItemStack stack) {
 		
@@ -144,10 +144,17 @@ public class EntityBoomerang extends EntityThrowable {
 		//Target is entity or block?
 		if(target.entityHit == null) {
 			//It's a block
-			if(!worldObj.isRemote) {
+			//Distance specifies the range the boomerang should get auto-collected [CONFIG STUFF!]
+			int distance = 5;
+			this.setDead();
+			BlockPos bp = target.getBlockPos();
+			BlockPos pp = getThrowerASave().getPosition();
+			if(!worldObj.isRemote && Math.abs(bp.getX() - pp.getX()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance) {
+				EntityPlayer p = (EntityPlayer) getThrowerASave();
+				p.inventory.addItemStackToInventory(getItemStack());
+			} else if(!worldObj.isRemote) {
 				entityDropItem(getItemStack(), 0.5f);
 			}
-			setDead();
 		} else {
 			//It's an entity
 			if(target.entityHit != getThrowerASave()) {
@@ -164,7 +171,8 @@ public class EntityBoomerang extends EntityThrowable {
 				//It's the thrower himself
 				this.setDead();
 				ItemStack stack = getItemStack();
-				entityDropItem(stack, 0.0F);
+				EntityPlayer p = (EntityPlayer) target.entityHit;
+				p.inventory.addItemStackToInventory(stack);
 			}
 		}
 	}
