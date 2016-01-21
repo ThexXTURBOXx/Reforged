@@ -39,6 +39,7 @@ public class RenderBoomerang extends Render
 		bindTexture(getEntityTexture(B));
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
+        GL11.glRotatef(-yaw, 0, 1F, 0);
 		model.render(B, 0, 0, 0, 0, 0, 0.0475F);
 		GL11.glPopMatrix();
 	}

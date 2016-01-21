@@ -37,6 +37,7 @@ public class RenderJavelin extends Render
 		bindTexture(getEntityTexture(J));
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
+        GL11.glRotatef(yaw + 90, 0, partialTicks, 0);
 		model.render(J, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0475F);
 		GL11.glPopMatrix();
 	}
