@@ -42,32 +42,20 @@ public class EntityBoomerang extends EntityThrowable {
 	protected void entityInit() {
 		super.entityInit();
 		
-		List allwatched = dataWatcher.getAllWatched();
-		
-		if(!allwatched.contains(5)) {
 		// id 5 = ItemStack of Boomerang, type 5 = ItemStack
 		dataWatcher.addObjectByDataType(5, 5);
-		}
 		
-		if(!allwatched.contains(6)) {
 		// id 6 = Name of Thrower, type 4 = String
 		dataWatcher.addObjectByDataType(6, 4);
-		}
 		
-		if(!allwatched.contains(7)) {
 		// id 7 = posX, type 3 = float
 		dataWatcher.addObjectByDataType(7, 3);
-		}
 		
-		if(!allwatched.contains(8)) {
 		// id 8 = posY, type 3 = float
 		dataWatcher.addObjectByDataType(8, 3);
-		}
 		
-		if(!allwatched.contains(9)) {
 		// id 9 = posZ, type 3 = float
 		dataWatcher.addObjectByDataType(9, 3);
-		}
 	}
 
 	public ItemStack getItemStack() {
@@ -110,17 +98,6 @@ public class EntityBoomerang extends EntityThrowable {
 	public void setThrowerName(String name) {
 		
 		dataWatcher.updateObject(6, name);
-	}
-	
-	private void printDatawatcher() {
-		
-		System.out.println("##########");
-		for(Object o : dataWatcher.getAllWatched()) {
-			WatchableObject wo = (WatchableObject) o;
-			System.out.println(wo.getDataValueId() + ": (" + wo.getObjectType() + ") " + wo.getObject());
-		}
-		
-		System.out.println("++++++++++++++++");
 	}
 	
 	public ToolMaterial getMaterial() {
