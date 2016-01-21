@@ -1,7 +1,6 @@
 package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
-import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedResources.Textures;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.models.ModelJavelin;
@@ -17,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderJavelin extends Render
 {
-	protected ModelBase model;
+	protected ModelBase model = new ModelJavelin();
 	
 	public RenderJavelin(RenderManager renderManager) {
 		super(renderManager);
@@ -26,11 +25,12 @@ public class RenderJavelin extends Render
 
 
 	@Override
-	public void doRender(Entity Javelin, double x, double y, double z, float yaw, float partialTick) {
-		renderEntityModel(Javelin, x, y, z, yaw, partialTick);
+	public void doRender(Entity Javelin, double x, double y, double z, float yaw, float partialTicks) {
+		super.doRender(Javelin, x, y, z, yaw, partialTicks);
+		renderEntityModel(Javelin, x, y, z, yaw, partialTicks);
 	}
 
-	public void renderEntityModel(Entity Javelin, double x, double y, double z, float yaw, float partialTick) {
+	public void renderEntityModel(Entity Javelin, double x, double y, double z, float yaw, float partialTicks) {
 		EntityJavelin J = (EntityJavelin) Javelin;
 		GL11.glPushMatrix();
 		float scale = 1;
