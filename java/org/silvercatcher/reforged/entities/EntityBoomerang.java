@@ -42,20 +42,32 @@ public class EntityBoomerang extends EntityThrowable {
 	protected void entityInit() {
 		super.entityInit();
 		
+		List allwatched = dataWatcher.getAllWatched();
+		
+		if(!allwatched.contains(5)) {
 		// id 5 = ItemStack of Boomerang, type 5 = ItemStack
 		dataWatcher.addObjectByDataType(5, 5);
-
+		}
+		
+		if(!allwatched.contains(6)) {
 		// id 6 = Name of Thrower, type 4 = String
 		dataWatcher.addObjectByDataType(6, 4);
+		}
 		
+		if(!allwatched.contains(7)) {
 		// id 7 = posX, type 3 = float
 		dataWatcher.addObjectByDataType(7, 3);
+		}
 		
+		if(!allwatched.contains(8)) {
 		// id 8 = posY, type 3 = float
 		dataWatcher.addObjectByDataType(8, 3);
+		}
 		
+		if(!allwatched.contains(9)) {
 		// id 9 = posZ, type 3 = float
 		dataWatcher.addObjectByDataType(9, 3);
+		}
 	}
 
 	public ItemStack getItemStack() {
@@ -71,21 +83,10 @@ public class EntityBoomerang extends EntityThrowable {
 		dataWatcher.updateObject(5, stack);
 	}
 	
-	public double throwerX;
-	public double throwerY;
-	public double throwerZ;
-	
-	public void setThrowerASave(double x, double y, double z) {
-		throwerX = x;
-		throwerY = y;
-		throwerZ = z;
-		setCoords(x, y, z);
-	}
-	
 	public void setCoords(double playerX, double playerY, double playerZ) {
 		dataWatcher.updateObject(7, (float) playerX);
 		dataWatcher.updateObject(8, (float) playerY);
-		dataWatcher.updateObject(9, (float) playerZ);		
+		dataWatcher.updateObject(9, (float) playerZ);
 	}
 	
 	public double getCoord(int coordId) {
@@ -196,7 +197,7 @@ public class EntityBoomerang extends EntityThrowable {
 		
 		super.writeEntityToNBT(tagCompound);
 		
-		tagCompound.setTag("thrower", getThrower().getEntityData());
+		tagCompound.setString("thrower", getThrower().getName());
 		tagCompound.setDouble("throwerX", getCoord(1));
 		tagCompound.setDouble("throwerY", getCoord(2));
 		tagCompound.setDouble("throwerZ", getCoord(3));
@@ -210,8 +211,8 @@ public class EntityBoomerang extends EntityThrowable {
 	public void readEntityFromNBT(NBTTagCompound tagCompund) {
 		
 		super.readEntityFromNBT(tagCompund);
-		
 		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
-		setThrowerASave(tagCompund.getDouble("throwerX"), tagCompund.getDouble("throwerY"), tagCompund.getDouble("throwerZ"));
+		setCoords(tagCompund.getDouble("throwerX"), tagCompund.getDouble("throwerY"), tagCompund.getDouble("throwerZ"));
+		setThrowerName(tagCompund.getString("thrower"));
 	}
 }
