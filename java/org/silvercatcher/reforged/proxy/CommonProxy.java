@@ -35,10 +35,12 @@ public class CommonProxy {
 		ReforgedRegistry.registerRecipes();
 	}
 	
+	public static int boomerang_distance;
+	
 	private void loadConfig(FMLPreInitializationEvent e) {
 		Configuration config = new Configuration(e.getSuggestedConfigurationFile());
 		config.load();
-		//Config stuff [LATER]
+		boomerang_distance = config.getInt("Boomerang-Autocollect", config.CATEGORY_GENERAL, 3, 0, 32, "The distance in which the Boomerang should get auto-collected by the thrower (0 means disable)");
 		config.save();
 	}
 	

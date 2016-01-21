@@ -1,26 +1,17 @@
 package org.silvercatcher.reforged.entities;
 
-import java.util.List;
-
-import org.omg.IOP.TaggedComponent;
+import org.silvercatcher.reforged.ReforgedResources.GlobalValues;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
-import net.minecraft.entity.DataWatcher.WatchableObject;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
 public class EntityBoomerang extends EntityThrowable {
@@ -145,7 +136,7 @@ public class EntityBoomerang extends EntityThrowable {
 		if(target.entityHit == null) {
 			//It's a block
 			//Distance specifies the range the boomerang should get auto-collected [CONFIG STUFF!]
-			int distance = 5;
+			int distance = GlobalValues.DISTANCE_BOOMERANG;
 			this.setDead();
 			BlockPos bp = target.getBlockPos();
 			BlockPos pp = getThrowerASave().getPosition();
