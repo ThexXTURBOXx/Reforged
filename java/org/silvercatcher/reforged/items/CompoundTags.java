@@ -1,7 +1,28 @@
 package org.silvercatcher.reforged.items;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+
 public class CompoundTags {
 
+	/**
+	 * make sure we get no NPEs by using this method!
+	 * if anyone knows a less stupid way, tell me!
+	 * 
+	 * @param stack
+	 * @return
+	 */
+	public static NBTTagCompound giveCompound(ItemStack stack) {
+		
+		NBTTagCompound compound = stack.getTagCompound();
+		if(compound == null) {
+			compound = new NBTTagCompound();
+			stack.setTagCompound(compound);
+		}
+		return compound;
+	}
+	
+	
 	/** saves the ticks left to reload */
 	public static final String RELOAD		= 	"reload";
 	

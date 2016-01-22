@@ -2,7 +2,9 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
 
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.ReforgedTab;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ItemReforged;
@@ -10,12 +12,13 @@ import org.silvercatcher.reforged.items.ItemReforged;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemMusket extends ItemReforged {
+public class ItemMusket extends ItemBow {
 
 	// let's see...
 	byte empty		= 0;
@@ -24,9 +27,10 @@ public class ItemMusket extends ItemReforged {
 	
 	public ItemMusket() {
 		
-		super("musket");
-		setMaxDamage(100);
 		setMaxStackSize(1);
+		setMaxDamage(100);
+		setUnlocalizedName("musket");
+		setCreativeTab(ReforgedMod.tabReforged);
 	}
 	
 	@Override
@@ -90,10 +94,9 @@ public class ItemMusket extends ItemReforged {
 		return stack;
 	}
 	
-	@Override
 	public NBTTagCompound giveCompound(ItemStack stack) {
 		
-		NBTTagCompound compound = super.giveCompound(stack);
+		NBTTagCompound compound = ItemReforged.giveCompound(stack);
 		
 		if(!compound.hasKey(CompoundTags.AMMUNITION)) {
 			

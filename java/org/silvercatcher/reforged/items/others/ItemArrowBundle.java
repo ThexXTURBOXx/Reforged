@@ -1,17 +1,16 @@
 package org.silvercatcher.reforged.items.others;
 
-import org.silvercatcher.reforged.items.ItemReforged;
-
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemArrowBundle extends ItemReforged {
+public class ItemArrowBundle extends Item {
 
 	
 	public ItemArrowBundle() {
 		
-		super("arrow_bundle");
+		super();
 		setMaxStackSize(16);
 	}
 
