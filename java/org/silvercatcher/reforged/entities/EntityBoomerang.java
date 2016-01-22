@@ -103,7 +103,6 @@ public class EntityBoomerang extends EntityThrowable {
 	}
 	
 	private static final double returnStrength = 0.05D;
-	private static final double returnStrengthY = 0.01D;
 	
 	@Override
 	public void onUpdate() {
@@ -114,13 +113,12 @@ public class EntityBoomerang extends EntityThrowable {
 			double dz = this.posZ - getCoord(3);
 			
 			double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
-			double ds = Math.sqrt(dx * dx + dy + dz * dz);
 			dx /= d;
-			dy /= ds;
+			dy /= d;
 			dz /= d;
 			
 			motionX -= returnStrength * dx;
-			motionY -= returnStrengthY * dy;
+			motionY -= returnStrength * dy;
 			motionZ -= returnStrength * dz;
 		}
 	}
