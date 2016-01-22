@@ -27,7 +27,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ReforgedRegistry {
 	
-	public static ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 2, 200, 5.0F, 1.5F, 10);
+	//public static ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 2, 200, 5.0F, 1.5F, 10);
 
 	public static Item ARROW_BUNDLE;
 	
@@ -57,14 +57,14 @@ public class ReforgedRegistry {
 	public static Item IRON_BATTLE_AXE;
 	public static Item GOLDEN_BATTLE_AXE;
 	public static Item DIAMOND_BATTLE_AXE;
-	public static Item COPPER_BATTLE_AXE = new ItemBattleAxe(COPPER);
+	//public static Item COPPER_BATTLE_AXE = new ItemBattleAxe(COPPER);
 	
 	public static Item WOODEN_BOOMERANG;
 	public static Item STONE_BOOMERANG;
 	public static Item IRON_BOOMERANG;
 	public static Item GOLDEN_BOOMERANG;
 	public static Item DIAMOND_BOOMERANG;
-	public static Item COPPER_BOOMERANG = new ItemBoomerang(COPPER);
+	//public static Item COPPER_BOOMERANG = new ItemBoomerang(COPPER);
 	
 	public static Item WOODEN_SABER;
 	public static Item STONE_SABER;
