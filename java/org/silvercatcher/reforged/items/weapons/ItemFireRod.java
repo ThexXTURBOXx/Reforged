@@ -1,6 +1,9 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.items.ItemExtension;
+
+import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +16,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemFireRod extends Item {
+public class ItemFireRod extends AWeapon {
 
 	public static final int FIRE_DURATION = 6;
 	
@@ -70,6 +73,7 @@ public class ItemFireRod extends Item {
 	}
 
 
+	@Override
 	public float getHitDamage() {
 		return 1.5f;
 	}

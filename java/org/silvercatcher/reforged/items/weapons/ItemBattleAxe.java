@@ -2,8 +2,11 @@ package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
+
+import com.google.common.collect.Multimap;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -16,7 +19,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 
-public class ItemBattleAxe extends ItemAxe {
+public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 
 	protected final MaterialDefinition materialDefinition;
 	
@@ -63,8 +66,15 @@ public class ItemBattleAxe extends ItemAxe {
 		return (material == Material.wood || material == Material.plants || material == Material.vine);
 	}
 
+	@Override
 	public float getHitDamage() {
 		
 		return materialDefinition.getDamageVsEntity() * 1.5f + 4f;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Override
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		return ItemExtension.super.getAttributeModifiers(stack);
 	}
 }

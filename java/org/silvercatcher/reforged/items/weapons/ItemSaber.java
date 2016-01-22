@@ -2,8 +2,11 @@ package org.silvercatcher.reforged.items.weapons;
 
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
+
+import com.google.common.collect.Multimap;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -11,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemSaber extends ItemSword {
+public class ItemSaber extends ItemSword implements ItemExtension {
 
 	protected final MaterialDefinition materialDefinition;
 	
@@ -39,8 +42,16 @@ public class ItemSaber extends ItemSword {
 				's', Items.stick);
 	}
 
+	@Override
 	public float getHitDamage() {
 		
 		return materialDefinition.getDamageVsEntity() + 3.5f;
+	}
+	
+	
+	@SuppressWarnings("rawtypes")
+	@Override
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		return ItemExtension.super.getAttributeModifiers(stack);
 	}
 }
