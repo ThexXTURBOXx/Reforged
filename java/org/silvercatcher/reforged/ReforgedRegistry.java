@@ -7,6 +7,7 @@ import org.silvercatcher.reforged.items.ItemReforged;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
+import org.silvercatcher.reforged.items.weapons.ItemBayonetMusket;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.items.weapons.ItemHolyCross;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
@@ -30,13 +31,26 @@ public class ReforgedRegistry {
 
 	public static ItemReforged ARROW_BUNDLE;
 	
+	public static ItemReforged GUN_STOCK;
+	public static ItemReforged BLUNDERBUSS_BARREL;
+	public static ItemReforged MUSKET_BARREL;
+	
+	public static ItemReforged BLUNDERBUSS;
+	public static ItemReforged MUSKET;
+	public static ItemReforged WOODEN_BAYONET_MUSKET;
+	public static ItemReforged STONE_BAYONET_MUSKET;
+	public static ItemReforged IRON_BAYONET_MUSKET;
+	public static ItemReforged GOLDEN_BAYONET_MUSKET;
+	public static ItemReforged DIAMOND_BAYONET_MUSKET;
+	
+	public static ItemReforged MUSKET_BULLET;
+	public static ItemReforged BLUNDERBUSS_SHOT;
+	
 	public static ItemReforged NEST_OF_BEES;
 
 	public static ItemReforged HOLY_CROSS;
 	
 	public static ItemReforged FIREROD;
-	
-	public static ItemReforged MUSKET;
 	
 	public static ItemReforged WOODEN_BATTLE_AXE;
 	public static ItemReforged STONE_BATTLE_AXE;
@@ -59,8 +73,7 @@ public class ReforgedRegistry {
 	public static ItemReforged DIAMOND_SABER;
 	
 	public static ItemReforged JAVELIN;	
-	
-	public static ItemReforged TEMPORARY;
+
 	
 	public static List<ItemReforged> registratonList = new ArrayList<ItemReforged>();
 	
@@ -74,8 +87,17 @@ public class ReforgedRegistry {
 		
 		registratonList.add(FIREROD = new ItemFireRod());
 		
-		registratonList.add(MUSKET = new ItemMusket());
+		registratonList.add(BLUNDERBUSS_BARREL);
+		registratonList.add(MUSKET_BARREL);
+		registratonList.add(GUN_STOCK);
 		
+		registratonList.add(MUSKET = new ItemMusket());
+		registratonList.add(WOODEN_BAYONET_MUSKET = new ItemBayonetMusket());
+		registratonList.add(STONE_BAYONET_MUSKET = new ItemBayonetMusket());
+		registratonList.add(IRON_BAYONET_MUSKET = new ItemBayonetMusket());
+		registratonList.add(GOLDEN_BAYONET_MUSKET = new ItemBayonetMusket());
+		registratonList.add(DIAMOND_BAYONET_MUSKET = new ItemBayonetMusket());
+
 		registratonList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
 		registratonList.add(STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));
 		registratonList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
@@ -96,7 +118,7 @@ public class ReforgedRegistry {
 		
 		registratonList.add(JAVELIN = new ItemJavelin());
 		
-		registratonList.add(TEMPORARY = new ItemBulletMusket());
+		registratonList.add(MUSKET_BULLET = new ItemBulletMusket());
 		
 	}
 	

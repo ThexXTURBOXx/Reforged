@@ -13,6 +13,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemMusket extends ItemReforged {
 
@@ -36,7 +37,7 @@ public class ItemMusket extends ItemReforged {
 		if(loadState == empty) {
 			
 			if(playerIn.capabilities.isCreativeMode ||
-					playerIn.inventory.consumeInventoryItem(ReforgedRegistry.TEMPORARY)) {
+					playerIn.inventory.consumeInventoryItem(ReforgedRegistry.MUSKET_BULLET)) {
 				
 				loadState = loading;
 			
@@ -146,6 +147,8 @@ public class ItemMusket extends ItemReforged {
 	@Override
 	public void registerRecipes() {
 	
+		GameRegistry.addShapelessRecipe(new ItemStack(this),
+				new ItemStack(ReforgedRegistry.MUSKET_BARREL), new ItemStack(ReforgedRegistry.GUN_STOCK));
 	}
 
 	@Override
