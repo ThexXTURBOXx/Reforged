@@ -48,7 +48,7 @@ public class ItemJavelin extends AWeapon {
 
 	@Override
 	public float getHitDamage() {
-		return 4f;
+		return 3f;
 	}
 	
 	@Override
