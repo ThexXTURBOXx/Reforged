@@ -66,7 +66,11 @@ public class EntityJavelin extends EntityThrowable {
 			}
 		}
 		this.setDead();
-		entityDropItem(getItemStack(), 1);
+		if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+			entityDropItem(getItemStack(), 0.5f);
+		} else {
+			//Custom sound later... [BREAK SOUND]
+		}
 	}
 	
 	public EntityLivingBase getThrowerASave() {
