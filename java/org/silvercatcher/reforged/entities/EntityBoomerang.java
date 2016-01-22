@@ -26,8 +26,8 @@ public class EntityBoomerang extends EntityThrowable {
 		super(worldIn, getThrowerIn);
 		setItemStack(stack);
 		setThrowerName(getThrowerIn.getName());
-		setCoords(getThrowerIn.posX, getThrowerIn.posY, getThrowerIn.posZ);
-		this.setPositionAndRotation(getThrowerIn.posX, getThrowerIn.posY, getThrowerIn.posZ, getThrowerIn.rotationYaw, getThrowerIn.rotationPitch);
+		setCoords(getThrowerIn.posX, getThrowerIn.posY + getThrowerIn.getEyeHeight(), getThrowerIn.posZ);
+		this.setPositionAndRotation(getThrowerIn.posX, getThrowerIn.posY + getThrowerIn.getEyeHeight(), getThrowerIn.posZ, getThrowerIn.rotationYaw, getThrowerIn.rotationPitch);
 	}
 	
 	@Override
@@ -122,6 +122,22 @@ public class EntityBoomerang extends EntityThrowable {
 			motionX -= returnStrength * dx;
 			motionY -= returnStrength * dy;
 			motionZ -= returnStrength * dz;
+
+			int distance = GlobalValues.DISTANCE_BOOMERANG;
+			
+			BlockPos bp = this.getPosition();
+			EntityPlayer p = (EntityPlayer) getThrowerASave();
+			BlockPos pp = p.getPosition();
+			
+			if(this.ticksExisted >= 100) {
+				if(Math.abs(bp.getX() - pp.getX()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance) {
+					this.setDead();
+					p.inventory.addItemStackToInventory(getItemStack());
+				} else {
+					this.setDead();
+					this.entityDropItem(getItemStack(), 0);					
+				}
+			}
 		}
 	}
 	
@@ -136,7 +152,7 @@ public class EntityBoomerang extends EntityThrowable {
 		//Target is entity or block?
 		if(target.entityHit == null) {
 			//It's a block
-			//Distance specifies the range the boomerang should get auto-collected [CONFIG STUFF!]
+			//Distance specifies the range the boomerang should get auto-collected
 			int distance = GlobalValues.DISTANCE_BOOMERANG;
 			this.setDead();
 			BlockPos bp = target.getBlockPos();
