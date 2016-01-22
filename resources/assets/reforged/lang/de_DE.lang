@@ -1,6 +1,6 @@
 itemGroup.reforged=Reforged
 item.nest_of_bees.name=Bienennest
-item.holy_cross.name=Heiliges Kreuz
+item.holy_cross.name=§eHeiliges Kreuz
 item.firerod.name=Feuerstab
 item.arrow_bundle.name=Pfeilbündel
 
@@ -25,6 +25,23 @@ item.iron_saber.name=Eisensäbel
 item.diamond_saber.name=Diamantsäbel
 item.copper_saber.name=Kupfersäbel
 
+item.wooden_musket.name=Holzmuskete
+item.stone_musket.name=Steinmuskete
+item.golden_musket.name=Goldmuskete
+item.iron_musket.name=Eisenmuskete
+item.diamond_musket.name=Diamantmuskete
+item.copper_musket.name=Kupfermuskete
+
+item.wooden_knife.name=Holzmesser
+item.stone_knife.name=Steinmesser
+item.golden_knife.name=Goldmesser
+item.iron_knife.name=Eisenmesser
+item.diamond_knife.name=Diamantmesser
+item.copper_knife.name=Kupfermesser
+
+item.musket_barrel.name=Musketenlauf
+item.gun_stock.name=Gewehrkolben
+item.blunderbuss_barrel.name=Espingole
 item.javelin.name=Wurfspeer
-item.bullet_musket.name=Musketenkugel
+item.musket_bullet.name=Musketenkugel
 item.musket.name=Muskete
