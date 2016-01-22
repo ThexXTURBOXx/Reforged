@@ -16,7 +16,7 @@ public class ReforgedMod
 {
 	public static final String NAME = "Reforged";
     public static final String ID = "reforged";
-    public static final String VERSION = "0.5.5-alpha";
+    public static final String VERSION = "0.6-alpha";
     
     public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
 		
