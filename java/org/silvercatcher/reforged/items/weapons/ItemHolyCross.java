@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.items.ItemExtension;
+
+import com.google.common.collect.Multimap;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -24,7 +27,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemHolyCross extends Item {
+public class ItemHolyCross extends AWeapon {
 
 	private final static int DELAY = 40;
 	
@@ -123,6 +126,7 @@ public class ItemHolyCross extends Item {
 	}
 	
 
+	@Override
 	public float getHitDamage() {
 		return 1f;
 	}

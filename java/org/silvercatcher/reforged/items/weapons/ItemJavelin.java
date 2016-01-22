@@ -2,7 +2,9 @@ package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityJavelin;
-import org.silvercatcher.reforged.items.ItemDefault;
+import org.silvercatcher.reforged.items.ItemExtension;
+
+import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
@@ -10,7 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemJavelin extends Item {
+public class ItemJavelin extends AWeapon {
 
 	public ItemJavelin() {
 		
@@ -41,8 +43,9 @@ public class ItemJavelin extends Item {
 	}
 
 
+	@Override
 	public float getHitDamage() {
-		return 4;
+		return 4f;
 	}
 	
 	@Override
@@ -54,7 +57,7 @@ public class ItemJavelin extends Item {
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack)
     {
-        return ItemDefault.USE_DURATON;
+        return ItemExtension.USE_DURATON;
     }
 	
 	@Override

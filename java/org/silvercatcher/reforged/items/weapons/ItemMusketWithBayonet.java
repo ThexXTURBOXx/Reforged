@@ -16,4 +16,10 @@ public class ItemMusketWithBayonet extends ItemMusket {
 		this.materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setUnlocalizedName(materialDefinition.getPrefixedName("musket"));
 	}
+	
+	@Override
+	public float getHitDamage() {
+		
+		return super.getHitDamage() + materialDefinition.getDamageVsEntity();
+	}
 }

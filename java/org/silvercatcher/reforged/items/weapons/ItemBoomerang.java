@@ -3,8 +3,11 @@ package org.silvercatcher.reforged.items.weapons;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
+
+import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -15,7 +18,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-public class ItemBoomerang extends Item {
+public class ItemBoomerang extends AWeapon {
 	
 	protected final MaterialDefinition materialDefinition;
 	
@@ -64,6 +67,7 @@ public class ItemBoomerang extends Item {
 	 * this is weak melee combat damage!
 	 * for ranged combat damage, see {@link EntityBoomerang#getImpactDamage}
 	 */
+	@Override
 	public float getHitDamage() {
 		
 		return Math.max(1f, (0.5f + materialDefinition.getDamageVsEntity() * 0.5f));

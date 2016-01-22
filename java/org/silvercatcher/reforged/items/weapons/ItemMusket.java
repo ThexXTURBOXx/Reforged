@@ -6,6 +6,9 @@ import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.items.CompoundTags;
+import org.silvercatcher.reforged.items.ItemExtension;
+
+import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -16,7 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemMusket extends ItemBow {
+public class ItemMusket extends ItemBow implements ItemExtension {
 
 	// let's see...
 	byte empty		= 0;
@@ -151,7 +154,14 @@ public class ItemMusket extends ItemBow {
 				new ItemStack(ReforgedRegistry.MUSKET_BARREL), new ItemStack(ReforgedRegistry.GUN_STOCK));
 	}
 
+	@Override
 	public float getHitDamage() {
 		return 2f;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	@Override
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		return ItemExtension.super.getAttributeModifiers(stack);
 	}
 }
