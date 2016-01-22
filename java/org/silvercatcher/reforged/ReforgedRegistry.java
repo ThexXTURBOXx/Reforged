@@ -57,20 +57,24 @@ public class ReforgedRegistry {
 	public static Item IRON_BATTLE_AXE;
 	public static Item GOLDEN_BATTLE_AXE;
 	public static Item DIAMOND_BATTLE_AXE;
-	//public static Item COPPER_BATTLE_AXE = new ItemBattleAxe(COPPER);
 	
 	public static Item WOODEN_BOOMERANG;
 	public static Item STONE_BOOMERANG;
 	public static Item IRON_BOOMERANG;
 	public static Item GOLDEN_BOOMERANG;
 	public static Item DIAMOND_BOOMERANG;
-	//public static Item COPPER_BOOMERANG = new ItemBoomerang(COPPER);
 	
 	public static Item WOODEN_SABER;
 	public static Item STONE_SABER;
 	public static Item IRON_SABER;
 	public static Item GOLDEN_SABER;
 	public static Item DIAMOND_SABER;
+	
+	public static Item WOODEN_KNIFE;
+	public static Item STONE_KNIFE;
+	public static Item IRON_KNIFE;
+	public static Item GOLDEN_KNIFE;
+	public static Item DIAMOND_KNIFE;
 	
 	public static Item JAVELIN;	
 
@@ -87,6 +91,12 @@ public class ReforgedRegistry {
 		
 		registratonList.add(FIREROD = new ItemFireRod());
 		
+		registratonList.add(MUSKET_BARREL = 
+				new Item().setUnlocalizedName("musket_barrel").setCreativeTab(ReforgedMod.tabReforged));
+		registratonList.add(BLUNDERBUSS_BARREL = 
+				new Item().setUnlocalizedName("blunderbuss_barrel").setCreativeTab(ReforgedMod.tabReforged));
+		registratonList.add(GUN_STOCK = 
+				new Item().setUnlocalizedName("gun_stock").setCreativeTab(ReforgedMod.tabReforged));
 		
 		registratonList.add(MUSKET = new ItemMusket());
 		registratonList.add(WOODEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.WOOD));
@@ -112,6 +122,12 @@ public class ReforgedRegistry {
 		registratonList.add(GOLDEN_SABER = new ItemSaber(ToolMaterial.GOLD));
 		registratonList.add(IRON_SABER = new ItemSaber(ToolMaterial.IRON));
 		registratonList.add(DIAMOND_SABER = new ItemSaber(ToolMaterial.EMERALD));
+		
+		registratonList.add(WOODEN_KNIFE = new ItemKnife(ToolMaterial.WOOD));
+		registratonList.add(STONE_KNIFE = new ItemKnife(ToolMaterial.STONE));
+		registratonList.add(GOLDEN_KNIFE = new ItemKnife(ToolMaterial.GOLD));
+		registratonList.add(IRON_KNIFE = new ItemKnife(ToolMaterial.IRON));
+		registratonList.add(DIAMOND_KNIFE = new ItemKnife(ToolMaterial.EMERALD));
 		
 		registratonList.add(JAVELIN = new ItemJavelin());
 		
