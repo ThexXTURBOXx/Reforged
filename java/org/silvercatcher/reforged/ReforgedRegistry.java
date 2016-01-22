@@ -87,9 +87,41 @@ public class ReforgedRegistry {
 		
 		registratonList.add(FIREROD = new ItemFireRod());
 		
-		registratonList.add(BLUNDERBUSS_BARREL);
-		registratonList.add(MUSKET_BARREL);
-		registratonList.add(GUN_STOCK);
+		/*
+		registratonList.add(BLUNDERBUSS_BARREL = new ItemReforged("blunderbuss_barrel") {
+			
+			@Override
+			public void registerRecipes() {
+			}
+			
+			@Override
+			public float getHitDamage() {
+				return 0;
+			}
+		});
+		registratonList.add(MUSKET_BARREL = new ItemReforged("musket_barrel") {
+			
+			@Override
+			public void registerRecipes() {
+			}
+			
+			@Override
+			public float getHitDamage() {
+				return 0;
+			}
+		});
+		registratonList.add(GUN_STOCK = new ItemReforged("gun_stock") {
+			
+			@Override
+			public void registerRecipes() {
+			}
+			
+			@Override
+			public float getHitDamage() {
+				return 0;
+			}
+		});
+		
 		
 		registratonList.add(MUSKET = new ItemMusket());
 		registratonList.add(WOODEN_BAYONET_MUSKET = new ItemBayonetMusket());
@@ -97,7 +129,7 @@ public class ReforgedRegistry {
 		registratonList.add(IRON_BAYONET_MUSKET = new ItemBayonetMusket());
 		registratonList.add(GOLDEN_BAYONET_MUSKET = new ItemBayonetMusket());
 		registratonList.add(DIAMOND_BAYONET_MUSKET = new ItemBayonetMusket());
-
+		 */
 		registratonList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
 		registratonList.add(STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));
 		registratonList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
