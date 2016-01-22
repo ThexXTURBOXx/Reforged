@@ -1,6 +1,6 @@
 itemGroup.reforged=Reforged
 item.nest_of_bees.name=Nest of Bees
-item.holy_cross.name=Holy Cross
+item.holy_cross.name=§eHoly Cross
 item.firerod.name=Firerod
 item.arrow_bundle.name=Arrow Bundle
 
@@ -15,7 +15,7 @@ item.wooden_boomerang.name=Wooden Boomerang
 item.stone_boomerang.name=Stone Boomerang
 item.golden_boomerang.name=Golden Boomerang
 item.iron_boomerang.name=Iron Boomerang
-item.diamond_boomerang.name=Diamond Boomerang
+item.diamond_boomerang.name=Diamond 
 item.copper_boomerang.name=Copper Boomerang
 
 item.wooden_saber.name=Wooden Saber
@@ -25,6 +25,23 @@ item.iron_saber.name=Iron Saber
 item.diamond_saber.name=Diamond Saber
 item.copper_saber.name=Copper Saber
 
+item.wooden_musket.name=Wooden Musket
+item.stone_musket.name=Stone Musket
+item.golden_musket.name=Golden Musket
+item.iron_musket.name=Iron Musket
+item.diamond_musket.name=Diamond Musket
+item.copper_musket.name=Copper Musket
+
+item.wooden_knife.name=Wooden Knife
+item.stone_knife.name=Stone Knife
+item.golden_knife.name=Golden Knife
+item.iron_knife.name=Iron Knife
+item.diamond_knife.name=Diamond Knife
+item.copper_knife.name=Copper Knife
+
+item.musket_barrel.name=Musket Barrel
+item.gun_stock.name=Gun Stock
+item.blunderbuss_barrel.name=Blunderbuss Barrel
 item.javelin.name=Javelin
-item.bullet_musket.name=Musket Ball
+item.musket_bullet.name=Musket Ball
 item.musket.name=Musket
