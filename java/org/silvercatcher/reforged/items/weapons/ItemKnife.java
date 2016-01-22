@@ -1,5 +1,6 @@
-package org.silvercatcher.reforged;
+package org.silvercatcher.reforged.items.weapons;
 
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
