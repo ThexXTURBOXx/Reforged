@@ -1,7 +1,7 @@
 {
     "parent": "reforged:builtin/generated",
     "textures": {
-        "layer0": "reforged:items/bullet_musket"
+        "layer0": "reforged:items/musket_bullet"
     },
     "display": {
         "thirdperson": {
