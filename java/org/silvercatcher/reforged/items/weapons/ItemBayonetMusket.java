@@ -12,6 +12,8 @@ public class ItemBayonetMusket extends ItemMusket {
 	public ItemBayonetMusket(ToolMaterial material) {
 		
 		super();
+		
 		this.materialDefinition = MaterialManager.getMaterialDefinition(material);
+	
 	}
 }

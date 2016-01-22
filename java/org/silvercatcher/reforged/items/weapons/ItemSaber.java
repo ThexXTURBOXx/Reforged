@@ -1,41 +1,44 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.items.MaterialItem;
+
+import org.silvercatcher.reforged.material.MaterialDefinition;
+import org.silvercatcher.reforged.material.MaterialManager;
 
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemSaber extends MaterialItem {
+public class ItemSaber extends ItemSword {
 
+	protected final MaterialDefinition materialDefinition;
+	
 	public ItemSaber(ToolMaterial material) {
 		
-		super("saber", material);
+		super(material);
+		
+		materialDefinition = MaterialManager.getMaterialDefinition(material);
+		
+		setUnlocalizedName(materialDefinition.getPrefixedName("saber"));
 		
 		setMaxStackSize(1);
-		setMaxDamage(getMaxDamageForMaterial(material));
+		setMaxDamage(materialDefinition.getMaxUses());
 	}
 
-	@Override
-	protected int getMaxDamageForMaterial(ToolMaterial material) {
-		
-		return material.getMaxUses();
-	}
 
-	@Override
 	public void registerRecipes() {
 		
 		GameRegistry.addRecipe(new ItemStack(this),
 				" b ",
 				"b  ",
 				"s  ",
-				'b', material.getRepairItemStack(),
+				'b', materialDefinition.getRepairMaterial(),
 				's', Items.stick);
 	}
 
-	@Override
 	public float getHitDamage() {
 		
-		return material.getDamageVsEntity() + 3.5f;
+		return materialDefinition.getDamageVsEntity() + 3.5f;
 	}
 }

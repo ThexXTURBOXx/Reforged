@@ -90,7 +90,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			}
 		}
 		
-		NBTTagCompound compound = ReforgedRegistry.NEST_OF_BEES.giveCompound(output);
+		NBTTagCompound compound = CompoundTags.giveCompound(output);
 		
 		int arrows = compound.getInteger(CompoundTags.AMMUNITION);
 		

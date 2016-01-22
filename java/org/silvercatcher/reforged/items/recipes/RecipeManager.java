@@ -15,7 +15,7 @@ public class RecipeManager {
 
 	public static void registerRecipes() {
 		
-		// todo: register recipes
+		// todo: register recipes here
 
 		
 	}

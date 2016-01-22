@@ -4,10 +4,8 @@ import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.ReforgedTab;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.items.CompoundTags;
-import org.silvercatcher.reforged.items.ItemReforged;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -96,7 +94,7 @@ public class ItemMusket extends ItemBow {
 	
 	public NBTTagCompound giveCompound(ItemStack stack) {
 		
-		NBTTagCompound compound = ItemReforged.giveCompound(stack);
+		NBTTagCompound compound = CompoundTags.giveCompound(stack);
 		
 		if(!compound.hasKey(CompoundTags.AMMUNITION)) {
 			
@@ -147,14 +145,12 @@ public class ItemMusket extends ItemBow {
 		return ToolMaterial.IRON.getEnchantability();
 	}
 	
-	@Override
 	public void registerRecipes() {
 	
 		GameRegistry.addShapelessRecipe(new ItemStack(this),
 				new ItemStack(ReforgedRegistry.MUSKET_BARREL), new ItemStack(ReforgedRegistry.GUN_STOCK));
 	}
 
-	@Override
 	public float getHitDamage() {
 		return 2f;
 	}

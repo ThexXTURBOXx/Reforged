@@ -1,27 +1,26 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.items.ItemReforged;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemFireRod extends ItemReforged {
+public class ItemFireRod extends Item {
 
 	public static final int FIRE_DURATION = 6;
 	
 	public ItemFireRod() {
-		super("firerod");
+		
 		setMaxStackSize(32);
 	}
 
-	@Override
+
 	public void registerRecipes() {
 	
 		GameRegistry.addRecipe(new ItemStack(this),
@@ -65,7 +64,7 @@ public class ItemFireRod extends ItemReforged {
 		return false;
 	}
 
-	@Override
+
 	public float getHitDamage() {
 		return 1.5f;
 	}

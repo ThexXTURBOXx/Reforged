@@ -20,24 +20,20 @@ public class MaterialDefinition {
 
 	private final String prefix;
 	private final ItemStack repairMaterial;
-	private final int maxUses;
-	private final float damageVsEntity;
-	private float efficiency;
-	private final List<Item> materalBasedItems;
+	private final ToolMaterial material;
+	private final List<Item> materialBasedItems;
 	
 	public MaterialDefinition(String prefix, ToolMaterial material) {
 		
-		this(prefix, material,material.getRepairItemStack());
+		this(prefix, material, material.getRepairItemStack());
 	}
 	
 	public MaterialDefinition(String prefix, ToolMaterial material, ItemStack repairMaterial) {
 	
 		this.prefix = prefix;
+		this.material = material;
 		this.repairMaterial = repairMaterial;
-		this.maxUses = material.getMaxUses();
-		this.damageVsEntity = material.getDamageVsEntity();
-		this.efficiency = material.getEfficiencyOnProperMaterial();
-		this.materalBasedItems = new LinkedList<>();
+		this.materialBasedItems = new LinkedList<>();
 	}
 	
 	public final String getPrefix() {
@@ -49,28 +45,40 @@ public class MaterialDefinition {
 		return prefix + "_" + baseName;
 	}
 	
+	public ToolMaterial getMaterial() {
+		return material;
+	}
+	
 	public ItemStack getRepairMaterial() {
 		return repairMaterial;
 	}
 
 	public int getMaxUses() {
-		return maxUses;
+		return material.getMaxUses();
 	}
 
 	public float getDamageVsEntity() {
-		return damageVsEntity;
+		return material.getDamageVsEntity();
 	}
 
+	/**
+	 * convenience method, for example to make silver stronger against undead
+	 * 
+	 * @param target
+	 * @return
+	 */
+	public void onEntityHit(Entity target) {}
+	
 	public float getEfficiencyOnProperMaterial() {
-		return efficiency;
+		return material.getEfficiencyOnProperMaterial();
 	}
 	
-	public final List<Item> getMateralBasedItems() {
-		return materalBasedItems;
+	public final List<Item> getMaterialBasedItems() {
+		return materialBasedItems;
 	}
 	
 	public void addItem(Item item) {
 		
-		materalBasedItems.add(item);
+		materialBasedItems.add(item);
 	}
 }

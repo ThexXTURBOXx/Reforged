@@ -3,7 +3,6 @@ package org.silvercatcher.reforged;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.silvercatcher.reforged.items.ItemReforged;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
@@ -17,6 +16,7 @@ import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
 import org.silvercatcher.reforged.items.weapons.ItemSaber;
 
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
@@ -29,53 +29,53 @@ public class ReforgedRegistry {
 	
 	public static ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 2, 200, 5.0F, 1.5F, 10);
 
-	public static ItemReforged ARROW_BUNDLE;
+	public static Item ARROW_BUNDLE;
 	
-	public static ItemReforged GUN_STOCK;
-	public static ItemReforged BLUNDERBUSS_BARREL;
-	public static ItemReforged MUSKET_BARREL;
+	public static Item GUN_STOCK;
+	public static Item BLUNDERBUSS_BARREL;
+	public static Item MUSKET_BARREL;
 	
-	public static ItemReforged BLUNDERBUSS;
-	public static ItemReforged MUSKET;
-	public static ItemReforged WOODEN_BAYONET_MUSKET;
-	public static ItemReforged STONE_BAYONET_MUSKET;
-	public static ItemReforged IRON_BAYONET_MUSKET;
-	public static ItemReforged GOLDEN_BAYONET_MUSKET;
-	public static ItemReforged DIAMOND_BAYONET_MUSKET;
+	public static Item BLUNDERBUSS;
+	public static Item MUSKET;
+	public static Item WOODEN_BAYONET_MUSKET;
+	public static Item STONE_BAYONET_MUSKET;
+	public static Item IRON_BAYONET_MUSKET;
+	public static Item GOLDEN_BAYONET_MUSKET;
+	public static Item DIAMOND_BAYONET_MUSKET;
 	
-	public static ItemReforged MUSKET_BULLET;
-	public static ItemReforged BLUNDERBUSS_SHOT;
+	public static Item MUSKET_BULLET;
+	public static Item BLUNDERBUSS_SHOT;
 	
-	public static ItemReforged NEST_OF_BEES;
+	public static Item NEST_OF_BEES;
 
-	public static ItemReforged HOLY_CROSS;
+	public static Item HOLY_CROSS;
 	
-	public static ItemReforged FIREROD;
+	public static Item FIREROD;
 	
-	public static ItemReforged WOODEN_BATTLE_AXE;
-	public static ItemReforged STONE_BATTLE_AXE;
-	public static ItemReforged IRON_BATTLE_AXE;
-	public static ItemReforged GOLDEN_BATTLE_AXE;
-	public static ItemReforged DIAMOND_BATTLE_AXE;
-	public static ItemReforged COPPER_BATTLE_AXE = new ItemBattleAxe(COPPER);
+	public static Item WOODEN_BATTLE_AXE;
+	public static Item STONE_BATTLE_AXE;
+	public static Item IRON_BATTLE_AXE;
+	public static Item GOLDEN_BATTLE_AXE;
+	public static Item DIAMOND_BATTLE_AXE;
+	public static Item COPPER_BATTLE_AXE = new ItemBattleAxe(COPPER);
 	
-	public static ItemReforged WOODEN_BOOMERANG;
-	public static ItemReforged STONE_BOOMERANG;
-	public static ItemReforged IRON_BOOMERANG;
-	public static ItemReforged GOLDEN_BOOMERANG;
-	public static ItemReforged DIAMOND_BOOMERANG;
-	public static ItemReforged COPPER_BOOMERANG = new ItemBoomerang(COPPER);
+	public static Item WOODEN_BOOMERANG;
+	public static Item STONE_BOOMERANG;
+	public static Item IRON_BOOMERANG;
+	public static Item GOLDEN_BOOMERANG;
+	public static Item DIAMOND_BOOMERANG;
+	public static Item COPPER_BOOMERANG = new ItemBoomerang(COPPER);
 	
-	public static ItemReforged WOODEN_SABER;
-	public static ItemReforged STONE_SABER;
-	public static ItemReforged IRON_SABER;
-	public static ItemReforged GOLDEN_SABER;
-	public static ItemReforged DIAMOND_SABER;
+	public static Item WOODEN_SABER;
+	public static Item STONE_SABER;
+	public static Item IRON_SABER;
+	public static Item GOLDEN_SABER;
+	public static Item DIAMOND_SABER;
 	
-	public static ItemReforged JAVELIN;	
+	public static Item JAVELIN;	
 
 	
-	public static List<ItemReforged> registratonList = new ArrayList<ItemReforged>();
+	public static List<Item> registratonList = new ArrayList<Item>();
 	
 	public static void createItems() {
 		
@@ -88,7 +88,7 @@ public class ReforgedRegistry {
 		registratonList.add(FIREROD = new ItemFireRod());
 		
 		/*
-		registratonList.add(BLUNDERBUSS_BARREL = new ItemReforged("blunderbuss_barrel") {
+		registratonList.add(BLUNDERBUSS_BARREL = new Item("blunderbuss_barrel") {
 			
 			@Override
 			public void registerRecipes() {
@@ -99,7 +99,7 @@ public class ReforgedRegistry {
 				return 0;
 			}
 		});
-		registratonList.add(MUSKET_BARREL = new ItemReforged("musket_barrel") {
+		registratonList.add(MUSKET_BARREL = new Item("musket_barrel") {
 			
 			@Override
 			public void registerRecipes() {
@@ -110,7 +110,7 @@ public class ReforgedRegistry {
 				return 0;
 			}
 		});
-		registratonList.add(GUN_STOCK = new ItemReforged("gun_stock") {
+		registratonList.add(GUN_STOCK = new Item("gun_stock") {
 			
 			@Override
 			public void registerRecipes() {
@@ -156,16 +156,17 @@ public class ReforgedRegistry {
 	
 	public static void registerItems() {
 		
-		for(ItemReforged item : registratonList) {
-			GameRegistry.registerItem(item, item.getName());
+		for(Item item : registratonList) {
+			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
 		}
 	}
 	
 	public static void registerRecipes() {
 		
-		for(ItemReforged item : registratonList) {
+		/*
+		for(Item item : registratonList) {
 			item.registerRecipes();
-		}
+		}*/
 	}
 	
 	public static void registerEntity(Class c, String name, int counter) {

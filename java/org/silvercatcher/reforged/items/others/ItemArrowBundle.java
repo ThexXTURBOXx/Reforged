@@ -14,14 +14,14 @@ public class ItemArrowBundle extends Item {
 		setMaxStackSize(16);
 	}
 
-	@Override
+
 	public void registerRecipes() {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(this),
 			new ItemStack(Items.arrow, 8), new ItemStack(Items.string));
 	}
 
-	@Override
+
 	public float getHitDamage() {
 		return 0f;
 	}
