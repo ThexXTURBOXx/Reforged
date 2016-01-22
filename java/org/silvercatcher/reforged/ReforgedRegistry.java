@@ -11,6 +11,7 @@ import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.items.weapons.ItemHolyCross;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
+import org.silvercatcher.reforged.items.weapons.ItemKnife;
 import org.silvercatcher.reforged.items.weapons.ItemMusket;
 import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
 import org.silvercatcher.reforged.items.weapons.ItemSaber;
@@ -144,8 +145,7 @@ public class ReforgedRegistry {
 	
 	public static void registerRecipes() {
 		
-		/*
-		for(Item item : registratonList) {
+		/*for(Item item : registratonList) {
 			item.registerRecipes();
 		}*/
 	}
