@@ -74,7 +74,7 @@ public class ItemJavelin extends AWeapon {
 
 			if (!worldIn.isRemote) {
 	        	
-	        	worldIn.spawnEntityInWorld(new EntityJavelin(worldIn, playerIn, throwStack));
+	        	worldIn.spawnEntityInWorld(new EntityJavelin(worldIn, playerIn, throwStack, stack.getMaxItemUseDuration() - timeLeft));
 	        }
 	    }
     }

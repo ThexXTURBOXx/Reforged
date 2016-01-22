@@ -16,10 +16,18 @@ public class EntityJavelin extends EntityThrowable {
 		super(worldIn);
 	}
 	
-	public EntityJavelin(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
+	public EntityJavelin(World worldIn, EntityLivingBase throwerIn, ItemStack stack, int durationLoaded) {
 		super(worldIn, throwerIn);
 		setItemStack(stack);
 		setThrowerName(throwerIn.getName());
+		setDurLoaded(durationLoaded);
+		if(durationLoaded < 10) {
+			durationLoaded = 10;
+		}
+		System.out.println(5 + getDurLoaded() / 5);
+		this.motionX *= (durationLoaded / 10);
+		this.motionY *= (durationLoaded / 10);
+		this.motionZ *= (durationLoaded / 10);
 		this.setPositionAndRotation(throwerIn.posX, throwerIn.posY + throwerIn.getEyeHeight(), throwerIn.posZ, throwerIn.rotationYaw, throwerIn.rotationPitch);
 	}
 	
@@ -32,6 +40,9 @@ public class EntityJavelin extends EntityThrowable {
 		
 		// id 6 = Name of Thrower, type 4 = String
 		dataWatcher.addObjectByDataType(6, 4);
+		
+		// id 7 = Loaded Duration, type 2 = Integer
+		dataWatcher.addObjectByDataType(7, 2);
 	}
 	
 	public ItemStack getItemStack() {
@@ -58,7 +69,7 @@ public class EntityJavelin extends EntityThrowable {
 			}
 		} else {
 			//It's a entity
-			target.entityHit.attackEntityFrom(DamageSource.causeThornsDamage(getThrower()), 7);
+			target.entityHit.attackEntityFrom(DamageSource.causeThornsDamage(getThrower()), 5 + getDurLoaded() / 5);
 			ItemStack stack = getItemStack();
 			if(stack.attemptDamageItem(1, rand)) {
 			} else {
@@ -86,12 +97,22 @@ public class EntityJavelin extends EntityThrowable {
 		dataWatcher.updateObject(6, name);
 	}
 	
+	public int getDurLoaded() {
+		return dataWatcher.getWatchableObjectInt(7);
+	}
+	
+	public void setDurLoaded(int durloaded) {
+		
+		dataWatcher.updateObject(7, durloaded);
+	}
+	
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tagCompound) {
 		
 		super.writeEntityToNBT(tagCompound);
 		
 		tagCompound.setString("thrower", getThrower().getName());
+		tagCompound.setInteger("durloaded", getDurLoaded());
 		
 		if(getItemStack() != null) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
@@ -102,6 +123,7 @@ public class EntityJavelin extends EntityThrowable {
 	public void readEntityFromNBT(NBTTagCompound tagCompund) {
 		
 		super.readEntityFromNBT(tagCompund);
+		setDurLoaded(tagCompund.getInteger("durloaded"));
 		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
 		setThrowerName(tagCompund.getString("thrower"));
 	}
