@@ -1,5 +1,7 @@
 package org.silvercatcher.reforged.items.others;
 
+import org.silvercatcher.reforged.ReforgedMod;
+
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -10,8 +12,9 @@ public class ItemArrowBundle extends Item {
 	
 	public ItemArrowBundle() {
 		
-		super();
 		setMaxStackSize(16);
+		setUnlocalizedName("arrow_bundle");
+		setCreativeTab(ReforgedMod.tabReforged);
 	}
 
 

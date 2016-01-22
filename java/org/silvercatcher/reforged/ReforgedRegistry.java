@@ -6,7 +6,7 @@ import java.util.List;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
-import org.silvercatcher.reforged.items.weapons.ItemBayonetMusket;
+import org.silvercatcher.reforged.items.weapons.ItemMusketWithBayonet;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.items.weapons.ItemHolyCross;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
@@ -87,49 +87,14 @@ public class ReforgedRegistry {
 		
 		registratonList.add(FIREROD = new ItemFireRod());
 		
-		/*
-		registratonList.add(BLUNDERBUSS_BARREL = new Item("blunderbuss_barrel") {
-			
-			@Override
-			public void registerRecipes() {
-			}
-			
-			@Override
-			public float getHitDamage() {
-				return 0;
-			}
-		});
-		registratonList.add(MUSKET_BARREL = new Item("musket_barrel") {
-			
-			@Override
-			public void registerRecipes() {
-			}
-			
-			@Override
-			public float getHitDamage() {
-				return 0;
-			}
-		});
-		registratonList.add(GUN_STOCK = new Item("gun_stock") {
-			
-			@Override
-			public void registerRecipes() {
-			}
-			
-			@Override
-			public float getHitDamage() {
-				return 0;
-			}
-		});
-		
 		
 		registratonList.add(MUSKET = new ItemMusket());
-		registratonList.add(WOODEN_BAYONET_MUSKET = new ItemBayonetMusket());
-		registratonList.add(STONE_BAYONET_MUSKET = new ItemBayonetMusket());
-		registratonList.add(IRON_BAYONET_MUSKET = new ItemBayonetMusket());
-		registratonList.add(GOLDEN_BAYONET_MUSKET = new ItemBayonetMusket());
-		registratonList.add(DIAMOND_BAYONET_MUSKET = new ItemBayonetMusket());
-		 */
+		registratonList.add(WOODEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.WOOD));
+		registratonList.add(STONE_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.STONE));
+		registratonList.add(IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.IRON));
+		registratonList.add(GOLDEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.GOLD));
+		registratonList.add(DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.EMERALD));
+		
 		registratonList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
 		registratonList.add(STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));
 		registratonList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));

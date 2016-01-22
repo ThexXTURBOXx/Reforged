@@ -21,11 +21,12 @@ public class ItemBoomerang extends Item {
 	
 	public ItemBoomerang(ToolMaterial material) {
 		
-		super();
 		setMaxStackSize(1);
 		
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setMaxDamage((int) (materialDefinition.getMaxUses() * 0.8f));
+		setUnlocalizedName(materialDefinition.getPrefixedName("boomerang"));
+		
 		setCreativeTab(ReforgedMod.tabReforged);
 	}
 	

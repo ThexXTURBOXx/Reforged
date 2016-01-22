@@ -1,5 +1,7 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import org.silvercatcher.reforged.ReforgedMod;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -17,7 +19,10 @@ public class ItemFireRod extends Item {
 	
 	public ItemFireRod() {
 		
+		setUnlocalizedName("firerod");
 		setMaxStackSize(32);
+		
+		setCreativeTab(ReforgedMod.tabReforged);
 	}
 
 

@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.items.ItemDefault;
 
@@ -13,7 +14,10 @@ public class ItemJavelin extends Item {
 
 	public ItemJavelin() {
 		
+		setUnlocalizedName("javelin");
 		setMaxStackSize(8);
+		
+		setCreativeTab(ReforgedMod.tabReforged);
 	}
 
 	

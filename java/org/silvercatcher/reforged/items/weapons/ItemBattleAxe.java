@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -27,6 +28,9 @@ public class ItemBattleAxe extends ItemAxe {
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setUnlocalizedName(materialDefinition.getPrefixedName("battleaxe"));
 		setMaxDamage(materialDefinition.getMaxUses());
+
+		setCreativeTab(ReforgedMod.tabReforged);
+
 	}
 
 	public void registerRecipes() {

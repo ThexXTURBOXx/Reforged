@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.items.weapons;
 
 
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
 
@@ -22,6 +23,7 @@ public class ItemSaber extends ItemSword {
 		
 		setUnlocalizedName(materialDefinition.getPrefixedName("saber"));
 		
+		setCreativeTab(ReforgedMod.tabReforged);
 		setMaxStackSize(1);
 		setMaxDamage(materialDefinition.getMaxUses());
 	}

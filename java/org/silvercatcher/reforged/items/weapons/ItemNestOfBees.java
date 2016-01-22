@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
 
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
 
@@ -28,6 +29,8 @@ public class ItemNestOfBees extends Item {
 		setUnlocalizedName("nest_of_bees");
 		setMaxDamage(80);
 		setMaxStackSize(1);
+		
+		setCreativeTab(ReforgedMod.tabReforged);
 	}
 	
 	

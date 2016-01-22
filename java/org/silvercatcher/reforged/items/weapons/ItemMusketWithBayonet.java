@@ -5,15 +5,15 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import net.minecraft.item.Item.ToolMaterial;
 
-public class ItemBayonetMusket extends ItemMusket {
+public class ItemMusketWithBayonet extends ItemMusket {
 
 	protected final MaterialDefinition materialDefinition;
 	
-	public ItemBayonetMusket(ToolMaterial material) {
+	public ItemMusketWithBayonet(ToolMaterial material) {
 		
 		super();
 		
 		this.materialDefinition = MaterialManager.getMaterialDefinition(material);
-	
+		setUnlocalizedName(materialDefinition.getPrefixedName("musket"));
 	}
 }
