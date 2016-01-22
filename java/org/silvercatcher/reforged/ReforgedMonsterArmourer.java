@@ -3,8 +3,6 @@ package org.silvercatcher.reforged;
 import java.util.Random;
 import java.util.UUID;
 
-import org.silvercatcher.reforged.items.ItemReforged;
-
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityZombie;
@@ -18,7 +16,7 @@ public class ReforgedMonsterArmourer {
 
 	private static final UUID itemModifierUUID =  UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
 	private Random random = new Random();
-	
+	/*
 	// simple way for now
 	private static final ItemReforged [] zombieWeapons = {
 			
@@ -45,7 +43,7 @@ public class ReforgedMonsterArmourer {
 		}
 	}
 
-	private ItemReforged randomFrom(ItemReforged [] selection) {
+	private Item randomFrom(Item [] selection) {
 		
 		return selection[random.nextInt(selection.length)];
 	}
@@ -54,13 +52,13 @@ public class ReforgedMonsterArmourer {
 		
 		if(zombie.getCurrentArmor(0) == null && random.nextInt(10) == 0) {
 			
-			ItemReforged item = randomFrom(zombieWeapons);
+			Item item = randomFrom(zombieWeapons);
 			
 			zombie.setCurrentItemOrArmor(0, new ItemStack(item));
 			
 			zombie.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(
-					new AttributeModifier(itemModifierUUID, "Weapon Damage", item.getHitDamage(), 0));
+					new AttributeModifier(itemModifierUUID, "Weapon Damage", 99f, 0));
 			
 		}
-	}
+	}*/
 }

@@ -2,8 +2,8 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
 
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.items.CompoundTags;
-import org.silvercatcher.reforged.items.ItemReforged;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
 
 import net.minecraft.entity.Entity;
@@ -18,7 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemNestOfBees extends ItemReforged {
+public class ItemNestOfBees extends Item {
 
 	private static int delay = 4;
 	private static int buildup = 25;
@@ -26,9 +26,11 @@ public class ItemNestOfBees extends ItemReforged {
 	
 	public ItemNestOfBees() {
 		
-		super("nest_of_bees");
+		setUnlocalizedName("nest_of_bees");
 		setMaxDamage(80);
 		setMaxStackSize(1);
+		
+		setCreativeTab(ReforgedMod.tabReforged);
 	}
 	
 	
@@ -36,10 +38,10 @@ public class ItemNestOfBees extends ItemReforged {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
 		
-		tooltip.add("Arrows: " + giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
+		tooltip.add("Arrows: " + CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
 	}
 	
-	@Override
+
 	public void registerRecipes() {
 		
 		// for testing!
@@ -58,7 +60,7 @@ public class ItemNestOfBees extends ItemReforged {
 		GameRegistry.addRecipe(new NestOfBeesLoadRecipe());
 	}
 
-	@Override
+
 	public float getHitDamage() {
 		
 		return 0f;
@@ -76,7 +78,7 @@ public class ItemNestOfBees extends ItemReforged {
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
 		
-		return giveCompound(stack).getBoolean(CompoundTags.ACTIVATED) ? delay : buildup;
+		return CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ACTIVATED) ? delay : buildup;
 	}
 	
 	@Override
@@ -87,7 +89,7 @@ public class ItemNestOfBees extends ItemReforged {
 
 			EntityPlayer player = (EntityPlayer) entityIn;
 			
-			NBTTagCompound compound = giveCompound(stack);
+			NBTTagCompound compound = CompoundTags.giveCompound(stack);
 			
 			int arrows = compound.getInteger(CompoundTags.AMMUNITION);
 			
@@ -106,7 +108,7 @@ public class ItemNestOfBees extends ItemReforged {
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
 		
-		NBTTagCompound compound = giveCompound(stack);
+		NBTTagCompound compound = CompoundTags.giveCompound(stack);
 		
 		if(compound.getInteger(CompoundTags.AMMUNITION) > 0) {
 			compound.setBoolean(CompoundTags.ACTIVATED, true);
@@ -134,13 +136,13 @@ public class ItemNestOfBees extends ItemReforged {
 	
 	public int getAmmoCount(ItemStack stack) {
 		
-		return getAmmoCount(giveCompound(stack));
+		return getAmmoCount(CompoundTags.giveCompound(stack));
 	}
 	
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
 		
-		NBTTagCompound compund = giveCompound(stack);
+		NBTTagCompound compund = CompoundTags.giveCompound(stack);
 		
 		if(compund.getBoolean(CompoundTags.ACTIVATED)) {
 			return EnumAction.BOW;

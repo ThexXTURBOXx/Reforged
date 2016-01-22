@@ -61,8 +61,8 @@ public class RenderBoomerang extends Render
 		
 		case WOOD: return Textures.WOODEN_BOOMERANG;
 		
-		default: if(entityBoomerang.getMaterial() == ReforgedRegistry.COPPER) {return Textures.COPPER_BOOMERANG;
-		} else {return null;}
+		default: return null;
+		
 		
 		}
 	}

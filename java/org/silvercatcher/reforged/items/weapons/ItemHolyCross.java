@@ -3,7 +3,7 @@ package org.silvercatcher.reforged.items.weapons;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import org.silvercatcher.reforged.items.ItemReforged;
+import org.silvercatcher.reforged.ReforgedMod;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -24,23 +24,24 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemHolyCross extends ItemReforged {
+public class ItemHolyCross extends Item {
 
 	private final static int DELAY = 40;
 	
 	private LinkedList<EntityLivingBase> toPunish;
 	
 	public ItemHolyCross() {
-		
-		super("holy_cross");
-		
+				
+		setUnlocalizedName("holy_cross");
 		setMaxStackSize(1);
 		setMaxDamage(25);
+	
+		setCreativeTab(ReforgedMod.tabReforged);
 		
-		toPunish = new LinkedList<EntityLivingBase>();
+		toPunish = new LinkedList<>();
 	}
 
-	@Override
+
 	public void registerRecipes() {
 		
 		GameRegistry.addShapedRecipe(new ItemStack(this),
@@ -121,7 +122,7 @@ public class ItemHolyCross extends ItemReforged {
 		}
 	}
 	
-	@Override
+
 	public float getHitDamage() {
 		return 1f;
 	}

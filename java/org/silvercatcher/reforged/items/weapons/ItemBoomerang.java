@@ -1,23 +1,33 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
-import org.silvercatcher.reforged.items.MaterialItem;
+import org.silvercatcher.reforged.material.MaterialDefinition;
+import org.silvercatcher.reforged.material.MaterialManager;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-public class ItemBoomerang extends MaterialItem
-{
-	public ItemBoomerang(ToolMaterial material)
-	{
-		super("boomerang", material);
+public class ItemBoomerang extends Item {
+	
+	protected final MaterialDefinition materialDefinition;
+	
+	public ItemBoomerang(ToolMaterial material) {
+		
 		setMaxStackSize(1);
-		setMaxDamage(getMaxDamageForMaterial(material));
+		
+		materialDefinition = MaterialManager.getMaterialDefinition(material);
+		setMaxDamage((int) (materialDefinition.getMaxUses() * 0.8f));
+		setUnlocalizedName(materialDefinition.getPrefixedName("boomerang"));
+		
+		setCreativeTab(ReforgedMod.tabReforged);
 	}
 	
 	@Override
@@ -39,38 +49,28 @@ public class ItemBoomerang extends MaterialItem
 	    return par1ItemStack;
 	}
 
-	@Override
 	public void registerRecipes() {
-		if(material.getRepairItemStack() != null) {
+
 			GameRegistry.addRecipe(new ItemStack(this),
 					"xww",
 					"  w",
 					"  x",
-					'x', material.getRepairItemStack(),
+					'x', materialDefinition.getRepairMaterial(),
 					'w', Items.stick);
-		} else if(material == ReforgedRegistry.COPPER) {
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), true, new Object[]{
-					"xww",
-					"  w",
-					"  x",
-					'x', "ingotCopper",
-					'w', Items.stick}));
-		}
 	}
-
-	@Override
-	protected int getMaxDamageForMaterial(ToolMaterial material) {
-		
-		return (int) (material.getMaxUses() * 0.8f);
-	}
+	
 
 	/**
 	 * this is weak melee combat damage!
 	 * for ranged combat damage, see {@link EntityBoomerang#getImpactDamage}
 	 */
-	@Override
 	public float getHitDamage() {
 		
-		return Math.max(1f, (0.5f + material.getDamageVsEntity() * 0.5f));
+		return Math.max(1f, (0.5f + materialDefinition.getDamageVsEntity() * 0.5f));
+	}
+	
+	public ToolMaterial getMaterial() {
+		
+		return materialDefinition.getMaterial();
 	}
 }

@@ -1,25 +1,25 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityJavelin;
-import org.silvercatcher.reforged.items.ItemReforged;
+import org.silvercatcher.reforged.items.ItemDefault;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemJavelin extends ItemReforged {
+public class ItemJavelin extends Item {
 
 	public ItemJavelin() {
-		super("javelin");
-		setMaxStackSize(64);
-	}
-	
-	@Override
-	protected void mapEnchantments() {
 		
+		setUnlocalizedName("javelin");
+		setMaxStackSize(8);
 		
+		setCreativeTab(ReforgedMod.tabReforged);
 	}
+
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
@@ -35,12 +35,12 @@ public class ItemJavelin extends ItemReforged {
         return itemStackIn;
     }
 	
-	@Override
+
 	public void registerRecipes() {
 		
 	}
 
-	@Override
+
 	public float getHitDamage() {
 		return 4;
 	}
@@ -54,20 +54,20 @@ public class ItemJavelin extends ItemReforged {
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack)
     {
-        return 72000;
+        return ItemDefault.USE_DURATON;
     }
 	
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft)
-    {
-		if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(this))
-    {
-        worldIn.playSoundAtEntity(playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-        if (!worldIn.isRemote) {
-        	
-        	worldIn.spawnEntityInWorld(new EntityJavelin(worldIn, playerIn, stack));
-        }
-    }
-    }
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
+		
+		if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(this)) {
+			
+			worldIn.playSoundAtEntity(playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
+			if (!worldIn.isRemote) {
+	        	
+	        	worldIn.spawnEntityInWorld(new EntityJavelin(worldIn, playerIn, stack));
+	        }
+	    }
+    }
 }
