@@ -148,6 +148,7 @@ public class ItemMusket extends ItemBow implements ItemExtension {
 		return ToolMaterial.IRON.getEnchantability();
 	}
 	
+	@Override
 	public void registerRecipes() {
 	
 		GameRegistry.addShapelessRecipe(new ItemStack(this),

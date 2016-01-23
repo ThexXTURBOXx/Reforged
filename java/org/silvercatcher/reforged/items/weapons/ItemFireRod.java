@@ -29,6 +29,7 @@ public class ItemFireRod extends AWeapon {
 	}
 
 
+	@Override
 	public void registerRecipes() {
 	
 		GameRegistry.addRecipe(new ItemStack(this),

@@ -52,6 +52,7 @@ public class ItemBoomerang extends AWeapon {
 	    return par1ItemStack;
 	}
 
+	@Override
 	public void registerRecipes() {
 
 			GameRegistry.addRecipe(new ItemStack(this),

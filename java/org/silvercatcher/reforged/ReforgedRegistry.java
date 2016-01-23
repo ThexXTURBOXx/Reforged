@@ -80,72 +80,72 @@ public class ReforgedRegistry {
 	public static Item JAVELIN;	
 
 	
-	public static List<Item> registratonList = new ArrayList<Item>();
+	public static List<Item> registrationList = new ArrayList<Item>();
 	
 	public static void createItems() {
 		
-		registratonList.add(ARROW_BUNDLE = new ItemArrowBundle());
+		registrationList.add(ARROW_BUNDLE = new ItemArrowBundle());
 		
-		registratonList.add(NEST_OF_BEES = new ItemNestOfBees());
+		registrationList.add(NEST_OF_BEES = new ItemNestOfBees());
 
-		registratonList.add(HOLY_CROSS = new ItemHolyCross());
+		registrationList.add(HOLY_CROSS = new ItemHolyCross());
 		
-		registratonList.add(FIREROD = new ItemFireRod());
+		registrationList.add(FIREROD = new ItemFireRod());
 		
-		registratonList.add(MUSKET_BARREL = 
+		registrationList.add(MUSKET_BARREL = 
 				new Item().setUnlocalizedName("musket_barrel").setCreativeTab(ReforgedMod.tabReforged));
-		registratonList.add(BLUNDERBUSS_BARREL = 
+		registrationList.add(BLUNDERBUSS_BARREL = 
 				new Item().setUnlocalizedName("blunderbuss_barrel").setCreativeTab(ReforgedMod.tabReforged));
-		registratonList.add(GUN_STOCK = 
+		registrationList.add(GUN_STOCK = 
 				new Item().setUnlocalizedName("gun_stock").setCreativeTab(ReforgedMod.tabReforged));
 		
-		registratonList.add(MUSKET = new ItemMusket());
-		registratonList.add(WOODEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.WOOD));
-		registratonList.add(STONE_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.STONE));
-		registratonList.add(IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.IRON));
-		registratonList.add(GOLDEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.GOLD));
-		registratonList.add(DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.EMERALD));
+		registrationList.add(MUSKET = new ItemMusket());
+		registrationList.add(WOODEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.WOOD));
+		registrationList.add(STONE_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.STONE));
+		registrationList.add(IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.IRON));
+		registrationList.add(GOLDEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.GOLD));
+		registrationList.add(DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.EMERALD));
 		
-		registratonList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
-		registratonList.add(STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));
-		registratonList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
-		registratonList.add(GOLDEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.GOLD));
-		registratonList.add(DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.EMERALD));
+		registrationList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
+		registrationList.add(STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));
+		registrationList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
+		registrationList.add(GOLDEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.GOLD));
+		registrationList.add(DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.EMERALD));
 
-		registratonList.add(WOODEN_BOOMERANG = new ItemBoomerang(ToolMaterial.WOOD));
-		registratonList.add(STONE_BOOMERANG = new ItemBoomerang(ToolMaterial.STONE));
-		registratonList.add(GOLDEN_BOOMERANG = new ItemBoomerang(ToolMaterial.GOLD));
-		registratonList.add(IRON_BOOMERANG = new ItemBoomerang(ToolMaterial.IRON));
-		registratonList.add(DIAMOND_BOOMERANG = new ItemBoomerang(ToolMaterial.EMERALD));
+		registrationList.add(WOODEN_BOOMERANG = new ItemBoomerang(ToolMaterial.WOOD));
+		registrationList.add(STONE_BOOMERANG = new ItemBoomerang(ToolMaterial.STONE));
+		registrationList.add(GOLDEN_BOOMERANG = new ItemBoomerang(ToolMaterial.GOLD));
+		registrationList.add(IRON_BOOMERANG = new ItemBoomerang(ToolMaterial.IRON));
+		registrationList.add(DIAMOND_BOOMERANG = new ItemBoomerang(ToolMaterial.EMERALD));
 		
-		registratonList.add(WOODEN_SABER = new ItemSaber(ToolMaterial.WOOD));
-		registratonList.add(STONE_SABER = new ItemSaber(ToolMaterial.STONE));
-		registratonList.add(GOLDEN_SABER = new ItemSaber(ToolMaterial.GOLD));
-		registratonList.add(IRON_SABER = new ItemSaber(ToolMaterial.IRON));
-		registratonList.add(DIAMOND_SABER = new ItemSaber(ToolMaterial.EMERALD));
+		registrationList.add(WOODEN_SABER = new ItemSaber(ToolMaterial.WOOD));
+		registrationList.add(STONE_SABER = new ItemSaber(ToolMaterial.STONE));
+		registrationList.add(GOLDEN_SABER = new ItemSaber(ToolMaterial.GOLD));
+		registrationList.add(IRON_SABER = new ItemSaber(ToolMaterial.IRON));
+		registrationList.add(DIAMOND_SABER = new ItemSaber(ToolMaterial.EMERALD));
 		
-		registratonList.add(WOODEN_KNIFE = new ItemKnife(ToolMaterial.WOOD));
-		registratonList.add(STONE_KNIFE = new ItemKnife(ToolMaterial.STONE));
-		registratonList.add(GOLDEN_KNIFE = new ItemKnife(ToolMaterial.GOLD));
-		registratonList.add(IRON_KNIFE = new ItemKnife(ToolMaterial.IRON));
-		registratonList.add(DIAMOND_KNIFE = new ItemKnife(ToolMaterial.EMERALD));
+		registrationList.add(WOODEN_KNIFE = new ItemKnife(ToolMaterial.WOOD));
+		registrationList.add(STONE_KNIFE = new ItemKnife(ToolMaterial.STONE));
+		registrationList.add(GOLDEN_KNIFE = new ItemKnife(ToolMaterial.GOLD));
+		registrationList.add(IRON_KNIFE = new ItemKnife(ToolMaterial.IRON));
+		registrationList.add(DIAMOND_KNIFE = new ItemKnife(ToolMaterial.EMERALD));
 		
-		registratonList.add(JAVELIN = new ItemJavelin());
+		registrationList.add(JAVELIN = new ItemJavelin());
 		
-		registratonList.add(MUSKET_BULLET = new ItemBulletMusket());
+		registrationList.add(MUSKET_BULLET = new ItemBulletMusket());
 		
 	}
 	
 	public static void registerItems() {
 		
-		for(Item item : registratonList) {
+		for(Item item : registrationList) {
 			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
 		}
 	}
 	
 	public static void registerRecipes() {
 		
-		/*for(Item item : registratonList) {
+		/*for(Item item : registrationList) {
 			item.registerRecipes();
 		}*/
 	}

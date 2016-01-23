@@ -25,6 +25,11 @@ public class ItemKnife extends ItemSword implements ItemExtension {
 		setMaxStackSize(1);
 		setCreativeTab(ReforgedMod.tabReforged);
 	}
+	
+	@Override
+	public void registerRecipes() {
+		
+	}
 
 	@Override
 	public float getHitDamage() {

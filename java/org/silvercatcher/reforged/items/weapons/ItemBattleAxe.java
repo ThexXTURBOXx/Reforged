@@ -36,6 +36,7 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 
 	}
 
+	@Override
 	public void registerRecipes() {
 
 		GameRegistry.addRecipe(new ItemStack(this),

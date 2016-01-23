@@ -3,11 +3,10 @@ package org.silvercatcher.reforged.items.others;
 import org.silvercatcher.reforged.ReforgedMod;
 
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemArrowBundle extends Item {
+public class ItemArrowBundle extends ItemOther {
 
 	
 	public ItemArrowBundle() {
@@ -16,8 +15,8 @@ public class ItemArrowBundle extends Item {
 		setUnlocalizedName("arrow_bundle");
 		setCreativeTab(ReforgedMod.tabReforged);
 	}
-
-
+	
+	@Override
 	public void registerRecipes() {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(this),

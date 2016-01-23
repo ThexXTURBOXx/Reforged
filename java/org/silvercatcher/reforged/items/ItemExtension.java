@@ -28,6 +28,8 @@ public interface ItemExtension {
 				new AttributeModifier(itemModifierUUID, "Weapon Damage", getHitDamage(), 0));
 		return modifiers;
 	}
+	
+	default void registerRecipes() {}
 
 	default float getHitDamage() {
 		return 0f;

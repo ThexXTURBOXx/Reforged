@@ -25,4 +25,5 @@ public abstract class AWeapon extends Item implements ItemExtension {
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
 	}
+	
 }
