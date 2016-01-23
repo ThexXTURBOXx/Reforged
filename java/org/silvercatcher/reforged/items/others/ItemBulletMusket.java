@@ -18,6 +18,7 @@ public class ItemBulletMusket extends ItemOther {
 	}
 
 
+	@Override
 	public float getHitDamage() {
 		return 0;
 	}

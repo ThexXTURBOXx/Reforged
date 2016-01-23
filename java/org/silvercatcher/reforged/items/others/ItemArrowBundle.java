@@ -24,6 +24,7 @@ public class ItemArrowBundle extends ItemOther {
 	}
 
 
+	@Override
 	public float getHitDamage() {
 		return 0f;
 	}

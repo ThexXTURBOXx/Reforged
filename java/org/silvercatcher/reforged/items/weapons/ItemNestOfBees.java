@@ -62,6 +62,7 @@ public class ItemNestOfBees extends AWeapon {
 	}
 
 
+	@Override
 	public float getHitDamage() {
 		
 		return 0f;
