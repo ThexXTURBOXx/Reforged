@@ -42,7 +42,7 @@ public class ClientProxy extends CommonProxy {
 		
 		String inventory = "inventory";
 		
-		for(Item item : ReforgedRegistry.registratonList) {
+		for(Item item : ReforgedRegistry.registrationList) {
 			mesher.register(item, 0, new ModelResourceLocation(ReforgedMod.ID + ":" 
 					+ item.getUnlocalizedName().substring(5), inventory));
 		}

@@ -18,7 +18,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemNestOfBees extends Item {
+public class ItemNestOfBees extends AWeapon {
 
 	private static int delay = 4;
 	private static int buildup = 25;
@@ -42,6 +42,7 @@ public class ItemNestOfBees extends Item {
 	}
 	
 
+	@Override
 	public void registerRecipes() {
 		
 		// for testing!

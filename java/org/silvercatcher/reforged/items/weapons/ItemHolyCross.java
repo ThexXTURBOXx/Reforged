@@ -45,6 +45,7 @@ public class ItemHolyCross extends AWeapon {
 	}
 
 
+	@Override
 	public void registerRecipes() {
 		
 		GameRegistry.addShapedRecipe(new ItemStack(this),

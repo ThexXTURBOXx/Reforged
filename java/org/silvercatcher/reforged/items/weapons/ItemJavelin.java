@@ -41,6 +41,7 @@ public class ItemJavelin extends AWeapon {
     }
 	
 
+	@Override
 	public void registerRecipes() {
 		
 	}

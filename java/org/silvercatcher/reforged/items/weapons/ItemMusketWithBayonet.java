@@ -18,6 +18,11 @@ public class ItemMusketWithBayonet extends ItemMusket {
 	}
 	
 	@Override
+	public void registerRecipes() {
+		
+	}
+	
+	@Override
 	public float getHitDamage() {
 		
 		return super.getHitDamage() + materialDefinition.getDamageVsEntity();

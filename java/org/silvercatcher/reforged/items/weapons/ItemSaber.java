@@ -32,6 +32,7 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 	}
 
 
+	@Override
 	public void registerRecipes() {
 		
 		GameRegistry.addRecipe(new ItemStack(this),
