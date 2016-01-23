@@ -39,11 +39,12 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 	@Override
 	public void registerRecipes() {
 
+		System.out.println(materialDefinition.getRepairMaterial());
 		GameRegistry.addRecipe(new ItemStack(this),
 				"xxx",
 				"xsx",
 				" s ",
-				'x', materialDefinition.getRepairMaterial(),
+				'x', materialDefinition.getRepairMaterial().getItem(),
 				's', Items.stick);
 	}
 

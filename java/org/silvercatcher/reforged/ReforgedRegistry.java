@@ -3,6 +3,7 @@ package org.silvercatcher.reforged;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
@@ -146,6 +147,16 @@ public class ReforgedRegistry {
 		for(Item item : registrationList) {
 			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
 		}
+	}
+	
+	public static void registerRecipes() {
+		
+		for(Item item : registrationList) {
+			if(item instanceof ItemExtension) {
+				((ItemExtension) (item)).registerRecipes();				
+			}
+		}
+		
 		
 		GameRegistry.addRecipe(new ItemStack(GUN_STOCK),
 				"   ",
@@ -167,13 +178,6 @@ public class ReforgedRegistry {
 				"i i",
 				'i', Items.iron_ingot,
 				'f', Items.flint_and_steel);
-	}
-	
-	public static void registerRecipes() {
-		
-		/*for(Item item : registrationList) {
-			item.registerRecipes();
-		}*/
 	}
 	
 	public static void registerEntity(Class c, String name, int counter) {

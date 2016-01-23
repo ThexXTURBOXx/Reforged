@@ -50,8 +50,8 @@ public class ItemJavelin extends ExtendedItem {
 				"  f",
 				" s ",
 				"s  ",
-				'f', Items.flint,
-				's', Items.stick);
+				'f', new ItemStack(Items.flint),
+				's', new ItemStack(Items.stick));
 	}
 
 
@@ -87,4 +87,9 @@ public class ItemJavelin extends ExtendedItem {
 	        }
 	    }
     }
+	
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return ToolMaterial.STONE.getEnchantability();
+	}
 }
