@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
 
 import com.google.common.collect.Multimap;
@@ -27,7 +28,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemHolyCross extends AWeapon {
+public class ItemHolyCross extends ExtendedItem {
 
 	private final static int DELAY = 40;
 	
@@ -38,9 +39,7 @@ public class ItemHolyCross extends AWeapon {
 		setUnlocalizedName("holy_cross");
 		setMaxStackSize(1);
 		setMaxDamage(25);
-	
-		setCreativeTab(ReforgedMod.tabReforged);
-		
+			
 		toPunish = new LinkedList<>();
 	}
 
@@ -76,13 +75,8 @@ public class ItemHolyCross extends AWeapon {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-		
-		super.onItemRightClick(itemStackIn, worldIn, playerIn);
-		
-		if(!toPunish.isEmpty()) {
-			
-			worldIn.setThunderStrength(1f);
-		}
+				
+		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 		
 		return itemStackIn;
 	}
@@ -130,5 +124,15 @@ public class ItemHolyCross extends AWeapon {
 	@Override
 	public float getHitDamage() {
 		return 1f;
+	}
+	
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return ToolMaterial.WOOD.getEnchantability();
+	}
+	
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+		return USE_DURATON;
 	}
 }

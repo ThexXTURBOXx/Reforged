@@ -43,7 +43,7 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 				"xxx",
 				"xsx",
 				" s ",
-				'x', materialDefinition.getRepairMaterial(),
+				'x', materialDefinition.getRepairMaterial().getItem(),
 				's', Items.stick);
 	}
 
@@ -77,5 +77,10 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 	@Override
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
+	}
+	
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return materialDefinition.getEnchantability();
 	}
 }

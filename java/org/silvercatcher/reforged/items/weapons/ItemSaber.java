@@ -55,4 +55,9 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
 	}
+	
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return materialDefinition.getEnchantability();
+	}
 }

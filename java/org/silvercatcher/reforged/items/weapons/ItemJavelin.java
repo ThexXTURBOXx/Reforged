@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityJavelin;
+import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -9,12 +10,14 @@ import org.silvercatcher.reforged.material.MaterialManager;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemJavelin extends AWeapon {
+public class ItemJavelin extends ExtendedItem {
 	
 	public ItemJavelin() {
 		
@@ -22,7 +25,6 @@ public class ItemJavelin extends AWeapon {
 		setMaxStackSize(8);
 		setMaxDamage(32);
 		
-		setCreativeTab(ReforgedMod.tabReforged);
 	}
 
 	
@@ -44,6 +46,12 @@ public class ItemJavelin extends AWeapon {
 	@Override
 	public void registerRecipes() {
 		
+		GameRegistry.addRecipe(new ItemStack(this),
+				"  f",
+				" s ",
+				"s  ",
+				'f', new ItemStack(Items.flint),
+				's', new ItemStack(Items.stick));
 	}
 
 
@@ -79,4 +87,9 @@ public class ItemJavelin extends AWeapon {
 	        }
 	    }
     }
+	
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return ToolMaterial.STONE.getEnchantability();
+	}
 }

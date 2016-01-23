@@ -1,7 +1,6 @@
-package org.silvercatcher.reforged.items.weapons;
+package org.silvercatcher.reforged.items;
 
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.items.ItemExtension;
 
 import com.google.common.collect.Multimap;
 
@@ -14,9 +13,9 @@ import net.minecraft.item.ItemStack;
  * 
  * this class is just for less @override trouble...
  */
-public abstract class AWeapon extends Item implements ItemExtension {
+public abstract class ExtendedItem extends Item implements ItemExtension {
 
-	public AWeapon() {
+	public ExtendedItem() {
 	
 		setCreativeTab(ReforgedMod.tabReforged);
 	}
@@ -25,5 +24,4 @@ public abstract class AWeapon extends Item implements ItemExtension {
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
 	}
-	
 }

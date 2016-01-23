@@ -61,6 +61,10 @@ public class MaterialDefinition {
 		return material.getDamageVsEntity();
 	}
 
+	public int getEnchantability() {
+		return material.getEnchantability();
+	}
+	
 	/**
 	 * convenience method, for example to make silver stronger against undead
 	 * 

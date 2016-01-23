@@ -3,9 +3,12 @@ package org.silvercatcher.reforged;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;
+import org.silvercatcher.reforged.items.others.ItemDart;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
+import org.silvercatcher.reforged.items.weapons.ItemBlowGun;
 import org.silvercatcher.reforged.items.weapons.ItemMusketWithBayonet;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.items.weapons.ItemHolyCross;
@@ -16,9 +19,13 @@ import org.silvercatcher.reforged.items.weapons.ItemMusket;
 import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
 import org.silvercatcher.reforged.items.weapons.ItemSaber;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -79,6 +86,8 @@ public class ReforgedRegistry {
 	
 	public static Item JAVELIN;	
 
+	public static Item DART;
+	public static Item BLOWGUN;
 	
 	public static List<Item> registrationList = new ArrayList<Item>();
 	
@@ -134,10 +143,13 @@ public class ReforgedRegistry {
 		
 		registrationList.add(MUSKET_BULLET = new ItemBulletMusket());
 		
+		registrationList.add(DART = new ItemDart());
+		registrationList.add(BLOWGUN = new ItemBlowGun());
 	}
 	
 	public static void registerItems() {
 		
+		//todo refactor recipe system
 		for(Item item : registrationList) {
 			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
 		}
@@ -145,9 +157,33 @@ public class ReforgedRegistry {
 	
 	public static void registerRecipes() {
 		
-		/*for(Item item : registrationList) {
-			item.registerRecipes();
-		}*/
+		for(Item item : registrationList) {
+			if(item instanceof ItemExtension) {
+				((ItemExtension) (item)).registerRecipes();				
+			}
+		}
+		
+		
+		GameRegistry.addRecipe(new ItemStack(GUN_STOCK),
+				"   ",
+				"ssp",
+				"   ",
+				's', Items.stick,
+				'p', Blocks.planks);
+		
+		GameRegistry.addRecipe(new ItemStack(MUSKET_BARREL),
+				"   ",
+				"iif",
+				"  i",
+				'i', Items.iron_ingot,
+				'f', Items.flint_and_steel);
+		
+		GameRegistry.addRecipe(new ItemStack(BLUNDERBUSS_BARREL),
+				"i  ",
+				" if",
+				"i i",
+				'i', Items.iron_ingot,
+				'f', Items.flint_and_steel);
 	}
 	
 	public static void registerEntity(Class c, String name, int counter) {

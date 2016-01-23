@@ -1,8 +1,13 @@
 package org.silvercatcher.reforged.items.others;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.items.ExtendedItem;
 
-public class ItemBulletMusket extends ItemOther {
+import net.minecraft.init.Items;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+
+public class ItemBulletMusket extends ExtendedItem {
 	
 	public ItemBulletMusket() {
 		
@@ -15,9 +20,17 @@ public class ItemBulletMusket extends ItemOther {
 	@Override
 	public void registerRecipes() {
 		
+		GameRegistry.addShapedRecipe(new ItemStack(this),
+				" i ",
+				" g ",
+				" p ",
+				'i', Items.iron_ingot,
+				'g', Items.gunpowder,
+				'p', Items.paper);
 	}
 
 
+	@Override
 	public float getHitDamage() {
 		return 0;
 	}

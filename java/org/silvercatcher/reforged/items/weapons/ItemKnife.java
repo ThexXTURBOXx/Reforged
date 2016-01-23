@@ -7,8 +7,10 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemKnife extends ItemSword implements ItemExtension {
 
@@ -29,6 +31,8 @@ public class ItemKnife extends ItemSword implements ItemExtension {
 	@Override
 	public void registerRecipes() {
 		
+		GameRegistry.addShapelessRecipe(new ItemStack(this),
+				new ItemStack(Items.stick), materialDefinition.getRepairMaterial());
 	}
 
 	@Override
@@ -39,5 +43,10 @@ public class ItemKnife extends ItemSword implements ItemExtension {
 	@Override
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
+	}
+	
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return materialDefinition.getEnchantability();
 	}
 }

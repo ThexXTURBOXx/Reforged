@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
 
 import com.google.common.collect.Multimap;
@@ -16,7 +17,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemFireRod extends AWeapon {
+public class ItemFireRod extends ExtendedItem {
 
 	public static final int FIRE_DURATION = 6;
 	
@@ -24,8 +25,7 @@ public class ItemFireRod extends AWeapon {
 		
 		setUnlocalizedName("firerod");
 		setMaxStackSize(32);
-		
-		setCreativeTab(ReforgedMod.tabReforged);
+
 	}
 
 
@@ -36,7 +36,7 @@ public class ItemFireRod extends AWeapon {
 				"  c",
 				" s ",
 				"s  ",
-				'c', Items.coal,
+				'c', new ItemStack(Items.coal, 1, 0),
 				's', Items.stick);
 		
 		GameRegistry.addRecipe(new ItemStack(this),
