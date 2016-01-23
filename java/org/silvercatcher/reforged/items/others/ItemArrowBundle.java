@@ -1,12 +1,13 @@
 package org.silvercatcher.reforged.items.others;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.items.ExtendedItem;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemArrowBundle extends ItemOther {
+public class ItemArrowBundle extends ExtendedItem {
 
 	
 	public ItemArrowBundle() {

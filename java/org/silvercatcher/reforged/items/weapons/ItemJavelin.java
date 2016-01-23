@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityJavelin;
+import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -14,7 +15,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public class ItemJavelin extends AWeapon {
+public class ItemJavelin extends ExtendedItem {
 	
 	public ItemJavelin() {
 		

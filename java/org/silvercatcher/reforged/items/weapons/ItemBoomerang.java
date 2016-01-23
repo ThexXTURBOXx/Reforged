@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.items.weapons;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -18,7 +19,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-public class ItemBoomerang extends AWeapon {
+public class ItemBoomerang extends ExtendedItem {
 	
 	protected final MaterialDefinition materialDefinition;
 	

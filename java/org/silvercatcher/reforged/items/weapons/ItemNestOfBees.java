@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.items.weapons;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
 
@@ -18,7 +19,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemNestOfBees extends AWeapon {
+public class ItemNestOfBees extends ExtendedItem {
 
 	private static int delay = 4;
 	private static int buildup = 25;
@@ -29,8 +30,7 @@ public class ItemNestOfBees extends AWeapon {
 		setUnlocalizedName("nest_of_bees");
 		setMaxDamage(80);
 		setMaxStackSize(1);
-		
-		setCreativeTab(ReforgedMod.tabReforged);
+	
 	}
 	
 	

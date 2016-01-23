@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
 
 import com.google.common.collect.Multimap;
@@ -27,7 +28,7 @@ import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemHolyCross extends AWeapon {
+public class ItemHolyCross extends ExtendedItem {
 
 	private final static int DELAY = 40;
 	

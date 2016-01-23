@@ -1,8 +1,9 @@
 package org.silvercatcher.reforged.items.others;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.items.ExtendedItem;
 
-public class ItemBulletMusket extends ItemOther {
+public class ItemBulletMusket extends ExtendedItem {
 	
 	public ItemBulletMusket() {
 		
