@@ -10,6 +10,7 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -166,6 +167,7 @@ public class EntityBoomerang extends EntityThrowable {
 			BlockPos bp = target.getBlockPos();
 			BlockPos pp = getThrowerASave().getPosition();
 			if(!worldObj.isRemote && Math.abs(bp.getX() - pp.getX()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance) {
+			if(!worldObj.isRemote && Math.abs(bp.getX() - pp.getX()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance && Math.abs(bp.getZ() - pp.getZ()) <= distance) {
 				EntityPlayer p = (EntityPlayer) getThrowerASave();
 				p.inventory.addItemStackToInventory(getItemStack());
 			} else if(!worldObj.isRemote) {
