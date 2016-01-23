@@ -39,9 +39,7 @@ public class ItemHolyCross extends ExtendedItem {
 		setUnlocalizedName("holy_cross");
 		setMaxStackSize(1);
 		setMaxDamage(25);
-	
-		setCreativeTab(ReforgedMod.tabReforged);
-		
+			
 		toPunish = new LinkedList<>();
 	}
 

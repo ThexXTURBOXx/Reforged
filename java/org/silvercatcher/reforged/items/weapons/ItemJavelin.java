@@ -10,10 +10,12 @@ import org.silvercatcher.reforged.material.MaterialManager;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemJavelin extends ExtendedItem {
 	
@@ -23,7 +25,6 @@ public class ItemJavelin extends ExtendedItem {
 		setMaxStackSize(8);
 		setMaxDamage(32);
 		
-		setCreativeTab(ReforgedMod.tabReforged);
 	}
 
 	
@@ -45,6 +46,12 @@ public class ItemJavelin extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 		
+		GameRegistry.addRecipe(new ItemStack(this),
+				"  f",
+				" s ",
+				"s  ",
+				'f', Items.flint,
+				's', Items.stick);
 	}
 
 

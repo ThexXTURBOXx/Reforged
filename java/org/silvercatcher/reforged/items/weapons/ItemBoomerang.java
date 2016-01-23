@@ -30,8 +30,7 @@ public class ItemBoomerang extends ExtendedItem {
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setMaxDamage((int) (materialDefinition.getMaxUses() * 0.8f));
 		setUnlocalizedName(materialDefinition.getPrefixedName("boomerang"));
-		
-		setCreativeTab(ReforgedMod.tabReforged);
+
 	}
 	
 	@Override

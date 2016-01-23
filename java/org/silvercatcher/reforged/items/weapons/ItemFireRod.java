@@ -25,8 +25,7 @@ public class ItemFireRod extends ExtendedItem {
 		
 		setUnlocalizedName("firerod");
 		setMaxStackSize(32);
-		
-		setCreativeTab(ReforgedMod.tabReforged);
+
 	}
 
 
@@ -37,7 +36,7 @@ public class ItemFireRod extends ExtendedItem {
 				"  c",
 				" s ",
 				"s  ",
-				'c', Items.coal,
+				'c', new ItemStack(Items.coal, 1, 0),
 				's', Items.stick);
 		
 		GameRegistry.addRecipe(new ItemStack(this),
