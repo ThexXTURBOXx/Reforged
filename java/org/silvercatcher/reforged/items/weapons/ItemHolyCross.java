@@ -75,13 +75,8 @@ public class ItemHolyCross extends ExtendedItem {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-		
-		super.onItemRightClick(itemStackIn, worldIn, playerIn);
-		
-		if(!toPunish.isEmpty()) {
-			
-			worldIn.setThunderStrength(1f);
-		}
+				
+		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 		
 		return itemStackIn;
 	}
@@ -134,5 +129,10 @@ public class ItemHolyCross extends ExtendedItem {
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
 		return ToolMaterial.WOOD.getEnchantability();
+	}
+	
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+		return USE_DURATON;
 	}
 }

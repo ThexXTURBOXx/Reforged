@@ -24,11 +24,12 @@ public class EntityJavelin extends EntityThrowable {
 		if(durationLoaded < 10) {
 			durationLoaded = 10;
 		}
-		System.out.println(5 + getDurLoaded() / 5);
+		//System.out.println(5 + getDurLoaded() / 5);
 		this.motionX *= (durationLoaded / 10);
 		this.motionY *= (durationLoaded / 10);
 		this.motionZ *= (durationLoaded / 10);
-		this.setPositionAndRotation(throwerIn.posX, throwerIn.posY + throwerIn.getEyeHeight(), throwerIn.posZ, throwerIn.rotationYaw, throwerIn.rotationPitch);
+		this.setPositionAndRotation(throwerIn.posX, throwerIn.posY + throwerIn.getEyeHeight(),
+				throwerIn.posZ, throwerIn.rotationYaw, throwerIn.rotationPitch);
 	}
 	
 	@Override
@@ -59,6 +60,7 @@ public class EntityJavelin extends EntityThrowable {
 
 	@Override
 	protected void onImpact(MovingObjectPosition target) {
+
 		//Target is entity or block?
 		if(target.entityHit == null) {
 			//It's a block
@@ -68,17 +70,21 @@ public class EntityJavelin extends EntityThrowable {
 				setItemStack(stack);
 			}
 		} else {
-			//It's a entity
-			target.entityHit.attackEntityFrom(DamageSource.causeThornsDamage(getThrower()), 5 + getDurLoaded() / 5);
+			//It's an entity
+			target.entityHit.attackEntityFrom(DamageSource.causeThornsDamage(
+					getThrower()), 5 + getDurLoaded() / 5);
 			ItemStack stack = getItemStack();
 			if(stack.attemptDamageItem(1, rand)) {
+				
 			} else {
 				setItemStack(stack);
 			}
 		}
 		this.setDead();
 		if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-			entityDropItem(getItemStack(), 0.5f);
+			if(!worldObj.isRemote) {
+				entityDropItem(getItemStack(), 0.5f);
+			}
 		} else {
 			//Custom sound later... [BREAK SOUND]
 		}
