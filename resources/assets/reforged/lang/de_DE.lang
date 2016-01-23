@@ -39,6 +39,14 @@ item.iron_knife.name=Eisenmesser
 item.diamond_knife.name=Diamantmesser
 item.copper_knife.name=Kupfermesser
 
+item.dart_normal.name=Normaler Dartpfeilpfeil
+item.dart_poison.name=Giftiger Dartpfeil
+item.dart_strong.name=Dartpfeil der Stärke
+item.dart_slowness.name=Dartpfeil der Langsamkeit
+item.dart_hunger.name=Dartpfeil des Hungers
+item.dart_wither.name=Dartpfeil des Withers
+item.blowgun.name=Blasrohr
+
 item.musket_barrel.name=Musketenlauf
 item.gun_stock.name=Gewehrkolben
 item.blunderbuss_barrel.name=Espingole

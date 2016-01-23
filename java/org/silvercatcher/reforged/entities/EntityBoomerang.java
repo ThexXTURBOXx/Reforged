@@ -10,6 +10,7 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -165,9 +166,18 @@ public class EntityBoomerang extends EntityThrowable {
 			this.setDead();
 			BlockPos bp = target.getBlockPos();
 			BlockPos pp = getThrowerASave().getPosition();
-			if(!worldObj.isRemote && Math.abs(bp.getX() - pp.getX()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance) {
+			if(!worldObj.isRemote && Math.abs(bp.getX() - pp.getX()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance && Math.abs(bp.getZ() - pp.getZ()) <= distance) {
 				EntityPlayer p = (EntityPlayer) getThrowerASave();
-				p.inventory.addItemStackToInventory(getItemStack());
+				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+					p.inventory.addItemStackToInventory(getItemStack());
+				} else {
+					if(p.getHealth() != 1.0F) {
+						p.setHealth(0F);
+						p.addChatMessage(new ChatComponentText("The " + getItemStack().getDisplayName() + " hit your hands too hard."));
+					} else {
+						p.setHealth(p.getHealth() - 1.0F);						
+					}
+				}
 			} else if(!worldObj.isRemote) {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 					entityDropItem(getItemStack(), 0.5f);

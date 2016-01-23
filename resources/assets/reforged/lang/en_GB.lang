@@ -18,6 +18,14 @@ item.iron_boomerang.name=Iron Boomerang
 item.diamond_boomerang.name=Diamond Boomerang
 item.copper_boomerang.name=Copper Boomerang
 
+item.dart_normal.name=Normal Dart
+item.dart_poison.name=Poisonous Dart
+item.dart_strong.name=Dart of Force
+item.dart_slowness.name=Dart of Slowness
+item.dart_hunger.name=Dart of Hunger
+item.dart_wither.name=Dart of the Wither
+item.blowgun.name=Blowgun
+
 item.wooden_saber.name=Wooden Saber
 item.stone_saber.name=Stone Saber
 item.golden_saber.name=Golden Saber
