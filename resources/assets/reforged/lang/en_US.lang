@@ -39,6 +39,14 @@ item.iron_knife.name=Iron Knife
 item.diamond_knife.name=Diamond Knife
 item.copper_knife.name=Copper Knife
 
+item.dart_normal.name=Normal Dart
+item.dart_poison.name=Poisonous Dart
+item.dart_strong.name=Dart of Force
+item.dart_slowness.name=Dart of Slowness
+item.dart_hunger.name=Dart of Hunger
+item.dart_wither.name=Dart of the Wither
+item.blowgun.name=Blowgun
+
 item.musket_barrel.name=Musket Barrel
 item.gun_stock.name=Gun Stock
 item.blunderbuss_barrel.name=Blunderbuss Barrel
