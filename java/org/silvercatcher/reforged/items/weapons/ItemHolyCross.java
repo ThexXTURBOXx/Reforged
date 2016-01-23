@@ -130,4 +130,9 @@ public class ItemHolyCross extends ExtendedItem {
 	public float getHitDamage() {
 		return 1f;
 	}
+	
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return ToolMaterial.WOOD.getEnchantability();
+	}
 }

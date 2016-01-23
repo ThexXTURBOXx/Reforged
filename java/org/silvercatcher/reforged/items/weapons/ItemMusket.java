@@ -165,4 +165,9 @@ public class ItemMusket extends ItemBow implements ItemExtension {
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
 	}
+	
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return ToolMaterial.IRON.getEnchantability();
+	}
 }

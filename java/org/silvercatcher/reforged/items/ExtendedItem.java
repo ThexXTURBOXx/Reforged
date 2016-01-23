@@ -24,5 +24,4 @@ public abstract class ExtendedItem extends Item implements ItemExtension {
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
 	}
-	
 }
