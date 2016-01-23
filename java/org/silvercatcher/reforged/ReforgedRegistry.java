@@ -159,7 +159,7 @@ public class ReforgedRegistry {
 		
 		for(Item item : registrationList) {
 			if(item instanceof ItemExtension) {
-				((ItemExtension) (item)).registerRecipes();				
+				((ItemExtension) (item)).registerRecipes();
 			}
 		}
 		
