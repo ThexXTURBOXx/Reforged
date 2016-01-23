@@ -6,7 +6,9 @@ import java.util.List;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;
+import org.silvercatcher.reforged.items.others.ItemDart;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
+import org.silvercatcher.reforged.items.weapons.ItemBlowGun;
 import org.silvercatcher.reforged.items.weapons.ItemMusketWithBayonet;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.items.weapons.ItemHolyCross;
@@ -84,6 +86,8 @@ public class ReforgedRegistry {
 	
 	public static Item JAVELIN;	
 
+	public static Item DART;
+	public static Item BLOWGUN;
 	
 	public static List<Item> registrationList = new ArrayList<Item>();
 	
@@ -139,6 +143,8 @@ public class ReforgedRegistry {
 		
 		registrationList.add(MUSKET_BULLET = new ItemBulletMusket());
 		
+		registrationList.add(DART = new ItemDart());
+		registrationList.add(BLOWGUN = new ItemBlowGun());
 	}
 	
 	public static void registerItems() {

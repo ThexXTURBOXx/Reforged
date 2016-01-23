@@ -6,6 +6,7 @@ import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
+import org.silvercatcher.reforged.items.others.ItemDart;
 import org.silvercatcher.reforged.render.RenderBoomerang;
 import org.silvercatcher.reforged.render.RenderBulletMusket;
 import org.silvercatcher.reforged.render.RenderJavelin;
@@ -13,6 +14,7 @@ import org.silvercatcher.reforged.render.RenderJavelin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -23,8 +25,13 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
+		
 		super.preInit(event);
 		MinecraftForge.EVENT_BUS.register(new ReloadOverlay());
+		
+		for(int i = 0; i < ItemDart.dartVariants(); i++) {
+			ModelBakery.addVariantName(ReforgedRegistry.DART, ItemDart.getDartModelName(i));
+		}
 	}
 	
 	@Override
@@ -45,6 +52,12 @@ public class ClientProxy extends CommonProxy {
 		for(Item item : ReforgedRegistry.registrationList) {
 			mesher.register(item, 0, new ModelResourceLocation(ReforgedMod.ID + ":" 
 					+ item.getUnlocalizedName().substring(5), inventory));
+		}
+		
+		for(int i = 0; i < ItemDart.dartVariants(); i++) {
+			
+			mesher.register(ReforgedRegistry.DART, i, new ModelResourceLocation(
+					ItemDart.getDartModelName(i), "inventory"));
 		}
 		
 		mesher.register(ReforgedRegistry.NEST_OF_BEES, 1, new ModelResourceLocation(ReforgedMod.ID
