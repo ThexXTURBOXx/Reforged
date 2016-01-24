@@ -41,7 +41,7 @@ item.copper_knife.name=Copper Knife
 
 item.dart_normal.name=Normal Dart
 item.dart_poison.name=Poisonous Dart
-item.dart_strong.name=Dart of Force
+item.dart_poison_strong.name=Dart of the Poison Arrow Frog
 item.dart_slowness.name=Dart of Slowness
 item.dart_hunger.name=Dart of Hunger
 item.dart_wither.name=Dart of the Wither
@@ -53,3 +53,8 @@ item.blunderbuss_barrel.name=Blunderbuss Barrel
 item.javelin.name=Javelin
 item.musket_bullet.name=Musket Ball
 item.musket.name=Musket
+
+death.attack.boomeranghit=%1$s's head was splittered by a Boomerang.
+death.attack.boomeranghit.player=%1$s's head was splittered by a Boomerang while fighting %2$s.
+death.attack.boomerangbreak=%1$s's Boomerang killed his thrower.
+death.attack.boomerangbreak.player=%1$s's Boomerang killed his thrower while fighting %2$s.

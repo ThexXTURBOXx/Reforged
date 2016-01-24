@@ -18,14 +18,6 @@ item.iron_boomerang.name=Iron Boomerang
 item.diamond_boomerang.name=Diamond Boomerang
 item.copper_boomerang.name=Copper Boomerang
 
-item.dart_normal.name=Normal Dart
-item.dart_poison.name=Poisonous Dart
-item.dart_strong.name=Dart of Force
-item.dart_slowness.name=Dart of Slowness
-item.dart_hunger.name=Dart of Hunger
-item.dart_wither.name=Dart of the Wither
-item.blowgun.name=Blowgun
-
 item.wooden_saber.name=Wooden Saber
 item.stone_saber.name=Stone Saber
 item.golden_saber.name=Golden Saber
@@ -47,9 +39,22 @@ item.iron_knife.name=Iron Knife
 item.diamond_knife.name=Diamond Knife
 item.copper_knife.name=Copper Knife
 
+item.dart_normal.name=Normal Dart
+item.dart_poison.name=Poisonous Dart
+item.dart_poison_strong.name=Dart of the Poison Arrow Frog
+item.dart_slowness.name=Dart of Slowness
+item.dart_hunger.name=Dart of Hunger
+item.dart_wither.name=Dart of the Wither
+item.blowgun.name=Blowgun
+
 item.musket_barrel.name=Musket Barrel
 item.gun_stock.name=Gun Stock
 item.blunderbuss_barrel.name=Blunderbuss Barrel
 item.javelin.name=Javelin
 item.musket_bullet.name=Musket Ball
 item.musket.name=Musket
+
+death.attack.boomeranghit=%1$s's head was splittered by a Boomerang.
+death.attack.boomeranghit.player=%1$s's head was splittered by a Boomerang while fighting %2$s.
+death.attack.boomerangbreak=%1$s's Boomerang killed his thrower.
+death.attack.boomerangbreak.player=%1$s's Boomerang killed his thrower while fighting %2$s.

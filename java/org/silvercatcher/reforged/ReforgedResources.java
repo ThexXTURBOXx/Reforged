@@ -6,9 +6,9 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
 public abstract class ReforgedResources
 {
+	@SideOnly(Side.CLIENT)
 	public static abstract class Textures
 	{
 		public static final ResourceLocation WOODEN_BOOMERANG = new ResourceLocation(ReforgedMod.ID + ":textures/entity/wooden_boomerang.png");

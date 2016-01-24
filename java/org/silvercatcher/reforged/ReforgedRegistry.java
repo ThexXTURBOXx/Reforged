@@ -26,6 +26,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
@@ -88,6 +89,9 @@ public class ReforgedRegistry {
 
 	public static Item DART;
 	public static Item BLOWGUN;
+
+	public static DamageSource boomerangHitDamage = new DamageSource("boomeranghit").setDamageBypassesArmor();
+	public static DamageSource boomerangBreakDamage = new DamageSource("boomerangbreak").setDamageBypassesArmor();
 	
 	public static List<Item> registrationList = new ArrayList<Item>();
 	
@@ -187,7 +191,7 @@ public class ReforgedRegistry {
 	}
 	
 	public static void registerEntity(Class c, String name, int counter) {
-		EntityRegistry.registerModEntity(c, name, counter, ReforgedMod.instance, 120, 3, true);		
+		EntityRegistry.registerModEntity(c, name, counter, ReforgedMod.instance, 120, 1, true);		
 	}	
 	
 	public static void registerEntityRenderer(Class entityclass, Render renderclass) {

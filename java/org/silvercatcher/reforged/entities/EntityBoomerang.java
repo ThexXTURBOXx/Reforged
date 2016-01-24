@@ -1,8 +1,10 @@
 package org.silvercatcher.reforged.entities;
 
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.ReforgedResources.GlobalValues;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
@@ -171,11 +173,12 @@ public class EntityBoomerang extends EntityThrowable {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 					p.inventory.addItemStackToInventory(getItemStack());
 				} else {
-					if(p.getHealth() != 1.0F) {
-						p.setHealth(0F);
-						p.addChatMessage(new ChatComponentText("The " + getItemStack().getDisplayName() + " hit your hands too hard."));
+					if(p.getHealth() <= 2.0F) {
+						System.out.println("LEL");
+						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 20);
 					} else {
-						p.setHealth(p.getHealth() - 1.0F);						
+						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 2);
+						p.addChatMessage(new ChatComponentText("The " + getItemStack().getDisplayName() + " broke in your hands."));
 					}
 				}
 			} else if(!worldObj.isRemote) {
@@ -189,8 +192,7 @@ public class EntityBoomerang extends EntityThrowable {
 			//It's an entity
 			if(target.entityHit != getThrowerASave()) {
 				//It's an hit entity
-				target.entityHit.attackEntityFrom(DamageSource.causeThrownDamage(
-						target.entityHit, getThrowerASave()), getImpactDamage());
+				target.entityHit.attackEntityFrom(ReforgedRegistry.boomerangHitDamage, getImpactDamage());
 				ItemStack stack = getItemStack();
 				if(stack.attemptDamageItem(1, rand)) {
 					this.setDead();
