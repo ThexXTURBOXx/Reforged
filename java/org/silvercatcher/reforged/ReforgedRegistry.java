@@ -187,7 +187,7 @@ public class ReforgedRegistry {
 	}
 	
 	public static void registerEntity(Class c, String name, int counter) {
-		EntityRegistry.registerModEntity(c, name, counter, ReforgedMod.instance, 120, 3, true);		
+		EntityRegistry.registerModEntity(c, name, counter, ReforgedMod.instance, 120, 1, true);		
 	}	
 	
 	public static void registerEntityRenderer(Class entityclass, Render renderclass) {
