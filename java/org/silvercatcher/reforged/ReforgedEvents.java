@@ -6,9 +6,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 
-public class ReforgedEvents {
-	
+public class ReforgedEvents {	
 	/*
+	//Copper integration [Better way will be added later...]
 	@SubscribeEvent
 	public void onOreRegistryReg(OreRegisterEvent e) {
 		if(e.Name.equalsIgnoreCase("ingotcopper")) {

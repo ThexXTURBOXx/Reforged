@@ -41,7 +41,7 @@ item.copper_knife.name=Kupfermesser
 
 item.dart_normal.name=Normaler Dartpfeilpfeil
 item.dart_poison.name=Giftiger Dartpfeil
-item.dart_strong.name=Dartpfeil der Stärke
+item.dart_poison_strong.name=Dartpfeil des Pfeilgiftfrosches
 item.dart_slowness.name=Dartpfeil der Langsamkeit
 item.dart_hunger.name=Dartpfeil des Hungers
 item.dart_wither.name=Dartpfeil des Withers
@@ -53,3 +53,8 @@ item.blunderbuss_barrel.name=Espingole
 item.javelin.name=Wurfspeer
 item.musket_bullet.name=Musketenkugel
 item.musket.name=Muskete
+
+death.attack.boomeranghit=%1$s's Schädel wurde von einem Boomerang zerteilt.
+death.attack.boomeranghit.player=%1$s's Schädel wurde von einem Boomerang zerteilt während er mit %2$s kämpfte.
+death.attack.boomerangbreak=%1$s's Boomerang hat seinen Werfer getötet.
+death.attack.boomerangbreak.player=%1$s's Boomerang hat seinen Werfer getötet während er mit %2$s kämpfte.
