@@ -174,7 +174,6 @@ public class EntityBoomerang extends EntityThrowable {
 					p.inventory.addItemStackToInventory(getItemStack());
 				} else {
 					if(p.getHealth() <= 2.0F) {
-						System.out.println("LEL");
 						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 20);
 					} else {
 						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 2);
