@@ -33,11 +33,14 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class ReforgedRegistry {
 	
+	//ToolMaterials
 	//public static ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 2, 200, 5.0F, 1.5F, 10);
 
+	//Items
 	public static Item ARROW_BUNDLE;
 	
 	public static Item GUN_STOCK;
@@ -89,12 +92,17 @@ public class ReforgedRegistry {
 
 	public static Item DART;
 	public static Item BLOWGUN;
-
+	
+	//Damage Sources
 	public static DamageSource boomerangHitDamage = new DamageSource("boomeranghit").setDamageBypassesArmor();
 	public static DamageSource boomerangBreakDamage = new DamageSource("boomerangbreak").setDamageBypassesArmor();
+	public static DamageSource javelinDamage = new DamageSource("javelin").setDamageBypassesArmor();
+	public static DamageSource musketDamage = new DamageSource("musket").setDamageBypassesArmor();
 	
+	//Hashmaps
 	public static List<Item> registrationList = new ArrayList<Item>();
 	
+	//Registry
 	public static void createItems() {
 		
 		registrationList.add(ARROW_BUNDLE = new ItemArrowBundle());

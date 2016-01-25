@@ -16,6 +16,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class EntityBoomerang extends EntityThrowable {
 	
@@ -83,11 +84,7 @@ public class EntityBoomerang extends EntityThrowable {
 	}
 	
 	public EntityLivingBase getThrowerASave() {
-		return getEntityWorld().getPlayerEntityByName(getThrowerName());
-	}
-	
-	public String getThrowerName() {
-		return dataWatcher.getWatchableObjectString(6);
+		return getEntityWorld().getPlayerEntityByName(dataWatcher.getWatchableObjectString(6));
 	}
 	
 	public void setThrowerName(String name) {
@@ -177,7 +174,7 @@ public class EntityBoomerang extends EntityThrowable {
 						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 20);
 					} else {
 						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 2);
-						p.addChatMessage(new ChatComponentText("The " + getItemStack().getDisplayName() + " broke in your hands."));
+						p.addChatMessage(new ChatComponentText(new LanguageRegistry().instance().getStringLocalization("item.boomerang.langBreak").replace("%1$s",getItemStack().getDisplayName())));
 					}
 				}
 			} else if(!worldObj.isRemote) {

@@ -2,14 +2,16 @@ package org.silvercatcher.reforged;
 
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public abstract class ReforgedResources
+public class ReforgedResources
 {
 	@SideOnly(Side.CLIENT)
-	public static abstract class Textures
+	public static class Textures
 	{
 		public static final ResourceLocation WOODEN_BOOMERANG = new ResourceLocation(ReforgedMod.ID + ":textures/entity/wooden_boomerang.png");
 		public static final ResourceLocation STONE_BOOMERANG = new ResourceLocation(ReforgedMod.ID + ":textures/entity/stone_boomerang.png");
@@ -23,7 +25,7 @@ public abstract class ReforgedResources
 		public static final ResourceLocation JAVELIN = new ResourceLocation(ReforgedMod.ID + ":textures/entity/javelin.png");
 	}
 	
-	public static abstract class GlobalValues
+	public static class GlobalValues
 	{
 		public static final int DISTANCE_BOOMERANG = CommonProxy.boomerang_distance;
 	}
