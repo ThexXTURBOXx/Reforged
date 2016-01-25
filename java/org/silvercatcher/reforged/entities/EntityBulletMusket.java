@@ -1,12 +1,10 @@
 package org.silvercatcher.reforged.entities;
 
-import java.util.Random;
+import org.silvercatcher.reforged.ReforgedRegistry;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -30,7 +28,7 @@ public class EntityBulletMusket extends EntityThrowable {
 			//It's a block
 		} else {
 			//It's an entity
-			target.entityHit.attackEntityFrom(DamageSource.causeThornsDamage(getThrower()), 4);
+			target.entityHit.attackEntityFrom(ReforgedRegistry.musketDamage, 4);
 		}
 		setDead();
 	}

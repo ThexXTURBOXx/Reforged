@@ -1,12 +1,12 @@
 package org.silvercatcher.reforged.entities;
 
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -71,8 +71,7 @@ public class EntityJavelin extends EntityThrowable {
 			}
 		} else {
 			//It's an entity
-			target.entityHit.attackEntityFrom(DamageSource.causeThornsDamage(
-					getThrower()), 5 + getDurLoaded() / 5);
+			target.entityHit.attackEntityFrom(ReforgedRegistry.javelinDamage, 5 + getDurLoaded() / 5);
 			ItemStack stack = getItemStack();
 			if(stack.attemptDamageItem(1, rand)) {
 				
