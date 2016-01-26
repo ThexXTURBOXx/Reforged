@@ -3,21 +3,7 @@ package org.silvercatcher.reforged;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.silvercatcher.reforged.items.ItemExtension;
-import org.silvercatcher.reforged.items.others.ItemArrowBundle;
-import org.silvercatcher.reforged.items.others.ItemBulletMusket;
-import org.silvercatcher.reforged.items.others.ItemDart;
-import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
-import org.silvercatcher.reforged.items.weapons.ItemBlowGun;
-import org.silvercatcher.reforged.items.weapons.ItemMusketWithBayonet;
-import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
-import org.silvercatcher.reforged.items.weapons.ItemHolyCross;
-import org.silvercatcher.reforged.items.weapons.ItemFireRod;
-import org.silvercatcher.reforged.items.weapons.ItemJavelin;
-import org.silvercatcher.reforged.items.weapons.ItemKnife;
-import org.silvercatcher.reforged.items.weapons.ItemMusket;
-import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
-import org.silvercatcher.reforged.items.weapons.ItemSaber;
+import org.silvercatcher.reforged.items.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.Render;
