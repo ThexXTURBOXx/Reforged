@@ -106,8 +106,6 @@ public class EntityBoomerang extends EntityThrowable {
 	
 	@Override
 	public void onUpdate() {
-
-		if(true) {
 		
 			super.onUpdate();
 			double dx = this.posX - getCoord(1);
@@ -146,7 +144,6 @@ public class EntityBoomerang extends EntityThrowable {
 					this.setDead();			
 				}
 			}
-		}
 	}
 	
 	@Override
