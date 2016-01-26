@@ -2,9 +2,7 @@ package org.silvercatcher.reforged;
 
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -27,6 +25,20 @@ public class ReforgedResources
 	
 	public static class GlobalValues
 	{
+		//Items
+		public static final boolean ARROW_BUNDLE = CommonProxy.arrow_bundle;
+		public static final boolean BATTLEAXE = CommonProxy.battleaxe;
+		public static final boolean BLOWGUN = CommonProxy.blowgun;
+		public static final boolean BOOMERANG = CommonProxy.boomerang;
+		public static final boolean FIREROD = CommonProxy.firerod;
+		public static final boolean HOLY_CROSS = CommonProxy.holy_cross;
+		public static final boolean JAVELIN = CommonProxy.javelin;
+		public static final boolean KNIFE = CommonProxy.knife;
+		public static final boolean MUSKET = CommonProxy.musket;
+		public static final boolean NEST_OF_BEES = CommonProxy.nest_of_bees;
+		public static final boolean SABRE = CommonProxy.sabre;
+		
+		//Others
 		public static final int DISTANCE_BOOMERANG = CommonProxy.boomerang_distance;
 	}
 }

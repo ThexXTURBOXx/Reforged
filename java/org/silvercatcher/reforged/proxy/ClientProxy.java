@@ -1,7 +1,8 @@
 package org.silvercatcher.reforged.proxy;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.ReforgedResources.GlobalValues;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityJavelin;
@@ -28,9 +29,11 @@ public class ClientProxy extends CommonProxy {
 		
 		super.preInit(event);
 		MinecraftForge.EVENT_BUS.register(new ReloadOverlay());
-		
-		for(int i = 0; i < ItemDart.dartVariants(); i++) {
-			ModelBakery.addVariantName(ReforgedRegistry.DART, ItemDart.getDartModelName(i));
+
+		if(GlobalValues.BLOWGUN) {
+			for(int i = 0; i < ItemDart.dartVariants(); i++) {
+				ModelBakery.addVariantName(ReforgedRegistry.DART, ItemDart.getDartModelName(i));
+			}
 		}
 	}
 	
@@ -54,23 +57,36 @@ public class ClientProxy extends CommonProxy {
 					+ item.getUnlocalizedName().substring(5), inventory));
 		}
 		
-		for(int i = 0; i < ItemDart.dartVariants(); i++) {
+		if(GlobalValues.BLOWGUN) {
+			for(int i = 0; i < ItemDart.dartVariants(); i++) {
 			
-			mesher.register(ReforgedRegistry.DART, i, new ModelResourceLocation(
-					ItemDart.getDartModelName(i), "inventory"));
+				mesher.register(ReforgedRegistry.DART, i, new ModelResourceLocation(
+						ItemDart.getDartModelName(i), "inventory"));
+			}
 		}
 		
-		mesher.register(ReforgedRegistry.NEST_OF_BEES, 1, new ModelResourceLocation(ReforgedMod.ID
-				+ ReforgedRegistry.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_empty", inventory));
+		if(GlobalValues.NEST_OF_BEES) {
+			mesher.register(ReforgedRegistry.NEST_OF_BEES, 1, new ModelResourceLocation(ReforgedMod.ID
+					+ ReforgedRegistry.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_empty", inventory));
 		
-		mesher.register(ReforgedRegistry.NEST_OF_BEES, 2, new ModelResourceLocation(ReforgedMod.ID
-				+ ReforgedRegistry.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_powder", inventory));
+			mesher.register(ReforgedRegistry.NEST_OF_BEES, 2, new ModelResourceLocation(ReforgedMod.ID
+					+ ReforgedRegistry.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_powder", inventory));
+		}
 	}
 	
 	@Override
 	protected void registerEntityRenderers(RenderManager manager) {
-		ReforgedRegistry.registerEntityRenderer(EntityBoomerang.class, new RenderBoomerang(manager));
-		ReforgedRegistry.registerEntityRenderer(EntityBulletMusket.class, new RenderBulletMusket(manager));
-		ReforgedRegistry.registerEntityRenderer(EntityJavelin.class, new RenderJavelin(manager));
+		
+		if(GlobalValues.BOOMERANG) {
+			ReforgedRegistry.registerEntityRenderer(EntityBoomerang.class, new RenderBoomerang(manager));
+		}
+		
+		if(GlobalValues.MUSKET) {
+			ReforgedRegistry.registerEntityRenderer(EntityBulletMusket.class, new RenderBulletMusket(manager));
+		}
+		
+		if(GlobalValues.JAVELIN) {
+			ReforgedRegistry.registerEntityRenderer(EntityJavelin.class, new RenderJavelin(manager));
+		}
 	}
 }
