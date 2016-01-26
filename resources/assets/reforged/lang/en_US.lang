@@ -1,8 +1,13 @@
 itemGroup.reforged=Reforged
-item.nest_of_bees.name=Nest of Bees
+
 item.holy_cross.name=§eHoly Cross
+
 item.firerod.name=Firerod
+
 item.arrow_bundle.name=Arrow Bundle
+
+item.nest_of_bees.name=Nest Of Bees
+item.nestofbees.arrows=Arrows
 
 item.wooden_battleaxe.name=Wooden Battleaxe
 item.stone_battleaxe.name=Stone Battleaxe
@@ -54,6 +59,10 @@ item.blunderbuss_barrel.name=Blunderbuss Barrel
 item.javelin.name=Javelin
 item.musket_bullet.name=Musket Ball
 item.musket.name=Musket
+item.musket.loadstate=Loadstate
+item.musket.loadstate.empty=Empty
+item.musket.loadstate.loading=Loading
+item.musket.loadstate.loaded=Loaded
 
 death.attack.boomeranghit=%1$s's head was splittered by a Boomerang.
 death.attack.boomeranghit.player=%1$s's head was splittered by a Boomerang while fighting %2$s.

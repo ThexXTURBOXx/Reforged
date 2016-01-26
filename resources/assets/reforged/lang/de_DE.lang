@@ -1,8 +1,13 @@
 itemGroup.reforged=Reforged
-item.nest_of_bees.name=Bienennest
+
 item.holy_cross.name=§eHeiliges Kreuz
+
 item.firerod.name=Feuerstab
+
 item.arrow_bundle.name=Pfeilbündel
+
+item.nest_of_bees.name=Bienennest
+item.nestofbees.arrows=Pfeile
 
 item.wooden_battleaxe.name=Holzstreitaxt
 item.stone_battleaxe.name=Steinstreitaxt
@@ -54,6 +59,10 @@ item.blunderbuss_barrel.name=Espingole
 item.javelin.name=Wurfspeer
 item.musket_bullet.name=Musketenkugel
 item.musket.name=Muskete
+item.musket.loadstate=Ladetatus
+item.musket.loadstate.empty=Leer
+item.musket.loadstate.loading=Nachladen
+item.musket.loadstate.loaded=Geladen
 
 death.attack.boomeranghit=%1$s's Schädel wurde von einem Boomerang zerteilt.
 death.attack.boomeranghit.player=%1$s's Schädel wurde von einem Boomerang zerteilt während er mit %2$s kämpfte.

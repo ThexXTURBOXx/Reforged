@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class ItemMusket extends ItemBow implements ItemExtension {
 
@@ -112,8 +113,10 @@ public class ItemMusket extends ItemBow implements ItemExtension {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		tooltip.add("Loadstate: " + (loadState == empty ? "empty"
-				: (loadState == loaded ? "loaded" : "loading")));
+		tooltip.add(new LanguageRegistry().instance().getStringLocalization("item.musket.loadstate") + ": " + (loadState == empty ? 
+				new LanguageRegistry().instance().getStringLocalization("item.musket.loadstate.empty")
+				: (loadState == loaded ? new LanguageRegistry().instance().getStringLocalization("item.musket.loadstate.loaded") : 
+					new LanguageRegistry().instance().getStringLocalization("item.musket.loadstate.loading"))));
 	}
 	
 	@Override
