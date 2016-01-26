@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class ItemNestOfBees extends ExtendedItem {
 
@@ -37,8 +38,8 @@ public class ItemNestOfBees extends ExtendedItem {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-		
-		tooltip.add("Arrows: " + CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
+
+		tooltip.add(new LanguageRegistry().instance().getStringLocalization("item.nestofbees.arrows") + ": " + CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
 	}
 	
 
