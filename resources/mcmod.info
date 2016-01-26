@@ -5,11 +5,11 @@
   "description": "A successor (not port) of Balkon's Weapon Mod, will add primitive, medieval and some gunpowder weapons.",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
-  "updateUrl": "",
+  "url": "https://github.com/TheOnlySilverClaw/Reforged/",
+  "updateUrl": "https://github.com/TheOnlySilverClaw/Reforged/releases",
   "authorList": ["Silvercatcher", "ThexXTURBOXx"],
   "credits": "Snow_Yoshi98, baddaspig and Sunconure11 for textures",
-  "logoFile": "",
+  "logoFile": "/assets/reforged/textures/others/logo.png",
   "screenshots": [],
   "dependencies": []
 }
