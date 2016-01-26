@@ -24,12 +24,12 @@ item.diamond_boomerang.name=Diamond Boomerang
 item.copper_boomerang.name=Copper Boomerang
 item.boomerang.langBreak=The %1$s broke in your hands.
 
-item.wooden_saber.name=Wooden Saber
-item.stone_saber.name=Stone Saber
-item.golden_saber.name=Golden Saber
-item.iron_saber.name=Iron Saber
-item.diamond_saber.name=Diamond Saber
-item.copper_saber.name=Copper Saber
+item.wooden_saber.name=Wooden Sabre
+item.stone_saber.name=Stone Sabre
+item.golden_saber.name=Golden Sabre
+item.iron_saber.name=Iron Sabre
+item.diamond_saber.name=Diamond Sabre
+item.copper_saber.name=Copper Sabre
 
 item.wooden_musket.name=Wooden Musket
 item.stone_musket.name=Stone Musket
