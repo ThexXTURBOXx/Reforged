@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.silvercatcher.reforged.items.*;
+import org.silvercatcher.reforged.items.others.*;
+import org.silvercatcher.reforged.items.weapons.*;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.Render;
