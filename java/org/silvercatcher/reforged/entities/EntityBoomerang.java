@@ -1,7 +1,7 @@
 package org.silvercatcher.reforged.entities;
 
+import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.ReforgedResources.GlobalValues;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
 import net.minecraft.entity.EntityLivingBase;

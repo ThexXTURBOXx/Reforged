@@ -6,7 +6,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ReforgedResources
+public class ReforgedReferences
 {
 	@SideOnly(Side.CLIENT)
 	public static class Textures
