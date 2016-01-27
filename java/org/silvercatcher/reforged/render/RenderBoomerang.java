@@ -1,14 +1,10 @@
 package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
-import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.ReforgedResources.Textures;
+import org.silvercatcher.reforged.ReforgedReferences.Textures;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.models.ModelBoomerang;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;

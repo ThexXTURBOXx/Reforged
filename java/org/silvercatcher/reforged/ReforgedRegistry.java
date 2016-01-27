@@ -3,7 +3,7 @@ package org.silvercatcher.reforged;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.silvercatcher.reforged.ReforgedResources.GlobalValues;
+import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.items.*;
 import org.silvercatcher.reforged.items.others.*;
 import org.silvercatcher.reforged.items.weapons.*;
@@ -95,72 +95,72 @@ public class ReforgedRegistry {
 		}
 
 		if(GlobalValues.NEST_OF_BEES) {
-		registrationList.add(NEST_OF_BEES = new ItemNestOfBees());
+			registrationList.add(NEST_OF_BEES = new ItemNestOfBees());
 		}
 		
 		if(GlobalValues.HOLY_CROSS) {
-		registrationList.add(HOLY_CROSS = new ItemHolyCross());
+			registrationList.add(HOLY_CROSS = new ItemHolyCross());
 		}
 		
 		if(GlobalValues.FIREROD) {
-		registrationList.add(FIREROD = new ItemFireRod());
+			registrationList.add(FIREROD = new ItemFireRod());
 		}
 		
 		if(GlobalValues.MUSKET) {
-		registrationList.add(MUSKET_BARREL = 
-				new Item().setUnlocalizedName("musket_barrel").setCreativeTab(ReforgedMod.tabReforged));
-		registrationList.add(BLUNDERBUSS_BARREL = 
-				new Item().setUnlocalizedName("blunderbuss_barrel").setCreativeTab(ReforgedMod.tabReforged));
-		registrationList.add(GUN_STOCK = 
-				new Item().setUnlocalizedName("gun_stock").setCreativeTab(ReforgedMod.tabReforged));
-		registrationList.add(MUSKET = new ItemMusket());
-		registrationList.add(WOODEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.WOOD));
-		registrationList.add(STONE_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.STONE));
-		registrationList.add(IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.IRON));
-		registrationList.add(GOLDEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.GOLD));
-		registrationList.add(DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.EMERALD));
-		registrationList.add(MUSKET_BULLET = new ItemBulletMusket());
+			registrationList.add(MUSKET_BARREL = 
+					new Item().setUnlocalizedName("musket_barrel").setCreativeTab(ReforgedMod.tabReforged));
+			registrationList.add(BLUNDERBUSS_BARREL = 
+					new Item().setUnlocalizedName("blunderbuss_barrel").setCreativeTab(ReforgedMod.tabReforged));
+			registrationList.add(GUN_STOCK = 
+					new Item().setUnlocalizedName("gun_stock").setCreativeTab(ReforgedMod.tabReforged));
+			registrationList.add(MUSKET = new ItemMusket());
+			registrationList.add(WOODEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.WOOD));
+			registrationList.add(STONE_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.STONE));
+			registrationList.add(IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.IRON));
+			registrationList.add(GOLDEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.GOLD));
+			registrationList.add(DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.EMERALD));
+			registrationList.add(MUSKET_BULLET = new ItemBulletMusket());
 		}
 		
 		if(GlobalValues.BATTLEAXE) {
-		registrationList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
-		registrationList.add(STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));
-		registrationList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
-		registrationList.add(GOLDEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.GOLD));
-		registrationList.add(DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.EMERALD));
+			registrationList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
+			registrationList.add(STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));
+			registrationList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
+			registrationList.add(GOLDEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.GOLD));
+			registrationList.add(DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.EMERALD));
 		}
 		
 		if(GlobalValues.BOOMERANG) {
-		registrationList.add(WOODEN_BOOMERANG = new ItemBoomerang(ToolMaterial.WOOD));
-		registrationList.add(STONE_BOOMERANG = new ItemBoomerang(ToolMaterial.STONE));
-		registrationList.add(GOLDEN_BOOMERANG = new ItemBoomerang(ToolMaterial.GOLD));
-		registrationList.add(IRON_BOOMERANG = new ItemBoomerang(ToolMaterial.IRON));
-		registrationList.add(DIAMOND_BOOMERANG = new ItemBoomerang(ToolMaterial.EMERALD));
+			registrationList.add(WOODEN_BOOMERANG = new ItemBoomerang(ToolMaterial.WOOD));
+			registrationList.add(STONE_BOOMERANG = new ItemBoomerang(ToolMaterial.STONE));
+			registrationList.add(GOLDEN_BOOMERANG = new ItemBoomerang(ToolMaterial.GOLD));
+			registrationList.add(IRON_BOOMERANG = new ItemBoomerang(ToolMaterial.IRON));
+			registrationList.add(DIAMOND_BOOMERANG = new ItemBoomerang(ToolMaterial.EMERALD));
 		}
 		
 		if(GlobalValues.SABRE) {
-		registrationList.add(WOODEN_SABER = new ItemSaber(ToolMaterial.WOOD));
-		registrationList.add(STONE_SABER = new ItemSaber(ToolMaterial.STONE));
-		registrationList.add(GOLDEN_SABER = new ItemSaber(ToolMaterial.GOLD));
-		registrationList.add(IRON_SABER = new ItemSaber(ToolMaterial.IRON));
-		registrationList.add(DIAMOND_SABER = new ItemSaber(ToolMaterial.EMERALD));
+			registrationList.add(WOODEN_SABER = new ItemSaber(ToolMaterial.WOOD));
+			registrationList.add(STONE_SABER = new ItemSaber(ToolMaterial.STONE));
+			registrationList.add(GOLDEN_SABER = new ItemSaber(ToolMaterial.GOLD));
+			registrationList.add(IRON_SABER = new ItemSaber(ToolMaterial.IRON));
+			registrationList.add(DIAMOND_SABER = new ItemSaber(ToolMaterial.EMERALD));
 		}
 		
 		if(GlobalValues.KNIFE) {
-		registrationList.add(WOODEN_KNIFE = new ItemKnife(ToolMaterial.WOOD));
-		registrationList.add(STONE_KNIFE = new ItemKnife(ToolMaterial.STONE));
-		registrationList.add(GOLDEN_KNIFE = new ItemKnife(ToolMaterial.GOLD));
-		registrationList.add(IRON_KNIFE = new ItemKnife(ToolMaterial.IRON));
-		registrationList.add(DIAMOND_KNIFE = new ItemKnife(ToolMaterial.EMERALD));
+			registrationList.add(WOODEN_KNIFE = new ItemKnife(ToolMaterial.WOOD));
+			registrationList.add(STONE_KNIFE = new ItemKnife(ToolMaterial.STONE));
+			registrationList.add(GOLDEN_KNIFE = new ItemKnife(ToolMaterial.GOLD));
+			registrationList.add(IRON_KNIFE = new ItemKnife(ToolMaterial.IRON));
+			registrationList.add(DIAMOND_KNIFE = new ItemKnife(ToolMaterial.EMERALD));
 		}
 		
 		if(GlobalValues.JAVELIN) {
-		registrationList.add(JAVELIN = new ItemJavelin());
+			registrationList.add(JAVELIN = new ItemJavelin());
 		}
 		
 		if(GlobalValues.BLOWGUN) {
-		registrationList.add(DART = new ItemDart());
-		registrationList.add(BLOWGUN = new ItemBlowGun());
+			registrationList.add(DART = new ItemDart());
+			registrationList.add(BLOWGUN = new ItemBlowGun());
 		}
 	}
 	

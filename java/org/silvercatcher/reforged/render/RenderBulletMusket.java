@@ -1,10 +1,10 @@
 package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
-import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.ReforgedResources.Textures;
+import org.silvercatcher.reforged.ReforgedReferences.Textures;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.models.ModelBulletMusket;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
