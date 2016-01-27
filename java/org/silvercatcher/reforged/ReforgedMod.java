@@ -1,6 +1,10 @@
 package org.silvercatcher.reforged;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.silvercatcher.reforged.proxy.CommonProxy;
+import org.silvercatcher.reforged.items.CreativeTabComparator;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -19,11 +23,21 @@ public class ReforgedMod
     public static final String VERSION = "0.5.8-alpha";
     
     public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
+
+    	private CreativeTabComparator itemSorter = new CreativeTabComparator();
 		
 		@Override
 		public Item getTabIconItem() {
 			return ReforgedRegistry.IRON_BATTLE_AXE;
 		}
+		
+		@Override
+		public void displayAllReleventItems(List itemList) {
+			super.displayAllReleventItems(itemList);
+			//To do: Sort them using the itemSorter...
+			//Collections.sort(itemList, itemSorter);
+		}
+		
 	};
     
     @Instance(ID)
