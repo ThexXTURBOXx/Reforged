@@ -37,8 +37,8 @@ public class ReforgedRegistry {
 	public static Item MUSKET;
 	public static Item WOODEN_BAYONET_MUSKET;
 	public static Item STONE_BAYONET_MUSKET;
-	public static Item IRON_BAYONET_MUSKET;
 	public static Item GOLDEN_BAYONET_MUSKET;
+	public static Item IRON_BAYONET_MUSKET;
 	public static Item DIAMOND_BAYONET_MUSKET;
 	
 	public static Item MUSKET_BULLET;
@@ -52,26 +52,26 @@ public class ReforgedRegistry {
 	
 	public static Item WOODEN_BATTLE_AXE;
 	public static Item STONE_BATTLE_AXE;
-	public static Item IRON_BATTLE_AXE;
 	public static Item GOLDEN_BATTLE_AXE;
+	public static Item IRON_BATTLE_AXE;
 	public static Item DIAMOND_BATTLE_AXE;
 	
 	public static Item WOODEN_BOOMERANG;
 	public static Item STONE_BOOMERANG;
-	public static Item IRON_BOOMERANG;
 	public static Item GOLDEN_BOOMERANG;
+	public static Item IRON_BOOMERANG;
 	public static Item DIAMOND_BOOMERANG;
 	
 	public static Item WOODEN_SABER;
 	public static Item STONE_SABER;
-	public static Item IRON_SABER;
 	public static Item GOLDEN_SABER;
+	public static Item IRON_SABER;
 	public static Item DIAMOND_SABER;
 	
 	public static Item WOODEN_KNIFE;
 	public static Item STONE_KNIFE;
-	public static Item IRON_KNIFE;
 	public static Item GOLDEN_KNIFE;
+	public static Item IRON_KNIFE;
 	public static Item DIAMOND_KNIFE;
 	
 	public static Item JAVELIN;	
@@ -116,8 +116,8 @@ public class ReforgedRegistry {
 			registrationList.add(MUSKET = new ItemMusket());
 			registrationList.add(WOODEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.WOOD));
 			registrationList.add(STONE_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.STONE));
-			registrationList.add(IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.IRON));
 			registrationList.add(GOLDEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.GOLD));
+			registrationList.add(IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.IRON));
 			registrationList.add(DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.EMERALD));
 			registrationList.add(MUSKET_BULLET = new ItemBulletMusket());
 		}
@@ -126,11 +126,12 @@ public class ReforgedRegistry {
 			registrationList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
 			registrationList.add(STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));
 			registrationList.add(GOLDEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.GOLD));
-			registrationList.add(DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.EMERALD));
 		}
-		
 		//This has to be registered! Else, the Creative Tab would be broken!
 		registrationList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
+		if(GlobalValues.BATTLEAXE) {
+			registrationList.add(DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.EMERALD));
+		}
 		
 		if(GlobalValues.BOOMERANG) {
 			registrationList.add(WOODEN_BOOMERANG = new ItemBoomerang(ToolMaterial.WOOD));
