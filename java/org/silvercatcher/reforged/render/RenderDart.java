@@ -45,7 +45,7 @@ public class RenderDart extends Render
 		
 		EntityDart entityDart = (EntityDart) entity;
 		
-		switch(entityDart.getEffect().substring(5)) {
+		switch(entityDart.getEffect()) {
 		
 		case "normal": return Textures.NORMAL_DART;
 		
@@ -57,9 +57,9 @@ public class RenderDart extends Render
 		
 		case "slowness": return Textures.SLOW_DART;
 					 	 
-		case "wither": return Textures.WITHER_DART; 
+		case "wither": return Textures.WITHER_DART;
 		
-		default: throw new IllegalArgumentException("No Item called " + entityDart.getItemStack() + " found!");
+		default: throw new IllegalArgumentException("No Item called " + entityDart.getEffect() + " found!");
 				
 		}
 	}
