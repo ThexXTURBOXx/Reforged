@@ -5,6 +5,7 @@ import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
+import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -85,15 +86,19 @@ public class CommonProxy {
 		int count = 1;
 		
 		if(GlobalValues.BOOMERANG) {
-		ReforgedRegistry.registerEntity(EntityBoomerang.class, "Boomerang", count++);
+			ReforgedRegistry.registerEntity(EntityBoomerang.class, "Boomerang", count++);
 		}
 		
 		if(GlobalValues.JAVELIN) {
-		ReforgedRegistry.registerEntity(EntityJavelin.class, "Javelin", count++);
+			ReforgedRegistry.registerEntity(EntityJavelin.class, "Javelin", count++);
 		}
 		
 		if(GlobalValues.MUSKET) {
-		ReforgedRegistry.registerEntity(EntityBulletMusket.class, "BulletMusket", count++);
-		}		
+			ReforgedRegistry.registerEntity(EntityBulletMusket.class, "BulletMusket", count++);
+		}
+		
+		if(GlobalValues.BLOWGUN) {
+			ReforgedRegistry.registerEntity(EntityDart.class, "Dart", count++);
+		}	
 	}
 }
