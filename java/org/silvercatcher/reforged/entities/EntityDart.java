@@ -43,15 +43,14 @@ public class EntityDart extends EntityThrowable {
 	
 	public void setItemStack(ItemStack stack) {
 		
-		if(stack == null || !(stack.getItem() instanceof ItemDart)) {
+		if(stack == null || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
 		dataWatcher.updateObject(5, stack);
 	}
 	
 	public String getEffect() {
-
-		return ((ItemDart) getItemStack().getItem()).getUnlocalizedName();
+		return ((ItemDart) getItemStack().getItem()).getUnlocalizedName().substring(5);
 	}
 
 	@Override
@@ -68,7 +67,7 @@ public class EntityDart extends EntityThrowable {
 				//Lives still after first damage
 				if(target.entityHit instanceof EntityPlayer) {
 					EntityPlayer p = (EntityPlayer) target.entityHit;
-					switch(getEffect().substring(5)) {
+					switch(getEffect()) {
 					
 					case "normal": break;
 					
