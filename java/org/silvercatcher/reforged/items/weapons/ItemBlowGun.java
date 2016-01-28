@@ -1,9 +1,10 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.items.ExtendedItem;
+import org.silvercatcher.reforged.util.InventoryIterator;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -21,7 +22,10 @@ public class ItemBlowGun extends ExtendedItem {
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
 		
 		if(!worldIn.isRemote) {
-			EntityArrow dart = new EntityArrow(worldIn, playerIn, 0.5f);
+			int num = InventoryIterator.getNearestDart(playerIn);
+			ItemStack stack = new ItemStack(playerIn.inventory.getStackInSlot(num).getItem(), 1);
+			playerIn.inventory.consumeInventoryItem(stack.getItem());
+			EntityDart dart = new EntityDart(worldIn, playerIn, stack);
 			worldIn.spawnEntityInWorld(dart);
 		}
 		return itemStackIn;

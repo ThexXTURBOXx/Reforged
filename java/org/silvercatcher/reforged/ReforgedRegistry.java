@@ -84,6 +84,7 @@ public class ReforgedRegistry {
 	public static DamageSource boomerangBreakDamage = new DamageSource("boomerangbreak").setDamageBypassesArmor();
 	public static DamageSource javelinDamage = new DamageSource("javelin").setDamageBypassesArmor();
 	public static DamageSource musketDamage = new DamageSource("musket").setDamageBypassesArmor();
+	public static DamageSource dartDamage = new DamageSource("dart").setDamageBypassesArmor();
 	
 	//Hashmaps
 	public static List<Item> registrationList = new ArrayList<Item>();

@@ -5,11 +5,13 @@ import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
+import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
 import org.silvercatcher.reforged.items.others.ItemDart;
 import org.silvercatcher.reforged.render.RenderBoomerang;
 import org.silvercatcher.reforged.render.RenderBulletMusket;
+import org.silvercatcher.reforged.render.RenderDart;
 import org.silvercatcher.reforged.render.RenderJavelin;
 
 import net.minecraft.client.Minecraft;
@@ -87,6 +89,10 @@ public class ClientProxy extends CommonProxy {
 		
 		if(GlobalValues.JAVELIN) {
 			ReforgedRegistry.registerEntityRenderer(EntityJavelin.class, new RenderJavelin(manager));
+		}
+		
+		if(GlobalValues.BLOWGUN) {
+			ReforgedRegistry.registerEntityRenderer(EntityDart.class, new RenderDart(manager));
 		}
 	}
 }
