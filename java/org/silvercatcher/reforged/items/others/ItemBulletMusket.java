@@ -20,7 +20,7 @@ public class ItemBulletMusket extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 		
-		GameRegistry.addShapedRecipe(new ItemStack(this),
+		GameRegistry.addShapedRecipe(new ItemStack(this, 8),
 				" i ",
 				" g ",
 				" p ",
