@@ -50,7 +50,7 @@ public class EntityDart extends EntityThrowable {
 	}
 	
 	public String getEffect() {
-		return ((ItemDart) getItemStack().getItem()).getUnlocalizedName().substring(5);
+		return ((ItemDart) getItemStack().getItem()).getUnlocalizedName().substring(10);
 	}
 
 	@Override
@@ -66,6 +66,7 @@ public class EntityDart extends EntityThrowable {
 			if(!target.entityHit.isDead) {
 				//Lives still after first damage
 				if(target.entityHit instanceof EntityPlayer) {
+					//Is a player
 					EntityPlayer p = (EntityPlayer) target.entityHit;
 					switch(getEffect()) {
 					
@@ -86,6 +87,7 @@ public class EntityDart extends EntityThrowable {
 					
 					}
 				} else {
+					//Is a mob
 					target.entityHit.attackEntityFrom(ReforgedRegistry.dartDamage, 4);
 				}
 			}
