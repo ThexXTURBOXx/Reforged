@@ -28,10 +28,10 @@ public class ItemDart extends ExtendedItem {
 		
 		case "normal": GameRegistry.addShapedRecipe(new ItemStack(this),
 				 " f ",
-				 " p ",
-				 "vpv",
+				 " s ",
+				 "vsv",
 				 'f', Items.flint,
-				 'p', Blocks.planks,
+				 's', Items.stick,
 				 'v', Items.feather); break;
 			
 		case "hunger": GameRegistry.addShapedRecipe(new ItemStack(this),
