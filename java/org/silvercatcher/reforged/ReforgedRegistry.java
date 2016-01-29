@@ -76,7 +76,12 @@ public class ReforgedRegistry {
 	
 	public static Item JAVELIN;	
 
-	public static Item DART;
+	public static Item DART_NORMAL;
+	public static Item DART_HUNGER;
+	public static Item DART_POISON;
+	public static Item DART_POISON_2;
+	public static Item DART_SLOW;
+	public static Item DART_WITHER;
 	public static Item BLOWGUN;
 	
 	//Damage Sources
@@ -163,7 +168,12 @@ public class ReforgedRegistry {
 		}
 		
 		if(GlobalValues.BLOWGUN) {
-			registrationList.add(DART = new ItemDart());
+			registrationList.add(DART_NORMAL = new ItemDart("normal"));
+			registrationList.add(DART_HUNGER = new ItemDart("hunger"));
+			registrationList.add(DART_POISON = new ItemDart("poison"));
+			registrationList.add(DART_POISON_2 = new ItemDart("poison_strong"));
+			registrationList.add(DART_SLOW = new ItemDart("slowness"));
+			registrationList.add(DART_WITHER = new ItemDart("wither"));
 			registrationList.add(BLOWGUN = new ItemBlowGun());
 		}
 	}

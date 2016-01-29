@@ -4,56 +4,85 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.ExtendedItem;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemDart extends ExtendedItem {
-
-	private final static String [] dartNames = {
-
-			"normal",
-			"poison",
-			"poison_strong",
-			"slowness",
-			"hunger",
-			"wither"
-	};
-
 	
-	public static int dartVariants() {
-		return dartNames.length;
-	}
-	
-	public static String getDartModelName(int id) {
-		
-		return ReforgedMod.ID +  ":dart_" + dartNames[id];
-	}
-	
-	public ItemDart() {
-		
+	public ItemDart(String effect) {
 		super();
-		
-		setUnlocalizedName("dart");
-		
+		setUnlocalizedName("dart_" + effect);
 		setMaxStackSize(64);
-		setHasSubtypes(true);
 	}
 	
 	@Override
-	public String getUnlocalizedName(ItemStack stack) {
+	public void registerRecipes() {
+		switch(getUnlocalizedName().substring(10)) {
 		
-		return super.getUnlocalizedName() + "_" + dartNames[stack.getMetadata()];
-	}
-	
-	@SuppressWarnings("rawtypes")
-	@Override
-	public void getSubItems(Item itemIn, CreativeTabs tab, List subItems) {
+		case "normal": GameRegistry.addShapedRecipe(new ItemStack(this),
+				 " f ",
+				 " p ",
+				 "vpv",
+				 'f', Items.flint,
+				 'p', Blocks.planks,
+				 'v', Items.feather); break;
+			
+		case "hunger": GameRegistry.addShapedRecipe(new ItemStack(this),
+				 " p ",
+				 " d ",
+				 "   ",
+				 'd', ReforgedRegistry.DART_NORMAL,
+				 'p', new ItemStack(Items.potionitem, 1, 16)); break;
+			
+		case "poison": GameRegistry.addShapedRecipe(new ItemStack(this),
+				 " p ",
+				 " d ",
+				 "   ",
+				 'd', ReforgedRegistry.DART_NORMAL,
+				 'p', new ItemStack(Items.potionitem, 1, 8196)); break;
+			
+		case "poison_strong": GameRegistry.addShapedRecipe(new ItemStack(this),
+				 " p ",
+				 " d ",
+				 "   ",
+				 'd', ReforgedRegistry.DART_POISON,
+				 'p', new ItemStack(Items.potionitem, 1, 8196));
+		 		GameRegistry.addShapedRecipe(new ItemStack(this),
+				 " p ",
+				 " d ",
+				 "   ",
+				 'd', ReforgedRegistry.DART_NORMAL,
+				 'p', new ItemStack(Items.potionitem, 1, 8228));break;
+			
+		case "slowness": GameRegistry.addShapedRecipe(new ItemStack(this),
+				 " p ",
+				 " d ",
+				 "   ",
+				 'd', ReforgedRegistry.DART_NORMAL,
+				 'p', new ItemStack(Items.potionitem, 1, 16394)); break;
+			
+		case "wither": GameRegistry.addShapedRecipe(new ItemStack(this),
+				 " p ",
+				 " d ",
+				 " b ",
+				 'd', ReforgedRegistry.DART_NORMAL,
+				 'p', new ItemStack(Items.potionitem, 1, 16428),
+				 'b', new ItemStack(Items.potionitem, 1, 8196)); break;
+			
+		default: throw new IllegalArgumentException("Could not register recipe of the item: " + getUnlocalizedName());
 		
-		for(int i = 0; i < dartNames.length; i++) {
-			subItems.add(new ItemStack(itemIn, 1, i));
 		}
+	}
+
+	@Override
+	public float getHitDamage() {
+		return 1f;
 	}
 }

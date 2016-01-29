@@ -17,7 +17,6 @@ import org.silvercatcher.reforged.render.RenderJavelin;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -31,12 +30,6 @@ public class ClientProxy extends CommonProxy {
 		
 		super.preInit(event);
 		MinecraftForge.EVENT_BUS.register(new ReloadOverlay());
-
-		if(GlobalValues.BLOWGUN) {
-			for(int i = 0; i < ItemDart.dartVariants(); i++) {
-				ModelBakery.addVariantName(ReforgedRegistry.DART, ItemDart.getDartModelName(i));
-			}
-		}
 	}
 	
 	@Override
@@ -57,14 +50,6 @@ public class ClientProxy extends CommonProxy {
 		for(Item item : ReforgedRegistry.registrationList) {
 			mesher.register(item, 0, new ModelResourceLocation(ReforgedMod.ID + ":" 
 					+ item.getUnlocalizedName().substring(5), inventory));
-		}
-		
-		if(GlobalValues.BLOWGUN) {
-			for(int i = 0; i < ItemDart.dartVariants(); i++) {
-			
-				mesher.register(ReforgedRegistry.DART, i, new ModelResourceLocation(
-						ItemDart.getDartModelName(i), "inventory"));
-			}
 		}
 		
 		if(GlobalValues.NEST_OF_BEES) {
