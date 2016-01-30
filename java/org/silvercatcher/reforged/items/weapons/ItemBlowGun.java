@@ -7,9 +7,12 @@ import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.others.ItemDart;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBlowGun extends ExtendedItem {
 
@@ -55,5 +58,15 @@ public class ItemBlowGun extends ExtendedItem {
 		}
 		}
 		return itemStackIn;
+	}
+	
+	@Override
+	public void registerRecipes() {
+		GameRegistry.addShapedRecipe(new ItemStack(this),
+				 "scs",
+				 "c c",
+				 "scs",
+				 's', Items.string,
+				 'c', Items.reeds);
 	}
 }

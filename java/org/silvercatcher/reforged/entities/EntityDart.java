@@ -59,7 +59,7 @@ public class EntityDart extends EntityThrowable {
 		//Target is entity or block?
 		if(target.entityHit == null) {
 			//It's a block
-			dropItem(Items.feather, 1);
+			entityDropItem(new ItemStack(Items.feather), 1);
 		} else {
 			//It's an entity
 			target.entityHit.attackEntityFrom(ReforgedRegistry.dartDamage, 5);
