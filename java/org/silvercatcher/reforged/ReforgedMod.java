@@ -30,6 +30,11 @@ public class ReforgedMod
 			return true;
 		}
 		
+		@Override
+		public String getBackgroundImageName() {
+			return "item_search.png";
+		}
+		
 	};
     
     @Instance(ID)
