@@ -71,12 +71,12 @@ public class EntityBoomerang extends EntityThrowable {
 		dataWatcher.updateObject(9, (float) playerZ);
 	}
 	
-	public double getCoord(int coordId) {
+	public double getCoord(String coordId) {
 		switch(coordId) {
 		//1 returns X, 2 returns Y, 3 returns Z
-		case 1: return (double) dataWatcher.getWatchableObjectFloat(7);
-		case 2: return (double) dataWatcher.getWatchableObjectFloat(8);
-		case 3: return (double) dataWatcher.getWatchableObjectFloat(9);
+		case "X": return (double) dataWatcher.getWatchableObjectFloat(7);
+		case "Y": return (double) dataWatcher.getWatchableObjectFloat(8);
+		case "Z": return (double) dataWatcher.getWatchableObjectFloat(9);
 		default: throw new IllegalArgumentException("Invalid coordId!");
 		}
 	}
@@ -106,9 +106,9 @@ public class EntityBoomerang extends EntityThrowable {
 	public void onUpdate() {
 		
 			super.onUpdate();
-			double dx = this.posX - getCoord(1);
-			double dy = this.posY - getCoord(2);
-			double dz = this.posZ - getCoord(3);
+			double dx = this.posX - getCoord("X");
+			double dy = this.posY - getCoord("Y");
+			double dz = this.posZ - getCoord("Z");
 			
 			double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
 			dx /= d;
@@ -121,12 +121,16 @@ public class EntityBoomerang extends EntityThrowable {
 
 			int distance = GlobalValues.DISTANCE_BOOMERANG;
 			
-			BlockPos bp = this.getPosition();
 			EntityPlayer p = (EntityPlayer) getThrowerASave();
-			BlockPos pp = p.getPosition();
+			double posx = getCoord("X");
+			double posy = getCoord("Y");
+			double posz = getCoord("Z");
+			double bposx = posX;
+			double bposy = posY;
+			double bposz = posZ;
 			
 			if(this.ticksExisted >= 100) {
-				if(Math.abs(bp.getX() - pp.getX()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance) {
+				if(Math.abs(bposx - posx) <= distance && Math.abs(bposy - posy) <= distance && Math.abs(bposz - posz) <= distance) {
 					if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 						p.inventory.addItemStackToInventory(getItemStack());
 					} else {
@@ -158,10 +162,16 @@ public class EntityBoomerang extends EntityThrowable {
 			//Distance specifies the range the boomerang should get auto-collected
 			int distance = GlobalValues.DISTANCE_BOOMERANG;
 			this.setDead();
-			BlockPos bp = target.getBlockPos();
-			BlockPos pp = getThrowerASave().getPosition();
-			if(!worldObj.isRemote && Math.abs(bp.getX() - pp.getX()) <= distance && Math.abs(bp.getY() - pp.getY()) <= distance && Math.abs(bp.getZ() - pp.getZ()) <= distance) {
-				EntityPlayer p = (EntityPlayer) getThrowerASave();
+			
+			EntityPlayer p = (EntityPlayer) getThrowerASave();
+			double posx = getCoord("X");
+			double posy = getCoord("Y");
+			double posz = getCoord("Z");
+			double bposx = posX;
+			double bposy = posY;
+			double bposz = posZ;
+			
+			if(!worldObj.isRemote && Math.abs(bposx - posx) <= distance && Math.abs(bposy - posy) <= distance && Math.abs(bposz - posz) <= distance) {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 					p.inventory.addItemStackToInventory(getItemStack());
 				} else {
@@ -209,10 +219,10 @@ public class EntityBoomerang extends EntityThrowable {
 		
 		super.writeEntityToNBT(tagCompound);
 		
-		tagCompound.setString("thrower", getThrower().getName());
-		tagCompound.setDouble("throwerX", getCoord(1));
-		tagCompound.setDouble("throwerY", getCoord(2));
-		tagCompound.setDouble("throwerZ", getCoord(3));
+		tagCompound.setString("thrower", getThrowerASave().getName());
+		tagCompound.setDouble("throwerX", getCoord("X"));
+		tagCompound.setDouble("throwerY", getCoord("Y"));
+		tagCompound.setDouble("throwerZ", getCoord("Z"));
 		
 		if(getItemStack() != null) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
