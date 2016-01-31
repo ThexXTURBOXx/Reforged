@@ -1,7 +1,5 @@
 package org.silvercatcher.reforged;
 
-import java.util.List;
-
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
 import net.minecraft.creativetab.CreativeTabs;
