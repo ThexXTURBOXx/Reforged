@@ -2,14 +2,27 @@
 	"versionList": [
 		{
 			"mcVersion":"Minecraft 1.8",
-			"modVersion":"0.5.8-alpha-hotfix1",
+			"modVersion":"0.5.8-alpha-hotfix2",
 			"changeLog": [
-        			"Something like a 0.6-Prerelease",
-                		"Too much stuff for this little list",
+        		"Something like a 0.6-Prerelease",
+                "Too much stuff for this little list",
 				"Very much new Weapons and Fixes.",
 				"This is a HOTFIX for the Prerelease"
 			],
-			"updateURL":"https://github.com/TheOnlySilverClaw/Reforged/releases/download/v0.5.8-alpha/reforged-0.5.8-alpha-hotfix1.jar",
+			"updateURL":"https://github.com/TheOnlySilverClaw/Reforged/releases/download/v0.5.8-alpha/reforged-0.5.8-alpha-hotfix2-1.8.jar",
+			"isDirectLink":"true",
+			"newFileName":""
+		},
+		{
+			"mcVersion":"Minecraft 1.8.9",
+			"modVersion":"0.5.8-alpha-hotfix2",
+			"changeLog": [
+        		"Something like a 0.6-Prerelease",
+                "Too much stuff for this little list",
+				"Very much new Weapons and Fixes.",
+				"This is a HOTFIX for the Prerelease"
+			],
+			"updateURL":"https://github.com/TheOnlySilverClaw/Reforged/releases/download/v0.5.8-alpha/reforged-0.5.8-alpha-hotfix2-1.8.9.jar",
 			"isDirectLink":"true",
 			"newFileName":""
 		}
