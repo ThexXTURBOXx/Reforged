@@ -100,8 +100,6 @@ public class EntityBoomerang extends EntityThrowable {
 		return getMaterial().getDamageVsEntity()  + 3;
 	}
 	
-	private static final double returnStrength = 0.05D;
-	
 	@Override
 	public void onUpdate() {
 		
@@ -115,9 +113,9 @@ public class EntityBoomerang extends EntityThrowable {
 			dy /= d;
 			dz /= d;
 			
-			motionX -= returnStrength * dx;
-			motionY -= returnStrength * dy;
-			motionZ -= returnStrength * dz;
+			motionX -= 0.05D * dx;
+			motionY -= 0.05D * dy;
+			motionZ -= 0.05D * dz;
 
 			int distance = GlobalValues.DISTANCE_BOOMERANG;
 			

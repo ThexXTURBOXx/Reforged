@@ -1,10 +1,15 @@
 package org.silvercatcher.reforged;
 
-import org.silvercatcher.reforged.items.others.ItemBulletMusket;
+import org.silvercatcher.reforged.util.VersionChecker;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.event.ClickEvent;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.IChatComponent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
+import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class ReforgedEvents {	
 	/*
@@ -17,4 +22,30 @@ public class ReforgedEvents {
 		}
 	}
 	*/
+	
+	public boolean notificated = false;
+	
+	@SubscribeEvent
+	public void onPlayerTick(PlayerTickEvent e) {
+		//from Version Checker
+		if(!notificated) {
+			notificated = true;
+			if(!VersionChecker.isLatestVersion()) {
+				EntityPlayer p = e.player;
+				ChatStyle gold = new ChatStyle().setColor(EnumChatFormatting.GOLD);
+				IChatComponent chat = new ChatComponentText("");
+				chat.setChatStyle(gold);
+				chat.appendText("[" + ReforgedMod.NAME + "] ");
+				chat.appendText("Newer version available: " + VersionChecker.getLatestVersion());
+				p.addChatMessage(chat);
+				IChatComponent chat2 = new ChatComponentText("");
+				ChatStyle link = new ChatStyle();
+				link.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/TheOnlySilverClaw/Reforged/releases"));
+				link.setColor(EnumChatFormatting.AQUA);
+				chat2.appendText("Click here to download: ").setChatStyle(gold);
+				chat2.appendText("[Download]").setChatStyle(link);
+				p.addChatComponentMessage(chat2);
+			}
+		}
+	}
 }

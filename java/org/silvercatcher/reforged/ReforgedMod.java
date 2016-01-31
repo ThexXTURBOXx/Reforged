@@ -1,7 +1,5 @@
 package org.silvercatcher.reforged;
 
-import java.util.List;
-
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -18,7 +16,7 @@ public class ReforgedMod
 {
 	public static final String NAME = "Reforged";
     public static final String ID = "reforged";
-    public static final String VERSION = "0.5.8-alpha-hotfix2";
+    public static final String VERSION = "0.5.9";
     
     public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
 		
@@ -30,6 +28,11 @@ public class ReforgedMod
 		@Override
 		public boolean hasSearchBar() {
 			return true;
+		}
+		
+		@Override
+		public String getBackgroundImageName() {
+			return "item_search.png";
 		}
 		
 	};

@@ -8,7 +8,6 @@ import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
-import org.silvercatcher.reforged.items.others.ItemDart;
 import org.silvercatcher.reforged.render.RenderBoomerang;
 import org.silvercatcher.reforged.render.RenderBulletMusket;
 import org.silvercatcher.reforged.render.RenderDart;
