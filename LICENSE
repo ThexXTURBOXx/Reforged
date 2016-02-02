@@ -1,28 +1,20 @@
 Copyright (c) 2016
 
 
-1. Definitions
+1 Definitions
 
 The developers are the writers of the software, TheOnlySilverClaw and ThexXTURBOXx.
 The mod refers to this software, including its source code and binary form and all copies thereof.
 
 
-2. General Use
+2 General Use
 
 Use of this software goes without warranty and at your own risk.
-The developers cannot be held accountable for any damage
-that might be related to the installation or use of this software.
-Problems with the software are to be reported under the following URL and should include instructions to
-reproduce the problem and, if available, a crash report: https://github.com/TheOnlySilverClaw/Reforged/issues
+The developers cannot be held accountable for any damage that might be related to the installation or use of this software.
+Problems with the software are to be reported under the following URL and should include instructions to reproduce the problem and, if available, a crash report: https://github.com/TheOnlySilverClaw/Reforged/issues
 
 
-3. Modpacks
-
-You may use this mod in your modpack, private or public.
-For public modpacks, you have to give credit to the developers.
-
-
-4. Distribution
+3 Distribution
 
 There are two official sources to get this mod from:
 
@@ -35,10 +27,19 @@ The Curse download page, where versions considered stable can be found:
 Any other source is considered inofficial and is not recommended,
 since there is no guarantee that they will provide updated versions.
 
+Any permitted distribution of this software has to include this license text in human-readable form.
+
+
+3.1 Redistribution on third party websites
 
 It is strictly forbidden to redistribute this mod on its own without asking for the developers' permission.
-This includes, but is not limited to, websites that earn money by hosting mods,
-through advertisements, subscriptions, or any other form of monetisation.
+This includes, but is not limited to, websites that earn money by hosting mods, through advertisements, subscriptions, or any other form of monetisation.
 
 The developers cannot be held accountable for any kind of malware, adware or any other unwanted software that is
 aquired when downloading the mod from any source that is not maintained by the developers.
+
+
+3.2 Modpacks
+
+You may use this mod in your modpack, private or public.
+For public modpacks, you have to give credit to the developers.
