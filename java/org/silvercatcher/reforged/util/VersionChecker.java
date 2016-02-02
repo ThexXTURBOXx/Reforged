@@ -19,6 +19,7 @@ public class VersionChecker implements Runnable {
   private static String downloadUrl = "http://minecraft.curseforge.com/projects/reforged";
   private static String jsonUrl = "https://raw.githubusercontent.com/TheOnlySilverClaw/Reforged/master/version.json";
   
+  @Override
   public void run()
   {
     InputStream in = null;
