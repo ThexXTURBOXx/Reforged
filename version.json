@@ -1,17 +1,2 @@
-{
-	"versionList": [
-		{
-			"mcVersion":"Minecraft 1.8.*",
-			"modVersion":"0.5.8-alpha-hotfix2",
-			"changeLog": [
-        		"Something like a 0.6-Prerelease",
-                "Too much stuff for this little list",
-				"Very much new Weapons and Fixes.",
-				"This is a HOTFIX for the Prerelease"
-			],
-			"updateURL":"https://github.com/TheOnlySilverClaw/Reforged/releases",
-			"isDirectLink":"false",
-			"newFileName":""
-		}
-	]
-}
+"modVersion":"0.5.8-alpha-hotfix2",
+"changeLog":"Something like a 0.6-Prerelease!/nToo much stuff for this little list.../nVery much new Weapons and Fixes./nThis is a HOTFIX for the Prerelease."
