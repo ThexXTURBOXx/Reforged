@@ -1,28 +1,44 @@
-Before you ask: You MAY use this mod in your modpack, but keep that in mind:
-This mod is still ALPHA, so there will be bugs! You have the responsibility.
-We won't be to blame, when anything in your client doesn't work properly after installing our mod.
-AND: Give credit to us please. Don't say it's your mod, it is Silvercatcher's, ThexXTURBOXx's and the texturer's!
-AND: You may NOT mirror a link to our mod or earn money with it. This mod is FREE!
+Copyright (c) 2016
 
-The MIT License (MIT)
 
-Copyright (c) 2015 
+* Definitions
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+The developers are the writers of the software, TheOnlySilverClaw and ThexXTURBOXx.
+The mod refers to this software, including its source code and binary form and all copies thereof.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+* General Use
 
+Use of this software goes without warranty and at your own risk.
+The developers cannot be held accountable for any damage
+that might be related to the installation or use of this software.
+Problems with the software are to be reported under the following URL and should include instructions to
+reproduce the problem and, if available, a crash report: https://github.com/TheOnlySilverClaw/Reforged/issues
+
+
+* Modpacks
+
+You **may** use this mod in your modpack, private or public.
+For public modpacks, you have to give credit to the developers.
+
+
+* Distribution
+
+There are two official sources to get this mod from:
+
+The release section of the Github repository, which includes experimental builds:
+https://github.com/TheOnlySilverClaw/Reforged/releases
+
+The Curse download page, where versions considered stable can be found:
+<link will follow soon>
+
+Any other source is considered inofficial and is not recommended,
+since there is no guarantee that they will provide updated versions.
+
+
+It is **strictly forbidden** to redistribute this mod on its own without asking for the developers' permission.
+This includes, but is not limited to, websites that earn money by hosting mods,
+through advertisements, subscriptions, or any other form of monetisation.
+
+The developers cannot be held accountable for any kind of malware, adware or any other unwanted software that is
+aquired when downloading the mod from any source that is not maintained by the developers.
