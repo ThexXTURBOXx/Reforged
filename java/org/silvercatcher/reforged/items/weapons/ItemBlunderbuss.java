@@ -11,6 +11,8 @@ import org.silvercatcher.reforged.items.ItemExtension;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
@@ -71,10 +73,8 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 			worldIn.playSoundAtEntity(playerIn, "ambient.weather.thunder", 1f, 1f);
 
 			if(!worldIn.isRemote) {
-
-				EntityBulletBlunderbuss projectile = new EntityBulletBlunderbuss(worldIn, playerIn, stack);
 				
-				worldIn.spawnEntityInWorld(projectile);
+				spreadShot(worldIn, playerIn, stack);
 				
 				if(stack.attemptDamageItem(5, itemRand)) {
 					playerIn.renderBrokenItemStack(stack);
@@ -173,5 +173,11 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
 		return ToolMaterial.IRON.getEnchantability();
+	}
+	
+	private void spreadShot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
+		for(int i = 1; i <=11; i++) {
+			worldIn.spawnEntityInWorld(new EntityBulletBlunderbuss(worldIn, playerIn, stack));
+		}
 	}
 }
