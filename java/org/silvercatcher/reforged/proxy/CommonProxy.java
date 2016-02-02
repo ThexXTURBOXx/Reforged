@@ -5,6 +5,7 @@ import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.entities.EntityJavelin;
@@ -27,8 +28,6 @@ public class CommonProxy {
 		ReforgedRegistry.registerItems();
 		registerEntities();
 		//Version Checker
-		FMLInterModComms.sendRuntimeMessage(ReforgedMod.ID, "VersionChecker", "addVersionCheck",
-				"https://raw.githubusercontent.com/TheOnlySilverClaw/Reforged/master/version.json");
 		Thread versionCheckThread = new Thread(new VersionChecker(), "Version Check");
 		versionCheckThread.start();
 	}
@@ -46,6 +45,7 @@ public class CommonProxy {
 	public static boolean firerod;
 	public static boolean holy_cross;
 	public static boolean javelin;
+	public static boolean katana;
 	public static boolean knife;
 	public static boolean musket;
 	public static boolean nest_of_bees;
@@ -69,6 +69,7 @@ public class CommonProxy {
 		firerod = config.getBoolean("Firerod", "Items", true, "Enable the Firerod");
 		holy_cross = config.getBoolean("Holy Cross", "Items", true, "Enable the Holy Cross");
 		javelin = config.getBoolean("Javelin", "Items", true, "Enable the Javelin");
+		katana= config.getBoolean("Katana", "Items", true, "Enable the Katana");
 		knife = config.getBoolean("Knife", "Items", true, "Enable the Knife");
 		musket = config.getBoolean("Musket", "Items", true, "Enable the Musket and Blunderbuss");
 		nest_of_bees = config.getBoolean("Nest Of Bees", "Items", false, "Enable the Nest Of Bees (Beta, Only use for testing!)");
@@ -99,6 +100,7 @@ public class CommonProxy {
 		
 		if(GlobalValues.MUSKET) {
 			ReforgedRegistry.registerEntity(EntityBulletMusket.class, "BulletMusket", count++);
+			ReforgedRegistry.registerEntity(EntityBulletBlunderbuss.class, "BulletBlunderbuss", count++);
 		}
 		
 		if(GlobalValues.BLOWGUN) {

@@ -40,6 +40,7 @@ public class ReforgedReferences
 		public static final boolean FIREROD = CommonProxy.firerod;
 		public static final boolean HOLY_CROSS = CommonProxy.holy_cross;
 		public static final boolean JAVELIN = CommonProxy.javelin;
+		public static final boolean KATANA = CommonProxy.katana;
 		public static final boolean KNIFE = CommonProxy.knife;
 		public static final boolean MUSKET = CommonProxy.musket;
 		public static final boolean NEST_OF_BEES = CommonProxy.nest_of_bees;

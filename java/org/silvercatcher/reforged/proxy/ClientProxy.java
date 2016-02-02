@@ -4,11 +4,13 @@ import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
 import org.silvercatcher.reforged.render.RenderBoomerang;
+import org.silvercatcher.reforged.render.RenderBulletBlunderbuss;
 import org.silvercatcher.reforged.render.RenderBulletMusket;
 import org.silvercatcher.reforged.render.RenderDart;
 import org.silvercatcher.reforged.render.RenderJavelin;
@@ -69,6 +71,7 @@ public class ClientProxy extends CommonProxy {
 		
 		if(GlobalValues.MUSKET) {
 			ReforgedRegistry.registerEntityRenderer(EntityBulletMusket.class, new RenderBulletMusket(manager));
+			ReforgedRegistry.registerEntityRenderer(EntityBulletBlunderbuss.class, new RenderBulletBlunderbuss(manager));
 		}
 		
 		if(GlobalValues.JAVELIN) {
