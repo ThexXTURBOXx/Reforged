@@ -8,14 +8,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityBulletMusket extends EntityThrowable {
+public class EntityBulletBlunderbuss extends EntityThrowable {
 
 
-	public EntityBulletMusket(World worldIn) {
+	public EntityBulletBlunderbuss(World worldIn) {
 		super(worldIn);
 	}
 	
-	public EntityBulletMusket(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
+	public EntityBulletBlunderbuss(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		
 		super(worldIn, throwerIn);
 		this.setPositionAndRotation(throwerIn.posX, throwerIn.posY + throwerIn.getEyeHeight(), throwerIn.posZ, throwerIn.rotationYaw, throwerIn.rotationPitch);

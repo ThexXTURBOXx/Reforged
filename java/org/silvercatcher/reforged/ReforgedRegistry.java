@@ -68,6 +68,12 @@ public class ReforgedRegistry {
 	public static Item IRON_SABER;
 	public static Item DIAMOND_SABER;
 	
+	public static Item WOODEN_KATANA;
+	public static Item STONE_KATANA;
+	public static Item GOLDEN_KATANA;
+	public static Item IRON_KATANA;
+	public static Item DIAMOND_KATANA;
+	
 	public static Item WOODEN_KNIFE;
 	public static Item STONE_KNIFE;
 	public static Item GOLDEN_KNIFE;
@@ -126,6 +132,8 @@ public class ReforgedRegistry {
 			registrationList.add(IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.IRON));
 			registrationList.add(DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.EMERALD));
 			registrationList.add(MUSKET_BULLET = new ItemBulletMusket());
+			registrationList.add(BLUNDERBUSS = new ItemBlunderbuss());
+			registrationList.add(BLUNDERBUSS_SHOT = new ItemBulletBlunderbuss());
 		}
 		
 		if(GlobalValues.BATTLEAXE) {
@@ -161,6 +169,14 @@ public class ReforgedRegistry {
 			registrationList.add(GOLDEN_KNIFE = new ItemKnife(ToolMaterial.GOLD));
 			registrationList.add(IRON_KNIFE = new ItemKnife(ToolMaterial.IRON));
 			registrationList.add(DIAMOND_KNIFE = new ItemKnife(ToolMaterial.EMERALD));
+		}
+		
+		if(GlobalValues.KATANA) {
+			registrationList.add(WOODEN_KATANA = new ItemKatana(ToolMaterial.WOOD));
+			registrationList.add(STONE_KATANA = new ItemKatana(ToolMaterial.STONE));
+			registrationList.add(GOLDEN_KATANA = new ItemKatana(ToolMaterial.GOLD));
+			registrationList.add(IRON_KATANA = new ItemKatana(ToolMaterial.IRON));
+			registrationList.add(DIAMOND_KATANA = new ItemKatana(ToolMaterial.EMERALD));
 		}
 		
 		if(GlobalValues.JAVELIN) {

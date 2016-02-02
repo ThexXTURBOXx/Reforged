@@ -45,6 +45,13 @@ item.iron_knife.name=Eisenmesser
 item.diamond_knife.name=Diamantmesser
 item.copper_knife.name=Kupfermesser
 
+item.wooden_katana.name=Holzkatana
+item.stone_katana.name=Steinkatana
+item.golden_katana.name=Goldkatana
+item.iron_katana.name=Eisenkatana
+item.diamond_katana.name=Diamantkatana
+item.copper_katana.name=Kupferkatana
+
 item.dart_normal.name=Normaler Dartpfeilpfeil
 item.dart_poison.name=Giftiger Dartpfeil
 item.dart_poison_strong.name=Dartpfeil des Pfeilgiftfrosches
@@ -55,7 +62,9 @@ item.blowgun.name=Blasrohr
 
 item.musket_barrel.name=Musketenlauf
 item.gun_stock.name=Gewehrkolben
-item.blunderbuss_barrel.name=Espingole
+item.blunderbuss_barrel.name=Espingolenkolben
+item.blunderbuss_bullet.name=Schrotkugeln
+item.blunderbuss.name=Espingole
 item.javelin.name=Wurfspeer
 item.musket_bullet.name=Musketenkugel
 item.musket.name=Muskete
@@ -74,6 +83,7 @@ death.attack.musket=%1$s bekam einen Schuss in den Kopf.
 death.attack.musket.player=%1$s bekam einen Schuss in den Kopf während er mit %2$s kämpfte.
 death.attack.dart=%1$s diente als Zielscheibe.
 death.attack.dart.player=%1$s diente als Zielscheibe während er mit %2$s kämpfte.
+
 versionchecker.ingame.outdated=Neuere Version verfügbar
 versionchecker.ingame.downloadclick=Hier zum herunterladen klicken
 versionchecker.ingame.download=Herunterladen

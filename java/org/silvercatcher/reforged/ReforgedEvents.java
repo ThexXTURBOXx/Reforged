@@ -10,10 +10,12 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
+import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class ReforgedEvents {	
 	/*
-	//Copper integration [Better way will be added later...]
+	//Mod integration
+	//Copper integration
 	@SubscribeEvent
 	public void onOreRegistryReg(OreRegisterEvent e) {
 		if(e.Name.equalsIgnoreCase("ingotcopper")) {
@@ -27,7 +29,7 @@ public class ReforgedEvents {
 	
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent e) {
-		//from Version Checker
+		//Version Checker Notification
 		if(!notificated) {
 			notificated = true;
 			if(!VersionChecker.isLatestVersion()) {
@@ -36,14 +38,14 @@ public class ReforgedEvents {
 				IChatComponent chat = new ChatComponentText("");
 				chat.setChatStyle(gold);
 				chat.appendText("[" + ReforgedMod.NAME + "] ");
-				chat.appendText("Newer version available: " + VersionChecker.getLatestVersion());
+				chat.appendText(new LanguageRegistry().instance().getStringLocalization("versionchecker.ingame.outdated") + ": " + VersionChecker.getLatestVersion());
 				p.addChatMessage(chat);
 				IChatComponent chat2 = new ChatComponentText("");
 				ChatStyle link = new ChatStyle();
-				link.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://github.com/TheOnlySilverClaw/Reforged/releases"));
+				link.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, VersionChecker.getDownloadUrl()));
 				link.setColor(EnumChatFormatting.AQUA);
-				chat2.appendText("Click here to download: ").setChatStyle(gold);
-				chat2.appendText("[Download]").setChatStyle(link);
+				chat2.appendText(new LanguageRegistry().instance().getStringLocalization("versionchecker.ingame.downloadclick") + ": ").setChatStyle(gold);
+				chat2.appendText("[" + new LanguageRegistry().instance().getStringLocalization("versionchecker.ingame.download") + "]").setChatStyle(link);
 				p.addChatComponentMessage(chat2);
 			}
 		}
