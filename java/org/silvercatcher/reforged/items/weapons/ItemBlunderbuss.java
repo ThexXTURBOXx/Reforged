@@ -114,10 +114,9 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		tooltip.add(new LanguageRegistry().instance().getStringLocalization("item.musket.loadstate") + ": " + (loadState == empty ? 
-				new LanguageRegistry().instance().getStringLocalization("item.musket.loadstate.empty")
-				: (loadState == loaded ? new LanguageRegistry().instance().getStringLocalization("item.musket.loadstate.loaded") : 
-					new LanguageRegistry().instance().getStringLocalization("item.musket.loadstate.loading"))));
+		tooltip.add(LanguageRegistry.instance().getStringLocalization("item.musket.loadstate")
+				+ LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.")
+				+ (loadState == empty ? "empty" : (loadState == loaded ? "loaded" : "loading")));
 	}
 	
 	@Override
@@ -139,6 +138,7 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 
 		return super.getMaxItemUseDuration(stack);
 	}
+	
 	
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
