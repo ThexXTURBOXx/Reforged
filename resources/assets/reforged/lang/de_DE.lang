@@ -74,3 +74,6 @@ death.attack.musket=%1$s bekam einen Schuss in den Kopf.
 death.attack.musket.player=%1$s bekam einen Schuss in den Kopf während er mit %2$s kämpfte.
 death.attack.dart=%1$s diente als Zielscheibe.
 death.attack.dart.player=%1$s diente als Zielscheibe während er mit %2$s kämpfte.
+versionchecker.ingame.outdated=Neuere Version verfügbar
+versionchecker.ingame.downloadclick=Hier zum herunterladen klicken
+versionchecker.ingame.download=Herunterladen

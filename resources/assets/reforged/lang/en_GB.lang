@@ -74,3 +74,6 @@ death.attack.musket=%1$s got headshooted.
 death.attack.musket.player=%1$s got headshooted while fighting %2$s.
 death.attack.dart=%1$s served as a target.
 death.attack.dart.player=%1$s served as a target while fighting %2$s.
+versionchecker.ingame.outdated=Newer version available
+versionchecker.ingame.downloadclick=Click here to download
+versionchecker.ingame.download=Download

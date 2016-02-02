@@ -27,8 +27,6 @@ public class CommonProxy {
 		ReforgedRegistry.registerItems();
 		registerEntities();
 		//Version Checker
-		FMLInterModComms.sendRuntimeMessage(ReforgedMod.ID, "VersionChecker", "addVersionCheck",
-				"https://raw.githubusercontent.com/TheOnlySilverClaw/Reforged/master/version.json");
 		Thread versionCheckThread = new Thread(new VersionChecker(), "Version Check");
 		versionCheckThread.start();
 	}
