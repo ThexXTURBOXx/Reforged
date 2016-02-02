@@ -95,6 +95,7 @@ public class ReforgedRegistry {
 	public static DamageSource boomerangBreakDamage = new DamageSource("boomerangbreak").setDamageBypassesArmor();
 	public static DamageSource javelinDamage = new DamageSource("javelin").setDamageBypassesArmor();
 	public static DamageSource musketDamage = new DamageSource("musket").setDamageBypassesArmor();
+	public static DamageSource blunderbussDamage = new DamageSource("blunderbuss").setDamageBypassesArmor();
 	public static DamageSource dartDamage = new DamageSource("dart").setDamageBypassesArmor();
 	
 	//Hashmaps
