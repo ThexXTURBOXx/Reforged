@@ -43,7 +43,7 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 				"xxx",
 				"xsx",
 				" s ",
-				'x', materialDefinition.getRepairMaterial().getItem(),
+				'x', materialDefinition.getRepairMaterial(),
 				's', Items.stick);
 	}
 
