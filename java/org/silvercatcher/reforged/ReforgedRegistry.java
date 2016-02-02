@@ -91,12 +91,12 @@ public class ReforgedRegistry {
 	public static Item BLOWGUN;
 	
 	//Damage Sources
-	public static DamageSource boomerangHitDamage = new DamageSource("boomeranghit").setDamageBypassesArmor();
-	public static DamageSource boomerangBreakDamage = new DamageSource("boomerangbreak").setDamageBypassesArmor();
-	public static DamageSource javelinDamage = new DamageSource("javelin").setDamageBypassesArmor();
-	public static DamageSource musketDamage = new DamageSource("musket").setDamageBypassesArmor();
-	public static DamageSource blunderbussDamage = new DamageSource("blunderbuss").setDamageBypassesArmor();
-	public static DamageSource dartDamage = new DamageSource("dart").setDamageBypassesArmor();
+	public static DamageSource boomerangHitDamage = new DamageSource("boomeranghit");
+	public static DamageSource boomerangBreakDamage = new DamageSource("boomerangbreak");
+	public static DamageSource javelinDamage = new DamageSource("javelin");
+	public static DamageSource musketDamage = new DamageSource("musket");
+	public static DamageSource blunderbussDamage = new DamageSource("blunderbuss");
+	public static DamageSource dartDamage = new DamageSource("dart");
 	
 	//Hashmaps
 	public static List<Item> registrationList = new ArrayList<Item>();
