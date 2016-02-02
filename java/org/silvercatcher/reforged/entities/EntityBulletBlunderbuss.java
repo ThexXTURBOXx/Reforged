@@ -22,19 +22,16 @@ public class EntityBulletBlunderbuss extends EntityThrowable {
 		
 		super(worldIn, throwerIn);
 		this.setPositionAndRotation(throwerIn.posX, throwerIn.posY + throwerIn.getEyeHeight(), throwerIn.posZ, throwerIn.rotationYaw, throwerIn.rotationPitch);
-		float randomNumX = rand.nextInt(11) + 10;
-		float randomNumY = rand.nextInt(11) + 10;
-		float randomNumZ = rand.nextInt(11) + 10;
-		boolean randomBoolX = rand.nextBoolean();
-		boolean randomBoolY = rand.nextBoolean();
-		boolean randomBoolZ = rand.nextBoolean();
-		if(randomBoolX) {
+		float randomNumX = rand.nextInt(21);
+		float randomNumY = rand.nextInt(21);
+		float randomNumZ = rand.nextInt(21);
+		if(rand.nextBoolean()) {
 			randomNumX = 0 - randomNumX;
 		}
-		if(randomBoolY) {
+		if(rand.nextBoolean()) {
 			randomNumY = 0 - randomNumY;
 		}
-		if(randomBoolZ) {
+		if(rand.nextBoolean()) {
 			randomNumZ = 0 - randomNumZ;
 		}
 		this.motionX += randomNumX / 100;
@@ -49,7 +46,7 @@ public class EntityBulletBlunderbuss extends EntityThrowable {
 			//It's a block
 		} else {
 			//It's an entity
-			target.entityHit.attackEntityFrom(ReforgedRegistry.musketDamage, 4);
+			target.entityHit.attackEntityFrom(ReforgedRegistry.blunderbussDamage, 4);
 		}
 		setDead();
 	}
