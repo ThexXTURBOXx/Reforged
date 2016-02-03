@@ -1,0 +1,91 @@
+itemGroup.reforged=Reforged
+
+item.holy_cross.name=Â§eŒwiêty Krzy¿
+
+item.firerod.name=Ognista Laska
+
+item.arrow_bundle.name=Pêk Strza³
+
+item.nest_of_bees.name=Gniazdo Pszczó³
+item.nestofbees.arrows=Strza³y
+
+item.wooden_battleaxe.name=Drewniany Topór Bitewny
+item.stone_battleaxe.name=Kamienny Topór Bitewny
+item.iron_battleaxe.name=¯elazny Topór Bitewny
+item.golden_battleaxe.name=Z³oty Topór Bitewny
+item.diamond_battleaxe.name=Diamentowy Topór Bitewny
+item.copper_battleaxe.name=Miedziany Topór Bitewny
+
+item.wooden_boomerang.name=Drewniany Bumerang
+item.stone_boomerang.name=Kamienny Bumerang
+item.golden_boomerang.name=Z³oty Bumerang
+item.iron_boomerang.name=¯elazny Bumerang
+item.diamond_boomerang.name=Diamentowy Bumerang
+item.copper_boomerang.name=Miedziany Bumerang
+item.boomerang.langBreak=%1$s z³ama³ siê w twoich rêkach.
+
+item.wooden_saber.name=Drewniana Szabla
+item.stone_saber.name=Kamienna Szabla
+item.golden_saber.name=Z³ota Szabla
+item.iron_saber.name=¯elazna Szabla
+item.diamond_saber.name=Diamentowa Szabla
+item.copper_saber.name=Miedziana Szabla
+
+item.wooden_musket.name=Drewniany Muszkiet
+item.stone_musket.name=Kamienny Muszkiet
+item.golden_musket.name=Z³oty Muszkiet
+item.iron_musket.name=¯elazny Muszkiet
+item.diamond_musket.name=Diamentowy Muszkiet
+item.copper_musket.name=Miedziany Muszkiet
+
+item.wooden_knife.name=Drewniany Nó¿
+item.stone_knife.name=¯elazny Nó¿
+item.golden_knife.name=Z³oty Nó¿
+item.iron_knife.name=¯elazny Nó¿
+item.diamond_knife.name=Diamentowy Nó¿
+item.copper_knife.name=Miedziany Nó¿
+
+item.wooden_katana.name=Drewniana Katana
+item.stone_katana.name=Kamienna Katana
+item.golden_katana.name=Z³ota Katana
+item.iron_katana.name=¯elazna Katana
+item.diamond_katana.name=Diamentowa Katana
+item.copper_katana.name=Miedziana Katana
+
+item.dart_normal.name=Strza³ka
+item.dart_poison.name=Zatruta Strza³ka
+item.dart_poison_strong.name=Strza³ka z trucizn¹ jadowitej ¿aby
+item.dart_slowness.name=Spowalniaj¹ca Strza³ka
+item.dart_hunger.name=Strza³ka G³odu
+item.dart_wither.name=Strza³ka Obumierania
+item.blowgun.name=Dmuchawka
+
+item.musket_barrel.name=Lufa Muszkietu
+item.gun_stock.name=Rdzeñ Pistoletu
+item.blunderbuss_barrel.name=Lufa Gar³acza
+item.blunderbuss_bullet.name=Nabój Gar³acza
+item.blunderbuss.name=Gar³acz
+item.javelin.name=Oszczep
+item.musket_bullet.name=Nabój Muszkietu
+item.musket.name=Muszkiet
+item.musket.loadstate=Stan Prze³adowania
+item.musket.loadstate.empty=Pusty
+item.musket.loadstate.loading=Prze³adowywanie
+item.musket.loadstate.loaded=Prze³adowany
+
+death.attack.boomeranghit=G³owa gracza %1$s zosta³a zmia¿d¿ona przez bumerang.
+death.attack.boomeranghit.player=G³owa gracza %1$s zosta³a zmia¿d¿ona przez bumerang podczas walki z %2$s.
+death.attack.boomerangbreak=%1$s zosta³ zabity przez w³asny bumerang.
+death.attack.boomerangbreak.player=%1$s zosta³ zabity przez w³asny bumerang podczas walki z %2$s.
+death.attack.javelin=%1$s zosta³ przebity.
+death.attack.javelin.player=%1$s zosta³ przebity podczas walki z %2$s.
+death.attack.musket=%1$s zosta³ postrzelony w g³owê.
+death.attack.musket.player=%1$s zosta³ postrzelony w g³owê podczas walki z %2$s.
+death.attack.blunderbuss=%1$s zosta³ rozdarty przez kule.
+death.attack.blunderbuss.player=%1$s zosta³ rozdarty przez kule podczas walki z %2$s.
+death.attack.dart=%1$s pos³u¿y³ jako ruchomy cel.
+death.attack.dart.player=%1$s pos³u¿y³ jako ruchomy cel podczas walki z %2$s.
+
+versionchecker.ingame.outdated=Dostêpna nowa wersja
+versionchecker.ingame.downloadclick=Kliknij tutaj, aby pobraæ
+versionchecker.ingame.download=Pobierz
