@@ -6,6 +6,7 @@ import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.CompoundTags;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -47,8 +48,12 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			
 			if(stack != null) {
 				if(stack.getItem() == ReforgedRegistry.NEST_OF_BEES) {
-					nestsOfBees++;
-					output = stack.copy();
+					if(stack.getTagCompound().getInteger(CompoundTags.AMMUNITION) + 1 > 32) {
+						return false;
+					} else {
+						nestsOfBees++;
+						output = stack.copy();
+					}
 				} else if(stack.getItem() == ReforgedRegistry.ARROW_BUNDLE) {
 					arrowBundles++;
 				} else {
@@ -81,11 +86,9 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 				Item item = stack.getItem();
 				if(item == ReforgedRegistry.NEST_OF_BEES) {
 					output = stack.copy();
-				} else {
-					if(item == ReforgedRegistry.ARROW_BUNDLE) {
-						arrowBundleIndizes.add(i);
-						input[i] = stack.copy();
-					}
+				} else if(item == ReforgedRegistry.ARROW_BUNDLE) {
+					arrowBundleIndizes.add(i);
+					input[i] = stack.copy();
 				}
 			}
 		}
@@ -100,13 +103,11 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			int arrowBundleSlot = arrowBundleIndizes.removeFirst();
 			
 			ItemStack arrowBundleStack = inventory.getStackInSlot(arrowBundleSlot);
-			
-			int use = (32 - arrows) / 8;
-			if(use <= 0) break;
-			
-			arrows += Math.min(use, arrowBundleStack.stackSize) * 8;
-
-			input[arrowBundleSlot].stackSize -= use;
+			arrows += 8;
+			if(arrows > 32) {
+				arrows = 32;
+			}
+			input[arrowBundleSlot].stackSize -= 4;
 		}
 
 		compound.setInteger(CompoundTags.AMMUNITION, arrows);
