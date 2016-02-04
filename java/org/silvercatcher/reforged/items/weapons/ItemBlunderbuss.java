@@ -156,7 +156,8 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 	public void registerRecipes() {
 	
 		GameRegistry.addShapelessRecipe(new ItemStack(this),
-				new ItemStack(ReforgedRegistry.BLUNDERBUSS_BARREL), new ItemStack(ReforgedRegistry.GUN_STOCK));
+				new ItemStack(ReforgedRegistry.BLUNDERBUSS_BARREL),
+				new ItemStack(ReforgedRegistry.GUN_STOCK));
 	}
 
 	@Override

@@ -52,14 +52,11 @@ public class ItemKnife extends ItemSword implements ItemExtension {
 					- target.posY + target.getEyeHeight(),
 					player.posZ - target.posZ);
 			double d0 = attacker.lengthVector();
-			System.out.println(d0);
+
 			double d1 = look.dotProduct(attacker);
-			System.out.println(d1);
-			
+
 			boolean seen = d1 > 1 - 0.25 / d0;
-			
-			System.out.println(seen);
-			
+						
 			if(seen && target.canEntityBeSeen(player)) {
 				target.attackEntityFrom(DamageSource.causePlayerDamage(player), 2f);
 			}

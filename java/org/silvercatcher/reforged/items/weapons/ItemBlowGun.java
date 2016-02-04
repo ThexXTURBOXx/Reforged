@@ -51,7 +51,7 @@ public class ItemBlowGun extends ExtendedItem {
 		}
 		if(dart != null) {
 			worldIn.spawnEntityInWorld(dart);
-			itemStackIn.attemptDamageItem(1, this.itemRand);
+			itemStackIn.attemptDamageItem(1, itemRand);
 			if(itemStackIn.getItemDamage() >= 40) {
 				playerIn.inventory.consumeInventoryItem(itemStackIn.getItem());
 			}
