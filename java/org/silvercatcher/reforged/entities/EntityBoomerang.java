@@ -10,7 +10,6 @@ import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -74,9 +73,9 @@ public class EntityBoomerang extends EntityThrowable {
 	public double getCoord(String coordId) {
 		switch(coordId) {
 		//1 returns X, 2 returns Y, 3 returns Z
-		case "X": return (double) dataWatcher.getWatchableObjectFloat(7);
-		case "Y": return (double) dataWatcher.getWatchableObjectFloat(8);
-		case "Z": return (double) dataWatcher.getWatchableObjectFloat(9);
+		case "X": return dataWatcher.getWatchableObjectFloat(7);
+		case "Y": return dataWatcher.getWatchableObjectFloat(8);
+		case "Z": return dataWatcher.getWatchableObjectFloat(9);
 		default: throw new IllegalArgumentException("Invalid coordId!");
 		}
 	}
@@ -177,7 +176,8 @@ public class EntityBoomerang extends EntityThrowable {
 						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 20);
 					} else {
 						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 2);
-						p.addChatMessage(new ChatComponentText(new LanguageRegistry().instance().getStringLocalization("item.boomerang.langBreak").replace("%1$s",getItemStack().getDisplayName())));
+						new LanguageRegistry();
+						p.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("item.boomerang.langBreak").replace("%1$s",getItemStack().getDisplayName())));
 					}
 				}
 			} else if(!worldObj.isRemote) {

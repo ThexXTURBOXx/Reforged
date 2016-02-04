@@ -113,10 +113,14 @@ public class ItemMusket extends ItemBow implements ItemExtension {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		tooltip.add(new LanguageRegistry().instance().getStringLocalization("item.musket.loadstate") + ": " + (loadState == empty ? 
-				new LanguageRegistry().instance().getStringLocalization("item.musket.loadstate.empty")
-				: (loadState == loaded ? new LanguageRegistry().instance().getStringLocalization("item.musket.loadstate.loaded") : 
-					new LanguageRegistry().instance().getStringLocalization("item.musket.loadstate.loading"))));
+		new LanguageRegistry();
+		new LanguageRegistry();
+		new LanguageRegistry();
+		new LanguageRegistry();
+		tooltip.add(LanguageRegistry.instance().getStringLocalization("item.musket.loadstate") + ": " + (loadState == empty ? 
+				LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.empty")
+				: (loadState == loaded ? LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.loaded") : 
+					LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.loading"))));
 	}
 	
 	@Override

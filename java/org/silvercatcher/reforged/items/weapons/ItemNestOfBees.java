@@ -2,7 +2,6 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
 
-import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
@@ -39,7 +38,8 @@ public class ItemNestOfBees extends ExtendedItem {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
 
-		tooltip.add(new LanguageRegistry().instance().getStringLocalization("item.nestofbees.arrows") + ": " + CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
+		new LanguageRegistry();
+		tooltip.add(LanguageRegistry.instance().getStringLocalization("item.nestofbees.arrows") + ": " + CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
 	}
 	
 

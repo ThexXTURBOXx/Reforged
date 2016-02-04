@@ -23,8 +23,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ReforgedRegistry {
 	
-	//ToolMaterials
-	//public static ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 2, 200, 5.0F, 1.5F, 10);
 
 	//Items
 	public static Item ARROW_BUNDLE;
@@ -85,7 +83,7 @@ public class ReforgedRegistry {
 	public static Item DART_NORMAL;
 	public static Item DART_HUNGER;
 	public static Item DART_POISON;
-	public static Item DART_POISON_2;
+	public static Item DART_POISON_STRONG;
 	public static Item DART_SLOW;
 	public static Item DART_WITHER;
 	public static Item BLOWGUN;
@@ -103,6 +101,7 @@ public class ReforgedRegistry {
 	
 	//Registry
 	public static void createItems() {
+
 		if(GlobalValues.NEST_OF_BEES) {
 			registrationList.add(ARROW_BUNDLE = new ItemArrowBundle());
 			registrationList.add(NEST_OF_BEES = new ItemNestOfBees());
@@ -138,12 +137,10 @@ public class ReforgedRegistry {
 			registrationList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
 			registrationList.add(STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));
 			registrationList.add(GOLDEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.GOLD));
+			registrationList.add(DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.EMERALD));
 		}
 		//This has to be registered! Else, the Creative Tab would be broken!
 		registrationList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
-		if(GlobalValues.BATTLEAXE) {
-			registrationList.add(DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.EMERALD));
-		}
 		
 		if(GlobalValues.BOOMERANG) {
 			registrationList.add(WOODEN_BOOMERANG = new ItemBoomerang(ToolMaterial.WOOD));
@@ -185,7 +182,7 @@ public class ReforgedRegistry {
 			registrationList.add(DART_NORMAL = new ItemDart("normal"));
 			registrationList.add(DART_HUNGER = new ItemDart("hunger"));
 			registrationList.add(DART_POISON = new ItemDart("poison"));
-			registrationList.add(DART_POISON_2 = new ItemDart("poison_strong"));
+			registrationList.add(DART_POISON_STRONG = new ItemDart("poison_strong"));
 			registrationList.add(DART_SLOW = new ItemDart("slowness"));
 			registrationList.add(DART_WITHER = new ItemDart("wither"));
 			registrationList.add(BLOWGUN = new ItemBlowGun());

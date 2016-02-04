@@ -13,18 +13,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class ReforgedEvents {	
-	/*
-	//Mod integration
-	//Copper integration
-	@SubscribeEvent
-	public void onOreRegistryReg(OreRegisterEvent e) {
-		if(e.Name.equalsIgnoreCase("ingotcopper")) {
-			GameRegistry.registerItem(ReforgedRegistry.COPPER_BOOMERANG, ReforgedRegistry.COPPER_BOOMERANG.getName());
-			GameRegistry.registerItem(ReforgedRegistry.COPPER_BATTLE_AXE, ReforgedRegistry.COPPER_BATTLE_AXE.getName());
-		}
-	}
-	*/
-	
+
 	public boolean notificated = false;
 	
 	@SubscribeEvent
@@ -38,14 +27,17 @@ public class ReforgedEvents {
 				IChatComponent chat = new ChatComponentText("");
 				chat.setChatStyle(gold);
 				chat.appendText("[" + ReforgedMod.NAME + "] ");
-				chat.appendText(new LanguageRegistry().instance().getStringLocalization("versionchecker.ingame.outdated") + ": " + VersionChecker.getLatestVersion());
+				new LanguageRegistry();
+				chat.appendText(LanguageRegistry.instance().getStringLocalization("versionchecker.ingame.outdated") + ": " + VersionChecker.getLatestVersion());
 				p.addChatMessage(chat);
 				IChatComponent chat2 = new ChatComponentText("");
 				ChatStyle link = new ChatStyle();
 				link.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, VersionChecker.getDownloadUrl()));
 				link.setColor(EnumChatFormatting.AQUA);
-				chat2.appendText(new LanguageRegistry().instance().getStringLocalization("versionchecker.ingame.downloadclick") + ": ").setChatStyle(gold);
-				chat2.appendText("[" + new LanguageRegistry().instance().getStringLocalization("versionchecker.ingame.download") + "]").setChatStyle(link);
+				new LanguageRegistry();
+				chat2.appendText(LanguageRegistry.instance().getStringLocalization("versionchecker.ingame.downloadclick") + ": ").setChatStyle(gold);
+				new LanguageRegistry();
+				chat2.appendText("[" + LanguageRegistry.instance().getStringLocalization("versionchecker.ingame.download") + "]").setChatStyle(link);
 				p.addChatComponentMessage(chat2);
 			}
 		}

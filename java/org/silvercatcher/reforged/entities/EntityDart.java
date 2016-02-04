@@ -59,17 +59,18 @@ public class EntityDart extends EntityThrowable {
 		//Target is entity or block?
 		if(target.entityHit == null) {
 			//It's a block
-			if(!worldObj.isRemote) {
+			if(!worldObj.isRemote && rand.nextInt(4) == 0) {
 				entityDropItem(new ItemStack(Items.feather), 1);	
 			}
 		} else {
 			//It's an entity
 			target.entityHit.attackEntityFrom(ReforgedRegistry.dartDamage, 5);
 			if(!target.entityHit.isDead) {
-				//Lives still after first damage
-				if(target.entityHit instanceof EntityPlayer) {
-					//Is a player
-					EntityPlayer p = (EntityPlayer) target.entityHit;
+				// Still alive after first damage
+				if(target.entityHit instanceof EntityLivingBase) {
+
+					EntityLivingBase p = (EntityLivingBase) target.entityHit;
+				
 					switch(getEffect()) {
 					
 					case "normal": break;
@@ -88,9 +89,6 @@ public class EntityDart extends EntityThrowable {
 					default: throw new IllegalArgumentException("No effect called " + getEffect().substring(5) + " found!");
 					
 					}
-				} else {
-					//Is a mob
-					target.entityHit.attackEntityFrom(ReforgedRegistry.dartDamage, 4);
 				}
 			}
 		}

@@ -1,30 +1,14 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 
-import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.items.ExtendedItem;
-import org.silvercatcher.reforged.items.ItemExtension;
-
-import com.google.common.collect.Multimap;
-
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
-import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHelper;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 

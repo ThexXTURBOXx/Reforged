@@ -1,18 +1,11 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
-import org.silvercatcher.reforged.material.MaterialDefinition;
-import org.silvercatcher.reforged.material.MaterialManager;
-
-import com.google.common.collect.Multimap;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;

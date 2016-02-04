@@ -9,7 +9,6 @@ import org.silvercatcher.reforged.material.MaterialManager;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.fml.common.registry.GameRegistry;
