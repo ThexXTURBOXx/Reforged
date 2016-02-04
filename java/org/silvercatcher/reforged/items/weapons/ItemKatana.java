@@ -7,10 +7,15 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.util.DamageSource;
+import net.minecraft.item.ItemArmor;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemKatana extends ItemSword implements ItemExtension {
@@ -27,6 +32,43 @@ public class ItemKatana extends ItemSword implements ItemExtension {
 		setMaxDamage(materialDefinition.getMaxUses());
 		setMaxStackSize(1);
 		setCreativeTab(ReforgedMod.tabReforged);
+	}
+	
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		
+		if(!super.onLeftClickEntity(stack, player, entity)) {
+			
+			if(entity instanceof EntityLivingBase) {
+				
+				EntityLivingBase target = (EntityLivingBase) entity;
+				
+				int armorvalue = 0;
+
+				for(int i = 1; i < 4; i++) {
+					
+					ItemStack armorStack = target.getEquipmentInSlot(i);
+					if(armorStack != null && armorStack.getItem() instanceof ItemArmor) {
+						armorvalue += ((ItemArmor) armorStack.getItem()).damageReduceAmount;
+					}
+				}
+
+				if(armorvalue < 6) {
+					
+					target.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage() / 2f);
+					target.hurtResistantTime = 0;
+				}
+				
+				if(armorvalue > 12) {
+					
+					stack.damageItem(1, target);
+				}
+			}
+			
+			
+		}
+		
+		return false;
 	}
 	
 	@Override
