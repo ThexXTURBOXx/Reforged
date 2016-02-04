@@ -32,9 +32,9 @@ public class ItemBlowGun extends ExtendedItem {
 		} else if(playerIn.inventory.hasItem(ReforgedRegistry.DART_POISON)) {
 			dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_POISON));
 			if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_POISON));
-		} else if(playerIn.inventory.hasItem(ReforgedRegistry.DART_POISON_2)) {
-			dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_POISON_2));
-			if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_POISON_2));
+		} else if(playerIn.inventory.hasItem(ReforgedRegistry.DART_POISON_STRONG)) {
+			dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_POISON_STRONG));
+			if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_POISON_STRONG));
 		} else if(playerIn.inventory.hasItem(ReforgedRegistry.DART_SLOW)) {
 			dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_SLOW));
 			if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_SLOW));
