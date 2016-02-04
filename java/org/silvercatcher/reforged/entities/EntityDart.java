@@ -66,10 +66,11 @@ public class EntityDart extends EntityThrowable {
 			//It's an entity
 			target.entityHit.attackEntityFrom(ReforgedRegistry.dartDamage, 5);
 			if(!target.entityHit.isDead) {
-				//Lives still after first damage
-				if(target.entityHit instanceof EntityPlayer) {
-					//Is a player
-					EntityPlayer p = (EntityPlayer) target.entityHit;
+				// Still alive after first damage
+				if(target.entityHit instanceof EntityLivingBase) {
+
+					EntityLivingBase p = (EntityLivingBase) target.entityHit;
+				
 					switch(getEffect()) {
 					
 					case "normal": break;
@@ -88,9 +89,6 @@ public class EntityDart extends EntityThrowable {
 					default: throw new IllegalArgumentException("No effect called " + getEffect().substring(5) + " found!");
 					
 					}
-				} else {
-					//Is a mob
-					target.entityHit.attackEntityFrom(ReforgedRegistry.dartDamage, 4);
 				}
 			}
 		}
