@@ -21,7 +21,11 @@ public class ItemArrowBundle extends ExtendedItem {
 	public void registerRecipes() {
 		
 		GameRegistry.addShapelessRecipe(new ItemStack(this),
-			new ItemStack(Items.arrow, 8), new ItemStack(Items.string));
+			new ItemStack(Items.string), new ItemStack(Items.arrow), 
+			new ItemStack(Items.arrow), new ItemStack(Items.arrow), 
+			new ItemStack(Items.arrow), new ItemStack(Items.arrow), 
+			new ItemStack(Items.arrow), new ItemStack(Items.arrow), 
+			new ItemStack(Items.arrow));
 	}
 
 
