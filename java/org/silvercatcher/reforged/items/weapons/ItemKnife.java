@@ -1,6 +1,5 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.apache.commons.lang3.RandomUtils;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
@@ -10,16 +9,13 @@ import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.ai.EntityLookHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import scala.tools.asm.util.TraceSignatureVisitor;
 
 public class ItemKnife extends ItemSword implements ItemExtension {
 

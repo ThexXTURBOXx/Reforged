@@ -1,16 +1,9 @@
 package org.silvercatcher.reforged.items.others;
 
-import java.util.HashMap;
-import java.util.List;
-
-import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.ExtendedItem;
 
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 

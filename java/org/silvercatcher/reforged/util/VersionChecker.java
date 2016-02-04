@@ -7,8 +7,6 @@ import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInterModComms;

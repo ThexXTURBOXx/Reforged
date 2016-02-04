@@ -3,7 +3,6 @@ package org.silvercatcher.reforged.render;
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.ReforgedReferences.Textures;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
-import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.models.ModelBulletMusket;
 
 import net.minecraft.client.model.ModelBase;

@@ -38,14 +38,17 @@ public class ReforgedEvents {
 				IChatComponent chat = new ChatComponentText("");
 				chat.setChatStyle(gold);
 				chat.appendText("[" + ReforgedMod.NAME + "] ");
-				chat.appendText(new LanguageRegistry().instance().getStringLocalization("versionchecker.ingame.outdated") + ": " + VersionChecker.getLatestVersion());
+				new LanguageRegistry();
+				chat.appendText(LanguageRegistry.instance().getStringLocalization("versionchecker.ingame.outdated") + ": " + VersionChecker.getLatestVersion());
 				p.addChatMessage(chat);
 				IChatComponent chat2 = new ChatComponentText("");
 				ChatStyle link = new ChatStyle();
 				link.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, VersionChecker.getDownloadUrl()));
 				link.setColor(EnumChatFormatting.AQUA);
-				chat2.appendText(new LanguageRegistry().instance().getStringLocalization("versionchecker.ingame.downloadclick") + ": ").setChatStyle(gold);
-				chat2.appendText("[" + new LanguageRegistry().instance().getStringLocalization("versionchecker.ingame.download") + "]").setChatStyle(link);
+				new LanguageRegistry();
+				chat2.appendText(LanguageRegistry.instance().getStringLocalization("versionchecker.ingame.downloadclick") + ": ").setChatStyle(gold);
+				new LanguageRegistry();
+				chat2.appendText("[" + LanguageRegistry.instance().getStringLocalization("versionchecker.ingame.download") + "]").setChatStyle(link);
 				p.addChatComponentMessage(chat2);
 			}
 		}

@@ -1,15 +1,10 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.items.ExtendedItem;
-import org.silvercatcher.reforged.items.others.ItemDart;
-
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;

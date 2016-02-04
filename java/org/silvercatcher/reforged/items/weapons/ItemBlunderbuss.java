@@ -5,13 +5,11 @@ import java.util.List;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
-import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ItemExtension;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;

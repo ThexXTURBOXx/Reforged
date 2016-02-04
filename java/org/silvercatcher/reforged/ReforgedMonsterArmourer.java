@@ -3,15 +3,6 @@ package org.silvercatcher.reforged;
 import java.util.Random;
 import java.util.UUID;
 
-import net.minecraft.entity.SharedMonsterAttributes;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.monster.EntityZombie;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.WeightedRandom;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-
 public class ReforgedMonsterArmourer {
 
 	private static final UUID itemModifierUUID =  UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");

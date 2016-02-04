@@ -1,10 +1,6 @@
 package org.silvercatcher.reforged.entities;
 
-import java.util.Random;
-
 import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.items.weapons.ItemBlunderbuss;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;

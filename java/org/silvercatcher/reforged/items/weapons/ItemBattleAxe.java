@@ -1,7 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -17,7 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 

@@ -1,7 +1,6 @@
 package org.silvercatcher.reforged.proxy;
 
 import org.silvercatcher.reforged.ReforgedEvents;
-import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
@@ -14,7 +13,6 @@ import org.silvercatcher.reforged.util.VersionChecker;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy {

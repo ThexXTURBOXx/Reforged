@@ -4,11 +4,7 @@ import java.util.EnumMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
-
 import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.util.EnumHelper;
 
 public class MaterialManager {	
 	
