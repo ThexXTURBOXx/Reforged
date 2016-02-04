@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.event.FMLInterModComms;
 public class VersionChecker implements Runnable {
   private static boolean isLatestVersion = true;
   private static String latestVersion = "";
-  private static String downloadUrl = "http://minecraft.curseforge.com/projects/reforged";
+  private static String downloadUrl = "http://minecraft.curseforge.com/projects/reforged-balkons-weapons-1-8";
   private static String jsonUrl = "https://raw.githubusercontent.com/TheOnlySilverClaw/Reforged/master/version.json";
   
   @Override
