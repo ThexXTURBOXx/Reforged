@@ -23,8 +23,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ReforgedRegistry {
 	
-	//ToolMaterials
-	//public static ToolMaterial COPPER = EnumHelper.addToolMaterial("COPPER", 2, 200, 5.0F, 1.5F, 10);
 
 	//Items
 	public static Item ARROW_BUNDLE;
