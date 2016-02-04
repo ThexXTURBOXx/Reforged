@@ -53,13 +53,13 @@ public class ItemKatana extends ItemSword implements ItemExtension {
 					}
 				}
 
-				if(armorvalue < 6) {
+				if(armorvalue < 12) {
 					
 					target.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage() / 2f);
 					target.hurtResistantTime = 0;
 				}
 				
-				if(armorvalue > 12) {
+				if(armorvalue > 6) {
 					
 					stack.damageItem(1, target);
 				}
