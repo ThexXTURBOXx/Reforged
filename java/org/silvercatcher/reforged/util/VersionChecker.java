@@ -40,23 +40,25 @@ public class VersionChecker implements Runnable {
 	    		  s = s.replace("	", "");
 	    		  s = s.replace(":", "");
 				  latestVersion = s;
-	    		  if(!s.equals(ReforgedMod.VERSION)) {
-	    			  System.out.println("Newer version of the mod Reforged available: " + s);
-	    		  } else {
-	    			  System.out.println("Yay! You have the newest version of the mod Reforged :)");
-	    		  }
-	    		  if (Loader.isModLoaded("VersionChecker")) {
-	  				NBTTagCompound compound = new NBTTagCompound();
-	  				compound.setString("modDisplayName", ReforgedMod.NAME);
-	  				compound.setString("oldVersion", ReforgedMod.VERSION);
-	  				compound.setString("newVersion", latestVersion);
-	  				compound.setString("changeLog", getChangelog());
-	  				if (downloadUrl != null) {
-	  					compound.setString("updateUrl", downloadUrl);
-	  					compound.setBoolean("isDirectLink", false);
-	  				}
-	  				FMLInterModComms.sendRuntimeMessage(ReforgedMod.ID, "VersionChecker", "addUpdate", compound);
-	  			}
+	    		  	if(!s.equals(ReforgedMod.VERSION)) {
+	    		  		System.out.println("Newer version of the mod Reforged available: " + s);
+	    		  	} else {
+	    		  		System.out.println("Yay! You have the newest version of the mod Reforged :)");
+	    		  	}
+	    		  	
+	    		  	//Sending version to Version Checker Mod by Dynious, if it is loaded
+	    		  	if (Loader.isModLoaded("VersionChecker")) {
+	    		  		NBTTagCompound compound = new NBTTagCompound();
+	    		  		compound.setString("modDisplayName", ReforgedMod.NAME);
+	    		  		compound.setString("oldVersion", ReforgedMod.VERSION);
+	    		  		compound.setString("newVersion", latestVersion);
+	    		  		compound.setString("changeLog", getChangelog());
+	    		  		if (downloadUrl != null) {
+	    		  			compound.setString("updateUrl", downloadUrl);
+	    		  			compound.setBoolean("isDirectLink", false);
+	    		  		}
+	    		  		FMLInterModComms.sendRuntimeMessage(ReforgedMod.ID, "VersionChecker", "addUpdate", compound);
+	    		  	}
 	    	  }
 	      }
 	    } catch (IOException e) {
