@@ -59,7 +59,7 @@ public class EntityDart extends EntityThrowable {
 		//Target is entity or block?
 		if(target.entityHit == null) {
 			//It's a block
-			if(!worldObj.isRemote) {
+			if(!worldObj.isRemote && rand.nextInt(4) == 0) {
 				entityDropItem(new ItemStack(Items.feather), 1);	
 			}
 		} else {
