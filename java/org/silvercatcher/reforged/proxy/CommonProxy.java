@@ -73,7 +73,7 @@ public class CommonProxy {
 		knife = config.getBoolean("Knife", "Items", true, "Enable the Knife");
 		musket = config.getBoolean("Musket", "Items", true, "Enable the Musket and Blunderbuss");
 		nest_of_bees = config.getBoolean("Nest Of Bees", "Items", false, "Enable the Nest Of Bees (Beta, Only use for testing!)");
-		arrow_bundle = config.getBoolean("Sabre", "Items", true, "Enable the Sabre");
+		sabre = config.getBoolean("Sabre", "Items", true, "Enable the Sabre");
 		
 		//Others
 		boomerang_distance = config.getInt("Boomerang-Autocollect", "Others", 3, 0, 32, "The distance in which the Boomerang should get auto-collected by the thrower (0 means disable)");
