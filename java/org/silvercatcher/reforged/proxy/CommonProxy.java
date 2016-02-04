@@ -38,7 +38,6 @@ public class CommonProxy {
 	}
 	
 	//Items for Config
-	public static boolean arrow_bundle;
 	public static boolean battleaxe;
 	public static boolean blowgun;
 	public static boolean boomerang;
@@ -62,7 +61,6 @@ public class CommonProxy {
 		config.load();
 		
 		//Items
-		arrow_bundle = config.getBoolean("Arrow Bundle", "Items", true, "Enable the Arrow Bundle");
 		battleaxe = config.getBoolean("Battleaxe", "Items", true, "Enable the Battleaxe");
 		blowgun = config.getBoolean("Blowgun", "Items", true, "Enable the Blowgun plus Darts");
 		boomerang = config.getBoolean("Boomerang", "Items", true, "Enable the Boomerang");
@@ -72,7 +70,7 @@ public class CommonProxy {
 		katana= config.getBoolean("Katana", "Items", true, "Enable the Katana");
 		knife = config.getBoolean("Knife", "Items", true, "Enable the Knife");
 		musket = config.getBoolean("Musket", "Items", true, "Enable the Musket and Blunderbuss");
-		nest_of_bees = config.getBoolean("Nest Of Bees", "Items", false, "Enable the Nest Of Bees (Beta, Only use for testing!)");
+		nest_of_bees = config.getBoolean("Nest Of Bees", "Items", true, "Enable the Nest Of Bees");
 		sabre = config.getBoolean("Sabre", "Items", true, "Enable the Sabre");
 		
 		//Others

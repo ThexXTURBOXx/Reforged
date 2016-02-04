@@ -103,11 +103,8 @@ public class ReforgedRegistry {
 	
 	//Registry
 	public static void createItems() {
-		if(GlobalValues.ARROW_BUNDLE) {
-			registrationList.add(ARROW_BUNDLE = new ItemArrowBundle());
-		}
-
 		if(GlobalValues.NEST_OF_BEES) {
+			registrationList.add(ARROW_BUNDLE = new ItemArrowBundle());
 			registrationList.add(NEST_OF_BEES = new ItemNestOfBees());
 		}
 		
@@ -197,7 +194,6 @@ public class ReforgedRegistry {
 	
 	public static void registerItems() {
 		
-		//todo refactor recipe system
 		for(Item item : registrationList) {
 			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
 		}
@@ -238,7 +234,7 @@ public class ReforgedRegistry {
 	
 	public static void registerEntity(Class c, String name, int counter) {
 		EntityRegistry.registerModEntity(c, name, counter, ReforgedMod.instance, 120, 1, true);		
-	}	
+	}
 	
 	public static void registerEntityRenderer(Class entityclass, Render renderclass) {
 		RenderingRegistry.registerEntityRenderingHandler(entityclass, renderclass);

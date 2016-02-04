@@ -33,7 +33,6 @@ public class ReforgedReferences
 	public static class GlobalValues
 	{
 		//Items
-		public static final boolean ARROW_BUNDLE = CommonProxy.arrow_bundle;
 		public static final boolean BATTLEAXE = CommonProxy.battleaxe;
 		public static final boolean BLOWGUN = CommonProxy.blowgun;
 		public static final boolean BOOMERANG = CommonProxy.boomerang;
