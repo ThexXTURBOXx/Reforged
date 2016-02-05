@@ -31,12 +31,12 @@ item.iron_saber.name=Żelazna Szabla
 item.diamond_saber.name=Diamentowa Szabla
 item.copper_saber.name=Miedziana Szabla
 
-item.wooden_musket.name=Muszkiet z drewniany bagnetem
-item.stone_musket.name=Muszkiet z kamienny bagnetem
-item.golden_musket.name=Muszkiet z złoty bagnetem
-item.iron_musket.name=Muszkiet z żelazny bagnetem
-item.diamond_musket.name=Muszkiet z diamentowy bagnetem
-item.copper_musket.name=Muszkiet z miedziany bagnetem
+item.wooden_musket.name=Muszkiet z drewnianym bagnetem
+item.stone_musket.name=Muszkiet z kamiennym bagnetem
+item.golden_musket.name=Muszkiet ze złotym bagnetem
+item.iron_musket.name=Muszkiet z żelaznym bagnetem
+item.diamond_musket.name=Muszkiet z diamentowym bagnetem
+item.copper_musket.name=Muszkiet z miedzianym bagnetem
 
 item.wooden_knife.name=Drewniany Nóż
 item.stone_knife.name=Żelazny Nóż
