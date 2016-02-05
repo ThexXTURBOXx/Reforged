@@ -31,12 +31,12 @@ item.iron_saber.name=Eisensäbel
 item.diamond_saber.name=Diamantsäbel
 item.copper_saber.name=Kupfersäbel
 
-item.wooden_musket.name=Holzmuskete
-item.stone_musket.name=Steinmuskete
-item.golden_musket.name=Goldmuskete
-item.iron_musket.name=Eisenmuskete
-item.diamond_musket.name=Diamantmuskete
-item.copper_musket.name=Kupfermuskete
+item.wooden_musket.name=Muskete mit Holzbajonett
+item.stone_musket.name=Muskete mit Steinbajonett
+item.golden_musket.name=Muskete mit Goldbajonett
+item.iron_musket.name=Muskete mit Eisenbajonett
+item.diamond_musket.name=Muskete mit Diamantbajonett
+item.copper_musket.name=Muskete mit Kupferbajonett
 
 item.wooden_knife.name=Holzmesser
 item.stone_knife.name=Steinmesser

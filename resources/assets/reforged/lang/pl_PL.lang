@@ -1,91 +1,91 @@
 itemGroup.reforged=Reforged
 
-item.holy_cross.name=¬ßeåwiÍty Krzyø
+item.holy_cross.name=¬ße≈öwiƒôty Krzy≈º
 
 item.firerod.name=Ognista Laska
 
-item.arrow_bundle.name=PÍk Strza≥
+item.arrow_bundle.name=Pƒôk Strza≈Ç
 
-item.nest_of_bees.name=Gniazdo PszczÛ≥
-item.nestofbees.arrows=Strza≥y
+item.nest_of_bees.name=Gniazdo Pszcz√≥≈Ç
+item.nestofbees.arrows=Strza≈Çy
 
-item.wooden_battleaxe.name=Drewniany TopÛr Bitewny
-item.stone_battleaxe.name=Kamienny TopÛr Bitewny
-item.iron_battleaxe.name=Øelazny TopÛr Bitewny
-item.golden_battleaxe.name=Z≥oty TopÛr Bitewny
-item.diamond_battleaxe.name=Diamentowy TopÛr Bitewny
-item.copper_battleaxe.name=Miedziany TopÛr Bitewny
+item.wooden_battleaxe.name=Drewniany Top√≥r Bitewny
+item.stone_battleaxe.name=Kamienny Top√≥r Bitewny
+item.iron_battleaxe.name=≈ªelazny Top√≥r Bitewny
+item.golden_battleaxe.name=Z≈Çoty Top√≥r Bitewny
+item.diamond_battleaxe.name=Diamentowy Top√≥r Bitewny
+item.copper_battleaxe.name=Miedziany Top√≥r Bitewny
 
 item.wooden_boomerang.name=Drewniany Bumerang
 item.stone_boomerang.name=Kamienny Bumerang
-item.golden_boomerang.name=Z≥oty Bumerang
-item.iron_boomerang.name=Øelazny Bumerang
+item.golden_boomerang.name=Z≈Çoty Bumerang
+item.iron_boomerang.name=≈ªelazny Bumerang
 item.diamond_boomerang.name=Diamentowy Bumerang
 item.copper_boomerang.name=Miedziany Bumerang
-item.boomerang.langBreak=%1$s z≥ama≥ siÍ w twoich rÍkach.
+item.boomerang.langBreak=%1$s z≈Çama≈Ç siƒô w twoich rƒôkach.
 
 item.wooden_saber.name=Drewniana Szabla
 item.stone_saber.name=Kamienna Szabla
-item.golden_saber.name=Z≥ota Szabla
-item.iron_saber.name=Øelazna Szabla
+item.golden_saber.name=Z≈Çota Szabla
+item.iron_saber.name=≈ªelazna Szabla
 item.diamond_saber.name=Diamentowa Szabla
 item.copper_saber.name=Miedziana Szabla
 
-item.wooden_musket.name=Drewniany Muszkiet
-item.stone_musket.name=Kamienny Muszkiet
-item.golden_musket.name=Z≥oty Muszkiet
-item.iron_musket.name=Øelazny Muszkiet
-item.diamond_musket.name=Diamentowy Muszkiet
-item.copper_musket.name=Miedziany Muszkiet
+item.wooden_musket.name=Muszkiet z drewniany bagnetem
+item.stone_musket.name=Muszkiet z kamienny bagnetem
+item.golden_musket.name=Muszkiet z z≈Çoty bagnetem
+item.iron_musket.name=Muszkiet z ≈ºelazny bagnetem
+item.diamond_musket.name=Muszkiet z diamentowy bagnetem
+item.copper_musket.name=Muszkiet z miedziany bagnetem
 
-item.wooden_knife.name=Drewniany NÛø
-item.stone_knife.name=Øelazny NÛø
-item.golden_knife.name=Z≥oty NÛø
-item.iron_knife.name=Øelazny NÛø
-item.diamond_knife.name=Diamentowy NÛø
-item.copper_knife.name=Miedziany NÛø
+item.wooden_knife.name=Drewniany N√≥≈º
+item.stone_knife.name=≈ªelazny N√≥≈º
+item.golden_knife.name=Z≈Çoty N√≥≈º
+item.iron_knife.name=≈ªelazny N√≥≈º
+item.diamond_knife.name=Diamentowy N√≥≈º
+item.copper_knife.name=Miedziany N√≥≈º
 
 item.wooden_katana.name=Drewniana Katana
 item.stone_katana.name=Kamienna Katana
-item.golden_katana.name=Z≥ota Katana
-item.iron_katana.name=Øelazna Katana
+item.golden_katana.name=Z≈Çota Katana
+item.iron_katana.name=≈ªelazna Katana
 item.diamond_katana.name=Diamentowa Katana
 item.copper_katana.name=Miedziana Katana
 
-item.dart_normal.name=Strza≥ka
-item.dart_poison.name=Zatruta Strza≥ka
-item.dart_poison_strong.name=Strza≥ka z truciznπ jadowitej øaby
-item.dart_slowness.name=Spowalniajπca Strza≥ka
-item.dart_hunger.name=Strza≥ka G≥odu
-item.dart_wither.name=Strza≥ka Obumierania
+item.dart_normal.name=Strza≈Çka
+item.dart_poison.name=Zatruta Strza≈Çka
+item.dart_poison_strong.name=Strza≈Çka z truciznƒÖ jadowitej ≈ºaby
+item.dart_slowness.name=SpowalniajƒÖca Strza≈Çka
+item.dart_hunger.name=Strza≈Çka G≈Çodu
+item.dart_wither.name=Strza≈Çka Obumierania
 item.blowgun.name=Dmuchawka
 
 item.musket_barrel.name=Lufa Muszkietu
-item.gun_stock.name=RdzeÒ Pistoletu
-item.blunderbuss_barrel.name=Lufa Gar≥acza
-item.blunderbuss_bullet.name=NabÛj Gar≥acza
-item.blunderbuss.name=Gar≥acz
+item.gun_stock.name=Rdze≈Ñ Pistoletu
+item.blunderbuss_barrel.name=Lufa Gar≈Çacza
+item.blunderbuss_bullet.name=Nab√≥j Gar≈Çacza
+item.blunderbuss.name=Gar≈Çacz
 item.javelin.name=Oszczep
-item.musket_bullet.name=NabÛj Muszkietu
+item.musket_bullet.name=Nab√≥j Muszkietu
 item.musket.name=Muszkiet
-item.musket.loadstate=Stan Prze≥adowania
+item.musket.loadstate=Stan Prze≈Çadowania
 item.musket.loadstate.empty=Pusty
-item.musket.loadstate.loading=Prze≥adowywanie
-item.musket.loadstate.loaded=Prze≥adowany
+item.musket.loadstate.loading=Prze≈Çadowywanie
+item.musket.loadstate.loaded=Prze≈Çadowany
 
-death.attack.boomeranghit=G≥owa gracza %1$s zosta≥a zmiaødøona przez bumerang.
-death.attack.boomeranghit.player=G≥owa gracza %1$s zosta≥a zmiaødøona przez bumerang podczas walki z %2$s.
-death.attack.boomerangbreak=%1$s zosta≥ zabity przez w≥asny bumerang.
-death.attack.boomerangbreak.player=%1$s zosta≥ zabity przez w≥asny bumerang podczas walki z %2$s.
-death.attack.javelin=%1$s zosta≥ przebity.
-death.attack.javelin.player=%1$s zosta≥ przebity podczas walki z %2$s.
-death.attack.musket=%1$s zosta≥ postrzelony w g≥owÍ.
-death.attack.musket.player=%1$s zosta≥ postrzelony w g≥owÍ podczas walki z %2$s.
-death.attack.blunderbuss=%1$s zosta≥ rozdarty przez kule.
-death.attack.blunderbuss.player=%1$s zosta≥ rozdarty przez kule podczas walki z %2$s.
-death.attack.dart=%1$s pos≥uøy≥ jako ruchomy cel.
-death.attack.dart.player=%1$s pos≥uøy≥ jako ruchomy cel podczas walki z %2$s.
+death.attack.boomeranghit=G≈Çowa gracza %1$s zosta≈Ça zmia≈ºd≈ºona przez bumerang.
+death.attack.boomeranghit.player=G≈Çowa gracza %1$s zosta≈Ça zmia≈ºd≈ºona przez bumerang podczas walki z %2$s.
+death.attack.boomerangbreak=%1$s zosta≈Ç zabity przez w≈Çasny bumerang.
+death.attack.boomerangbreak.player=%1$s zosta≈Ç zabity przez w≈Çasny bumerang podczas walki z %2$s.
+death.attack.javelin=%1$s zosta≈Ç przebity.
+death.attack.javelin.player=%1$s zosta≈Ç przebity podczas walki z %2$s.
+death.attack.musket=%1$s zosta≈Ç postrzelony w g≈Çowƒô.
+death.attack.musket.player=%1$s zosta≈Ç postrzelony w g≈Çowƒô podczas walki z %2$s.
+death.attack.blunderbuss=%1$s zosta≈Ç rozdarty przez kule.
+death.attack.blunderbuss.player=%1$s zosta≈Ç rozdarty przez kule podczas walki z %2$s.
+death.attack.dart=%1$s pos≈Çu≈ºy≈Ç jako ruchomy cel.
+death.attack.dart.player=%1$s pos≈Çu≈ºy≈Ç jako ruchomy cel podczas walki z %2$s.
 
-versionchecker.ingame.outdated=DostÍpna nowa wersja
-versionchecker.ingame.downloadclick=Kliknij tutaj, aby pobraÊ
+versionchecker.ingame.outdated=Dostƒôpna nowa wersja
+versionchecker.ingame.downloadclick=Kliknij tutaj, aby pobraƒá
 versionchecker.ingame.download=Pobierz
