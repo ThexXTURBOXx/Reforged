@@ -31,12 +31,12 @@ item.iron_saber.name=Iron Saber
 item.diamond_saber.name=Diamond Saber
 item.copper_saber.name=Copper Saber
 
-item.wooden_musket.name=Wooden Musket
-item.stone_musket.name=Stone Musket
-item.golden_musket.name=Golden Musket
-item.iron_musket.name=Iron Musket
-item.diamond_musket.name=Diamond Musket
-item.copper_musket.name=Copper Musket
+item.wooden_musket.name=Musket with Wooden Bayonet
+item.stone_musket.name=Musket with Stone Bayonet
+item.golden_musket.name=Musket with Golden Bayonet
+item.iron_musket.name=Musket with Iron Bayonet
+item.diamond_musket.name=Musket with Diamond Bayonet
+item.copper_musket.name=Musket with Copper Bayonet
 
 item.wooden_knife.name=Wooden Knife
 item.stone_knife.name=Stone Knife
