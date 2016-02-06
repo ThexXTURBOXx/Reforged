@@ -127,20 +127,22 @@ public class EntityBoomerang extends EntityThrowable {
 			double bposz = posZ;
 			
 			if(this.ticksExisted >= 100) {
-				if(Math.abs(bposx - posx) <= distance && Math.abs(bposy - posy) <= distance && Math.abs(bposz - posz) <= distance) {
-					if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-						p.inventory.addItemStackToInventory(getItemStack());
+				if(!worldObj.isRemote) {
+					if(Math.abs(bposx - posx) <= distance && Math.abs(bposy - posy) <= distance && Math.abs(bposz - posz) <= distance) {
+						if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+							p.inventory.addItemStackToInventory(getItemStack());
+						} else {
+							//Custom sound later... [BREAK SOUND]
+						}
+						this.setDead();
 					} else {
-						//Custom sound later... [BREAK SOUND]
+						if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+							this.entityDropItem(getItemStack(), 0);
+						} else {
+							//Custom sound later... [BREAK SOUND]
+						}
+						this.setDead();			
 					}
-					this.setDead();
-				} else {
-					if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-						this.entityDropItem(getItemStack(), 0);
-					} else {
-						//Custom sound later... [BREAK SOUND]
-					}
-					this.setDead();			
 				}
 			}
 	}
@@ -176,7 +178,6 @@ public class EntityBoomerang extends EntityThrowable {
 						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 20);
 					} else {
 						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 2);
-						new LanguageRegistry();
 						p.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("item.boomerang.langBreak").replace("%1$s",getItemStack().getDisplayName())));
 					}
 				}
