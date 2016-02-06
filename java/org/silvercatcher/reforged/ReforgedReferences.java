@@ -1,5 +1,7 @@
 package org.silvercatcher.reforged;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
 import net.minecraft.util.ResourceLocation;
@@ -31,6 +33,9 @@ public class ReforgedReferences
 	
 	public static class GlobalValues
 	{
+		//Logger
+		public static Logger log = LogManager.getLogger(ReforgedMod.NAME);
+		
 		//Items
 		public static final boolean BATTLEAXE = CommonProxy.battleaxe;
 		public static final boolean BLOWGUN = CommonProxy.blowgun;

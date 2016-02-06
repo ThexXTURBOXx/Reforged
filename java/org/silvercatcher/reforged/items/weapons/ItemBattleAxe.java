@@ -33,7 +33,7 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 		setCreativeTab(ReforgedMod.tabReforged);
 
 	}
-
+	
 	@Override
 	public void registerRecipes() {
 
