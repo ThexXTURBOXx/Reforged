@@ -18,7 +18,7 @@ public class ReforgedEvents {
 	
 	@SubscribeEvent
 	public void onPlayerTick(PlayerTickEvent e) {
-		//Version Checker Notification
+		//Version Checker Chat Notification
 		if(!notificated) {
 			notificated = true;
 			if(!VersionChecker.isLatestVersion()) {
