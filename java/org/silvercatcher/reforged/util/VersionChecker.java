@@ -6,7 +6,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.Logger;
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
@@ -16,6 +19,7 @@ public class VersionChecker implements Runnable {
   private static String latestVersion = "";
   private static String downloadUrl = "http://minecraft.curseforge.com/projects/reforged-balkons-weapons-1-8";
   private static String jsonUrl = "https://raw.githubusercontent.com/TheOnlySilverClaw/Reforged/master/version.json";
+  private Logger log = GlobalValues.log;
   
   @Override
 	public void run()
@@ -39,22 +43,20 @@ public class VersionChecker implements Runnable {
 	    		  s = s.replace(":", "");
 				  latestVersion = s;
 	    		  	if(!s.equals(ReforgedMod.VERSION)) {
-	    		  		System.out.println("Newer version of the mod Reforged available: " + s);
+	    		  		log.info("Newer version of the mod Reforged available: " + s, new Object[0]);
 	    		  	} else {
-	    		  		System.out.println("Yay! You have the newest version of the mod Reforged :)");
+	    		  		log.info("Yay! You have the newest version of the mod Reforged :)", new Object[0]);
 	    		  	}
 	    		  	
-	    		  	//Sending version to Version Checker Mod by Dynious, if it is loaded
+	    		  	//Sending version to Version Checker Mod by Dynious, if it's loaded
 	    		  	if (Loader.isModLoaded("VersionChecker")) {
 	    		  		NBTTagCompound compound = new NBTTagCompound();
 	    		  		compound.setString("modDisplayName", ReforgedMod.NAME);
 	    		  		compound.setString("oldVersion", ReforgedMod.VERSION);
 	    		  		compound.setString("newVersion", latestVersion);
 	    		  		compound.setString("changeLog", getChangelog());
-	    		  		if (downloadUrl != null) {
-	    		  			compound.setString("updateUrl", downloadUrl);
-	    		  			compound.setBoolean("isDirectLink", false);
-	    		  		}
+	    		  		compound.setString("updateUrl", downloadUrl);
+	    		  		compound.setBoolean("isDirectLink", false);
 	    		  		FMLInterModComms.sendRuntimeMessage(ReforgedMod.ID, "VersionChecker", "addUpdate", compound);
 	    		  	}
 	    	  }
@@ -102,7 +104,7 @@ public class VersionChecker implements Runnable {
 	    		  s = s.replace(",", "");
 	    		  s = s.replace("	", "");
 	    		  s = s.replace(":", "");
-	    		  s = s.replace("\n", enter);
+	    		  s = s.replace("/n", enter);
 				  changelog = s;
 	    	  }
 	      }
