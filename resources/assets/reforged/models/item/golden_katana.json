@@ -3,5 +3,12 @@
 
     "textures": {
         "layer0": "reforged:items/golden_katana"
-    }
+    },	
+	"display": {
+		"thirdperson": {
+			"rotation": [ 358, 92, 296 ],
+			"translation": [ 0.00, -1.00, -6.25 ],
+			"scale": [ 1.00, 1.00, 1.00 ]
+		}
+	}
 }
