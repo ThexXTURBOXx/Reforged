@@ -113,7 +113,7 @@ public class EntityBoomerang extends EntityThrowable {
 			motionX -= 0.05D * dx;
 			motionY -= 0.05D * dy;
 			motionZ -= 0.05D * dz;
-
+			
 			int distance = GlobalValues.DISTANCE_BOOMERANG;
 			double px = getCoord("X");
 			double py = getCoord("Y");
@@ -123,7 +123,7 @@ public class EntityBoomerang extends EntityThrowable {
 				py = getThrowerASave().posY;
 				pz = getThrowerASave().posZ;				
 			}
-			if(this.ticksExisted >= 100) {
+			if(this.ticksExisted >= 100 || isInWater()) {
 				if(!worldObj.isRemote) {
 					if(Math.abs(posX - px) <= distance && Math.abs(posY - py) <= distance && Math.abs(posZ - pz) <= distance) {
 						if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
@@ -166,7 +166,7 @@ public class EntityBoomerang extends EntityThrowable {
 				px = getThrowerASave().posX;
 				py = getThrowerASave().posY;
 				pz = getThrowerASave().posZ;				
-			}			
+			}
 			if(!worldObj.isRemote && Math.abs(px - posX) <= distance && Math.abs(py - posY) <= distance && Math.abs(pz - posZ) <= distance) {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 					EntityPlayer p = (EntityPlayer) getThrowerASave();
