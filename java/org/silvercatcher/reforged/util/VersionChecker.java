@@ -42,22 +42,11 @@ public class VersionChecker implements Runnable {
 	    		  s = s.replace("	", "");
 	    		  s = s.replace(":", "");
 				  latestVersion = s;
-	    		  	if(!s.equals(ReforgedMod.VERSION)) {
-	    		  		log.info("Newer version of " + ReforgedMod.NAME + "available: " + s, new Object[0]);
+	    		  	if(!s.equalsIgnoreCase(ReforgedMod.VERSION)) {
+	    		  		log.info("Newer version of " + ReforgedMod.NAME + " available: " + s, new Object[0]);
+	    		  		sendToVersionCheckMod();
 	    		  	} else {
-	    		  		log.info("Yay! You have the newest version of " + ReforgedMod.NAME + ":)", new Object[0]);
-	    		  	}
-	    		  	
-	    		  	//Sending version to Version Checker Mod by Dynious, if it's loaded
-	    		  	if (Loader.isModLoaded("VersionChecker")) {
-	    		  		NBTTagCompound compound = new NBTTagCompound();
-	    		  		compound.setString("modDisplayName", ReforgedMod.NAME);
-	    		  		compound.setString("oldVersion", ReforgedMod.VERSION);
-	    		  		compound.setString("newVersion", latestVersion);
-	    		  		compound.setString("changeLog", getChangelog());
-	    		  		compound.setString("updateUrl", downloadUrl);
-	    		  		compound.setBoolean("isDirectLink", false);
-	    		  		FMLInterModComms.sendRuntimeMessage(ReforgedMod.ID, "VersionChecker", "addUpdate", compound);
+	    		  		log.info("Yay! You have the newest version of " + ReforgedMod.NAME + " :)", new Object[0]);
 	    		  	}
 	    	  }
 	      }
@@ -115,4 +104,18 @@ public class VersionChecker implements Runnable {
 	    }
 	    return changelog;
 	  }
+	  
+	  public void sendToVersionCheckMod() {
+		  //Sending version to Version Checker Mod by Dynious, if it's loaded
+		  if (Loader.isModLoaded("VersionChecker")) {
+			  NBTTagCompound compound = new NBTTagCompound();
+			  compound.setString("modDisplayName", ReforgedMod.NAME);
+			  compound.setString("oldVersion", ReforgedMod.VERSION);
+			  compound.setString("newVersion", latestVersion);
+			  compound.setString("changeLog", getChangelog());
+			  compound.setString("updateUrl", downloadUrl);
+			  compound.setBoolean("isDirectLink", false);
+			  FMLInterModComms.sendRuntimeMessage(ReforgedMod.ID, "VersionChecker", "addUpdate", compound);
+			  }
+		  }	  
 }
