@@ -5,11 +5,15 @@ import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EntityJavelin extends EntityThrowable {
 
@@ -20,6 +24,7 @@ public class EntityJavelin extends EntityThrowable {
 	public EntityJavelin(World worldIn, EntityLivingBase throwerIn, ItemStack stack, int durationLoaded) {
 		super(worldIn, throwerIn);
 		setItemStack(stack);
+		GlobalValues.log.info("LOL");
 		setThrowerName(throwerIn.getName());
 		setDurLoaded(durationLoaded);
 		if(durationLoaded < 20) {
@@ -79,6 +84,13 @@ public class EntityJavelin extends EntityThrowable {
 				
 			} else {
 				setItemStack(stack);
+			}
+			if(target.entityHit instanceof EntityLivingBase) {
+				EntityLivingBase entityHit = (EntityLivingBase) target.entityHit;
+				if(entityHit instanceof EntityPigZombie) {
+					EntityPigZombie en = (EntityPigZombie) entityHit;
+					en.setRevengeTarget(getThrowerASave());
+				}
 			}
 		}
 		this.setDead();
