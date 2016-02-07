@@ -8,9 +8,13 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.passive.EntityHorse;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.DamageSource;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemSaber extends ItemSword implements ItemExtension {
@@ -29,8 +33,17 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 		setMaxStackSize(1);
 		setMaxDamage(materialDefinition.getMaxUses());
 	}
-
-
+	
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		if(player.isRiding() && player.ridingEntity.getName().equalsIgnoreCase("Horse")) {
+			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage() + getHitDamage() / 2f);
+		} else {
+			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage());
+		}
+		return true;
+	}
+	
 	@Override
 	public void registerRecipes() {
 		
@@ -47,7 +60,6 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 		
 		return materialDefinition.getDamageVsEntity() + 3.5f;
 	}
-	
 	
 	@SuppressWarnings("rawtypes")
 	@Override
