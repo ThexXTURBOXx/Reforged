@@ -3,16 +3,26 @@
     "textures": {
         "layer0": "reforged:items/primitive_javelin"
     },
-    "display": {
-        "thirdperson": {
-            "rotation": [ 165, 80, 210 ],
-            "translation": [ 0.0, 2.25, -3.25 ],
-            "scale": [ 2.0, 2.0, 2.0 ]
-        },
-        "firstperson": {
-            "rotation": [ 10, 210, 75 ],
-            "translation": [ 0, 4, 2 ],
-            "scale": [ 2.8, 2.8, 2.8 ]
-        }
-    }
+	"display": {
+		"thirdperson": {
+			"rotation": [ 179, 88, 224 ],
+			"translation": [ 0.00, 1.50, -1.50 ],
+			"scale": [ 2.00, 2.00, 2.00 ]
+		},
+		"firstperson": {
+			"rotation": [ 0, 225, 25 ],
+			"translation": [ 7.50, 2.75, 0.00 ],
+			"scale": [ 2.25, 2.25, 2.25 ]
+		},
+		"gui": {
+			"rotation": [ 0, 0, 0 ],
+			"translation": [ 0.00, 0.00, 0.00 ],
+			"scale": [ 1.00, 1.00, 1.00 ]
+		},
+		"head": {
+			"rotation": [ 0, 0, 0 ],
+			"translation": [ 0.00, 0.00, 0.00 ],
+			"scale": [ 1.00, 1.00, 1.00 ]
+		}
+	}
 }
