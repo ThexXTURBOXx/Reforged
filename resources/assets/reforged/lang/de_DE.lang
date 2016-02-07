@@ -14,14 +14,12 @@ item.stone_battleaxe.name=Steinstreitaxt
 item.iron_battleaxe.name=Eisenstreitaxt
 item.golden_battleaxe.name=Goldstreitaxt
 item.diamond_battleaxe.name=Diamantstreitaxt
-item.copper_battleaxe.name=Kupferstreitaxt
 
 item.wooden_boomerang.name=Holzbumerang
 item.stone_boomerang.name=Steinbumerang
 item.golden_boomerang.name=Goldbumerang
 item.iron_boomerang.name=Eisenbumerang
 item.diamond_boomerang.name=Diamantbumerang
-item.copper_boomerang.name=Kupferbumerang
 item.boomerang.langBreak=Der %1$s ist in deinen Händen zerbrochen.
 
 item.wooden_saber.name=Holzsäbel
@@ -29,28 +27,24 @@ item.stone_saber.name=Steinsäbel
 item.golden_saber.name=Goldsäbel
 item.iron_saber.name=Eisensäbel
 item.diamond_saber.name=Diamantsäbel
-item.copper_saber.name=Kupfersäbel
 
 item.wooden_musket.name=Muskete mit Holzbajonett
 item.stone_musket.name=Muskete mit Steinbajonett
 item.golden_musket.name=Muskete mit Goldbajonett
 item.iron_musket.name=Muskete mit Eisenbajonett
 item.diamond_musket.name=Muskete mit Diamantbajonett
-item.copper_musket.name=Muskete mit Kupferbajonett
 
 item.wooden_knife.name=Holzmesser
 item.stone_knife.name=Steinmesser
 item.golden_knife.name=Goldmesser
 item.iron_knife.name=Eisenmesser
 item.diamond_knife.name=Diamantmesser
-item.copper_knife.name=Kupfermesser
 
 item.wooden_katana.name=Holzkatana
 item.stone_katana.name=Steinkatana
 item.golden_katana.name=Goldkatana
 item.iron_katana.name=Eisenkatana
 item.diamond_katana.name=Diamantkatana
-item.copper_katana.name=Kupferkatana
 
 item.dart_normal.name=Normaler Dartpfeilpfeil
 item.dart_poison.name=Giftiger Dartpfeil

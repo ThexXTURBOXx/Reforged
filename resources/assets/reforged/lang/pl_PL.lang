@@ -14,14 +14,12 @@ item.stone_battleaxe.name=Kamienny Topór Bitewny
 item.iron_battleaxe.name=Żelazny Topór Bitewny
 item.golden_battleaxe.name=Złoty Topór Bitewny
 item.diamond_battleaxe.name=Diamentowy Topór Bitewny
-item.copper_battleaxe.name=Miedziany Topór Bitewny
 
 item.wooden_boomerang.name=Drewniany Bumerang
 item.stone_boomerang.name=Kamienny Bumerang
 item.golden_boomerang.name=Złoty Bumerang
 item.iron_boomerang.name=Żelazny Bumerang
 item.diamond_boomerang.name=Diamentowy Bumerang
-item.copper_boomerang.name=Miedziany Bumerang
 item.boomerang.langBreak=%1$s złamał się w twoich rękach.
 
 item.wooden_saber.name=Drewniana Szabla
@@ -29,28 +27,24 @@ item.stone_saber.name=Kamienna Szabla
 item.golden_saber.name=Złota Szabla
 item.iron_saber.name=Żelazna Szabla
 item.diamond_saber.name=Diamentowa Szabla
-item.copper_saber.name=Miedziana Szabla
 
 item.wooden_musket.name=Muszkiet z drewnianym bagnetem
 item.stone_musket.name=Muszkiet z kamiennym bagnetem
 item.golden_musket.name=Muszkiet ze złotym bagnetem
 item.iron_musket.name=Muszkiet z żelaznym bagnetem
 item.diamond_musket.name=Muszkiet z diamentowym bagnetem
-item.copper_musket.name=Muszkiet z miedzianym bagnetem
 
 item.wooden_knife.name=Drewniany Nóż
 item.stone_knife.name=Żelazny Nóż
 item.golden_knife.name=Złoty Nóż
 item.iron_knife.name=Żelazny Nóż
 item.diamond_knife.name=Diamentowy Nóż
-item.copper_knife.name=Miedziany Nóż
 
 item.wooden_katana.name=Drewniana Katana
 item.stone_katana.name=Kamienna Katana
 item.golden_katana.name=Złota Katana
 item.iron_katana.name=Żelazna Katana
 item.diamond_katana.name=Diamentowa Katana
-item.copper_katana.name=Miedziana Katana
 
 item.dart_normal.name=Strzałka
 item.dart_poison.name=Zatruta Strzałka
