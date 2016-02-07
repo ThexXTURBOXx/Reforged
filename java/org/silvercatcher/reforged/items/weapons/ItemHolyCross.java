@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.items.weapons;
 import java.util.LinkedList;
 
 import org.silvercatcher.reforged.items.ExtendedItem;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -36,7 +37,7 @@ public class ItemHolyCross extends ExtendedItem {
 				"sds",
 				" s ",
 				's', Items.stick,
-				'd', Items.diamond);
+				'd', Items.emerald);
 	}
 
 	@Override

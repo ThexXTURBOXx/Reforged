@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.entities;
 
 import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -21,13 +22,14 @@ public class EntityJavelin extends EntityThrowable {
 		setItemStack(stack);
 		setThrowerName(throwerIn.getName());
 		setDurLoaded(durationLoaded);
-		if(durationLoaded < 10) {
-			durationLoaded = 10;
+		if(durationLoaded < 20) {
+			durationLoaded = 20;
+		} else if(durationLoaded > 40) {
+			durationLoaded = 40;
 		}
-		//System.out.println(5 + getDurLoaded() / 5);
-		this.motionX *= (durationLoaded / 10);
-		this.motionY *= (durationLoaded / 10);
-		this.motionZ *= (durationLoaded / 10);
+		this.motionX *= (durationLoaded / 20);
+		this.motionY *= (durationLoaded / 20);
+		this.motionZ *= (durationLoaded / 20);
 		this.setPositionAndRotation(throwerIn.posX, throwerIn.posY + throwerIn.getEyeHeight(),
 				throwerIn.posZ, throwerIn.rotationYaw, throwerIn.rotationPitch);
 	}
@@ -71,7 +73,7 @@ public class EntityJavelin extends EntityThrowable {
 			}
 		} else {
 			//It's an entity
-			target.entityHit.attackEntityFrom(ReforgedRegistry.javelinDamage, 5 + getDurLoaded() / 5);
+			target.entityHit.attackEntityFrom(ReforgedRegistry.javelinDamage, 5 + getDurLoaded() / 10);
 			ItemStack stack = getItemStack();
 			if(stack.attemptDamageItem(1, rand)) {
 				

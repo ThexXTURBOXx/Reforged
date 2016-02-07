@@ -1,10 +1,14 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.items.ExtendedItem;
+import org.silvercatcher.reforged.items.ItemExtension;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -21,6 +25,25 @@ public class ItemBlowGun extends ExtendedItem {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
+		net.minecraftforge.event.entity.player.ArrowNockEvent event = new net.minecraftforge.event.entity.player.ArrowNockEvent(playerIn, itemStackIn);
+        if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) return event.result;
+
+        	if (playerIn.capabilities.isCreativeMode || playerIn.inventory.hasItem(this))
+        		{
+        			playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
+        		}
+		return itemStackIn;
+	}
+	
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack)
+    {
+        return EnumAction.BOW;
+    }
+	
+	@Override
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
+		if(timeLeft <= getMaxItemUseDuration(stack) - 15) {
 		EntityDart dart;
 		if(!worldIn.isRemote) {
 		if(playerIn.inventory.hasItem(ReforgedRegistry.DART_NORMAL)) {
@@ -46,22 +69,27 @@ public class ItemBlowGun extends ExtendedItem {
 		}
 		if(dart != null) {
 			worldIn.spawnEntityInWorld(dart);
-			itemStackIn.attemptDamageItem(1, itemRand);
-			if(itemStackIn.getItemDamage() >= 40) {
-				playerIn.inventory.consumeInventoryItem(itemStackIn.getItem());
+			if(!playerIn.capabilities.isCreativeMode) stack.attemptDamageItem(1, itemRand);
+			if(stack.getItemDamage() >= 40) {
+				playerIn.inventory.consumeInventoryItem(stack.getItem());
 			}
 		}
 		}
-		return itemStackIn;
+		}
 	}
+	
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack)
+    {
+        return ItemExtension.USE_DURATON;
+    }
 	
 	@Override
 	public void registerRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(this),
-				 "scs",
-				 "c c",
-				 "scs",
-				 's', Items.string,
+				 "r  ",
+				 " r ",
+				 "  r",
 				 'c', Items.reeds);
 	}
 }

@@ -1,6 +1,5 @@
 package org.silvercatcher.reforged.entities;
 
-import org.apache.logging.log4j.Logger;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
@@ -106,7 +105,6 @@ public class EntityBoomerang extends EntityThrowable {
 			double dx = this.posX - getCoord("X");
 			double dy = this.posY - getCoord("Y");
 			double dz = this.posZ - getCoord("Z");
-			
 			double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
 			dx /= d;
 			dy /= d;

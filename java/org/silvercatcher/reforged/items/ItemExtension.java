@@ -17,7 +17,7 @@ public interface ItemExtension {
 
 	public static final UUID itemModifierUUID = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
 	
-	public static final int USE_DURATON = 40;
+	public static final int USE_DURATON = 72000;
 	
 	@SuppressWarnings("rawtypes")
 	default Multimap getAttributeModifiers(ItemStack stack) {

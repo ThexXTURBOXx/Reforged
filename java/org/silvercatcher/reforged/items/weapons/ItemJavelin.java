@@ -6,6 +6,7 @@ import org.silvercatcher.reforged.items.ItemExtension;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -82,6 +83,11 @@ public class ItemJavelin extends ExtendedItem {
 	        }
 	    }
     }
+	
+	@Override
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+		return stack;
+	}
 	
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
