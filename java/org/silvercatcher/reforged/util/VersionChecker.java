@@ -43,9 +43,9 @@ public class VersionChecker implements Runnable {
 	    		  s = s.replace(":", "");
 				  latestVersion = s;
 	    		  	if(!s.equals(ReforgedMod.VERSION)) {
-	    		  		log.info("Newer version of the mod Reforged available: " + s, new Object[0]);
+	    		  		log.info("Newer version of " + ReforgedMod.NAME + "available: " + s, new Object[0]);
 	    		  	} else {
-	    		  		log.info("Yay! You have the newest version of the mod Reforged :)", new Object[0]);
+	    		  		log.info("Yay! You have the newest version of " + ReforgedMod.NAME + ":)", new Object[0]);
 	    		  	}
 	    		  	
 	    		  	//Sending version to Version Checker Mod by Dynious, if it's loaded
