@@ -28,7 +28,7 @@ public class EntityBulletMusket extends EntityThrowable {
 			//It's a block
 		} else {
 			//It's an entity
-			target.entityHit.attackEntityFrom(ReforgedRegistry.musketDamage, 4);
+			target.entityHit.attackEntityFrom(ReforgedRegistry.musketDamage, 10);
 		}
 		setDead();
 	}

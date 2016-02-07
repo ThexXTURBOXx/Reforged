@@ -42,7 +42,7 @@ public class EntityBulletBlunderbuss extends EntityThrowable {
 			//It's a block
 		} else {
 			//It's an entity
-			target.entityHit.attackEntityFrom(ReforgedRegistry.blunderbussDamage, 4);
+			target.entityHit.attackEntityFrom(ReforgedRegistry.blunderbussDamage, 10);
 		}
 		setDead();
 	}
