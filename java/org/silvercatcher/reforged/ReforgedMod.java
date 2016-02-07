@@ -23,18 +23,7 @@ public class ReforgedMod
 		@Override
 		public Item getTabIconItem() {
 			return ReforgedRegistry.IRON_BATTLE_AXE;
-		}
-		
-		@Override
-		public boolean hasSearchBar() {
-			return true;
-		}
-		
-		@Override
-		public String getBackgroundImageName() {
-			return "item_search.png";
-		}
-		
+		}		
 	};
     
     @Instance(ID)
