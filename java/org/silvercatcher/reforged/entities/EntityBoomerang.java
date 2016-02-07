@@ -5,6 +5,7 @@ import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.Item.ToolMaterial;
@@ -197,6 +198,13 @@ public class EntityBoomerang extends EntityThrowable {
 					this.setDead();
 				} else {
 					setItemStack(stack);
+				}
+				if(target.entityHit instanceof EntityLivingBase) {
+					EntityLivingBase entityHit = (EntityLivingBase) target.entityHit;
+					if(entityHit instanceof EntityPigZombie) {
+						EntityPigZombie en = (EntityPigZombie) entityHit;
+						en.setRevengeTarget(getThrowerASave());
+					}
 				}
 			} else {
 				//It's the thrower himself
