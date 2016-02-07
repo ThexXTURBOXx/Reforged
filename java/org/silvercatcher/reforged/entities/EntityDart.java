@@ -75,16 +75,16 @@ public class EntityDart extends EntityThrowable {
 					
 					case "normal": break;
 					
-					case "hunger": p.addPotionEffect(new PotionEffect(Potion.hunger.getId(), 400)); break;
+					case "hunger": p.addPotionEffect(new PotionEffect(Potion.hunger.getId(), 400, 1)); break;
 					
-					case "poison": p.addPotionEffect(new PotionEffect(Potion.poison.getId(), 300)); break;
+					case "poison": p.addPotionEffect(new PotionEffect(Potion.poison.getId(), 300, 1)); break;
 					
-					case "poison_strong": p.addPotionEffect(new PotionEffect(Potion.poison.getId(), 400, 1)); break;
+					case "poison_strong": p.addPotionEffect(new PotionEffect(Potion.poison.getId(), 400, 2)); break;
 					
-					case "slowness": p.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 400));
-								 	 p.addPotionEffect(new PotionEffect(Potion.digSlowdown.getId(), 400)); break;
+					case "slowness": p.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 400, 1));
+								 	 p.addPotionEffect(new PotionEffect(Potion.digSlowdown.getId(), 400, 1)); break;
 								 	 
-					case "wither": p.addPotionEffect(new PotionEffect(Potion.wither.getId(), 300)); break;
+					case "wither": p.addPotionEffect(new PotionEffect(Potion.wither.getId(), 400, 1)); break;
 					
 					default: throw new IllegalArgumentException("No effect called " + getEffect().substring(5) + " found!");
 					
