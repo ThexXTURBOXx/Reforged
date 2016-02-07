@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -53,12 +54,14 @@ public class ItemKnife extends ItemSword implements ItemExtension {
 
 			boolean seen = d1 > 1 - 0.25 / d0;
 						
-			if(seen && target.canEntityBeSeen(player)) {
-				target.attackEntityFrom(DamageSource.causePlayerDamage(player), 2f);
+			if(!seen && target.canEntityBeSeen(player)) {
+				target.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage() + 2f);
+			} else {
+				target.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage());
 			}
 		}
 		
-		return hit;
+		return true;
 	}
 	
 	@Override
