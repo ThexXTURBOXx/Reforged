@@ -2,8 +2,8 @@ package org.silvercatcher.reforged;
 
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
