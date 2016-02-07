@@ -113,8 +113,9 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
 		tooltip.add(LanguageRegistry.instance().getStringLocalization("item.musket.loadstate")
-				+ LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.")
-				+ (loadState == empty ? "empty" : (loadState == loaded ? "loaded" : "loading")));
+				+ ": " + (loadState == empty ? LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.empty")
+						: (loadState == loaded ? LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.loaded")
+								: LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.loading"))));
 	}
 	
 	@Override

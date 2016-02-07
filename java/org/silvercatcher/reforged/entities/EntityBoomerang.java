@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.entities;
 
+import org.apache.logging.log4j.Logger;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
@@ -122,13 +123,12 @@ public class EntityBoomerang extends EntityThrowable {
 			double posx = getCoord("X");
 			double posy = getCoord("Y");
 			double posz = getCoord("Z");
-			double bposx = posX;
-			double bposy = posY;
-			double bposz = posZ;
-			
+			double px = p.posX;
+			double py = p.posY;
+			double pz = p.posZ;
 			if(this.ticksExisted >= 100) {
 				if(!worldObj.isRemote) {
-					if(Math.abs(bposx - posx) <= distance && Math.abs(bposy - posy) <= distance && Math.abs(bposz - posz) <= distance) {
+					if(Math.abs(posX - px) <= distance && Math.abs(posY - py) <= distance && Math.abs(posZ - pz) <= distance) {
 						if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 							p.inventory.addItemStackToInventory(getItemStack());
 						} else {

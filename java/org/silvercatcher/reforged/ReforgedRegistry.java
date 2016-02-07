@@ -137,10 +137,12 @@ public class ReforgedRegistry {
 			registrationList.add(WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
 			registrationList.add(STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));
 			registrationList.add(GOLDEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.GOLD));
+		}
+			//This has to be registered! Else, the Creative Tab would be broken!
+			registrationList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
+		if(GlobalValues.BATTLEAXE) {
 			registrationList.add(DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.EMERALD));
 		}
-		//This has to be registered! Else, the Creative Tab would be broken!
-		registrationList.add(IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
 		
 		if(GlobalValues.BOOMERANG) {
 			registrationList.add(WOODEN_BOOMERANG = new ItemBoomerang(ToolMaterial.WOOD));
