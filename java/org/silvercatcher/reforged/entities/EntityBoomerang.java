@@ -65,15 +65,14 @@ public class EntityBoomerang extends EntityThrowable {
 		dataWatcher.updateObject(5, stack);
 	}
 	
-	public void setCoords(double playerX, double playerY, double playerZ) {
-		dataWatcher.updateObject(7, (float) playerX);
-		dataWatcher.updateObject(8, (float) playerY);
-		dataWatcher.updateObject(9, (float) playerZ);
+	public void setCoords(double entityX, double entityY, double entityZ) {
+		dataWatcher.updateObject(7, (float) entityX);
+		dataWatcher.updateObject(8, (float) entityY);
+		dataWatcher.updateObject(9, (float) entityZ);
 	}
 	
 	public double getCoord(String coordId) {
 		switch(coordId) {
-		//1 returns X, 2 returns Y, 3 returns Z
 		case "X": return dataWatcher.getWatchableObjectFloat(7);
 		case "Y": return dataWatcher.getWatchableObjectFloat(8);
 		case "Z": return dataWatcher.getWatchableObjectFloat(9);
@@ -118,18 +117,19 @@ public class EntityBoomerang extends EntityThrowable {
 			motionZ -= 0.05D * dz;
 
 			int distance = GlobalValues.DISTANCE_BOOMERANG;
-			
-			EntityPlayer p = (EntityPlayer) getThrowerASave();
-			double posx = getCoord("X");
-			double posy = getCoord("Y");
-			double posz = getCoord("Z");
-			double px = p.posX;
-			double py = p.posY;
-			double pz = p.posZ;
+			double px = getCoord("X");
+			double py = getCoord("Y");
+			double pz = getCoord("Z");
+			if(getThrowerASave() != null) {
+				px = getThrowerASave().posX;
+				py = getThrowerASave().posY;
+				pz = getThrowerASave().posZ;				
+			}
 			if(this.ticksExisted >= 100) {
 				if(!worldObj.isRemote) {
 					if(Math.abs(posX - px) <= distance && Math.abs(posY - py) <= distance && Math.abs(posZ - pz) <= distance) {
 						if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+							EntityPlayer p = (EntityPlayer) getThrowerASave();
 							p.inventory.addItemStackToInventory(getItemStack());
 						} else {
 							//Custom sound later... [BREAK SOUND]
@@ -161,19 +161,20 @@ public class EntityBoomerang extends EntityThrowable {
 			//Distance specifies the range the boomerang should get auto-collected
 			int distance = GlobalValues.DISTANCE_BOOMERANG;
 			this.setDead();
-			
-			EntityPlayer p = (EntityPlayer) getThrowerASave();
-			double posx = getCoord("X");
-			double posy = getCoord("Y");
-			double posz = getCoord("Z");
-			double bposx = posX;
-			double bposy = posY;
-			double bposz = posZ;
-			
-			if(!worldObj.isRemote && Math.abs(bposx - posx) <= distance && Math.abs(bposy - posy) <= distance && Math.abs(bposz - posz) <= distance) {
+			double px = getCoord("X");
+			double py = getCoord("Y");
+			double pz = getCoord("Z");
+			if(getThrowerASave() != null) {
+				px = getThrowerASave().posX;
+				py = getThrowerASave().posY;
+				pz = getThrowerASave().posZ;				
+			}			
+			if(!worldObj.isRemote && Math.abs(px - posX) <= distance && Math.abs(py - posY) <= distance && Math.abs(pz - posZ) <= distance) {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+					EntityPlayer p = (EntityPlayer) getThrowerASave();
 					p.inventory.addItemStackToInventory(getItemStack());
 				} else {
+					EntityPlayer p = (EntityPlayer) getThrowerASave();
 					if(p.getHealth() <= 2.0F) {
 						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 20);
 					} else {
@@ -219,9 +220,9 @@ public class EntityBoomerang extends EntityThrowable {
 		super.writeEntityToNBT(tagCompound);
 		
 		tagCompound.setString("thrower", getThrowerASave().getName());
-		tagCompound.setDouble("throwerX", getCoord("X"));
-		tagCompound.setDouble("throwerY", getCoord("Y"));
-		tagCompound.setDouble("throwerZ", getCoord("Z"));
+		tagCompound.setDouble("entityX", getCoord("X"));
+		tagCompound.setDouble("entityY", getCoord("Y"));
+		tagCompound.setDouble("entityZ", getCoord("Z"));
 		
 		if(getItemStack() != null) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
@@ -233,7 +234,7 @@ public class EntityBoomerang extends EntityThrowable {
 		
 		super.readEntityFromNBT(tagCompund);
 		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
-		setCoords(tagCompund.getDouble("throwerX"), tagCompund.getDouble("throwerY"), tagCompund.getDouble("throwerZ"));
+		setCoords(tagCompund.getDouble("entityX"), tagCompund.getDouble("entityY"), tagCompund.getDouble("entityZ"));
 		setThrowerName(tagCompund.getString("thrower"));
 	}
 }

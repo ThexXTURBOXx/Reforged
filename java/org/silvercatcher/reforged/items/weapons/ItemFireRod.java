@@ -13,7 +13,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemFireRod extends ExtendedItem {
 
-	public static final int FIRE_DURATION = 6;
+	public static final int FIRE_DURATION = 10;
 	
 	public ItemFireRod() {
 		
@@ -62,7 +62,9 @@ public class ItemFireRod extends ExtendedItem {
 		if(!entity.isImmuneToFire()) {
 			entity.setFire(FIRE_DURATION);
 		}
-		--stack.stackSize;
+		if(player.capabilities.isCreativeMode) {
+			--stack.stackSize;
+		}
 		return false;
 	}
 
