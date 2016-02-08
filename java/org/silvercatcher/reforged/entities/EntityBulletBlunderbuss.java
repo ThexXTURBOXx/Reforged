@@ -32,7 +32,7 @@ public class EntityBulletBlunderbuss extends ReforgedThrowable {
 		this.motionY += randomNumY / 100;
 		this.motionZ += randomNumZ / 100;
 	}
-
+	
 	@Override
 	protected void onImpact(MovingObjectPosition target) {
 		super.onImpact(target);
@@ -41,7 +41,10 @@ public class EntityBulletBlunderbuss extends ReforgedThrowable {
 			//It's a block
 		} else {
 			//It's an entity
-			target.entityHit.attackEntityFrom(ReforgedRegistry.blunderbussDamage, 10);
+			float damage;
+			if(ticksExisted > 12) {damage = 0;} else {damage = 12 - ticksExisted;}
+			System.out.println(damage);
+			target.entityHit.attackEntityFrom(ReforgedRegistry.blunderbussDamage, damage);
 		}
 		setDead();
 	}
