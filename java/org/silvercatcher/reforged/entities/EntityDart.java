@@ -4,9 +4,6 @@ import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.others.ItemDart;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -15,7 +12,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityDart extends EntityThrowable {
+public class EntityDart extends ReforgedThrowable {
 	
 	public EntityDart(World worldIn) {
 		
@@ -24,35 +21,21 @@ public class EntityDart extends EntityThrowable {
 	
 	public EntityDart(World worldIn, EntityLivingBase getThrowerIn, ItemStack stack) {
 		
-		super(worldIn, getThrowerIn);
+		super(worldIn, getThrowerIn, stack);
 		setItemStack(stack);
-		this.setPositionAndRotation(getThrowerIn.posX, getThrowerIn.posY + getThrowerIn.getEyeHeight(), getThrowerIn.posZ, getThrowerIn.rotationYaw, getThrowerIn.rotationPitch);
-		setThrowerName(getThrowerIn.getName());
 	}
 	
 	@Override
 	protected void entityInit() {
 		super.entityInit();
 		
-		// id 5 = ItemStack of Dart, type 5 = ItemStack
-		dataWatcher.addObjectByDataType(5, 5);
-		
-		// id 6 = Name of Thrower, type 4 = String
-		dataWatcher.addObjectByDataType(6, 4);
-	}
-	
-	public EntityLivingBase getThrowerASave() {
-		return getEntityWorld().getPlayerEntityByName(dataWatcher.getWatchableObjectString(6));
-	}
-	
-	public void setThrowerName(String name) {
-		
-		dataWatcher.updateObject(6, name);
+		// id 6 = ItemStack of Dart, type 5 = ItemStack
+		dataWatcher.addObjectByDataType(6, 5);
 	}
 
 	public ItemStack getItemStack() {
 		
-		return dataWatcher.getWatchableObjectItemStack(5);
+		return dataWatcher.getWatchableObjectItemStack(6);
 	}
 	
 	public void setItemStack(ItemStack stack) {
@@ -60,7 +43,7 @@ public class EntityDart extends EntityThrowable {
 		if(stack == null || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
-		dataWatcher.updateObject(5, stack);
+		dataWatcher.updateObject(6, stack);
 	}
 	
 	public String getEffect() {
@@ -69,6 +52,7 @@ public class EntityDart extends EntityThrowable {
 
 	@Override
 	protected void onImpact(MovingObjectPosition target) {
+		super.onImpact(target);
 
 		//Target is entity or block?
 		if(target.entityHit == null) {
@@ -103,24 +87,23 @@ public class EntityDart extends EntityThrowable {
 					default: throw new IllegalArgumentException("No effect called " + getEffect().substring(5) + " found!");
 					
 					}
-					
-					if(p instanceof EntityPigZombie) {
-						EntityPigZombie en = (EntityPigZombie) p;
-						en.setRevengeTarget(getThrowerASave());
-					}
 				}
 			}
 		}
 		//Custom sound later... [BREAK SOUND]
 		this.setDead();
 	}
+	
+	@Override
+	protected float getGravityVelocity() {
+		return 0.03F;
+	}
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tagCompound) {
 		
 		super.writeEntityToNBT(tagCompound);
-
-		tagCompound.setString("thrower", getThrowerASave().getName());
+		
 		if(getItemStack() != null) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
 		}
@@ -130,8 +113,7 @@ public class EntityDart extends EntityThrowable {
 	public void readEntityFromNBT(NBTTagCompound tagCompund) {
 		
 		super.readEntityFromNBT(tagCompund);
-
-		setThrowerName(tagCompund.getString("thrower"));
+		
 		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
 	}
 }

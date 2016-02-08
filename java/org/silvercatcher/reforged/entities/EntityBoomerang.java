@@ -5,9 +5,7 @@ import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,7 +14,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
-public class EntityBoomerang extends EntityThrowable {
+public class EntityBoomerang extends ReforgedThrowable {
 	
 	public EntityBoomerang(World worldIn) {
 		
@@ -25,22 +23,17 @@ public class EntityBoomerang extends EntityThrowable {
 	
 	public EntityBoomerang(World worldIn, EntityLivingBase getThrowerIn, ItemStack stack) {
 		
-		super(worldIn, getThrowerIn);
+		super(worldIn, getThrowerIn, stack);
 		setItemStack(stack);
-		setThrowerName(getThrowerIn.getName());
 		setCoords(getThrowerIn.posX, getThrowerIn.posY + getThrowerIn.getEyeHeight(), getThrowerIn.posZ);
-		this.setPositionAndRotation(getThrowerIn.posX, getThrowerIn.posY + getThrowerIn.getEyeHeight(), getThrowerIn.posZ, getThrowerIn.rotationYaw, getThrowerIn.rotationPitch);
 	}
 	
 	@Override
 	protected void entityInit() {
 		super.entityInit();
 		
-		// id 5 = ItemStack of Boomerang, type 5 = ItemStack
-		dataWatcher.addObjectByDataType(5, 5);
-		
-		// id 6 = Name of Thrower, type 4 = String
-		dataWatcher.addObjectByDataType(6, 4);
+		// id 6 = ItemStack of Boomerang, type 5 = ItemStack
+		dataWatcher.addObjectByDataType(6, 5);
 		
 		// id 7 = posX, type 3 = float
 		dataWatcher.addObjectByDataType(7, 3);
@@ -54,7 +47,7 @@ public class EntityBoomerang extends EntityThrowable {
 
 	public ItemStack getItemStack() {
 		
-		return dataWatcher.getWatchableObjectItemStack(5);
+		return dataWatcher.getWatchableObjectItemStack(6);
 	}
 	
 	public void setItemStack(ItemStack stack) {
@@ -62,13 +55,13 @@ public class EntityBoomerang extends EntityThrowable {
 		if(stack == null || !(stack.getItem() instanceof ItemBoomerang)) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
-		dataWatcher.updateObject(5, stack);
+		dataWatcher.updateObject(6, stack);
 	}
 	
-	public void setCoords(double entityX, double entityY, double entityZ) {
-		dataWatcher.updateObject(7, (float) entityX);
-		dataWatcher.updateObject(8, (float) entityY);
-		dataWatcher.updateObject(9, (float) entityZ);
+	public void setCoords(double playerX, double playerY, double playerZ) {
+		dataWatcher.updateObject(7, (float) playerX);
+		dataWatcher.updateObject(8, (float) playerY);
+		dataWatcher.updateObject(9, (float) playerZ);
 	}
 	
 	public double getCoord(String coordId) {
@@ -78,15 +71,6 @@ public class EntityBoomerang extends EntityThrowable {
 		case "Z": return dataWatcher.getWatchableObjectFloat(9);
 		default: throw new IllegalArgumentException("Invalid coordId!");
 		}
-	}
-	
-	public EntityLivingBase getThrowerASave() {
-		return getEntityWorld().getPlayerEntityByName(dataWatcher.getWatchableObjectString(6));
-	}
-	
-	public void setThrowerName(String name) {
-		
-		dataWatcher.updateObject(6, name);
 	}
 	
 	public ToolMaterial getMaterial() {
@@ -153,6 +137,7 @@ public class EntityBoomerang extends EntityThrowable {
 
 	@Override
 	protected void onImpact(MovingObjectPosition target) {
+		super.onImpact(target);
 		
 		//Target is entity or block?
 		if(target.entityHit == null) {
@@ -199,13 +184,6 @@ public class EntityBoomerang extends EntityThrowable {
 				} else {
 					setItemStack(stack);
 				}
-				if(target.entityHit instanceof EntityLivingBase) {
-					EntityLivingBase entityHit = (EntityLivingBase) target.entityHit;
-					if(entityHit instanceof EntityPigZombie) {
-						EntityPigZombie en = (EntityPigZombie) entityHit;
-						en.setRevengeTarget(getThrowerASave());
-					}
-				}
 			} else {
 				//It's the thrower himself
 				this.setDead();
@@ -225,10 +203,9 @@ public class EntityBoomerang extends EntityThrowable {
 		
 		super.writeEntityToNBT(tagCompound);
 		
-		tagCompound.setString("thrower", getThrowerASave().getName());
-		tagCompound.setDouble("entityX", getCoord("X"));
-		tagCompound.setDouble("entityY", getCoord("Y"));
-		tagCompound.setDouble("entityZ", getCoord("Z"));
+		tagCompound.setDouble("playerX", getCoord("X"));
+		tagCompound.setDouble("playerY", getCoord("Y"));
+		tagCompound.setDouble("playerZ", getCoord("Z"));
 		
 		if(getItemStack() != null) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
@@ -240,7 +217,6 @@ public class EntityBoomerang extends EntityThrowable {
 		
 		super.readEntityFromNBT(tagCompund);
 		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
-		setCoords(tagCompund.getDouble("entityX"), tagCompund.getDouble("entityY"), tagCompund.getDouble("entityZ"));
-		setThrowerName(tagCompund.getString("thrower"));
+		setCoords(tagCompund.getDouble("playerX"), tagCompund.getDouble("playerY"), tagCompund.getDouble("playerZ"));
 	}
 }
