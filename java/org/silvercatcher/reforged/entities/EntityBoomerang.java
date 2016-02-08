@@ -80,7 +80,7 @@ public class EntityBoomerang extends ReforgedThrowable {
 
 	private float getImpactDamage() {
 		
-		return getMaterial().getDamageVsEntity()  + 3;
+		return getMaterial().getDamageVsEntity() + 5;
 	}
 	
 	@Override
