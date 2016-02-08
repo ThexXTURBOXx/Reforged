@@ -62,7 +62,7 @@ public class ItemFireRod extends ExtendedItem {
 		if(!entity.isImmuneToFire()) {
 			entity.setFire(FIRE_DURATION);
 		}
-		if(player.capabilities.isCreativeMode) {
+		if(!player.capabilities.isCreativeMode) {
 			--stack.stackSize;
 		}
 		return false;
