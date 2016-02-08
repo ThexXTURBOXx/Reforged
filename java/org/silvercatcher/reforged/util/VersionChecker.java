@@ -6,7 +6,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.spi.AbstractLogger;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 
@@ -52,6 +54,7 @@ public class VersionChecker implements Runnable {
 	      }
 	    } catch (IOException e) {
 	      e.printStackTrace();
+	      log.log(Level.WARN, AbstractLogger.CATCHING_MARKER, "Update check for " + ReforgedMod.NAME + " failed.", e);
 	    } finally {
 	      IOUtils.closeQuietly(in);
 	    }

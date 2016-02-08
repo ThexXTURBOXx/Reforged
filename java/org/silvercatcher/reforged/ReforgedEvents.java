@@ -4,14 +4,14 @@ import org.silvercatcher.reforged.util.VersionChecker;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.event.ClickEvent;
+import net.minecraft.event.HoverEvent;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class ReforgedEvents {	
 
@@ -24,22 +24,28 @@ public class ReforgedEvents {
 			notificated = true;
 			if(!VersionChecker.isLatestVersion()) {
 				EntityPlayer p = e.player;
-				ChatStyle gold = new ChatStyle().setColor(EnumChatFormatting.GOLD);
+				ChatStyle version = new ChatStyle().setColor(EnumChatFormatting.AQUA);
+				ChatStyle modname = new ChatStyle();
+				ChatStyle download = new ChatStyle().setColor(EnumChatFormatting.GREEN);
+				ChatStyle tooltip = new ChatStyle().setColor(EnumChatFormatting.YELLOW);
+				ChatStyle data = modname.createShallowCopy();
+				ChatStyle data1 = download.createShallowCopy();
+				IChatComponent msg = new ChatComponentTranslation("versionchecker.ingame.downloadclick").setChatStyle(tooltip);
+				download.setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, msg));
 				IChatComponent chat = new ChatComponentText("");
-				chat.setChatStyle(gold);
-				chat.appendText("[" + ReforgedMod.NAME + "] ");
-				new LanguageRegistry();
-				chat.appendText(LanguageRegistry.instance().getStringLocalization("versionchecker.ingame.outdated") + ": " + VersionChecker.getLatestVersion());
+				IChatComponent msg1 = new ChatComponentText(ReforgedMod.VERSION).setChatStyle(version);
+				data.setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, msg1));
+				chat.appendSibling(new ChatComponentText("§6[§b" + ReforgedMod.NAME + "§6] ").setChatStyle(data));
+				chat.appendSibling(new ChatComponentTranslation("versionchecker.ingame.outdated").setChatStyle(data));
+				chat.appendText(": ");
+				chat.appendText("§d" + VersionChecker.getLatestVersion());
 				p.addChatMessage(chat);
-				IChatComponent chat2 = new ChatComponentText("");
-				ChatStyle link = new ChatStyle();
-				link.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, VersionChecker.getDownloadUrl()));
-				link.setColor(EnumChatFormatting.AQUA);
-				new LanguageRegistry();
-				chat2.appendText(LanguageRegistry.instance().getStringLocalization("versionchecker.ingame.downloadclick") + ": ").setChatStyle(gold);
-				new LanguageRegistry();
-				chat2.appendText("[" + LanguageRegistry.instance().getStringLocalization("versionchecker.ingame.download") + "]").setChatStyle(link);
-				p.addChatComponentMessage(chat2);
+				chat = new ChatComponentText("");
+				chat.appendText("§6[");
+				data1.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, VersionChecker.getDownloadUrl()));
+				chat.appendSibling(new ChatComponentTranslation("versionchecker.ingame.download").setChatStyle(data1));
+				chat.appendText("§6]");
+				p.addChatMessage(chat);
 			}
 		}
 	}
