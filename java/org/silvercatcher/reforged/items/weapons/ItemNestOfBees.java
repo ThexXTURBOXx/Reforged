@@ -25,14 +25,12 @@ public class ItemNestOfBees extends ExtendedItem {
 	private static int delay = 4;
 	private static int buildup = 25;
 	
-	
 	public ItemNestOfBees() {
 		setUnlocalizedName("nest_of_bees");
 		setMaxDamage(80);
 		setMaxStackSize(1);
 	
 	}
-	
 	
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -42,7 +40,6 @@ public class ItemNestOfBees extends ExtendedItem {
 		tooltip.add(LanguageRegistry.instance().getStringLocalization("item.nestofbees.arrows") + ": " + CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
 	}
 	
-
 	@Override
 	public void registerRecipes() {
 		
@@ -61,8 +58,7 @@ public class ItemNestOfBees extends ExtendedItem {
 		
 		GameRegistry.addRecipe(new NestOfBeesLoadRecipe());
 	}
-
-
+	
 	@Override
 	public float getHitDamage() {
 		
@@ -77,7 +73,6 @@ public class ItemNestOfBees extends ExtendedItem {
 		return itemStackIn;
 	}
 	
-
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
 		
@@ -130,16 +125,6 @@ public class ItemNestOfBees extends ExtendedItem {
 			world.spawnEntityInWorld(arrow);
 		}
         world.playSoundAtEntity(shooter, "fireworks.launch", 3.0f, 1.0f);
-	}
-
-	public int getAmmoCount(NBTTagCompound compound) {
-		
-		return compound.getInteger(CompoundTags.AMMUNITION);
-	}
-	
-	public int getAmmoCount(ItemStack stack) {
-		
-		return getAmmoCount(CompoundTags.giveCompound(stack));
 	}
 	
 	@Override
