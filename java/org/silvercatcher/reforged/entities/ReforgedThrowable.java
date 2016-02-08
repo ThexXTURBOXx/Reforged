@@ -2,9 +2,11 @@ package org.silvercatcher.reforged.entities;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -44,6 +46,14 @@ public class ReforgedThrowable extends EntityThrowable {
 			if(entityHit instanceof EntityPigZombie) {
 				EntityPigZombie en = (EntityPigZombie) entityHit;
 				en.setRevengeTarget(getThrowerASave());
+			}
+			if(entityHit instanceof EntityLivingBase) {
+				EntityLivingBase en = (EntityLivingBase) entityHit;
+				if(getThrowerASave() instanceof EntityPlayer) {
+					en.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) getThrowerASave()), 0F);
+				} else {
+					en.attackEntityFrom(DamageSource.causeMobDamage(getThrowerASave()), 0F);
+				}
 			}
 		}
 	}
