@@ -121,7 +121,7 @@ public class EntityJavelin extends AReforgedThrowable {
 
 	@Override
 	protected float getImpactDamage(Entity target) {
-		// TODO Auto-generated method stub
+
 		return 5 + getDurLoaded() / 10;
 	}
 }

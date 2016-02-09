@@ -43,7 +43,7 @@ public class EntityBulletMusket extends AReforgedThrowable {
 
 	@Override
 	protected float getImpactDamage(Entity target) {
-		// TODO Auto-generated method stub
+
 		return 4f;
 	}
 }
