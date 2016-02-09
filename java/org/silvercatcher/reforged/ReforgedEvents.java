@@ -33,7 +33,7 @@ public class ReforgedEvents {
 				IChatComponent msg = new ChatComponentTranslation("versionchecker.ingame.downloadclick").setChatStyle(tooltip);
 				download.setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, msg));
 				IChatComponent chat = new ChatComponentText("");
-				IChatComponent msg1 = new ChatComponentText(ReforgedMod.VERSION).setChatStyle(version);
+				IChatComponent msg1 = new ChatComponentText("Installed: " + ReforgedMod.VERSION).setChatStyle(version);
 				data.setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, msg1));
 				chat.appendSibling(new ChatComponentText("§6[§b" + ReforgedMod.NAME + "§6] ").setChatStyle(data));
 				chat.appendSibling(new ChatComponentTranslation("versionchecker.ingame.outdated").setChatStyle(data));
