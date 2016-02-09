@@ -42,4 +42,10 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 		living.attackEntityFrom(causeImpactDamage(living, getThrower()), 4);
 		return true;
 	}
+
+	@Override
+	protected float getImpactDamage(Entity target) {
+
+		return 5f;
+	}
 }

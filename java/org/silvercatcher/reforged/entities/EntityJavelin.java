@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.entities;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
@@ -12,10 +13,7 @@ import net.minecraft.world.World;
 
 public class EntityJavelin extends AReforgedThrowable {
 
-	public EntityJavelin(World worldIn) {
-		super(worldIn);
-	}
-	
+
 	public EntityJavelin(World worldIn, EntityLivingBase throwerIn, ItemStack stack, int durationLoaded) {
 		
 		super(worldIn, throwerIn, stack);
@@ -69,7 +67,7 @@ public class EntityJavelin extends AReforgedThrowable {
 			}
 		} else {
 			//It's an entity
-			target.entityHit.attackEntityFrom(ReforgedRegistry.javelinDamage, 5 + getDurLoaded() / 10);
+			target.entityHit.attackEntityFrom(ReforgedRegistry.javelinDamage, getImpactDamage(target.entityHit));
 			ItemStack stack = getItemStack();
 			if(stack.attemptDamageItem(1, rand)) {
 				
@@ -119,5 +117,11 @@ public class EntityJavelin extends AReforgedThrowable {
 		super.readEntityFromNBT(tagCompund);
 		setDurLoaded(tagCompund.getInteger("durloaded"));
 		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
+	}
+
+	@Override
+	protected float getImpactDamage(Entity target) {
+		// TODO Auto-generated method stub
+		return 5 + getDurLoaded() / 10;
 	}
 }

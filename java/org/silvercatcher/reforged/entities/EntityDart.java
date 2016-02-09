@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.entities;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.others.ItemDart;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -14,10 +15,6 @@ import net.minecraft.world.World;
 
 public class EntityDart extends AReforgedThrowable {
 	
-	public EntityDart(World worldIn) {
-		
-		super(worldIn);
-	}
 	
 	public EntityDart(World worldIn, EntityLivingBase getThrowerIn, ItemStack stack) {
 		
@@ -115,5 +112,11 @@ public class EntityDart extends AReforgedThrowable {
 		super.readEntityFromNBT(tagCompund);
 		
 		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
+	}
+
+	@Override
+	protected float getImpactDamage(Entity target) {
+
+		return 1f;
 	}
 }

@@ -197,4 +197,10 @@ public class EntityBoomerang extends AReforgedThrowable {
 		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
 		setCoords(tagCompund.getDouble("playerX"), tagCompund.getDouble("playerY"), tagCompund.getDouble("playerZ"));
 	}
+
+	@Override
+	protected float getImpactDamage(Entity target) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

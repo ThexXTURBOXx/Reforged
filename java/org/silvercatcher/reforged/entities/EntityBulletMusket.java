@@ -14,7 +14,7 @@ public class EntityBulletMusket extends AReforgedThrowable {
 
 
 	public EntityBulletMusket(World worldIn) {
-		super(worldIn);
+		super(worldIn, "bullet_musket");
 	}
 	
 	public EntityBulletMusket(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
@@ -39,5 +39,11 @@ public class EntityBulletMusket extends AReforgedThrowable {
 	protected DamageSource causeImpactDamage(Entity target, EntityLivingBase shooter) {
 		
 		return new EntityDamageSourceIndirect("bullet_musket", target, shooter);
+	}
+
+	@Override
+	protected float getImpactDamage(Entity target) {
+		// TODO Auto-generated method stub
+		return 4f;
 	}
 }
