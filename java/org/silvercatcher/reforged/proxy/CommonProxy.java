@@ -48,9 +48,6 @@ public class CommonProxy {
 	public static boolean nest_of_bees;
 	public static boolean sabre;
 	
-	//Others for Config
-	public static int boomerang_distance;
-	
 	private void loadConfig(FMLPreInitializationEvent e) {
 		//Get an instance of Config
 		Configuration config = new Configuration(e.getSuggestedConfigurationFile());
@@ -70,9 +67,6 @@ public class CommonProxy {
 		musket = config.getBoolean("Musket", "Items", true, "Enable the Musket and Blunderbuss");
 		nest_of_bees = config.getBoolean("Nest Of Bees", "Items", true, "Enable the Nest Of Bees");
 		sabre = config.getBoolean("Sabre", "Items", true, "Enable the Sabre");
-		
-		//Others
-		boomerang_distance = config.getInt("Boomerang-Autocollect", "Others", 3, 0, 32, "The distance in which the Boomerang should get auto-collected by the thrower (0 means disable)");
 		
 		//Save config
 		config.save();

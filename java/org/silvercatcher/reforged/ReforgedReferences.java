@@ -48,8 +48,5 @@ public class ReforgedReferences
 		public static final boolean MUSKET = CommonProxy.musket;
 		public static final boolean NEST_OF_BEES = CommonProxy.nest_of_bees;
 		public static final boolean SABRE = CommonProxy.sabre;
-		
-		//Others
-		public static final int DISTANCE_BOOMERANG = CommonProxy.boomerang_distance;
 	}
 }
