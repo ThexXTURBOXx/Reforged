@@ -64,13 +64,16 @@ public class EntityBoomerang extends ReforgedThrowable {
 		dataWatcher.updateObject(9, (float) playerZ);
 	}
 	
-	public double getCoord(String coordId) {
-		switch(coordId) {
-		case "X": return dataWatcher.getWatchableObjectFloat(7);
-		case "Y": return dataWatcher.getWatchableObjectFloat(8);
-		case "Z": return dataWatcher.getWatchableObjectFloat(9);
-		default: throw new IllegalArgumentException("Invalid coordId!");
-		}
+	public double getPosX() {
+		return dataWatcher.getWatchableObjectFloat(7);
+	}
+	
+	public double getPosY() {
+		return dataWatcher.getWatchableObjectFloat(8);
+	}
+	
+	public double getPosZ() {
+		return dataWatcher.getWatchableObjectFloat(9);
 	}
 	
 	public ToolMaterial getMaterial() {
@@ -87,9 +90,9 @@ public class EntityBoomerang extends ReforgedThrowable {
 	public void onUpdate() {
 		
 			super.onUpdate();
-			double dx = this.posX - getCoord("X");
-			double dy = this.posY - getCoord("Y");
-			double dz = this.posZ - getCoord("Z");
+			double dx = this.posX - getPosX();
+			double dy = this.posY - getPosY();
+			double dz = this.posZ - getPosZ();
 			double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
 			dx /= d;
 			dy /= d;
@@ -100,9 +103,10 @@ public class EntityBoomerang extends ReforgedThrowable {
 			motionZ -= 0.05D * dz;
 			
 			int distance = GlobalValues.DISTANCE_BOOMERANG;
-			double px = getCoord("X");
-			double py = getCoord("Y");
-			double pz = getCoord("Z");
+			double px = getPosX();
+			double py = getPosY();
+			double pz = getPosZ();
+	
 			if(getThrowerASave() != null) {
 				px = getThrowerASave().posX;
 				py = getThrowerASave().posY;
@@ -132,7 +136,7 @@ public class EntityBoomerang extends ReforgedThrowable {
 	
 	@Override
 	protected float getGravityVelocity() {
-		return 0.0F;
+		return 0.001F;
 	}
 
 	@Override
@@ -145,9 +149,10 @@ public class EntityBoomerang extends ReforgedThrowable {
 			//Distance specifies the range the boomerang should get auto-collected
 			int distance = GlobalValues.DISTANCE_BOOMERANG;
 			this.setDead();
-			double px = getCoord("X");
-			double py = getCoord("Y");
-			double pz = getCoord("Z");
+			double px = getPosX();
+			double py = getPosY();
+			double pz = getPosZ();
+			
 			if(getThrowerASave() != null) {
 				px = getThrowerASave().posX;
 				py = getThrowerASave().posY;
@@ -203,9 +208,9 @@ public class EntityBoomerang extends ReforgedThrowable {
 		
 		super.writeEntityToNBT(tagCompound);
 		
-		tagCompound.setDouble("playerX", getCoord("X"));
-		tagCompound.setDouble("playerY", getCoord("Y"));
-		tagCompound.setDouble("playerZ", getCoord("Z"));
+		tagCompound.setDouble("playerX", getPosX());
+		tagCompound.setDouble("playerY", getPosY());
+		tagCompound.setDouble("playerZ", getPosZ());
 		
 		if(getItemStack() != null) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
