@@ -20,9 +20,14 @@ import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class EntityBoomerang extends AReforgedThrowable {
 	
+	public EntityBoomerang(World worldIn) {
+		
+		super(worldIn, "boomerang");
+	}
+	
 	public EntityBoomerang(World worldIn, EntityLivingBase getThrowerIn, ItemStack stack) {
 		
-		super(worldIn, getThrowerIn, stack);
+		super(worldIn, getThrowerIn, stack, "boomerang");
 		setItemStack(stack);
 		setCoords(getThrowerIn.posX, getThrowerIn.posY + getThrowerIn.getEyeHeight(), getThrowerIn.posZ);
 	}
@@ -99,8 +104,9 @@ public class EntityBoomerang extends AReforgedThrowable {
 			motionX -= 0.05D * dx;
 			motionY -= 0.05D * dy;
 			motionZ -= 0.05D * dz;
-
-			if(ticksExisted >= 100 || isInWater()) {
+			
+			//After 103 ticks, the Boomerang drops exactly where the thrower stood
+			if(ticksExisted >= 103 || isInWater()) {
 				if(!worldObj.isRemote) {
 				
 					if(getItemStack().getMaxDamage() > getItemStack().getItemDamage()) {
@@ -129,25 +135,13 @@ public class EntityBoomerang extends AReforgedThrowable {
 			if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 				entityDropItem(getItemStack(), 0.5f);
 			}
-			
-			/* why was this in block hit? o.O
-			else {
-				EntityPlayer p = (EntityPlayer) getThrower();
-				if(p.getHealth() <= 2.0F) {
-					p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 20);
-				} else {
-					p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 2);
-					p.addChatMessage(new ChatComponentText(LanguageRegistry.instance()
-							.getStringLocalization("item.boomerang.langBreak").replace("%1$s",getItemStack().getDisplayName())));
-				}
-			}*/
 		}
+		setDead();
 		return true;
 	}
 	
 	@Override
 	protected boolean onEntityHit(Entity living) {
-		
 		if(living == getThrower()) {
 			
 			//It's the thrower himself
@@ -159,12 +153,11 @@ public class EntityBoomerang extends AReforgedThrowable {
 				//Custom sound later... [BREAK SOUND]
 				return true;
 			}
+			setDead();
 
 		} else {
-			
 			//It's an hit entity
-			living.attackEntityFrom(ReforgedRegistry.boomerangHitDamage,
-					getImpactDamage(living));
+			living.attackEntityFrom(causeImpactDamage(living, getThrower()), getImpactDamage(living));
 			ItemStack stack = getItemStack();
 			
 			if(stack.attemptDamageItem(1, rand)) {
@@ -200,7 +193,6 @@ public class EntityBoomerang extends AReforgedThrowable {
 
 	@Override
 	protected float getImpactDamage(Entity target) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getMaterial().getDamageVsEntity() + 5;
 	}
 }

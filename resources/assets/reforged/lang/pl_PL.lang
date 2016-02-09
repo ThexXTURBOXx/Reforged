@@ -67,10 +67,8 @@ item.musket.loadstate.empty=Pusty
 item.musket.loadstate.loading=Przeładowywanie
 item.musket.loadstate.loaded=Przeładowany
 
-death.attack.boomeranghit=Głowa gracza %1$s została zmiażdżona przez bumerang.
-death.attack.boomeranghit.player=Głowa gracza %1$s została zmiażdżona przez bumerang podczas walki z %2$s.
-death.attack.boomerangbreak=%1$s został zabity przez własny bumerang.
-death.attack.boomerangbreak.player=%1$s został zabity przez własny bumerang podczas walki z %2$s.
+death.attack.boomerang=Głowa gracza %1$s została zmiażdżona przez bumerang.
+death.attack.boomerang.player=Głowa gracza %1$s została zmiażdżona przez bumerang podczas walki z %2$s.
 death.attack.javelin=%1$s został przebity.
 death.attack.javelin.player=%1$s został przebity podczas walki z %2$s.
 death.attack.musket=%1$s został postrzelony w głowę.

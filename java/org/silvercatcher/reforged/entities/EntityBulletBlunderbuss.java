@@ -13,12 +13,13 @@ import net.minecraft.world.World;
 public class EntityBulletBlunderbuss extends AReforgedThrowable {
 	
 	public EntityBulletBlunderbuss(World worldIn) {
-		super(worldIn, "bullet_blunderbuss");
+		
+		super(worldIn, "blunderbuss");
 	}
 	
 	public EntityBulletBlunderbuss(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		
-		super(worldIn, throwerIn, stack);
+		super(worldIn, throwerIn, stack, "blunderbuss");
 		float randomNumX = rand.nextInt(21);
 		float randomNumY = rand.nextInt(21);
 		float randomNumZ = rand.nextInt(21);

@@ -11,15 +11,15 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 public class EntityBulletMusket extends AReforgedThrowable {
-
-
+	
 	public EntityBulletMusket(World worldIn) {
-		super(worldIn, "bullet_musket");
+		
+		super(worldIn, "musket");
 	}
 	
 	public EntityBulletMusket(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		
-		super(worldIn, throwerIn, stack);
+		super(worldIn, throwerIn, stack, "musket");
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class EntityBulletMusket extends AReforgedThrowable {
 			//It's a block
 		} else {
 			//It's an entity
-			target.entityHit.attackEntityFrom(ReforgedRegistry.musketDamage, 10);
+			target.entityHit.attackEntityFrom(causeImpactDamage(target.entityHit, getThrower()), 10);
 		}
 		setDead();
 	}

@@ -1,11 +1,7 @@
 package org.silvercatcher.reforged.entities;
 
-import java.util.UUID;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityPigZombie;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -25,10 +21,10 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		this.damageName = damageName;
 	}
 	
-	public AReforgedThrowable(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
+	public AReforgedThrowable(World worldIn, EntityLivingBase throwerIn, ItemStack stack, String damageName) {
 		
 		super(worldIn, throwerIn);
-		this.damageName = stack.getUnlocalizedName();
+		this.damageName = damageName;
 	}
 
 
@@ -69,11 +65,8 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		return onEntityHit((Entity) living);
 	}
 		
-	protected DamageSource causeImpactDamage(
-			Entity target, EntityLivingBase shooter) {
-		
-		return new EntityDamageSourceIndirect(
-				damageName, target, shooter).setProjectile();
+	protected DamageSource causeImpactDamage(Entity target, EntityLivingBase shooter) {
+		return new EntityDamageSourceIndirect(damageName, target, shooter).setProjectile();
 	}
 	
 	protected abstract float getImpactDamage(Entity target);

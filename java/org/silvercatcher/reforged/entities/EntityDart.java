@@ -15,10 +15,14 @@ import net.minecraft.world.World;
 
 public class EntityDart extends AReforgedThrowable {
 	
+	public EntityDart(World worldIn) {
+		
+		super(worldIn, "dart");
+	}
 	
 	public EntityDart(World worldIn, EntityLivingBase getThrowerIn, ItemStack stack) {
 		
-		super(worldIn, getThrowerIn, stack);
+		super(worldIn, getThrowerIn, stack, "dart");
 		setItemStack(stack);
 	}
 	
@@ -59,7 +63,7 @@ public class EntityDart extends AReforgedThrowable {
 			}
 		} else {
 			//It's an entity
-			target.entityHit.attackEntityFrom(ReforgedRegistry.dartDamage, 5);
+			target.entityHit.attackEntityFrom(causeImpactDamage(target.entityHit, getThrower()), 5);
 			if(!target.entityHit.isDead) {
 				// Still alive after first damage
 				if(target.entityHit instanceof EntityLivingBase) {

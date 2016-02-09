@@ -12,11 +12,15 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 public class EntityJavelin extends AReforgedThrowable {
-
+	
+	public EntityJavelin(World worldIn) {
+		
+		super(worldIn, "javelin");
+	}
 
 	public EntityJavelin(World worldIn, EntityLivingBase throwerIn, ItemStack stack, int durationLoaded) {
 		
-		super(worldIn, throwerIn, stack);
+		super(worldIn, throwerIn, stack, "javelin");
 		
 		setItemStack(stack);
 		setDurLoaded(durationLoaded);
@@ -67,7 +71,7 @@ public class EntityJavelin extends AReforgedThrowable {
 			}
 		} else {
 			//It's an entity
-			target.entityHit.attackEntityFrom(ReforgedRegistry.javelinDamage, getImpactDamage(target.entityHit));
+			target.entityHit.attackEntityFrom(causeImpactDamage(target.entityHit, getThrower()), getImpactDamage(target.entityHit));
 			ItemStack stack = getItemStack();
 			if(stack.attemptDamageItem(1, rand)) {
 				

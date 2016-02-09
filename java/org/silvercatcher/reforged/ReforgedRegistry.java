@@ -88,14 +88,6 @@ public class ReforgedRegistry {
 	public static Item DART_WITHER;
 	public static Item BLOWGUN;
 	
-	//Damage Sources
-	public static DamageSource boomerangHitDamage = new DamageSource("boomeranghit").setProjectile();
-	public static DamageSource boomerangBreakDamage = new DamageSource("boomerangbreak").setProjectile();
-	public static DamageSource javelinDamage = new DamageSource("javelin").setProjectile();
-	public static DamageSource musketDamage = new DamageSource("musket").setProjectile();
-	public static DamageSource blunderbussDamage = new DamageSource("blunderbuss").setProjectile();
-	public static DamageSource dartDamage = new DamageSource("dart").setProjectile();
-	
 	//Hashmaps
 	public static List<Item> registrationList = new ArrayList<Item>();
 	
