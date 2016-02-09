@@ -22,7 +22,8 @@ public class CompoundTags {
 		return compound;
 	}
 	
-	
+	public static final String DELAY = "delay";
+
 	/** saves the ticks left to reload */
 	public static final String RELOAD		= 	"reload";
 	

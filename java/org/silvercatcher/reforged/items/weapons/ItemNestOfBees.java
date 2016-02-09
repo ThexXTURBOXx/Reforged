@@ -22,7 +22,7 @@ import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class ItemNestOfBees extends ExtendedItem {
 
-	private static int delay = 4;
+	private static int shot_delay = 4;
 	private static int buildup = 25;
 	
 	public ItemNestOfBees() {
@@ -36,19 +36,13 @@ public class ItemNestOfBees extends ExtendedItem {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
 
-		new LanguageRegistry();
 		tooltip.add(LanguageRegistry.instance().getStringLocalization("item.nestofbees.arrows") + ": " + CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
 	}
 	
 	@Override
 	public void registerRecipes() {
 		
-		// for testing!
-		ItemStack testStack = new ItemStack(this);
-		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setInteger(CompoundTags.AMMUNITION, 16);
-		
-		GameRegistry.addRecipe(testStack,
+		GameRegistry.addRecipe(new ItemStack(this),
 				"lwl",
 				"lsl",
 				"lll",
@@ -76,30 +70,39 @@ public class ItemNestOfBees extends ExtendedItem {
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
 		
-		return CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ACTIVATED) ? delay : buildup;
+		return CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ACTIVATED)
+				? super.getMaxItemUseDuration(stack) : buildup;
 	}
 	
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		
-		//todo: find better way for delay
 		if(entityIn instanceof EntityPlayer) {
 
 			EntityPlayer player = (EntityPlayer) entityIn;
 			
 			NBTTagCompound compound = CompoundTags.giveCompound(stack);
 			
-			int arrows = compound.getInteger(CompoundTags.AMMUNITION);
+			int delay = compound.getInteger(CompoundTags.DELAY);
 			
-			if(arrows == 0) compound.setBoolean(CompoundTags.ACTIVATED, false);
-			
-			if(compound.getBoolean(CompoundTags.ACTIVATED)) {
-				shoot(worldIn, player);
-				stack.damageItem(1, player);
-				arrows--;
+			if(delay <= 0) {
+				
+				int arrows = compound.getInteger(CompoundTags.AMMUNITION);
+				
+				if(arrows == 0) compound.setBoolean(CompoundTags.ACTIVATED, false);
+				
+				if(compound.getBoolean(CompoundTags.ACTIVATED)) {
+					shoot(worldIn, player);
+					stack.damageItem(1, player);
+					arrows--;
+				}
+				
+				compound.setInteger(CompoundTags.AMMUNITION, arrows);
+				compound.setInteger(CompoundTags.DELAY, shot_delay);
+			} else {
+				
+				compound.setInteger(CompoundTags.DELAY, delay - 1);
 			}
-			
-			compound.setInteger(CompoundTags.AMMUNITION, arrows);
 		}
 	}
 	
@@ -110,7 +113,7 @@ public class ItemNestOfBees extends ExtendedItem {
 		
 		if(compound.getInteger(CompoundTags.AMMUNITION) > 0) {
 			compound.setBoolean(CompoundTags.ACTIVATED, true);
-	        worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 3.0f, 1.0f);
+	        worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 1.0f);
 		}
 		return stack;
 	}
@@ -134,6 +137,8 @@ public class ItemNestOfBees extends ExtendedItem {
 		
 		if(compund.getBoolean(CompoundTags.ACTIVATED)) {
 			return EnumAction.BOW;
+		} else if(compund.getInteger(CompoundTags.RELOAD) > 0){
+			return EnumAction.BLOCK;
 		}
 		return EnumAction.NONE;
 	}
