@@ -1,5 +1,7 @@
 package org.silvercatcher.reforged.entities;
 
+import java.util.UUID;
+
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,24 +21,26 @@ public class ReforgedThrowable extends EntityThrowable {
 	public ReforgedThrowable(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		
 		super(worldIn, throwerIn);
-		this.setPositionAndRotation(throwerIn.posX, throwerIn.posY + throwerIn.getEyeHeight(), throwerIn.posZ, throwerIn.rotationYaw, throwerIn.rotationPitch);
-		setThrowerName(throwerIn.getName());
+		setThrowerUUID(throwerIn.getUniqueID());
 	}
 	
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		// id 5 = Name of Thrower, type 4 = String
+		// id 5 = UUID of Thrower, type 4 = String
 		dataWatcher.addObjectByDataType(5, 4);
 	}
 	
 	public EntityLivingBase getThrowerASave() {
-		return getEntityWorld().getPlayerEntityByName(dataWatcher.getWatchableObjectString(5));
+		if(worldObj != null) {
+			return worldObj.getPlayerEntityByUUID(UUID.fromString(dataWatcher.getWatchableObjectString(5)));
+		}
+		return getThrower();
 	}
 	
-	public void setThrowerName(String name) {
+	public void setThrowerUUID(UUID uuid) {
 		
-		dataWatcher.updateObject(5, name);
+		dataWatcher.updateObject(5, uuid.toString());
 	}
 
 	@Override
@@ -67,13 +71,13 @@ public class ReforgedThrowable extends EntityThrowable {
 	public void writeEntityToNBT(NBTTagCompound tagCompound) {
 		
 		super.writeEntityToNBT(tagCompound);
-		tagCompound.setString("thrower", getThrowerASave().getName());
+		tagCompound.setString("throwerUUID", getThrowerASave().getUniqueID().toString());
 	}
 	
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tagCompund) {
 		
 		super.readEntityFromNBT(tagCompund);
-		setThrowerName(tagCompund.getString("thrower"));
+		setThrowerUUID(UUID.fromString(tagCompund.getString("throwerUUID")));
 	}
 }
