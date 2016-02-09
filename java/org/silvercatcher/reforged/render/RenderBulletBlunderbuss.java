@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderBulletBlunderbuss extends ReforgedRender {
 	
 	public RenderBulletBlunderbuss(RenderManager renderManager) {
-		super(renderManager, new ModelBulletMusket());
+		super(renderManager, new ModelBulletMusket(), 0.7F);
 	}
 	
 	@Override

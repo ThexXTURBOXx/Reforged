@@ -13,10 +13,16 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public abstract class ReforgedRender extends Render {
 	
 	ModelBase model;
+	float scale = 1;
 	
 	protected ReforgedRender(RenderManager renderManager, ModelBase model) {
 		super(renderManager);
 		this.model = model;
+	}
+	protected ReforgedRender(RenderManager renderManager, ModelBase model, float scale) {
+		super(renderManager);
+		this.model = model;
+		this.scale = scale;
 	}
 	
 	@Override
@@ -26,12 +32,10 @@ public abstract class ReforgedRender extends Render {
 
 	public void renderEntityModel(Entity theEntity, double x, double y, double z, float yaw, float partialTick) {
 		GL11.glPushMatrix();
-		float scale = 1;
 		bindTexture(getEntityTexture(theEntity));
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
 		model.render(theEntity,(float) x,(float) y,(float) z, yaw, partialTick, 0.0475F);
 		GL11.glPopMatrix();
 	}
-	
 }
