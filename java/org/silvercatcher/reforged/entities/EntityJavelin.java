@@ -55,7 +55,6 @@ public class EntityJavelin extends ReforgedThrowable {
 	@Override
 	protected void onImpact(MovingObjectPosition target) {
 		super.onImpact(target);
-
 		//Target is entity or block?
 		if(target.entityHit == null) {
 			//It's a block
