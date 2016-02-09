@@ -90,33 +90,32 @@ public class EntityBoomerang extends AReforgedThrowable {
 	@Override
 	public void onUpdate() {
 		
-			super.onUpdate();
-			
-			double dx = this.posX - getPosX();
-			double dy = this.posY - getPosY();
-			double dz = this.posZ - getPosZ();
-			double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
-			
-			dx /= d;
-			dy /= d;
-			dz /= d;
-			
-			motionX -= 0.05D * dx;
-			motionY -= 0.05D * dy;
-			motionZ -= 0.05D * dz;
-			
-			//After 103 ticks, the Boomerang drops exactly where the thrower stood
-			if(ticksExisted >= 103 || isInWater()) {
-				if(!worldObj.isRemote) {
-				
-					if(getItemStack().getMaxDamage() > getItemStack().getItemDamage()) {
-						entityDropItem(getItemStack(), 0);
-					} else {
-						//Custom sound later... [BREAK SOUND]
-					}
-					setDead();
+		super.onUpdate();
+		
+		double dx = this.posX - getPosX();
+		double dy = this.posY - getPosY();
+		double dz = this.posZ - getPosZ();
+		double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
+		
+		dx /= d;
+		dy /= d;
+		dz /= d;
+		
+		motionX -= 0.05D * dx;
+		motionY -= 0.05D * dy;
+		motionZ -= 0.05D * dz;
+		
+		//After 103 ticks, the Boomerang drops exactly where the thrower stood
+		if(ticksExisted >= 103 || isInWater()) {
+			if(!worldObj.isRemote) {
+				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+					entityDropItem(getItemStack(), 0.5f);
+				} else {
+					//Custom sound later... [BREAK SOUND]
 				}
+				setDead();
 			}
+		}
 	}
 	
 	@Override
@@ -136,28 +135,25 @@ public class EntityBoomerang extends AReforgedThrowable {
 				entityDropItem(getItemStack(), 0.5f);
 			}
 		}
-		setDead();
 		return true;
 	}
 	
 	@Override
-	protected boolean onEntityHit(Entity living) {
-		if(living == getThrower()) {
+	protected boolean onEntityHit(Entity hitEntity) {
+		if(hitEntity == getThrower()) {
 			
 			//It's the thrower himself
 			ItemStack stack = getItemStack();
-			EntityPlayer p = (EntityPlayer) living;
+			EntityPlayer p = (EntityPlayer) hitEntity;
 			if(stack.getMaxDamage() > stack.getItemDamage()) {
 				p.inventory.addItemStackToInventory(stack);
 			} else {
 				//Custom sound later... [BREAK SOUND]
-				return true;
 			}
-			setDead();
-
+			return true;
 		} else {
 			//It's an hit entity
-			living.attackEntityFrom(causeImpactDamage(living, getThrower()), getImpactDamage(living));
+			hitEntity.attackEntityFrom(causeImpactDamage(hitEntity, getThrower()), getImpactDamage(hitEntity));
 			ItemStack stack = getItemStack();
 			
 			if(stack.attemptDamageItem(1, rand)) {
