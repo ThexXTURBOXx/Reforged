@@ -142,7 +142,7 @@ public class EntityBoomerang extends ReforgedThrowable {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 					entityDropItem(getItemStack(), 0.5f);
 				} else {
-					EntityPlayer p = (EntityPlayer) getThrowerASave();
+					EntityPlayer p = (EntityPlayer) getThrower();
 					if(p.getHealth() <= 2.0F) {
 						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 20);
 					} else {
@@ -154,7 +154,7 @@ public class EntityBoomerang extends ReforgedThrowable {
 			}
 		} else {
 			//It's an entity
-			if(target.entityHit == getThrowerASave()) {
+			if(target.entityHit == getThrower()) {
 				
 				//It's the thrower himself
 				ItemStack stack = getItemStack();

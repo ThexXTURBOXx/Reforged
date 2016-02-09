@@ -21,24 +21,13 @@ public class ReforgedThrowable extends EntityThrowable {
 	public ReforgedThrowable(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		
 		super(worldIn, throwerIn);
-		setThrowerUUID(throwerIn.getUniqueID());
 	}
 	
 	@Override
 	protected void entityInit() {
 		super.entityInit();
 		// id 5 = UUID of Thrower, type 4 = String
-		dataWatcher.addObjectByDataType(5, 4);
-	}
-	
-	public EntityLivingBase getThrowerASave() {
-
-		return getThrower();
-	}
-	
-	public void setThrowerUUID(UUID uuid) {
-		
-		dataWatcher.updateObject(5, uuid.toString());
+		//dataWatcher.addObjectByDataType(5, 4);
 	}
 
 	@Override
@@ -47,14 +36,14 @@ public class ReforgedThrowable extends EntityThrowable {
 			EntityLivingBase entityHit = (EntityLivingBase) target.entityHit;
 			if(entityHit instanceof EntityPigZombie) {
 				EntityPigZombie en = (EntityPigZombie) entityHit;
-				en.setRevengeTarget(getThrowerASave());
+				en.setRevengeTarget(getThrower());
 			}
 			if(entityHit instanceof EntityLivingBase) {
 				EntityLivingBase en = (EntityLivingBase) entityHit;
-				if(getThrowerASave() instanceof EntityPlayer) {
-					en.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) getThrowerASave()), 0F);
+				if(getThrower() instanceof EntityPlayer) {
+					en.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) getThrower()), 0F);
 				} else {
-					en.attackEntityFrom(DamageSource.causeMobDamage(getThrowerASave()), 0F);
+					en.attackEntityFrom(DamageSource.causeMobDamage(getThrower()), 0F);
 				}
 			}
 		}
@@ -69,13 +58,11 @@ public class ReforgedThrowable extends EntityThrowable {
 	public void writeEntityToNBT(NBTTagCompound tagCompound) {
 		
 		super.writeEntityToNBT(tagCompound);
-		tagCompound.setString("throwerUUID", getThrowerASave().getUniqueID().toString());
 	}
 	
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tagCompund) {
 		
 		super.readEntityFromNBT(tagCompund);
-		setThrowerUUID(UUID.fromString(tagCompund.getString("throwerUUID")));
 	}
 }
