@@ -30,6 +30,7 @@ public class EntityBoomerang extends ReforgedThrowable {
 	
 	@Override
 	protected void entityInit() {
+		
 		super.entityInit();
 		
 		// id 6 = ItemStack of Boomerang, type 5 = ItemStack
@@ -59,6 +60,7 @@ public class EntityBoomerang extends ReforgedThrowable {
 	}
 	
 	public void setCoords(double playerX, double playerY, double playerZ) {
+		
 		dataWatcher.updateObject(7, (float) playerX);
 		dataWatcher.updateObject(8, (float) playerY);
 		dataWatcher.updateObject(9, (float) playerZ);
@@ -90,10 +92,12 @@ public class EntityBoomerang extends ReforgedThrowable {
 	public void onUpdate() {
 		
 			super.onUpdate();
+			
 			double dx = this.posX - getPosX();
 			double dy = this.posY - getPosY();
 			double dz = this.posZ - getPosZ();
 			double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
+			
 			dx /= d;
 			dy /= d;
 			dz /= d;
@@ -101,42 +105,23 @@ public class EntityBoomerang extends ReforgedThrowable {
 			motionX -= 0.05D * dx;
 			motionY -= 0.05D * dy;
 			motionZ -= 0.05D * dz;
-			
-			int distance = GlobalValues.DISTANCE_BOOMERANG;
-			double px = getPosX();
-			double py = getPosY();
-			double pz = getPosZ();
-	
-			if(getThrowerASave() != null) {
-				px = getThrowerASave().posX;
-				py = getThrowerASave().posY;
-				pz = getThrowerASave().posZ;				
-			}
-			if(this.ticksExisted >= 100 || isInWater()) {
+
+			if(ticksExisted >= 100 || isInWater()) {
 				if(!worldObj.isRemote) {
-					if(Math.abs(posX - px) <= distance && Math.abs(posY - py) <= distance && Math.abs(posZ - pz) <= distance) {
-						if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-							EntityPlayer p = (EntityPlayer) getThrowerASave();
-							p.inventory.addItemStackToInventory(getItemStack());
-						} else {
-							//Custom sound later... [BREAK SOUND]
-						}
-						this.setDead();
+				
+					if(getItemStack().getMaxDamage() > getItemStack().getItemDamage()) {
+						entityDropItem(getItemStack(), 0);
 					} else {
-						if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-							this.entityDropItem(getItemStack(), 0);
-						} else {
-							//Custom sound later... [BREAK SOUND]
-						}
-						this.setDead();			
+						//Custom sound later... [BREAK SOUND]
 					}
+					setDead();
 				}
 			}
 	}
 	
 	@Override
 	protected float getGravityVelocity() {
-		return 0.001F;
+		return 0f;
 	}
 
 	@Override
@@ -146,58 +131,50 @@ public class EntityBoomerang extends ReforgedThrowable {
 		//Target is entity or block?
 		if(target.entityHit == null) {
 			//It's a block
-			//Distance specifies the range the boomerang should get auto-collected
-			int distance = GlobalValues.DISTANCE_BOOMERANG;
-			this.setDead();
+			
+			setDead();
+			
 			double px = getPosX();
 			double py = getPosY();
 			double pz = getPosZ();
 			
-			if(getThrowerASave() != null) {
-				px = getThrowerASave().posX;
-				py = getThrowerASave().posY;
-				pz = getThrowerASave().posZ;				
-			}
-			if(!worldObj.isRemote && Math.abs(px - posX) <= distance && Math.abs(py - posY) <= distance && Math.abs(pz - posZ) <= distance) {
+			if(!worldObj.isRemote) {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-					EntityPlayer p = (EntityPlayer) getThrowerASave();
-					p.inventory.addItemStackToInventory(getItemStack());
+					entityDropItem(getItemStack(), 0.5f);
 				} else {
 					EntityPlayer p = (EntityPlayer) getThrowerASave();
 					if(p.getHealth() <= 2.0F) {
 						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 20);
 					} else {
 						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 2);
-						p.addChatMessage(new ChatComponentText(LanguageRegistry.instance().getStringLocalization("item.boomerang.langBreak").replace("%1$s",getItemStack().getDisplayName())));
+						p.addChatMessage(new ChatComponentText(LanguageRegistry.instance()
+								.getStringLocalization("item.boomerang.langBreak").replace("%1$s",getItemStack().getDisplayName())));
 					}
-				}
-			} else if(!worldObj.isRemote) {
-				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-					entityDropItem(getItemStack(), 0.5f);
-				} else {
-					//Custom sound later... [BREAK SOUND]
 				}
 			}
 		} else {
 			//It's an entity
-			if(target.entityHit != getThrowerASave()) {
-				//It's an hit entity
-				target.entityHit.attackEntityFrom(ReforgedRegistry.boomerangHitDamage, getImpactDamage());
-				ItemStack stack = getItemStack();
-				if(stack.attemptDamageItem(1, rand)) {
-					this.setDead();
-				} else {
-					setItemStack(stack);
-				}
-			} else {
+			if(target.entityHit == getThrowerASave()) {
+				
 				//It's the thrower himself
-				this.setDead();
 				ItemStack stack = getItemStack();
 				EntityPlayer p = (EntityPlayer) target.entityHit;
 				if(stack.getMaxDamage() - stack.getItemDamage() > 0) {
 					p.inventory.addItemStackToInventory(stack);
 				} else {
 					//Custom sound later... [BREAK SOUND]
+				}
+
+			} else {
+				
+				//It's an hit entity
+				target.entityHit.attackEntityFrom(ReforgedRegistry.boomerangHitDamage, getImpactDamage());
+				ItemStack stack = getItemStack();
+				
+				if(stack.attemptDamageItem(1, rand)) {
+					setDead();
+				} else {
+					setItemStack(stack);
 				}
 			}
 		}

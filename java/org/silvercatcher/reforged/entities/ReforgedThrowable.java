@@ -32,9 +32,7 @@ public class ReforgedThrowable extends EntityThrowable {
 	}
 	
 	public EntityLivingBase getThrowerASave() {
-		if(worldObj != null) {
-			return worldObj.getPlayerEntityByUUID(UUID.fromString(dataWatcher.getWatchableObjectString(5)));
-		}
+
 		return getThrower();
 	}
 	
