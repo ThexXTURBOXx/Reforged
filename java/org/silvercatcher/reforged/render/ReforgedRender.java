@@ -1,8 +1,8 @@
 package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
+import org.silvercatcher.reforged.models.ReforgedModel;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -12,17 +12,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public abstract class ReforgedRender extends Render {
 	
-	ModelBase model;
+	ReforgedModel model;
 	float scale = 1;
+	int modifier = 0;
 	
-	protected ReforgedRender(RenderManager renderManager, ModelBase model) {
+	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, int rotationModifier) {
 		super(renderManager);
 		this.model = model;
+		this.modifier = rotationModifier;
 	}
-	protected ReforgedRender(RenderManager renderManager, ModelBase model, float scale) {
+	
+	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, float scale, int rotationModifier) {
 		super(renderManager);
 		this.model = model;
 		this.scale = scale;
+		this.modifier = rotationModifier;
 	}
 	
 	@Override
@@ -35,6 +39,10 @@ public abstract class ReforgedRender extends Render {
 		bindTexture(getEntityTexture(theEntity));
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
+		GL11.glRotated(yaw + modifier, 0, 1, 0);
+		//If you find any little issues while flying, just change partialTick to 0. Could fix it
+		//I am not sure if I should let it like this, but for now it works ^^ I will change it, when needed
+		//- ThexXTURBOXx
 		model.render(theEntity,(float) x,(float) y,(float) z, yaw, partialTick, 0.0475F);
 		GL11.glPopMatrix();
 	}

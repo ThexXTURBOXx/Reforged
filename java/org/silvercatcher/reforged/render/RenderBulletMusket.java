@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderBulletMusket extends ReforgedRender {
 	
 	public RenderBulletMusket(RenderManager renderManager) {
-		super(renderManager, new ModelBulletMusket());
+		super(renderManager, new ModelBulletMusket(), 0);
 	}
 	
 	@Override

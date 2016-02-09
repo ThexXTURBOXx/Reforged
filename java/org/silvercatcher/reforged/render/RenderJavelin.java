@@ -13,7 +13,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderJavelin extends ReforgedRender {
 	
 	public RenderJavelin(RenderManager renderManager) {
-		super(renderManager, new ModelJavelin());
+		super(renderManager, new ModelJavelin(), 90);
 	}
 	
 	@Override

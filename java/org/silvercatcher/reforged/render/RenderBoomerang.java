@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderBoomerang extends ReforgedRender {
 	
 	public RenderBoomerang(RenderManager renderManager) {
-		super(renderManager, new ModelBoomerang());
+		super(renderManager, new ModelBoomerang(), 90);
 	}
 	
 	@Override
