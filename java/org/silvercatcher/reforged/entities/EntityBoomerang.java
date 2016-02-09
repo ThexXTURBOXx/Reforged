@@ -141,11 +141,10 @@ public class EntityBoomerang extends AReforgedThrowable {
 	@Override
 	protected boolean onEntityHit(Entity hitEntity) {
 		if(hitEntity == getThrower()) {
-			
 			//It's the thrower himself
 			ItemStack stack = getItemStack();
 			EntityPlayer p = (EntityPlayer) hitEntity;
-			if(stack.getMaxDamage() > stack.getItemDamage()) {
+			if(stack.getMaxDamage() - stack.getItemDamage() > 0) {
 				p.inventory.addItemStackToInventory(stack);
 			} else {
 				//Custom sound later... [BREAK SOUND]
@@ -155,8 +154,8 @@ public class EntityBoomerang extends AReforgedThrowable {
 			//It's an hit entity
 			hitEntity.attackEntityFrom(causeImpactDamage(hitEntity, getThrower()), getImpactDamage(hitEntity));
 			ItemStack stack = getItemStack();
-			
 			if(stack.attemptDamageItem(1, rand)) {
+				//Custom sound later... [BREAK SOUND]
 				return true;
 			} else {
 				setItemStack(stack);

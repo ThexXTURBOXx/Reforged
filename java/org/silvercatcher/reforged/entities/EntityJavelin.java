@@ -8,6 +8,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -57,29 +58,29 @@ public class EntityJavelin extends AReforgedThrowable {
 		}
 		dataWatcher.updateObject(6, stack);
 	}
-
+	
+	@Override
+	protected boolean onBlockHit(BlockPos blockPos) {
+		ItemStack stack = getItemStack();
+		if(!stack.attemptDamageItem(1, rand)) {
+			setItemStack(stack);
+		}
+		return true;
+	}
+	
+	@Override
+	protected boolean onEntityHit(Entity entity) {
+		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity));
+		ItemStack stack = getItemStack();
+		if(!stack.attemptDamageItem(1, rand)) {
+			setItemStack(stack);
+		}
+		return true;
+	}
+	
 	@Override
 	protected void onImpact(MovingObjectPosition target) {
-		
-		//Target is entity or block?
-		if(target.entityHit == null) {
-			//It's a block
-			ItemStack stack = getItemStack();
-			if(stack.attemptDamageItem(1, rand)) {
-			} else {
-				setItemStack(stack);
-			}
-		} else {
-			//It's an entity
-			target.entityHit.attackEntityFrom(causeImpactDamage(target.entityHit, getThrower()), getImpactDamage(target.entityHit));
-			ItemStack stack = getItemStack();
-			if(stack.attemptDamageItem(1, rand)) {
-				
-			} else {
-				setItemStack(stack);
-			}
-		}
-		setDead();
+		super.onImpact(target);
 		if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 			if(!worldObj.isRemote) {
 				entityDropItem(getItemStack(), 0.5f);

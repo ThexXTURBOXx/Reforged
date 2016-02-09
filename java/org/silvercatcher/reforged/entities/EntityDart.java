@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
@@ -50,49 +51,46 @@ public class EntityDart extends AReforgedThrowable {
 	public String getEffect() {
 		return ((ItemDart) getItemStack().getItem()).getUnlocalizedName().substring(10);
 	}
-
+	
 	@Override
-	protected void onImpact(MovingObjectPosition target) {
-		super.onImpact(target);
-
-		//Target is entity or block?
-		if(target.entityHit == null) {
-			//It's a block
-			if(!worldObj.isRemote && rand.nextInt(4) == 0) {
-				entityDropItem(new ItemStack(Items.feather), 1);	
-			}
-		} else {
-			//It's an entity
-			target.entityHit.attackEntityFrom(causeImpactDamage(target.entityHit, getThrower()), 5);
-			if(!target.entityHit.isDead) {
-				// Still alive after first damage
-				if(target.entityHit instanceof EntityLivingBase) {
-
-					EntityLivingBase p = (EntityLivingBase) target.entityHit;
+	protected boolean onBlockHit(BlockPos blockPos) {
+		if(!worldObj.isRemote && rand.nextInt(4) == 0) {
+			entityDropItem(new ItemStack(Items.feather), 1);	
+		}
+		return true;
+	}
+	
+	@Override
+	protected boolean onEntityHit(Entity entity) {
+		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), 5);
+		if(!entity.isDead) {
+			// Still alive after first damage
+			if(entity instanceof EntityLivingBase) {
 				
-					switch(getEffect()) {
-					
-					case "normal": break;
-					
-					case "hunger": p.addPotionEffect(new PotionEffect(Potion.hunger.getId(), 300, 1)); break;
-					
-					case "poison": p.addPotionEffect(new PotionEffect(Potion.poison.getId(), 200, 1)); break;
-					
-					case "poison_strong": p.addPotionEffect(new PotionEffect(Potion.poison.getId(), 300, 2)); break;
-					
-					case "slowness": p.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 300, 1));
-								 	 p.addPotionEffect(new PotionEffect(Potion.digSlowdown.getId(), 300, 1)); break;
-								 	 
-					case "wither": p.addPotionEffect(new PotionEffect(Potion.wither.getId(), 300, 1)); break;
-					
-					default: throw new IllegalArgumentException("No effect called " + getEffect().substring(5) + " found!");
-					
-					}
+				EntityLivingBase p = (EntityLivingBase) entity;
+				
+				switch(getEffect()) {
+				
+				case "normal": break;
+				
+				case "hunger": p.addPotionEffect(new PotionEffect(Potion.hunger.getId(), 300, 1)); break;
+				
+				case "poison": p.addPotionEffect(new PotionEffect(Potion.poison.getId(), 200, 1)); break;
+				
+				case "poison_strong": p.addPotionEffect(new PotionEffect(Potion.poison.getId(), 300, 2)); break;
+				
+				case "slowness": p.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 300, 1));
+				p.addPotionEffect(new PotionEffect(Potion.digSlowdown.getId(), 300, 1)); break;
+				
+				case "wither": p.addPotionEffect(new PotionEffect(Potion.wither.getId(), 300, 1)); break;
+				
+				default: throw new IllegalArgumentException("No effect called " + getEffect().substring(5) + " found!");
+				
 				}
 			}
 		}
 		//Custom sound later... [BREAK SOUND]
-		this.setDead();
+		return true;
 	}
 	
 	@Override
