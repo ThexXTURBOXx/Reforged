@@ -2,12 +2,15 @@ package org.silvercatcher.reforged.entities;
 
 import org.silvercatcher.reforged.ReforgedRegistry;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityBulletMusket extends ReforgedThrowable {
+public class EntityBulletMusket extends AReforgedThrowable {
 
 
 	public EntityBulletMusket(World worldIn) {
@@ -30,5 +33,11 @@ public class EntityBulletMusket extends ReforgedThrowable {
 			target.entityHit.attackEntityFrom(ReforgedRegistry.musketDamage, 10);
 		}
 		setDead();
+	}
+
+	@Override
+	protected DamageSource causeImpactDamage(Entity target, EntityLivingBase shooter) {
+		
+		return new EntityDamageSourceIndirect("bullet_musket", target, shooter);
 	}
 }

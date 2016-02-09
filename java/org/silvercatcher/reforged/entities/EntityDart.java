@@ -12,7 +12,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityDart extends ReforgedThrowable {
+public class EntityDart extends AReforgedThrowable {
 	
 	public EntityDart(World worldIn) {
 		

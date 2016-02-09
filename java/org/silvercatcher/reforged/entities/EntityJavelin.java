@@ -4,21 +4,25 @@ import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
-public class EntityJavelin extends ReforgedThrowable {
+public class EntityJavelin extends AReforgedThrowable {
 
 	public EntityJavelin(World worldIn) {
 		super(worldIn);
 	}
 	
 	public EntityJavelin(World worldIn, EntityLivingBase throwerIn, ItemStack stack, int durationLoaded) {
+		
 		super(worldIn, throwerIn, stack);
+		
 		setItemStack(stack);
 		setDurLoaded(durationLoaded);
+		
 		if(durationLoaded < 20) {
 			durationLoaded = 20;
 		} else if(durationLoaded > 40) {
@@ -54,7 +58,7 @@ public class EntityJavelin extends ReforgedThrowable {
 
 	@Override
 	protected void onImpact(MovingObjectPosition target) {
-		super.onImpact(target);
+		
 		//Target is entity or block?
 		if(target.entityHit == null) {
 			//It's a block

@@ -4,22 +4,21 @@ import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
-public class EntityBoomerang extends ReforgedThrowable {
-	
-	public EntityBoomerang(World worldIn) {
-		
-		super(worldIn);
-	}
+public class EntityBoomerang extends AReforgedThrowable {
 	
 	public EntityBoomerang(World worldIn, EntityLivingBase getThrowerIn, ItemStack stack) {
 		
@@ -82,11 +81,6 @@ public class EntityBoomerang extends ReforgedThrowable {
 
 		return ((ItemBoomerang) getItemStack().getItem()).getMaterial();
 	}
-
-	private float getImpactDamage() {
-		
-		return getMaterial().getDamageVsEntity() + 5;
-	}
 	
 	@Override
 	public void onUpdate() {
@@ -125,61 +119,63 @@ public class EntityBoomerang extends ReforgedThrowable {
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition target) {
-		super.onImpact(target);
+	protected boolean onBlockHit(BlockPos blockPos) {
 		
-		//Target is entity or block?
-		if(target.entityHit == null) {
-			//It's a block
-			
-			setDead();
-			
-			double px = getPosX();
-			double py = getPosY();
-			double pz = getPosZ();
-			
-			if(!worldObj.isRemote) {
-				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-					entityDropItem(getItemStack(), 0.5f);
-				} else {
-					EntityPlayer p = (EntityPlayer) getThrower();
-					if(p.getHealth() <= 2.0F) {
-						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 20);
-					} else {
-						p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 2);
-						p.addChatMessage(new ChatComponentText(LanguageRegistry.instance()
-								.getStringLocalization("item.boomerang.langBreak").replace("%1$s",getItemStack().getDisplayName())));
-					}
-				}
+		double px = getPosX();
+		double py = getPosY();
+		double pz = getPosZ();
+		
+		if(!worldObj.isRemote) {
+			if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+				entityDropItem(getItemStack(), 0.5f);
 			}
-		} else {
-			//It's an entity
-			if(target.entityHit == getThrower()) {
-				
-				//It's the thrower himself
-				ItemStack stack = getItemStack();
-				EntityPlayer p = (EntityPlayer) target.entityHit;
-				if(stack.getMaxDamage() - stack.getItemDamage() > 0) {
-					p.inventory.addItemStackToInventory(stack);
+			
+			/* why was this in block hit? o.O
+			else {
+				EntityPlayer p = (EntityPlayer) getThrower();
+				if(p.getHealth() <= 2.0F) {
+					p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 20);
 				} else {
-					//Custom sound later... [BREAK SOUND]
+					p.attackEntityFrom(ReforgedRegistry.boomerangBreakDamage, 2);
+					p.addChatMessage(new ChatComponentText(LanguageRegistry.instance()
+							.getStringLocalization("item.boomerang.langBreak").replace("%1$s",getItemStack().getDisplayName())));
 				}
-
+			}*/
+		}
+		return true;
+	}
+	
+	@Override
+	protected boolean onEntityHit(Entity living) {
+		
+		if(living == getThrower()) {
+			
+			//It's the thrower himself
+			ItemStack stack = getItemStack();
+			EntityPlayer p = (EntityPlayer) living;
+			if(stack.getMaxDamage() > stack.getItemDamage()) {
+				p.inventory.addItemStackToInventory(stack);
 			} else {
-				
-				//It's an hit entity
-				target.entityHit.attackEntityFrom(ReforgedRegistry.boomerangHitDamage, getImpactDamage());
-				ItemStack stack = getItemStack();
-				
-				if(stack.attemptDamageItem(1, rand)) {
-					setDead();
-				} else {
-					setItemStack(stack);
-				}
+				//Custom sound later... [BREAK SOUND]
+				return true;
+			}
+
+		} else {
+			
+			//It's an hit entity
+			living.attackEntityFrom(ReforgedRegistry.boomerangHitDamage,
+					getImpactDamage(living));
+			ItemStack stack = getItemStack();
+			
+			if(stack.attemptDamageItem(1, rand)) {
+				return true;
+			} else {
+				setItemStack(stack);
 			}
 		}
+		return false;
 	}
-
+	
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tagCompound) {
 		
