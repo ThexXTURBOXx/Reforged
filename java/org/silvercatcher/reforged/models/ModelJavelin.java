@@ -1,10 +1,9 @@
 package org.silvercatcher.reforged.models;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelJavelin extends ModelBase {
+public class ModelJavelin extends ReforgedModel {
     public ModelRenderer stick;
     public ModelRenderer front1;
     public ModelRenderer front2;
@@ -31,11 +30,5 @@ public class ModelJavelin extends ModelBase {
         this.front2.render(f5);
         this.front1.render(f5);
         this.stick.render(f5);
-    }
-    
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
     }
 }

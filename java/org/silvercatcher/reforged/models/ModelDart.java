@@ -1,11 +1,10 @@
 package org.silvercatcher.reforged.models;
 
-import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
-import net.minecraft.entity.Entity;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.Entity;
 
-public class ModelDart extends ModelBase {
+public class ModelDart extends ReforgedModel {
     public ModelRenderer shapefront;
     public ModelRenderer shapebehind;
     public ModelRenderer shapering;
@@ -62,11 +61,5 @@ public class ModelDart extends ModelBase {
         GlStateManager.translate(-this.shapebehind2.rotationPointX * f5, -this.shapebehind2.rotationPointY * f5, -this.shapebehind2.rotationPointZ * f5);
         this.shapebehind2.render(f5);
         GlStateManager.popMatrix();
-    }
-
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
     }
 }
