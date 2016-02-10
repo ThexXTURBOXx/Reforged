@@ -77,8 +77,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		
-		
-		if(entityIn instanceof EntityPlayer) {
+		if(entityIn instanceof EntityPlayer && isSelected) {
 
 			EntityPlayer player = (EntityPlayer) entityIn;
 			

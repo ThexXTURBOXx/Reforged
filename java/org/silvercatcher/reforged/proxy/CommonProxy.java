@@ -65,7 +65,7 @@ public class CommonProxy {
 		katana= config.getBoolean("Katana", "Items", true, "Enable the Katana");
 		knife = config.getBoolean("Knife", "Items", true, "Enable the Knife");
 		musket = config.getBoolean("Musket", "Items", true, "Enable the Musket and Blunderbuss");
-		nest_of_bees = config.getBoolean("Nest Of Bees", "Items", false, "Enable the Nest Of Bees");
+		nest_of_bees = config.getBoolean("Nest Of Bees", "Items", false, "Enable the Nest Of Bees (BETA, only use for testing!)");
 		sabre = config.getBoolean("Sabre", "Items", true, "Enable the Sabre");
 		
 		//Save config
