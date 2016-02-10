@@ -23,7 +23,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ReforgedRegistry {
 	
-
 	//Items
 	public static Item ARROW_BUNDLE;
 	

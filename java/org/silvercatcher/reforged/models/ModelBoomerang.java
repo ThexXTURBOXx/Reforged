@@ -5,7 +5,7 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.client.renderer.GlStateManager;
 
-public class ModelBoomerang extends ModelBase {
+public class ModelBoomerang extends ReforgedModel {
     public ModelRenderer tile1;
     public ModelRenderer tile2;
     public ModelRenderer tile3;
@@ -58,11 +58,5 @@ public class ModelBoomerang extends ModelBase {
         this.tile3.render(f5);
         GlStateManager.popMatrix();
         this.tile5.render(f5);
-    }
-
-    public void setRotateAngle(ModelRenderer modelRenderer, float x, float y, float z) {
-        modelRenderer.rotateAngleX = x;
-        modelRenderer.rotateAngleY = y;
-        modelRenderer.rotateAngleZ = z;
     }
 }

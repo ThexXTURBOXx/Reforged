@@ -14,7 +14,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class RenderDart extends ReforgedRender {
 	
 	public RenderDart(RenderManager renderManager) {
-		super(renderManager, new ModelDart());
+		super(renderManager, new ModelDart(), -90);
 	}
 	
 	@Override

@@ -39,14 +39,12 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 
 	@Override
 	protected boolean onEntityHit(EntityLivingBase living) {
-		
 		living.attackEntityFrom(causeImpactDamage(living, getThrower()), 4);
 		return true;
 	}
 
 	@Override
 	protected float getImpactDamage(Entity target) {
-
 		return 5f;
 	}
 }

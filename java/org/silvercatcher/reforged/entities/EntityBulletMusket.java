@@ -5,6 +5,7 @@ import org.silvercatcher.reforged.ReforgedRegistry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.BlockPos;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.MovingObjectPosition;
@@ -21,20 +22,13 @@ public class EntityBulletMusket extends AReforgedThrowable {
 		
 		super(worldIn, throwerIn, stack, "musket");
 	}
-
+	
 	@Override
-	protected void onImpact(MovingObjectPosition target) {
-		super.onImpact(target);
-		//Target is entity or block?
-		if(target.entityHit == null) {
-			//It's a block
-		} else {
-			//It's an entity
-			target.entityHit.attackEntityFrom(causeImpactDamage(target.entityHit, getThrower()), 10);
-		}
-		setDead();
+	protected boolean onEntityHit(Entity entity) {
+		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), 10);
+		return true;
 	}
-
+	
 	@Override
 	protected DamageSource causeImpactDamage(Entity target, EntityLivingBase shooter) {
 		
