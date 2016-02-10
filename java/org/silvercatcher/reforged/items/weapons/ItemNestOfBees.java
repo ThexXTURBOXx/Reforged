@@ -26,10 +26,10 @@ public class ItemNestOfBees extends ExtendedItem {
 	private static int buildup = 25;
 	
 	public ItemNestOfBees() {
+		
 		setUnlocalizedName("nest_of_bees");
 		setMaxDamage(80);
 		setMaxStackSize(1);
-	
 	}
 	
 	@SuppressWarnings("rawtypes")
@@ -61,9 +61,9 @@ public class ItemNestOfBees extends ExtendedItem {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-						
-		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 		
+		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
+		System.out.println(playerIn.getItemInUseDuration());
 		return itemStackIn;
 	}
 	
@@ -71,11 +71,12 @@ public class ItemNestOfBees extends ExtendedItem {
 	public int getMaxItemUseDuration(ItemStack stack) {
 		
 		return CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ACTIVATED)
-				? super.getMaxItemUseDuration(stack) : buildup;
+				? ExtendedItem.USE_DURATON : buildup;
 	}
 	
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		
 		
 		if(entityIn instanceof EntityPlayer) {
 
@@ -83,9 +84,11 @@ public class ItemNestOfBees extends ExtendedItem {
 			
 			NBTTagCompound compound = CompoundTags.giveCompound(stack);
 			
+			System.out.println(compound.getBoolean(CompoundTags.ACTIVATED));
+			
 			int delay = compound.getInteger(CompoundTags.DELAY);
 			
-			if(delay <= 0) {
+			if(delay == 0) {
 				
 				int arrows = compound.getInteger(CompoundTags.AMMUNITION);
 				
@@ -99,16 +102,17 @@ public class ItemNestOfBees extends ExtendedItem {
 				
 				compound.setInteger(CompoundTags.AMMUNITION, arrows);
 				compound.setInteger(CompoundTags.DELAY, shot_delay);
+			
 			} else {
 				
-				compound.setInteger(CompoundTags.DELAY, delay - 1);
+				compound.setInteger(CompoundTags.DELAY, Math.max(0, delay - 1));
 			}
 		}
 	}
 	
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-		
+				
 		NBTTagCompound compound = CompoundTags.giveCompound(stack);
 		
 		if(compound.getInteger(CompoundTags.AMMUNITION) > 0) {
@@ -133,12 +137,10 @@ public class ItemNestOfBees extends ExtendedItem {
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
 		
-		NBTTagCompound compund = CompoundTags.giveCompound(stack);
+		NBTTagCompound compound = CompoundTags.giveCompound(stack);
 		
-		if(compund.getBoolean(CompoundTags.ACTIVATED)) {
+		if(compound.getBoolean(CompoundTags.ACTIVATED)) {
 			return EnumAction.BOW;
-		} else if(compund.getInteger(CompoundTags.RELOAD) > 0){
-			return EnumAction.BLOCK;
 		}
 		return EnumAction.NONE;
 	}
