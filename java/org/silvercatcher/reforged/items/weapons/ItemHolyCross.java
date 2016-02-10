@@ -20,11 +20,10 @@ public class ItemHolyCross extends ExtendedItem {
 	private LinkedList<EntityLivingBase> toPunish;
 	
 	public ItemHolyCross() {
-				
+		super();
 		setUnlocalizedName("holy_cross");
 		setMaxStackSize(1);
 		setMaxDamage(25);
-			
 		toPunish = new LinkedList<>();
 	}
 

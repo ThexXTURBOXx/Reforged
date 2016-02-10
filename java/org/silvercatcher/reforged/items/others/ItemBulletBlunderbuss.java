@@ -11,11 +11,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemBulletBlunderbuss extends ExtendedItem {
 	
 	public ItemBulletBlunderbuss() {
-		
+		super();
 		setMaxStackSize(64);
 		setUnlocalizedName("blunderbuss_bullet");
-		
-		setCreativeTab(ReforgedMod.tabReforged);
 	}
 
 	@Override

@@ -40,11 +40,11 @@ public class EntityJavelin extends AReforgedThrowable {
 	protected void entityInit() {
 		super.entityInit();
 		
-		// id 6 = ItemStack of Javelin, type 5 = ItemStack
-		dataWatcher.addObjectByDataType(6, 5);
+		// id 5 = ItemStack of Javelin, type 5 = ItemStack
+		dataWatcher.addObjectByDataType(5, 5);
 		
-		// id 7 = Loaded Duration, type 2 = Integer
-		dataWatcher.addObjectByDataType(7, 2);
+		// id 6 = Loaded Duration, type 2 = Integer
+		dataWatcher.addObjectByDataType(6, 2);
 	}
 	
 	public ItemStack getItemStack() {

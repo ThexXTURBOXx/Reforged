@@ -48,9 +48,7 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 					? (EntityLivingBase) target.entityHit : target.entityHit); 
 		}
 		
-		if(broken) {
-			setDead();
-		}
+		if(broken) setDead();
 	}
 	
 	protected boolean onBlockHit(BlockPos blockPos) {

@@ -37,17 +37,17 @@ public class EntityBoomerang extends AReforgedThrowable {
 		
 		super.entityInit();
 		
-		// id 6 = ItemStack of Boomerang, type 5 = ItemStack
-		dataWatcher.addObjectByDataType(6, 5);
+		// id 5 = ItemStack of Boomerang, type 5 = ItemStack
+		dataWatcher.addObjectByDataType(5, 5);
 		
-		// id 7 = posX, type 3 = float
+		// id 6 = posX, type 3 = float
+		dataWatcher.addObjectByDataType(6, 3);
+		
+		// id 7 = posY, type 3 = float
 		dataWatcher.addObjectByDataType(7, 3);
 		
-		// id 8 = posY, type 3 = float
+		// id 8 = posZ, type 3 = float
 		dataWatcher.addObjectByDataType(8, 3);
-		
-		// id 9 = posZ, type 3 = float
-		dataWatcher.addObjectByDataType(9, 3);
 	}
 
 	public ItemStack getItemStack() {

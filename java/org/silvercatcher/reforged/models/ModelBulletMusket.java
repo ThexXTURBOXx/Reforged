@@ -6,11 +6,8 @@ import net.minecraft.entity.Entity;
 public class ModelBulletMusket extends ReforgedModel {	
 	ModelRenderer Bullet;
 	
-	public ModelBulletMusket()
-	{
-		textureWidth = 64;
-		textureHeight = 32;
-		
+	public ModelBulletMusket() {
+    	super();		
 		Bullet = new ModelRenderer(this, 0, 0);
 		Bullet.addBox(0F, 0F, 0F, 1, 1, 1);
 		Bullet.setRotationPoint(0F, 0F, 0F);

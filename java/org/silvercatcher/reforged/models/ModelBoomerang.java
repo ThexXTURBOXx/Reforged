@@ -14,8 +14,7 @@ public class ModelBoomerang extends ReforgedModel {
     public ModelRenderer tile6;
 
     public ModelBoomerang() {
-        this.textureWidth = 64;
-        this.textureHeight = 32;
+    	super();
         this.tile6 = new ModelRenderer(this, 56, 0);
         this.tile6.setRotationPoint(0.0F, 0.0F, -7.0F);
         this.tile6.addBox(0.0F, 0.0F, 0.0F, 2, 2, 2, 0.0F);

@@ -16,7 +16,7 @@ public class ItemFireRod extends ExtendedItem {
 	public static final int FIRE_DURATION = 10;
 	
 	public ItemFireRod() {
-		
+		super();
 		setUnlocalizedName("firerod");
 		setMaxStackSize(32);
 	}

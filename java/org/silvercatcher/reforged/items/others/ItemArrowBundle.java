@@ -11,10 +11,9 @@ public class ItemArrowBundle extends ExtendedItem {
 
 	
 	public ItemArrowBundle() {
-		
+		super();
 		setMaxStackSize(16);
 		setUnlocalizedName("arrow_bundle");
-		setCreativeTab(ReforgedMod.tabReforged);
 	}
 	
 	@Override

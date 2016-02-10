@@ -14,11 +14,10 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemJavelin extends ExtendedItem {
 	
 	public ItemJavelin() {
-		
+		super();
 		setUnlocalizedName("javelin");
 		setMaxStackSize(8);
 		setMaxDamage(32);
-		
 	}
 
 	

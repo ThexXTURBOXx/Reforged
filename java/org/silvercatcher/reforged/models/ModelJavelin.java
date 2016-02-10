@@ -9,8 +9,7 @@ public class ModelJavelin extends ReforgedModel {
     public ModelRenderer front2;
 
     public ModelJavelin() {
-        this.textureWidth = 64;
-        this.textureHeight = 32;
+    	super();
         this.front2 = new ModelRenderer(this, 0, 6);
         this.front2.setRotationPoint(-18.7F, 0.0F, 0.0F);
         this.front2.addBox(0.0F, 0.0F, 0.0F, 2, 1, 1, 0.0F);

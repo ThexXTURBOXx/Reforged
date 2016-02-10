@@ -10,11 +10,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemBulletMusket extends ExtendedItem {
 	
 	public ItemBulletMusket() {
-		
+		super();
 		setMaxStackSize(64);
 		setUnlocalizedName("musket_bullet");
-		
-		setCreativeTab(ReforgedMod.tabReforged);
 	}
 
 	@Override

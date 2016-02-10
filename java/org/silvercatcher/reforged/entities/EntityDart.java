@@ -31,8 +31,8 @@ public class EntityDart extends AReforgedThrowable {
 	protected void entityInit() {
 		super.entityInit();
 		
-		// id 6 = ItemStack of Dart, type 5 = ItemStack
-		dataWatcher.addObjectByDataType(6, 5);
+		// id 5 = ItemStack of Dart, type 5 = ItemStack
+		dataWatcher.addObjectByDataType(5, 5);
 	}
 
 	public ItemStack getItemStack() {

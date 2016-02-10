@@ -11,8 +11,7 @@ public class ModelDart extends ReforgedModel {
     public ModelRenderer shapebehind2;
 
     public ModelDart() {
-        this.textureWidth = 64;
-        this.textureHeight = 32;
+    	super();
         this.shapefront = new ModelRenderer(this, 58, 0);
         this.shapefront.setRotationPoint(0.0F, 0.3F, 0.3F);
         this.shapefront.addBox(1.0F, 0.0F, 0.0F, 2, 1, 1, 0.0F);

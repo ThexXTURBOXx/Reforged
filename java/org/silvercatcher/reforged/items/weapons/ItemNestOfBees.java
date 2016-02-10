@@ -26,7 +26,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	private static int buildup = 25;
 	
 	public ItemNestOfBees() {
-		
+		super();
 		setUnlocalizedName("nest_of_bees");
 		setMaxDamage(80);
 		setMaxStackSize(1);
