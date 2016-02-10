@@ -3,7 +3,6 @@ package org.silvercatcher.reforged.items.recipes;
 import java.util.LinkedList;
 
 import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.gui.ReloadOverlay;
 import org.silvercatcher.reforged.items.CompoundTags;
 
 import net.minecraft.client.Minecraft;
@@ -15,13 +14,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-public class NestOfBeesLoadRecipe implements IRecipe {
-	
+//JUST A BACKUP
+
+public class NestOfBeesLoadRecipeOld implements IRecipe {
+
 	private ItemStack output;
 	private ItemStack input [];
-	private int aBSlot;
-	private int stasize;
-	private int c;
 	
 	private static void printInventory(String name, InventoryCrafting inventory) {
 	
@@ -58,10 +56,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 						output = stack.copy();
 					}
 				} else if(stack.getItem() == ReforgedRegistry.ARROW_BUNDLE) {
-					arrowBundles = stack.stackSize;
-					if(arrowBundles > 4) {
-						arrowBundles = 4;
-					}
+					arrowBundles++;
 				} else {
 					// we don't want any other stuff!
 					return false;
@@ -71,7 +66,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 		
 		return nestsOfBees == 1 && arrowBundles > 0;
 	}
-	
+
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventory) {
 
@@ -107,36 +102,37 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 		while(!arrowBundleIndizes.isEmpty()) {
 			
 			int arrowBundleSlot = arrowBundleIndizes.removeFirst();
-			aBSlot = arrowBundleSlot;
+			
 			ItemStack arrowBundleStack = inventory.getStackInSlot(arrowBundleSlot);
-			int stsize = arrowBundleStack.stackSize;
-			if(stsize > 4) stsize = 4;
-			arrows += arrowBundleStack.stackSize * 8;
-			if(arrows > 32) arrows = 32;
-			stasize = stsize;
+			arrows += 8;
+			if(arrows > 32) {
+				arrows = 32;
+			}
+			input[arrowBundleSlot].stackSize -= 4;
 		}
-		
+
 		compound.setInteger(CompoundTags.AMMUNITION, arrows);
-		c = 0;
+
 		return output;
 	}
-	
+
 	@Override
 	public int getRecipeSize() {
 		
 		return 9;
 	}
-	
+
 	@Override
 	public ItemStack getRecipeOutput() {
+		
 		return output;
 	}
-	
+
 	@Override
 	public ItemStack[] getRemainingItems(InventoryCrafting inventory) {
 		
 		//printInventory("remain", inventory);
-		if(c++ == 0) inventory.decrStackSize(aBSlot, stasize - 1);
+		
 		return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
 	}
 }
