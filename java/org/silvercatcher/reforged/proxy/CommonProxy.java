@@ -48,6 +48,9 @@ public class CommonProxy {
 	public static boolean nest_of_bees;
 	public static boolean sabre;
 	
+	//Others for Config
+	public static boolean version_checker;
+	
 	private void loadConfig(FMLPreInitializationEvent e) {
 		//Get an instance of Config
 		Configuration config = new Configuration(e.getSuggestedConfigurationFile());
@@ -67,6 +70,9 @@ public class CommonProxy {
 		musket = config.getBoolean("Musket", "Items", true, "Enable the Musket and Blunderbuss");
 		nest_of_bees = config.getBoolean("Nest Of Bees", "Items", false, "Enable the Nest Of Bees (BETA, only use for testing!)");
 		sabre = config.getBoolean("Sabre", "Items", true, "Enable the Sabre");
+		
+		//Others
+		version_checker = config.getBoolean("Version Checker", "General", true, "Enable the Version Checker");		
 		
 		//Save config
 		config.save();

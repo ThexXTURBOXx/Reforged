@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged;
 
+import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.util.VersionChecker;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,7 +23,7 @@ public class ReforgedEvents {
 		//Version Checker Chat Notification
 		if(!notificated) {
 			notificated = true;
-			if(!VersionChecker.isLatestVersion()) {
+			if(!VersionChecker.isLatestVersion() && GlobalValues.VERSION_CHECKER) {
 				EntityPlayer p = e.player;
 				ChatStyle version = new ChatStyle().setColor(EnumChatFormatting.AQUA);
 				ChatStyle modname = new ChatStyle();
