@@ -63,7 +63,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
 		
 		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
-		System.out.println(playerIn.getItemInUseDuration());
+		//System.out.println(playerIn.getItemInUseDuration());
 		return itemStackIn;
 	}
 	
@@ -84,7 +84,7 @@ public class ItemNestOfBees extends ExtendedItem {
 			
 			NBTTagCompound compound = CompoundTags.giveCompound(stack);
 			
-			System.out.println(compound.getBoolean(CompoundTags.ACTIVATED));
+			//System.out.println(compound.getBoolean(CompoundTags.ACTIVATED));
 			
 			int delay = compound.getInteger(CompoundTags.DELAY);
 			
