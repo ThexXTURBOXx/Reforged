@@ -35,16 +35,18 @@ public class ReforgedEvents {
 				IChatComponent chat = new ChatComponentText("");
 				IChatComponent msg1 = new ChatComponentText("Installed: " + ReforgedMod.VERSION).setChatStyle(version);
 				data.setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, msg1));
-				chat.appendSibling(new ChatComponentText("ง6[งb" + ReforgedMod.NAME + "ง6] ").setChatStyle(data));
+				String ModName = ReforgedMod.NAME;
+				if(VersionChecker.isBeta()) ModName = ModName + " BETA";
+				chat.appendSibling(new ChatComponentText("ยง6[ยงb" + ModName + "ยง6] ").setChatStyle(data));
 				chat.appendSibling(new ChatComponentTranslation("versionchecker.ingame.outdated").setChatStyle(data));
 				chat.appendText(": ");
-				chat.appendText("งd" + VersionChecker.getLatestVersion());
+				chat.appendText("ยงd" + VersionChecker.getLatestVersion());
 				p.addChatMessage(chat);
 				chat = new ChatComponentText("");
-				chat.appendText("ง6[");
+				chat.appendText("ยง6[");
 				data1.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, VersionChecker.getDownloadUrl()));
 				chat.appendSibling(new ChatComponentTranslation("versionchecker.ingame.download").setChatStyle(data1));
-				chat.appendText("ง6]");
+				chat.appendText("ยง6]");
 				p.addChatMessage(chat);
 			}
 		}
