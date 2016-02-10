@@ -21,12 +21,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
-public class ItemBlunderbuss extends ItemBow implements ItemExtension {
+public class ItemBlunderbuss extends ItemBow implements ItemExtension, IReloadable {
 
 	// let's see...
 	byte empty		= 0;
 	byte loading	= 1;
 	byte loaded		= 2;
+	
 	
 	public ItemBlunderbuss() {
 		
@@ -39,7 +40,9 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
 		
-		byte loadState = giveCompound(itemStackIn).getByte(CompoundTags.AMMUNITION);
+		NBTTagCompound compound = giveCompound(itemStackIn);
+		
+		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 		
 		if(loadState == empty) {
 			
@@ -47,6 +50,7 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 					playerIn.inventory.consumeInventoryItem(ReforgedRegistry.BLUNDERBUSS_SHOT)) {
 				
 				loadState = loading;
+				compound.setLong(CompoundTags.RELOAD, worldIn.getWorldTime() +  getReloadTotal());
 			
 			} else {
 				
@@ -54,7 +58,7 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 			}
 		}
 		
-		giveCompound(itemStackIn).setByte(CompoundTags.AMMUNITION, loadState);
+		compound.setByte(CompoundTags.AMMUNITION, loadState);
 		
 		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 		
@@ -64,7 +68,9 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
 		
-		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
+		NBTTagCompound compound = giveCompound(stack);
+		
+		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 		
 		if(loadState == loaded) {
 
@@ -79,7 +85,7 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 					playerIn.destroyCurrentEquippedItem();
 				}
 			}
-			giveCompound(stack).setByte(CompoundTags.AMMUNITION, empty);
+			compound.setByte(CompoundTags.AMMUNITION, empty);
 		}
 	}
 
@@ -106,16 +112,19 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 		return compound;
 	}
 	
+	
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		tooltip.add(LanguageRegistry.instance().getStringLocalization("item.musket.loadstate")
-				+ ": " + (loadState == empty ? LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.empty")
-						: (loadState == loaded ? LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.loaded")
-								: LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.loading"))));
+		LanguageRegistry lr = LanguageRegistry.instance();
+		
+		tooltip.add(lr.getStringLocalization("item.musket.loadstate")
+				+ ": " + (loadState == empty ? lr.getStringLocalization("item.musket.loadstate.empty")
+						: (loadState == loaded ? lr.getStringLocalization("item.musket.loadstate.loaded")
+								: lr.getStringLocalization("item.musket.loadstate.loading"))));
 	}
 	
 	@Override
@@ -176,8 +185,21 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension {
 	}
 	
 	private void spreadShot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
-		for(int i = 1; i <=11; i++) {
+		
+		for(int i = 1; i < 12; i++) {
 			worldIn.spawnEntityInWorld(new EntityBulletBlunderbuss(worldIn, playerIn, stack));
 		}
+	}
+
+	@Override
+	public int getReloadTotal() {
+
+		return 40;
+	}
+
+	@Override
+	public long getReloadStarted(ItemStack stack) {
+
+		return giveCompound(stack).getLong(CompoundTags.RELOAD);
 	}
 }

@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
-public class ItemMusket extends ItemBow implements ItemExtension {
+public class ItemMusket extends ItemBow implements ItemExtension, IReloadable {
 
 	// let's see...
 	byte empty		= 0;
@@ -38,7 +38,9 @@ public class ItemMusket extends ItemBow implements ItemExtension {
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
 		
-		byte loadState = giveCompound(itemStackIn).getByte(CompoundTags.AMMUNITION);
+		NBTTagCompound compound = giveCompound(itemStackIn);
+		
+		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 		
 		if(loadState == empty) {
 			
@@ -46,14 +48,16 @@ public class ItemMusket extends ItemBow implements ItemExtension {
 					playerIn.inventory.consumeInventoryItem(ReforgedRegistry.MUSKET_BULLET)) {
 				
 				loadState = loading;
-			
+				compound.setLong(CompoundTags.RELOAD,
+						worldIn.getWorldTime() + getReloadTotal());
+				
 			} else {
 				
 				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
 			}
 		}
 		
-		giveCompound(itemStackIn).setByte(CompoundTags.AMMUNITION, loadState);
+		compound.setByte(CompoundTags.AMMUNITION, loadState);
 		
 		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 		
@@ -63,7 +67,9 @@ public class ItemMusket extends ItemBow implements ItemExtension {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
 		
-		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
+		NBTTagCompound compound = giveCompound(stack);
+		
+		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 		
 		if(loadState == loaded) {
 
@@ -80,8 +86,10 @@ public class ItemMusket extends ItemBow implements ItemExtension {
 					playerIn.destroyCurrentEquippedItem();
 				}
 			}
-			giveCompound(stack).setByte(CompoundTags.AMMUNITION, empty);
+			compound.setByte(CompoundTags.AMMUNITION, empty);
 		}
+		compound.setLong(CompoundTags.RELOAD,
+				worldIn.getWorldTime() + getReloadTotal());
 	}
 
 	@Override
@@ -113,14 +121,12 @@ public class ItemMusket extends ItemBow implements ItemExtension {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		new LanguageRegistry();
-		new LanguageRegistry();
-		new LanguageRegistry();
-		new LanguageRegistry();
-		tooltip.add(LanguageRegistry.instance().getStringLocalization("item.musket.loadstate") + ": " + (loadState == empty ? 
-				LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.empty")
-				: (loadState == loaded ? LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.loaded") : 
-					LanguageRegistry.instance().getStringLocalization("item.musket.loadstate.loading"))));
+		LanguageRegistry lr = LanguageRegistry.instance();
+		
+		tooltip.add(lr.getStringLocalization("item.musket.loadstate") + ": " + (loadState == empty ? 
+				lr.getStringLocalization("item.musket.loadstate.empty")
+				: (loadState == loaded ? lr.getStringLocalization("item.musket.loadstate.loaded") : 
+					lr.getStringLocalization("item.musket.loadstate.loading"))));
 	}
 	
 	@Override
@@ -159,7 +165,8 @@ public class ItemMusket extends ItemBow implements ItemExtension {
 	public void registerRecipes() {
 	
 		GameRegistry.addShapelessRecipe(new ItemStack(this),
-				new ItemStack(ReforgedRegistry.MUSKET_BARREL), new ItemStack(ReforgedRegistry.GUN_STOCK));
+				new ItemStack(ReforgedRegistry.MUSKET_BARREL),
+				new ItemStack(ReforgedRegistry.GUN_STOCK));
 	}
 
 	@Override
@@ -176,5 +183,17 @@ public class ItemMusket extends ItemBow implements ItemExtension {
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
 		return ToolMaterial.IRON.getEnchantability();
+	}
+
+	@Override
+	public int getReloadTotal() {
+
+		return 45;
+	}
+	
+	@Override
+	public long getReloadStarted(ItemStack stack) {
+
+		return giveCompound(stack).getLong(CompoundTags.RELOAD);
 	}
 }
