@@ -233,5 +233,4 @@ public class ReforgedRegistry {
 		FMLCommonHandler.instance().bus().register(eventclass);
 	    MinecraftForge.EVENT_BUS.register(eventclass);
 	}
-	
 }

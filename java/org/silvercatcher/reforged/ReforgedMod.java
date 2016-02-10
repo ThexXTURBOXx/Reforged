@@ -2,8 +2,8 @@ package org.silvercatcher.reforged;
 
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
-import net.minecraft.item.Item;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -19,11 +19,10 @@ public class ReforgedMod
     public static final String VERSION = "0.6";
     
     public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
-		
 		@Override
 		public Item getTabIconItem() {
 			return ReforgedRegistry.IRON_BATTLE_AXE;
-		}		
+		}
 	};
     
     @Instance(ID)
@@ -36,13 +35,11 @@ public class ReforgedMod
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-    	
     	proxy.preInit(event);
     }
     
     @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
+    public void init(FMLInitializationEvent event) {
         proxy.init(event);
     }
 }
