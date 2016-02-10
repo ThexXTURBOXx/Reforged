@@ -1,14 +1,12 @@
 package org.silvercatcher.reforged.gui;
 
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.util.ReadableColor;
 import org.silvercatcher.reforged.items.weapons.IReloadable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -58,7 +56,7 @@ public class ReloadOverlay extends Gui {
 				GL11.glColor4f(1F, 1F, 1F, 1F);
 				GL11.glDisable(GL11.GL_LIGHTING);
 				
-				System.out.println("done: " + done);
+				//System.out.println("done: " + done);
 				
 				int i;
 				for (i = 0; i < 9; i++)
@@ -84,7 +82,6 @@ public class ReloadOverlay extends Gui {
 						color = red;
 					}
 				}
-				
 				
 				//System.out.println("color: " + color);
 				
