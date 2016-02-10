@@ -51,6 +51,7 @@ public class ItemNestOfBees extends ExtendedItem {
 				'w', Item.getItemFromBlock(Blocks.planks));
 		
 		GameRegistry.addRecipe(new NestOfBeesLoadRecipe());
+		RecipeSorter.INSTANCE.register("ReloadNoB", NestOfBeesLoadRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
 	}
 	
 	@Override
