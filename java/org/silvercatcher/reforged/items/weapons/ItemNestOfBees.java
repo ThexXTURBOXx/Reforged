@@ -19,6 +19,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
+import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ItemNestOfBees extends ExtendedItem {
 
@@ -103,7 +105,7 @@ public class ItemNestOfBees extends ExtendedItem {
 				compound.setInteger(CompoundTags.AMMUNITION, arrows);
 				compound.setInteger(CompoundTags.DELAY, shot_delay);
 			
-			} else {
+			} else if(compound.getBoolean(CompoundTags.ACTIVATED)) {
 				
 				compound.setInteger(CompoundTags.DELAY, Math.max(0, delay - 1));
 			}
