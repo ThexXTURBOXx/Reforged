@@ -51,22 +51,39 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		if(broken) setDead();
 	}
 	
+	/** Called when the entity hits a block
+	 * @param blockPos The position where the entity landed
+	 * @return should the entity get setDead() ? */
 	protected boolean onBlockHit(BlockPos blockPos) {
 		return true;
 	}
-
+	
+	/** Called when the entity hits an other entity
+	 * @param entity The entity which got hit
+	 * @return should the entity get setDead() ? */
 	protected boolean onEntityHit(Entity entity) {
 		return true;
 	}
-	
+
+	/** Called when the entity hits a living entity
+	 * @param living The mob which got hit
+	 * @return should the entity get setDead() ? */
 	protected boolean onEntityHit(EntityLivingBase living) {
 		return onEntityHit((Entity) living);
 	}
-		
+
+	/** Causes the damage, which is set in the constructor
+	 * @param target the entity which got hit
+	 * @param shooter the mob which shot
+	 * @return the specified DamageSource*/
 	protected DamageSource causeImpactDamage(Entity target, EntityLivingBase shooter) {
 		return new EntityDamageSourceIndirect(damageName, target, shooter).setProjectile();
 	}
 	
+	/** Sets the damage which should be caused. It
+	 * is set in half-lives.
+	 * @param target The mob which gets hit
+	 * @return the amount of damage*/
 	protected abstract float getImpactDamage(Entity target);
 	
 	@Override

@@ -22,6 +22,7 @@ public class CompoundTags {
 		return compound;
 	}
 	
+	/** saves the delay in ticks until an action should be called */
 	public static final String DELAY        =   "delay";
 
 	/** saves the ticks left to reload */
@@ -46,5 +47,6 @@ public class CompoundTags {
 	/** saves the material of an item that is currently an entity */
 	public static final String ITEM_MATERIAL = "item_material";
 	
+	/** saves whether the item is activated via right click */
 	public static final String ACTIVATED	 = "activated";
 }
