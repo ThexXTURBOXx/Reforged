@@ -15,7 +15,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class ReforgedEvents {	
-
+	
+	/**Says whether the player got already notified by the Version Checker message*/
 	public boolean notificated = false;
 	
 	@SubscribeEvent

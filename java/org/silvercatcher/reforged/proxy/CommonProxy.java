@@ -83,24 +83,22 @@ public class CommonProxy {
 	protected void registerEntityRenderers(RenderManager manager) {}
 	
 	private void registerEntities() {
-
-		int count = 1;
 		
 		if(GlobalValues.BOOMERANG) {
-			ReforgedRegistry.registerEntity(EntityBoomerang.class, "Boomerang", count++);
+			ReforgedRegistry.registerEntity(EntityBoomerang.class, "Boomerang");
 		}
 		
 		if(GlobalValues.JAVELIN) {
-			ReforgedRegistry.registerEntity(EntityJavelin.class, "Javelin", count++);
+			ReforgedRegistry.registerEntity(EntityJavelin.class, "Javelin");
 		}
 		
 		if(GlobalValues.MUSKET) {
-			ReforgedRegistry.registerEntity(EntityBulletMusket.class, "BulletMusket", count++);
-			ReforgedRegistry.registerEntity(EntityBulletBlunderbuss.class, "BulletBlunderbuss", count++);
+			ReforgedRegistry.registerEntity(EntityBulletMusket.class, "BulletMusket");
+			ReforgedRegistry.registerEntity(EntityBulletBlunderbuss.class, "BulletBlunderbuss");
 		}
 		
 		if(GlobalValues.BLOWGUN) {
-			ReforgedRegistry.registerEntity(EntityDart.class, "Dart", count++);
+			ReforgedRegistry.registerEntity(EntityDart.class, "Dart");
 		}	
 	}
 }

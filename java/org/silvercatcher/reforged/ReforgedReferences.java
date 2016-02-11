@@ -9,6 +9,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ReforgedReferences {
+	/**All needed {@link ResourceLocation}s*/
 	@SideOnly(Side.CLIENT)
 	public static class Textures {
 		public static final ResourceLocation WOODEN_BOOMERANG = new ResourceLocation(ReforgedMod.ID + ":textures/entity/wooden_boomerang.png");
@@ -28,7 +29,8 @@ public class ReforgedReferences {
 		
 		public static final ResourceLocation JAVELIN = new ResourceLocation(ReforgedMod.ID + ":textures/entity/javelin.png");
 	}
-	
+
+	/**All needed GlobalValues*/
 	public static class GlobalValues {
 		//Logger
 		public static Logger log = LogManager.getLogger(ReforgedMod.NAME);
