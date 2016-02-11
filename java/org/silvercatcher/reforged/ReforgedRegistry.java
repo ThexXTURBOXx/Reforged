@@ -86,6 +86,9 @@ public class ReforgedRegistry {
 	public static Item DART_WITHER;
 	public static Item BLOWGUN;
 	
+	//Integers
+	public static int counterEntities = 0;
+	
 	//Hashmaps
 	/**Every item on that list gets registered*/
 	public static List<Item> registrationList = new ArrayList<Item>();
@@ -228,6 +231,8 @@ public class ReforgedRegistry {
 	/**Helper method for registering an Entity
 	 * @param c The class of the Entity
 	 * @param name The name for the Entity*/
+	public static void registerEntity(Class c, String name) {
+		EntityRegistry.registerModEntity(c, name, ++counterEntities, ReforgedMod.instance, 120, 1, true);		
 	}
 
 	/**Helper method for binding a renderclass to a entity
