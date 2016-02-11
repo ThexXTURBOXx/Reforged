@@ -20,7 +20,7 @@ public class ReforgedMod
     //Value depends on Download location... If the update is only released
     //on GitHub, then set this to true
     //If it gets released on CurseForge as well, then set it to false
-    public static final boolean BETA = true;
+    public static final boolean BETA = false;
     
     public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
 		@Override
