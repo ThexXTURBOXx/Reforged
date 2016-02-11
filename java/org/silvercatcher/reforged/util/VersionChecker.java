@@ -16,14 +16,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 
+/**Thread of our Version Checker*/
 public class VersionChecker implements Runnable {
   private static boolean isLatestVersion = true;
   private static String latestVersion = "";
   private static String downloadUrl = "";
+  /**The URL to our json containing the latest version and changelog*/
   private static String jsonUrl = "https://raw.githubusercontent.com/TheOnlySilverClaw/Reforged/master/version.json";
   private static boolean beta = ReforgedMod.BETA;
   private Logger log = GlobalValues.log;
-  
+
+  /**Let the Version Checker run*/
   @Override
 	public void run()
 	  {
@@ -84,14 +87,17 @@ public class VersionChecker implements Runnable {
 	    isLatestVersion = ReforgedMod.VERSION.equals(latestVersion);
 	  }
 	  
+  	  /**@return whether Reforged is up-to-date or not*/
 	  public static boolean isLatestVersion() {
 		  return isLatestVersion;
 	  }
 	  
+	  /**@return if true, the update is only available on GitHub; if false, then on CurseForge and GitHub*/
 	  public static boolean isBeta() {
 		  return beta;
 	  }
 	  
+	  /**@return the latest version available*/
 	  public static String getLatestVersion() {
 		  if(latestVersion == "") {
 			  latestVersion = ReforgedMod.VERSION;
@@ -99,10 +105,12 @@ public class VersionChecker implements Runnable {
 		  return latestVersion;
 	  }
 	  
+	  /**@return the Download-URL of Reforged*/
 	  public static String getDownloadUrl() {
 		  return downloadUrl;
 	  }
 	  
+	  /**@return the current changelog of Reforged*/
 	  public static String getChangelog() {
 		String changelog = "";
 	    InputStream in = null;
@@ -148,9 +156,9 @@ public class VersionChecker implements Runnable {
 	    }
 	    return changelog;
 	  }
-	  
+
+	  /**Sending version to the Version Checker Mod by Dynious, if it's loaded*/
 	  public void sendToVersionCheckMod() {
-		  //Sending version to Version Checker Mod by Dynious, if it's loaded
 		  if (Loader.isModLoaded("VersionChecker")) {
 			  NBTTagCompound compound = new NBTTagCompound();
 			  compound.setString("modDisplayName", ReforgedMod.NAME);
