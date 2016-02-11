@@ -1,6 +1,5 @@
 package org.silvercatcher.reforged.items.others;
 
-import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.items.ExtendedItem;
 
 import net.minecraft.init.Items;

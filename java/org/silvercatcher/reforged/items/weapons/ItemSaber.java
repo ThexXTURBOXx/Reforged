@@ -8,7 +8,6 @@ import org.silvercatcher.reforged.material.MaterialManager;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

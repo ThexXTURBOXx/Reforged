@@ -3,7 +3,6 @@ package org.silvercatcher.reforged.items.recipes;
 import java.util.LinkedList;
 
 import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.gui.ReloadOverlay;
 import org.silvercatcher.reforged.items.CompoundTags;
 
 import net.minecraft.client.Minecraft;
