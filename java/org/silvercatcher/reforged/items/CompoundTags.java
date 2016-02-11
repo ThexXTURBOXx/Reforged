@@ -22,7 +22,7 @@ public class CompoundTags {
 		return compound;
 	}
 	
-	public static final String DELAY = "delay";
+	public static final String DELAY        =   "delay";
 
 	/** saves the ticks left to reload */
 	public static final String RELOAD		= 	"reload";
@@ -41,10 +41,10 @@ public class CompoundTags {
 	public static final String IMPACT_DAMAGE = "impact_damage";
 	
 	/** saves the amount of damage an item, currently represented as an entity, has taken */
-	public static final String ITEM_DAMAGE	=	"item_damage";
+	public static final String ITEM_DAMAGE	 = "item_damage";
 
 	/** saves the material of an item that is currently an entity */
-	public static final String ITEM_MATERIAL=	"item_material";
+	public static final String ITEM_MATERIAL = "item_material";
 	
-	public static final String ACTIVATED	=	"activated";
+	public static final String ACTIVATED	 = "activated";
 }
