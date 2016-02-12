@@ -86,6 +86,7 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension, IReloadab
 				}
 			}
 			compound.setByte(CompoundTags.AMMUNITION, empty);
+			compound.setLong(CompoundTags.RELOAD, -1l);
 		}
 	}
 
@@ -142,7 +143,7 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension, IReloadab
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		if(loadState == loading) return 40;
+		if(loadState == loading) return getReloadTotal();
 
 		return super.getMaxItemUseDuration(stack);
 	}
