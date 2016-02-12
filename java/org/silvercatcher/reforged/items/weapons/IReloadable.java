@@ -6,5 +6,5 @@ public interface IReloadable {
 	
 	int getReloadTotal();
 	
-	long getReloadStarted(ItemStack stack);
+	long getReloadFinish(ItemStack stack);
 }

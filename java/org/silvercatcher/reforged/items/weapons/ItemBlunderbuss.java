@@ -203,7 +203,7 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension, IReloadab
 	}
 
 	@Override
-	public long getReloadStarted(ItemStack stack) {
+	public long getReloadFinish(ItemStack stack) {
 
 		return giveCompound(stack).getLong(CompoundTags.RELOAD);
 	}

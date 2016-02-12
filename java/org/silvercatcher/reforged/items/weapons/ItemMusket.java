@@ -86,9 +86,11 @@ public class ItemMusket extends ItemBow implements ItemExtension, IReloadable {
 				}
 			}
 			compound.setByte(CompoundTags.AMMUNITION, empty);
+		} else if(loadState == loading) {
+			System.out.println("reset");
+			compound.setLong(CompoundTags.RELOAD, -1l);	
+			compound.setByte(CompoundTags.AMMUNITION, empty);
 		}
-		System.out.println("reset");
-		compound.setLong(CompoundTags.RELOAD, -1l);
 	}
 
 	@Override
@@ -191,7 +193,7 @@ public class ItemMusket extends ItemBow implements ItemExtension, IReloadable {
 	}
 	
 	@Override
-	public long getReloadStarted(ItemStack stack) {
+	public long getReloadFinish(ItemStack stack) {
 
 		return giveCompound(stack).getLong(CompoundTags.RELOAD);
 	}
