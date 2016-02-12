@@ -143,7 +143,7 @@ public class ItemMusket extends ItemBow implements ItemExtension, IReloadable {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		if(loadState == loading) return 40;
+		if(loadState == loading) return getReloadTotal();
 
 		return super.getMaxItemUseDuration(stack);
 	}
