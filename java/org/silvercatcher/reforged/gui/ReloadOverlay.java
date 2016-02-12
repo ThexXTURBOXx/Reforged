@@ -91,7 +91,7 @@ public class ReloadOverlay extends Gui {
 				int x0 = event.resolution.getScaledWidth() / 2 - 88 + i * 20;
 				int y0 = event.resolution.getScaledHeight() -3;
 				
-				drawRect(x0, y0 -3, x0 + 16, y0 - (int) (done * 16), color);
+				drawRect(x0, y0, x0 + 16, y0 - (int) (done * 16), color);
 			}
 		}
 	}
