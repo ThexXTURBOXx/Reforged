@@ -42,11 +42,16 @@ public class ReloadOverlay extends Gui {
 				
 				IReloadable reloadable = (IReloadable) equipped.getItem();
 				
-				int reloadLeft = (int) (reloadable.getReloadStarted(equipped)
-						- player.worldObj.getWorldTime());
+				long reloadStarted = reloadable.getReloadStarted(equipped);
+				
+				if(reloadStarted == -1l) return;
+				
+				int reloadLeft = (int) (reloadStarted - player.worldObj.getWorldTime());
 				
 				if(reloadLeft < 0) return;
 				
+				System.out.println(reloadLeft);
+
 				if(reloadLeft > reloadable.getReloadTotal()) {
 					reloadLeft = reloadable.getReloadTotal();
 				}

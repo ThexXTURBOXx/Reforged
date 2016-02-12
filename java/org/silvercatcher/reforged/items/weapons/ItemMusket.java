@@ -87,7 +87,7 @@ public class ItemMusket extends ItemBow implements ItemExtension, IReloadable {
 			}
 			compound.setByte(CompoundTags.AMMUNITION, empty);
 		}
-		System.out.println("resetting reload");
+		System.out.println("reset");
 		compound.setLong(CompoundTags.RELOAD, -1l);
 	}
 

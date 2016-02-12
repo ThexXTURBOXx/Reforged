@@ -53,7 +53,7 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension, IReloadab
 				compound.setLong(CompoundTags.RELOAD, worldIn.getWorldTime() +  getReloadTotal());
 			
 			} else {
-				
+				System.out.println("is this ever called?");
 				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
 			}
 		}
@@ -86,6 +86,7 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension, IReloadab
 				}
 			}
 			compound.setByte(CompoundTags.AMMUNITION, empty);
+			System.out.println("reset");
 			compound.setLong(CompoundTags.RELOAD, -1l);
 		}
 	}
@@ -93,12 +94,15 @@ public class ItemBlunderbuss extends ItemBow implements ItemExtension, IReloadab
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
 		
-		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
+		NBTTagCompound compound = giveCompound(stack);
+		
+		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 
 		if(loadState == loading) {
 			loadState = loaded;
+			compound.setLong(CompoundTags.RELOAD, -1l);
 		}
-		giveCompound(stack).setByte(CompoundTags.AMMUNITION, loadState);
+		compound.setByte(CompoundTags.AMMUNITION, loadState);
 		return stack;
 	}
 	
