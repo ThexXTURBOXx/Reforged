@@ -29,7 +29,10 @@ public class CompoundTags {
 	public static final String RELOAD		= 	"reload";
 	
 	/** saves the amount of ammunition */
-	public static final String AMMUNITION	=	"ammo";
+	public static final String AMMUNITION	=	"ammounition";
+	
+	/** saves the amount of ammunition */
+	public static final String AMMO      	=	"ammo";
 	
 	/** saves a catalyst / amount of secondary ammunition */
 	public static final String CATALYST		=	"catalyst";

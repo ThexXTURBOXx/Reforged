@@ -1,7 +1,7 @@
 package org.silvercatcher.reforged.gui;
 
 import org.lwjgl.opengl.GL11;
-import org.silvercatcher.reforged.items.weapons.IReloadable;
+import org.silvercatcher.reforged.items.weapons.AReloadable;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -38,9 +38,9 @@ public class ReloadOverlay extends Gui {
 			
 			ItemStack equipped = player.getCurrentEquippedItem();
 						
-			if(equipped != null && equipped.getItem() instanceof IReloadable) {
+			if(equipped != null && equipped.getItem() instanceof AReloadable) {
 				
-				IReloadable reloadable = (IReloadable) equipped.getItem();
+				AReloadable reloadable = (AReloadable) equipped.getItem();
 				
 				int reloadLeft = (int) (reloadable.getReloadStarted(equipped)
 						- player.worldObj.getWorldTime());
