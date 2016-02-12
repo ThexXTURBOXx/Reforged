@@ -42,15 +42,8 @@ public class ReloadOverlay extends Gui {
 				
 				AReloadable reloadable = (AReloadable) equipped.getItem();
 				
-				long reloadFinish = reloadable.getReloadFinish(equipped);
-				
-				System.out.println("finish: " + reloadFinish);
-				
-				if(reloadFinish == -1l) return;
-				
-				int reloadLeft = (int) (reloadFinish - player.worldObj.getWorldTime());
-				
-				System.out.println(reloadLeft);
+				int reloadLeft = (int) (reloadable.getReloadStarted(equipped)
+						- player.worldObj.getWorldTime());
 				
 				if(reloadLeft < 0) return;
 				
@@ -79,7 +72,6 @@ public class ReloadOverlay extends Gui {
 				if(done > 0.5f) {
 					if(done > 0.75f) {
 						color = green;
-						System.out.println("green");
 					} else {
 						color = yellow;
 					}
@@ -96,7 +88,7 @@ public class ReloadOverlay extends Gui {
 				int x0 = event.resolution.getScaledWidth() / 2 - 88 + i * 20;
 				int y0 = event.resolution.getScaledHeight() -3;
 				
-				drawRect(x0, y0, x0 + 16, y0 - (int) (done * 16), color);
+				drawRect(x0, y0 -3, x0 + 16, y0 - (int) (done * 16), color);
 			}
 		}
 	}
