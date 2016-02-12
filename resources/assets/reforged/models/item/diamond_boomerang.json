@@ -1,28 +1,6 @@
 {
-    "parent": "reforged:builtin/generated",
+    "parent": "reforged:item/boomerang",
     "textures": {
         "layer0": "reforged:items/diamond_boomerang"
-    },
-	"display": {
-		"thirdperson": {
-			"rotation": [ 170, 264, 81 ],
-			"translation": [ 0.00, 2.75, -2.50 ],
-			"scale": [ 0.85, 0.85, 0.85 ]
-		},
-		"firstperson": {
-			"rotation": [ 0, 225, 25 ],
-			"translation": [ 7.50, 2.75, 0.00 ],
-			"scale": [ 2.25, 2.25, 2.25 ]
-		},
-		"gui": {
-			"rotation": [ 0, 0, 0 ],
-			"translation": [ 0.00, 0.00, 0.00 ],
-			"scale": [ 1.00, 1.00, 1.00 ]
-		},
-		"head": {
-			"rotation": [ 0, 0, 0 ],
-			"translation": [ 0.00, 0.00, 0.00 ],
-			"scale": [ 1.00, 1.00, 1.00 ]
-		}
-	}
+    }
 }

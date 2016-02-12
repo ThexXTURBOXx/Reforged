@@ -1,6 +1,5 @@
 package org.silvercatcher.reforged.items.weapons;
 
-
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
@@ -9,7 +8,6 @@ import org.silvercatcher.reforged.material.MaterialManager;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -36,7 +34,7 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 	
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if(player.isRiding() && player.ridingEntity.getName().equalsIgnoreCase("Horse")) {
+		if(player.isRiding()) {
 			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage() + getHitDamage() / 2f);
 		} else {
 			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage());

@@ -48,8 +48,7 @@ public class ItemMusket extends ItemBow implements ItemExtension, IReloadable {
 					playerIn.inventory.consumeInventoryItem(ReforgedRegistry.MUSKET_BULLET)) {
 				
 				loadState = loading;
-				compound.setLong(CompoundTags.RELOAD,
-						worldIn.getWorldTime() + getReloadTotal());
+				compound.setLong(CompoundTags.RELOAD, worldIn.getWorldTime() + getReloadTotal());
 				
 			} else {
 				

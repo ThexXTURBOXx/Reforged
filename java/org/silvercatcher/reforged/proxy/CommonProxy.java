@@ -48,6 +48,9 @@ public class CommonProxy {
 	public static boolean nest_of_bees;
 	public static boolean sabre;
 	
+	//Others for Config
+	public static boolean version_checker;
+	
 	private void loadConfig(FMLPreInitializationEvent e) {
 		//Get an instance of Config
 		Configuration config = new Configuration(e.getSuggestedConfigurationFile());
@@ -65,8 +68,11 @@ public class CommonProxy {
 		katana= config.getBoolean("Katana", "Items", true, "Enable the Katana");
 		knife = config.getBoolean("Knife", "Items", true, "Enable the Knife");
 		musket = config.getBoolean("Musket", "Items", true, "Enable the Musket and Blunderbuss");
-		nest_of_bees = config.getBoolean("Nest Of Bees", "Items", false, "Enable the Nest Of Bees");
+		nest_of_bees = config.getBoolean("Nest Of Bees", "Items", false, "Enable the Nest Of Bees (BETA, only use for testing!)");
 		sabre = config.getBoolean("Sabre", "Items", true, "Enable the Sabre");
+		
+		//Others
+		version_checker = config.getBoolean("Version Checker", "General", true, "Enable the Version Checker");		
 		
 		//Save config
 		config.save();
@@ -77,24 +83,22 @@ public class CommonProxy {
 	protected void registerEntityRenderers(RenderManager manager) {}
 	
 	private void registerEntities() {
-
-		int count = 1;
 		
 		if(GlobalValues.BOOMERANG) {
-			ReforgedRegistry.registerEntity(EntityBoomerang.class, "Boomerang", count++);
+			ReforgedRegistry.registerEntity(EntityBoomerang.class, "Boomerang");
 		}
 		
 		if(GlobalValues.JAVELIN) {
-			ReforgedRegistry.registerEntity(EntityJavelin.class, "Javelin", count++);
+			ReforgedRegistry.registerEntity(EntityJavelin.class, "Javelin");
 		}
 		
 		if(GlobalValues.MUSKET) {
-			ReforgedRegistry.registerEntity(EntityBulletMusket.class, "BulletMusket", count++);
-			ReforgedRegistry.registerEntity(EntityBulletBlunderbuss.class, "BulletBlunderbuss", count++);
+			ReforgedRegistry.registerEntity(EntityBulletMusket.class, "BulletMusket");
+			ReforgedRegistry.registerEntity(EntityBulletBlunderbuss.class, "BulletBlunderbuss");
 		}
 		
 		if(GlobalValues.BLOWGUN) {
-			ReforgedRegistry.registerEntity(EntityDart.class, "Dart", count++);
+			ReforgedRegistry.registerEntity(EntityDart.class, "Dart");
 		}	
 	}
 }

@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged;
 
+import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.util.VersionChecker;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,7 +15,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 
 public class ReforgedEvents {	
-
+	
+	/**Says whether the player got already notified by the Version Checker message*/
 	public boolean notificated = false;
 	
 	@SubscribeEvent
@@ -22,7 +24,7 @@ public class ReforgedEvents {
 		//Version Checker Chat Notification
 		if(!notificated) {
 			notificated = true;
-			if(!VersionChecker.isLatestVersion()) {
+			if(!VersionChecker.isLatestVersion() && GlobalValues.VERSION_CHECKER) {
 				EntityPlayer p = e.player;
 				ChatStyle version = new ChatStyle().setColor(EnumChatFormatting.AQUA);
 				ChatStyle modname = new ChatStyle();
@@ -35,16 +37,18 @@ public class ReforgedEvents {
 				IChatComponent chat = new ChatComponentText("");
 				IChatComponent msg1 = new ChatComponentText("Installed: " + ReforgedMod.VERSION).setChatStyle(version);
 				data.setChatHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, msg1));
-				chat.appendSibling(new ChatComponentText("ง6[งb" + ReforgedMod.NAME + "ง6] ").setChatStyle(data));
+				String ModName = ReforgedMod.NAME;
+				if(VersionChecker.isBeta()) ModName = ModName + " BETA";
+				chat.appendSibling(new ChatComponentText("ยง6[ยงb" + ModName + "ยง6] ").setChatStyle(data));
 				chat.appendSibling(new ChatComponentTranslation("versionchecker.ingame.outdated").setChatStyle(data));
 				chat.appendText(": ");
-				chat.appendText("งd" + VersionChecker.getLatestVersion());
+				chat.appendText("ยงd" + VersionChecker.getLatestVersion());
 				p.addChatMessage(chat);
 				chat = new ChatComponentText("");
-				chat.appendText("ง6[");
+				chat.appendText("ยง6[");
 				data1.setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, VersionChecker.getDownloadUrl()));
 				chat.appendSibling(new ChatComponentTranslation("versionchecker.ingame.download").setChatStyle(data1));
-				chat.appendText("ง6]");
+				chat.appendText("ยง6]");
 				p.addChatMessage(chat);
 			}
 		}

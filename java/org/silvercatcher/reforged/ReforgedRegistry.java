@@ -86,10 +86,15 @@ public class ReforgedRegistry {
 	public static Item DART_WITHER;
 	public static Item BLOWGUN;
 	
+	//Integers
+	public static int counterEntities = 0;
+	
 	//Hashmaps
+	/**Every item on that list gets registered*/
 	public static List<Item> registrationList = new ArrayList<Item>();
 	
 	//Registry
+	/**Adds all items to the registrationList*/
 	public static void createItems() {
 
 		if(GlobalValues.NEST_OF_BEES) {
@@ -181,6 +186,7 @@ public class ReforgedRegistry {
 		}
 	}
 	
+	/**Registers all items out of the registrationList*/
 	public static void registerItems() {
 		
 		for(Item item : registrationList) {
@@ -188,6 +194,7 @@ public class ReforgedRegistry {
 		}
 	}
 	
+	/**Registers all recipes of the registered items*/
 	public static void registerRecipes() {
 		
 		for(Item item : registrationList) {
@@ -220,18 +227,25 @@ public class ReforgedRegistry {
 					'f', Items.flint_and_steel);
 		}
 	}
-	
-	public static void registerEntity(Class c, String name, int counter) {
-		EntityRegistry.registerModEntity(c, name, counter, ReforgedMod.instance, 120, 1, true);		
+
+	/**Helper method for registering an Entity
+	 * @param c The class of the Entity
+	 * @param name The name for the Entity*/
+	public static void registerEntity(Class c, String name) {
+		EntityRegistry.registerModEntity(c, name, ++counterEntities, ReforgedMod.instance, 120, 1, true);		
 	}
-	
+
+	/**Helper method for binding a renderclass to a entity
+	 * @param entityclass The class of the Entity
+	 * @param renderclass The class of the Renderer*/
 	public static void registerEntityRenderer(Class entityclass, Render renderclass) {
 		RenderingRegistry.registerEntityRenderingHandler(entityclass, renderclass);
 	}
-	
+
+	/**Helper method for registering our EventHandler
+	 * @param ReforgedEvents The instance of our EventHandler*/
 	public static void registerEventHandler(ReforgedEvents eventclass) {
 		FMLCommonHandler.instance().bus().register(eventclass);
 	    MinecraftForge.EVENT_BUS.register(eventclass);
 	}
-	
 }

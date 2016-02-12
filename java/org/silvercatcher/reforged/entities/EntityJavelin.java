@@ -1,11 +1,9 @@
 package org.silvercatcher.reforged.entities;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
@@ -48,7 +46,7 @@ public class EntityJavelin extends AReforgedThrowable {
 	}
 	
 	public ItemStack getItemStack() {
-		return dataWatcher.getWatchableObjectItemStack(6);
+		return dataWatcher.getWatchableObjectItemStack(5);
 	}
 	
 	public void setItemStack(ItemStack stack) {
@@ -56,7 +54,7 @@ public class EntityJavelin extends AReforgedThrowable {
 		if(stack == null || !(stack.getItem() instanceof ItemJavelin)) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
-		dataWatcher.updateObject(6, stack);
+		dataWatcher.updateObject(5, stack);
 	}
 	
 	@Override
@@ -91,12 +89,12 @@ public class EntityJavelin extends AReforgedThrowable {
 	}
 	
 	public int getDurLoaded() {
-		return dataWatcher.getWatchableObjectInt(7);
+		return dataWatcher.getWatchableObjectInt(6);
 	}
 	
 	public void setDurLoaded(int durloaded) {
 		
-		dataWatcher.updateObject(7, durloaded);
+		dataWatcher.updateObject(6, durloaded);
 	}
 	
 	@Override

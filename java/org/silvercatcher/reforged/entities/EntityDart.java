@@ -1,6 +1,5 @@
 package org.silvercatcher.reforged.entities;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.others.ItemDart;
 
 import net.minecraft.entity.Entity;
@@ -11,7 +10,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 public class EntityDart extends AReforgedThrowable {
@@ -37,7 +35,7 @@ public class EntityDart extends AReforgedThrowable {
 
 	public ItemStack getItemStack() {
 		
-		return dataWatcher.getWatchableObjectItemStack(6);
+		return dataWatcher.getWatchableObjectItemStack(5);
 	}
 	
 	public void setItemStack(ItemStack stack) {
@@ -45,7 +43,7 @@ public class EntityDart extends AReforgedThrowable {
 		if(stack == null || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
-		dataWatcher.updateObject(6, stack);
+		dataWatcher.updateObject(5, stack);
 	}
 	
 	public String getEffect() {

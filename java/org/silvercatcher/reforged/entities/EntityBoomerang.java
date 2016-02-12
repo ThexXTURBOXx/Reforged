@@ -1,7 +1,5 @@
 package org.silvercatcher.reforged.entities;
 
-import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
 import net.minecraft.entity.Entity;
@@ -11,12 +9,7 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EntityDamageSourceIndirect;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class EntityBoomerang extends AReforgedThrowable {
 	
@@ -52,7 +45,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 
 	public ItemStack getItemStack() {
 		
-		return dataWatcher.getWatchableObjectItemStack(6);
+		return dataWatcher.getWatchableObjectItemStack(5);
 	}
 	
 	public void setItemStack(ItemStack stack) {
@@ -60,26 +53,26 @@ public class EntityBoomerang extends AReforgedThrowable {
 		if(stack == null || !(stack.getItem() instanceof ItemBoomerang)) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
-		dataWatcher.updateObject(6, stack);
+		dataWatcher.updateObject(5, stack);
 	}
 	
 	public void setCoords(double playerX, double playerY, double playerZ) {
 		
-		dataWatcher.updateObject(7, (float) playerX);
-		dataWatcher.updateObject(8, (float) playerY);
-		dataWatcher.updateObject(9, (float) playerZ);
+		dataWatcher.updateObject(6, (float) playerX);
+		dataWatcher.updateObject(7, (float) playerY);
+		dataWatcher.updateObject(8, (float) playerZ);
 	}
 	
 	public double getPosX() {
-		return dataWatcher.getWatchableObjectFloat(7);
+		return dataWatcher.getWatchableObjectFloat(6);
 	}
 	
 	public double getPosY() {
-		return dataWatcher.getWatchableObjectFloat(8);
+		return dataWatcher.getWatchableObjectFloat(7);
 	}
 	
 	public double getPosZ() {
-		return dataWatcher.getWatchableObjectFloat(9);
+		return dataWatcher.getWatchableObjectFloat(8);
 	}
 	
 	public ToolMaterial getMaterial() {

@@ -35,15 +35,15 @@ public abstract class ReforgedRender extends Render {
 		renderEntityModel(Bullet, x, y, z, yaw, partialTick);
 	}
 
+	/**If you find any little issues while flying, just change partialTick in the render-method to 0. Could fix it... 
+	I am not sure if I should let it like this, but for now it works ^^ I will change it, when needed
+	 - ThexXTURBOXx*/
 	public void renderEntityModel(Entity theEntity, double x, double y, double z, float yaw, float partialTick) {
 		GL11.glPushMatrix();
 		bindTexture(getEntityTexture(theEntity));
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
 		GL11.glRotated(yaw + modifier, 0, 1, 0);
-		//If you find any little issues while flying, just change partialTick to 0. Could fix it
-		//I am not sure if I should let it like this, but for now it works ^^ I will change it, when needed
-		//- ThexXTURBOXx
 		model.render(theEntity,(float) x,(float) y,(float) z, yaw, partialTick, 0.0475F);
 		GL11.glPopMatrix();
 	}

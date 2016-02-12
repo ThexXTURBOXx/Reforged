@@ -2,8 +2,8 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
 
-import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.CompoundTags;
+import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
 
 import net.minecraft.entity.Entity;
@@ -13,12 +13,13 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
+import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ItemNestOfBees extends ExtendedItem {
 
@@ -51,6 +52,7 @@ public class ItemNestOfBees extends ExtendedItem {
 				'w', Item.getItemFromBlock(Blocks.planks));
 		
 		GameRegistry.addRecipe(new NestOfBeesLoadRecipe());
+		RecipeSorter.INSTANCE.register("ReloadNoB", NestOfBeesLoadRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
 	}
 	
 	@Override
@@ -77,8 +79,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		
-		
-		if(entityIn instanceof EntityPlayer) {
+		if(entityIn instanceof EntityPlayer && isSelected) {
 
 			EntityPlayer player = (EntityPlayer) entityIn;
 			
@@ -103,7 +104,7 @@ public class ItemNestOfBees extends ExtendedItem {
 				compound.setInteger(CompoundTags.AMMUNITION, arrows);
 				compound.setInteger(CompoundTags.DELAY, shot_delay);
 			
-			} else {
+			} else if(compound.getBoolean(CompoundTags.ACTIVATED)) {
 				
 				compound.setInteger(CompoundTags.DELAY, Math.max(0, delay - 1));
 			}

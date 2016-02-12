@@ -1,7 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
