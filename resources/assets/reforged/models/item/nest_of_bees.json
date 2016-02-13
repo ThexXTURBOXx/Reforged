@@ -1,7 +1,7 @@
 {
     "parent": "reforged:builtin/generated",
     "textures": {
-        "layer0": "reforged:items/nest_of_bees"
+        "layer0": "reforged:items/nob_filled"
     },
     "display": {
         "thirdperson": {

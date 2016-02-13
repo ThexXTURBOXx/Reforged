@@ -1,13 +1,10 @@
 {
     "parent": "reforged:builtin/generated",
-    "textures": {
-        "layer0": "reforged:items/javelin"
-    },
 	"display": {
 		"thirdperson": {
-			"rotation": [ 179, 88, 224 ],
-			"translation": [ 0.00, 1.50, -1.50 ],
-			"scale": [ 2.00, 2.00, 2.00 ]
+			"rotation": [ 358, 92, 296 ],
+			"translation": [ 0.00, -1.00, -6.25 ],
+			"scale": [ 1.00, 1.00, 1.00 ]
 		},
 		"firstperson": {
 			"rotation": [ 0, 225, 25 ],

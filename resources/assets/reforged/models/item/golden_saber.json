@@ -2,6 +2,6 @@
     "parent": "reforged:item/saber",
 
     "textures": {
-        "layer0": "reforged:items/golden_saber"
+        "layer0": "reforged:items/saber_gold"
     }
 }

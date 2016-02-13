@@ -2,6 +2,6 @@
     "parent": "reforged:item/knife",
 
     "textures": {
-        "layer0": "reforged:items/stone_knife"
+        "layer0": "reforged:items/knife_stone"
     }
 }

@@ -2,6 +2,6 @@
     "parent": "reforged:item/nest_of_bees",
 
     "textures": {
-        "layer0": "reforged:items/nest_of_bees_empty"
+        "layer0": "reforged:items/nob_empty"
     }
 }

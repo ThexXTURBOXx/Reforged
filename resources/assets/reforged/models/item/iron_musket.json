@@ -2,6 +2,6 @@
     "parent": "reforged:item/musket",
 
     "textures": {
-        "layer0": "reforged:items/iron_musket"
+        "layer0": "reforged:items/musket_iron"
     }
 }

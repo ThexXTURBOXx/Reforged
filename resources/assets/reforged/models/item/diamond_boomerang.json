@@ -1,6 +1,6 @@
 {
     "parent": "reforged:item/boomerang",
     "textures": {
-        "layer0": "reforged:items/diamond_boomerang"
+        "layer0": "reforged:items/boomerang_diamond"
     }
 }
