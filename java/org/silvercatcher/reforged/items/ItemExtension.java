@@ -31,7 +31,7 @@ public interface ItemExtension {
 	
 	default void registerRecipes() {}
 
-	default float getHitDamage() {
+	default float getHitDamage(ItemStack stack) {
 		return 0f;
 	}
 }
