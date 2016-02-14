@@ -7,8 +7,10 @@ import com.google.common.collect.Multimap;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -27,7 +29,7 @@ public interface ItemExtension {
 		Multimap modifiers =  HashMultimap.create();
 		
 		modifiers.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
-				new AttributeModifier(itemModifierUUID, "Weapon Damage", getHitDamage(), 0));
+				new AttributeModifier(itemModifierUUID, "Weapon Damage", getHitDamage(stack), 0));
 		return modifiers;
 	}
 	
@@ -43,7 +45,17 @@ public interface ItemExtension {
 	
 	float getHitDamage();
 	
+
 	default float getHitDamage(int powerLevel) {
 		return getHitDamage() + powerLevel * 1.25f;
+	}
+	
+	default void applyHitEnchantments(ItemStack stack, EntityPlayer player, Entity entity) {
+		
+		int fireAspect = EnchantmentHelper.getFireAspectModifier(player);
+		System.out.println("fire: " + fireAspect);
+		if(fireAspect > 0) {
+			entity.setFire(fireAspect * 4);
+		}
 	}
 }

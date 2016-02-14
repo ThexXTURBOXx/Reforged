@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -34,11 +35,20 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 	
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+			
+		boolean stop = true;
+		
+		float damage = getHitDamage();
+		
 		if(player.isRiding()) {
-			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage() + getHitDamage() / 2f);
-		} else {
-			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage());
+		
+			damage += getHitDamage() / 2;
 		}
+		
+		entity.attackEntityFrom(DamageSource.causePlayerDamage(player), damage);
+		
+		applyHitEnchantments(stack, player, entity);
+		
 		return true;
 	}
 	
