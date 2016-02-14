@@ -5,6 +5,8 @@ import java.util.UUID;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;
@@ -32,6 +34,16 @@ public interface ItemExtension {
 	default void registerRecipes() {}
 
 	default float getHitDamage(ItemStack stack) {
-		return 0f;
+		
+		int powerLevel = EnchantmentHelper.getEnchantmentLevel(
+				Enchantment.sharpness.effectId, stack);
+		
+		return powerLevel > 0 ? getHitDamage(powerLevel) : getHitDamage();
+	}
+	
+	float getHitDamage();
+	
+	default float getHitDamage(int powerLevel) {
+		return getHitDamage() + powerLevel * 1.25f;
 	}
 }
