@@ -52,9 +52,11 @@ public class ItemKatana extends ItemSword implements ItemExtension {
 					}
 				}
 
+				float damage = getHitDamage() + getEnchantmentBonus(stack, player, entity);
+				
 				if(armorvalue < 12) {
 					
-					target.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage() / 2f);
+					damage *= 1.5f;
 					target.hurtResistantTime = 0;
 				}
 				
@@ -62,12 +64,12 @@ public class ItemKatana extends ItemSword implements ItemExtension {
 					
 					stack.damageItem(1, target);
 				}
+				
+				target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage);
 			}
-			
-			
 		}
 		
-		return false;
+		return true;
 	}
 	
 	@Override

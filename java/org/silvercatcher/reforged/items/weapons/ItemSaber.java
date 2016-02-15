@@ -8,9 +8,14 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBook;
+import net.minecraft.item.ItemEnchantedBook;
+import net.minecraft.item.ItemFishingRod;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
@@ -39,9 +44,7 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 		super.onLeftClickEntity(stack, player, entity);
 		
 		float damage = getHitDamage(stack) + getEnchantmentBonus(stack, player, entity);
-		
-		System.out.println("effectice damage: " + damage);
-		
+				
 		if(player.isRiding()) {
 		
 			damage += getHitDamage() / 2;
