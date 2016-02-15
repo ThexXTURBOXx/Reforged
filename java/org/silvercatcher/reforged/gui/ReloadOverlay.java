@@ -87,11 +87,11 @@ public class ReloadOverlay extends Gui {
 						color = red;
 					}
 				}
-
-				int x0 = event.resolution.getScaledWidth() / 2 - 88 + i * 20;
-				int y0 = event.resolution.getScaledHeight() - 19;
 				
-				drawRectangle(x0, y0, x0 + 16, y0 + (int) (done * 16), color);
+				int x0 = event.resolution.getScaledWidth() / 2 - 88 + i * 20;
+				int y0 = event.resolution.getScaledHeight() - 3;
+				
+				drawRectangle(x0, y0 - (int) (done * 16), x0 + 16, y0, color);
 			}
 		}
 	}
@@ -100,19 +100,15 @@ public class ReloadOverlay extends Gui {
 	 * Helper method for creating a Rectangle
 	 */
 	public void drawRectangle(int left, int top, int right, int bottom, float[] color) {
-
-        int j1;
-
-        if (left < right)
-        {
-            j1 = left;
+		
+        if (left < right) {
+            int j1 = left;
             left = right;
             right = j1;
         }
 
-        if (top < bottom)
-        {
-            j1 = top;
+        if (top < bottom) {
+            int j1 = top;
             top = bottom;
             bottom = j1;
         }
