@@ -26,10 +26,4 @@ public class ItemBulletBlunderbuss extends ExtendedItem {
 				'g', Items.gunpowder,
 				'p', Items.paper);
 	}
-
-
-	@Override
-	public float getHitDamage() {
-		return 0;
-	}
 }

@@ -16,6 +16,7 @@ public class ItemBoomerang extends ExtendedItem {
 	protected final MaterialDefinition materialDefinition;
 	
 	public ItemBoomerang(ToolMaterial material) {
+
 		super();
 		setMaxStackSize(1);
 		materialDefinition = MaterialManager.getMaterialDefinition(material);

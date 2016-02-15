@@ -1,15 +1,21 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBook;
+import net.minecraft.item.ItemEnchantedBook;
+import net.minecraft.item.ItemFishingRod;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
@@ -34,11 +40,18 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 	
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+			
+		super.onLeftClickEntity(stack, player, entity);
+		
+		float damage = getHitDamage(stack) + getEnchantmentBonus(stack, player, entity);
+				
 		if(player.isRiding()) {
-			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage() + getHitDamage() / 2f);
-		} else {
-			entity.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage());
+		
+			damage += getHitDamage() / 2;
 		}
+				
+		entity.attackEntityFrom(DamageSource.causePlayerDamage(player), damage);
+
 		return true;
 	}
 	

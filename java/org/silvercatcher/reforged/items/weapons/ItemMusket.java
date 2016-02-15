@@ -23,6 +23,7 @@ public class ItemMusket extends AReloadable {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
+		
 		setAmmo(ReforgedRegistry.MUSKET_BULLET);
 		return super.onItemRightClick(itemStackIn, worldIn, playerIn);
 	}

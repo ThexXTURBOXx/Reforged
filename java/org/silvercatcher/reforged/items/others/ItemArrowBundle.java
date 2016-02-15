@@ -25,10 +25,4 @@ public class ItemArrowBundle extends ExtendedItem {
 			new ItemStack(Items.arrow), new ItemStack(Items.arrow), 
 			new ItemStack(Items.arrow));
 	}
-
-
-	@Override
-	public float getHitDamage() {
-		return 0f;
-	}
 }
