@@ -18,6 +18,8 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ReloadOverlay extends Gui {
 	
 	//My way to setup colors >:D
+	//The values are {Red, Green, Blue}
+	//1 means f (full color)
 	private static final float[] red    = new float[] {1, 0    , 0};
 	private static final float[] orange = new float[] {1, 0.66F, 0};
 	private static final float[] yellow = new float[] {1, 1    , 0};
@@ -96,9 +98,7 @@ public class ReloadOverlay extends Gui {
 		}
 	}
 	
-	/*
-	 * Helper method for creating a Rectangle
-	 */
+	/** Helper method for creating a Rectangle*/
 	public void drawRectangle(int left, int top, int right, int bottom, float[] color) {
 		
         if (left < right) {
