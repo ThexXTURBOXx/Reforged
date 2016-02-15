@@ -7,6 +7,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentDamage;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -49,14 +50,18 @@ public interface ItemExtension {
 			
 			Entry <Integer, Integer> entry = (Entry<Integer, Integer>) o;
 			
-			System.out.println(entry);
+			Enchantment e = Enchantment.getEnchantmentById(entry.getKey());
 			
-			enchantDamage += Enchantment.getEnchantmentById(entry.getKey())
-					.calcDamageByCreature(entry.getValue(), null);
-		}
-		
-		System.out.println("enchant damage: " + enchantDamage);
-		
+			if(e instanceof EnchantmentDamage) {
+				
+				EnchantmentDamage ed = (EnchantmentDamage) e;
+				
+				if(ed.damageType == 0) {
+					
+					enchantDamage += ed.calcDamageByCreature(entry.getValue(), null);
+				}
+			}
+		}		
 		return getHitDamage() + enchantDamage;
 	}
 	
@@ -71,12 +76,22 @@ public interface ItemExtension {
 			
 			EntityLivingBase living = (EntityLivingBase) entity;
 			
-			for(Object o :  EnchantmentHelper.getEnchantments(stack).values()) {
+			for(Object o :  EnchantmentHelper.getEnchantments(stack).entrySet()) {
 				
-				Enchantment e = (Enchantment) o;
+				Entry <Integer, Integer> entry = (Entry<Integer, Integer>) o;
 				
-				e.calcDamageByCreature(EnchantmentHelper.getEnchantmentLevel(
-						e.effectId, stack), living.getCreatureAttribute());
+				Enchantment e = Enchantment.getEnchantmentById(entry.getKey());
+				
+				if(e instanceof EnchantmentDamage) {
+					
+					EnchantmentDamage ed = (EnchantmentDamage) e;
+					
+					if(ed.damageType != 0) {
+						
+						extraDamage += e.calcDamageByCreature(EnchantmentHelper.getEnchantmentLevel(
+								e.effectId, stack), living.getCreatureAttribute());
+					}
+				}
 			}
 		}
 		return extraDamage;

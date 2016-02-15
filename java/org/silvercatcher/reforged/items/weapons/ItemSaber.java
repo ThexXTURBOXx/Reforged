@@ -37,9 +37,10 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 			
 		super.onLeftClickEntity(stack, player, entity);
-		boolean stop = true;
 		
-		float damage = getHitDamage();
+		float damage = getHitDamage(stack) + getEnchantmentBonus(stack, player, entity);
+		
+		System.out.println("effectice damage: " + damage);
 		
 		if(player.isRiding()) {
 		
