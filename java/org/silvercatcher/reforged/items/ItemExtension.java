@@ -96,41 +96,4 @@ public interface ItemExtension {
 		}
 		return extraDamage;
 	}
-
-/*
-	default void applyFireAspect(ItemStack stack, EntityPlayer player, Entity entity) {
-		
-		int fireAspect = EnchantmentHelper.getFireAspectModifier(player);
-		if(fireAspect > 0) {
-			entity.setFire(4 * fireAspect);
-		}
-	}
-	
-	/**
-	 * @return the amount of damage added by the smite enchantment,
-	 * 0 if enchantment does not exist
-	 *
-	default float applySmite(ItemStack stack, EntityLivingBase living) {
-		
-		int smite = EnchantmentHelper.getEnchantmentLevel(Enchantment.smite.effectId, stack);
-
-		if(smite > 0 && living.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
-			
-			return smite * 2.5f;
-		}
-		return 0f;
-	}
-	
-	default float applyBaneOfArthropods(ItemStack stack,EntityLivingBase living) {
-		
-		int baneOfArthropods = EnchantmentHelper.getEnchantmentLevel(
-				Enchantment.baneOfArthropods.effectId, stack);
-		
-		if(baneOfArthropods > 0 && living.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD) {
-			
-			living.addPotionEffect(new PotionEffect(PotionEffec;
-			return baneOfArthropods * 2.5f;
-		}
-		return 0f;
-	}*/
 }
