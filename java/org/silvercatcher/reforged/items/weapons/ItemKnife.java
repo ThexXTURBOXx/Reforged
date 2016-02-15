@@ -30,7 +30,6 @@ public class ItemKnife extends ItemSword implements ItemExtension {
 		setUnlocalizedName(materialDefinition.getPrefixedName("knife"));
 		setMaxDamage(materialDefinition.getMaxUses());
 		setMaxStackSize(1);
-		setCreativeTab(ReforgedMod.tabReforged);
 	}
 	
 	@Override

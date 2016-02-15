@@ -36,6 +36,7 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 			
+		super.onLeftClickEntity(stack, player, entity);
 		boolean stop = true;
 		
 		float damage = getHitDamage();
@@ -44,11 +45,9 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 		
 			damage += getHitDamage() / 2;
 		}
-		
+				
 		entity.attackEntityFrom(DamageSource.causePlayerDamage(player), damage);
-		
-		applyHitEnchantments(stack, player, entity);
-		
+
 		return true;
 	}
 	

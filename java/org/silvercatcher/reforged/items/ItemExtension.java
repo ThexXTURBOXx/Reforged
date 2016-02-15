@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.items;
 
+import java.util.Map.Entry;
 import java.util.UUID;
 
 import com.google.common.collect.HashMultimap;
@@ -8,10 +9,15 @@ import com.google.common.collect.Multimap;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.potion.PotionHelper;
 
 /**
  * Attempt to use Java 8 features against lack of foresight.
@@ -37,25 +43,79 @@ public interface ItemExtension {
 
 	default float getHitDamage(ItemStack stack) {
 		
-		int powerLevel = EnchantmentHelper.getEnchantmentLevel(
-				Enchantment.sharpness.effectId, stack);
+		float enchantDamage = 0f;
 		
-		return powerLevel > 0 ? getHitDamage(powerLevel) : getHitDamage();
+		for(Object o :  EnchantmentHelper.getEnchantments(stack).entrySet()) {
+			
+			Entry <Integer, Integer> entry = (Entry<Integer, Integer>) o;
+			
+			System.out.println(entry);
+			
+			enchantDamage += Enchantment.getEnchantmentById(entry.getKey())
+					.calcDamageByCreature(entry.getValue(), null);
+		}
+		
+		System.out.println("enchant damage: " + enchantDamage);
+		
+		return getHitDamage() + enchantDamage;
 	}
 	
 	float getHitDamage();
-	
 
-	default float getHitDamage(int powerLevel) {
-		return getHitDamage() + powerLevel * 1.25f;
-	}
 	
-	default void applyHitEnchantments(ItemStack stack, EntityPlayer player, Entity entity) {
+	default float getEnchantmentBonus(ItemStack stack, EntityPlayer player, Entity entity) {
+		
+		float extraDamage = 0f;
+		
+		if(entity instanceof EntityLivingBase) {
+			
+			EntityLivingBase living = (EntityLivingBase) entity;
+			
+			for(Object o :  EnchantmentHelper.getEnchantments(stack).values()) {
+				
+				Enchantment e = (Enchantment) o;
+				
+				e.calcDamageByCreature(EnchantmentHelper.getEnchantmentLevel(
+						e.effectId, stack), living.getCreatureAttribute());
+			}
+		}
+		return extraDamage;
+	}
+
+/*
+	default void applyFireAspect(ItemStack stack, EntityPlayer player, Entity entity) {
 		
 		int fireAspect = EnchantmentHelper.getFireAspectModifier(player);
-		System.out.println("fire: " + fireAspect);
 		if(fireAspect > 0) {
-			entity.setFire(fireAspect * 4);
+			entity.setFire(4 * fireAspect);
 		}
 	}
+	
+	/**
+	 * @return the amount of damage added by the smite enchantment,
+	 * 0 if enchantment does not exist
+	 *
+	default float applySmite(ItemStack stack, EntityLivingBase living) {
+		
+		int smite = EnchantmentHelper.getEnchantmentLevel(Enchantment.smite.effectId, stack);
+
+		if(smite > 0 && living.getCreatureAttribute() == EnumCreatureAttribute.UNDEAD) {
+			
+			return smite * 2.5f;
+		}
+		return 0f;
+	}
+	
+	default float applyBaneOfArthropods(ItemStack stack,EntityLivingBase living) {
+		
+		int baneOfArthropods = EnchantmentHelper.getEnchantmentLevel(
+				Enchantment.baneOfArthropods.effectId, stack);
+		
+		if(baneOfArthropods > 0 && living.getCreatureAttribute() == EnumCreatureAttribute.ARTHROPOD) {
+			
+			living.addPotionEffect(new PotionEffect(PotionEffec;
+			return baneOfArthropods * 2.5f;
+		}
+		return 0f;
+	}*/
 }

@@ -31,7 +31,7 @@ public abstract class ExtendedItem extends Item implements ItemExtension {
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		
-		applyHitEnchantments(stack, player, entity);
+		
 		
 		return false;
 	}
