@@ -76,7 +76,10 @@ public class ReforgedRegistry {
 	public static Item IRON_KNIFE;
 	public static Item DIAMOND_KNIFE;
 	
-	public static Item JAVELIN;	
+	public static Item JAVELIN;
+	
+	public static Item KERIS;
+	public static Item GOLDEN_STICK;
 
 	public static Item DART_NORMAL;
 	public static Item DART_HUNGER;
@@ -175,6 +178,12 @@ public class ReforgedRegistry {
 			registrationList.add(JAVELIN = new ItemJavelin());
 		}
 		
+		if(GlobalValues.KERIS) {
+			registrationList.add(KERIS = new ItemKeris());
+			registrationList.add(GOLDEN_STICK = 
+					new Item().setUnlocalizedName("golden_stick").setCreativeTab(ReforgedMod.tabReforged));
+		}
+		
 		if(GlobalValues.BLOWGUN) {
 			registrationList.add(DART_NORMAL = new ItemDart("normal"));
 			registrationList.add(DART_HUNGER = new ItemDart("hunger"));
@@ -218,13 +227,21 @@ public class ReforgedRegistry {
 					"  i",
 					'i', Items.iron_ingot,
 					'f', Items.flint_and_steel);
-		
+
 			GameRegistry.addRecipe(new ItemStack(BLUNDERBUSS_BARREL),
 					"i  ",
 					" if",
 					"i i",
 					'i', Items.iron_ingot,
 					'f', Items.flint_and_steel);
+		}
+		
+		if(GlobalValues.KERIS) {
+			
+			GameRegistry.addRecipe(new ItemStack(GOLDEN_STICK),
+					"g ",
+					"g ",
+					'g', Items.gold_ingot);
 		}
 	}
 
