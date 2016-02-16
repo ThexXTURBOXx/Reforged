@@ -66,10 +66,8 @@ public class ReloadOverlay extends Gui {
 				GL11.glDisable(GL11.GL_LIGHTING);
 				
 				int i;
-				for (i = 0; i < 9; i++)
-				{
-					if (player.inventory.getStackInSlot(i) == equipped)
-					{
+				for (i = 0; i < 9; i++) {
+					if (player.inventory.getStackInSlot(i) == equipped) {
 						break;
 					}
 				}
