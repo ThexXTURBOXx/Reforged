@@ -67,16 +67,16 @@ item.musket.loadstate.empty=Vide
 item.musket.loadstate.loading=Recharger
 item.musket.loadstate.loaded=Chargé
 
-death.attack.boomerang=%1$s's Schädel wurde von einem Boomerang zerteilt.
-death.attack.boomerang.player=%1$s's Schädel wurde von einem Boomerang zerteilt während er mit %2$s kämpfte.
-death.attack.javelin=%1$s wurde aufgespießt.
-death.attack.javelin.player=%1$s wurde aufgespießt während er mit %2$s kämpfte.
-death.attack.musket=%1$s bekam einen Schuss in den Kopf.
-death.attack.musket.player=%1$s bekam einen Schuss in den Kopf während er mit %2$s kämpfte.
-death.attack.blunderbuss=%1$s wurde durch Munition zerfetzt.
-death.attack.blunderbuss.player=%1$s wurde durch Munition zerfetzt während er mit %2$s kämpfte.
-death.attack.dart=%1$s diente als Zielscheibe.
-death.attack.dart.player=%1$s diente als Zielscheibe während er mit %2$s kämpfte.
+death.attack.boomerang=%1$s's head was splittered by a Boomerang.
+death.attack.boomerang.player=%1$s's head was splittered by a Boomerang while fighting %2$s.
+death.attack.javelin=%1$s got impaled.
+death.attack.javelin.player=%1$s got impaled while fighting %2$s.
+death.attack.musket=%1$s got headshooted.
+death.attack.musket.player=%1$s got headshooted while fighting %2$s.
+death.attack.blunderbuss=%1$s got shredded by bullets.
+death.attack.blunderbuss.player=%1$s got shredded by bullets while fighting %2$s.
+death.attack.dart=%1$s served as a target.
+death.attack.dart.player=%1$s served as a target while fighting %2$s.
 
 versionchecker.ingame.outdated=Il y a une version plus nouvelles!
 versionchecker.ingame.downloadclick=Cliques ici pour télécharger.
