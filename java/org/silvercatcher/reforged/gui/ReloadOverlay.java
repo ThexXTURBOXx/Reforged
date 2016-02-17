@@ -66,10 +66,8 @@ public class ReloadOverlay extends Gui {
 				GL11.glDisable(GL11.GL_LIGHTING);
 				
 				int i;
-				for (i = 0; i < 9; i++)
-				{
-					if (player.inventory.getStackInSlot(i) == equipped)
-					{
+				for (i = 0; i < 9; i++) {
+					if (player.inventory.getStackInSlot(i) == equipped) {
 						break;
 					}
 				}
@@ -127,6 +125,24 @@ public class ReloadOverlay extends Gui {
         tessellator.draw();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
+        
+        //1.8.9-methods
+        /*
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        GlStateManager.color(color[0], color[1], color[2], 1);
+        worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+        worldrenderer.pos((double)left, (double)bottom, 0.0D).endVertex();
+        worldrenderer.pos((double)right, (double)bottom, 0.0D).endVertex();
+        worldrenderer.pos((double)right, (double)top, 0.0D).endVertex();
+        worldrenderer.pos((double)left, (double)top, 0.0D).endVertex();
+        tessellator.draw();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+        */
 	}
 	
 }

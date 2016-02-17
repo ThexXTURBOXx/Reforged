@@ -67,6 +67,9 @@ item.musket.loadstate.empty=Empty
 item.musket.loadstate.loading=Loading
 item.musket.loadstate.loaded=Loaded
 
+item.keris.name=Kris
+item.golden_stick.name=Golden Rod
+
 death.attack.boomerang=%1$s's head was splittered by a Boomerang.
 death.attack.boomerang.player=%1$s's head was splittered by a Boomerang while fighting %2$s.
 death.attack.javelin=%1$s got impaled.
