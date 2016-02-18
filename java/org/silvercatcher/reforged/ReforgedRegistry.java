@@ -79,7 +79,6 @@ public class ReforgedRegistry {
 	public static Item JAVELIN;
 	
 	public static Item KERIS;
-	public static Item GOLDEN_STICK;
 
 	public static Item DART_NORMAL;
 	public static Item DART_HUNGER;
@@ -180,8 +179,6 @@ public class ReforgedRegistry {
 		
 		if(GlobalValues.KERIS) {
 			registrationList.add(KERIS = new ItemKeris());
-			registrationList.add(GOLDEN_STICK = 
-					new Item().setUnlocalizedName("golden_stick").setCreativeTab(ReforgedMod.tabReforged));
 		}
 		
 		if(GlobalValues.BLOWGUN) {
@@ -234,14 +231,6 @@ public class ReforgedRegistry {
 					"i i",
 					'i', Items.iron_ingot,
 					'f', Items.flint_and_steel);
-		}
-		
-		if(GlobalValues.KERIS) {
-			
-			GameRegistry.addRecipe(new ItemStack(GOLDEN_STICK),
-					"g ",
-					"g ",
-					'g', Items.gold_ingot);
 		}
 	}
 
