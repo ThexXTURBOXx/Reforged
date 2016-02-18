@@ -44,6 +44,8 @@ public class ReforgedRegistry {
 
 	public static Item HOLY_CROSS;
 	
+	public static Item NECROMANCERS_STAFF;
+	
 	public static Item FIREROD;
 	
 	public static Item WOODEN_BATTLE_AXE;
@@ -190,6 +192,8 @@ public class ReforgedRegistry {
 			registrationList.add(DART_WITHER = new ItemDart("wither"));
 			registrationList.add(BLOWGUN = new ItemBlowGun());
 		}
+		
+		registrationList.add(NECROMANCERS_STAFF = new ItemNecromancersStaff());
 	}
 	
 	/**Registers all items out of the registrationList*/
