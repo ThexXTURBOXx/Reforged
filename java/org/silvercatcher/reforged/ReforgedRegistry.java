@@ -76,7 +76,9 @@ public class ReforgedRegistry {
 	public static Item IRON_KNIFE;
 	public static Item DIAMOND_KNIFE;
 	
-	public static Item JAVELIN;	
+	public static Item JAVELIN;
+	
+	public static Item KERIS;
 
 	public static Item DART_NORMAL;
 	public static Item DART_HUNGER;
@@ -175,6 +177,10 @@ public class ReforgedRegistry {
 			registrationList.add(JAVELIN = new ItemJavelin());
 		}
 		
+		if(GlobalValues.KERIS) {
+			registrationList.add(KERIS = new ItemKeris());
+		}
+		
 		if(GlobalValues.BLOWGUN) {
 			registrationList.add(DART_NORMAL = new ItemDart("normal"));
 			registrationList.add(DART_HUNGER = new ItemDart("hunger"));
@@ -218,7 +224,7 @@ public class ReforgedRegistry {
 					"  i",
 					'i', Items.iron_ingot,
 					'f', Items.flint_and_steel);
-		
+
 			GameRegistry.addRecipe(new ItemStack(BLUNDERBUSS_BARREL),
 					"i  ",
 					" if",

@@ -1,0 +1,83 @@
+itemGroup.reforged=Reforged
+
+item.holy_cross.name=§eSainte Croix
+
+item.firerod.name=Bâton de feu
+
+item.arrow_bundle.name=Paquet des flèches
+
+item.nest_of_bees.name=Nest of Bees
+item.nestofbees.arrows=Arrows
+
+item.wooden_battleaxe.name=Hache en bois
+item.stone_battleaxe.name=Hache en pierre
+item.iron_battleaxe.name=Hache en fer
+item.golden_battleaxe.name=Hache en or
+item.diamond_battleaxe.name=Hache en diamant
+
+item.wooden_boomerang.name=Boomerang en bois
+item.stone_boomerang.name=Boomerang en pierre
+item.golden_boomerang.name=Boomerang en or
+item.iron_boomerang.name=Boomerang en fer
+item.diamond_boomerang.name=Boomearang en diamant
+item.boomerang.langBreak=Le %1$s est cassé dans ton mains.
+
+item.wooden_saber.name=Sabre en bois
+item.stone_saber.name=Sabre en pierre
+item.golden_saber.name=Sabre en or
+item.iron_saber.name=Sabre en fer
+item.diamond_saber.name=Sabre en diamant
+
+item.wooden_musket.name=Mousquet avec baïonnette en bois
+item.stone_musket.name=Mousquet avec baïonnette en pierre
+item.golden_musket.name=Mousquet avec baïonnette en or
+item.iron_musket.name=Mousquet avec baïonnette en fer
+item.diamond_musket.name=Mousquet avec baïonnette en diamant
+
+item.wooden_knife.name=Coteau en bois
+item.stone_knife.name=Coteau en pierre
+item.golden_knife.name=Coteau en or
+item.iron_knife.name=Coteau en fer
+item.diamond_knife.name=Coteau en diamant
+
+item.wooden_katana.name=Katana en bois
+item.stone_katana.name=Katana en pierre
+item.golden_katana.name=Katana en or
+item.iron_katana.name=Katana en fer
+item.diamond_katana.name=Katana en diamant
+
+item.dart_normal.name=Flèche normale
+item.dart_poison.name=Flèche empoisonnée
+item.dart_poison_strong.name=Flèche empoisonnée puissante
+item.dart_slowness.name=Flèche de lenteur
+item.dart_hunger.name=Flèche de faim
+item.dart_wither.name=Flèche de Wither
+item.blowgun.name=Sarbacane
+
+item.musket_barrel.name=Cross du mousquet
+item.gun_stock.name=Cross des carabines
+item.blunderbuss_barrel.name=Crosse de la bombarde
+item.blunderbuss_bullet.name=Plombs
+item.blunderbuss.name=Bombarde
+item.javelin.name=Javelot
+item.musket_bullet.name=Boulet de mousquet
+item.musket.name=Mousquet
+item.musket.loadstate=Statut de charger
+item.musket.loadstate.empty=Vide
+item.musket.loadstate.loading=Recharger
+item.musket.loadstate.loaded=Chargé
+
+death.attack.boomerang=%1$s's head was splittered by a Boomerang.
+death.attack.boomerang.player=%1$s's head was splittered by a Boomerang while fighting %2$s.
+death.attack.javelin=%1$s got impaled.
+death.attack.javelin.player=%1$s got impaled while fighting %2$s.
+death.attack.musket=%1$s got headshooted.
+death.attack.musket.player=%1$s got headshooted while fighting %2$s.
+death.attack.blunderbuss=%1$s got shredded by bullets.
+death.attack.blunderbuss.player=%1$s got shredded by bullets while fighting %2$s.
+death.attack.dart=%1$s served as a target.
+death.attack.dart.player=%1$s served as a target while fighting %2$s.
+
+versionchecker.ingame.outdated=Il y a une version plus nouvelles!
+versionchecker.ingame.downloadclick=Cliques ici pour télécharger.
+versionchecker.ingame.download=Télécharger

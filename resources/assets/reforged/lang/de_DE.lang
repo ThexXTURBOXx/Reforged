@@ -46,19 +46,19 @@ item.golden_katana.name=Goldkatana
 item.iron_katana.name=Eisenkatana
 item.diamond_katana.name=Diamantkatana
 
-item.dart_normal.name=Normaler Dartpfeilpfeil
-item.dart_poison.name=Giftiger Dartpfeil
-item.dart_poison_strong.name=Stark giftiger Dartpfeil
-item.dart_slowness.name=Dartpfeil der Langsamkeit
-item.dart_hunger.name=Dartpfeil des Hungers
-item.dart_wither.name=Dartpfeil des Withers
+item.dart_normal.name=Normaler Pfeil
+item.dart_poison.name=Giftpfeil
+item.dart_poison_strong.name=Starker Giftpfeil
+item.dart_slowness.name=Pfeil der Langsamkeit
+item.dart_hunger.name=Pfeil des Hungers
+item.dart_wither.name=Pfeil des Withers
 item.blowgun.name=Blasrohr
 
 item.musket_barrel.name=Musketenlauf
 item.gun_stock.name=Gewehrkolben
-item.blunderbuss_barrel.name=Espingolenkolben
+item.blunderbuss_barrel.name=Donnerbüchsenkolben
 item.blunderbuss_bullet.name=Schrotkugeln
-item.blunderbuss.name=Espingole
+item.blunderbuss.name=Donnerbüchse
 item.javelin.name=Wurfspeer
 item.musket_bullet.name=Musketenkugel
 item.musket.name=Muskete
@@ -66,6 +66,8 @@ item.musket.loadstate=Ladetatus
 item.musket.loadstate.empty=Leer
 item.musket.loadstate.loading=Nachladen
 item.musket.loadstate.loaded=Geladen
+
+item.keris.name=Kris
 
 death.attack.boomerang=%1$s's Schädel wurde von einem Boomerang zerteilt.
 death.attack.boomerang.player=%1$s's Schädel wurde von einem Boomerang zerteilt während er mit %2$s kämpfte.
