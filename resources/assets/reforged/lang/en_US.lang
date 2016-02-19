@@ -80,6 +80,8 @@ death.attack.blunderbuss.player=%1$s got shredded by bullets while fighting %2$s
 death.attack.dart=%1$s served as a target.
 death.attack.dart.player=%1$s served as a target while fighting %2$s.
 
+enchantment.goalseeker=Goalseeker
+
 versionchecker.ingame.outdated=Newer version available
 versionchecker.ingame.downloadclick=Click here to download
 versionchecker.ingame.download=Download

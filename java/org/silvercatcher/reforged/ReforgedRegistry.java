@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+import org.silvercatcher.reforged.enchantments.EnchantmentGoalseeker;
 import org.silvercatcher.reforged.items.*;
 import org.silvercatcher.reforged.items.others.*;
 import org.silvercatcher.reforged.items.weapons.*;
 
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -87,6 +89,9 @@ public class ReforgedRegistry {
 	public static Item DART_SLOW;
 	public static Item DART_WITHER;
 	public static Item BLOWGUN;
+	
+	//Enchantments
+    public static Enchantment goalseeker = new EnchantmentGoalseeker(100);
 	
 	//Integers
 	public static int counterEntities = 0;

@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.entities;
 
+import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
 import net.minecraft.entity.Entity;
@@ -85,6 +86,12 @@ public class EntityBoomerang extends AReforgedThrowable {
 		
 		super.onUpdate();
 		
+		if(getThrower() != null) {
+			if(CompoundTags.giveCompound(getItemStack()).getInteger(CompoundTags.ENCHANTED) == 1) {
+				setCoords(getThrower().posX, getThrower().posY + getThrower().getEyeHeight(), getThrower().posZ);
+			}
+		}
+		
 		double dx = this.posX - getPosX();
 		double dy = this.posY - getPosY();
 		double dz = this.posZ - getPosZ();
@@ -99,7 +106,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 		motionZ -= 0.05D * dz;
 		
 		//After 103 ticks, the Boomerang drops exactly where the thrower stood
-		if(ticksExisted >= 103 || isInWater()) {
+		if((CompoundTags.giveCompound(getItemStack()).getInteger(CompoundTags.ENCHANTED) != 1 && ticksExisted >= 103) || isInWater()) {
 			if(!worldObj.isRemote) {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 					entityDropItem(getItemStack(), 0.5f);
@@ -118,10 +125,6 @@ public class EntityBoomerang extends AReforgedThrowable {
 
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
-		
-		double px = getPosX();
-		double py = getPosY();
-		double pz = getPosZ();
 		
 		if(!worldObj.isRemote) {
 			if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {

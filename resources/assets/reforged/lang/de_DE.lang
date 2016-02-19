@@ -80,6 +80,8 @@ death.attack.blunderbuss.player=%1$s wurde durch Munition zerfetzt während er m
 death.attack.dart=%1$s diente als Zielscheibe.
 death.attack.dart.player=%1$s diente als Zielscheibe während er mit %2$s kämpfte.
 
+enchantment.goalseeker=Zielsucher
+
 versionchecker.ingame.outdated=Neuere Version verfügbar
 versionchecker.ingame.downloadclick=Hier zum herunterladen klicken
 versionchecker.ingame.download=Herunterladen
