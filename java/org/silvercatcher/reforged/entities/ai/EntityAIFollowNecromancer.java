@@ -25,7 +25,7 @@ public class EntityAIFollowNecromancer extends EntityAIBase {
 	
 	public EntityAIFollowNecromancer(EntityPlayer master, EntityLiving slave) {
 		
-		this(master, slave, 0.9, 20, 4);
+		this(master, slave, 1.2, 20, 4);
 	}
 	
 	
@@ -57,9 +57,8 @@ public class EntityAIFollowNecromancer extends EntityAIBase {
 		if(master.isEntityAlive() && slave.isEntityAlive()) {
 			
 			double distance = slave.getDistanceToEntity(master);
-						System.out.println(distance);
 			if(distance > maxDistance) {
-								
+			
 				return true;
 			}
 		}
