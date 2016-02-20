@@ -8,8 +8,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
+import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -35,11 +37,18 @@ public class ItemNecromancersStaff extends ExtendedItem {
 		
 		if(entity instanceof EntityCreature) {
 			
-			EntityCreature living = (EntityCreature) entity;
+			EntityCreature creature = (EntityCreature) entity;
 			
-			living.targetTasks.addTask(0, new EntityAIDefendNecromancer(player, living));
-			living.targetTasks.addTask(1, new EntityAIFollowNecromancer(player, living));
+			// empty brain
+			creature.tasks.taskEntries.clear();
+			creature.targetTasks.taskEntries.clear();
+			
+			creature.targetTasks.addTask(0, new EntityAIDefendNecromancer(player, creature));
+			creature.targetTasks.addTask(1, new EntityAIFollowNecromancer(player, creature));
+			
+			creature.tasks.addTask(2, new EntityAIAttackOnCollide(creature, 1, false));
+			creature.tasks.addTask(3, new EntityAISwimming(creature));
 		}
-		return false;
+		return true;
 	}
 }
