@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.entities.ai;
 
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAILeapAtTarget;
@@ -9,40 +10,44 @@ import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.monster.EntityPigZombie;
 import net.minecraft.entity.player.EntityPlayer;
 
-public class EntityAINekroSlave extends EntityAIBase {
+public class EntityAIFollowNecromancer extends EntityAIBase {
 
 	protected final EntityPlayer master;
 	protected final EntityLiving slave;
 	
 	protected final double followMasterSpeed;
-	protected final double attackLeapSpeed;
 	
 	protected final int updateInterval;
+	protected final int maxDistance;
 	
 	protected int updateCountdown;
-	protected EntityLivingBase target;
 	
-	public EntityAINekroSlave(EntityPlayer master, EntityLiving slave) {
+	
+	public EntityAIFollowNecromancer(EntityPlayer master, EntityLiving slave) {
 		
-		this(master, slave, 0.75, 0.8, 20);
+		this(master, slave, 0.9, 20, 4);
 	}
 	
 	
-	public EntityAINekroSlave(EntityPlayer master, EntityLiving slave,
-			double followMasterSpeed, double attackLeapSpeed, int updateInterval) {
+	public EntityAIFollowNecromancer(EntityPlayer master, EntityLiving slave,
+			double followMasterSpeed, int updateInterval, int maxDistance) {
 		
-		setMutexBits(7);
+		/*
+		 *  bits: 	0011
+		 *  &		0001
+		 * 			0001
+		 * 
+		 * should cancel out other AI, expect swimming
+		*/
+		setMutexBits(3);
 		
 		this.master = master;
 		this.slave = slave;
-		
 		this.followMasterSpeed = followMasterSpeed;
-		this.attackLeapSpeed = attackLeapSpeed;
 		
 		this.updateInterval = updateInterval;
-		
-		slave.setAttackTarget(null);
-		slave.setRevengeTarget(null);
+		this.maxDistance = Math.max(0, maxDistance);
+
 	}
 
 	
@@ -51,9 +56,9 @@ public class EntityAINekroSlave extends EntityAIBase {
 		
 		if(master.isEntityAlive() && slave.isEntityAlive()) {
 			
-			double distanceSq = master.getDistanceSqToEntity(slave);
-						
-			if(distanceSq < 80) {
+			double distance = slave.getDistanceToEntity(master);
+						System.out.println(distance);
+			if(distance > maxDistance) {
 								
 				return true;
 			}
@@ -61,35 +66,15 @@ public class EntityAINekroSlave extends EntityAIBase {
 		
 		return false;
 	}
-
-	@Override
-	public void startExecuting() {
-		
-		//if no fighting goes on, just follow master
-		if(master.getLastAttacker() == null || master.getLastAttacker() == slave) {
-			
-			target = master;
-			
-		} else {
-			
-			target = master.getLastAttacker();
-		}
-	}
 	
 	
 	@Override
 	public void updateTask() {
 	
-		if(updateCountdown == 0) {
+		if(--updateCountdown <= 0) {
 			
-			slave.getNavigator().setPath(slave.getNavigator().getPathToEntityLiving(target),
-					target == master ? followMasterSpeed : attackLeapSpeed);
-			
+			slave.getNavigator().tryMoveToEntityLiving(master, followMasterSpeed);
 			updateCountdown = updateInterval; 
-		
-		} else {
-			
-			updateCountdown--;
 		}
 		
 	}
@@ -97,8 +82,7 @@ public class EntityAINekroSlave extends EntityAIBase {
 	@Override
 	public void resetTask() {
 		
-		System.out.println("reset");
 		slave.getNavigator().clearPathEntity();
-		target = null;
+		updateCountdown = 0;
 	}
 }

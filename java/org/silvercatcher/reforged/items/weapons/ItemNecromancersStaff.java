@@ -1,11 +1,12 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.entities.ai.EntityAINekroSlave;
+import org.silvercatcher.reforged.entities.ai.EntityAIFollowNecromancer;
 import org.silvercatcher.reforged.items.ExtendedItem;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -33,8 +34,8 @@ public class ItemNecromancersStaff extends ExtendedItem {
 			
 			EntityLiving living = (EntityLiving) entity;
 			
-			living.targetTasks.addTask(0,
-					new EntityAINekroSlave(player, living));
+			living.targetTasks.addTask(1,
+					new EntityAIFollowNecromancer(player, living));
 		}
 		return false;
 	}
