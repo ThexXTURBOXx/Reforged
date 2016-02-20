@@ -67,20 +67,6 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 				" s ",
 				'm', Items.iron_ingot,
 				's', Items.gold_ingot);
-		
-		GameRegistry.addRecipe(new ItemStack(this),
-				"m  ",
-				"m  ",
-				"s  ",
-				'm', Items.iron_ingot,
-				's', Items.gold_ingot);
-		
-		GameRegistry.addRecipe(new ItemStack(this),
-				"m  ",
-				"m  ",
-				"s  ",
-				'm', Items.iron_ingot,
-				's', Items.gold_ingot);
 	}
 	
 	@Override
