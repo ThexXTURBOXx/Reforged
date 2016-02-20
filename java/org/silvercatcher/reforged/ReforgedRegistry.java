@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+import org.silvercatcher.reforged.enchantments.EnchantmentGoalseeker;
 import org.silvercatcher.reforged.items.*;
 import org.silvercatcher.reforged.items.others.*;
 import org.silvercatcher.reforged.items.weapons.*;
 
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -79,7 +81,6 @@ public class ReforgedRegistry {
 	public static Item JAVELIN;
 	
 	public static Item KERIS;
-	public static Item GOLDEN_STICK;
 
 	public static Item DART_NORMAL;
 	public static Item DART_HUNGER;
@@ -88,6 +89,9 @@ public class ReforgedRegistry {
 	public static Item DART_SLOW;
 	public static Item DART_WITHER;
 	public static Item BLOWGUN;
+	
+	//Enchantments
+    public static Enchantment goalseeker = new EnchantmentGoalseeker(100);
 	
 	//Integers
 	public static int counterEntities = 0;
@@ -180,8 +184,6 @@ public class ReforgedRegistry {
 		
 		if(GlobalValues.KERIS) {
 			registrationList.add(KERIS = new ItemKeris());
-			registrationList.add(GOLDEN_STICK = 
-					new Item().setUnlocalizedName("golden_stick").setCreativeTab(ReforgedMod.tabReforged));
 		}
 		
 		if(GlobalValues.BLOWGUN) {
@@ -234,14 +236,6 @@ public class ReforgedRegistry {
 					"i i",
 					'i', Items.iron_ingot,
 					'f', Items.flint_and_steel);
-		}
-		
-		if(GlobalValues.KERIS) {
-			
-			GameRegistry.addRecipe(new ItemStack(GOLDEN_STICK),
-					"g ",
-					"g ",
-					'g', Items.gold_ingot);
 		}
 	}
 

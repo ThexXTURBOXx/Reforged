@@ -68,7 +68,6 @@ item.musket.loadstate.loading=Loading
 item.musket.loadstate.loaded=Loaded
 
 item.keris.name=Kris
-item.golden_stick.name=Golden Rod
 
 death.attack.boomerang=%1$s's head was splittered by a Boomerang.
 death.attack.boomerang.player=%1$s's head was splittered by a Boomerang while fighting %2$s.
@@ -80,6 +79,8 @@ death.attack.blunderbuss=%1$s got shredded by bullets.
 death.attack.blunderbuss.player=%1$s got shredded by bullets while fighting %2$s.
 death.attack.dart=%1$s served as a target.
 death.attack.dart.player=%1$s served as a target while fighting %2$s.
+
+enchantment.goalseeker=Goalseeker
 
 versionchecker.ingame.outdated=Newer version available
 versionchecker.ingame.downloadclick=Click here to download

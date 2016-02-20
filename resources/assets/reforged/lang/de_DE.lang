@@ -68,7 +68,6 @@ item.musket.loadstate.loading=Nachladen
 item.musket.loadstate.loaded=Geladen
 
 item.keris.name=Kris
-item.golden_stick.name=Goldener Stab
 
 death.attack.boomerang=%1$s's Schädel wurde von einem Boomerang zerteilt.
 death.attack.boomerang.player=%1$s's Schädel wurde von einem Boomerang zerteilt während er mit %2$s kämpfte.
@@ -80,6 +79,8 @@ death.attack.blunderbuss=%1$s wurde durch Munition zerfetzt.
 death.attack.blunderbuss.player=%1$s wurde durch Munition zerfetzt während er mit %2$s kämpfte.
 death.attack.dart=%1$s diente als Zielscheibe.
 death.attack.dart.player=%1$s diente als Zielscheibe während er mit %2$s kämpfte.
+
+enchantment.goalseeker=Zielsucher
 
 versionchecker.ingame.outdated=Neuere Version verfügbar
 versionchecker.ingame.downloadclick=Hier zum herunterladen klicken

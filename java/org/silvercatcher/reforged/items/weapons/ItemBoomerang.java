@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.items.ExtendedItem;
+import org.silvercatcher.reforged.items.recipes.BoomerangEnchRecipe;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
 
@@ -10,6 +11,8 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ItemBoomerang extends ExtendedItem {
 	
@@ -45,16 +48,18 @@ public class ItemBoomerang extends ExtendedItem {
 
 	@Override
 	public void registerRecipes() {
-
+		
 			GameRegistry.addRecipe(new ItemStack(this),
 					"xww",
 					"  w",
 					"  x",
 					'x', materialDefinition.getRepairMaterial(),
 					'w', Items.stick);
+			
+			GameRegistry.addRecipe(new BoomerangEnchRecipe());
+			RecipeSorter.INSTANCE.register("EnchantBoomerang", BoomerangEnchRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
 	}
 	
-
 	/**
 	 * this is weak melee combat damage!
 	 * for ranged combat damage, see {@link EntityBoomerang#getImpactDamage}

@@ -13,6 +13,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.BlockPos;
@@ -25,9 +26,9 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 	
 	public ItemKeris() {
 		
-		super(ToolMaterial.IRON);
+		super(ToolMaterial.GOLD);
 		
-		materialDefinition = MaterialManager.getMaterialDefinition(ToolMaterial.IRON);
+		materialDefinition = MaterialManager.getMaterialDefinition(ToolMaterial.GOLD);
 		
 		setUnlocalizedName("keris");
 		setMaxDamage(materialDefinition.getMaxUses());
@@ -59,13 +60,13 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 	
 	@Override
 	public void registerRecipes() {
-		
+
 		GameRegistry.addRecipe(new ItemStack(this),
-				"  m",
 				" m ",
-				"s  ",
-				'm', ToolMaterial.IRON.getRepairItemStack(),
-				's', new ItemStack(ReforgedRegistry.GOLDEN_STICK));
+				" m ",
+				" s ",
+				'm', Items.iron_ingot,
+				's', Items.gold_ingot);
 	}
 	
 	@Override
@@ -81,6 +82,6 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
 		//Sunconure11 wanted high enchantability ^^
-		return materialDefinition.getEnchantability() + 16;
+		return materialDefinition.getEnchantability() + 8;
 	}
 }

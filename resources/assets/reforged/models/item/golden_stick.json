@@ -1,7 +1,0 @@
-{
-    "parent": "reforged:item/musket_barrel",
-
-    "textures": {
-        "layer0": "reforged:items/keris_golden_stick"
-    }
-}
