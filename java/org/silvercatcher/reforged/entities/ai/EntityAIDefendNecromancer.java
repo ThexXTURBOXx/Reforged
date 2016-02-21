@@ -45,14 +45,14 @@ public class EntityAIDefendNecromancer extends EntityAIBase {
 	@Override
 	public boolean shouldExecute() {
 		
-		return slave.getAttackTarget() != master.getLastAttacker();
+		return slave.getAttackTarget() != master.getLastAttacker()
+				&& shouldBeAttacked(master.getLastAttacker());
 	}
 	
 	
 	@Override
 	public void startExecuting() {
 		
-		System.out.println("start");
 		slave.setAttackTarget(master.getLastAttacker());
 	}
 	
