@@ -46,6 +46,7 @@ public class VersionChecker implements Runnable {
 	    	  		if(s.contains("betaVersion")) {
 	    	  			s = s.substring(0, s.indexOf("|"));
 	    	  			s = s.replace("betaVersion", "");
+	    	  		s = s.replace("﻿", "");
 	    	    	  	s = s.replace("\"", "");
 	    	    	  	s = s.replace(",", "");
 	    	    	  	s = s.replace("	", "");
@@ -57,6 +58,7 @@ public class VersionChecker implements Runnable {
 	    	  		if(s.contains("modVersion")) {
 	    	  			s = s.substring(0, s.indexOf("|"));
 	    	  			s = s.replace("modVersion", "");
+	    	  		s = s.replace("﻿", "");
 	    	    	  	s = s.replace("\"", "");
 	    	    	  	s = s.replace(",", "");
 	    	    	  	s = s.replace("	", "");
@@ -70,7 +72,7 @@ public class VersionChecker implements Runnable {
 		    	downloadUrl = "https://github.com/TheOnlySilverClaw/Reforged/releases";
 		    } else {
 	    		  //Released on GitHub and CurseForge
-		    	downloadUrl = "http://minecraft.curseforge.com/projects/reforged-balkons-weapons-1-8";
+		    	downloadUrl = "http://minecraft.curseforge.com/projects/reforged";
 		    }
 		  	if(!latestVersion.equalsIgnoreCase(ReforgedMod.VERSION)) {
 		  		log.info("Newer version of " + ReforgedMod.NAME + " available: " + latestVersion, new Object[0]);
@@ -129,6 +131,7 @@ public class VersionChecker implements Runnable {
 	    		  //Only released on GitHub
 		    	  if(s.contains("betaLog")) {
 		    		  s = s.replace("betaLog", "");
+	    	  		s = s.replace("﻿", "");
 		    		  s = s.replace("\"", "");
 		    		  s = s.replace(",", "");
 		    		  s = s.replace("	", "");
@@ -140,6 +143,7 @@ public class VersionChecker implements Runnable {
 	    		  //Released on GitHub and CurseForge
 		    	  if(s.contains("changeLog")) {
 		    		  s = s.replace("changeLog", "");
+	    	  		s = s.replace("﻿", "");
 		    		  s = s.replace("\"", "");
 		    		  s = s.replace(",", "");
 		    		  s = s.replace("	", "");

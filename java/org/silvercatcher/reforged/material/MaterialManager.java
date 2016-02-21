@@ -4,14 +4,17 @@ import java.util.EnumMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.silvercatcher.reforged.api.APIRegistry;
+
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraftforge.fml.common.Loader;
 
 public class MaterialManager {	
 	
 	private static final EnumMap<ToolMaterial, MaterialDefinition> definitionMap = new EnumMap<>(ToolMaterial.class);
 	
 	static {
-		
 		definitionMap.put(ToolMaterial.WOOD,
 				new MaterialDefinition("wooden", ToolMaterial.WOOD));
 		definitionMap.put(ToolMaterial.STONE,

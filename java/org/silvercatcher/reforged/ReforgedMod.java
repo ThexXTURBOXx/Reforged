@@ -21,11 +21,18 @@ public class ReforgedMod
     on GitHub, then set this to true
     If it gets released on CurseForge as well, then set it to false*/
     public static final boolean BETA = false;
-    
+
     public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
 		@Override
 		public Item getTabIconItem() {
 			return ReforgedRegistry.IRON_BATTLE_AXE;
+		}
+	};
+	
+    public static final CreativeTabs tabReforgedIntegration = new CreativeTabs(ID) {
+		@Override
+		public Item getTabIconItem() {
+			return ReforgedRegistry.GOLDEN_KATANA;
 		}
 	};
     

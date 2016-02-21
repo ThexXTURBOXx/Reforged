@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+import org.silvercatcher.reforged.api.APIRegistry;
 import org.silvercatcher.reforged.enchantments.EnchantmentGoalseeker;
 import org.silvercatcher.reforged.items.*;
 import org.silvercatcher.reforged.items.others.*;
@@ -195,6 +196,12 @@ public class ReforgedRegistry {
 			registrationList.add(DART_WITHER = new ItemDart("wither"));
 			registrationList.add(BLOWGUN = new ItemBlowGun());
 		}
+		
+		//Register all the API-Items [Better Config later]
+		if(GlobalValues.INTEGRATION) {
+			new APIRegistry().register();
+		}
+		
 	}
 	
 	/**Registers all items out of the registrationList*/
