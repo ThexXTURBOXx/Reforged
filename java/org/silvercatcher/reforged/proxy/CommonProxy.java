@@ -18,18 +18,17 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class CommonProxy {
 	
 	public void preInit(FMLPreInitializationEvent event) {
-
+		
 		loadConfig(event);
 		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
 		//MinecraftForge.EVENT_BUS.register(new ReforgedMonsterArmourer());
 		ReforgedRegistry.createItems();
 		ReforgedRegistry.registerItems();
 		registerEntities();
-		//Version Checker
 		Thread versionCheckThread = new Thread(new VersionChecker(), "Version Check");
 		versionCheckThread.start();
 	}
-
+	
 	public void init(FMLInitializationEvent event) {
 		
 		ReforgedRegistry.registerRecipes();
