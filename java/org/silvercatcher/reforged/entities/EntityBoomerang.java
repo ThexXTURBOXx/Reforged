@@ -142,6 +142,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 			EntityPlayer p = (EntityPlayer) hitEntity;
 			if(stack.getMaxDamage() - stack.getItemDamage() > 0) {
 				p.inventory.addItemStackToInventory(stack);
+				worldObj.playSoundAtEntity(this, "", 0.5F, 0.4F);
 			} else {
 				//Custom sound later... [BREAK SOUND]
 			}

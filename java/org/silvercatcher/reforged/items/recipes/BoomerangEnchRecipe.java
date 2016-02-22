@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.CompoundTags;
+import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.init.Items;
@@ -47,7 +48,7 @@ public class BoomerangEnchRecipe implements IRecipe {
 			ItemStack stack = inventory.getStackInSlot(i);
 			
 			if(stack != null) {
-				if(stack.getItem() == ReforgedRegistry.WOODEN_BOOMERANG || stack.getItem() == ReforgedRegistry.STONE_BOOMERANG || stack.getItem() == ReforgedRegistry.GOLDEN_BOOMERANG || stack.getItem() == ReforgedRegistry.DIAMOND_BOOMERANG) {
+				if(stack.getItem() instanceof ItemBoomerang) {
 					boomerangs++;
 					output = stack.copy();
 				} else if(stack.getItem() == Items.gold_ingot) {

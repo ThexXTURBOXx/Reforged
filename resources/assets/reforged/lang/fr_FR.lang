@@ -1,4 +1,5 @@
 itemGroup.reforged=Reforged
+itemGroup.reforged_integration=Reforged Integrations
 
 item.holy_cross.name=§eSainte Croix
 
@@ -19,7 +20,8 @@ item.wooden_boomerang.name=Boomerang en bois
 item.stone_boomerang.name=Boomerang en pierre
 item.golden_boomerang.name=Boomerang en or
 item.iron_boomerang.name=Boomerang en fer
-item.diamond_boomerang.name=Boomearang en diamant
+item.diamond_boomerang.name=Boomerang en diamant
+item.thaumium_boomerang.name=Boomerang en thaumium
 item.boomerang.langBreak=Le %1$s est cassé dans ton mains.
 
 item.wooden_saber.name=Sabre en bois

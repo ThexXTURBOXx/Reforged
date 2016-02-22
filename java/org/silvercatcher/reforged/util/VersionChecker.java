@@ -70,7 +70,7 @@ public class VersionChecker implements Runnable {
 		    	downloadUrl = "https://github.com/TheOnlySilverClaw/Reforged/releases";
 		    } else {
 	    		  //Released on GitHub and CurseForge
-		    	downloadUrl = "http://minecraft.curseforge.com/projects/reforged-balkons-weapons-1-8";
+		    	downloadUrl = "http://minecraft.curseforge.com/projects/reforged";
 		    }
 		  	if(!latestVersion.equalsIgnoreCase(ReforgedMod.VERSION)) {
 		  		log.info("Newer version of " + ReforgedMod.NAME + " available: " + latestVersion, new Object[0]);
