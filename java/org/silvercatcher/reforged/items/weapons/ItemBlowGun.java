@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
@@ -45,24 +45,24 @@ public class ItemBlowGun extends ExtendedItem {
 		if(timeLeft <= getMaxItemUseDuration(stack) - 15) {
 			EntityDart dart;
 			if(!worldIn.isRemote) {
-				if(playerIn.inventory.hasItem(ReforgedRegistry.DART_NORMAL)) {
-					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_NORMAL));
-					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_NORMAL));
-				} else if(playerIn.inventory.hasItem(ReforgedRegistry.DART_HUNGER)) {
-					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_HUNGER));
-					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_HUNGER));
-				} else if(playerIn.inventory.hasItem(ReforgedRegistry.DART_POISON)) {
-					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_POISON));
-					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_POISON));
-				} else if(playerIn.inventory.hasItem(ReforgedRegistry.DART_POISON_STRONG)) {
-					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_POISON_STRONG));
-					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_POISON_STRONG));
-				} else if(playerIn.inventory.hasItem(ReforgedRegistry.DART_SLOW)) {
-					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_SLOW));
-					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_SLOW));
-				} else if(playerIn.inventory.hasItem(ReforgedRegistry.DART_WITHER) || playerIn.capabilities.isCreativeMode) {
-					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_WITHER));
-					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_WITHER));
+				if(playerIn.inventory.hasItem(ReforgedAdditions.DART_NORMAL)) {
+					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_NORMAL));
+					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.DART_NORMAL));
+				} else if(playerIn.inventory.hasItem(ReforgedAdditions.DART_HUNGER)) {
+					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_HUNGER));
+					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.DART_HUNGER));
+				} else if(playerIn.inventory.hasItem(ReforgedAdditions.DART_POISON)) {
+					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_POISON));
+					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.DART_POISON));
+				} else if(playerIn.inventory.hasItem(ReforgedAdditions.DART_POISON_STRONG)) {
+					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_POISON_STRONG));
+					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.DART_POISON_STRONG));
+				} else if(playerIn.inventory.hasItem(ReforgedAdditions.DART_SLOW)) {
+					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_SLOW));
+					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.DART_SLOW));
+				} else if(playerIn.inventory.hasItem(ReforgedAdditions.DART_WITHER) || playerIn.capabilities.isCreativeMode) {
+					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_WITHER));
+					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.DART_WITHER));
 				} else {
 					dart = null;
 				}

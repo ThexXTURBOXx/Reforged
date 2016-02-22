@@ -1,7 +1,7 @@
 package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
-import org.silvercatcher.reforged.ReforgedReferences.Textures;
+import org.silvercatcher.reforged.api.ReforgedReferences.Textures;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.models.ModelBoomerang;
 
@@ -49,8 +49,12 @@ public class RenderBoomerang extends ReforgedRender {
 		case "STONE": return Textures.STONE_BOOMERANG;
 		
 		case "WOOD": return Textures.WOODEN_BOOMERANG;
-		
+
 		case "THAUMIUM": return Textures.THAUMIUM_BOOMERANG;
+		
+		case "DARK_MATTER": return Textures.DM_BOOMERANG;
+		
+		case "RED_MATTER": return Textures.RM_BOOMERANG;
 		
 		default: return null;
 		

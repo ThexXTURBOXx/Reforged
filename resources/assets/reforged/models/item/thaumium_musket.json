@@ -2,6 +2,6 @@
     "parent": "reforged:item/musket",
 
     "textures": {
-        "layer0": "reforged:items/musket_thaumium"
+        "layer0": "reforged:items/integration/musket_thaumium"
     }
 }

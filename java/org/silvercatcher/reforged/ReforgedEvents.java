@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged;
 
-import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+import org.silvercatcher.reforged.api.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.util.VersionChecker;
 
 import net.minecraft.entity.player.EntityPlayer;

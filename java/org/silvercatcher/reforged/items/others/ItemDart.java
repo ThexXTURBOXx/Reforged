@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.items.others;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.ExtendedItem;
 
 import net.minecraft.init.Blocks;
@@ -29,25 +29,25 @@ public class ItemDart extends ExtendedItem {
 				 'v', Items.feather); break;
 			
 		case "hunger": GameRegistry.addShapelessRecipe(new ItemStack(this),
-				 ReforgedRegistry.DART_NORMAL,
-				 Items.rotten_flesh); break;
+				ReforgedAdditions.DART_NORMAL,
+				Items.rotten_flesh); break;
 			
 		case "poison": GameRegistry.addShapelessRecipe(new ItemStack(this),
-				 ReforgedRegistry.DART_NORMAL,
-				 new ItemStack(Blocks.cactus)); break;
+				ReforgedAdditions.DART_NORMAL,
+				new ItemStack(Blocks.cactus)); break;
 			
 		case "poison_strong": GameRegistry.addShapelessRecipe(new ItemStack(this),
-				 ReforgedRegistry.DART_NORMAL,
-				 Items.spider_eye); break;
+				ReforgedAdditions.DART_NORMAL,
+				Items.spider_eye); break;
 			
 		case "slowness": GameRegistry.addShapelessRecipe(new ItemStack(this),
-				 ReforgedRegistry.DART_NORMAL,
-				 Items.slime_ball); break;
+				ReforgedAdditions.DART_NORMAL,
+				Items.slime_ball); break;
 			
 		case "wither": GameRegistry.addShapelessRecipe(new ItemStack(this),
-				 ReforgedRegistry.DART_NORMAL,
-				 Items.spider_eye,
-				 Items.bone); break;
+				ReforgedAdditions.DART_NORMAL,
+				Items.spider_eye,
+				Items.bone); break;
 			
 		default: throw new IllegalArgumentException("Could not register recipe of the item: " + getUnlocalizedName());
 		

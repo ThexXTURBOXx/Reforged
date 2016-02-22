@@ -1,7 +1,8 @@
-package org.silvercatcher.reforged;
+package org.silvercatcher.reforged.api;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
 import net.minecraft.util.ResourceLocation;
@@ -18,6 +19,8 @@ public class ReforgedReferences {
 		public static final ResourceLocation GOLDEN_BOOMERANG = new ResourceLocation(ReforgedMod.ID + ":textures/entity/golden_boomerang.png");
 		public static final ResourceLocation DIAMOND_BOOMERANG = new ResourceLocation(ReforgedMod.ID + ":textures/entity/diamond_boomerang.png");
 		public static final ResourceLocation THAUMIUM_BOOMERANG = new ResourceLocation(ReforgedMod.ID + ":textures/entity/thaumium_boomerang.png");
+		public static final ResourceLocation DM_BOOMERANG = new ResourceLocation(ReforgedMod.ID + ":textures/entity/dark_matter_boomerang.png");
+		public static final ResourceLocation RM_BOOMERANG = new ResourceLocation(ReforgedMod.ID + ":textures/entity/red_matter_boomerang.png");
 		
 		public static final ResourceLocation NORMAL_DART = new ResourceLocation(ReforgedMod.ID + ":textures/entity/dart_normal.png");
 		public static final ResourceLocation HUNGER_DART = new ResourceLocation(ReforgedMod.ID + ":textures/entity/dart_hunger.png");
@@ -31,7 +34,7 @@ public class ReforgedReferences {
 		public static final ResourceLocation JAVELIN = new ResourceLocation(ReforgedMod.ID + ":textures/entity/javelin.png");
 	}
 
-	/**All needed GlobalValues*/
+	/**Other Values needed*/
 	public static class GlobalValues {
 		//Logger
 		public static Logger log = LogManager.getLogger(ReforgedMod.NAME);

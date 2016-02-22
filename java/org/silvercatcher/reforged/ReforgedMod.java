@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged;
 
 import org.silvercatcher.reforged.api.APIRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -25,7 +26,7 @@ public class ReforgedMod {
     public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
 		@Override
 		public Item getTabIconItem() {
-			return ReforgedRegistry.IRON_BATTLE_AXE;
+			return ReforgedAdditions.IRON_BATTLE_AXE;
 		}
 	};
     

@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.items.recipes;
 import java.util.LinkedList;
 
 import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
@@ -82,7 +83,7 @@ public class BoomerangEnchRecipe implements IRecipe {
 			ItemStack stack = inventory.getStackInSlot(i);
 			
 			if(stack != null) {
-				if(stack.getItem() == ReforgedRegistry.WOODEN_BOOMERANG || stack.getItem() == ReforgedRegistry.STONE_BOOMERANG || stack.getItem() == ReforgedRegistry.GOLDEN_BOOMERANG || stack.getItem() == ReforgedRegistry.DIAMOND_BOOMERANG) {
+				if(stack.getItem() instanceof ItemBoomerang) {
 					output = stack.copy();
 				} else if(stack.getItem() == Items.gold_ingot) {
 					goldSlots.add(i);
@@ -96,7 +97,7 @@ public class BoomerangEnchRecipe implements IRecipe {
 		
 		NBTTagCompound compound = CompoundTags.giveCompound(output);
 		
-		output.addEnchantment(ReforgedRegistry.goalseeker, 1);
+		output.addEnchantment(ReforgedAdditions.goalseeker, 1);
 		compound.setInteger(CompoundTags.ENCHANTED, 1);
 		return output;
 	}

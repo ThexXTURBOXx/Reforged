@@ -11,7 +11,7 @@ public abstract class APIBase {
 	public static List<Item> regListItems = new ArrayList<Item>();
 	
 	/**Saves the name of the mod, that needs to get integrated*/
-	protected static String modName;
+	String modName;
 	
 	/**Registers all the Items of the Integration-modules*/
 	public abstract void registerItems();
@@ -20,7 +20,7 @@ public abstract class APIBase {
 	public abstract void registerMatDefs();
 	
 	/**@return The name of the mod, which gets integrated*/
-	public static String getModName() {
+	public String getModName() {
 		return modName;
 	}
 	

@@ -1,7 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.api.Thaumcraft;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -23,12 +22,14 @@ public class ItemMusketWithBayonet extends ItemMusket {
 	
 	public ItemExtension getKnife() {
 		switch(materialDefinition.getPrefix()) {
-		case "wooden": return (ItemExtension) ReforgedRegistry.WOODEN_KNIFE;
-		case "stone": return (ItemExtension) ReforgedRegistry.STONE_KNIFE;
-		case "golden": return (ItemExtension) ReforgedRegistry.GOLDEN_KNIFE;
-		case "iron": return (ItemExtension) ReforgedRegistry.IRON_KNIFE;
-		case "diamond": return (ItemExtension) ReforgedRegistry.DIAMOND_KNIFE;
-		case "thaumium": return (ItemExtension) Thaumcraft.THAUMIUM_KNIFE;
+		case "wooden": return (ItemExtension) ReforgedAdditions.WOODEN_KNIFE;
+		case "stone": return (ItemExtension) ReforgedAdditions.STONE_KNIFE;
+		case "golden": return (ItemExtension) ReforgedAdditions.GOLDEN_KNIFE;
+		case "iron": return (ItemExtension) ReforgedAdditions.IRON_KNIFE;
+		case "diamond": return (ItemExtension) ReforgedAdditions.DIAMOND_KNIFE;
+		case "thaumium": return (ItemExtension) ReforgedAdditions.THAUMIUM_KNIFE;
+		case "dark_matter": return (ItemExtension) ReforgedAdditions.DM_KNIFE;
+		case "red_matter": return (ItemExtension) ReforgedAdditions.RM_KNIFE;
 		default: throw new IllegalArgumentException("The ToolMaterial called " + materialDefinition.getPrefix() + " couldn't be found");
 		}
 	}
@@ -36,7 +37,7 @@ public class ItemMusketWithBayonet extends ItemMusket {
 	@Override
 	public void registerRecipes() {
 		GameRegistry.addShapelessRecipe(new ItemStack(this),
-				new ItemStack(ReforgedRegistry.MUSKET), getKnife());
+				new ItemStack(ReforgedAdditions.MUSKET), getKnife());
 	}
 	
 	@Override

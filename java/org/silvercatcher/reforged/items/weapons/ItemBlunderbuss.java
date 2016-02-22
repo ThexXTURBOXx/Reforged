@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -32,8 +32,8 @@ public class ItemBlunderbuss extends AReloadable {
 	public void registerRecipes() {
 	
 		GameRegistry.addShapelessRecipe(new ItemStack(this),
-				new ItemStack(ReforgedRegistry.BLUNDERBUSS_BARREL),
-				new ItemStack(ReforgedRegistry.GUN_STOCK));
+				new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL),
+				new ItemStack(ReforgedAdditions.GUN_STOCK));
 	}
 	
 	@Override
@@ -56,7 +56,7 @@ public class ItemBlunderbuss extends AReloadable {
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-		setAmmo(ReforgedRegistry.BLUNDERBUSS_SHOT);
+		setAmmo(ReforgedAdditions.BLUNDERBUSS_SHOT);
 		return super.onItemRightClick(itemStackIn, worldIn, playerIn);
 	}
 	

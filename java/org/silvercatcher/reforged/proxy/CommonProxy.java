@@ -1,8 +1,8 @@
 package org.silvercatcher.reforged.proxy;
 
 import org.silvercatcher.reforged.ReforgedEvents;
-import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
