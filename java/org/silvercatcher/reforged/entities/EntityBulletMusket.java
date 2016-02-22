@@ -26,12 +26,6 @@ public class EntityBulletMusket extends AReforgedThrowable {
 	}
 	
 	@Override
-	protected DamageSource causeImpactDamage(Entity target, EntityLivingBase shooter) {
-		
-		return new EntityDamageSourceIndirect("bullet_musket", target, shooter);
-	}
-
-	@Override
 	protected float getImpactDamage(Entity target) {
 
 		return 4f;

@@ -1,18 +1,15 @@
 package org.silvercatcher.reforged.material;
 
-import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.silvercatcher.reforged.api.APIRegistry;
-
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.Item.ToolMaterial;
-import net.minecraftforge.fml.common.Loader;
 
 public class MaterialManager {	
 	
-	private static final EnumMap<ToolMaterial, MaterialDefinition> definitionMap = new EnumMap<>(ToolMaterial.class);
+	private static final HashMap<ToolMaterial, MaterialDefinition> definitionMap = new HashMap<ToolMaterial, MaterialDefinition>();
 	
 	static {
 		definitionMap.put(ToolMaterial.WOOD,

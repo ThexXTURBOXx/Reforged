@@ -1,4 +1,5 @@
 itemGroup.reforged=Reforged
+itemGroup.reforged_integration=Reforged Integration
 
 item.holy_cross.name=§eHeiliges Kreuz
 
@@ -14,12 +15,14 @@ item.stone_battleaxe.name=Steinstreitaxt
 item.iron_battleaxe.name=Eisenstreitaxt
 item.golden_battleaxe.name=Goldstreitaxt
 item.diamond_battleaxe.name=Diamantstreitaxt
+item.thaumium_battleaxe.name=Thaumiumstreitaxt
 
 item.wooden_boomerang.name=Holzbumerang
 item.stone_boomerang.name=Steinbumerang
 item.golden_boomerang.name=Goldbumerang
 item.iron_boomerang.name=Eisenbumerang
 item.diamond_boomerang.name=Diamantbumerang
+item.thaumium_boomerang.name=Thaumiumbumerang
 item.boomerang.langBreak=Der %1$s ist in deinen Händen zerbrochen.
 
 item.wooden_saber.name=Holzsäbel
@@ -27,24 +30,28 @@ item.stone_saber.name=Steinsäbel
 item.golden_saber.name=Goldsäbel
 item.iron_saber.name=Eisensäbel
 item.diamond_saber.name=Diamantsäbel
+item.thaumium_saber.name=Thaumiumsäbel
 
 item.wooden_musket.name=Muskete mit Holzbajonett
 item.stone_musket.name=Muskete mit Steinbajonett
 item.golden_musket.name=Muskete mit Goldbajonett
 item.iron_musket.name=Muskete mit Eisenbajonett
 item.diamond_musket.name=Muskete mit Diamantbajonett
+item.thaumium_musket.name=Muskete mit Thaumiumbajonett
 
 item.wooden_knife.name=Holzmesser
 item.stone_knife.name=Steinmesser
 item.golden_knife.name=Goldmesser
 item.iron_knife.name=Eisenmesser
 item.diamond_knife.name=Diamantmesser
+item.thaumium_knife.name=Thaumiummesser
 
 item.wooden_katana.name=Holzkatana
 item.stone_katana.name=Steinkatana
 item.golden_katana.name=Goldkatana
 item.iron_katana.name=Eisenkatana
 item.diamond_katana.name=Diamantkatana
+item.thaumium_katana.name=Thaumiumkatana
 
 item.dart_normal.name=Normaler Pfeil
 item.dart_poison.name=Giftpfeil

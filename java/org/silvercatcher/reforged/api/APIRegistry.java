@@ -3,36 +3,36 @@ package org.silvercatcher.reforged.api;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.ReforgedRegistry;
+
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Loader;
 
 public class APIRegistry {
 	
+	/**All the Dependencies for our mod*/
+	public static final String Deps = "after:Thaumcraft";
+	
 	/**Saves all the instances of the Integration APIs*/
-	public static final List<APIBase> regList = new ArrayList<APIBase>();
+	public static List<APIBase> regList = new ArrayList<APIBase>();
+	
+	/**The Creative Tab for all Integration-Items*/
+    public static CreativeTabs tabReforgedIntegration;
 	
 	/**Adds all the Integration APIs to the List {@link APIRegistry#regList}*/
-	public void addAPIs() {
-		regList.add(new Thaumcraft());
-	}
-	
-	/**Registers all the Integration APIs' Items*/
-	public void registerAPIItems(APIBase ab) {
-		ab.registerItems();
-	}
-	
-	/**Registers all the Integration APIs' MaterialDefinitions*/
-	public void registerAPIMatDefs(APIBase ab) {
-		ab.registerMatDefs();
-	}
-	
-	/**Master method for {@link APIRegistry#addAPIs()}, {@link APIRegistry#registerDefMaps()} and {@link APIRegistry#registerAPIs()}*/
-	public void register() {
-		addAPIs();		
-		for(APIBase apibase : regList) {
-			if(Loader.isModLoaded(apibase.modName)) {
-				registerAPIMatDefs(apibase);
-				registerAPIItems(apibase);
-			}
-		}		
+	public static void addAPIs() {
+		if(Loader.isModLoaded(new Thaumcraft().getModName())) {
+			regList.add(new Thaumcraft());
+		}
+		if(!regList.isEmpty()) {
+			tabReforgedIntegration = new CreativeTabs(ReforgedMod.ID + "_integration") {
+				@Override
+				public Item getTabIconItem() {
+					return ReforgedRegistry.GOLDEN_KATANA;
+				}
+			};
+		}
 	}
 }

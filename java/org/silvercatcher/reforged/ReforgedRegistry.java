@@ -4,11 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+import org.silvercatcher.reforged.api.APIBase;
 import org.silvercatcher.reforged.api.APIRegistry;
 import org.silvercatcher.reforged.enchantments.EnchantmentGoalseeker;
-import org.silvercatcher.reforged.items.*;
-import org.silvercatcher.reforged.items.others.*;
-import org.silvercatcher.reforged.items.weapons.*;
+import org.silvercatcher.reforged.items.ItemExtension;
+import org.silvercatcher.reforged.items.others.ItemArrowBundle;
+import org.silvercatcher.reforged.items.others.ItemBulletBlunderbuss;
+import org.silvercatcher.reforged.items.others.ItemBulletMusket;
+import org.silvercatcher.reforged.items.others.ItemDart;
+import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
+import org.silvercatcher.reforged.items.weapons.ItemBlowGun;
+import org.silvercatcher.reforged.items.weapons.ItemBlunderbuss;
+import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
+import org.silvercatcher.reforged.items.weapons.ItemFireRod;
+import org.silvercatcher.reforged.items.weapons.ItemHolyCross;
+import org.silvercatcher.reforged.items.weapons.ItemJavelin;
+import org.silvercatcher.reforged.items.weapons.ItemKatana;
+import org.silvercatcher.reforged.items.weapons.ItemKeris;
+import org.silvercatcher.reforged.items.weapons.ItemKnife;
+import org.silvercatcher.reforged.items.weapons.ItemMusket;
+import org.silvercatcher.reforged.items.weapons.ItemMusketWithBayonet;
+import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
+import org.silvercatcher.reforged.items.weapons.ItemSaber;
 
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.enchantment.Enchantment;
@@ -20,6 +37,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -197,16 +215,26 @@ public class ReforgedRegistry {
 			registrationList.add(BLOWGUN = new ItemBlowGun());
 		}
 		
-		//Register all the API-Items [Better Config later]
-		if(GlobalValues.INTEGRATION) {
-			new APIRegistry().register();
-		}
-		
 	}
 	
 	/**Registers all items out of the registrationList*/
 	public static void registerItems() {
 		
+		//Add all the API-Items to the registrationList [Better Config later]
+		if(GlobalValues.INTEGRATION) {
+			APIRegistry.addAPIs();
+			for(APIBase ab : APIRegistry.regList) {
+				ab.registerMatDefs();
+				ab.registerItems();
+				if(!ab.regListItems.isEmpty()) {
+					for(Item i : ab.regListItems) {
+						registrationList.add(i);
+					}					
+				}
+			}
+		}
+		
+		//Register all Items
 		for(Item item : registrationList) {
 			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
 		}
