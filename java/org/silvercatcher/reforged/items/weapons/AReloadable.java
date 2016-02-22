@@ -123,9 +123,8 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				}
 			}
 			compound.setByte(CompoundTags.AMMUNITION, empty);
+			compound.setLong(CompoundTags.RELOAD, -1l);
 		}
-		compound.setLong(CompoundTags.RELOAD,
-				worldIn.getWorldTime() + getReloadTotal());
 	}
 
 	public abstract void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack);
