@@ -34,6 +34,7 @@ public class ProjectE extends APIBase {
 	
 	@Override
 	public void registerItems() {
+		super.registerItems();
 		simpleReg(ReforgedAdditions.DM_MUSKET = new ItemMusketWithBayonet(ProjectE_DarkMatter));
 		simpleReg(ReforgedAdditions.DM_BATTLE_AXE = new ItemBattleAxe(ProjectE_DarkMatter));
 		simpleReg(ReforgedAdditions.DM_BOOMERANG = new ItemBoomerang(ProjectE_DarkMatter));

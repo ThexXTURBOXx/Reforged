@@ -16,6 +16,8 @@ item.iron_battleaxe.name=Iron Battleaxe
 item.golden_battleaxe.name=Golden Battleaxe
 item.diamond_battleaxe.name=Diamond Battleaxe
 item.thaumium_battleaxe.name=Thaumium Battleaxe
+item.dark_matter_battleaxe.name=Dark Matter Battleaxe
+item.red_matter_battleaxe.name=Red Matter Battleaxe
 
 item.wooden_boomerang.name=Wooden Boomerang
 item.stone_boomerang.name=Stone Boomerang
@@ -23,6 +25,8 @@ item.golden_boomerang.name=Golden Boomerang
 item.iron_boomerang.name=Iron Boomerang
 item.diamond_boomerang.name=Diamond Boomerang
 item.thaumium_boomerang.name=Thaumium Boomerang
+item.dark_matter_boomerang.name=Dark Matter Boomerang
+item.red_matter_boomerang.name=Red Matter Boomerang
 item.boomerang.langBreak=The %1$s broke in your hands.
 
 item.wooden_saber.name=Wooden Saber
@@ -31,6 +35,8 @@ item.golden_saber.name=Golden Saber
 item.iron_saber.name=Iron Saber
 item.diamond_saber.name=Diamond Saber
 item.thaumium_saber.name=Thaumium Saber
+item.dark_matter_saber.name=Dark Matter Saber
+item.red_matter_saber.name=Red Matter Saber
 
 item.wooden_musket.name=Musket with Wooden Bayonet
 item.stone_musket.name=Musket with Stone Bayonet
@@ -38,6 +44,8 @@ item.golden_musket.name=Musket with Golden Bayonet
 item.iron_musket.name=Musket with Iron Bayonet
 item.diamond_musket.name=Musket with Diamond Bayonet
 item.thaumium_musket.name=Musket with Thaumium Bayonet
+item.dark_matter_musket.name=Musket with Dark Matter Bayonet
+item.red_matter_musket.name=Musket with Red Matter Bayonet
 
 item.wooden_knife.name=Wooden Knife
 item.stone_knife.name=Stone Knife
@@ -45,6 +53,8 @@ item.golden_knife.name=Golden Knife
 item.iron_knife.name=Iron Knife
 item.diamond_knife.name=Diamond Knife
 item.thaumium_knife.name=Thaumium Knife
+item.dark_matter_knife.name=Dark Matter Knife
+item.red_matter_knife.name=Red Matter Knife
 
 item.wooden_katana.name=Wooden Katana
 item.stone_katana.name=Stone Katana
@@ -52,6 +62,8 @@ item.golden_katana.name=Golden Katana
 item.iron_katana.name=Iron Katana
 item.diamond_katana.name=Diamond Katana
 item.thaumium_katana.name=Thaumium Katana
+item.dark_matter_katana.name=Dark Matter Katana
+item.red_matter_katana.name=Red Matter Katana
 
 item.dart_normal.name=Normal Dart
 item.dart_poison.name=Poisonous Dart

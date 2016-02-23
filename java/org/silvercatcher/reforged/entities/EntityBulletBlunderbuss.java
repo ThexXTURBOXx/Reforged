@@ -34,6 +34,7 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 
 	@Override
 	protected boolean onEntityHit(Entity entity) {
+		System.out.println("Hit...");
 		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), 4);
 		return true;
 	}

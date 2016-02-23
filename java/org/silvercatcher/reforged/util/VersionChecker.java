@@ -28,8 +28,20 @@ public class VersionChecker implements Runnable {
 
   /**Let the Version Checker run*/
   @Override
-	public void run()
-	  {
+	public void run() {
+	  Process p1 = null;
+	try {
+		p1 = Runtime.getRuntime().exec("ping www.google.com");
+	} catch (IOException e1) {
+		e1.printStackTrace();
+	}
+	  int returnVal = 1;
+	try {
+		if(p1 != null) returnVal = p1.waitFor();
+	} catch (InterruptedException e1) {
+		e1.printStackTrace();
+	}
+	  if(returnVal==0) {
 	    InputStream in = null;
 	    try {
 	      in = new URL(jsonUrl).openStream();
@@ -86,6 +98,7 @@ public class VersionChecker implements Runnable {
 	    }
 	    isLatestVersion = ReforgedMod.VERSION.equals(latestVersion);
 	  }
+  }
 	  
   	  /**@return whether Reforged is up-to-date or not*/
 	  public static boolean isLatestVersion() {

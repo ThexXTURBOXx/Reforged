@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Loader;
 public class APIRegistry {
 	
 	/**All the Dependencies for our mod*/
-	public static final String Deps = "after:Thaumcraft;after:ProjectE";
+	public static final String Deps = "after:ProjectE;after:Thaumcraft;after:Baubles;required-after:Forge";
 	
 	/**Saves all the instances of the Integration APIs*/
 	public static final List<APIBase> regList = new ArrayList<APIBase>();

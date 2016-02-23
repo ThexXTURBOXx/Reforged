@@ -25,6 +25,7 @@ public class Thaumcraft extends APIBase {
 	
 	@Override
 	public void registerItems() {
+		super.registerItems();
 		simpleReg(ReforgedAdditions.THAUMIUM_MUSKET = new ItemMusketWithBayonet(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_THAUMIUM));
 		simpleReg(ReforgedAdditions.THAUMIUM_BATTLE_AXE = new ItemBattleAxe(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_THAUMIUM));
 		simpleReg(ReforgedAdditions.THAUMIUM_BOOMERANG = new ItemBoomerang(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_THAUMIUM));

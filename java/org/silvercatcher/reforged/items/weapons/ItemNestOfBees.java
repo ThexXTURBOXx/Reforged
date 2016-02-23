@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
 
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
@@ -18,7 +19,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
-import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ItemNestOfBees extends ExtendedItem {
@@ -50,9 +50,7 @@ public class ItemNestOfBees extends ExtendedItem {
 				'l', Items.leather,
 				's', Items.string,
 				'w', Item.getItemFromBlock(Blocks.planks));
-		
-		GameRegistry.addRecipe(new NestOfBeesLoadRecipe());
-		RecipeSorter.INSTANCE.register("ReloadNoB", NestOfBeesLoadRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
+		ReforgedRegistry.registerIRecipe("ReloadNoB", new NestOfBeesLoadRecipe(), NestOfBeesLoadRecipe.class, Category.SHAPELESS);
 	}
 	
 	@Override

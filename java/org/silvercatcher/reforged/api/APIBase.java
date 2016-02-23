@@ -14,7 +14,9 @@ public abstract class APIBase {
 	String modName;
 	
 	/**Registers all the Items of the Integration-modules*/
-	public abstract void registerItems();
+	public void registerItems() {
+		if(!regListItems.isEmpty()) regListItems.clear();
+	}
 	
 	/**Registers all the MaterialDefinitions of the Integration-modules*/
 	public abstract void registerMatDefs();

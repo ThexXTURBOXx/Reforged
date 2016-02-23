@@ -7,7 +7,6 @@ import org.silvercatcher.reforged.api.APIBase;
 import org.silvercatcher.reforged.api.APIRegistry;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.api.ReforgedReferences.GlobalValues;
-import org.silvercatcher.reforged.enchantments.EnchantmentGoalseeker;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletBlunderbuss;
@@ -29,17 +28,19 @@ import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
 import org.silvercatcher.reforged.items.weapons.ItemSaber;
 
 import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ReforgedRegistry {
 	
@@ -201,6 +202,25 @@ public class ReforgedRegistry {
 					'i', Items.iron_ingot,
 					'f', Items.flint_and_steel);
 		}
+	}
+	
+	/**Helper method for registering an Custom IRecipe
+	 * @param name The name for the Recipe
+	 * @param recipe The instance of the Recipe
+	 * @param recipeclass The class of the Recipe
+	 * @param category {@link Category#SHAPED} or {@link Category#SHAPELESS}?*/
+	public static void registerIRecipe(String name, IRecipe recipe, Class recipeclass, Category category) {
+		String catString;
+		if(category == Category.SHAPELESS) {
+			catString = "after:minecraft:shapeless";
+		} else if(category == Category.SHAPED) {
+			catString = "after:minecraft:shaped";
+		} else {
+			throw new IllegalArgumentException("The Category called " + category.name() + " couldn't be found!");
+		}
+		GameRegistry.addRecipe(recipe);
+		RecipeSorter.INSTANCE.register(name, recipeclass, category, catString);
+		//NEI IRecipe Registry [todo]
 	}
 
 	/**Helper method for registering an Entity
