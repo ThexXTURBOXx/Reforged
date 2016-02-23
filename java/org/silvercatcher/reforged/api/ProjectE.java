@@ -16,9 +16,9 @@ import net.minecraftforge.common.util.EnumHelper;
 public class ProjectE extends APIBase {
 	
 	/**ProjectE's DarkMatter as ToolMaterial*/
-	public static ToolMaterial ProjectE_DarkMatter = EnumHelper.addToolMaterial("DARK_MATTER", 7, 9999, 30, 12, 0);
+	public static ToolMaterial ProjectE_DarkMatter = EnumHelper.addToolMaterial("DARK_MATTER", 7, 9999, 30, 8, 0);
 	/**ProjectE's RedMatter as ToolMaterial*/
-	public static ToolMaterial ProjectE_RedMatter = EnumHelper.addToolMaterial("RED_MATTER", 7, 9999, 36, 16, 0);
+	public static ToolMaterial ProjectE_RedMatter = EnumHelper.addToolMaterial("RED_MATTER", 7, 9999, 36, 12, 0);
 	
 	public ProjectE() {
 		modName = "ProjectE";

@@ -16,6 +16,7 @@ item.iron_battleaxe.name=Eisenstreitaxt
 item.golden_battleaxe.name=Goldstreitaxt
 item.diamond_battleaxe.name=Diamantstreitaxt
 item.thaumium_battleaxe.name=Thaumiumstreitaxt
+item.void_battleaxe.name=Leerenmetallstreitaxt
 item.dark_matter_battleaxe.name=Dunkle Materiestreitaxt
 item.red_matter_battleaxe.name=Rote Materiestreitaxt
 
@@ -25,6 +26,7 @@ item.golden_boomerang.name=Goldbumerang
 item.iron_boomerang.name=Eisenbumerang
 item.diamond_boomerang.name=Diamantbumerang
 item.thaumium_boomerang.name=Thaumiumbumerang
+item.void_boomerang.name=Leerenmetallbumerang
 item.dark_matter_boomerang.name=Dunkler Materiebumerang
 item.red_matter_boomerang.name=Roter Materiebumerang
 item.boomerang.langBreak=Der %1$s ist in deinen Händen zerbrochen.
@@ -35,6 +37,7 @@ item.golden_saber.name=Goldsäbel
 item.iron_saber.name=Eisensäbel
 item.diamond_saber.name=Diamantsäbel
 item.thaumium_saber.name=Thaumiumsäbel
+item.void_saber.name=Leerenmetallsäbel
 item.dark_matter_saber.name=Dunkler Materiesäbel
 item.red_matter_saber.name=Roter Materiesäbel
 
@@ -44,6 +47,7 @@ item.golden_musket.name=Muskete mit Goldbajonett
 item.iron_musket.name=Muskete mit Eisenbajonett
 item.diamond_musket.name=Muskete mit Diamantbajonett
 item.thaumium_musket.name=Muskete mit Thaumiumbajonett
+item.void_musket.name=Muskete mit Leerenmetallbajonett
 item.dark_matter_musket.name=Muskete mit Dunklem Materiebajonett
 item.red_matter_musket.name=Muskete mit Rotem Materiebajonett
 
@@ -53,6 +57,7 @@ item.golden_knife.name=Goldmesser
 item.iron_knife.name=Eisenmesser
 item.diamond_knife.name=Diamantmesser
 item.thaumium_knife.name=Thaumiummesser
+item.void_knife.name=Leerenmetallmesser
 item.dark_matter_knife.name=Dunkles Materiemesser
 item.red_matter_knife.name=Rotes Materiemesser
 
@@ -62,6 +67,7 @@ item.golden_katana.name=Goldkatana
 item.iron_katana.name=Eisenkatana
 item.diamond_katana.name=Diamantkatana
 item.thaumium_katana.name=Thaumiumkatana
+item.void_katana.name=Leerenmetallkatana
 item.dark_matter_katana.name=Dunkler Materiekatana
 item.red_matter_katana.name=Roter Materiekatana
 

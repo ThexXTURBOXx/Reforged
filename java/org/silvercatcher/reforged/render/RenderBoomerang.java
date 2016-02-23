@@ -51,6 +51,8 @@ public class RenderBoomerang extends ReforgedRender {
 		case "WOOD": return Textures.WOODEN_BOOMERANG;
 
 		case "THAUMIUM": return Textures.THAUMIUM_BOOMERANG;
+
+		case "VOID": return Textures.VOID_BOOMERANG;
 		
 		case "DARK_MATTER": return Textures.DM_BOOMERANG;
 		

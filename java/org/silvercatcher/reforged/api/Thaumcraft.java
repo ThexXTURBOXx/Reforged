@@ -21,6 +21,8 @@ public class Thaumcraft extends APIBase {
 	public void registerMatDefs() {
 		MaterialManager.addMaterialDefinition(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_THAUMIUM,
 				new MaterialDefinition("thaumium", thaumcraft.api.ThaumcraftMaterials.TOOLMAT_THAUMIUM, new ItemStack(thaumcraft.api.items.ItemsTC.ingots, 1, 0)));
+		MaterialManager.addMaterialDefinition(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_VOID,
+				new MaterialDefinition("void", thaumcraft.api.ThaumcraftMaterials.TOOLMAT_VOID, new ItemStack(thaumcraft.api.items.ItemsTC.ingots, 1, 1)));
 	}
 	
 	@Override
@@ -32,5 +34,11 @@ public class Thaumcraft extends APIBase {
 		simpleReg(ReforgedAdditions.THAUMIUM_SABER = new ItemSaber(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_THAUMIUM));
 		simpleReg(ReforgedAdditions.THAUMIUM_KNIFE = new ItemKnife(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_THAUMIUM));
 		simpleReg(ReforgedAdditions.THAUMIUM_KATANA = new ItemKatana(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_THAUMIUM));
+		simpleReg(ReforgedAdditions.VOID_MUSKET = new ItemMusketWithBayonet(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_VOID));
+		simpleReg(ReforgedAdditions.VOID_BATTLE_AXE = new ItemBattleAxe(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_VOID));
+		simpleReg(ReforgedAdditions.VOID_BOOMERANG = new ItemBoomerang(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_VOID));
+		simpleReg(ReforgedAdditions.VOID_SABER = new ItemSaber(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_VOID));
+		simpleReg(ReforgedAdditions.VOID_KNIFE = new ItemKnife(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_VOID));
+		simpleReg(ReforgedAdditions.VOID_KATANA = new ItemKatana(thaumcraft.api.ThaumcraftMaterials.TOOLMAT_VOID));
 	}
 }

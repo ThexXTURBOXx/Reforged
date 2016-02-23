@@ -28,6 +28,7 @@ public class ItemMusketWithBayonet extends ItemMusket {
 		case "iron": return (ItemExtension) ReforgedAdditions.IRON_KNIFE;
 		case "diamond": return (ItemExtension) ReforgedAdditions.DIAMOND_KNIFE;
 		case "thaumium": return (ItemExtension) ReforgedAdditions.THAUMIUM_KNIFE;
+		case "void": return (ItemExtension) ReforgedAdditions.VOID_KNIFE;
 		case "dark_matter": return (ItemExtension) ReforgedAdditions.DM_KNIFE;
 		case "red_matter": return (ItemExtension) ReforgedAdditions.RM_KNIFE;
 		default: throw new IllegalArgumentException("The ToolMaterial called " + materialDefinition.getPrefix() + " couldn't be found");
