@@ -60,7 +60,7 @@ public class EntityDart extends AReforgedThrowable {
 	
 	@Override
 	protected boolean onEntityHit(Entity entity) {
-		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), 5);
+		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity));
 		if(!entity.isDead) {
 			// Still alive after first damage
 			if(entity instanceof EntityLivingBase) {
@@ -117,6 +117,6 @@ public class EntityDart extends AReforgedThrowable {
 	@Override
 	protected float getImpactDamage(Entity target) {
 
-		return 1f;
+		return 5f;
 	}
 }

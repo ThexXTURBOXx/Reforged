@@ -31,16 +31,23 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 		this.motionY += randomNumY / 100;
 		this.motionZ += randomNumZ / 100;
 	}
+	
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+		if(ticksExisted >= 30) {
+			setDead();
+		}
+	}
 
 	@Override
 	protected boolean onEntityHit(Entity entity) {
-		System.out.println("Hit...");
-		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), 4);
+		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity));
 		return true;
 	}
 
 	@Override
 	protected float getImpactDamage(Entity target) {
-		return 5f;
+		return (((30 - ticksExisted) / 4) + 4f);
 	}
 }
