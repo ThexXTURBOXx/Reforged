@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.render;
 
-import org.silvercatcher.reforged.api.ReforgedReferences.Textures;
+import org.silvercatcher.reforged.ReforgedReferences.Textures;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.models.ModelDart;
 

@@ -80,7 +80,7 @@ public class EntityJavelin extends AReforgedThrowable {
 	protected void onImpact(MovingObjectPosition target) {
 		super.onImpact(target);
 		if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-			if(!worldObj.isRemote) {
+			if(!worldObj.isRemote && !creativeUse()) {
 				entityDropItem(getItemStack(), 0.5f);
 			}
 		} else {

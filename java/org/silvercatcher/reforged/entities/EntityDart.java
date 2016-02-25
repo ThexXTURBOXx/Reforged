@@ -52,7 +52,7 @@ public class EntityDart extends AReforgedThrowable {
 	
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
-		if(!worldObj.isRemote && rand.nextInt(4) == 0) {
+		if(!worldObj.isRemote && rand.nextInt(4) == 0 && !creativeUse()) {
 			entityDropItem(new ItemStack(Items.feather), 1);	
 		}
 		return true;

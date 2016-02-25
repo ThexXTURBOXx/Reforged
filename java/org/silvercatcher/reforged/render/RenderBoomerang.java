@@ -1,7 +1,7 @@
 package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
-import org.silvercatcher.reforged.api.ReforgedReferences.Textures;
+import org.silvercatcher.reforged.ReforgedReferences.Textures;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.models.ModelBoomerang;
 

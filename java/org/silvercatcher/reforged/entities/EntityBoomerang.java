@@ -108,8 +108,8 @@ public class EntityBoomerang extends AReforgedThrowable {
 		//After 103 ticks, the Boomerang drops exactly where the thrower stood
 		if((CompoundTags.giveCompound(getItemStack()).getInteger(CompoundTags.ENCHANTED) != 1 && ticksExisted >= 103) || isInWater()) {
 			if(!worldObj.isRemote) {
-				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-					entityDropItem(getItemStack(), 0.5f);
+				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
+						entityDropItem(getItemStack(), 0.5f);
 				} else {
 					//Custom sound later... [BREAK SOUND]
 				}
@@ -127,7 +127,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 	protected boolean onBlockHit(BlockPos blockPos) {
 		
 		if(!worldObj.isRemote) {
-			if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+			if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 				entityDropItem(getItemStack(), 0.5f);
 			}
 		}
@@ -140,7 +140,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 			//It's the thrower himself
 			ItemStack stack = getItemStack();
 			EntityPlayer p = (EntityPlayer) hitEntity;
-			if(stack.getMaxDamage() - stack.getItemDamage() > 0) {
+			if(stack.getMaxDamage() - stack.getItemDamage() > 0 && !creativeUse()) {
 				p.inventory.addItemStackToInventory(stack);
 				worldObj.playSoundAtEntity(this, "random.pop", 0.5F, 0.7F);
 			} else {

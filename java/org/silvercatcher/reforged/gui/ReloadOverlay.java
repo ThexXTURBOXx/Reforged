@@ -20,10 +20,10 @@ public class ReloadOverlay extends Gui {
 	//My way to setup colors >:D
 	//The values are {Red, Green, Blue}
 	//1 means f (full color)
-	private static final float[] red    = new float[] {1, 0    , 0};
-	private static final float[] orange = new float[] {1, 0.66F, 0};
-	private static final float[] yellow = new float[] {1, 1    , 0};
-	private static final float[] green  = new float[] {0, 1    , 0};
+	private static final float[] red    = new float[] {1, 0    , 0, 1};
+	private static final float[] orange = new float[] {1, 0.66F, 0, 1};
+	private static final float[] yellow = new float[] {1, 1    , 0, 1};
+	private static final float[] green  = new float[] {0, 1    , 0, 1};
 	
 	private final Minecraft minecraft;
 	
@@ -116,7 +116,7 @@ public class ReloadOverlay extends Gui {
         GlStateManager.enableBlend();
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-        GlStateManager.color(color[0], color[1], color[2], 1);
+        GlStateManager.color(color[0], color[1], color[2], color[3]);
         
         //1.8
         worldrenderer.startDrawingQuads();

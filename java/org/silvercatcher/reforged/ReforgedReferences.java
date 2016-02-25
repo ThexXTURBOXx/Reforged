@@ -1,15 +1,14 @@
-package org.silvercatcher.reforged.api;
+package org.silvercatcher.reforged;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ReforgedReferences {
+public class ReforgedReferences {	
 	/**All needed {@link ResourceLocation}s*/
 	@SideOnly(Side.CLIENT)
 	public static class Textures {

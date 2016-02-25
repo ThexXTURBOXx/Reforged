@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.entities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -101,5 +102,12 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 	public void readEntityFromNBT(NBTTagCompound tagCompund) {
 		
 		super.readEntityFromNBT(tagCompund);
+	}
+	
+	/**@return True, if the thrower is a player in Creative Mode.
+	 * False, if the player is in Survival Mode or the thrower is an Entity*/
+	public boolean creativeUse() {
+		return (getThrower() instanceof EntityPlayer && ((EntityPlayer) getThrower()).capabilities.isCreativeMode)
+			   || !(getThrower() instanceof EntityPlayer);
 	}
 }

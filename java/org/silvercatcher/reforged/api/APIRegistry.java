@@ -34,7 +34,7 @@ public class APIRegistry {
 			tabReforgedIntegration = new CreativeTabs(ReforgedMod.ID + "_integration") {
 				@Override
 				public Item getTabIconItem() {
-					return ReforgedAdditions.GOLDEN_KATANA;
+					return ReforgedAdditions.IRON_SABER;
 				}
 			};
 		}
