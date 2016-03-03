@@ -1,14 +1,13 @@
 package org.silvercatcher.reforged.material;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import net.minecraft.item.Item.ToolMaterial;
 
 public class MaterialManager {	
-	
+
 	private static final HashMap<ToolMaterial, MaterialDefinition> definitionMap = new HashMap<ToolMaterial, MaterialDefinition>();
 	
 	static {
@@ -30,12 +29,17 @@ public class MaterialManager {
 	}
 	
 	public static MaterialDefinition getMaterialDefinition(ToolMaterial material) {
-		
-		return definitionMap.get(material);
+		if(definitionMap.containsKey(material)) {
+			return definitionMap.get(material);
+		} else {
+			return null;
+		}
 	}
 	
 	public static void addMaterialDefinition(ToolMaterial material, MaterialDefinition definition) {
-		
-		definitionMap.put(material, definition);
+
+		if(!definitionMap.containsKey(material)) {
+			definitionMap.put(material, definition);
+		}
 	}
 }

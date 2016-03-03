@@ -13,7 +13,7 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 
-public class ProjectE extends APIBase {
+public class ProjectE extends IntegrationBase {
 	
 	/**ProjectE's DarkMatter as ToolMaterial*/
 	public static ToolMaterial ProjectE_DarkMatter = EnumHelper.addToolMaterial("DARK_MATTER", 7, 9999, 30, 8, 0);

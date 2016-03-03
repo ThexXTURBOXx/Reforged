@@ -11,7 +11,7 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import net.minecraft.item.ItemStack;
 
-public class Thaumcraft extends APIBase {
+public class Thaumcraft extends IntegrationBase {
 	
 	public Thaumcraft() {
 		modName = "Thaumcraft";

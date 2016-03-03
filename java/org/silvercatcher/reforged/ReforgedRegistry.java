@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
-import org.silvercatcher.reforged.api.APIBase;
-import org.silvercatcher.reforged.api.APIRegistry;
+import org.silvercatcher.reforged.api.InegrationRegistry;
+import org.silvercatcher.reforged.api.IntegrationBase;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
@@ -145,7 +145,6 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.DART_WITHER = new ItemDart("wither"));
 			registrationList.add(ReforgedAdditions.BLOWGUN = new ItemBlowGun());
 		}
-		
 	}
 	
 	/**Registers all items out of the registrationList*/
@@ -153,8 +152,8 @@ public class ReforgedRegistry {
 		
 		//Add all the API-Items to the registrationList [Better Config later]
 		if(GlobalValues.INTEGRATION) {
-			APIRegistry.addAPIs();
-			for(APIBase ab : APIRegistry.regList) {
+			InegrationRegistry.addAPIs();
+			for(IntegrationBase ab : InegrationRegistry.regList) {
 				ab.registerMatDefs();
 				ab.registerItems();
 				if(!ab.regListItems.isEmpty()) {

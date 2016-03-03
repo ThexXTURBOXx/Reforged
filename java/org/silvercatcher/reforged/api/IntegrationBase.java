@@ -5,7 +5,7 @@ import java.util.List;
 
 import net.minecraft.item.Item;
 
-public abstract class APIBase {
+public abstract class IntegrationBase {
 	
 	/**Saves all the instances of the Integration APIs*/
 	public static List<Item> regListItems = new ArrayList<Item>();
@@ -28,6 +28,6 @@ public abstract class APIBase {
 	
 	/**Simple Registry for the Item*/
 	protected void simpleReg(Item item) {
-		regListItems.add(item.setCreativeTab(APIRegistry.tabReforgedIntegration));
+		regListItems.add(item.setCreativeTab(InegrationRegistry.tabReforgedIntegration));
 	}
 }
