@@ -1,12 +1,15 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import java.util.Arrays;
+import java.util.UUID;
 
+import org.apache.logging.log4j.core.helpers.UUIDUtil;
 import org.silvercatcher.reforged.entities.ai.EntityAIDefendNecromancer;
 import org.silvercatcher.reforged.entities.ai.EntityAIFollowNecromancer;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ExtendedItem;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
 import net.minecraft.entity.EntityLiving;
@@ -19,17 +22,23 @@ import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
 public class ItemNecromancersStaff extends ExtendedItem {
 
 	// very specific compound tag for keeping track of slaves, just keep it here
 	private static final String SLAVE_TAG = "slaves";
+	private static final MinecraftServer server = MinecraftServer.getServer();
 	
 	public ItemNecromancersStaff() {
 		
+		System.out.println(server);
 		setUnlocalizedName("necromancers_staff");
 	}
 	
@@ -51,23 +60,29 @@ public class ItemNecromancersStaff extends ExtendedItem {
 			
 			NBTTagCompound compound = CompoundTags.giveCompound(stack);
 			
-			int [] slaveIDs;
+			NBTTagList slaveNames = new NBTTagList();
 			
 			if(compound.hasKey(SLAVE_TAG)) {
-				slaveIDs = compound.getIntArray(SLAVE_TAG);
+				slaveNames = compound.getTagList(SLAVE_TAG, 9);
 			} else {
-				slaveIDs = new int [4];
-				compound.setIntArray(SLAVE_TAG, slaveIDs);
+				slaveNames = new NBTTagList();
+				compound.setTag(SLAVE_TAG, slaveNames);
 			}
 			
-			if(isSlave(slaveIDs, creature)) {
+			if(isSlave(slaveNames, creature)) {
 				// some reaction
 			} else {
-				enslave(slaveIDs, creature);
+				enslave(slaveNames, creature);
 			}
 			
 			// safe changes
-			compound.setIntArray(SLAVE_TAG, slaveIDs);
+			compound.setTag(SLAVE_TAG, slaveNames);
+			
+			String s = "";
+			for(int i = 0; i < slaveNames.tagCount(); i++) {
+				s += slaveNames.getStringTagAt(i);
+			}
+			System.out.println(s);
 		}
 		return true;
 	}
@@ -76,26 +91,26 @@ public class ItemNecromancersStaff extends ExtendedItem {
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
 		
 		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
-		
+
 		NBTTagCompound compound = CompoundTags.giveCompound(itemStackIn);
 		
-		int [] slaveIDs = compound.getIntArray(SLAVE_TAG);
+		NBTTagList slaveNames = compound.getTagList(SLAVE_TAG, 9);
 		
-		System.out.println(Arrays.toString(slaveIDs));
+		System.out.println(slaveNames.tagCount());
 		
-		for(int i = 0; i < slaveIDs.length; i++) {
-			
-			int id = slaveIDs[i];
-			if(id == 0) break;
-			
+		for(int i = 0; i < slaveNames.tagCount(); i++) {
 			
 			// only EntityCreatures are added, so cast should be safe
-			EntityCreature slave = (EntityCreature) worldIn.getEntityByID(id);
+			EntityCreature slave = (EntityCreature) server.getEntityFromUuid(
+					UUID.fromString(slaveNames.getStringTagAt(i)));
+			
+			System.out.println(slave);
 			
 			// throw invalid entities out
 			if(slave == null || !slave.isEntityAlive()) {
-				slaveIDs[i] = 0;
-				System.out.println("Removed invalid Entity with ID " + id);
+				
+				slaveNames.removeTag(i);
+				System.out.println("Removed invalid Entity with ID: " + slave);
 				break;
 			}
 			
@@ -105,26 +120,28 @@ public class ItemNecromancersStaff extends ExtendedItem {
 			navigate.tryMoveToEntityLiving(playerIn, 1);
 		}
 		// save changes
-		compound.setIntArray(SLAVE_TAG, slaveIDs);
+		compound.setTag(SLAVE_TAG, slaveNames);
 		return itemStackIn;
 	}
 	
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
-		
 		return 10;
 	}
 	
-	private boolean isSlave(int [] slaveIDs, EntityCreature creature) {
+	private boolean isSlave(NBTTagList slaveNames, EntityCreature creature) {
 		
-		int creatureID = creature.getEntityId();
-		return 0 < Arrays.binarySearch(slaveIDs, creatureID);
+		String creatureID = creature.getPersistentID().toString();
+		for(int i = 0; i < slaveNames.tagCount(); i++) {
+			if(slaveNames.getStringTagAt(i).equals(creatureID)) return true;
+		}
+		return false;
 	}
 	
-	
-	private void enslave(int [] slaveIDs, EntityCreature creature) {
+	private void enslave(NBTTagList slaveNames, EntityCreature creature) {
 
-		slaveIDs[0] = creature.getEntityId();
-		Arrays.sort(slaveIDs);
+		System.out.println("appending");
+		slaveNames.appendTag(new NBTTagString(
+				creature.getPersistentID().toString()));
 	}
 }
