@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Loader;
 public class InegrationRegistry {
 	
 	/**All the Dependencies for our mod*/
-	public static final String Deps = "after:ProjectE;after:Thaumcraft";
+	public static final String Deps = "after:Baubles;after:Thaumcraft;after:ProjectE";
 	
 	/**Saves all the instances of the Integration APIs*/
 	public static final List<IntegrationBase> regList = new ArrayList<IntegrationBase>();

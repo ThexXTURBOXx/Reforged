@@ -24,6 +24,7 @@ import org.silvercatcher.reforged.items.weapons.ItemKeris;
 import org.silvercatcher.reforged.items.weapons.ItemKnife;
 import org.silvercatcher.reforged.items.weapons.ItemMusket;
 import org.silvercatcher.reforged.items.weapons.ItemMusketWithBayonet;
+import org.silvercatcher.reforged.items.weapons.ItemNecromancersStaff;
 import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
 import org.silvercatcher.reforged.items.weapons.ItemSaber;
 
