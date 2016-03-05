@@ -11,17 +11,18 @@ import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.pathfinding.PathNavigate;
 
 public class EntityAIDefendNecromancer extends EntityAIBase {
 
 	
 	protected final EntityPlayer master;
 	protected final EntityCreature slave;
-	
+		
 	protected final int updateInterval;
 	protected final double attackSpeed;
 	
-	//protected EntityLivingBase target;
+	protected EntityLivingBase target;
 	protected int updateCountdown;
 	
 	
@@ -33,7 +34,7 @@ public class EntityAIDefendNecromancer extends EntityAIBase {
 	public EntityAIDefendNecromancer(EntityPlayer master, EntityCreature slave,
 			int updateInterval, double attackSpeed) {
 		
-		setMutexBits(1);
+		setMutexBits(3);
 		
 		this.master = Objects.requireNonNull(master, "Master must be defined!");
 		this.slave = Objects.requireNonNull(slave, "Slave must be defined!");
@@ -45,20 +46,32 @@ public class EntityAIDefendNecromancer extends EntityAIBase {
 	@Override
 	public boolean shouldExecute() {
 		
-		return slave.getAttackTarget() != master.getLastAttacker()
-				&& shouldBeAttacked(master.getLastAttacker());
+		return target != null && target.isEntityAlive() && slave.canEntityBeSeen(target);
 	}
 	
 	
 	@Override
 	public void startExecuting() {
 		
-		slave.setAttackTarget(master.getLastAttacker());
+		slave.setAttackTarget(target);
+		slave.setRevengeTarget(target);
+		
+		PathNavigate navigator = slave.getNavigator();
+		
+		if(navigator.noPath() && updateCountdown-- == 0) {
+			
+			updateCountdown = updateInterval;
+			navigator.tryMoveToEntityLiving(target, attackSpeed);
+			System.out.println(navigator.getPath());
+		}
 	}
 	
 	
-	private boolean shouldBeAttacked(EntityLivingBase target) {
+	public void setTarget(EntityLivingBase target) {
 		
-		return target != null && target != slave && target.isEntityAlive();
+		if(target == master || target == slave) {
+			target = null;
+		}
+		this.target = target;
 	}
 }
