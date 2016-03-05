@@ -20,9 +20,13 @@ import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.pathfinding.PathNavigate;
+import net.minecraft.world.World;
 
 public class ItemNecromancersStaff extends ExtendedItem {
 
+	// very specific compound tag for keeping track of slaves, just keep it here
+	private static final String SLAVE_TAG = "slaves";
 	
 	public ItemNecromancersStaff() {
 		
@@ -47,29 +51,71 @@ public class ItemNecromancersStaff extends ExtendedItem {
 			
 			NBTTagCompound compound = CompoundTags.giveCompound(stack);
 			
-			
 			int [] slaveIDs;
 			
-			if(compound.hasKey("slaves")) {
-				slaveIDs = compound.getIntArray("slaves");
+			if(compound.hasKey(SLAVE_TAG)) {
+				slaveIDs = compound.getIntArray(SLAVE_TAG);
 			} else {
 				slaveIDs = new int [4];
-				compound.setIntArray("slaves", slaveIDs);
+				compound.setIntArray(SLAVE_TAG, slaveIDs);
 			}
 			
 			if(isSlave(slaveIDs, creature)) {
-				
 				// some reaction
 			} else {
-				
 				enslave(slaveIDs, creature);
 			}
+			
+			// safe changes
+			compound.setIntArray(SLAVE_TAG, slaveIDs);
 		}
 		return true;
 	}
 
-	private boolean isSlave(int [] slaveIDs, EntityCreature creature) {
+	@Override
+	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
 		
+		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
+		
+		NBTTagCompound compound = CompoundTags.giveCompound(itemStackIn);
+		
+		int [] slaveIDs = compound.getIntArray(SLAVE_TAG);
+		
+		System.out.println(Arrays.toString(slaveIDs));
+		
+		for(int i = 0; i < slaveIDs.length; i++) {
+			
+			int id = slaveIDs[i];
+			if(id == 0) break;
+			
+			
+			// only EntityCreatures are added, so cast should be safe
+			EntityCreature slave = (EntityCreature) worldIn.getEntityByID(id);
+			
+			// throw invalid entities out
+			if(slave == null || !slave.isEntityAlive()) {
+				slaveIDs[i] = 0;
+				System.out.println("Removed invalid Entity with ID " + id);
+				break;
+			}
+			
+			//System.out.println("Calling slave: " + slave);
+			// call the slave to the holder of this staff
+			PathNavigate navigate = slave.getNavigator();
+			navigate.tryMoveToEntityLiving(playerIn, 1);
+		}
+		// save changes
+		compound.setIntArray(SLAVE_TAG, slaveIDs);
+		return itemStackIn;
+	}
+	
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+		
+		return 10;
+	}
+	
+	private boolean isSlave(int [] slaveIDs, EntityCreature creature) {
 		
 		int creatureID = creature.getEntityId();
 		return 0 < Arrays.binarySearch(slaveIDs, creatureID);
@@ -80,6 +126,5 @@ public class ItemNecromancersStaff extends ExtendedItem {
 
 		slaveIDs[0] = creature.getEntityId();
 		Arrays.sort(slaveIDs);
-		System.out.println(Arrays.toString(slaveIDs));
 	}
 }
