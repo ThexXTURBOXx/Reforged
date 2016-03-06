@@ -73,6 +73,8 @@ public class ReforgedAdditions {
 	public static Item DART_WITHER;
 	public static Item BLOWGUN;
 	
+	public static Item NECROMANCERS_STAFF;
+	
 	//Integration Items
 	//Thaumcraft: Thaumium
 	public static Item THAUMIUM_MUSKET;

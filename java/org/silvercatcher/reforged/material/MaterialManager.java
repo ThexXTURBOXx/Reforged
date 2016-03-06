@@ -24,22 +24,14 @@ public class MaterialManager {
 	}
 	
 	public static Set<Entry<ToolMaterial, MaterialDefinition>> getEntries() {
-		
 		return definitionMap.entrySet();
 	}
 	
 	public static MaterialDefinition getMaterialDefinition(ToolMaterial material) {
-		if(definitionMap.containsKey(material)) {
-			return definitionMap.get(material);
-		} else {
-			return null;
-		}
+		return definitionMap.get(material);
 	}
 	
 	public static void addMaterialDefinition(ToolMaterial material, MaterialDefinition definition) {
-
-		if(!definitionMap.containsKey(material)) {
-			definitionMap.put(material, definition);
-		}
+		definitionMap.put(material, definition);
 	}
 }
