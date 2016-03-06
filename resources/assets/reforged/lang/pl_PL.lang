@@ -1,5 +1,4 @@
 itemGroup.reforged=Reforged
-itemGroup.reforged_integration=Reforged Integration
 
 item.holy_cross.name=§eŚwięty Krzyż
 
@@ -21,7 +20,6 @@ item.stone_boomerang.name=Kamienny Bumerang
 item.golden_boomerang.name=Złoty Bumerang
 item.iron_boomerang.name=Żelazny Bumerang
 item.diamond_boomerang.name=Diamentowy Bumerang
-item.thaumium_boomerang.name=Thaumium Bumerang
 item.boomerang.langBreak=%1$s złamał się w twoich rękach.
 
 item.wooden_saber.name=Drewniana Szabla

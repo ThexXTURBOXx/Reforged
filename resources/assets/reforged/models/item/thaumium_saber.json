@@ -1,7 +1,0 @@
-{
-    "parent": "reforged:item/saber",
-
-    "textures": {
-        "layer0": "reforged:items/integration/saber_thaumium"
-    }
-}

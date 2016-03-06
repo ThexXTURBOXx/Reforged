@@ -1,6 +1,5 @@
 package org.silvercatcher.reforged;
 
-import org.silvercatcher.reforged.api.InegrationRegistry;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
@@ -13,7 +12,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = ReforgedMod.ID, version = ReforgedMod.VERSION, name = ReforgedMod.NAME, dependencies = InegrationRegistry.Deps)
+@Mod(modid = ReforgedMod.ID, version = ReforgedMod.VERSION, name = ReforgedMod.NAME)
 public class ReforgedMod {
 	public static final String NAME = "Reforged";
     public static final String ID = "reforged";
