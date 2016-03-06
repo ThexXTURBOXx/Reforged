@@ -2,8 +2,12 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -11,8 +15,8 @@ import java.util.stream.Stream;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.helpers.UUIDUtil;
-import org.silvercatcher.reforged.entities.ai.EntityAIDefendNecromancer;
-import org.silvercatcher.reforged.entities.ai.EntityAIFollowNecromancer;
+import org.silvercatcher.reforged.entities.ai.EntityAINecromancerSlave;
+import org.silvercatcher.reforged.entities.ai.EntityAINecromancerSlaveZombie;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ExtendedItem;
 
@@ -24,7 +28,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
+import net.minecraft.entity.ai.EntityAIFindEntityNearest;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
+import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,12 +42,29 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChatStyle;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
 public class ItemNecromancersStaff extends ExtendedItem {
+	
+	public static final HashMap<Class<? extends EntityCreature>,
+		BiConsumer<EntityPlayer, EntityCreature>> SLAVE_TRANSFORMATIONS = new HashMap<>();
+	
+	static {
+		
+		SLAVE_TRANSFORMATIONS.put(EntityZombie.class, (player, zombie) -> {
+		
+			zombie.targetTasks.taskEntries.clear();
+			zombie.targetTasks.addTask(0, new EntityAINecromancerSlaveZombie(player, zombie));
+			}
+		);
+	}
+	
+	private static final ChatStyle minionsDiedStyle =
+			new ChatStyle().setColor(EnumChatFormatting.DARK_GRAY);
 
-	private final Logger logger = LogManager.getLogger();
 	
 	// very specific compound tag for keeping track of slaves, just keep it here
 	private static final String SLAVE_TAG = "slaves";
@@ -63,15 +86,13 @@ public class ItemNecromancersStaff extends ExtendedItem {
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		
-		
 		if(!player.worldObj.isRemote) {
 			
 			if(entity instanceof EntityCreature) {
 				
 				EntityCreature creature = (EntityCreature) entity;
-				
-				NBTTagCompound compound = CompoundTags.giveCompound(stack);
-				
+
+				NBTTagCompound compound = CompoundTags.giveCompound(stack);	
 				NBTTagList slaveNames = new NBTTagList();
 								
 				if(compound.hasKey(SLAVE_TAG)) {
@@ -84,7 +105,7 @@ public class ItemNecromancersStaff extends ExtendedItem {
 				if(isSlave(slaveNames, creature)) {
 					// some reaction
 				} else {
-					enslave(slaveNames, creature);
+					enslave(slaveNames, player, creature);
 				}
 			}
 		}
@@ -101,10 +122,19 @@ public class ItemNecromancersStaff extends ExtendedItem {
 		return false;
 	}
 	
-	private void enslave(NBTTagList slaveNames, EntityCreature creature) {
-
-		slaveNames.appendTag(new NBTTagString(
-				creature.getPersistentID().toString()));
+	private void enslave(NBTTagList slaveNames, EntityPlayer player, EntityCreature creature) {
+		
+		
+		BiConsumer<EntityPlayer, EntityCreature> transformation =
+				SLAVE_TRANSFORMATIONS.get(creature.getClass());
+		
+		if(transformation == null) {
+			player.addChatMessage(new ChatComponentText("This creature cannot be enslaved."));
+		} else {
+			transformation.accept(player, creature);
+			slaveNames.appendTag(new NBTTagString(
+					creature.getPersistentID().toString()));
+		}
 	}
 	
 	@Override
@@ -117,35 +147,41 @@ public class ItemNecromancersStaff extends ExtendedItem {
 			NBTTagCompound compound = CompoundTags.giveCompound(itemStackIn);
 			
 			NBTTagList slaveNames = compound.getTagList(SLAVE_TAG, 8);
-						
-			MinecraftServer server = MinecraftServer.getServer();
 
-			for(int i = 0; i < slaveNames.tagCount(); i++) {
-				
-				UUID uuid = UUID.fromString(slaveNames.getStringTagAt(i));
-						
-				// only EntityCreatures are added, so cast should be safe
-				EntityCreature slave = (EntityCreature) server.getEntityFromUuid(uuid);
-				
-				if(slave != null) {
-					System.out.println(slave + " is : " + (slave.isEntityAlive() ? "alive" : "dead"));
-				}
-				
-				// throw invalid entities out
-				if(slave == null || !slave.isEntityAlive()) {
-					System.out.println(slave + " died");
-					playerIn.addChatMessage(new ChatComponentText("One of your evil minions has died!"));
-					slaveNames.removeTag(i);
-					break;
-				}
-				
-				// call the slave to the holder of this staff
-				slave.getNavigator().tryMoveToEntityLiving(playerIn, 1);
-			}
+			List<EntityCreature> slaves = getSlaves(slaveNames, playerIn);
+
+			slaves.forEach(slave -> slave.getNavigator().tryMoveToEntityLiving(playerIn, 1));
+			
 			// save changes
 			compound.setTag(SLAVE_TAG, slaveNames);
 		}
 		return itemStackIn;
+	}
+	
+	protected List<EntityCreature> getSlaves(NBTTagList slaveNames, EntityPlayer player) {
+				
+		MinecraftServer server = MinecraftServer.getServer();
+	
+		List<EntityCreature> slaves = new LinkedList<>();
+		
+		for(int i = 0; i < slaveNames.tagCount(); i++) {
+			
+			UUID uuid = UUID.fromString(slaveNames.getStringTagAt(i));
+					
+			// only EntityCreatures are added, so cast should be safe
+			EntityCreature slave = (EntityCreature) server.getEntityFromUuid(uuid);
+			
+			// throw invalid entities out
+			if(slave == null || !slave.isEntityAlive()) {
+				
+				player.addChatMessage(new ChatComponentText("One of your evil minions has died!"));
+				slaveNames.removeTag(i);
+				break;
+			}
+			
+			slaves.add(slave);
+		}
+		return slaves;
 	}
 	
 	@Override
