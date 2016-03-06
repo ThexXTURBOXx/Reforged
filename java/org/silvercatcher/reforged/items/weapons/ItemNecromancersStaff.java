@@ -8,6 +8,8 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.helpers.UUIDUtil;
 import org.silvercatcher.reforged.entities.ai.EntityAIDefendNecromancer;
 import org.silvercatcher.reforged.entities.ai.EntityAIFollowNecromancer;
@@ -33,10 +35,14 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
 public class ItemNecromancersStaff extends ExtendedItem {
 
+	private final Logger logger = LogManager.getLogger();
+	
 	// very specific compound tag for keeping track of slaves, just keep it here
 	private static final String SLAVE_TAG = "slaves";
 	
@@ -116,26 +122,29 @@ public class ItemNecromancersStaff extends ExtendedItem {
 
 			for(int i = 0; i < slaveNames.tagCount(); i++) {
 				
+				UUID uuid = UUID.fromString(slaveNames.getStringTagAt(i));
+						
 				// only EntityCreatures are added, so cast should be safe
-				EntityCreature slave = (EntityCreature) server.getEntityFromUuid(
-						UUID.fromString(slaveNames.getStringTagAt(i)));
+				EntityCreature slave = (EntityCreature) server.getEntityFromUuid(uuid);
+				
+				if(slave != null) {
+					System.out.println(slave + " is : " + (slave.isEntityAlive() ? "alive" : "dead"));
+				}
 				
 				// throw invalid entities out
 				if(slave == null || !slave.isEntityAlive()) {
-					
+					System.out.println(slave + " died");
+					playerIn.addChatMessage(new ChatComponentText("One of your evil minions has died!"));
 					slaveNames.removeTag(i);
-					System.out.println("Removed invalid Entity with ID: " + slave);
 					break;
 				}
 				
-				//System.out.println("Calling slave: " + slave);
 				// call the slave to the holder of this staff
 				slave.getNavigator().tryMoveToEntityLiving(playerIn, 1);
 			}
 			// save changes
 			compound.setTag(SLAVE_TAG, slaveNames);
 		}
-
 		return itemStackIn;
 	}
 	
