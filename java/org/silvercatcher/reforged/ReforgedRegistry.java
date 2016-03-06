@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
-import org.silvercatcher.reforged.api.InegrationRegistry;
-import org.silvercatcher.reforged.api.IntegrationBase;
+//import org.silvercatcher.reforged.api.InegrationRegistry;
+//import org.silvercatcher.reforged.api.IntegrationBase;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
@@ -153,6 +153,7 @@ public class ReforgedRegistry {
 	/**Registers all items out of the registrationList*/
 	public static void registerItems() {
 		
+		/*
 		//Add all the API-Items to the registrationList [Better Config later]
 		if(GlobalValues.INTEGRATION) {
 			InegrationRegistry.addAPIs();
@@ -165,7 +166,7 @@ public class ReforgedRegistry {
 					}					
 				}
 			}
-		}
+		}*/
 		//Register all Items
 		for(Item item : registrationList) {
 			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
