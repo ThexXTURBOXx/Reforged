@@ -1,6 +1,8 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -65,11 +67,9 @@ public class ItemNecromancersStaff extends ExtendedItem {
 				NBTTagCompound compound = CompoundTags.giveCompound(stack);
 				
 				NBTTagList slaveNames = new NBTTagList();
-				
-				System.out.println("has key:" + compound.hasKey(SLAVE_TAG));
-				
+								
 				if(compound.hasKey(SLAVE_TAG)) {
-					slaveNames = compound.getTagList(SLAVE_TAG, 9);
+					slaveNames = compound.getTagList(SLAVE_TAG, 8);
 				} else {
 					slaveNames = new NBTTagList();
 					compound.setTag(SLAVE_TAG, slaveNames);
@@ -81,8 +81,26 @@ public class ItemNecromancersStaff extends ExtendedItem {
 					enslave(slaveNames, creature);
 				}
 				
+				System.out.println();
+				System.out.println(slaveNames.getTagType());
+				
+				List<String> list = new ArrayList<>(slaveNames.tagCount());
+				
+				for(int i = 0; i< slaveNames.tagCount(); i++) {
+					list.add(slaveNames.getStringTagAt(i));
+				}
+				System.out.println(list);
+				
 				// safe changes
 				compound.setTag(SLAVE_TAG, slaveNames);
+				
+				list.clear();
+				slaveNames = compound.getTagList(SLAVE_TAG, 8);
+				
+				for(int i = 0; i < slaveNames.tagCount(); i++) {
+					list.add(slaveNames.getStringTagAt(i));
+				}
+				System.out.println(list);
 			}
 		}
 		return true;
@@ -100,10 +118,8 @@ public class ItemNecromancersStaff extends ExtendedItem {
 	
 	private void enslave(NBTTagList slaveNames, EntityCreature creature) {
 
-		System.out.println("appending");
 		slaveNames.appendTag(new NBTTagString(
 				creature.getPersistentID().toString()));
-		System.out.println(slaveNames.tagCount());
 	}
 	
 	@Override
@@ -111,16 +127,16 @@ public class ItemNecromancersStaff extends ExtendedItem {
 		
 		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 
-		if(worldIn.isRemote) {
+		if(!worldIn.isRemote) {
 	
 			NBTTagCompound compound = CompoundTags.giveCompound(itemStackIn);
 			
-			NBTTagList slaveNames = compound.getTagList(SLAVE_TAG, 9);
+			NBTTagList slaveNames = compound.getTagList(SLAVE_TAG, 8);
 			
 			System.out.println(slaveNames.tagCount());
 			
 			MinecraftServer server = MinecraftServer.getServer();
-			
+
 			for(int i = 0; i < slaveNames.tagCount(); i++) {
 				
 				// only EntityCreatures are added, so cast should be safe
@@ -153,5 +169,4 @@ public class ItemNecromancersStaff extends ExtendedItem {
 	public int getMaxItemUseDuration(ItemStack stack) {
 		return 10;
 	}
-
 }
