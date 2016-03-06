@@ -62,8 +62,14 @@ public class ItemNecromancersStaff extends ExtendedItem {
 		);
 	}
 	
+	private static final ChatStyle notEnslavableStyle = 
+			new ChatStyle().setColor(EnumChatFormatting.GRAY);
 	private static final ChatStyle minionsDiedStyle =
-			new ChatStyle().setColor(EnumChatFormatting.DARK_GRAY);
+			new ChatStyle().setColor(EnumChatFormatting.DARK_RED);
+	private static final ChatStyle enslavedSuccessStyle =
+			new ChatStyle().setColor(EnumChatFormatting.DARK_PURPLE).setBold(true);
+	private static final ChatStyle alreadySlaveStyle = 
+			new ChatStyle().setColor(EnumChatFormatting.LIGHT_PURPLE);
 
 	
 	// very specific compound tag for keeping track of slaves, just keep it here
@@ -103,7 +109,9 @@ public class ItemNecromancersStaff extends ExtendedItem {
 				}
 				
 				if(isSlave(slaveNames, creature)) {
-					// some reaction
+					player.addChatComponentMessage(new ChatComponentText(
+							"This " + creature.getName() + " follows you already.")
+							.setChatStyle(alreadySlaveStyle));
 				} else {
 					enslave(slaveNames, player, creature);
 				}
@@ -129,8 +137,13 @@ public class ItemNecromancersStaff extends ExtendedItem {
 				SLAVE_TRANSFORMATIONS.get(creature.getClass());
 		
 		if(transformation == null) {
-			player.addChatMessage(new ChatComponentText("This creature cannot be enslaved."));
+			player.addChatMessage(new ChatComponentText(
+					"A " + creature.getName() + " cannot be enslaved.")
+					.setChatStyle(notEnslavableStyle));
 		} else {
+			player.addChatComponentMessage(new ChatComponentText(
+					"This puny " + creature.getName() + " will now follow your command.")
+					.setChatStyle(enslavedSuccessStyle));
 			transformation.accept(player, creature);
 			slaveNames.appendTag(new NBTTagString(
 					creature.getPersistentID().toString()));
@@ -174,7 +187,8 @@ public class ItemNecromancersStaff extends ExtendedItem {
 			// throw invalid entities out
 			if(slave == null || !slave.isEntityAlive()) {
 				
-				player.addChatMessage(new ChatComponentText("One of your evil minions has died!"));
+				player.addChatMessage(new ChatComponentText("One of your evil minions has died!")
+						.setChatStyle(minionsDiedStyle));
 				slaveNames.removeTag(i);
 				break;
 			}
