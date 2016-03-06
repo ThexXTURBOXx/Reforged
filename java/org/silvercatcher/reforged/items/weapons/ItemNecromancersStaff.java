@@ -80,27 +80,6 @@ public class ItemNecromancersStaff extends ExtendedItem {
 				} else {
 					enslave(slaveNames, creature);
 				}
-				
-				System.out.println();
-				System.out.println(slaveNames.getTagType());
-				
-				List<String> list = new ArrayList<>(slaveNames.tagCount());
-				
-				for(int i = 0; i< slaveNames.tagCount(); i++) {
-					list.add(slaveNames.getStringTagAt(i));
-				}
-				System.out.println(list);
-				
-				// safe changes
-				compound.setTag(SLAVE_TAG, slaveNames);
-				
-				list.clear();
-				slaveNames = compound.getTagList(SLAVE_TAG, 8);
-				
-				for(int i = 0; i < slaveNames.tagCount(); i++) {
-					list.add(slaveNames.getStringTagAt(i));
-				}
-				System.out.println(list);
 			}
 		}
 		return true;
@@ -132,9 +111,7 @@ public class ItemNecromancersStaff extends ExtendedItem {
 			NBTTagCompound compound = CompoundTags.giveCompound(itemStackIn);
 			
 			NBTTagList slaveNames = compound.getTagList(SLAVE_TAG, 8);
-			
-			System.out.println(slaveNames.tagCount());
-			
+						
 			MinecraftServer server = MinecraftServer.getServer();
 
 			for(int i = 0; i < slaveNames.tagCount(); i++) {
@@ -142,8 +119,6 @@ public class ItemNecromancersStaff extends ExtendedItem {
 				// only EntityCreatures are added, so cast should be safe
 				EntityCreature slave = (EntityCreature) server.getEntityFromUuid(
 						UUID.fromString(slaveNames.getStringTagAt(i)));
-				
-				System.out.println(slave.getPersistentID());
 				
 				// throw invalid entities out
 				if(slave == null || !slave.isEntityAlive()) {
@@ -155,8 +130,7 @@ public class ItemNecromancersStaff extends ExtendedItem {
 				
 				//System.out.println("Calling slave: " + slave);
 				// call the slave to the holder of this staff
-				PathNavigate navigate = slave.getNavigator();
-				navigate.tryMoveToEntityLiving(playerIn, 1);
+				slave.getNavigator().tryMoveToEntityLiving(playerIn, 1);
 			}
 			// save changes
 			compound.setTag(SLAVE_TAG, slaveNames);
