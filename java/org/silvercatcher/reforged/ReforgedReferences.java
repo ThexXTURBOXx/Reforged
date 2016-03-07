@@ -52,7 +52,6 @@ public class ReforgedReferences {
 		public static final boolean NEST_OF_BEES = CommonProxy.nest_of_bees;
 		public static final boolean SABRE = CommonProxy.sabre;
 		public static final boolean KERIS = CommonProxy.keris;
-		public static final boolean INTEGRATION = CommonProxy.integration;
 		
 		//Others
 		public static final boolean VERSION_CHECKER = CommonProxy.version_checker;

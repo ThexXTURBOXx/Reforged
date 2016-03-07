@@ -75,39 +75,6 @@ public class ReforgedAdditions {
 	
 	public static Item NECROMANCERS_STAFF;
 	
-	//Integration Items
-	//Thaumcraft: Thaumium
-	public static Item THAUMIUM_MUSKET;
-	public static Item THAUMIUM_BATTLE_AXE;
-	public static Item THAUMIUM_BOOMERANG;
-	public static Item THAUMIUM_SABER;
-	public static Item THAUMIUM_KATANA;
-	public static Item THAUMIUM_KNIFE;
-	
-	//Thaumcraft: Void
-	public static Item VOID_MUSKET;
-	public static Item VOID_BATTLE_AXE;
-	public static Item VOID_BOOMERANG;
-	public static Item VOID_SABER;
-	public static Item VOID_KATANA;
-	public static Item VOID_KNIFE;
-	
-	//ProjectE: Dark Matter
-	public static Item DM_MUSKET;
-	public static Item DM_BATTLE_AXE;
-	public static Item DM_BOOMERANG;
-	public static Item DM_SABER;
-	public static Item DM_KATANA;
-	public static Item DM_KNIFE;
-
-	//ProjectE: Red Matter
-	public static Item RM_MUSKET;
-	public static Item RM_BATTLE_AXE;
-	public static Item RM_BOOMERANG;
-	public static Item RM_SABER;
-	public static Item RM_KATANA;
-	public static Item RM_KNIFE;
-	
 	//Enchantments
     public static Enchantment goalseeker = new EnchantmentGoalseeker(100);
 }
