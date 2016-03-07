@@ -88,8 +88,6 @@ public class ItemHolyCross extends ExtendedItem {
 					target.posX, target.posY, target.posZ);
 			
 			if(!world.isRemote) {
-				world.spawnEntityInWorld(lightning);
-			} else {
 				world.addWeatherEffect(lightning);
 			}
 			
