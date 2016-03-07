@@ -102,6 +102,26 @@ public class ItemNecromancersStaff extends ExtendedItem {
 	}
 	
 	@Override
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+
+		System.out.println("called");
+		
+		super.addInformation(stack, playerIn, tooltip, advanced);
+		
+		int maxnp = 50;
+		int np = 20;
+		
+		tooltip.add((np > maxnp/4 ? "§2" : "§4") + np + "/§9" + maxnp + " NP");
+		for(EntityCreature slave : getSlaves(CompoundTags.giveCompound(stack)
+				.getTagList(SLAVE_TAG, 8), playerIn)) {
+			
+			tooltip.add(String.format("§8%-9s[%.1f/%.1f]",
+					slave.getName(), slave.getHealth(), slave.getMaxHealth()));
+		}
+	}
+	
+	
+	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		
 		if(!player.worldObj.isRemote) {
