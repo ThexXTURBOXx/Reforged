@@ -27,11 +27,14 @@ import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
 import net.minecraft.entity.ai.EntityAIBase;
+import net.minecraft.entity.ai.EntityAIBreakDoor;
 import net.minecraft.entity.ai.EntityAIControlledByPlayer;
 import net.minecraft.entity.ai.EntityAIFindEntityNearest;
 import net.minecraft.entity.ai.EntityAIFollowOwner;
+import net.minecraft.entity.ai.EntityAILookIdle;
 import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -56,7 +59,16 @@ public class ItemNecromancersStaff extends ExtendedItem {
 		
 		SLAVE_TRANSFORMATIONS.put(EntityZombie.class, (player, zombie) -> {
 		
+			zombie.tasks.taskEntries.clear();
 			zombie.targetTasks.taskEntries.clear();
+			
+			zombie.tasks.addTask(0, new EntityAISwimming(zombie));
+			zombie.tasks.addTask(2, new EntityAIAttackOnCollide(zombie, EntityLivingBase.class, 1.0, false));
+			zombie.tasks.addTask(6, new EntityAIBreakDoor(zombie));
+			zombie.tasks.addTask(8, new EntityAIWatchClosest(zombie, EntityPlayer.class, 8f));
+			zombie.tasks.addTask(8, new EntityAILookIdle(zombie));
+			
+			
 			zombie.targetTasks.addTask(0, new EntityAINecromancerSlaveZombie(player, zombie));
 			}
 		);
