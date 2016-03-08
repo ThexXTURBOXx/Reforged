@@ -25,8 +25,10 @@ public class CommonProxy {
 		ReforgedRegistry.createItems();
 		ReforgedRegistry.registerItems();
 		registerEntities();
-		Thread versionCheckThread = new Thread(new VersionChecker(), "Version Check");
-		versionCheckThread.start();
+		if(version_checker) {
+			Thread versionCheckThread = new Thread(new VersionChecker(), "Version Check");
+			versionCheckThread.start();
+		}
 	}
 	
 	public void init(FMLInitializationEvent event) {
