@@ -1,53 +1,33 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
-import java.util.function.Function;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.helpers.UUIDUtil;
-import org.silvercatcher.reforged.entities.ai.EntityAINecromancerSlave;
 import org.silvercatcher.reforged.entities.ai.EntityAINecromancerSlaveZombie;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ExtendedItem;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityCreature;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIAttackOnCollide;
-import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAIBreakDoor;
-import net.minecraft.entity.ai.EntityAIControlledByPlayer;
-import net.minecraft.entity.ai.EntityAIFindEntityNearest;
-import net.minecraft.entity.ai.EntityAIFollowOwner;
 import net.minecraft.entity.ai.EntityAILookIdle;
-import net.minecraft.entity.ai.EntityAIOwnerHurtTarget;
 import net.minecraft.entity.ai.EntityAISwimming;
 import net.minecraft.entity.ai.EntityAIWatchClosest;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
-import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.util.IChatComponent;
 import net.minecraft.world.World;
 
 public class ItemNecromancersStaff extends ExtendedItem {
@@ -116,7 +96,7 @@ public class ItemNecromancersStaff extends ExtendedItem {
 				.getTagList(SLAVE_TAG, 8), playerIn)) {
 			
 			tooltip.add(String.format("§8%-9s[%.1f/%.1f]",
-					slave.getName(), slave.getHealth(), slave.getMaxHealth()));
+					slave.getDisplayName(), slave.getHealth(), slave.getMaxHealth()));
 		}
 	}
 	
@@ -142,7 +122,7 @@ public class ItemNecromancersStaff extends ExtendedItem {
 				
 				if(isSlave(slaveNames, creature)) {
 					player.addChatComponentMessage(new ChatComponentText(
-							"This " + creature.getName() + " follows you already.")
+							"This " + creature.getDisplayName() + " follows you already.")
 							.setChatStyle(alreadySlaveStyle));
 				} else {
 					enslave(slaveNames, player, creature);
@@ -170,11 +150,11 @@ public class ItemNecromancersStaff extends ExtendedItem {
 		
 		if(transformation == null) {
 			player.addChatMessage(new ChatComponentText(
-					"A " + creature.getName() + " cannot be enslaved.")
+					"A " + creature.getDisplayName() + " cannot be enslaved.")
 					.setChatStyle(notEnslavableStyle));
 		} else {
 			player.addChatComponentMessage(new ChatComponentText(
-					"This puny " + creature.getName() + " will now follow your command.")
+					"This puny " + creature.getDisplayName() + " will now follow your command.")
 					.setChatStyle(enslavedSuccessStyle));
 			transformation.accept(player, creature);
 			slaveNames.appendTag(new NBTTagString(
