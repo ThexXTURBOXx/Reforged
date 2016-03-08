@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.api.ReforgedAdditions;
+import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -27,7 +28,12 @@ public class ItemMusketWithBayonet extends ItemMusket {
 		case "golden": return (ItemExtension) ReforgedAdditions.GOLDEN_KNIFE;
 		case "iron": return (ItemExtension) ReforgedAdditions.IRON_KNIFE;
 		case "diamond": return (ItemExtension) ReforgedAdditions.DIAMOND_KNIFE;
-		default: throw new IllegalArgumentException("The ToolMaterial called " + materialDefinition.getPrefix() + " couldn't be found");
+		default:
+			if(MaterialManager.isFullyAdded(materialDefinition.getMaterial())) {
+				return (ItemExtension) MaterialManager.getItems(materialDefinition.getMaterial())[0];
+			} else {
+				throw new IllegalArgumentException("The ToolMaterial called " + materialDefinition.getPrefix() + " couldn't be found");
+			}
 		}
 	}
 	

@@ -73,6 +73,11 @@ public class ItemBoomerang extends ExtendedItem {
 		return materialDefinition.getMaterial();
 	}
 	
+	public MaterialDefinition getMaterialDefinition() {
+		
+		return materialDefinition;
+	}
+	
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
 		return materialDefinition.getEnchantability();

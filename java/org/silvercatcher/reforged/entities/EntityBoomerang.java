@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.entities;
 
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
+import org.silvercatcher.reforged.material.MaterialDefinition;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -76,9 +77,9 @@ public class EntityBoomerang extends AReforgedThrowable {
 		return dataWatcher.getWatchableObjectFloat(8);
 	}
 	
-	public ToolMaterial getMaterial() {
+	public MaterialDefinition getMaterialDefinition() {
 
-		return ((ItemBoomerang) getItemStack().getItem()).getMaterial();
+		return ((ItemBoomerang) getItemStack().getItem()).getMaterialDefinition();
 	}
 	
 	@Override
@@ -185,6 +186,6 @@ public class EntityBoomerang extends AReforgedThrowable {
 
 	@Override
 	protected float getImpactDamage(Entity target) {
-		return getMaterial().getDamageVsEntity() + 5;
+		return getMaterialDefinition().getDamageVsEntity() + 5;
 	}
 }

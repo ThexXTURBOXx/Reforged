@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.render;
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.ReforgedReferences.Textures;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.material.MaterialManager;
 import org.silvercatcher.reforged.models.ModelBoomerang;
 
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -38,28 +39,18 @@ public class RenderBoomerang extends ReforgedRender {
 		
 		EntityBoomerang entityBoomerang = (EntityBoomerang) entity;
 		
-		switch(entityBoomerang.getMaterial().name()) {
-		
-		case "EMERALD": return Textures.DIAMOND_BOOMERANG;
-		
-		case "GOLD": return Textures.GOLDEN_BOOMERANG;
-		
-		case "IRON": return Textures.IRON_BOOMERANG;
-		
-		case "STONE": return Textures.STONE_BOOMERANG;
-		
-		case "WOOD": return Textures.WOODEN_BOOMERANG;
-
-		case "THAUMIUM": return Textures.THAUMIUM_BOOMERANG;
-
-		case "VOID": return Textures.VOID_BOOMERANG;
-		
-		case "DARK_MATTER": return Textures.DM_BOOMERANG;
-		
-		case "RED_MATTER": return Textures.RM_BOOMERANG;
-		
-		default: return null;
-		
+		switch(entityBoomerang.getMaterialDefinition().getPrefix()) {
+		case "diamond": return Textures.DIAMOND_BOOMERANG;
+		case "golden": return Textures.GOLDEN_BOOMERANG;
+		case "iron": return Textures.IRON_BOOMERANG;
+		case "stone": return Textures.STONE_BOOMERANG;
+		case "wooden": return Textures.WOODEN_BOOMERANG;
+		default:
+			if(MaterialManager.isFullyAdded(entityBoomerang.getMaterialDefinition().getMaterial())) {
+				return MaterialManager.getTextures(entityBoomerang.getMaterialDefinition().getMaterial())[0];
+			} else {
+				return null;
+			}		
 		}
 	}
 }

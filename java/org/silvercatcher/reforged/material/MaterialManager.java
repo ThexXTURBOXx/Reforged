@@ -4,11 +4,17 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.util.ResourceLocation;
 
+/**Little note by and for ThexXTURBOXx
+ * 0: Knife Item, Boomerang Texture*/
 public class MaterialManager {	
 
 	private static final HashMap<ToolMaterial, MaterialDefinition> definitionMap = new HashMap<ToolMaterial, MaterialDefinition>();
+	private static final HashMap<ToolMaterial, Item[]> itemMap = new HashMap<ToolMaterial, Item[]>();
+	private static final HashMap<ToolMaterial, ResourceLocation[]> textureMap = new HashMap<ToolMaterial, ResourceLocation[]>();
 	
 	static {
 		definitionMap.put(ToolMaterial.WOOD,
@@ -33,5 +39,22 @@ public class MaterialManager {
 	
 	public static void addMaterialDefinition(ToolMaterial material, MaterialDefinition definition) {
 		definitionMap.put(material, definition);
+	}
+  
+	public static void addOthers(ToolMaterial material, ResourceLocation textures[], Item items[]) {
+		textureMap.put(material, textures);
+		itemMap.put(material, items);
+	}
+	
+	public static ResourceLocation[] getTextures(ToolMaterial material) {
+		return textureMap.get(material);
+	}
+	
+	public static Item[] getItems(ToolMaterial material) {
+		return itemMap.get(material);
+	}
+	
+	public static boolean isFullyAdded(ToolMaterial tm) {
+		return (definitionMap.containsKey(tm) && textureMap.containsKey(tm) && itemMap.containsKey(tm));
 	}
 }
