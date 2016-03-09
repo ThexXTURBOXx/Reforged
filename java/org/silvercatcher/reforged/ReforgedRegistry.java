@@ -15,14 +15,12 @@ import org.silvercatcher.reforged.items.weapons.ItemBlowGun;
 import org.silvercatcher.reforged.items.weapons.ItemBlunderbuss;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
-import org.silvercatcher.reforged.items.weapons.ItemHolyCross;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 import org.silvercatcher.reforged.items.weapons.ItemKatana;
 import org.silvercatcher.reforged.items.weapons.ItemKeris;
 import org.silvercatcher.reforged.items.weapons.ItemKnife;
 import org.silvercatcher.reforged.items.weapons.ItemMusket;
 import org.silvercatcher.reforged.items.weapons.ItemMusketWithBayonet;
-import org.silvercatcher.reforged.items.weapons.ItemNecromancersStaff;
 import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
 import org.silvercatcher.reforged.items.weapons.ItemSaber;
 
@@ -56,10 +54,6 @@ public class ReforgedRegistry {
 		if(GlobalValues.NEST_OF_BEES) {
 			registrationList.add(ReforgedAdditions.ARROW_BUNDLE = new ItemArrowBundle());
 			registrationList.add(ReforgedAdditions.NEST_OF_BEES = new ItemNestOfBees());
-		}
-		
-		if(GlobalValues.HOLY_CROSS) {
-			registrationList.add(ReforgedAdditions.HOLY_CROSS = new ItemHolyCross());
 		}
 		
 		if(GlobalValues.FIREROD) {
@@ -144,8 +138,6 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.DART_WITHER = new ItemDart("wither"));
 			registrationList.add(ReforgedAdditions.BLOWGUN = new ItemBlowGun());
 		}
-		
-		registrationList.add(ReforgedAdditions.NECROMANCERS_STAFF = new ItemNecromancersStaff());
 	}
 	
 	/**Registers all items out of the registrationList*/

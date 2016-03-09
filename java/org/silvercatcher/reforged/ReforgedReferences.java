@@ -40,7 +40,6 @@ public class ReforgedReferences {
 		public static final boolean BLOWGUN = CommonProxy.blowgun;
 		public static final boolean BOOMERANG = CommonProxy.boomerang;
 		public static final boolean FIREROD = CommonProxy.firerod;
-		public static final boolean HOLY_CROSS = CommonProxy.holy_cross;
 		public static final boolean JAVELIN = CommonProxy.javelin;
 		public static final boolean KATANA = CommonProxy.katana;
 		public static final boolean KNIFE = CommonProxy.knife;
@@ -48,8 +47,5 @@ public class ReforgedReferences {
 		public static final boolean NEST_OF_BEES = CommonProxy.nest_of_bees;
 		public static final boolean SABRE = CommonProxy.sabre;
 		public static final boolean KERIS = CommonProxy.keris;
-		
-		//Others
-		public static final boolean VERSION_CHECKER = CommonProxy.version_checker;
 	}
 }
