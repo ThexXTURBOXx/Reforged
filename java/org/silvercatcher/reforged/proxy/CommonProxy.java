@@ -45,8 +45,11 @@ public class CommonProxy {
 	public static boolean keris;
 	
 	private void loadConfig(FMLPreInitializationEvent e) {
+		File configdir = new File(e.getModConfigurationDirectory(), ReforgedMod.NAME);
+		File configfile = new File(configdir, "reforged.cfg");
+		if(!configfile.exists()) configdir.mkdirs();
 		//Get an instance of Config
-		Configuration config = new Configuration(e.getSuggestedConfigurationFile());
+		Configuration config = new Configuration(configfile);
 		
 		//Load Config
 		config.load();
