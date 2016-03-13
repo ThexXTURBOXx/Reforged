@@ -7,7 +7,7 @@ import net.minecraft.item.Item;
 
 public class ReforgedAdditions {
 	
-	//"Normal" Items
+	//Items
 	public static Item ARROW_BUNDLE;
 	
 	public static Item GUN_STOCK;
@@ -26,8 +26,6 @@ public class ReforgedAdditions {
 	public static Item BLUNDERBUSS_SHOT;
 	
 	public static Item NEST_OF_BEES;
-
-	public static Item HOLY_CROSS;
 	
 	public static Item FIREROD;
 	
@@ -72,8 +70,6 @@ public class ReforgedAdditions {
 	public static Item DART_SLOW;
 	public static Item DART_WITHER;
 	public static Item BLOWGUN;
-	
-	public static Item NECROMANCERS_STAFF;
 	
 	//Enchantments
     public static Enchantment goalseeker = new EnchantmentGoalseeker(100);
