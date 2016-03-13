@@ -12,13 +12,27 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemMusketWithBayonet extends ItemMusket {
 
 	protected final MaterialDefinition materialDefinition;
+	protected final boolean unbreakable;
 	
 	public ItemMusketWithBayonet(ToolMaterial material) {
-		
+		this(material, false);
+	}
+	
+	public ItemMusketWithBayonet(ToolMaterial material, boolean unbreakable) {
 		super();
 		
+		this.unbreakable = unbreakable;
 		this.materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setUnlocalizedName(materialDefinition.getPrefixedName("musket"));
+	}
+	
+	@Override
+	public boolean isDamageable() {
+		if(unbreakable) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	public ItemExtension getKnife() {

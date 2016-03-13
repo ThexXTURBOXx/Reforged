@@ -1,6 +1,9 @@
 package org.silvercatcher.reforged.proxy;
 
+import java.io.File;
+
 import org.silvercatcher.reforged.ReforgedEvents;
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;

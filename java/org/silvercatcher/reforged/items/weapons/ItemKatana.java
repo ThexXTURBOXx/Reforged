@@ -20,17 +20,31 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemKatana extends ItemSword implements ItemExtension {
 
 	protected final MaterialDefinition materialDefinition;
+	protected final boolean unbreakable;
 	
 	public ItemKatana(ToolMaterial material) {
-		
+		this(material, false);
+	}
+	
+	public ItemKatana(ToolMaterial material, boolean unbreakable) {
 		super(material);
 		
+		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		
 		setUnlocalizedName(materialDefinition.getPrefixedName("katana"));
 		setMaxDamage(materialDefinition.getMaxUses());
 		setMaxStackSize(1);
 		setCreativeTab(ReforgedMod.tabReforged);
+	}
+	
+	@Override
+	public boolean isDamageable() {
+		if(unbreakable) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	@Override

@@ -9,7 +9,9 @@ import com.google.common.collect.Multimap;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
@@ -20,18 +22,31 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 
 	protected final MaterialDefinition materialDefinition;
+	protected final boolean unbreakable;
 	
 	public ItemBattleAxe(ToolMaterial material) {
-		
+		this(material, false);
+	}
+	
+	public ItemBattleAxe(ToolMaterial material, boolean unbreakable) {
 		super(material);
 		setMaxStackSize(1);
 		
+		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setUnlocalizedName(materialDefinition.getPrefixedName("battleaxe"));
 		setMaxDamage(materialDefinition.getMaxUses());
-
+		
 		setCreativeTab(ReforgedMod.tabReforged);
-
+	}
+	
+	@Override
+	public boolean isDamageable() {
+		if(unbreakable) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	@Override

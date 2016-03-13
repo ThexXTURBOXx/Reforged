@@ -20,16 +20,30 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemKnife extends ItemSword implements ItemExtension {
 	
 	protected final MaterialDefinition materialDefinition;
+	protected final boolean unbreakable;
 	
 	public ItemKnife(ToolMaterial material) {
-		
+		this(material, false);
+	}
+	
+	public ItemKnife(ToolMaterial material, boolean unbreakable) {
 		super(material);
 		
+		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		
 		setUnlocalizedName(materialDefinition.getPrefixedName("knife"));
 		setMaxDamage(materialDefinition.getMaxUses());
 		setMaxStackSize(1);
+	}
+	
+	@Override
+	public boolean isDamageable() {
+		if(unbreakable) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	@Override

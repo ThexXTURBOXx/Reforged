@@ -117,7 +117,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				
 				shoot(worldIn, playerIn, stack);
 				
-				if(stack.attemptDamageItem(5, itemRand)) {
+				if(stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand)) {
 					playerIn.renderBrokenItemStack(stack);
 					playerIn.destroyCurrentEquippedItem();
 				}

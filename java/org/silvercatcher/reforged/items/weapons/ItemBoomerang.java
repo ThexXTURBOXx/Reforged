@@ -17,14 +17,28 @@ import net.minecraftforge.oredict.RecipeSorter.Category;
 public class ItemBoomerang extends ExtendedItem {
 	
 	protected final MaterialDefinition materialDefinition;
+	protected final boolean unbreakable;
 	
 	public ItemBoomerang(ToolMaterial material) {
-
+		this(material, false);
+	}
+	
+	public ItemBoomerang(ToolMaterial material, boolean unbreakable) {
 		super();
+		this.unbreakable = unbreakable;
 		setMaxStackSize(1);
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setMaxDamage((int) (materialDefinition.getMaxUses() * 0.8f));
 		setUnlocalizedName(materialDefinition.getPrefixedName("boomerang"));
+	}
+	
+	@Override
+	public boolean isDamageable() {
+		if(unbreakable) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 	
 	@Override
