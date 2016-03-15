@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 
 public class Helpers {
 	
@@ -59,5 +60,20 @@ public class Helpers {
         tessellator.draw();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
+	}
+	
+	/**Get the "Neighbourblock" in the given direction*/
+	public static BlockPos getNeighbourBlock(BlockPos pos, EnumFacing side) {
+		BlockPos newpos;
+		switch(side) {
+		case EAST:  newpos = new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()); break;
+		case WEST:  newpos = new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()); break;
+		case UP:    newpos = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()); break;
+		case DOWN:  newpos = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()); break;
+		case NORTH: newpos = new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1); break;
+		case SOUTH: newpos = new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1); break;
+		default: throw new IllegalArgumentException("Side " + side + " not found!");
+		}
+		return newpos;
 	}
 }

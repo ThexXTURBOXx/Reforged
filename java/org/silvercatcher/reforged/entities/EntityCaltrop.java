@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
@@ -26,19 +27,10 @@ public class EntityCaltrop extends AReforgedThrowable {
 		motionX = 0;
 		motionY = -0.2;
 		motionZ = 0;
-		BlockPos newpos;
-		switch(side) {
-		case EAST:  newpos = new BlockPos(pos.getX() + 1, pos.getY(), pos.getZ()); break;
-		case WEST:  newpos = new BlockPos(pos.getX() - 1, pos.getY(), pos.getZ()); break;
-		case UP:    newpos = new BlockPos(pos.getX(), pos.getY() + 1, pos.getZ()); break;
-		case DOWN:  newpos = new BlockPos(pos.getX(), pos.getY() - 1, pos.getZ()); break;
-		case NORTH: newpos = new BlockPos(pos.getX(), pos.getY(), pos.getZ() - 1); break;
-		case SOUTH: newpos = new BlockPos(pos.getX(), pos.getY(), pos.getZ() + 1); break;
-		default: throw new IllegalArgumentException("Side " + side + " not found!");
-		}
+		BlockPos newpos = Helpers.getNeighbourBlock(pos, side);
 		setPositionAndUpdate(newpos.getX() + 0.5, newpos.getY() + 0.5, newpos.getZ() + 0.5);
 	}
-
+	
 	public ItemStack getItemStack() {
 		
 		return new ItemStack(ReforgedAdditions.CALTROP);
@@ -54,12 +46,11 @@ public class EntityCaltrop extends AReforgedThrowable {
 				falling = true;
 			}
 		}
-	}
-	
-	@Override
-	public void onCollideWithPlayer(EntityPlayer entityIn) {
-		if(Helpers.blockPosEqual(entityIn.getPosition(), getPosition())) {
-			onEntityHit(entityIn);
+		BlockPos newpos1 = new BlockPos(getPosition().getX() - 1, getPosition().getY() - 1, getPosition().getZ() - 1);
+		BlockPos newpos2 = new BlockPos(getPosition().getX() + 1, getPosition().getY() + 1, getPosition().getZ() + 1);
+		Entity nearest = worldObj.findNearestEntityWithinAABB(EntityLivingBase.class, new AxisAlignedBB(newpos1, newpos2), this);
+		if(nearest != null && Helpers.blockPosEqual(getPosition(), nearest.getPosition())) {
+			onEntityHit(nearest);
 			setDead();
 		}
 	}

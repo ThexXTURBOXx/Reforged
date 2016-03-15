@@ -79,6 +79,8 @@ death.attack.blunderbuss=%1$s got shredded by bullets.
 death.attack.blunderbuss.player=%1$s got shredded by bullets while fighting %2$s.
 death.attack.dart=%1$s served as a target.
 death.attack.dart.player=%1$s served as a target while fighting %2$s.
+death.attack.caltrop=%1$s did not pay attention where he steps.
+death.attack.caltrop.player=%1$s didn't pay attention where he steps while fighting %2$s.
 
 enchantment.goalseeker=Goalseeker
 
