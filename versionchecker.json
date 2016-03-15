@@ -1,0 +1,24 @@
+{
+	"versionList": [
+		{
+			"mcVersion":"Minecraft 1.8",
+			"modVersion":"0.6.1",
+			"changeLog": [
+                "Added compatibility for the Integration Mod."
+			],
+			"updateURL":"http://minecraft.curseforge.com/projects/reforged/files/2286159/download",
+			"isDirectLink":"true",
+			"newFileName":""
+		},
+    {
+			"mcVersion":"Minecraft 1.8.9",
+			"modVersion":"0.6.1",
+			"changeLog": [
+                "Added compatibility for the Integration Mod."
+			],
+			"updateURL":"http://minecraft.curseforge.com/projects/reforged/files/2286160/download",
+			"isDirectLink":"true",
+			"newFileName":""
+		}
+	]
+}
