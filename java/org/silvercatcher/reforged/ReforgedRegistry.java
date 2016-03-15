@@ -14,6 +14,7 @@ import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
 import org.silvercatcher.reforged.items.weapons.ItemBlowGun;
 import org.silvercatcher.reforged.items.weapons.ItemBlunderbuss;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
+import org.silvercatcher.reforged.items.weapons.ItemCaltrop;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 import org.silvercatcher.reforged.items.weapons.ItemKatana;
@@ -138,6 +139,8 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.DART_WITHER = new ItemDart("wither"));
 			registrationList.add(ReforgedAdditions.BLOWGUN = new ItemBlowGun());
 		}
+		
+		registrationList.add(ReforgedAdditions.CALTROP = new ItemCaltrop());
 	}
 	
 	/**Registers all items out of the registrationList*/

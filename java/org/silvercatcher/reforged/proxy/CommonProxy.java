@@ -9,6 +9,7 @@ import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
+import org.silvercatcher.reforged.entities.EntityCaltrop;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 
@@ -95,6 +96,8 @@ public class CommonProxy {
 		
 		if(GlobalValues.BLOWGUN) {
 			ReforgedRegistry.registerEntity(EntityDart.class, "Dart");
-		}	
+		}
+		
+		ReforgedRegistry.registerEntity(EntityCaltrop.class, "Caltrop");
 	}
 }

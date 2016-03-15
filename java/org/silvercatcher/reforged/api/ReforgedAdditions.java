@@ -5,6 +5,8 @@ import org.silvercatcher.reforged.enchantments.EnchantmentGoalseeker;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 
+/**WARNING: If an Item is turned off in Config,
+ * it could cause a NullPointerException here!*/
 public class ReforgedAdditions {
 	
 	//Items
@@ -70,6 +72,8 @@ public class ReforgedAdditions {
 	public static Item DART_SLOW;
 	public static Item DART_WITHER;
 	public static Item BLOWGUN;
+	
+	public static Item CALTROP;
 	
 	//Enchantments
     public static Enchantment goalseeker = new EnchantmentGoalseeker(100);

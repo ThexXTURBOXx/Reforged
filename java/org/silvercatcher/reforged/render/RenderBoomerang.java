@@ -6,6 +6,7 @@ import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.material.MaterialManager;
 import org.silvercatcher.reforged.models.ModelBoomerang;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
@@ -15,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderBoomerang extends ReforgedRender {
 	
-	float yawb = modifier;
+	protected float yawb = modifier;
 	
 	public RenderBoomerang(RenderManager renderManager) {
 		super(renderManager, new ModelBoomerang(), 90);
@@ -28,7 +29,7 @@ public class RenderBoomerang extends ReforgedRender {
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
 		//If the number is set higher, then the Boomerang will rotate faster, otherwise slower
-		yawb += 15;
+		yawb += 5;
 		GL11.glRotated(yawb, 0, 1, 0);
 		model.render(theEntity,(float) x,(float) y,(float) z, yawb, partialTick, 0.0475F);
 		GL11.glPopMatrix();

@@ -2,12 +2,10 @@ package org.silvercatcher.reforged.gui;
 
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.items.weapons.AReloadable;
+import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -91,52 +89,8 @@ public class ReloadOverlay extends Gui {
 				int x0 = event.resolution.getScaledWidth() / 2 - 88 + i * 20;
 				int y0 = event.resolution.getScaledHeight() - 3;
 				
-				drawRectangle(x0, y0 - (int) (done * 16), x0 + 16, y0, color);
+				Helpers.drawRectangle(x0, y0 - (int) (done * 16), x0 + 16, y0, color);
 			}
 		}
 	}
-	
-	/** Helper method for creating a Rectangle*/
-	public void drawRectangle(int left, int top, int right, int bottom, float[] color) {
-		
-        if (left < right) {
-            int j1 = left;
-            left = right;
-            right = j1;
-        }
-
-        if (top < bottom) {
-            int j1 = top;
-            top = bottom;
-            bottom = j1;
-        }
-        
-        Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
-        GlStateManager.enableBlend();
-        GlStateManager.disableTexture2D();
-        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-        GlStateManager.color(color[0], color[1], color[2], color[3]);
-        
-        //1.8
-        worldrenderer.startDrawingQuads();
-        worldrenderer.addVertex((double)left, (double)bottom, 0.0D);
-        worldrenderer.addVertex((double)right, (double)bottom, 0.0D);
-        worldrenderer.addVertex((double)right, (double)top, 0.0D);
-        worldrenderer.addVertex((double)left, (double)top, 0.0D);
-        
-        //1.8.9
-        /*
-        worldrenderer.begin(7, DefaultVertexFormats.POSITION);
-        worldrenderer.pos((double)left, (double)bottom, 0.0D).endVertex();
-        worldrenderer.pos((double)right, (double)bottom, 0.0D).endVertex();
-        worldrenderer.pos((double)right, (double)top, 0.0D).endVertex();
-        worldrenderer.pos((double)left, (double)top, 0.0D).endVertex();
-        */
-        
-        tessellator.draw();
-        GlStateManager.enableTexture2D();
-        GlStateManager.disableBlend();
-	}
-	
 }
