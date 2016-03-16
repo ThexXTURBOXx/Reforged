@@ -22,8 +22,8 @@ public class ItemCaltrop extends ExtendedItem{
 	@Override
 	public void registerRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(this), " i ",
-														  "iii",
-														  "   ",
+														  " i ",
+														  "i i",
 														  'i', new ItemStack(Blocks.iron_bars));
 	}
 	

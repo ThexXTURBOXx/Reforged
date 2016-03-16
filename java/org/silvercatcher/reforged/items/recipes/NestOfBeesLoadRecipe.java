@@ -111,7 +111,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			ItemStack arrowBundleStack = inventory.getStackInSlot(arrowBundleSlot);
 			int stsize = arrowBundleStack.stackSize;
 			if(stsize > 4) stsize = 4;
-			arrows += arrowBundleStack.stackSize * 8;
+			arrows += stsize * 8;
 			if(arrows > 32) arrows = 32;
 			stasize = stsize;
 		}

@@ -75,6 +75,8 @@ public class ReforgedAdditions {
 	
 	public static Item CALTROP;
 	
+	public static Item DYNAMITE;
+	
 	//Enchantments
     public static Enchantment goalseeker = new EnchantmentGoalseeker(100);
 }

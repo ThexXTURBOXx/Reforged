@@ -11,7 +11,9 @@ import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityCaltrop;
 import org.silvercatcher.reforged.entities.EntityDart;
+import org.silvercatcher.reforged.entities.EntityDynamite;
 import org.silvercatcher.reforged.entities.EntityJavelin;
+import org.silvercatcher.reforged.util.VersionChecker;
 
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.common.config.Configuration;
@@ -28,6 +30,8 @@ public class CommonProxy {
 		ReforgedRegistry.createItems();
 		ReforgedRegistry.registerItems();
 		registerEntities();
+		Thread versionCheck = new VersionChecker();
+		versionCheck.start();
 	}
 	
 	public void init(FMLInitializationEvent event) {
@@ -99,5 +103,6 @@ public class CommonProxy {
 		}
 		
 		ReforgedRegistry.registerEntity(EntityCaltrop.class, "Caltrop");
+		ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
 	}
 }
