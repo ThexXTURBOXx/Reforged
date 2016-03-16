@@ -27,7 +27,7 @@ public class EntityCaltrop extends AReforgedThrowable {
 		motionX = 0;
 		motionY = -0.2;
 		motionZ = 0;
-		BlockPos newpos = Helpers.getNeighbourBlock(pos, side);
+		BlockPos newpos = pos.offset(side);
 		setPositionAndUpdate(newpos.getX() + 0.5, newpos.getY() + 0.5, newpos.getZ() + 0.5);
 	}
 	
