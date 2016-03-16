@@ -1,0 +1,18 @@
+{
+    "parent": "reforged:builtin/generated",
+    "textures": {
+        "layer0": "reforged:items/dynamite"
+    },
+    "display": {
+        "thirdperson": {
+            "rotation": [ 180, 88, 320 ],
+            "translation": [ 0.00, 1.50, -2.75 ],
+            "scale": [ 0.85, 0.85, 0.85 ]
+        },
+        "firstperson": {
+            "rotation": [ 2, 39, 352 ],
+            "translation": [ 8.75, 4.00, 1.75 ],
+            "scale": [ 1.80, 1.80, 1.80 ]
+        }
+    }
+}

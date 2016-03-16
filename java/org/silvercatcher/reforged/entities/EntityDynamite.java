@@ -9,6 +9,9 @@ import net.minecraft.world.World;
 
 public class EntityDynamite extends AReforgedThrowable {
 	
+	//In the lang-files we don't need the "dynamite-damage"-String,
+	//because the dynamite can't kill anyone as it does 0 damage...
+	
 	public EntityDynamite(World worldIn) {
 		
 		super(worldIn, "dynamite");
@@ -27,10 +30,8 @@ public class EntityDynamite extends AReforgedThrowable {
 	
 	@Override
 	protected boolean onEntityHit(Entity entity) {
-		motionX = 0;
-		motionY = -0.2;
-		motionZ = 0;
-		return false;
+		Explosion e = worldObj.createExplosion(this, posX, posY, posZ, 5, true);
+		return true;
 	}
 	
 	@Override
@@ -41,6 +42,6 @@ public class EntityDynamite extends AReforgedThrowable {
 	
 	@Override
 	protected float getGravityVelocity() {
-		return 0.01F;
+		return 0.05F;
 	}
 }
