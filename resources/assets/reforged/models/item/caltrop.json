@@ -11,7 +11,7 @@
         },
         "firstperson": {
             "rotation": [ 350, 215, 330 ],
-            "translation": [ 8.75, 6, 1.75 ],
+            "translation": [ 8.75, 2.25, 2.00 ],
             "scale": [ 1.8, 1.8, 1.8 ]
         }
     }
