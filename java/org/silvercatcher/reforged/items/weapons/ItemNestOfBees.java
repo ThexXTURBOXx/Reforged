@@ -2,23 +2,27 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
+import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ItemNestOfBees extends ExtendedItem {
@@ -50,7 +54,9 @@ public class ItemNestOfBees extends ExtendedItem {
 				'l', Items.leather,
 				's', Items.string,
 				'w', Item.getItemFromBlock(Blocks.planks));
-		ReforgedRegistry.registerIRecipe("ReloadNoB", new NestOfBeesLoadRecipe(), NestOfBeesLoadRecipe.class, Category.SHAPELESS);
+		
+		GameRegistry.addRecipe(new NestOfBeesLoadRecipe());
+		RecipeSorter.INSTANCE.register("ReloadNoB", NestOfBeesLoadRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
 	}
 	
 	@Override
@@ -60,11 +66,11 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		
 		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 		//System.out.println(playerIn.getItemInUseDuration());
-		return itemStackIn;
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 	
 	@Override
@@ -110,21 +116,22 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 	
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
-				
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase entityLiving) {
+		
 		NBTTagCompound compound = CompoundTags.giveCompound(stack);
 		
 		if(compound.getInteger(CompoundTags.AMMUNITION) > 0) {
 			compound.setBoolean(CompoundTags.ACTIVATED, true);
-	        worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 1.0f);
+			worldIn.playSoundAtEntity(entityLiving, "item.fireCharge.use", 1.0f, 1.0f);
 		}
-		return stack;
+		return stack;	
 	}
 	
 	protected void shoot(World world, EntityPlayer shooter) {
 		
 		if(!world.isRemote) {
-			EntityArrow arrow = new EntityArrow(world, shooter, 1f);
+			ItemArrow itemarrow = (ItemArrow) Items.arrow;
+			EntityArrow arrow = itemarrow.createArrow(world, new ItemStack(itemarrow), shooter);
 			arrow.setDamage(2);
 			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ,
 					3 + itemRand.nextFloat() / 2f, 1.5f);

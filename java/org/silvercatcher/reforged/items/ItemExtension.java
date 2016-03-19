@@ -11,14 +11,10 @@ import net.minecraft.enchantment.EnchantmentDamage;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
-import net.minecraft.potion.PotionHelper;
 
 /**
  * Attempt to use Java 8 features against lack of foresight.
@@ -35,7 +31,7 @@ public interface ItemExtension {
 		
 		Multimap modifiers =  HashMultimap.create();
 		
-		modifiers.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
+		modifiers.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(),
 				new AttributeModifier(itemModifierUUID, "Weapon Damage", getHitDamage(stack), 0));
 		return modifiers;
 	}
@@ -50,7 +46,7 @@ public interface ItemExtension {
 			
 			Entry <Integer, Integer> entry = (Entry<Integer, Integer>) o;
 			
-			Enchantment e = Enchantment.getEnchantmentById(entry.getKey());
+			Enchantment e = Enchantment.getEnchantmentByID(entry.getKey());
 			
 			if(e instanceof EnchantmentDamage) {
 				
@@ -80,7 +76,7 @@ public interface ItemExtension {
 				
 				Entry <Integer, Integer> entry = (Entry<Integer, Integer>) o;
 				
-				Enchantment e = Enchantment.getEnchantmentById(entry.getKey());
+				Enchantment e = Enchantment.getEnchantmentByID(entry.getKey());
 				
 				if(e instanceof EnchantmentDamage) {
 					
@@ -89,7 +85,7 @@ public interface ItemExtension {
 					if(ed.damageType != 0) {
 						
 						extraDamage += e.calcDamageByCreature(EnchantmentHelper.getEnchantmentLevel(
-								e.effectId, stack), living.getCreatureAttribute());
+								e, stack), living.getCreatureAttribute());
 					}
 				}
 			}

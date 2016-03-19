@@ -1,6 +1,5 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -14,36 +13,22 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemKnife extends ItemSword implements ItemExtension {
 	
 	protected final MaterialDefinition materialDefinition;
-	protected final boolean unbreakable;
 	
 	public ItemKnife(ToolMaterial material) {
-		this(material, false);
-	}
-	
-	public ItemKnife(ToolMaterial material, boolean unbreakable) {
+		
 		super(material);
 		
-		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		
 		setUnlocalizedName(materialDefinition.getPrefixedName("knife"));
 		setMaxDamage(materialDefinition.getMaxUses());
 		setMaxStackSize(1);
-	}
-	
-	@Override
-	public boolean isDamageable() {
-		if(unbreakable) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 	
 	@Override
@@ -55,8 +40,8 @@ public class ItemKnife extends ItemSword implements ItemExtension {
 				
 				EntityLivingBase target = (EntityLivingBase) entity;
 				
-				Vec3 look = target.getLookVec();
-				Vec3 attacker = new Vec3(player.posX - target.posX,
+				Vec3d look = target.getLookVec();
+				Vec3d attacker = new Vec3d(player.posX - target.posX,
 						(player.getEntityBoundingBox().minY + player.height / 2)
 						- target.posY + target.getEyeHeight(),
 						player.posZ - target.posZ);

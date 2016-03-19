@@ -1,19 +1,55 @@
 package org.silvercatcher.reforged.entities;
 
+import java.io.IOException;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public abstract class AReforgedThrowable extends EntityThrowable {
 	
+    public static final DataSerializer<ItemStack> ITEM_STACK = new DataSerializer<ItemStack>()
+    {
+        public void write(PacketBuffer buf, ItemStack value)
+        {
+            buf.writeItemStackToBuffer(value);
+        }
+        public ItemStack read(PacketBuffer buf) throws IOException
+        {
+            return (ItemStack)buf.readItemStackFromBuffer();
+        }
+        public DataParameter<ItemStack> createKey(int id)
+        {
+            return new DataParameter(id, this);
+        }
+    };
+    
+    public static final DataSerializer<Double> DOUBLE = new DataSerializer<Double>()
+    {
+        public void write(PacketBuffer buf, Double value)
+        {
+            buf.writeDouble(value);
+        }
+        public Double read(PacketBuffer buf) throws IOException
+        {
+            return (Double)buf.readDouble();
+        }
+        public DataParameter<Double> createKey(int id)
+        {
+            return new DataParameter(id, this);
+        }
+    };
+    
 	private final String damageName;
 	
 	public AReforgedThrowable(World worldIn, String damageName) {
@@ -28,13 +64,14 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		this.damageName = damageName;
 	}
 
+
 	@Override
 	protected void entityInit() {
 		super.entityInit();
 	}
-
+	
 	@Override
-	protected void onImpact(MovingObjectPosition target) {
+	protected void onImpact(RayTraceResult target) {
 		
 		boolean broken;
 		
@@ -102,19 +139,4 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		
 		super.readEntityFromNBT(tagCompund);
 	}
-	
-	/**@return True, if the thrower is a player in Creative Mode.
-	 * False, if the player is in Survival Mode or the thrower is an Entity*/
-	public boolean creativeUse() {
-		return (getThrower() instanceof EntityPlayer && ((EntityPlayer) getThrower()).capabilities.isCreativeMode)
-			   || !(getThrower() instanceof EntityPlayer);
-	}
-	
-	/**@return True, if the given Entity is a player in Creative Mode.
-	 * False, if the player is in Survival Mode or the entity is a normal Entity*/
-	public boolean creativeUse(Entity e) {
-		return (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode)
-			   || !(e instanceof EntityPlayer);
-	}
-	
 }

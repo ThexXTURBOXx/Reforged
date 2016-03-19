@@ -1,14 +1,17 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.api.ReforgedAdditions;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.ItemExtension;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -23,14 +26,10 @@ public class ItemBlowGun extends ExtendedItem {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-		net.minecraftforge.event.entity.player.ArrowNockEvent event = new net.minecraftforge.event.entity.player.ArrowNockEvent(playerIn, itemStackIn);
-        if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) return event.result;
-
-        	if (playerIn.capabilities.isCreativeMode || playerIn.inventory.hasItem(this))
-        		{
-        			playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
-        		}
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+		if (playerIn.capabilities.isCreativeMode || playerIn.inventory.hasItemStack(new ItemStack(this))) {
+			playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
+		}
 		return itemStackIn;
 	}
 	
@@ -41,28 +40,30 @@ public class ItemBlowGun extends ExtendedItem {
     }
 	
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase player, int timeLeft) {
 		if(timeLeft <= getMaxItemUseDuration(stack) - 15) {
 			EntityDart dart;
+			EntityPlayer playerIn;
+			if(player instanceof EntityPlayer) playerIn = (EntityPlayer) player;
 			if(!worldIn.isRemote) {
-				if(playerIn.inventory.hasItem(ReforgedAdditions.DART_NORMAL)) {
-					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_NORMAL));
-					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.DART_NORMAL));
-				} else if(playerIn.inventory.hasItem(ReforgedAdditions.DART_HUNGER)) {
-					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_HUNGER));
-					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.DART_HUNGER));
-				} else if(playerIn.inventory.hasItem(ReforgedAdditions.DART_POISON)) {
-					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_POISON));
-					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.DART_POISON));
-				} else if(playerIn.inventory.hasItem(ReforgedAdditions.DART_POISON_STRONG)) {
-					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_POISON_STRONG));
-					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.DART_POISON_STRONG));
-				} else if(playerIn.inventory.hasItem(ReforgedAdditions.DART_SLOW)) {
-					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_SLOW));
-					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.DART_SLOW));
-				} else if(playerIn.inventory.hasItem(ReforgedAdditions.DART_WITHER) || playerIn.capabilities.isCreativeMode) {
-					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_WITHER));
-					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.DART_WITHER));
+				if(playerIn.inventory.hasItemStack(new ItemStack(ReforgedRegistry.DART_NORMAL))) {
+					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_NORMAL));
+					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_NORMAL));
+				} else if(playerIn.inventory.hasItemStack(new ItemStack(ReforgedRegistry.DART_HUNGER))) {
+					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_HUNGER));
+					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_HUNGER));
+				} else if(playerIn.inventory.hasItemStack(new ItemStack(ReforgedRegistry.DART_POISON))) {
+					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_POISON));
+					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_POISON));
+				} else if(playerIn.inventory.hasItemStack(new ItemStack(ReforgedRegistry.DART_POISON_STRONG))) {
+					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_POISON_STRONG));
+					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_POISON_STRONG));
+				} else if(playerIn.inventory.hasItemStack(new ItemStack(ReforgedRegistry.DART_SLOW))) {
+					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_SLOW));
+					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_SLOW));
+				} else if(playerIn.inventory.hasItemStack(new ItemStack(ReforgedRegistry.DART_WITHER)) || playerIn.capabilities.isCreativeMode) {
+					dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedRegistry.DART_WITHER));
+					if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedRegistry.DART_WITHER));
 				} else {
 					dart = null;
 				}

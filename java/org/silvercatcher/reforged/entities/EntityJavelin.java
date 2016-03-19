@@ -1,16 +1,23 @@
 package org.silvercatcher.reforged.entities;
 
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityJavelin extends AReforgedThrowable {
+	
+	private static final DataParameter<ItemStack> STACK_JAVELIN = EntityDataManager.<ItemStack>createKey(EntityJavelin.class, ITEM_STACK);
+	private static final DataParameter<Integer> DURATION = EntityDataManager.<Integer>createKey(EntityBoomerang.class, DataSerializers.VARINT);
 	
 	public EntityJavelin(World worldIn) {
 		
@@ -38,15 +45,13 @@ public class EntityJavelin extends AReforgedThrowable {
 	protected void entityInit() {
 		super.entityInit();
 		
-		// id 5 = ItemStack of Javelin, type 5 = ItemStack
-		dataWatcher.addObjectByDataType(5, 5);
+		dataWatcher.register(STACK_JAVELIN, new ItemStack(ReforgedRegistry.JAVELIN));
 		
-		// id 6 = Loaded Duration, type 2 = Integer
-		dataWatcher.addObjectByDataType(6, 2);
+		dataWatcher.register(DURATION, 0);
 	}
 	
 	public ItemStack getItemStack() {
-		return dataWatcher.getWatchableObjectItemStack(5);
+		return dataWatcher.get(STACK_JAVELIN);
 	}
 	
 	public void setItemStack(ItemStack stack) {
@@ -54,7 +59,7 @@ public class EntityJavelin extends AReforgedThrowable {
 		if(stack == null || !(stack.getItem() instanceof ItemJavelin)) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
-		dataWatcher.updateObject(5, stack);
+		dataWatcher.set(STACK_JAVELIN, stack);
 	}
 	
 	@Override
@@ -77,10 +82,10 @@ public class EntityJavelin extends AReforgedThrowable {
 	}
 	
 	@Override
-	protected void onImpact(MovingObjectPosition target) {
+	protected void onImpact(RayTraceResult target) {
 		super.onImpact(target);
 		if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-			if(!worldObj.isRemote && !creativeUse()) {
+			if(!worldObj.isRemote) {
 				entityDropItem(getItemStack(), 0.5f);
 			}
 		} else {
@@ -89,12 +94,12 @@ public class EntityJavelin extends AReforgedThrowable {
 	}
 	
 	public int getDurLoaded() {
-		return dataWatcher.getWatchableObjectInt(6);
+		return dataWatcher.get(DURATION);
 	}
 	
 	public void setDurLoaded(int durloaded) {
 		
-		dataWatcher.updateObject(6, durloaded);
+		dataWatcher.set(DURATION, durloaded);
 	}
 	
 	@Override

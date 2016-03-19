@@ -5,6 +5,7 @@ import java.util.List;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ItemExtension;
+import org.silvercatcher.reforged.util.Helpers1dot9;
 
 import com.google.common.collect.Multimap;
 
@@ -15,6 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
@@ -76,7 +79,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
+	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand handIn) {
 		
 		NBTTagCompound compound = giveCompound(itemStackIn);
 		
@@ -84,7 +87,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		
 		if(loadState == empty) {
 			if(playerIn.capabilities.isCreativeMode ||
-					playerIn.inventory.consumeInventoryItem(getAmmo())) {
+					Helpers1dot9.consumeItem(playerIn.inventory, getAmmo())) {
 				
 				loadState = loading;
 				compound.setLong(CompoundTags.RELOAD, worldIn.getWorldTime() + getReloadTotal());
@@ -97,13 +100,13 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		
 		compound.setByte(CompoundTags.AMMUNITION, loadState);
 		
-		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
+		playerIn.setActiveHand(handIn);
 		
-		return itemStackIn;
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn, handIn);
 	}
-
+	
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase playerIn, int timeLeft) {
 		
 		NBTTagCompound compound = giveCompound(stack);
 		
@@ -117,20 +120,22 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				
 				shoot(worldIn, playerIn, stack);
 				
-				if(stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand)) {
+				if(playerIn instanceof EntityPlayer && stack.attemptDamageItem(5, itemRand)) {
 					playerIn.renderBrokenItemStack(stack);
-					playerIn.destroyCurrentEquippedItem();
+					Helpers1dot9.consumeItem(((EntityPlayer) playerIn).inventory, stack);
+					stack.splitStack(1);
 				}
 			}
 			compound.setByte(CompoundTags.AMMUNITION, empty);
-			compound.setLong(CompoundTags.RELOAD, -1l);
 		}
+		compound.setLong(CompoundTags.RELOAD,
+				worldIn.getWorldTime() + getReloadTotal());
 	}
 
 	public abstract void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack);
-
+	
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 

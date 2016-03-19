@@ -24,16 +24,11 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemSaber extends ItemSword implements ItemExtension {
 
 	protected final MaterialDefinition materialDefinition;
-	protected final boolean unbreakable;
 	
 	public ItemSaber(ToolMaterial material) {
-		this(material, false);
-	}
-	
-	public ItemSaber(ToolMaterial material, boolean unbreakable) {
+		
 		super(material);
 		
-		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		
 		setUnlocalizedName(materialDefinition.getPrefixedName("saber"));
@@ -41,15 +36,6 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 		setCreativeTab(ReforgedMod.tabReforged);
 		setMaxStackSize(1);
 		setMaxDamage(materialDefinition.getMaxUses());
-	}
-	
-	@Override
-	public boolean isDamageable() {
-		if(unbreakable) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 	
 	@Override

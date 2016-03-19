@@ -1,5 +1,7 @@
 itemGroup.reforged=Reforged
 
+item.holy_cross.name=§eHoly Cross
+
 item.firerod.name=Firerod
 
 item.arrow_bundle.name=Arrow Bundle
@@ -65,12 +67,6 @@ item.musket.loadstate.empty=Empty
 item.musket.loadstate.loading=Loading
 item.musket.loadstate.loaded=Loaded
 
-item.keris.name=Kris
-
-item.caltrop.name=Caltrop
-
-item.dynamite.name=Dynamite
-
 death.attack.boomerang=%1$s's head was splittered by a Boomerang.
 death.attack.boomerang.player=%1$s's head was splittered by a Boomerang while fighting %2$s.
 death.attack.javelin=%1$s got impaled.
@@ -81,10 +77,6 @@ death.attack.blunderbuss=%1$s got shredded by bullets.
 death.attack.blunderbuss.player=%1$s got shredded by bullets while fighting %2$s.
 death.attack.dart=%1$s served as a target.
 death.attack.dart.player=%1$s served as a target while fighting %2$s.
-death.attack.caltrop=%1$s did not pay attention where he steps.
-death.attack.caltrop.player=%1$s didn't pay attention where he steps while fighting %2$s.
-
-enchantment.goalseeker=Goalseeker
 
 versionchecker.ingame.outdated=Newer version available
 versionchecker.ingame.downloadclick=Click here to download

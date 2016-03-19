@@ -7,8 +7,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -40,21 +42,20 @@ public class ItemFireRod extends ExtendedItem {
 				'c', new ItemStack(Items.coal, 1, 1),
 				's', Items.stick);
 	}
-
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side,
-			float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
+			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		
-		if(worldIn.getBlockState(pos).getBlock().isFlammable(worldIn, pos, side)) {
+		if(worldIn.getBlockState(pos).getBlock().isFlammable(worldIn, pos, facing)) {
 			
-			BlockPos target = pos.offset(side);
+			BlockPos target = pos.offset(facing);
 			
 			if(!(worldIn.canBlockSeeSky(pos) && worldIn.isRaining()) &&  worldIn.isAirBlock(target)) {
 				worldIn.setBlockState(target, Blocks.fire.getDefaultState());
 				--stack.stackSize;
 			}
 		}
-		return true;
+		return EnumActionResult.SUCCESS;
 	}
 	
 	@Override

@@ -1,8 +1,7 @@
 package org.silvercatcher.reforged.entities;
 
-import org.silvercatcher.reforged.items.CompoundTags;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
-import org.silvercatcher.reforged.material.MaterialDefinition;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,10 +9,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityBoomerang extends AReforgedThrowable {
+
+	private static final DataParameter<ItemStack> STACK_BOOMERANG = EntityDataManager.<ItemStack>createKey(EntityBoomerang.class, ITEM_STACK);
+	private static final DataParameter<Double> THROWER_X = EntityDataManager.<Double>createKey(EntityBoomerang.class, DOUBLE);
+	private static final DataParameter<Double> THROWER_Y = EntityDataManager.<Double>createKey(EntityBoomerang.class, DOUBLE);
+	private static final DataParameter<Double> THROWER_Z = EntityDataManager.<Double>createKey(EntityBoomerang.class, DOUBLE);
 	
 	public EntityBoomerang(World worldIn) {
 		
@@ -32,22 +38,18 @@ public class EntityBoomerang extends AReforgedThrowable {
 		
 		super.entityInit();
 		
-		// id 5 = ItemStack of Boomerang, type 5 = ItemStack
-		dataWatcher.addObjectByDataType(5, 5);
+		dataWatcher.register(STACK_BOOMERANG, new ItemStack(ReforgedRegistry.WOODEN_BOOMERANG));
 		
-		// id 6 = posX, type 3 = float
-		dataWatcher.addObjectByDataType(6, 3);
+		dataWatcher.register(THROWER_X, posX);
 		
-		// id 7 = posY, type 3 = float
-		dataWatcher.addObjectByDataType(7, 3);
+		dataWatcher.register(THROWER_Y, posY);
 		
-		// id 8 = posZ, type 3 = float
-		dataWatcher.addObjectByDataType(8, 3);
+		dataWatcher.register(THROWER_Z, posZ);
 	}
 
 	public ItemStack getItemStack() {
 		
-		return dataWatcher.getWatchableObjectItemStack(5);
+		return dataWatcher.get(STACK_BOOMERANG);
 	}
 	
 	public void setItemStack(ItemStack stack) {
@@ -55,43 +57,37 @@ public class EntityBoomerang extends AReforgedThrowable {
 		if(stack == null || !(stack.getItem() instanceof ItemBoomerang)) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
-		dataWatcher.updateObject(5, stack);
+		dataWatcher.set(STACK_BOOMERANG, stack);
 	}
 	
 	public void setCoords(double playerX, double playerY, double playerZ) {
 		
-		dataWatcher.updateObject(6, (float) playerX);
-		dataWatcher.updateObject(7, (float) playerY);
-		dataWatcher.updateObject(8, (float) playerZ);
+		dataWatcher.set(THROWER_X, playerX);
+		dataWatcher.set(THROWER_Y, playerY);
+		dataWatcher.set(THROWER_Z, playerZ);
 	}
 	
 	public double getPosX() {
-		return dataWatcher.getWatchableObjectFloat(6);
+		return dataWatcher.get(THROWER_X);
 	}
 	
 	public double getPosY() {
-		return dataWatcher.getWatchableObjectFloat(7);
+		return dataWatcher.get(THROWER_Y);
 	}
 	
 	public double getPosZ() {
-		return dataWatcher.getWatchableObjectFloat(8);
+		return dataWatcher.get(THROWER_Z);
 	}
 	
-	public MaterialDefinition getMaterialDefinition() {
+	public ToolMaterial getMaterial() {
 
-		return ((ItemBoomerang) getItemStack().getItem()).getMaterialDefinition();
+		return ((ItemBoomerang) getItemStack().getItem()).getMaterial();
 	}
 	
 	@Override
 	public void onUpdate() {
 		
 		super.onUpdate();
-		
-		if(getThrower() != null) {
-			if(CompoundTags.giveCompound(getItemStack()).getInteger(CompoundTags.ENCHANTED) == 1) {
-				setCoords(getThrower().posX, getThrower().posY + getThrower().getEyeHeight(), getThrower().posZ);
-			}
-		}
 		
 		double dx = this.posX - getPosX();
 		double dy = this.posY - getPosY();
@@ -107,10 +103,10 @@ public class EntityBoomerang extends AReforgedThrowable {
 		motionZ -= 0.05D * dz;
 		
 		//After 103 ticks, the Boomerang drops exactly where the thrower stood
-		if((CompoundTags.giveCompound(getItemStack()).getInteger(CompoundTags.ENCHANTED) != 1 && ticksExisted >= 103) || isInWater()) {
+		if(ticksExisted >= 103 || isInWater()) {
 			if(!worldObj.isRemote) {
-				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
-						entityDropItem(getItemStack(), 0.5f);
+				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+					entityDropItem(getItemStack(), 0.5f);
 				} else {
 					//Custom sound later... [BREAK SOUND]
 				}
@@ -127,8 +123,12 @@ public class EntityBoomerang extends AReforgedThrowable {
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
 		
+		double px = getPosX();
+		double py = getPosY();
+		double pz = getPosZ();
+		
 		if(!worldObj.isRemote) {
-			if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
+			if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 				entityDropItem(getItemStack(), 0.5f);
 			}
 		}
@@ -141,9 +141,8 @@ public class EntityBoomerang extends AReforgedThrowable {
 			//It's the thrower himself
 			ItemStack stack = getItemStack();
 			EntityPlayer p = (EntityPlayer) hitEntity;
-			if(stack.getMaxDamage() - stack.getItemDamage() > 0 && !creativeUse()) {
+			if(stack.getMaxDamage() - stack.getItemDamage() > 0) {
 				p.inventory.addItemStackToInventory(stack);
-				worldObj.playSoundAtEntity(this, "random.pop", 0.5F, 0.7F);
 			} else {
 				//Custom sound later... [BREAK SOUND]
 			}
@@ -152,7 +151,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 			//It's an hit entity
 			hitEntity.attackEntityFrom(causeImpactDamage(hitEntity, getThrower()), getImpactDamage(hitEntity));
 			ItemStack stack = getItemStack();
-			if(stack.getItem().isDamageable() && stack.attemptDamageItem(1, rand)) {
+			if(stack.attemptDamageItem(1, rand)) {
 				//Custom sound later... [BREAK SOUND]
 				return true;
 			} else {
@@ -186,6 +185,6 @@ public class EntityBoomerang extends AReforgedThrowable {
 
 	@Override
 	protected float getImpactDamage(Entity target) {
-		return getMaterialDefinition().getDamageVsEntity() + 5;
+		return getMaterial().getDamageVsEntity() + 5;
 	}
 }

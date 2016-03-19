@@ -7,46 +7,31 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 
 	protected final MaterialDefinition materialDefinition;
-	protected final boolean unbreakable;
 	
 	public ItemBattleAxe(ToolMaterial material) {
-		this(material, false);
-	}
-	
-	public ItemBattleAxe(ToolMaterial material, boolean unbreakable) {
+		
 		super(material);
 		setMaxStackSize(1);
 		
-		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setUnlocalizedName(materialDefinition.getPrefixedName("battleaxe"));
 		setMaxDamage(materialDefinition.getMaxUses());
-		
+
 		setCreativeTab(ReforgedMod.tabReforged);
-	}
-	
-	@Override
-	public boolean isDamageable() {
-		if(unbreakable) {
-			return false;
-		} else {
-			return true;
-		}
+
 	}
 	
 	@Override
@@ -59,22 +44,22 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 				'x', materialDefinition.getRepairMaterial(),
 				's', Items.stick);
 	}
-
+	
 	@Override
-	public float getStrVsBlock(ItemStack stack, Block block) {
+	public float getStrVsBlock(ItemStack stack, IBlockState block) {
 		
 		return effectiveAgainst(block) ? materialDefinition.getEfficiencyOnProperMaterial() + 0.5f : 1f;
 	}
 	
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World worldIn, Block blockIn, BlockPos pos,
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState blockIn, BlockPos pos,
 			EntityLivingBase playerIn) {
 		
 		stack.damageItem(effectiveAgainst(blockIn) ? 2 : 3, playerIn);
 		return true;
 	}
 	
-	protected boolean effectiveAgainst(Block target) {
+	protected boolean effectiveAgainst(IBlockState target) {
 		
 		Material material = target.getMaterial();
 		return (material == Material.wood || material == Material.plants || material == Material.vine);

@@ -20,31 +20,17 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemKatana extends ItemSword implements ItemExtension {
 
 	protected final MaterialDefinition materialDefinition;
-	protected final boolean unbreakable;
 	
 	public ItemKatana(ToolMaterial material) {
-		this(material, false);
-	}
-	
-	public ItemKatana(ToolMaterial material, boolean unbreakable) {
+		
 		super(material);
 		
-		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		
 		setUnlocalizedName(materialDefinition.getPrefixedName("katana"));
 		setMaxDamage(materialDefinition.getMaxUses());
 		setMaxStackSize(1);
 		setCreativeTab(ReforgedMod.tabReforged);
-	}
-	
-	@Override
-	public boolean isDamageable() {
-		if(unbreakable) {
-			return false;
-		} else {
-			return true;
-		}
 	}
 	
 	@Override
@@ -57,13 +43,12 @@ public class ItemKatana extends ItemSword implements ItemExtension {
 				EntityLivingBase target = (EntityLivingBase) entity;
 				
 				int armorvalue = 0;
-
-				for(int i = 1; i < 4; i++) {
-					
-					ItemStack armorStack = target.getEquipmentInSlot(i);
+				
+				Iterable<ItemStack> armors = target.getArmorInventoryList();
+				for(ItemStack armorStack : armors) {
 					if(armorStack != null && armorStack.getItem() instanceof ItemArmor) {
 						armorvalue += ((ItemArmor) armorStack.getItem()).damageReduceAmount;
-					}
+					}					
 				}
 
 				float damage = getHitDamage() + getEnchantmentBonus(stack, player, entity);
@@ -94,7 +79,7 @@ public class ItemKatana extends ItemSword implements ItemExtension {
 				" m ",
 				"s  ",
 				'm', materialDefinition.getRepairMaterial(),
-				's', Items.stick);
+				's', new ItemStack(Items.stick));
 	}
 
 	@Override

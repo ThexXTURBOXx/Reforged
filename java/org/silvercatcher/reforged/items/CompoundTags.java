@@ -49,7 +49,4 @@ public class CompoundTags {
 	
 	/** saves whether the item is activated via right click */
 	public static final String ACTIVATED	 = "activated";
-	
-	/** saves whether the item is enchanted */
-	public static final String ENCHANTED	 = "enchanted";
 }

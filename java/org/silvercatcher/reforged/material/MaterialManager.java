@@ -17,6 +17,7 @@ public class MaterialManager {
 	private static final HashMap<ToolMaterial, ResourceLocation[]> textureMap = new HashMap<ToolMaterial, ResourceLocation[]>();
 	
 	static {
+		
 		definitionMap.put(ToolMaterial.WOOD,
 				new MaterialDefinition("wooden", ToolMaterial.WOOD));
 		definitionMap.put(ToolMaterial.STONE,
@@ -25,19 +26,22 @@ public class MaterialManager {
 				new MaterialDefinition("iron", ToolMaterial.IRON));
 		definitionMap.put(ToolMaterial.GOLD,
 				new MaterialDefinition("golden", ToolMaterial.GOLD));
-		definitionMap.put(ToolMaterial.EMERALD,
-				new MaterialDefinition("diamond", ToolMaterial.EMERALD));
+		definitionMap.put(ToolMaterial.DIAMOND,
+				new MaterialDefinition("diamond", ToolMaterial.DIAMOND));
 	}
 	
 	public static Set<Entry<ToolMaterial, MaterialDefinition>> getEntries() {
+		
 		return definitionMap.entrySet();
 	}
 	
 	public static MaterialDefinition getMaterialDefinition(ToolMaterial material) {
+		
 		return definitionMap.get(material);
 	}
 	
 	public static void addMaterialDefinition(ToolMaterial material, MaterialDefinition definition) {
+		
 		definitionMap.put(material, definition);
 	}
   

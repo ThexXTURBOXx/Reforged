@@ -1,17 +1,12 @@
 package org.silvercatcher.reforged.proxy;
 
-import java.io.File;
-
 import org.silvercatcher.reforged.ReforgedEvents;
-import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
-import org.silvercatcher.reforged.entities.EntityCaltrop;
 import org.silvercatcher.reforged.entities.EntityDart;
-import org.silvercatcher.reforged.entities.EntityDynamite;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.util.VersionChecker;
 
@@ -23,17 +18,20 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class CommonProxy {
 	
 	public void preInit(FMLPreInitializationEvent event) {
-		
+
 		loadConfig(event);
 		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
 		//MinecraftForge.EVENT_BUS.register(new ReforgedMonsterArmourer());
 		ReforgedRegistry.createItems();
 		ReforgedRegistry.registerItems();
 		registerEntities();
-		Thread versionCheck = new VersionChecker();
-		versionCheck.start();
+		//Version Checker
+		if(version_checker) {
+			Thread versionCheckThread = new Thread(new VersionChecker(), "Version Check");
+			versionCheckThread.start();
+		}
 	}
-	
+
 	public void init(FMLInitializationEvent event) {
 		
 		ReforgedRegistry.registerRecipes();
@@ -44,20 +42,20 @@ public class CommonProxy {
 	public static boolean blowgun;
 	public static boolean boomerang;
 	public static boolean firerod;
+	public static boolean holy_cross;
 	public static boolean javelin;
 	public static boolean katana;
 	public static boolean knife;
 	public static boolean musket;
 	public static boolean nest_of_bees;
 	public static boolean sabre;
-	public static boolean keris;
+	
+	//Others for Config
+	public static boolean version_checker;
 	
 	private void loadConfig(FMLPreInitializationEvent e) {
-		File configdir = new File(e.getModConfigurationDirectory(), ReforgedMod.NAME);
-		File configfile = new File(configdir, "reforged.cfg");
-		if(!configfile.exists()) configdir.mkdirs();
 		//Get an instance of Config
-		Configuration config = new Configuration(configfile);
+		Configuration config = new Configuration(e.getSuggestedConfigurationFile());
 		
 		//Load Config
 		config.load();
@@ -67,13 +65,16 @@ public class CommonProxy {
 		blowgun = config.getBoolean("Blowgun", "Items", true, "Enable the Blowgun plus Darts");
 		boomerang = config.getBoolean("Boomerang", "Items", true, "Enable the Boomerang");
 		firerod = config.getBoolean("Firerod", "Items", true, "Enable the Firerod");
+		holy_cross = config.getBoolean("Holy Cross", "Items", true, "Enable the Holy Cross");
 		javelin = config.getBoolean("Javelin", "Items", true, "Enable the Javelin");
 		katana= config.getBoolean("Katana", "Items", true, "Enable the Katana");
 		knife = config.getBoolean("Knife", "Items", true, "Enable the Knife");
 		musket = config.getBoolean("Musket", "Items", true, "Enable the Musket and Blunderbuss");
 		nest_of_bees = config.getBoolean("Nest Of Bees", "Items", false, "Enable the Nest Of Bees (BETA, only use for testing!)");
 		sabre = config.getBoolean("Sabre", "Items", true, "Enable the Sabre");
-		keris = config.getBoolean("Kris", "Items", true, "Enable the Kris");	
+		
+		//Others
+		version_checker = config.getBoolean("Version Checker", "General", true, "Enable the Version Checker");		
 		
 		//Save config
 		config.save();
@@ -100,9 +101,6 @@ public class CommonProxy {
 		
 		if(GlobalValues.BLOWGUN) {
 			ReforgedRegistry.registerEntity(EntityDart.class, "Dart");
-		}
-		
-		ReforgedRegistry.registerEntity(EntityCaltrop.class, "Caltrop");
-		ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
+		}	
 	}
 }
