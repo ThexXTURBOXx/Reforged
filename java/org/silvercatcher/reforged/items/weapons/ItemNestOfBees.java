@@ -12,13 +12,16 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
@@ -68,9 +71,10 @@ public class ItemNestOfBees extends ExtendedItem {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		
-		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
+		playerIn.setActiveHand(hand);
+		//playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 		//System.out.println(playerIn.getItemInUseDuration());
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
 	}
 	
 	@Override
@@ -122,7 +126,7 @@ public class ItemNestOfBees extends ExtendedItem {
 		
 		if(compound.getInteger(CompoundTags.AMMUNITION) > 0) {
 			compound.setBoolean(CompoundTags.ACTIVATED, true);
-			worldIn.playSoundAtEntity(entityLiving, "item.fireCharge.use", 1.0f, 1.0f);
+			if(entityLiving instanceof EntityPlayer) worldIn.playSound((EntityPlayer) entityLiving, entityLiving.getPosition(), SoundEvents.item_firecharge_use, SoundCategory.MASTER, 1.0f, 1.0f);
 		}
 		return stack;	
 	}
@@ -137,7 +141,7 @@ public class ItemNestOfBees extends ExtendedItem {
 					3 + itemRand.nextFloat() / 2f, 1.5f);
 			world.spawnEntityInWorld(arrow);
 		}
-        world.playSoundAtEntity(shooter, "fireworks.launch", 3.0f, 1.0f);
+        world.playSound(shooter, shooter.getPosition(), SoundEvents.entity_firework_launch, SoundCategory.MASTER, 3.0f, 1.0f);
 	}
 	
 	@Override

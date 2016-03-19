@@ -46,7 +46,7 @@ item.golden_katana.name=Goldkatana
 item.iron_katana.name=Eisenkatana
 item.diamond_katana.name=Diamantkatana
 
-item.dart_normal.name=Normaler Dartpfeilpfeil
+item.dart_normal.name=Normaler Dartpfeil
 item.dart_poison.name=Giftiger Dartpfeil
 item.dart_poison_strong.name=Stark giftiger Dartpfeil
 item.dart_slowness.name=Dartpfeil der Langsamkeit
@@ -77,7 +77,3 @@ death.attack.blunderbuss=%1$s wurde durch Munition zerfetzt.
 death.attack.blunderbuss.player=%1$s wurde durch Munition zerfetzt während er mit %2$s kämpfte.
 death.attack.dart=%1$s diente als Zielscheibe.
 death.attack.dart.player=%1$s diente als Zielscheibe während er mit %2$s kämpfte.
-
-versionchecker.ingame.outdated=Neuere Version verfügbar
-versionchecker.ingame.downloadclick=Hier zum herunterladen klicken
-versionchecker.ingame.download=Herunterladen

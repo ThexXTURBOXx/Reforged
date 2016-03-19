@@ -11,13 +11,16 @@ import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
@@ -93,8 +96,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				compound.setLong(CompoundTags.RELOAD, worldIn.getWorldTime() + getReloadTotal());
 				
 			} else {
-				
-				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
+				worldIn.playSound(playerIn, playerIn.getPosition(), SoundEvents.item_firecharge_use, SoundCategory.MASTER, 1, 0.7F);
 			}
 		}
 		
@@ -102,7 +104,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		
 		playerIn.setActiveHand(handIn);
 		
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn, handIn);
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
 	}
 	
 	@Override
@@ -113,16 +115,14 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 		
 		if(loadState == loaded) {
-
-			worldIn.playSoundAtEntity(playerIn, "ambient.weather.thunder", 1f, 1f);
-
+			if(playerIn instanceof EntityPlayer) worldIn.playSound((EntityPlayer) playerIn, playerIn.getPosition(), SoundEvents.entity_lightning_thunder, SoundCategory.WEATHER, 1f, 1f);
+			
 			if(!worldIn.isRemote) {
 				
 				shoot(worldIn, playerIn, stack);
 				
 				if(playerIn instanceof EntityPlayer && stack.attemptDamageItem(5, itemRand)) {
 					playerIn.renderBrokenItemStack(stack);
-					Helpers1dot9.consumeItem(((EntityPlayer) playerIn).inventory, stack);
 					stack.splitStack(1);
 				}
 			}

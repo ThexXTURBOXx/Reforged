@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.items.weapons;
 import java.util.LinkedList;
 
 import org.silvercatcher.reforged.items.ExtendedItem;
+import org.silvercatcher.reforged.util.Helpers1dot9;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -61,15 +63,15 @@ public class ItemHolyCross extends ExtendedItem {
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-				
-		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
+		playerIn.setActiveHand(hand);	
+		//playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 		
-		return itemStackIn;
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
 	}
 	
 	@Override
 	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
-		
+
 		if(toPunish.isEmpty()) return;
 
 		World world = player.worldObj;
@@ -95,9 +97,9 @@ public class ItemHolyCross extends ExtendedItem {
 				world.addWeatherEffect(lightning);
 			}
 			
-			if(stack.attemptDamageItem(1, itemRand)) {
+			if(player instanceof EntityPlayer && stack.attemptDamageItem(1, itemRand)) {
 				player.renderBrokenItemStack(stack);
-				player.destroyCurrentEquippedItem();
+				Helpers1dot9.destroyCurrentEquippedItem((EntityPlayer) player);
 			}
 			
 			if(!target.isDead) {
@@ -106,7 +108,6 @@ public class ItemHolyCross extends ExtendedItem {
 		}
 	}
 	
-
 	@Override
 	public float getHitDamage() {
 		return 1f;

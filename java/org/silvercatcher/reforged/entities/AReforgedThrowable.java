@@ -10,6 +10,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializer;
+import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.math.BlockPos;
@@ -68,6 +69,8 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 	@Override
 	protected void entityInit() {
 		super.entityInit();
+		DataSerializers.registerSerializer(DOUBLE);
+		DataSerializers.registerSerializer(ITEM_STACK);
 	}
 	
 	@Override
