@@ -45,13 +45,13 @@ public class EntityJavelin extends AReforgedThrowable {
 	protected void entityInit() {
 		super.entityInit();
 		
-		dataWatcher.register(STACK_JAVELIN, new ItemStack(ReforgedRegistry.JAVELIN));
+		dataManager.register(STACK_JAVELIN, new ItemStack(ReforgedRegistry.JAVELIN));
 		
-		dataWatcher.register(DURATION, 0);
+		dataManager.register(DURATION, 0);
 	}
 	
 	public ItemStack getItemStack() {
-		return dataWatcher.get(STACK_JAVELIN);
+		return dataManager.get(STACK_JAVELIN);
 	}
 	
 	public void setItemStack(ItemStack stack) {
@@ -59,7 +59,7 @@ public class EntityJavelin extends AReforgedThrowable {
 		if(stack == null || !(stack.getItem() instanceof ItemJavelin)) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
-		dataWatcher.set(STACK_JAVELIN, stack);
+		dataManager.set(STACK_JAVELIN, stack);
 	}
 	
 	@Override
@@ -94,12 +94,12 @@ public class EntityJavelin extends AReforgedThrowable {
 	}
 	
 	public int getDurLoaded() {
-		return dataWatcher.get(DURATION);
+		return dataManager.get(DURATION);
 	}
 	
 	public void setDurLoaded(int durloaded) {
 		
-		dataWatcher.set(DURATION, durloaded);
+		dataManager.set(DURATION, durloaded);
 	}
 	
 	@Override

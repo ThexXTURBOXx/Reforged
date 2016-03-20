@@ -35,12 +35,12 @@ public class EntityDart extends AReforgedThrowable {
 	protected void entityInit() {
 		super.entityInit();
 		
-		dataWatcher.register(STACK_DART, new ItemStack(ReforgedRegistry.DART_NORMAL));
+		dataManager.register(STACK_DART, new ItemStack(ReforgedRegistry.DART_NORMAL));
 	}
 
 	public ItemStack getItemStack() {
 		
-		return dataWatcher.get(STACK_DART);
+		return dataManager.get(STACK_DART);
 	}
 	
 	public void setItemStack(ItemStack stack) {
@@ -48,7 +48,7 @@ public class EntityDart extends AReforgedThrowable {
 		if(stack == null || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
-		dataWatcher.set(STACK_DART, stack);
+		dataManager.set(STACK_DART, stack);
 	}
 	
 	public String getEffect() {

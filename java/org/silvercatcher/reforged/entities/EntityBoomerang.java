@@ -39,18 +39,18 @@ public class EntityBoomerang extends AReforgedThrowable {
 		
 		super.entityInit();
 		
-		dataWatcher.register(STACK_BOOMERANG, new ItemStack(ReforgedRegistry.WOODEN_BOOMERANG));
+		dataManager.register(STACK_BOOMERANG, new ItemStack(ReforgedRegistry.WOODEN_BOOMERANG));
 		
-		dataWatcher.register(THROWER_X, posX);
+		dataManager.register(THROWER_X, posX);
 		
-		dataWatcher.register(THROWER_Y, posY);
+		dataManager.register(THROWER_Y, posY);
 		
-		dataWatcher.register(THROWER_Z, posZ);
+		dataManager.register(THROWER_Z, posZ);
 	}
 
 	public ItemStack getItemStack() {
 		
-		return dataWatcher.get(STACK_BOOMERANG);
+		return dataManager.get(STACK_BOOMERANG);
 	}
 	
 	public void setItemStack(ItemStack stack) {
@@ -58,26 +58,26 @@ public class EntityBoomerang extends AReforgedThrowable {
 		if(stack == null || !(stack.getItem() instanceof ItemBoomerang)) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
-		dataWatcher.set(STACK_BOOMERANG, stack);
+		dataManager.set(STACK_BOOMERANG, stack);
 	}
 	
 	public void setCoords(double playerX, double playerY, double playerZ) {
 		
-		dataWatcher.set(THROWER_X, playerX);
-		dataWatcher.set(THROWER_Y, playerY);
-		dataWatcher.set(THROWER_Z, playerZ);
+		dataManager.set(THROWER_X, playerX);
+		dataManager.set(THROWER_Y, playerY);
+		dataManager.set(THROWER_Z, playerZ);
 	}
 	
 	public double getPosX() {
-		return dataWatcher.get(THROWER_X);
+		return dataManager.get(THROWER_X);
 	}
 	
 	public double getPosY() {
-		return dataWatcher.get(THROWER_Y);
+		return dataManager.get(THROWER_Y);
 	}
 	
 	public double getPosZ() {
-		return dataWatcher.get(THROWER_Z);
+		return dataManager.get(THROWER_Z);
 	}
 	
 	public ToolMaterial getMaterial() {
