@@ -6,6 +6,7 @@ import org.silvercatcher.reforged.ReforgedEvents;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.entities.AReforgedThrowable;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
@@ -15,6 +16,7 @@ import org.silvercatcher.reforged.entities.EntityJavelin;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class CommonProxy {
@@ -32,6 +34,11 @@ public class CommonProxy {
 	public void init(FMLInitializationEvent event) {
 		
 		ReforgedRegistry.registerRecipes();
+	}
+	
+	public void postInit(FMLPostInitializationEvent event) {
+		
+		AReforgedThrowable.registerSerializers();
 	}
 	
 	//Items for Config

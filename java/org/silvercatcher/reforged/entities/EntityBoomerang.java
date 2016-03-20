@@ -15,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityBoomerang extends AReforgedThrowable {
-
+	
 	private static final DataParameter<ItemStack> STACK_BOOMERANG = EntityDataManager.<ItemStack>createKey(EntityBoomerang.class, ITEM_STACK);
 	private static final DataParameter<Double> THROWER_X = EntityDataManager.<Double>createKey(EntityBoomerang.class, DOUBLE);
 	private static final DataParameter<Double> THROWER_Y = EntityDataManager.<Double>createKey(EntityBoomerang.class, DOUBLE);
@@ -89,9 +89,9 @@ public class EntityBoomerang extends AReforgedThrowable {
 		
 		super.onUpdate();
 		
-		double dx = this.posX - getPosX();
-		double dy = this.posY - getPosY();
-		double dz = this.posZ - getPosZ();
+		double dx = posX - getPosX();
+		double dy = posY - getPosY();
+		double dz = posZ - getPosZ();
 		double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
 		
 		dx /= d;
@@ -123,10 +123,6 @@ public class EntityBoomerang extends AReforgedThrowable {
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
 		
-		double px = getPosX();
-		double py = getPosY();
-		double pz = getPosZ();
-		
 		if(!worldObj.isRemote) {
 			if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 				entityDropItem(getItemStack(), 0.5f);
@@ -137,9 +133,9 @@ public class EntityBoomerang extends AReforgedThrowable {
 	
 	@Override
 	protected boolean onEntityHit(Entity hitEntity) {
+		ItemStack stack = getItemStack();
 		if(hitEntity == getThrower()) {
 			//It's the thrower himself
-			ItemStack stack = getItemStack();
 			EntityPlayer p = (EntityPlayer) hitEntity;
 			if(stack.getMaxDamage() - stack.getItemDamage() > 0) {
 				p.inventory.addItemStackToInventory(stack);
@@ -150,7 +146,6 @@ public class EntityBoomerang extends AReforgedThrowable {
 		} else {
 			//It's an hit entity
 			hitEntity.attackEntityFrom(causeImpactDamage(hitEntity, getThrower()), getImpactDamage(hitEntity));
-			ItemStack stack = getItemStack();
 			if(stack.attemptDamageItem(1, rand)) {
 				//Custom sound later... [BREAK SOUND]
 				return true;

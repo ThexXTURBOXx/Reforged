@@ -13,19 +13,22 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderBulletMusket extends ReforgedRender implements IRenderFactory<EntityBulletMusket> {
-	
-	public RenderBulletMusket(RenderManager renderManager) {
-		super(renderManager, new ModelBulletMusket(), 0);
-	}
+public class RenderFactoryBulletMusket implements IRenderFactory<EntityBulletMusket> {
 	
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return Textures.BULLET_MUSKET;
+	public Render<EntityBulletMusket> createRenderFor(RenderManager manager) {
+		return new RenderBulletMusket(manager);
 	}
-
-	@Override
-	public Render<? super EntityBulletMusket> createRenderFor(RenderManager manager) {
-		return this;
+	
+	public static class RenderBulletMusket extends ReforgedRender {
+		
+		public RenderBulletMusket(RenderManager renderManager) {
+			super(renderManager, new ModelBulletMusket(), 0);
+		}
+		
+		@Override
+		protected ResourceLocation getEntityTexture(Entity entity) {
+			return Textures.BULLET_MUSKET;
+		}		
 	}
 }

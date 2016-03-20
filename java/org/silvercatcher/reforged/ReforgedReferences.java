@@ -30,7 +30,7 @@ public class ReforgedReferences {
 		public static final ResourceLocation JAVELIN = new ResourceLocation(ReforgedMod.ID + ":textures/entity/javelin.png");
 	}
 
-	/**All needed GlobalValues*/
+	/**All needed global values*/
 	public static class GlobalValues {
 		//Logger
 		public static Logger log = LogManager.getLogger(ReforgedMod.NAME);

@@ -13,19 +13,22 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderJavelin extends ReforgedRender implements IRenderFactory<EntityJavelin> {
-	
-	public RenderJavelin(RenderManager renderManager) {
-		super(renderManager, new ModelJavelin(), 90);
-	}
+public class RenderFactoryJavelin implements IRenderFactory<EntityJavelin> {
 	
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return Textures.JAVELIN;
+	public Render<EntityJavelin> createRenderFor(RenderManager manager) {
+		return new RenderJavelin(manager);
 	}
-
-	@Override
-	public Render<? super EntityJavelin> createRenderFor(RenderManager manager) {
-		return this;
+	
+	public static class RenderJavelin extends ReforgedRender {
+		
+		public RenderJavelin(RenderManager renderManager) {
+			super(renderManager, new ModelJavelin(), 90);
+		}
+		
+		@Override
+		protected ResourceLocation getEntityTexture(Entity entity) {
+			return Textures.JAVELIN;
+		}
 	}
 }

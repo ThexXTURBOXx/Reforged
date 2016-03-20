@@ -10,11 +10,11 @@ import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
-import org.silvercatcher.reforged.render.RenderBoomerang;
-import org.silvercatcher.reforged.render.RenderBulletBlunderbuss;
-import org.silvercatcher.reforged.render.RenderBulletMusket;
-import org.silvercatcher.reforged.render.RenderDart;
-import org.silvercatcher.reforged.render.RenderJavelin;
+import org.silvercatcher.reforged.render.RenderFactoryBoomerang;
+import org.silvercatcher.reforged.render.RenderFactoryBulletBlunderbuss;
+import org.silvercatcher.reforged.render.RenderFactoryBulletMusket;
+import org.silvercatcher.reforged.render.RenderFactoryDart;
+import org.silvercatcher.reforged.render.RenderFactoryJavelin;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
@@ -23,6 +23,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy {
@@ -40,6 +41,12 @@ public class ClientProxy extends CommonProxy {
 
 		super.init(event);
 		registerItemRenderers();
+	}
+	
+	@Override
+	public void postInit(FMLPostInitializationEvent event) {
+		
+		super.postInit(event);
 	}
 	
 	@Override
@@ -67,20 +74,20 @@ public class ClientProxy extends CommonProxy {
 	protected void registerEntityRenderers(RenderManager manager) {
 		
 		if(GlobalValues.BOOMERANG) {
-			ReforgedRegistry.registerEntityRenderer(EntityBoomerang.class, new RenderBoomerang(manager));
+			ReforgedRegistry.registerRenderFactory(EntityBoomerang.class, new RenderFactoryBoomerang());
 		}
 		
 		if(GlobalValues.MUSKET) {
-			ReforgedRegistry.registerEntityRenderer(EntityBulletMusket.class, new RenderBulletMusket(manager));
-			ReforgedRegistry.registerEntityRenderer(EntityBulletBlunderbuss.class, new RenderBulletBlunderbuss(manager));
+			ReforgedRegistry.registerRenderFactory(EntityBulletMusket.class, new RenderFactoryBulletMusket());
+			ReforgedRegistry.registerRenderFactory(EntityBulletBlunderbuss.class, new RenderFactoryBulletBlunderbuss());
 		}
 		
 		if(GlobalValues.JAVELIN) {
-			ReforgedRegistry.registerEntityRenderer(EntityJavelin.class, new RenderJavelin(manager));
+			ReforgedRegistry.registerRenderFactory(EntityJavelin.class, new RenderFactoryJavelin());
 		}
 		
 		if(GlobalValues.BLOWGUN) {
-			ReforgedRegistry.registerEntityRenderer(EntityDart.class, new RenderDart(manager));
+			ReforgedRegistry.registerRenderFactory(EntityDart.class, new RenderFactoryDart());
 		}
 	}
 }

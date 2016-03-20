@@ -40,7 +40,7 @@ public abstract class ReforgedRender extends Render {
 	 - ThexXTURBOXx*/
 	public void renderEntityModel(Entity theEntity, double x, double y, double z, float yaw, float partialTick) {
 		GL11.glPushMatrix();
-		bindTexture(getEntityTexture(theEntity));
+		bindEntityTexture(theEntity);
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
 		GL11.glRotated(yaw + modifier, 0, 1, 0);

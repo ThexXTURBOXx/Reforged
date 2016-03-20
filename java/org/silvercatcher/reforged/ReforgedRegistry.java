@@ -189,7 +189,7 @@ public class ReforgedRegistry {
 	/**Helper method for binding a renderclass to a entity
 	 * @param entityclass The class of the Entity
 	 * @param renderclass The class of the Renderer*/
-	public static void registerEntityRenderer(Class entityclass, IRenderFactory renderclass) {
+	public static void registerRenderFactory(Class entityclass, IRenderFactory renderclass) {
 		RenderingRegistry.registerEntityRenderingHandler(entityclass, renderclass);
 	}
 	
