@@ -31,9 +31,10 @@ public class ItemBlowGun extends ExtendedItem {
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (playerIn.capabilities.isCreativeMode || playerIn.inventory.hasItemStack(new ItemStack(this))) {
 			playerIn.setActiveHand(hand);
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
 			//playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
+		return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemStackIn);
 	}
 	
 	@Override

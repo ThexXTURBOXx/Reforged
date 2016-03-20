@@ -1,9 +1,7 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
-
-import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +27,7 @@ public class ItemMusket extends AReloadable {
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		
-		setAmmo(ReforgedRegistry.MUSKET_BULLET);
+		setAmmo(ReforgedAdditions.MUSKET_BULLET);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
 	}
 	
@@ -49,8 +47,8 @@ public class ItemMusket extends AReloadable {
 	public void registerRecipes() {
 	
 		GameRegistry.addShapelessRecipe(new ItemStack(this),
-				new ItemStack(ReforgedRegistry.MUSKET_BARREL),
-				new ItemStack(ReforgedRegistry.GUN_STOCK));
+				new ItemStack(ReforgedAdditions.MUSKET_BARREL),
+				new ItemStack(ReforgedAdditions.GUN_STOCK));
 	}
 
 	@Override

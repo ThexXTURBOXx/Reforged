@@ -4,14 +4,16 @@ import org.silvercatcher.reforged.ReforgedReferences.Textures;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.models.ModelDart;
 
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderDart extends ReforgedRender {
+public class RenderDart extends ReforgedRender implements IRenderFactory<EntityDart> {
 	
 	public RenderDart(RenderManager renderManager) {
 		super(renderManager, new ModelDart(), -90);
@@ -39,5 +41,10 @@ public class RenderDart extends ReforgedRender {
 		default: throw new IllegalArgumentException("No Item called " + entityDart.getEffect() + " found!");
 				
 		}
+	}
+
+	@Override
+	public Render<? super EntityDart> createRenderFor(RenderManager manager) {
+		return this;
 	}
 }

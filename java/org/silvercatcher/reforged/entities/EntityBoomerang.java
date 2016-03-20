@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.entities;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 
 import net.minecraft.entity.Entity;
@@ -10,7 +10,6 @@ import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -39,7 +38,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 		
 		super.entityInit();
 		
-		dataManager.register(STACK_BOOMERANG, new ItemStack(ReforgedRegistry.WOODEN_BOOMERANG));
+		dataManager.register(STACK_BOOMERANG, new ItemStack(ReforgedAdditions.WOODEN_BOOMERANG));
 		
 		dataManager.register(THROWER_X, posX);
 		

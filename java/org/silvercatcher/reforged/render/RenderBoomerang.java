@@ -5,14 +5,16 @@ import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.material.MaterialManager;
 import org.silvercatcher.reforged.models.ModelBoomerang;
 
+import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderBoomerang extends ReforgedRender {
+public class RenderBoomerang extends ReforgedRender implements IRenderFactory<EntityBoomerang> {
 	
 	public RenderBoomerang(RenderManager renderManager) {
 		super(renderManager, new ModelBoomerang(), 90);
@@ -38,9 +40,14 @@ public class RenderBoomerang extends ReforgedRender {
 		default: if(MaterialManager.isFullyAdded(entityBoomerang.getMaterial())) {
 			return MaterialManager.getTextures(entityBoomerang.getMaterial())[0];
 		} else {
-			return null;
+			throw new IllegalArgumentException("The ToolMaterial called " + entityBoomerang.getMaterial().name() + " couldn't be found!");
 		}
 		
 		}
+	}
+	
+	@Override
+	public Render<? super EntityBoomerang> createRenderFor(RenderManager manager) {
+		return this;
 	}
 }

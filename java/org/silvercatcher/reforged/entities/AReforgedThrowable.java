@@ -21,15 +21,18 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 	
     public static final DataSerializer<ItemStack> ITEM_STACK = new DataSerializer<ItemStack>()
     {
-        public void write(PacketBuffer buf, ItemStack value)
+        @Override
+		public void write(PacketBuffer buf, ItemStack value)
         {
             buf.writeItemStackToBuffer(value);
         }
-        public ItemStack read(PacketBuffer buf) throws IOException
+        @Override
+		public ItemStack read(PacketBuffer buf) throws IOException
         {
-            return (ItemStack)buf.readItemStackFromBuffer();
+            return buf.readItemStackFromBuffer();
         }
-        public DataParameter<ItemStack> createKey(int id)
+        @Override
+		public DataParameter<ItemStack> createKey(int id)
         {
             return new DataParameter(id, this);
         }
@@ -37,15 +40,18 @@ public abstract class AReforgedThrowable extends EntityThrowable {
     
     public static final DataSerializer<Double> DOUBLE = new DataSerializer<Double>()
     {
-        public void write(PacketBuffer buf, Double value)
+        @Override
+		public void write(PacketBuffer buf, Double value)
         {
             buf.writeDouble(value);
         }
-        public Double read(PacketBuffer buf) throws IOException
+        @Override
+		public Double read(PacketBuffer buf) throws IOException
         {
-            return (Double)buf.readDouble();
+            return buf.readDouble();
         }
-        public DataParameter<Double> createKey(int id)
+        @Override
+		public DataParameter<Double> createKey(int id)
         {
             return new DataParameter(id, this);
         }

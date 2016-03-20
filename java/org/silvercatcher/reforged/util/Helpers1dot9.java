@@ -9,10 +9,12 @@ import net.minecraft.item.ItemStack;
 
 public class Helpers1dot9 {
 	
+	/**Consumes 1 Item of the given type out of the given inventory*/
 	public static boolean consumeItem(InventoryPlayer inv, Item i) {
 		return consumeItem(inv, i, 1);
 	}
 	
+	/**Consumes a given amount of Items of the given type out of the given inventory*/
 	public static boolean consumeItem(InventoryPlayer inv, Item i, int count) {
 		int index = inv.getSlotFor(new ItemStack(i));
 		if(inv.getStackInSlot(index).isItemEqual(new ItemStack(i)) && inv.getStackInSlot(index).stackSize >= count) {
@@ -23,6 +25,7 @@ public class Helpers1dot9 {
 		}
 	}
 	
+	/**@return A HashMap with the slots as key and the ItemStacks as values*/
 	public static HashMap<Integer, ItemStack> getInventoryItems(InventoryPlayer inv) {
 		HashMap<Integer, ItemStack> items = new HashMap<Integer, ItemStack>();
 		for(int c = 1; c < inv.mainInventory.length; c++) {
@@ -34,8 +37,9 @@ public class Helpers1dot9 {
 		return items;
 	}
 	
+	/**Destroys the currently equipped item*/
 	public static void destroyCurrentEquippedItem(EntityPlayer player) {
-		player.inventory.decrStackSize(28 + player.inventory.currentItem, 1);
+		player.inventory.decrStackSize(1 + player.inventory.currentItem, 1);
 	}
 	
 }

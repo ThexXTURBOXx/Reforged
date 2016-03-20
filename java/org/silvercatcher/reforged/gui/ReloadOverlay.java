@@ -121,10 +121,10 @@ public class ReloadOverlay extends Gui {
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
         GlStateManager.color(color[0], color[1], color[2], 1);
         vertexbuffer.begin(7, DefaultVertexFormats.POSITION);
-        vertexbuffer.pos((double)left, (double)bottom, 0.0D).endVertex();
-        vertexbuffer.pos((double)right, (double)bottom, 0.0D).endVertex();
-        vertexbuffer.pos((double)right, (double)top, 0.0D).endVertex();
-        vertexbuffer.pos((double)left, (double)top, 0.0D).endVertex();
+        vertexbuffer.pos(left, bottom, 0.0D).endVertex();
+        vertexbuffer.pos(right, bottom, 0.0D).endVertex();
+        vertexbuffer.pos(right, top, 0.0D).endVertex();
+        vertexbuffer.pos(left, top, 0.0D).endVertex();
         tessellator.draw();
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();

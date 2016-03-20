@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.entities;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.others.ItemDart;
 
 import net.minecraft.entity.Entity;
@@ -35,7 +35,7 @@ public class EntityDart extends AReforgedThrowable {
 	protected void entityInit() {
 		super.entityInit();
 		
-		dataManager.register(STACK_DART, new ItemStack(ReforgedRegistry.DART_NORMAL));
+		dataManager.register(STACK_DART, new ItemStack(ReforgedAdditions.DART_NORMAL));
 	}
 
 	public ItemStack getItemStack() {

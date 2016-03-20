@@ -1,6 +1,9 @@
 package org.silvercatcher.reforged.proxy;
 
+import java.io.File;
+
 import org.silvercatcher.reforged.ReforgedEvents;
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
@@ -46,7 +49,10 @@ public class CommonProxy {
 	
 	private void loadConfig(FMLPreInitializationEvent e) {
 		//Get an instance of Config
-		Configuration config = new Configuration(e.getSuggestedConfigurationFile());
+		File configdir = new File(e.getModConfigurationDirectory(), ReforgedMod.NAME);
+		File configfile = new File(configdir, "reforged.cfg");
+		if(!configfile.exists()) configdir.mkdirs();
+		Configuration config = new Configuration(configfile);
 		
 		//Load Config
 		config.load();

@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -23,11 +23,11 @@ public class ItemMusketWithBayonet extends ItemMusket {
 	
 	public Item getKnife() {
 		switch(materialDefinition.getPrefix()) {
-		case "wooden": return ReforgedRegistry.WOODEN_KNIFE;
-		case "stone": return ReforgedRegistry.STONE_KNIFE;
-		case "golden": return ReforgedRegistry.GOLDEN_KNIFE;
-		case "iron": return ReforgedRegistry.IRON_KNIFE;
-		case "diamond": return ReforgedRegistry.DIAMOND_KNIFE;
+		case "wooden": return ReforgedAdditions.WOODEN_KNIFE;
+		case "stone": return ReforgedAdditions.STONE_KNIFE;
+		case "golden": return ReforgedAdditions.GOLDEN_KNIFE;
+		case "iron": return ReforgedAdditions.IRON_KNIFE;
+		case "diamond": return ReforgedAdditions.DIAMOND_KNIFE;
 		default: if(MaterialManager.isFullyAdded(materialDefinition.getMaterial())) {
 			return MaterialManager.getItems(materialDefinition.getMaterial())[0];
 		} else {
@@ -39,7 +39,7 @@ public class ItemMusketWithBayonet extends ItemMusket {
 	@Override
 	public void registerRecipes() {
 		GameRegistry.addShapelessRecipe(new ItemStack(this),
-				new ItemStack(ReforgedRegistry.MUSKET), getKnife());
+				new ItemStack(ReforgedAdditions.MUSKET), getKnife());
 	}
 	
 	@Override
