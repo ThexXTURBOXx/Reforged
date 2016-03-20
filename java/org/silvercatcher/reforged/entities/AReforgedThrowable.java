@@ -27,9 +27,14 @@ public abstract class AReforgedThrowable extends EntityThrowable {
             buf.writeItemStackToBuffer(value);
         }
         @Override
-		public ItemStack read(PacketBuffer buf) throws IOException
+		public ItemStack read(PacketBuffer buf)
         {
-            return buf.readItemStackFromBuffer();
+            try {
+				return buf.readItemStackFromBuffer();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return null;
         }
         @Override
 		public DataParameter<ItemStack> createKey(int id)
@@ -46,7 +51,7 @@ public abstract class AReforgedThrowable extends EntityThrowable {
             buf.writeDouble(value);
         }
         @Override
-		public Double read(PacketBuffer buf) throws IOException
+		public Double read(PacketBuffer buf)
         {
             return buf.readDouble();
         }
@@ -70,13 +75,16 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		super(worldIn, throwerIn);
 		this.damageName = damageName;
 	}
+	
+	public static void registerSerializers() {
+		DataSerializers.registerSerializer(DOUBLE);
+		DataSerializers.registerSerializer(ITEM_STACK);
+	}
 
 
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		DataSerializers.registerSerializer(DOUBLE);
-		DataSerializers.registerSerializer(ITEM_STACK);
 	}
 	
 	@Override
