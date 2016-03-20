@@ -17,6 +17,7 @@ public class Helpers1dot9 {
 	/**Consumes a given amount of Items of the given type out of the given inventory*/
 	public static boolean consumeItem(InventoryPlayer inv, Item i, int count) {
 		int index = inv.getSlotFor(new ItemStack(i));
+		if(index <= 0) inv.offHandInventory[0].stackSize = inv.offHandInventory[0].stackSize - count;
 		if(inv.getStackInSlot(index).isItemEqual(new ItemStack(i)) && inv.getStackInSlot(index).stackSize >= count) {
 			inv.decrStackSize(index, count);
 			return true;
