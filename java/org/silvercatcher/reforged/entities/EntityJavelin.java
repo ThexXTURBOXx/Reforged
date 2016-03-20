@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.entities;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 
 import net.minecraft.entity.Entity;
@@ -45,7 +45,7 @@ public class EntityJavelin extends AReforgedThrowable {
 	protected void entityInit() {
 		super.entityInit();
 		
-		dataManager.register(STACK_JAVELIN, new ItemStack(ReforgedRegistry.JAVELIN));
+		dataManager.register(STACK_JAVELIN, new ItemStack(ReforgedAdditions.JAVELIN));
 		
 		dataManager.register(DURATION, 0);
 	}

@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 
 import net.minecraft.entity.EntityLivingBase;
@@ -35,8 +35,8 @@ public class ItemBlunderbuss extends AReloadable {
 	public void registerRecipes() {
 	
 		GameRegistry.addShapelessRecipe(new ItemStack(this),
-				new ItemStack(ReforgedRegistry.BLUNDERBUSS_BARREL),
-				new ItemStack(ReforgedRegistry.GUN_STOCK));
+				new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL),
+				new ItemStack(ReforgedAdditions.GUN_STOCK));
 	}
 	
 	@Override
@@ -51,7 +51,6 @@ public class ItemBlunderbuss extends AReloadable {
 	
 	@Override
 	public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
-		
 		for(int i = 1; i < 12; i++) {
 			worldIn.spawnEntityInWorld(new EntityBulletBlunderbuss(worldIn, playerIn, stack));
 		}
@@ -59,13 +58,13 @@ public class ItemBlunderbuss extends AReloadable {
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		setAmmo(ReforgedRegistry.BLUNDERBUSS_SHOT);
+		super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
+		setAmmo(ReforgedAdditions.BLUNDERBUSS_SHOT);
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
 	}
 	
 	@Override
 	public int getReloadTotal() {
-
 		return 40;
 	}
 }

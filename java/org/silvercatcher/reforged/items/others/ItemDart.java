@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.items.others;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.ExtendedItem;
 
 import net.minecraft.init.Items;
@@ -31,41 +31,41 @@ public class ItemDart extends ExtendedItem {
 				 " p ",
 				 " d ",
 				 "   ",
-				 'd', ReforgedRegistry.DART_NORMAL,
+				 'd', ReforgedAdditions.DART_NORMAL,
 				 'p', new ItemStack(Items.potionitem, 1, 16)); break;
 			
 		case "poison": GameRegistry.addShapedRecipe(new ItemStack(this),
 				 " p ",
 				 " d ",
 				 "   ",
-				 'd', ReforgedRegistry.DART_NORMAL,
+				 'd', ReforgedAdditions.DART_NORMAL,
 				 'p', new ItemStack(Items.potionitem, 1, 8196)); break;
 			
 		case "poison_strong": GameRegistry.addShapedRecipe(new ItemStack(this),
 				 " p ",
 				 " d ",
 				 "   ",
-				 'd', ReforgedRegistry.DART_POISON,
+				 'd', ReforgedAdditions.DART_POISON,
 				 'p', new ItemStack(Items.potionitem, 1, 8196));
 		 		GameRegistry.addShapedRecipe(new ItemStack(this),
 				 " p ",
 				 " d ",
 				 "   ",
-				 'd', ReforgedRegistry.DART_NORMAL,
+				 'd', ReforgedAdditions.DART_NORMAL,
 				 'p', new ItemStack(Items.potionitem, 1, 8228));break;
 			
 		case "slowness": GameRegistry.addShapedRecipe(new ItemStack(this),
 				 " p ",
 				 " d ",
 				 "   ",
-				 'd', ReforgedRegistry.DART_NORMAL,
+				 'd', ReforgedAdditions.DART_NORMAL,
 				 'p', new ItemStack(Items.potionitem, 1, 16394)); break;
 			
 		case "wither": GameRegistry.addShapedRecipe(new ItemStack(this),
 				 " p ",
 				 " d ",
 				 " b ",
-				 'd', ReforgedRegistry.DART_NORMAL,
+				 'd', ReforgedAdditions.DART_NORMAL,
 				 'p', new ItemStack(Items.potionitem, 1, 16428),
 				 'b', new ItemStack(Items.potionitem, 1, 8196)); break;
 			
