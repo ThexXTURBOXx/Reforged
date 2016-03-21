@@ -67,7 +67,7 @@ item.musket.loadstate.loaded=Loaded
 
 item.keris.name=Kris
 
-item.caltrop.name=Caltrop
+tile.caltrop.name=Caltrop
 
 item.dynamite.name=Dynamite
 

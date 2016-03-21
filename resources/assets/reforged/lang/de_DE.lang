@@ -67,7 +67,7 @@ item.musket.loadstate.loaded=Geladen
 
 item.keris.name=Kris
 
-item.caltrop.name=Fußangel
+tile.caltrop.name=Fußangel
 
 item.dynamite.name=Dynamit
 

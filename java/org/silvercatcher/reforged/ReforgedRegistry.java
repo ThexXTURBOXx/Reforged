@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
+import org.silvercatcher.reforged.blocks.BlockExtension;
+import org.silvercatcher.reforged.blocks.TileEntityCaltropBlock;
 import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletBlunderbuss;
@@ -14,7 +16,6 @@ import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
 import org.silvercatcher.reforged.items.weapons.ItemBlowGun;
 import org.silvercatcher.reforged.items.weapons.ItemBlunderbuss;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
-import org.silvercatcher.reforged.items.weapons.ItemCaltrop;
 import org.silvercatcher.reforged.items.weapons.ItemDynamite;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
@@ -26,6 +27,7 @@ import org.silvercatcher.reforged.items.weapons.ItemMusketWithBayonet;
 import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
 import org.silvercatcher.reforged.items.weapons.ItemSaber;
 
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -48,6 +50,7 @@ public class ReforgedRegistry {
 	
 	/**Every item on that list gets registered*/
 	public static List<Item> registrationList = new ArrayList<Item>();
+	public static List<Block> registrationListBlocks = new ArrayList<Block>();
 	
 	//Registry
 	/**Adds all items to the registrationList*/
@@ -141,9 +144,13 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.BLOWGUN = new ItemBlowGun());
 		}
 		
-		registrationList.add(ReforgedAdditions.CALTROP = new ItemCaltrop());
+		if(GlobalValues.CALTROP) {
+			registrationListBlocks.add(ReforgedAdditions.CALTROP = new TileEntityCaltropBlock());
+		}
 		
-		registrationList.add(ReforgedAdditions.DYNAMITE = new ItemDynamite());
+		if(GlobalValues.DYNAMITE) {
+			registrationList.add(ReforgedAdditions.DYNAMITE = new ItemDynamite());			
+		}
 	}
 	
 	/**Registers all items out of the registrationList*/
@@ -151,6 +158,11 @@ public class ReforgedRegistry {
 		//Register all Items
 		for(Item item : registrationList) {
 			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
+		}
+		
+		//Register all Blocks
+		for(Block block : registrationListBlocks) {
+			GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
 		}
 	}
 	
@@ -160,6 +172,12 @@ public class ReforgedRegistry {
 		for(Item item : registrationList) {
 			if(item instanceof ItemExtension) {
 				((ItemExtension) (item)).registerRecipes();
+			}
+		}
+		
+		for(Block block : registrationListBlocks) {
+			if(block instanceof BlockExtension) {
+				((BlockExtension) (block)).registerRecipes();
 			}
 		}
 		
@@ -203,7 +221,7 @@ public class ReforgedRegistry {
 			throw new IllegalArgumentException("The Category called " + category.name() + " couldn't be found!");
 		}
 		GameRegistry.addRecipe(recipe);
-		RecipeSorter.INSTANCE.register(name, recipeclass, category, catString);
+		RecipeSorter.register(name, recipeclass, category, catString);
 		//NEI and JEI IRecipe Registry [todo]
 	}
 
