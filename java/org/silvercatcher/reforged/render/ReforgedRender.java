@@ -24,10 +24,8 @@ public abstract class ReforgedRender extends Render {
 	}
 	
 	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, float scale, int rotationModifier) {
-		super(renderManager);
-		this.model = model;
+		this(renderManager, model, rotationModifier);
 		this.scale = scale;
-		this.modifier = rotationModifier;
 	}
 	
 	@Override

@@ -30,8 +30,10 @@ public class ReforgedReferences {
 		public static final ResourceLocation JAVELIN = new ResourceLocation(ReforgedMod.ID + ":textures/entity/javelin.png");
 		
 		public static final ResourceLocation CALTROP = new ResourceLocation(ReforgedMod.ID + ":textures/entity/caltrop.png");
+		
+		public static final ResourceLocation DYNAMITE = new ResourceLocation(ReforgedMod.ID + ":textures/entity/dynamite.png");
 	}
-
+	
 	/**Other Values needed*/
 	public static class GlobalValues {
 		//Logger
@@ -49,5 +51,7 @@ public class ReforgedReferences {
 		public static final boolean NEST_OF_BEES = CommonProxy.nest_of_bees;
 		public static final boolean SABRE = CommonProxy.sabre;
 		public static final boolean KERIS = CommonProxy.keris;
+		public static final boolean CALTROP = CommonProxy.caltrop;
+		public static final boolean DYNAMITE = CommonProxy.dynamite;
 	}
 }

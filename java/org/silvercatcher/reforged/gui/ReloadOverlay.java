@@ -4,6 +4,7 @@ import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.items.weapons.AReloadable;
 import org.silvercatcher.reforged.util.Helpers;
 
+//import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;

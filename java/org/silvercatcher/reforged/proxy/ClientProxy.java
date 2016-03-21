@@ -9,6 +9,7 @@ import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityCaltrop;
 import org.silvercatcher.reforged.entities.EntityDart;
+import org.silvercatcher.reforged.entities.EntityDynamite;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
 import org.silvercatcher.reforged.render.RenderBoomerang;
@@ -16,6 +17,7 @@ import org.silvercatcher.reforged.render.RenderBulletBlunderbuss;
 import org.silvercatcher.reforged.render.RenderBulletMusket;
 import org.silvercatcher.reforged.render.RenderCaltrop;
 import org.silvercatcher.reforged.render.RenderDart;
+import org.silvercatcher.reforged.render.RenderDynamite;
 import org.silvercatcher.reforged.render.RenderJavelin;
 
 import net.minecraft.client.Minecraft;
@@ -68,23 +70,16 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	protected void registerEntityRenderers(RenderManager manager) {
 		
-		if(GlobalValues.BOOMERANG) {
-			ReforgedRegistry.registerEntityRenderer(EntityBoomerang.class, new RenderBoomerang(manager));
-		}
+		if(GlobalValues.BOOMERANG) ReforgedRegistry.registerEntityRenderer(EntityBoomerang.class, new RenderBoomerang(manager));
 		
 		if(GlobalValues.MUSKET) {
 			ReforgedRegistry.registerEntityRenderer(EntityBulletMusket.class, new RenderBulletMusket(manager));
 			ReforgedRegistry.registerEntityRenderer(EntityBulletBlunderbuss.class, new RenderBulletBlunderbuss(manager));
 		}
 		
-		if(GlobalValues.JAVELIN) {
-			ReforgedRegistry.registerEntityRenderer(EntityJavelin.class, new RenderJavelin(manager));
-		}
-		
-		if(GlobalValues.BLOWGUN) {
-			ReforgedRegistry.registerEntityRenderer(EntityDart.class, new RenderDart(manager));
-		}
-		
-		ReforgedRegistry.registerEntityRenderer(EntityCaltrop.class, new RenderCaltrop(manager));
+		if(GlobalValues.JAVELIN) ReforgedRegistry.registerEntityRenderer(EntityJavelin.class, new RenderJavelin(manager));
+		if(GlobalValues.BLOWGUN) ReforgedRegistry.registerEntityRenderer(EntityDart.class, new RenderDart(manager));
+		if(GlobalValues.CALTROP) ReforgedRegistry.registerEntityRenderer(EntityCaltrop.class, new RenderCaltrop(manager));
+		if(GlobalValues.DYNAMITE) ReforgedRegistry.registerEntityRenderer(EntityDynamite.class, new RenderDynamite(manager));
 	}
 }

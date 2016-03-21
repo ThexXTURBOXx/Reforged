@@ -41,7 +41,7 @@ public class EntityCaltrop extends AReforgedThrowable {
 		if(falling) {
 			super.onUpdate();
 		} else {
-			BlockPos p = new BlockPos(getPosition().getX(), getPosition().getY() - 1, getPosition().getZ());
+			BlockPos p = new BlockPos(getPosition().getX(), getPosition().getY() - 0.5, getPosition().getZ());
 			if(worldObj.getBlockState(p).getBlock() == Blocks.air) {
 				falling = true;
 			}

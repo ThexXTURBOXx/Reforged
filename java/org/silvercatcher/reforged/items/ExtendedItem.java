@@ -4,7 +4,6 @@ import org.silvercatcher.reforged.ReforgedMod;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;

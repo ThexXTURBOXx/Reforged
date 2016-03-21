@@ -6,7 +6,6 @@ import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.material.MaterialManager;
 import org.silvercatcher.reforged.models.ModelBoomerang;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;

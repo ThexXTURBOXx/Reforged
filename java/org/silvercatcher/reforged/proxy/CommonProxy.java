@@ -51,6 +51,8 @@ public class CommonProxy {
 	public static boolean nest_of_bees;
 	public static boolean sabre;
 	public static boolean keris;
+	public static boolean caltrop;
+	public static boolean dynamite;
 	
 	private void loadConfig(FMLPreInitializationEvent e) {
 		File configdir = new File(e.getModConfigurationDirectory(), ReforgedMod.NAME);
@@ -73,7 +75,10 @@ public class CommonProxy {
 		musket = config.getBoolean("Musket", "Items", true, "Enable the Musket and Blunderbuss");
 		nest_of_bees = config.getBoolean("Nest Of Bees", "Items", false, "Enable the Nest Of Bees (BETA, only use for testing!)");
 		sabre = config.getBoolean("Sabre", "Items", true, "Enable the Sabre");
-		keris = config.getBoolean("Kris", "Items", true, "Enable the Kris");	
+		keris = config.getBoolean("Kris", "Items", true, "Enable the Kris");
+		caltrop = config.getBoolean("Caltrop", "Items", true, "Enable the Caltrop");
+		dynamite = config.getBoolean("Dynamite", "Items", true, "Enable the Dynamite");
+		
 		
 		//Save config
 		config.save();
@@ -85,24 +90,16 @@ public class CommonProxy {
 	
 	private void registerEntities() {
 		
-		if(GlobalValues.BOOMERANG) {
-			ReforgedRegistry.registerEntity(EntityBoomerang.class, "Boomerang");
-		}
-		
-		if(GlobalValues.JAVELIN) {
-			ReforgedRegistry.registerEntity(EntityJavelin.class, "Javelin");
-		}
+		if(GlobalValues.BOOMERANG) ReforgedRegistry.registerEntity(EntityBoomerang.class, "Boomerang");
+		if(GlobalValues.JAVELIN) ReforgedRegistry.registerEntity(EntityJavelin.class, "Javelin");
 		
 		if(GlobalValues.MUSKET) {
 			ReforgedRegistry.registerEntity(EntityBulletMusket.class, "BulletMusket");
 			ReforgedRegistry.registerEntity(EntityBulletBlunderbuss.class, "BulletBlunderbuss");
 		}
 		
-		if(GlobalValues.BLOWGUN) {
-			ReforgedRegistry.registerEntity(EntityDart.class, "Dart");
-		}
-		
-		ReforgedRegistry.registerEntity(EntityCaltrop.class, "Caltrop");
-		ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
+		if(GlobalValues.BLOWGUN) ReforgedRegistry.registerEntity(EntityDart.class, "Dart");
+		if(GlobalValues.CALTROP) ReforgedRegistry.registerEntity(EntityCaltrop.class, "Caltrop");
+		if(GlobalValues.DYNAMITE) ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
 	}
 }
