@@ -1,3 +1,9 @@
+"tagName":"v0.7-pre1-alpha"
+"fileName":"reforged-0.7-pre1-alpha-1.8.jar"
+"updateURLreforged-0.7-pre1-alpha-1.8.jar":"minecraft.curseforge.com/projects/reforged/files/2288665/download"
+"fileName":"reforged-0.7-pre1-alpha-1.8.9.jar"
+"updateURLreforged-0.7-pre1-alpha-1.8.9.jar":"minecraft.curseforge.com/projects/reforged/files/2288666/download"
+
 "tagName":"v0.6.1-alpha"
 "fileName":"reforged-0.6.1-alpha-1.8.jar"
 "updateURLreforged-0.6.1-alpha-1.8.jar":"minecraft.curseforge.com/projects/reforged/files/2286159/download"
@@ -58,6 +64,7 @@
 "fileName":"reforged-0.1.6-alpha-1.8.jar"
 "updateURL":"github.com/TheOnlySilverClaw/Reforged/releases/download/v0.1.6-alpha/reforged-0.1.6-alpha-1.8.jar"
 
+"v0.7-pre1-alpha":"Little prerelease for 0.7"&|
 "v0.6.1-alpha":"Added compatibility for Integration Mod"&|
 "v0.6-alpha":"Final 0.6-release, some Fixes"&|
 "v0.6-pre2":"Hotfixes"&|
