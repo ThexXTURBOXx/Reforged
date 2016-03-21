@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.api;
 
 import org.silvercatcher.reforged.enchantments.EnchantmentGoalseeker;
 
+import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 
@@ -73,10 +74,11 @@ public class ReforgedAdditions {
 	public static Item DART_WITHER;
 	public static Item BLOWGUN;
 	
-	public static Item CALTROP;
-	
 	public static Item DYNAMITE;
 	
+	//Blocks
+	public static Block CALTROP;
+	
 	//Enchantments
-    public static Enchantment goalseeker = new EnchantmentGoalseeker(100);
+    public static final Enchantment goalseeker = new EnchantmentGoalseeker(100);
 }

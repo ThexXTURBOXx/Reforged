@@ -4,6 +4,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.util.BlockPos;
+//For 1.8.9: import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
 public class Helpers {
 	
@@ -42,10 +43,10 @@ public class Helpers {
         
         //1.8
         worldrenderer.startDrawingQuads();
-        worldrenderer.addVertex((double)left, (double)bottom, 0.0D);
-        worldrenderer.addVertex((double)right, (double)bottom, 0.0D);
-        worldrenderer.addVertex((double)right, (double)top, 0.0D);
-        worldrenderer.addVertex((double)left, (double)top, 0.0D);
+        worldrenderer.addVertex(left, bottom, 0.0D);
+        worldrenderer.addVertex(right, bottom, 0.0D);
+        worldrenderer.addVertex(right, top, 0.0D);
+        worldrenderer.addVertex(left, top, 0.0D);
         
         //1.8.9
         /*

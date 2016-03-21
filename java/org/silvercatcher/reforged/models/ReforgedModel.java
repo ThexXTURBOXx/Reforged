@@ -10,7 +10,7 @@ public class ReforgedModel extends ModelBase {
         textureHeight = 32;
 	}
 	
-	/** This was a helper method of Tabula. Doesn't work, but I let it stay here for later... 
+	/**Helper-Method to rotate a part of a ModelBase
 	 * @param modelRenderer a instance of {@link ModelRenderer}.
 	 * @param x motion in x-axis
 	 * @param y motion in y-axis

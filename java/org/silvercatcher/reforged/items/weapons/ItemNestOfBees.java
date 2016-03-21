@@ -5,6 +5,7 @@ import java.util.List;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.items.CompoundTags;
 import org.silvercatcher.reforged.items.ExtendedItem;
+import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
 
 import net.minecraft.entity.Entity;
@@ -71,7 +72,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	public int getMaxItemUseDuration(ItemStack stack) {
 		
 		return CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ACTIVATED)
-				? ExtendedItem.USE_DURATON : buildup;
+				? ItemExtension.USE_DURATON : buildup;
 	}
 	
 	@Override

@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class ReforgedMod {
 	public static final String NAME = "Reforged";
     public static final String ID = "reforged";
-    public static final String VERSION = "0.7-pre1";
+    public static final String VERSION = "0.7-pre2";
 
     public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
 		@Override

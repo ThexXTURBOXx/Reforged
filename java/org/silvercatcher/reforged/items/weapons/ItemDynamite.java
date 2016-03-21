@@ -26,6 +26,7 @@ public class ItemDynamite extends ExtendedItem{
 														     'g', new ItemStack(Items.gunpowder));
 	}
 	
+	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn) {		
 		ItemStack throwStack = stack.copy();
 		
