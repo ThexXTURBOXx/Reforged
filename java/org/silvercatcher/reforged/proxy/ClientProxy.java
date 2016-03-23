@@ -66,10 +66,10 @@ public class ClientProxy extends CommonProxy {
 		}
 		
 		if(GlobalValues.NEST_OF_BEES) {
-			mesher.register(ReforgedAdditions.NEST_OF_BEES, 1, new ModelResourceLocation(ReforgedMod.ID
+			mesher.register(ReforgedAdditions.NEST_OF_BEES, 1, new ModelResourceLocation(ReforgedMod.ID + ":"
 					+ ReforgedAdditions.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_empty", inventory));
 		
-			mesher.register(ReforgedAdditions.NEST_OF_BEES, 2, new ModelResourceLocation(ReforgedMod.ID
+			mesher.register(ReforgedAdditions.NEST_OF_BEES, 2, new ModelResourceLocation(ReforgedMod.ID + ":"
 					+ ReforgedAdditions.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_powder", inventory));
 		}
 	}
