@@ -11,11 +11,13 @@ import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletBlunderbuss;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;
+import org.silvercatcher.reforged.items.others.ItemCrossbowBolt;
 import org.silvercatcher.reforged.items.others.ItemDart;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
 import org.silvercatcher.reforged.items.weapons.ItemBlowGun;
 import org.silvercatcher.reforged.items.weapons.ItemBlunderbuss;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
+import org.silvercatcher.reforged.items.weapons.ItemCrossbow;
 import org.silvercatcher.reforged.items.weapons.ItemDynamite;
 import org.silvercatcher.reforged.items.weapons.ItemFireRod;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
@@ -150,6 +152,11 @@ public class ReforgedRegistry {
 		
 		if(GlobalValues.DYNAMITE) {
 			registrationList.add(ReforgedAdditions.DYNAMITE = new ItemDynamite());			
+		}
+		
+		if(GlobalValues.CROSSBOW) {
+			registrationList.add(ReforgedAdditions.CROSSBOW = new ItemCrossbow());
+			registrationList.add(ReforgedAdditions.CROSSBOW_BOLT = new ItemCrossbowBolt());
 		}
 	}
 	

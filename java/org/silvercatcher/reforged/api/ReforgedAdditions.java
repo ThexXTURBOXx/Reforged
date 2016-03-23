@@ -76,6 +76,9 @@ public class ReforgedAdditions {
 	
 	public static Item DYNAMITE;
 	
+	public static Item CROSSBOW;
+	public static Item CROSSBOW_BOLT;
+	
 	//Blocks
 	public static Block CALTROP;
 	

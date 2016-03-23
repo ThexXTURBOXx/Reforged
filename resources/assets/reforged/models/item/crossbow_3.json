@@ -1,0 +1,6 @@
+{
+    "parent": "reforged:item/crossbow",
+    "textures": {
+        "layer0": "reforged:items/crossbow_1"
+    }
+}

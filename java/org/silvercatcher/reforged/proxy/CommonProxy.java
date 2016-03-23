@@ -54,6 +54,7 @@ public class CommonProxy {
 	public static boolean keris;
 	public static boolean caltrop;
 	public static boolean dynamite;
+	public static boolean crossbow;
 	
 	private void loadConfig(FMLPreInitializationEvent e) {
 		File configdir = new File(e.getModConfigurationDirectory(), ReforgedMod.NAME);
@@ -79,7 +80,7 @@ public class CommonProxy {
 		keris = config.getBoolean("Kris", "Items", true, "Enable the Kris");
 		caltrop = config.getBoolean("Caltrop", "Items", true, "Enable the Caltrop");
 		dynamite = config.getBoolean("Dynamite", "Items", true, "Enable the Dynamite");
-		
+		crossbow = config.getBoolean("Crossbow", "Items", true, "Enable the Crossbow plus Bolt");
 		
 		//Save config
 		config.save();

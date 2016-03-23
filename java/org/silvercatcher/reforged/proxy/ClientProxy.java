@@ -24,6 +24,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
@@ -55,6 +56,11 @@ public class ClientProxy extends CommonProxy {
 		
 		String inventory = "inventory";
 		
+		if(GlobalValues.CROSSBOW) {
+			ModelBakery.addVariantName(ReforgedAdditions.CROSSBOW, new String[] {ReforgedMod.ID + ":crossbow", 
+				 ReforgedMod.ID + ":crossbow_1", ReforgedMod.ID + ":crossbow_2", ReforgedMod.ID + ":crossbow_3"});
+		}
+		 
 		for(Item item : ReforgedRegistry.registrationList) {
 			mesher.register(item, 0, new ModelResourceLocation(ReforgedMod.ID + ":" 
 					+ item.getUnlocalizedName().substring(5), inventory));
@@ -71,6 +77,15 @@ public class ClientProxy extends CommonProxy {
 		
 			mesher.register(ReforgedAdditions.NEST_OF_BEES, 2, new ModelResourceLocation(ReforgedMod.ID + ":"
 					+ ReforgedAdditions.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_powder", inventory));
+		}
+		
+		if(GlobalValues.CROSSBOW) {
+			mesher.register(ReforgedAdditions.CROSSBOW, 1, new ModelResourceLocation(ReforgedMod.ID + ":"
+					+ "crossbow_1"));
+			mesher.register(ReforgedAdditions.CROSSBOW, 2, new ModelResourceLocation(ReforgedMod.ID + ":"
+					+ "crossbow_2"));
+			mesher.register(ReforgedAdditions.CROSSBOW, 3, new ModelResourceLocation(ReforgedMod.ID + ":"
+					+ "crossbow_3"));
 		}
 	}
 	

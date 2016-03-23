@@ -71,6 +71,9 @@ tile.caltrop.name=Caltrop
 
 item.dynamite.name=Dynamite
 
+item.crossbow.name=Crossbow
+item.crossbow_bolt.name=Crossbow Bolt
+
 death.attack.boomerang=%1$s's head was splittered by a Boomerang.
 death.attack.boomerang.player=%1$s's head was splittered by a Boomerang while fighting %2$s.
 death.attack.javelin=%1$s got impaled.
