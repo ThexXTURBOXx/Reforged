@@ -94,6 +94,9 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 				
 				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
 			}
+		} else if(loadState == loading && compound.getLong(CompoundTags.CANCELLED) == 1l) {
+			compound.setLong(CompoundTags.CANCELLED, 0);
+			compound.setLong(CompoundTags.RELOAD, worldIn.getWorldTime() + getReloadTotal());
 		}
 		
 		compound.setByte(CompoundTags.AMMUNITION, loadState);
@@ -124,6 +127,8 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 			}
 			compound.setByte(CompoundTags.AMMUNITION, empty);
 			compound.setLong(CompoundTags.RELOAD, -1l);
+		} else if(loadState == loading) {
+			compound.setLong(CompoundTags.CANCELLED, 1l);
 		}
 	}
 	
@@ -143,6 +148,10 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		return stack;
 	}
 	
+	public long getReloadStarted(ItemStack stack) {
+		return giveCompound(stack).getLong(CompoundTags.RELOAD);
+	}
+	
 	public int getReloadTotal() {
 		return 20;
 	}
@@ -158,10 +167,6 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		return compound;
 	}
 	
-	public long getReloadStarted(ItemStack stack) {
-		return giveCompound(stack).getLong(CompoundTags.RELOAD);
-	}
-	
 	@Override
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
@@ -173,6 +178,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		if(stack.getItem() == this && player.getItemInUse() != null && getLoadState(stack) != empty) {
 			if(getLoadState(stack) == loading) {
 				int left = getReloadLeft(stack, player);
+				System.out.println("left: " + left);
 				if(left > 0) {
 					mrl = new ModelResourceLocation(ReforgedMod.ID + ":crossbow_1", "inventory");
 				} else {
@@ -186,7 +192,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	}
 	
 	private int getReloadLeft(ItemStack stack, EntityPlayer player) {
-		return (int) (getReloadStarted(stack) - player.worldObj.getWorldTime());
+		return (int) (giveCompound(stack).getLong(CompoundTags.RELOAD) - player.worldObj.getWorldTime());
 	}
 	
 	@Override

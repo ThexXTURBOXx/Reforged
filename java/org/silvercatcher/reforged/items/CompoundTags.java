@@ -52,4 +52,7 @@ public class CompoundTags {
 	
 	/** saves whether the item is enchanted */
 	public static final String ENCHANTED	 = "enchanted";
+
+	/** saves whether reloading got cancelled */
+	public static final String CANCELLED 	 = "cancelled";
 }
