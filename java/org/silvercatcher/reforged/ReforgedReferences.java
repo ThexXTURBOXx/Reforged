@@ -36,8 +36,11 @@ public class ReforgedReferences {
 	
 	/**Other Values needed*/
 	public static class GlobalValues {
+		//IDs
+		public static final int GOALSEEKERID = CommonProxy.goalseekerid;
+		
 		//Logger
-		public static Logger log = LogManager.getLogger(ReforgedMod.NAME);
+		public static final Logger LOG = LogManager.getLogger(ReforgedMod.NAME);
 		
 		//Items
 		public static final boolean BATTLEAXE = CommonProxy.battleaxe;

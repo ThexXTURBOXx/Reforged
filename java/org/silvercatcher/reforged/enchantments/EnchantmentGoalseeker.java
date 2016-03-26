@@ -1,5 +1,7 @@
 package org.silvercatcher.reforged.enchantments;
 
+import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.item.ItemStack;
@@ -8,8 +10,8 @@ import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class EnchantmentGoalseeker extends Enchantment {
 	
-	public EnchantmentGoalseeker(int enchID) {
-		super(enchID, new ResourceLocation("goalseeker"), 1, EnumEnchantmentType.BOW);
+	public EnchantmentGoalseeker() {
+		super(GlobalValues.GOALSEEKERID, new ResourceLocation("goalseeker"), 1, EnumEnchantmentType.BOW);
 	}
 	
 	@Override

@@ -56,6 +56,9 @@ public class CommonProxy {
 	public static boolean dynamite;
 	public static boolean crossbow;
 	
+	//IDs
+	public static int goalseekerid;
+	
 	private void loadConfig(FMLPreInitializationEvent e) {
 		File configdir = new File(e.getModConfigurationDirectory(), ReforgedMod.NAME);
 		File configfile = new File(configdir, "reforged.cfg");
@@ -81,6 +84,9 @@ public class CommonProxy {
 		caltrop = config.getBoolean("Caltrop", "Items", true, "Enable the Caltrop");
 		dynamite = config.getBoolean("Dynamite", "Items", true, "Enable the Dynamite");
 		crossbow = config.getBoolean("Crossbow", "Items", true, "Enable the Crossbow plus Bolt");
+		
+		//IDs
+		goalseekerid = config.getInt("Goalseeker", "IDs", 100, 0, 256, "This specifies the Enchantment ID of the Goalseeker-Enchantment");
 		
 		//Save config
 		config.save();

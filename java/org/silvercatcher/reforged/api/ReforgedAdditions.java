@@ -83,5 +83,5 @@ public class ReforgedAdditions {
 	public static Block CALTROP;
 	
 	//Enchantments
-    public static final Enchantment goalseeker = new EnchantmentGoalseeker(100);
+    public static final Enchantment goalseeker = new EnchantmentGoalseeker();
 }
