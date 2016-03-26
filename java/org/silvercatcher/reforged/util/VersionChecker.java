@@ -23,7 +23,7 @@ public class VersionChecker extends Thread {
 			if(Loader.isModLoaded("ReforgedIntegrationCore")) {
 				NBTTagCompound cpd1 = new NBTTagCompound();
 				cpd1.setString("curseProjectName", curseIntegrationID);
-				cpd1.setString("curseFilenameParser", "1.8.9 Reforged Integration []");
+				cpd1.setString("curseFilenameParser", "Reforged Integration []");
 				cpd1.setString("modDisplayName", "Reforged Integration");
 				FMLInterModComms.sendRuntimeMessage("ReforgedIntegrationCore", "VersionChecker", "addCurseCheck", cpd1);				
 			}
