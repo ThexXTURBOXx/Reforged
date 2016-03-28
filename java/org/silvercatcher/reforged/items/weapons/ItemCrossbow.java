@@ -3,9 +3,9 @@ package org.silvercatcher.reforged.items.weapons;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.api.CompoundTags;
+import org.silvercatcher.reforged.api.ItemExtension;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.items.CompoundTags;
-import org.silvercatcher.reforged.items.ItemExtension;
 
 import com.google.common.collect.Multimap;
 
@@ -58,7 +58,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		byte loadState = getLoadState(stack);
 		
 		if(loadState == loading) return EnumAction.BLOCK;
-		if(loadState == loaded) return EnumAction.BLOCK;
+		if(loadState == loaded) return EnumAction.BOW;
 		return EnumAction.NONE;
 	}
 	
@@ -83,20 +83,16 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		
 		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 		
-		if(loadState == empty) {
-			if(playerIn.capabilities.isCreativeMode ||
-					playerIn.inventory.consumeInventoryItem(ammo)) {
+		if(loadState == empty && worldIn.isRemote) {
+			if(playerIn.inventory.consumeInventoryItem(ammo)) {
 				
 				loadState = loading;
-				compound.setLong(CompoundTags.RELOAD, worldIn.getWorldTime() + getReloadTotal());
-				
+				compound.setInteger(CompoundTags.RELOAD, playerIn.ticksExisted + getReloadTotal());
+				if(compound.getByte(CompoundTags.AMMUNITION) == empty) compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
 			} else {
 				
 				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
 			}
-		} else if(loadState == loading && compound.getLong(CompoundTags.CANCELLED) == 1l) {
-			compound.setLong(CompoundTags.CANCELLED, 0);
-			compound.setLong(CompoundTags.RELOAD, worldIn.getWorldTime() + getReloadTotal());
 		}
 		
 		compound.setByte(CompoundTags.AMMUNITION, loadState);
@@ -126,9 +122,8 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 				}
 			}
 			compound.setByte(CompoundTags.AMMUNITION, empty);
-			compound.setLong(CompoundTags.RELOAD, -1l);
-		} else if(loadState == loading) {
-			compound.setLong(CompoundTags.CANCELLED, 1l);
+			compound.setInteger(CompoundTags.RELOAD, -1);
+			compound.setInteger(CompoundTags.STARTED, -1);
 		}
 	}
 	
@@ -148,8 +143,8 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		return stack;
 	}
 	
-	public long getReloadStarted(ItemStack stack) {
-		return giveCompound(stack).getLong(CompoundTags.RELOAD);
+	public int getReloadStarted(ItemStack stack) {
+		return giveCompound(stack).getInteger(CompoundTags.STARTED);
 	}
 	
 	public int getReloadTotal() {
@@ -191,10 +186,6 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		return mrl;
 	}
 	
-	private int getReloadLeft(ItemStack stack, EntityPlayer player) {
-		return (int) (giveCompound(stack).getLong(CompoundTags.RELOAD) - player.worldObj.getWorldTime());
-	}
-	
 	@Override
 	public void registerRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(this), "bii",
@@ -203,6 +194,10 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 														  'b', Items.bow,
 														  'i', Items.iron_ingot,
 														  'w', new ItemStack(Blocks.planks));
+	}
+	
+	public int getReloadLeft(ItemStack stack, EntityPlayer player) {
+		return (getReloadStarted(stack) - player.ticksExisted);
 	}
 	
 	@Override

@@ -1,10 +1,8 @@
-package org.silvercatcher.reforged.items.weapons;
+package org.silvercatcher.reforged.api;
 
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.items.CompoundTags;
-import org.silvercatcher.reforged.items.ItemExtension;
 
 import com.google.common.collect.Multimap;
 
@@ -51,7 +49,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	public EnumAction getItemUseAction(ItemStack stack) {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
-
+		
 		if(loadState == loading) return EnumAction.BLOCK;
 		if(loadState == loaded) return EnumAction.BOW;
 		return EnumAction.NONE;
@@ -82,13 +80,12 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		
 		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 		
-		if(loadState == empty) {
-			if(playerIn.capabilities.isCreativeMode ||
-					playerIn.inventory.consumeInventoryItem(getAmmo())) {
+		if(loadState == empty && worldIn.isRemote) {
+			if(playerIn.inventory.consumeInventoryItem(getAmmo())) {
 				
 				loadState = loading;
-				compound.setLong(CompoundTags.RELOAD, worldIn.getWorldTime() + getReloadTotal());
-				
+				compound.setInteger(CompoundTags.RELOAD, playerIn.ticksExisted + getReloadTotal());
+				if(compound.getByte(CompoundTags.AMMUNITION) == empty) compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
 			} else {
 				
 				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
@@ -101,7 +98,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		
 		return itemStackIn;
 	}
-
+	
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
 		
@@ -110,9 +107,9 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 		
 		if(loadState == loaded) {
-
+			
 			worldIn.playSoundAtEntity(playerIn, "ambient.weather.thunder", 1f, 1f);
-
+			
 			if(!worldIn.isRemote) {
 				
 				shoot(worldIn, playerIn, stack);
@@ -120,26 +117,28 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 					playerIn.renderBrokenItemStack(stack);
 					playerIn.destroyCurrentEquippedItem();
 				}
+				
 			}
 			compound.setByte(CompoundTags.AMMUNITION, empty);
-			compound.setLong(CompoundTags.RELOAD, -1l);
+			compound.setInteger(CompoundTags.RELOAD, -1);
+			compound.setInteger(CompoundTags.STARTED, -1);
 		}
 	}
-
+	
 	public abstract void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack);
-
+	
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
-
+		
 		if(loadState == loading) {
 			loadState = loaded;
 		}
 		giveCompound(stack).setByte(CompoundTags.AMMUNITION, loadState);
 		return stack;
 	}
-
+	
 	public abstract int getReloadTotal();
 	
 	public NBTTagCompound giveCompound(ItemStack stack) {
@@ -153,8 +152,12 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		return compound;
 	}
 	
-	public long getReloadStarted(ItemStack stack) {
-		return giveCompound(stack).getLong(CompoundTags.RELOAD);
+	public int getReloadStarted(ItemStack stack) {
+		return giveCompound(stack).getInteger(CompoundTags.STARTED);
+	}
+	
+	public int getReloadLeft(ItemStack stack, EntityPlayer player) {
+		return (getReloadStarted(stack) - player.ticksExisted);
 	}
 	
 	@SuppressWarnings("rawtypes")

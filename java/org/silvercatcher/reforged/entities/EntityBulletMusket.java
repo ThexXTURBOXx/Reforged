@@ -1,5 +1,7 @@
 package org.silvercatcher.reforged.entities;
 
+import org.silvercatcher.reforged.api.AReforgedThrowable;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;

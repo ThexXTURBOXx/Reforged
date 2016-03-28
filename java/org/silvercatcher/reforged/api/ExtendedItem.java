@@ -1,4 +1,4 @@
-package org.silvercatcher.reforged.items;
+package org.silvercatcher.reforged.api;
 
 import org.silvercatcher.reforged.ReforgedMod;
 

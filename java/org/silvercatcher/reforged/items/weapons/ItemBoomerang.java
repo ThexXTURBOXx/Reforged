@@ -1,8 +1,8 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
-import org.silvercatcher.reforged.items.ExtendedItem;
 import org.silvercatcher.reforged.items.recipes.BoomerangEnchRecipe;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;

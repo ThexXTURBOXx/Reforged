@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import org.silvercatcher.reforged.api.AReloadable;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 

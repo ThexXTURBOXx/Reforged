@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.entities;
 
-import org.silvercatcher.reforged.items.CompoundTags;
+import org.silvercatcher.reforged.api.AReforgedThrowable;
+import org.silvercatcher.reforged.api.CompoundTags;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 

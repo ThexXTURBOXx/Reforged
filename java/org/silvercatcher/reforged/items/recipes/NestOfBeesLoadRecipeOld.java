@@ -2,8 +2,8 @@ package org.silvercatcher.reforged.items.recipes;
 
 import java.util.LinkedList;
 
+import org.silvercatcher.reforged.api.CompoundTags;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.items.CompoundTags;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.InventoryCrafting;

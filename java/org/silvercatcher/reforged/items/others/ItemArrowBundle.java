@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.items.others;
 
-import org.silvercatcher.reforged.items.ExtendedItem;
+import org.silvercatcher.reforged.api.ExtendedItem;
 
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;

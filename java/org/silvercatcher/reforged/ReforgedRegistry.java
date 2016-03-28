@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+import org.silvercatcher.reforged.api.BlockExtension;
+import org.silvercatcher.reforged.api.ItemExtension;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.blocks.BlockExtension;
 import org.silvercatcher.reforged.blocks.TileEntityCaltropBlock;
-import org.silvercatcher.reforged.items.ItemExtension;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletBlunderbuss;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;

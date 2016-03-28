@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.entities;
 
+import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.items.others.ItemDart;
 
 import net.minecraft.entity.Entity;

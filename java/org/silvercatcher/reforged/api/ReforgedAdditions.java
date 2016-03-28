@@ -8,7 +8,7 @@ import net.minecraft.item.Item;
 
 /**WARNING: If an Item is turned off in Config,
  * it could cause a NullPointerException here!*/
-public class ReforgedAdditions {
+public abstract class ReforgedAdditions {
 	
 	//Items
 	public static Item ARROW_BUNDLE;

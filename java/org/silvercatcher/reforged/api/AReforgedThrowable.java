@@ -1,4 +1,4 @@
-package org.silvercatcher.reforged.entities;
+package org.silvercatcher.reforged.api;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

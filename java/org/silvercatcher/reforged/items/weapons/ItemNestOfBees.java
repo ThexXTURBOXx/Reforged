@@ -3,9 +3,9 @@ package org.silvercatcher.reforged.items.weapons;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.items.CompoundTags;
-import org.silvercatcher.reforged.items.ExtendedItem;
-import org.silvercatcher.reforged.items.ItemExtension;
+import org.silvercatcher.reforged.api.CompoundTags;
+import org.silvercatcher.reforged.api.ExtendedItem;
+import org.silvercatcher.reforged.api.ItemExtension;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
 
 import net.minecraft.entity.Entity;

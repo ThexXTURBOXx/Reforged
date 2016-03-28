@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.api.BlockExtension;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.TileEntityCaltropEntity;
 

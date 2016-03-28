@@ -1,4 +1,4 @@
-package org.silvercatcher.reforged.items;
+package org.silvercatcher.reforged.api;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -55,4 +55,7 @@ public class CompoundTags {
 
 	/** saves whether reloading got cancelled */
 	public static final String CANCELLED 	 = "cancelled";
+
+	/** saves when the weapon got started reloading */
+	public static final String STARTED 	 = "started";
 }

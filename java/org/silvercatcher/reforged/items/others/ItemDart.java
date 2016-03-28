@@ -1,7 +1,7 @@
 package org.silvercatcher.reforged.items.others;
 
+import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.items.ExtendedItem;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

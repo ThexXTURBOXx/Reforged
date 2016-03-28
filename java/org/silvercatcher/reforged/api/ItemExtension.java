@@ -1,4 +1,4 @@
-package org.silvercatcher.reforged.items;
+package org.silvercatcher.reforged.api;
 
 import java.util.Map.Entry;
 import java.util.UUID;

@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.entities;
 
+import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
 
 import net.minecraft.entity.Entity;

@@ -1,7 +1,7 @@
 package org.silvercatcher.reforged.gui;
 
 import org.lwjgl.opengl.GL11;
-import org.silvercatcher.reforged.items.weapons.AReloadable;
+import org.silvercatcher.reforged.api.AReloadable;
 import org.silvercatcher.reforged.util.Helpers;
 
 //import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -50,16 +50,21 @@ public class ReloadOverlay extends Gui {
 				
 				AReloadable reloadable = (AReloadable) equipped.getItem();
 				
-				int reloadLeft = (int) (reloadable.getReloadStarted(equipped)
-						- player.worldObj.getWorldTime());
+				int reloadLeft = reloadable.getReloadLeft(equipped, player);
 				
 				if(reloadLeft < 0) return;
+				
+				//System.out.println("left: " + reloadLeft);
+				
+				//System.out.println("total: " + reloadable.getReloadTotal());
 				
 				if(reloadLeft > reloadable.getReloadTotal()) {
 					reloadLeft = reloadable.getReloadTotal();
 				}
 				
 				float done = (float) reloadLeft / reloadable.getReloadTotal();
+				
+				//System.out.println("done: " + done);
 				
 				GL11.glColor4f(1F, 1F, 1F, 1F);
 				GL11.glDisable(GL11.GL_LIGHTING);
