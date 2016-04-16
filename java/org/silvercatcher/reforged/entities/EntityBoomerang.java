@@ -40,11 +40,11 @@ public class EntityBoomerang extends AReforgedThrowable {
 		
 		dataManager.register(STACK_BOOMERANG, new ItemStack(ReforgedAdditions.WOODEN_BOOMERANG));
 		
-		dataManager.register(THROWER_X, posX);
+		dataManager.register(THROWER_X, getThrower().posX);
 		
-		dataManager.register(THROWER_Y, posY);
+		dataManager.register(THROWER_Y, getThrower().posY + getThrower().getEyeHeight());
 		
-		dataManager.register(THROWER_Z, posZ);
+		dataManager.register(THROWER_Z, getThrower().posZ);
 	}
 
 	public ItemStack getItemStack() {
