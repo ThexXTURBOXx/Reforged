@@ -21,8 +21,8 @@ public class ItemBulletMusket extends ExtendedItem {
 				" i ",
 				" g ",
 				" p ",
-				'i', Items.iron_ingot,
-				'g', Items.gunpowder,
-				'p', Items.paper);
+				'i', Items.IRON_INGOT,
+				'g', Items.GUNPOWDER,
+				'p', Items.PAPER);
 	}
 }

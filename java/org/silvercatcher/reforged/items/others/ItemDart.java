@@ -23,51 +23,51 @@ public class ItemDart extends ExtendedItem {
 				 " f ",
 				 " s ",
 				 "vsv",
-				 'f', Items.flint,
-				 's', Items.stick,
-				 'v', Items.feather); break;
+				 'f', Items.FLINT,
+				 's', Items.STICK,
+				 'v', Items.FEATHER); break;
 			
 		case "hunger": GameRegistry.addShapedRecipe(new ItemStack(this),
 				 " p ",
 				 " d ",
 				 "   ",
 				 'd', ReforgedAdditions.DART_NORMAL,
-				 'p', new ItemStack(Items.potionitem, 1, 16)); break;
+				 'p', new ItemStack(Items.POTIONITEM, 1, 16)); break;
 			
 		case "poison": GameRegistry.addShapedRecipe(new ItemStack(this),
 				 " p ",
 				 " d ",
 				 "   ",
 				 'd', ReforgedAdditions.DART_NORMAL,
-				 'p', new ItemStack(Items.potionitem, 1, 8196)); break;
+				 'p', new ItemStack(Items.POTIONITEM, 1, 8196)); break;
 			
 		case "poison_strong": GameRegistry.addShapedRecipe(new ItemStack(this),
 				 " p ",
 				 " d ",
 				 "   ",
 				 'd', ReforgedAdditions.DART_POISON,
-				 'p', new ItemStack(Items.potionitem, 1, 8196));
+				 'p', new ItemStack(Items.POTIONITEM, 1, 8196));
 		 		GameRegistry.addShapedRecipe(new ItemStack(this),
 				 " p ",
 				 " d ",
 				 "   ",
 				 'd', ReforgedAdditions.DART_NORMAL,
-				 'p', new ItemStack(Items.potionitem, 1, 8228));break;
+				 'p', new ItemStack(Items.POTIONITEM, 1, 8228));break;
 			
 		case "slowness": GameRegistry.addShapedRecipe(new ItemStack(this),
 				 " p ",
 				 " d ",
 				 "   ",
 				 'd', ReforgedAdditions.DART_NORMAL,
-				 'p', new ItemStack(Items.potionitem, 1, 16394)); break;
+				 'p', new ItemStack(Items.POTIONITEM, 1, 16394)); break;
 			
 		case "wither": GameRegistry.addShapedRecipe(new ItemStack(this),
 				 " p ",
 				 " d ",
 				 " b ",
 				 'd', ReforgedAdditions.DART_NORMAL,
-				 'p', new ItemStack(Items.potionitem, 1, 16428),
-				 'b', new ItemStack(Items.potionitem, 1, 8196)); break;
+				 'p', new ItemStack(Items.POTIONITEM, 1, 16428),
+				 'b', new ItemStack(Items.POTIONITEM, 1, 8196)); break;
 			
 		default: throw new IllegalArgumentException("Could not register recipe of the item: " + getUnlocalizedName());
 		

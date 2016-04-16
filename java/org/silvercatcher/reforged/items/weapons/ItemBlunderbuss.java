@@ -8,7 +8,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -22,7 +21,7 @@ public class ItemBlunderbuss extends AReloadable {
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
 		
-		return (repair.getItem() == Items.iron_ingot);
+		return (repair.getItem() == Items.IRON_INGOT);
 	}
 	
 	@Override
@@ -58,9 +57,8 @@ public class ItemBlunderbuss extends AReloadable {
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 		setAmmo(ReforgedAdditions.BLUNDERBUSS_SHOT);
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemStackIn);
+		return super.onItemRightClick(itemStackIn, worldIn, playerIn, hand);
 	}
 	
 	@Override

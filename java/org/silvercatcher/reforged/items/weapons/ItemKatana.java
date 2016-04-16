@@ -79,7 +79,7 @@ public class ItemKatana extends ItemSword implements ItemExtension {
 				" m ",
 				"s  ",
 				'm', materialDefinition.getRepairMaterial(),
-				's', new ItemStack(Items.stick));
+				's', new ItemStack(Items.STICK));
 	}
 
 	@Override

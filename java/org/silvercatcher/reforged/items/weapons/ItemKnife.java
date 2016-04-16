@@ -64,7 +64,7 @@ public class ItemKnife extends ItemSword implements ItemExtension {
 	@Override
 	public void registerRecipes() {
 		GameRegistry.addShapelessRecipe(new ItemStack(this),
-				new ItemStack(Items.stick), materialDefinition.getRepairMaterial());
+				new ItemStack(Items.STICK), materialDefinition.getRepairMaterial());
 	}
 	
 	@Override

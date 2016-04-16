@@ -39,8 +39,8 @@ public class ItemHolyCross extends ExtendedItem {
 				" s ",
 				"sds",
 				" s ",
-				's', Items.stick,
-				'd', Items.emerald);
+				's', Items.STICK,
+				'd', Items.EMERALD);
 	}
 
 	@Override

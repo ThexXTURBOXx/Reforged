@@ -32,15 +32,15 @@ public class ItemFireRod extends ExtendedItem {
 				"  c",
 				" s ",
 				"s  ",
-				'c', new ItemStack(Items.coal, 1, 0),
-				's', Items.stick);
+				'c', new ItemStack(Items.COAL, 1, 0),
+				's', Items.STICK);
 		
 		GameRegistry.addRecipe(new ItemStack(this),
 				"  c",
 				" s ",
 				"s  ",
-				'c', new ItemStack(Items.coal, 1, 1),
-				's', Items.stick);
+				'c', new ItemStack(Items.COAL, 1, 1),
+				's', Items.STICK);
 	}
 	@Override
 	public EnumActionResult onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos,
@@ -51,7 +51,7 @@ public class ItemFireRod extends ExtendedItem {
 			BlockPos target = pos.offset(facing);
 			
 			if(!(worldIn.canBlockSeeSky(pos) && worldIn.isRaining()) &&  worldIn.isAirBlock(target)) {
-				worldIn.setBlockState(target, Blocks.fire.getDefaultState());
+				worldIn.setBlockState(target, Blocks.FIRE.getDefaultState());
 				--stack.stackSize;
 			}
 		}

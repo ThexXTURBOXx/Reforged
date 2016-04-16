@@ -42,7 +42,7 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 				"xsx",
 				" s ",
 				'x', materialDefinition.getRepairMaterial(),
-				's', Items.stick);
+				's', Items.STICK);
 	}
 	
 	@Override
@@ -62,7 +62,7 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension {
 	protected boolean effectiveAgainst(IBlockState target) {
 		
 		Material material = target.getMaterial();
-		return (material == Material.wood || material == Material.plants || material == Material.vine);
+		return (material == Material.WOOD || material == Material.PLANTS || material == Material.VINE);
 	}
 
 	@Override

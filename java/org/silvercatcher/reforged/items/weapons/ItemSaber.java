@@ -57,7 +57,7 @@ public class ItemSaber extends ItemSword implements ItemExtension {
 				"b  ",
 				"s  ",
 				'b', materialDefinition.getRepairMaterial(),
-				's', Items.stick);
+				's', Items.STICK);
 	}
 
 	@Override

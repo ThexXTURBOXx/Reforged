@@ -23,9 +23,9 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 
@@ -44,8 +44,8 @@ public class ItemNestOfBees extends ExtendedItem {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
-
-		tooltip.add(LanguageRegistry.instance().getStringLocalization("item.nestofbees.arrows") + ": " + CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
+		
+		tooltip.add(new TextComponentTranslation("item.nestofbees.arrows", (Object[]) null).getUnformattedText() + ": " + CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
 	}
 	
 	@Override
@@ -55,9 +55,9 @@ public class ItemNestOfBees extends ExtendedItem {
 				"lwl",
 				"lsl",
 				"lll",
-				'l', Items.leather,
-				's', Items.string,
-				'w', Item.getItemFromBlock(Blocks.planks));
+				'l', Items.LEATHER,
+				's', Items.STRING,
+				'w', Item.getItemFromBlock(Blocks.PLANKS));
 		
 		GameRegistry.addRecipe(new NestOfBeesLoadRecipe());
 		RecipeSorter.register("ReloadNoB", NestOfBeesLoadRecipe.class, Category.SHAPELESS, "after:minecraft:shapeless");
@@ -127,7 +127,7 @@ public class ItemNestOfBees extends ExtendedItem {
 		
 		if(compound.getInteger(CompoundTags.AMMUNITION) > 0) {
 			compound.setBoolean(CompoundTags.ACTIVATED, true);
-			if(entityLiving instanceof EntityPlayer) worldIn.playSound((EntityPlayer) entityLiving, entityLiving.getPosition(), SoundEvents.item_firecharge_use, SoundCategory.MASTER, 1.0f, 1.0f);
+			if(entityLiving instanceof EntityPlayer) worldIn.playSound((EntityPlayer) entityLiving, entityLiving.getPosition(), SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.MASTER, 1.0f, 1.0f);
 		}
 		return stack;	
 	}
@@ -135,14 +135,14 @@ public class ItemNestOfBees extends ExtendedItem {
 	protected void shoot(World world, EntityPlayer shooter) {
 		
 		if(!world.isRemote) {
-			ItemArrow itemarrow = (ItemArrow) Items.arrow;
+			ItemArrow itemarrow = (ItemArrow) Items.ARROW;
 			EntityArrow arrow = itemarrow.createArrow(world, new ItemStack(itemarrow), shooter);
 			arrow.setDamage(2);
 			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ,
 					3 + itemRand.nextFloat() / 2f, 1.5f);
 			world.spawnEntityInWorld(arrow);
 		}
-        world.playSound(shooter, shooter.getPosition(), SoundEvents.entity_firework_launch, SoundCategory.MASTER, 3.0f, 1.0f);
+        world.playSound(shooter, shooter.getPosition(), SoundEvents.ENTITY_FIREWORK_LAUNCH, SoundCategory.MASTER, 3.0f, 1.0f);
 	}
 	
 	@Override

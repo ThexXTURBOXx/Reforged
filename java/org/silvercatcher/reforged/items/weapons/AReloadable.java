@@ -21,8 +21,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public abstract class AReloadable extends ItemBow implements ItemExtension {
 	
@@ -45,12 +45,10 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		LanguageRegistry lr = LanguageRegistry.instance();
-		
-		tooltip.add(lr.getStringLocalization("item.musket.loadstate") + ": " + (loadState == empty ? 
-				lr.getStringLocalization("item.musket.loadstate.empty")
-				: (loadState == loaded ? lr.getStringLocalization("item.musket.loadstate.loaded") : 
-					lr.getStringLocalization("item.musket.loadstate.loading"))));
+		tooltip.add(new TextComponentTranslation("item.musket.loadstate", (Object[]) null).getUnformattedText() + ": " + (loadState == empty ? 
+				new TextComponentTranslation("item.musket.loadstate.empty", (Object[]) null).getUnformattedText()
+				: (loadState == loaded ? new TextComponentTranslation("item.musket.loadstate.loaded", (Object[]) null).getUnformattedText() : 
+					new TextComponentTranslation("item.musket.loadstate.loading", (Object[]) null).getUnformattedText())));
 	}
 	
 	@Override
@@ -96,7 +94,8 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				compound.setLong(CompoundTags.RELOAD, worldIn.getWorldTime() + getReloadTotal());
 				
 			} else {
-				worldIn.playSound(playerIn, playerIn.getPosition(), SoundEvents.item_firecharge_use, SoundCategory.MASTER, 1, 0.7F);
+				worldIn.playSound(playerIn, playerIn.getPosition(), SoundEvents.ITEM_FIRECHARGE_USE, SoundCategory.MASTER, 1, 0.7F);
+				return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemStackIn);
 			}
 		}
 		
@@ -115,7 +114,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 		
 		if(loadState == loaded) {
-			if(playerIn instanceof EntityPlayer) worldIn.playSound((EntityPlayer) playerIn, playerIn.getPosition(), SoundEvents.entity_lightning_thunder, SoundCategory.WEATHER, 1f, 1f);
+			if(playerIn instanceof EntityPlayer) worldIn.playSound((EntityPlayer) playerIn, playerIn.getPosition(), SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.WEATHER, 1f, 1f);
 			
 			if(!worldIn.isRemote) {
 				

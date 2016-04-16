@@ -46,8 +46,8 @@ public class ItemJavelin extends ExtendedItem {
 				"  f",
 				" s ",
 				"s  ",
-				'f', new ItemStack(Items.flint),
-				's', new ItemStack(Items.stick));
+				'f', new ItemStack(Items.FLINT),
+				's', new ItemStack(Items.STICK));
 	}
 
 
@@ -75,7 +75,7 @@ public class ItemJavelin extends ExtendedItem {
 		
 		if(timeLeft <= getMaxItemUseDuration(stack) - 7 && (playerIn instanceof EntityPlayer && (((EntityPlayer) playerIn).capabilities.isCreativeMode) || Helpers1dot9.consumeItem(((EntityPlayer) playerIn).inventory, this))) {
 			
-			if(playerIn instanceof EntityPlayer) worldIn.playSound((EntityPlayer) playerIn, playerIn.getPosition(), SoundEvents.entity_arrow_shoot, SoundCategory.MASTER, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+			if(playerIn instanceof EntityPlayer) worldIn.playSound((EntityPlayer) playerIn, playerIn.getPosition(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.MASTER, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 			
 			if (!worldIn.isRemote) {
 				if(throwStack.stackSize > 1) {

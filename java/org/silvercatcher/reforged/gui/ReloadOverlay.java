@@ -17,14 +17,14 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ReloadOverlay extends Gui {
-	
+		
 	//My way to setup colors >:D
 	//The values are {Red, Green, Blue}
 	//1 means f (full color)
-	private static final float[] red    = new float[] {1, 0    , 0};
-	private static final float[] orange = new float[] {1, 0.66F, 0};
-	private static final float[] yellow = new float[] {1, 1    , 0};
-	private static final float[] green  = new float[] {0, 1    , 0};
+	private static final float[] red    = new float[] {1, 0    , 0, 1};
+	private static final float[] orange = new float[] {1, 0.66F, 0, 1};
+	private static final float[] yellow = new float[] {1, 1    , 0, 1};
+	private static final float[] green  = new float[] {0, 1    , 0, 1};
 	
 	private final Minecraft minecraft;
 	
@@ -38,7 +38,7 @@ public class ReloadOverlay extends Gui {
 	@SubscribeEvent
 	public void renderReload(RenderGameOverlayEvent event) {
 		
-		if(event instanceof RenderGameOverlayEvent.Post|| event.type != RenderGameOverlayEvent.ElementType.HOTBAR) {
+		if(event instanceof RenderGameOverlayEvent.Post|| event.getType() != RenderGameOverlayEvent.ElementType.HOTBAR) {
 			return ;
 		}
 		drawRect(0, 0, 0, 0, 0);
@@ -91,10 +91,10 @@ public class ReloadOverlay extends Gui {
 					}
 				}
 				
-				int x0 = event.resolution.getScaledWidth() / 2 - 88 + i * 20;
-				int y0 = event.resolution.getScaledHeight() - 3;
+				int x0 = event.getResolution().getScaledWidth() / 2 - 88 + i * 20;
+				int y0 = event.getResolution().getScaledHeight() - 3;
 				
-				drawRectangle(x0, y0 - (int) (done * 16), x0 + 16, y0, color);
+				drawRect(x0, y0 - (int) (done * 16), x0 + 16, y0, 0xffffffff);
 			}
 		}
 	}
@@ -119,7 +119,7 @@ public class ReloadOverlay extends Gui {
         GlStateManager.enableBlend();
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        GlStateManager.color(color[0], color[1], color[2], 1);
+        GlStateManager.color(color[0], color[1], color[2], color[3]);
         vertexbuffer.begin(7, DefaultVertexFormats.POSITION);
         vertexbuffer.pos(left, bottom, 0.0D).endVertex();
         vertexbuffer.pos(right, bottom, 0.0D).endVertex();
@@ -129,5 +129,4 @@ public class ReloadOverlay extends Gui {
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
 	}
-	
 }

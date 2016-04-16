@@ -38,7 +38,7 @@ public class ItemBoomerang extends ExtendedItem {
 		
 		if(par3EntityPlayer.capabilities.isCreativeMode || Helpers1dot9.consumeItem(par3EntityPlayer.inventory, this)) {
 			
-	        par2World.playSound(par3EntityPlayer, par3EntityPlayer.getPosition(), SoundEvents.entity_arrow_shoot, SoundCategory.MASTER, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+	        par2World.playSound(par3EntityPlayer, par3EntityPlayer.getPosition(), SoundEvents.ENTITY_ARROW_SHOOT, SoundCategory.MASTER, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
         	
 	        if (!par2World.isRemote) {
 	        	
@@ -57,7 +57,7 @@ public class ItemBoomerang extends ExtendedItem {
 					"  w",
 					"  x",
 					'x', materialDefinition.getRepairMaterial(),
-					'w', Items.stick);
+					'w', Items.STICK);
 	}
 	
 

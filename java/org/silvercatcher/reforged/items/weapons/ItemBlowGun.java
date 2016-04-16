@@ -94,6 +94,6 @@ public class ItemBlowGun extends ExtendedItem {
 				 "r  ",
 				 " r ",
 				 "  r",
-				 'r', Items.reeds);
+				 'r', Items.REEDS);
 	}
 }

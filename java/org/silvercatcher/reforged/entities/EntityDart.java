@@ -58,7 +58,7 @@ public class EntityDart extends AReforgedThrowable {
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
 		if(!worldObj.isRemote && rand.nextInt(4) == 0) {
-			entityDropItem(new ItemStack(Items.feather), 1);	
+			entityDropItem(new ItemStack(Items.FEATHER), 1);	
 		}
 		return true;
 	}
@@ -76,16 +76,16 @@ public class EntityDart extends AReforgedThrowable {
 				
 				case "normal": break;
 				
-				case "hunger": p.addPotionEffect(new PotionEffect(Potion.potionRegistry.getObject(new ResourceLocation("hunger")), 300, 1)); break;
+				case "hunger": p.addPotionEffect(new PotionEffect(Potion.REGISTRY.getObject(new ResourceLocation("hunger")), 300, 1)); break;
 				
-				case "poison": p.addPotionEffect(new PotionEffect(Potion.potionRegistry.getObject(new ResourceLocation("poison")), 200, 1)); break;
+				case "poison": p.addPotionEffect(new PotionEffect(Potion.REGISTRY.getObject(new ResourceLocation("poison")), 200, 1)); break;
 				
-				case "poison_strong": p.addPotionEffect(new PotionEffect(Potion.potionRegistry.getObject(new ResourceLocation("poison")), 300, 2)); break;
+				case "poison_strong": p.addPotionEffect(new PotionEffect(Potion.REGISTRY.getObject(new ResourceLocation("poison")), 300, 2)); break;
 				
-				case "slowness": p.addPotionEffect(new PotionEffect(Potion.potionRegistry.getObject(new ResourceLocation("slowness")), 300, 1));
-				p.addPotionEffect(new PotionEffect(Potion.potionRegistry.getObject(new ResourceLocation("mining_fatigue")), 300, 1)); break;
+				case "slowness": p.addPotionEffect(new PotionEffect(Potion.REGISTRY.getObject(new ResourceLocation("slowness")), 300, 1));
+				p.addPotionEffect(new PotionEffect(Potion.REGISTRY.getObject(new ResourceLocation("mining_fatigue")), 300, 1)); break;
 				
-				case "wither": p.addPotionEffect(new PotionEffect(Potion.potionRegistry.getObject(new ResourceLocation("wither")), 300, 1)); break;
+				case "wither": p.addPotionEffect(new PotionEffect(Potion.REGISTRY.getObject(new ResourceLocation("wither")), 300, 1)); break;
 				
 				default: throw new IllegalArgumentException("No effect called " + getEffect().substring(5) + " found!");
 				

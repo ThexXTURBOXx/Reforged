@@ -160,22 +160,22 @@ public class ReforgedRegistry {
 					"   ",
 					"ssp",
 					"   ",
-					's', Items.stick,
-					'p', Blocks.planks);
+					's', Items.STICK,
+					'p', Blocks.PLANKS);
 		
 			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.MUSKET_BARREL),
 					"   ",
 					"iif",
 					"  i",
-					'i', Items.iron_ingot,
-					'f', Items.flint_and_steel);
+					'i', Items.IRON_INGOT,
+					'f', Items.FLINT_AND_STEEL);
 		
 			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL),
 					"i  ",
 					" if",
 					"i i",
-					'i', Items.iron_ingot,
-					'f', Items.flint_and_steel);
+					'i', Items.IRON_INGOT,
+					'f', Items.FLINT_AND_STEEL);
 		}
 	}
 	
