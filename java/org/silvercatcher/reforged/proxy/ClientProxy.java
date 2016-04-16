@@ -57,8 +57,9 @@ public class ClientProxy extends CommonProxy {
 		String inventory = "inventory";
 		
 		if(GlobalValues.CROSSBOW) {
-			ModelBakery.addVariantName(ReforgedAdditions.CROSSBOW, new String[] {ReforgedMod.ID + ":crossbow", 
-				 ReforgedMod.ID + ":crossbow_1", ReforgedMod.ID + ":crossbow_2", ReforgedMod.ID + ":crossbow_3"});
+			ModelBakery.addVariantName(ReforgedAdditions.CROSSBOW, new String[] {ReforgedMod.ID + ":crossbow",
+				 ReforgedMod.ID + ":crossbow_1", ReforgedMod.ID + ":crossbow_2", ReforgedMod.ID + ":crossbow_3",
+				 ReforgedMod.ID + ":crossbow_4", ReforgedMod.ID + ":crossbow_5"});
 		}
 		 
 		for(Item item : ReforgedRegistry.registrationList) {
@@ -80,12 +81,10 @@ public class ClientProxy extends CommonProxy {
 		}
 		
 		if(GlobalValues.CROSSBOW) {
-			mesher.register(ReforgedAdditions.CROSSBOW, 1, new ModelResourceLocation(ReforgedMod.ID + ":"
-					+ "crossbow_1"));
-			mesher.register(ReforgedAdditions.CROSSBOW, 2, new ModelResourceLocation(ReforgedMod.ID + ":"
-					+ "crossbow_2"));
-			mesher.register(ReforgedAdditions.CROSSBOW, 3, new ModelResourceLocation(ReforgedMod.ID + ":"
-					+ "crossbow_3"));
+			for(int i = 1; i <= 5; i++) {
+				mesher.register(ReforgedAdditions.CROSSBOW, i, new ModelResourceLocation(ReforgedMod.ID + ":"
+						+ "crossbow_" + i));				
+			}
 		}
 	}
 	

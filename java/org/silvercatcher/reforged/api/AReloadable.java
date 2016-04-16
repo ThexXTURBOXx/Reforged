@@ -80,12 +80,12 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		
 		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 		
-		if(loadState == empty && worldIn.isRemote) {
-			if(playerIn.inventory.consumeInventoryItem(getAmmo())) {
+		if(loadState == empty) {
+			if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(getAmmo())) {
 				
 				loadState = loading;
 				compound.setInteger(CompoundTags.RELOAD, playerIn.ticksExisted + getReloadTotal());
-				if(compound.getByte(CompoundTags.AMMUNITION) == empty) compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
+				if(compound.getByte(CompoundTags.AMMUNITION) == empty && worldIn.isRemote) compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
 			} else {
 				
 				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
@@ -110,15 +110,12 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 			
 			worldIn.playSoundAtEntity(playerIn, "ambient.weather.thunder", 1f, 1f);
 			
-			if(!worldIn.isRemote) {
-				
-				shoot(worldIn, playerIn, stack);
-				if(!playerIn.capabilities.isCreativeMode && (stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand))) {
-					playerIn.renderBrokenItemStack(stack);
-					playerIn.destroyCurrentEquippedItem();
-				}
-				
+			shoot(worldIn, playerIn, stack);
+			if(!playerIn.capabilities.isCreativeMode && stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand)) {
+				playerIn.renderBrokenItemStack(stack);
+				playerIn.destroyCurrentEquippedItem();
 			}
+			
 			compound.setByte(CompoundTags.AMMUNITION, empty);
 			compound.setInteger(CompoundTags.RELOAD, -1);
 			compound.setInteger(CompoundTags.STARTED, -1);
