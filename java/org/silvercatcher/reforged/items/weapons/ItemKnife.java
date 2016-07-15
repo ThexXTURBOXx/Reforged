@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -27,6 +28,8 @@ public class ItemKnife extends ItemSword implements ItemExtension {
 	
 	public ItemKnife(ToolMaterial material, boolean unbreakable) {
 		super(material);
+		
+		setCreativeTab(ReforgedMod.tabReforged);
 		
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
