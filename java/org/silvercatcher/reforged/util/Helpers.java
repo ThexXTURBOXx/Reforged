@@ -1,8 +1,6 @@
 package org.silvercatcher.reforged.util;
 
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.*;
 import net.minecraft.util.BlockPos;
 //For 1.8.9: import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 

@@ -2,17 +2,9 @@ package org.silvercatcher.reforged.proxy;
 
 import java.io.File;
 
-import org.silvercatcher.reforged.ReforgedEvents;
-import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.*;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
-import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.entities.EntityBoomerang;
-import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
-import org.silvercatcher.reforged.entities.EntityBulletMusket;
-import org.silvercatcher.reforged.entities.EntityDart;
-import org.silvercatcher.reforged.entities.EntityDynamite;
-import org.silvercatcher.reforged.entities.EntityJavelin;
-import org.silvercatcher.reforged.entities.TileEntityCaltropEntity;
+import org.silvercatcher.reforged.entities.*;
 import org.silvercatcher.reforged.util.VersionChecker;
 
 import net.minecraft.client.renderer.entity.RenderManager;
