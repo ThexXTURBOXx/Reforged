@@ -78,11 +78,15 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		
 		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 		
-		if(loadState == empty && worldIn.isRemote) {
+		if(loadState == empty) {
 			if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.CROSSBOW_BOLT)) {
 				loadState = loading;
-				compound.setInteger(CompoundTags.RELOAD, playerIn.ticksExisted + getReloadTotal());
-				if(compound.getByte(CompoundTags.AMMUNITION) == empty) compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
+				if(compound.getByte(CompoundTags.AMMUNITION) == empty) {
+					if(worldIn.isRemote) {
+						System.out.println("modified");
+						compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
+					}
+				}
 			} else {
 				
 				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
@@ -98,23 +102,20 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
-		if(worldIn.isRemote) {
+		NBTTagCompound compound = giveCompound(stack);
+		
+		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
+		if(loadState == loaded) {
 			
-			NBTTagCompound compound = giveCompound(stack);
-			
-			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
-			if(loadState == loaded) {
-				
-				worldIn.playSoundAtEntity(playerIn, "reforged:crossbow_shoot", 1f, 1f);
-				shoot(worldIn, playerIn, stack);
-				if(!playerIn.capabilities.isCreativeMode && (stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand))) {
-					playerIn.renderBrokenItemStack(stack);
-					playerIn.destroyCurrentEquippedItem();
-				}
-				compound.setByte(CompoundTags.AMMUNITION, empty);
-				compound.setInteger(CompoundTags.RELOAD, -1);
-				compound.setInteger(CompoundTags.STARTED, -1);
-			}			
+			worldIn.playSoundAtEntity(playerIn, "reforged:crossbow_shoot", 1f, 1f);
+			if(!worldIn.isRemote) shoot(worldIn, playerIn, stack);
+			if(!playerIn.capabilities.isCreativeMode && (stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand))) {
+				playerIn.renderBrokenItemStack(stack);
+				playerIn.destroyCurrentEquippedItem();
+			}
+			compound.setByte(CompoundTags.AMMUNITION, empty);
+			System.out.println("modified");
+			if(worldIn.isRemote) compound.setInteger(CompoundTags.STARTED, -1);
 		}
 	}
 	
@@ -164,6 +165,14 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		if(stack.getItem() == this && player.getItemInUse() != null) {
 			if(getLoadState(stack) == loading) {
 				int left = getReloadLeft(stack, player);
+				/*
+				 * The tE is everytime right, ofc
+				 * the ir becomes 0 after some ticks
+				 * the left depends on both of them, so it gets negative after ir becomes 0
+				 */
+				System.out.println("tE: " + player.ticksExisted);
+				System.out.println("ir: " + getReloadStarted(stack));
+				System.out.println("le: " + left);
 				if(left > 10) {
 					mrl = new ModelResourceLocation(ReforgedMod.ID + ":crossbow_1", "inventory");
 				} else if(left > 0) {
