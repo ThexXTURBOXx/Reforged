@@ -228,8 +228,8 @@ public class ReforgedRegistry {
 
 	/**Helper method for registering our EventHandler
 	 * @param ReforgedEvents The instance of our EventHandler*/
-	public static void registerEventHandler(ReforgedEvents eventclass) {
-		FMLCommonHandler.instance().bus().register(eventclass);
-	    MinecraftForge.EVENT_BUS.register(eventclass);
+	public static void registerEventHandler(Object event) {
+		FMLCommonHandler.instance().bus().register(event);
+	    MinecraftForge.EVENT_BUS.register(event);
 	}
 }

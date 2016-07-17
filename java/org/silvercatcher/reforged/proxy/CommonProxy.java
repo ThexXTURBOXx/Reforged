@@ -19,7 +19,7 @@ public class CommonProxy {
 		
 		loadConfig(event);
 		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
-		//MinecraftForge.EVENT_BUS.register(new ReforgedMonsterArmourer());
+		//ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
 		ReforgedRegistry.createItems();
 		ReforgedRegistry.registerItems();
 		registerEntities();
