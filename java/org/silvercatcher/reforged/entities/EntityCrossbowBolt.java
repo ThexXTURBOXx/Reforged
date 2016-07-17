@@ -67,11 +67,11 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
             this.canBePickedUp = 1;
         }
 
-        this.posY = shooter.posY + (double)shooter.getEyeHeight() - 0.10000000149011612D;
+        this.posY = shooter.posY + shooter.getEyeHeight() - 0.10000000149011612D;
         double d0 = p_i1755_3_.posX - shooter.posX;
-        double d1 = p_i1755_3_.getEntityBoundingBox().minY + (double)(p_i1755_3_.height / 3.0F) - this.posY;
+        double d1 = p_i1755_3_.getEntityBoundingBox().minY + p_i1755_3_.height / 3.0F - this.posY;
         double d2 = p_i1755_3_.posZ - shooter.posZ;
-        double d3 = (double)MathHelper.sqrt_double(d0 * d0 + d2 * d2);
+        double d3 = MathHelper.sqrt_double(d0 * d0 + d2 * d2);
 
         if (d3 >= 1.0E-7D)
         {
@@ -81,7 +81,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
             double d5 = d2 / d3;
             this.setLocationAndAngles(shooter.posX + d4, this.posY, shooter.posZ + d5, f2, f3);
             float f4 = (float)(d3 * 0.20000000298023224D);
-            this.setThrowableHeading(d0, d1 + (double)f4, d2, p_i1755_4_, p_i1755_5_);
+            this.setThrowableHeading(d0, d1 + f4, d2, p_i1755_4_, p_i1755_5_);
         }
     }
 
@@ -97,18 +97,19 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
         }
 
         this.setSize(0.5F, 0.5F);
-        this.setLocationAndAngles(shooter.posX, shooter.posY + (double)shooter.getEyeHeight(), shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
-        this.posX -= (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+        this.setLocationAndAngles(shooter.posX, shooter.posY + shooter.getEyeHeight(), shooter.posZ, shooter.rotationYaw, shooter.rotationPitch);
+        this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F;
         this.posY -= 0.10000000149011612D;
-        this.posZ -= (double)(MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+        this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * 0.16F;
         this.setPosition(this.posX, this.posY, this.posZ);
-        this.motionX = (double)(-MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
-        this.motionZ = (double)(MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI));
-        this.motionY = (double)(-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
+        this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI);
+        this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(this.rotationPitch / 180.0F * (float)Math.PI);
+        this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float)Math.PI));
         this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 3.15F, 1.0F);
     }
 
-    protected void entityInit()
+    @Override
+	protected void entityInit()
     {
         this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
     }
@@ -118,28 +119,30 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
      *  
      * @param inaccuracy Higher means more error.
      */
-    public void setThrowableHeading(double x, double y, double z, float velocity, float inaccuracy)
+    @Override
+	public void setThrowableHeading(double x, double y, double z, float velocity, float inaccuracy)
     {
         float f2 = MathHelper.sqrt_double(x * x + y * y + z * z);
-        x /= (double)f2;
-        y /= (double)f2;
-        z /= (double)f2;
-        x += this.rand.nextGaussian() * (double)(this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double)inaccuracy;
-        y += this.rand.nextGaussian() * (double)(this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double)inaccuracy;
-        z += this.rand.nextGaussian() * (double)(this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * (double)inaccuracy;
-        x *= (double)velocity;
-        y *= (double)velocity;
-        z *= (double)velocity;
+        x /= f2;
+        y /= f2;
+        z /= f2;
+        x += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * inaccuracy;
+        y += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * inaccuracy;
+        z += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * inaccuracy;
+        x *= velocity;
+        y *= velocity;
+        z *= velocity;
         this.motionX = x;
         this.motionY = y;
         this.motionZ = z;
         float f3 = MathHelper.sqrt_double(x * x + z * z);
         this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(x, z) * 180.0D / Math.PI);
-        this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(y, (double)f3) * 180.0D / Math.PI);
+        this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(y, f3) * 180.0D / Math.PI);
         this.ticksInGround = 0;
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean p_180426_10_)
     {
         this.setPosition(x, y, z);
@@ -149,7 +152,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
     /**
      * Sets the velocity to the args. Args: x, y, z
      */
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void setVelocity(double x, double y, double z)
     {
         this.motionX = x;
@@ -160,7 +164,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
         {
             float f = MathHelper.sqrt_double(x * x + z * z);
             this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(x, z) * 180.0D / Math.PI);
-            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(y, (double)f) * 180.0D / Math.PI);
+            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(y, f) * 180.0D / Math.PI);
             this.prevRotationPitch = this.rotationPitch;
             this.prevRotationYaw = this.rotationYaw;
             this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
@@ -171,7 +175,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate()
+    @Override
+	public void onUpdate()
     {
         super.onUpdate();
 
@@ -179,7 +184,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
         {
             float f = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.prevRotationYaw = this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
-            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(this.motionY, (double)f) * 180.0D / Math.PI);
+            this.prevRotationPitch = this.rotationPitch = (float)(Math.atan2(this.motionY, f) * 180.0D / Math.PI);
         }
 
         BlockPos blockpos = new BlockPos(this.xTile, this.yTile, this.zTile);
@@ -218,9 +223,9 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
             else
             {
                 this.inGround = false;
-                this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
-                this.motionY *= (double)(this.rand.nextFloat() * 0.2F);
-                this.motionZ *= (double)(this.rand.nextFloat() * 0.2F);
+                this.motionX *= this.rand.nextFloat() * 0.2F;
+                this.motionY *= this.rand.nextFloat() * 0.2F;
+                this.motionZ *= this.rand.nextFloat() * 0.2F;
                 this.ticksInGround = 0;
                 this.ticksInAir = 0;
             }
@@ -252,7 +257,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
                 if (entity1.canBeCollidedWith() && (entity1 != this.shootingEntity || this.ticksInAir >= 5))
                 {
                     f1 = 0.3F;
-                    AxisAlignedBB axisalignedbb1 = entity1.getEntityBoundingBox().expand((double)f1, (double)f1, (double)f1);
+                    AxisAlignedBB axisalignedbb1 = entity1.getEntityBoundingBox().expand(f1, f1, f1);
                     MovingObjectPosition movingobjectposition1 = axisalignedbb1.calculateIntercept(vec31, vec3);
 
                     if (movingobjectposition1 != null)
@@ -292,7 +297,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
                 if (movingobjectposition.entityHit != null)
                 {
                     f2 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-                    int k = MathHelper.ceiling_double_int((double)f2 * this.damage);
+                    int k = MathHelper.ceiling_double_int(f2 * this.damage);
 
                     if (this.getIsCritical())
                     {
@@ -315,7 +320,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
                         movingobjectposition.entityHit.setFire(5);
                     }
 
-                    if (movingobjectposition.entityHit.attackEntityFrom(damagesource, (float)k))
+                    if (movingobjectposition.entityHit.attackEntityFrom(damagesource, k))
                     {
                         if (movingobjectposition.entityHit instanceof EntityLivingBase)
                         {
@@ -332,7 +337,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
 
                                 if (f4 > 0.0F)
                                 {
-                                    movingobjectposition.entityHit.addVelocity(this.motionX * (double)this.knockbackStrength * 0.6000000238418579D / (double)f4, 0.1D, this.motionZ * (double)this.knockbackStrength * 0.6000000238418579D / (double)f4);
+                                    movingobjectposition.entityHit.addVelocity(this.motionX * this.knockbackStrength * 0.6000000238418579D / f4, 0.1D, this.motionZ * this.knockbackStrength * 0.6000000238418579D / f4);
                                 }
                             }
 
@@ -374,13 +379,13 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
                     iblockstate = this.worldObj.getBlockState(blockpos1);
                     this.inTile = iblockstate.getBlock();
                     this.inData = this.inTile.getMetaFromState(iblockstate);
-                    this.motionX = (double)((float)(movingobjectposition.hitVec.xCoord - this.posX));
-                    this.motionY = (double)((float)(movingobjectposition.hitVec.yCoord - this.posY));
-                    this.motionZ = (double)((float)(movingobjectposition.hitVec.zCoord - this.posZ));
+                    this.motionX = ((float)(movingobjectposition.hitVec.xCoord - this.posX));
+                    this.motionY = ((float)(movingobjectposition.hitVec.yCoord - this.posY));
+                    this.motionZ = ((float)(movingobjectposition.hitVec.zCoord - this.posZ));
                     f3 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-                    this.posX -= this.motionX / (double)f3 * 0.05000000074505806D;
-                    this.posY -= this.motionY / (double)f3 * 0.05000000074505806D;
-                    this.posZ -= this.motionZ / (double)f3 * 0.05000000074505806D;
+                    this.posX -= this.motionX / f3 * 0.05000000074505806D;
+                    this.posY -= this.motionY / f3 * 0.05000000074505806D;
+                    this.posZ -= this.motionZ / f3 * 0.05000000074505806D;
                     this.playSound("random.bowhit", 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
                     this.inGround = true;
                     this.arrowShake = 7;
@@ -397,7 +402,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
             {
                 for (i = 0; i < 4; ++i)
                 {
-                    this.worldObj.spawnParticle(EnumParticleTypes.CRIT, this.posX + this.motionX * (double)i / 4.0D, this.posY + this.motionY * (double)i / 4.0D, this.posZ + this.motionZ * (double)i / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ, new int[0]);
+                    this.worldObj.spawnParticle(EnumParticleTypes.CRIT, this.posX + this.motionX * i / 4.0D, this.posY + this.motionY * i / 4.0D, this.posZ + this.motionZ * i / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ, new int[0]);
                 }
             }
 
@@ -407,7 +412,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
             f2 = MathHelper.sqrt_double(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.rotationYaw = (float)(Math.atan2(this.motionX, this.motionZ) * 180.0D / Math.PI);
 
-            for (this.rotationPitch = (float)(Math.atan2(this.motionY, (double)f2) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
+            for (this.rotationPitch = (float)(Math.atan2(this.motionY, f2) * 180.0D / Math.PI); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
             {
                 ;
             }
@@ -437,7 +442,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
                 for (int l = 0; l < 4; ++l)
                 {
                     f4 = 0.25F;
-                    this.worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * (double)f4, this.posY - this.motionY * (double)f4, this.posZ - this.motionZ * (double)f4, this.motionX, this.motionY, this.motionZ, new int[0]);
+                    this.worldObj.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * f4, this.posY - this.motionY * f4, this.posZ - this.motionZ * f4, this.motionX, this.motionY, this.motionZ, new int[0]);
                 }
 
                 f3 = 0.6F;
@@ -448,10 +453,10 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
                 this.extinguish();
             }
 
-            this.motionX *= (double)f3;
-            this.motionY *= (double)f3;
-            this.motionZ *= (double)f3;
-            this.motionY -= (double)f1;
+            this.motionX *= f3;
+            this.motionY *= f3;
+            this.motionZ *= f3;
+            this.motionY -= f1;
             this.setPosition(this.posX, this.posY, this.posZ);
             this.doBlockCollisions();
         }
@@ -460,7 +465,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound tagCompound)
+    @Override
+	public void writeEntityToNBT(NBTTagCompound tagCompound)
     {
         tagCompound.setShort("xTile", (short)this.xTile);
         tagCompound.setShort("yTile", (short)this.yTile);
@@ -478,7 +484,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound tagCompund)
+    @Override
+	public void readEntityFromNBT(NBTTagCompound tagCompund)
     {
         this.xTile = tagCompund.getShort("xTile");
         this.yTile = tagCompund.getShort("yTile");
@@ -516,7 +523,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
     /**
      * Called by a player entity when they collide with an entity
      */
-    public void onCollideWithPlayer(EntityPlayer entityIn)
+    @Override
+	public void onCollideWithPlayer(EntityPlayer entityIn)
     {
         if (!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0)
         {
@@ -540,7 +548,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
-    protected boolean canTriggerWalking()
+    @Override
+	protected boolean canTriggerWalking()
     {
         return false;
     }
@@ -566,7 +575,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
     /**
      * If returns false, the item will not inflict any damage against entities.
      */
-    public boolean canAttackWithItem()
+    @Override
+	public boolean canAttackWithItem()
     {
         return false;
     }

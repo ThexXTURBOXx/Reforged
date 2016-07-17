@@ -24,9 +24,6 @@ public class CompoundTags {
 	
 	/** saves the delay in ticks until an action should be called */
 	public static final String DELAY        =   "delay";
-
-	/** saves the ticks left to reload */
-	public static final String RELOAD		= 	"reload";
 	
 	/** saves the amount of ammunition */
 	public static final String AMMUNITION	=	"ammo";

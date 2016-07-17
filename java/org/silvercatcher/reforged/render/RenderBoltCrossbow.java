@@ -35,15 +35,15 @@ public class RenderBoltCrossbow extends Render {
         byte b0 = 0;
         float f2 = 0.0F;
         float f3 = 0.5F;
-        float f4 = (float)(0 + b0 * 10) / 32.0F;
-        float f5 = (float)(5 + b0 * 10) / 32.0F;
+        float f4 = (0 + b0 * 10) / 32.0F;
+        float f5 = (5 + b0 * 10) / 32.0F;
         float f6 = 0.0F;
         float f7 = 0.15625F;
-        float f8 = (float)(5 + b0 * 10) / 32.0F;
-        float f9 = (float)(10 + b0 * 10) / 32.0F;
+        float f8 = (5 + b0 * 10) / 32.0F;
+        float f9 = (10 + b0 * 10) / 32.0F;
         float f10 = 0.05625F;
         GlStateManager.enableRescaleNormal();
-        float f11 = (float)arrow.arrowShake - p_180551_9_;
+        float f11 = arrow.arrowShake - p_180551_9_;
 
         if (f11 > 0.0F)
         {
@@ -56,17 +56,17 @@ public class RenderBoltCrossbow extends Render {
         GlStateManager.translate(-4.0F, 0.0F, 0.0F);
         GL11.glNormal3f(f10, 0.0F, 0.0F);
         worldrenderer.startDrawingQuads();
-        worldrenderer.addVertexWithUV(-7.0D, -2.0D, -2.0D, (double)f6, (double)f8);
-        worldrenderer.addVertexWithUV(-7.0D, -2.0D, 2.0D, (double)f7, (double)f8);
-        worldrenderer.addVertexWithUV(-7.0D, 2.0D, 2.0D, (double)f7, (double)f9);
-        worldrenderer.addVertexWithUV(-7.0D, 2.0D, -2.0D, (double)f6, (double)f9);
+        worldrenderer.addVertexWithUV(-7.0D, -2.0D, -2.0D, f6, f8);
+        worldrenderer.addVertexWithUV(-7.0D, -2.0D, 2.0D, f7, f8);
+        worldrenderer.addVertexWithUV(-7.0D, 2.0D, 2.0D, f7, f9);
+        worldrenderer.addVertexWithUV(-7.0D, 2.0D, -2.0D, f6, f9);
         tessellator.draw();
         GL11.glNormal3f(-f10, 0.0F, 0.0F);
         worldrenderer.startDrawingQuads();
-        worldrenderer.addVertexWithUV(-7.0D, 2.0D, -2.0D, (double)f6, (double)f8);
-        worldrenderer.addVertexWithUV(-7.0D, 2.0D, 2.0D, (double)f7, (double)f8);
-        worldrenderer.addVertexWithUV(-7.0D, -2.0D, 2.0D, (double)f7, (double)f9);
-        worldrenderer.addVertexWithUV(-7.0D, -2.0D, -2.0D, (double)f6, (double)f9);
+        worldrenderer.addVertexWithUV(-7.0D, 2.0D, -2.0D, f6, f8);
+        worldrenderer.addVertexWithUV(-7.0D, 2.0D, 2.0D, f7, f8);
+        worldrenderer.addVertexWithUV(-7.0D, -2.0D, 2.0D, f7, f9);
+        worldrenderer.addVertexWithUV(-7.0D, -2.0D, -2.0D, f6, f9);
         tessellator.draw();
 
         for (int i = 0; i < 4; ++i)
@@ -74,10 +74,10 @@ public class RenderBoltCrossbow extends Render {
             GlStateManager.rotate(90.0F, 1.0F, 0.0F, 0.0F);
             GL11.glNormal3f(0.0F, 0.0F, f10);
             worldrenderer.startDrawingQuads();
-            worldrenderer.addVertexWithUV(-8.0D, -2.0D, 0.0D, (double)f2, (double)f4);
-            worldrenderer.addVertexWithUV(8.0D, -2.0D, 0.0D, (double)f3, (double)f4);
-            worldrenderer.addVertexWithUV(8.0D, 2.0D, 0.0D, (double)f3, (double)f5);
-            worldrenderer.addVertexWithUV(-8.0D, 2.0D, 0.0D, (double)f2, (double)f5);
+            worldrenderer.addVertexWithUV(-8.0D, -2.0D, 0.0D, f2, f4);
+            worldrenderer.addVertexWithUV(8.0D, -2.0D, 0.0D, f3, f4);
+            worldrenderer.addVertexWithUV(8.0D, 2.0D, 0.0D, f3, f5);
+            worldrenderer.addVertexWithUV(-8.0D, 2.0D, 0.0D, f2, f5);
             tessellator.draw();
         }
 
@@ -94,7 +94,8 @@ public class RenderBoltCrossbow extends Render {
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(Entity entity)
+    @Override
+	protected ResourceLocation getEntityTexture(Entity entity)
     {
         return this.getEntityTexture((EntityCrossbowBolt)entity);
     }
@@ -107,7 +108,8 @@ public class RenderBoltCrossbow extends Render {
      *  
      * @param entityYaw The yaw rotation of the passed entity
      */
-    public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
+    @Override
+	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         this.doRender((EntityCrossbowBolt)entity, x, y, z, entityYaw, partialTicks);
     }
