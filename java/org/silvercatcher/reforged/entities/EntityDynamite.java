@@ -26,13 +26,13 @@ public class EntityDynamite extends AReforgedThrowable {
 	
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
-		Explosion e = worldObj.createExplosion(this, posX, posY, posZ, 5, true);
+		Explosion e = worldObj.createExplosion(this, posX, posY, posZ, 2, true);
 		return true;
 	}
 	
 	@Override
 	protected boolean onEntityHit(Entity entity) {
-		Explosion e = worldObj.createExplosion(this, posX, posY, posZ, 5, true);
+		Explosion e = worldObj.createExplosion(this, posX, posY, posZ, 2, true);
 		return true;
 	}
 	
