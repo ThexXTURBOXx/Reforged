@@ -48,7 +48,8 @@ public class BoomerangEnchRecipe implements IRecipe {
 			ItemStack stack = inventory.getStackInSlot(i);
 			
 			if(stack != null) {
-				if(stack.getItem() instanceof ItemBoomerang) {
+				if(stack.getItem() instanceof ItemBoomerang &&
+						!CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ENCHANTED)) {
 					boomerangs++;
 					output = stack.copy();
 				} else if(stack.getItem() == Items.gold_ingot) {
@@ -62,7 +63,7 @@ public class BoomerangEnchRecipe implements IRecipe {
 			}
 		}
 		
-		return boomerangs == 1 && gold == 4 && diamonds == 4;
+		return boomerangs == 1 && gold == 6 && diamonds == 2;
 	}
 	
 	@Override
@@ -97,7 +98,7 @@ public class BoomerangEnchRecipe implements IRecipe {
 		NBTTagCompound compound = CompoundTags.giveCompound(output);
 		
 		output.addEnchantment(ReforgedAdditions.goalseeker, 1);
-		compound.setInteger(CompoundTags.ENCHANTED, 1);
+		compound.setBoolean(CompoundTags.ENCHANTED, true);
 		return output;
 	}
 	

@@ -49,7 +49,7 @@ public class RenderBoomerang extends ReforgedRender {
 			}
 		}
 		//If the number is set higher, then the Boomerang will rotate faster, otherwise slower
-		yawb += ((double) 5 / boomerangCount);
+		yawb += ((double) 3 / boomerangCount);
 		GL11.glRotated(yawb, 0, 1, 0);
 		model.render(theEntity,(float) x,(float) y,(float) z, yawb, partialTick, 0.0475F);
 		GL11.glPopMatrix();

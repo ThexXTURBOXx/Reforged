@@ -87,10 +87,8 @@ public class EntityBoomerang extends AReforgedThrowable {
 		
 		super.onUpdate();
 		
-		if(getThrower() != null) {
-			if(CompoundTags.giveCompound(getItemStack()).getInteger(CompoundTags.ENCHANTED) == 1) {
-				setCoords(getThrower().posX, getThrower().posY + getThrower().getEyeHeight(), getThrower().posZ);
-			}
+		if(getThrower() != null && CompoundTags.giveCompound(getItemStack()).getBoolean(CompoundTags.ENCHANTED)) {
+			setCoords(getThrower().posX, getThrower().posY + getThrower().getEyeHeight(), getThrower().posZ);
 		}
 		
 		double dx = this.posX - getPosX();
@@ -107,7 +105,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 		motionZ -= 0.05D * dz;
 		
 		//After 103 ticks, the Boomerang drops exactly where the thrower stood
-		if((CompoundTags.giveCompound(getItemStack()).getInteger(CompoundTags.ENCHANTED) != 1 && ticksExisted >= 103) || isInWater()) {
+		if(isInWater()) {
 			if(!worldObj.isRemote) {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 						entityDropItem(getItemStack(), 0.5f);
@@ -115,6 +113,20 @@ public class EntityBoomerang extends AReforgedThrowable {
 					//Custom sound later... [BREAK SOUND]
 				}
 				setDead();
+			}
+		}
+		if(ticksExisted >= 103) {
+			if(CompoundTags.giveCompound(getItemStack()).getBoolean(CompoundTags.ENCHANTED)) {
+				if(onEntityHit(getThrower())) setDead();
+			} else {
+				if(!worldObj.isRemote) {
+					if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
+							entityDropItem(getItemStack(), 0.5f);
+					} else {
+						//Custom sound later... [BREAK SOUND]
+					}
+					setDead();
+				}
 			}
 		}
 	}
