@@ -86,6 +86,8 @@ death.attack.dart=%1$s diente als Zielscheibe.
 death.attack.dart.player=%1$s diente als Zielscheibe während er mit %2$s kämpfte.
 death.attack.caltrop=%1$s hat nicht darauf geachtet, wo er hintritt.
 death.attack.caltrop.player=%1$s hat nicht darauf geachtet, wo er hintritt, während er mit %2$s kämpfte.
+death.attack.crossbow=%1$s wurde von einem Pfeil zerteilt.
+death.attack.crossbow.player=%1$s wurde von einem Pfeil zerteilt, während er mit %2$s kämpfte.
 
 enchantment.goalseeker=Zielsucher
 

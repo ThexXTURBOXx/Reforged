@@ -90,5 +90,6 @@ public class ClientProxy extends CommonProxy {
 		if(GlobalValues.BLOWGUN) ReforgedRegistry.registerEntityRenderer(EntityDart.class, new RenderDart(manager));
 		if(GlobalValues.CALTROP) ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCaltropEntity.class, new RenderTileEntityCaltrop());
 		if(GlobalValues.DYNAMITE) ReforgedRegistry.registerEntityRenderer(EntityDynamite.class, new RenderDynamite(manager));
+		if(GlobalValues.CROSSBOW) ReforgedRegistry.registerEntityRenderer(EntityCrossbowBolt.class, new RenderBoltCrossbow(manager));
 	}
 }

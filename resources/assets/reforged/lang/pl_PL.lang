@@ -75,6 +75,8 @@ death.attack.blunderbuss=%1$s został rozdarty przez kule.
 death.attack.blunderbuss.player=%1$s został rozdarty przez kule podczas walki z %2$s.
 death.attack.dart=%1$s posłużył jako ruchomy cel.
 death.attack.dart.player=%1$s posłużył jako ruchomy cel podczas walki z %2$s.
+death.attack.crossbow=%1$s got sliced by a bolt.
+death.attack.crossbow.player=%1$s got sliced by a bolt while fighting %2$s.
 
 versionchecker.ingame.outdated=Dostępna nowa wersja
 versionchecker.ingame.downloadclick=Kliknij tutaj, aby pobrać

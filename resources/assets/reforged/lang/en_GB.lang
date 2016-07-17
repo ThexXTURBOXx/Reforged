@@ -86,6 +86,8 @@ death.attack.dart=%1$s served as a target.
 death.attack.dart.player=%1$s served as a target while fighting %2$s.
 death.attack.caltrop=%1$s did not pay attention where he steps.
 death.attack.caltrop.player=%1$s didn't pay attention where he steps while fighting %2$s.
+death.attack.crossbow=%1$s got sliced by a bolt.
+death.attack.crossbow.player=%1$s got sliced by a bolt while fighting %2$s.
 
 enchantment.goalseeker=Goalseeker
 

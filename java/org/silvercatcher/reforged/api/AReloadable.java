@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.api;
 
-import java.util.List;
+import java.util.*;
 
 import org.silvercatcher.reforged.ReforgedMod;
 
@@ -27,6 +27,8 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	byte empty		= 0;
 	byte loading	= 1;
 	byte loaded		= 2;
+	
+	Map<EntityPlayer, Integer> clientServerTransfer = new HashMap<EntityPlayer, Integer>();
 	
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -81,8 +83,14 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 			if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(getAmmo())) {
 				
 				loadState = loading;
-				compound.setInteger(CompoundTags.RELOAD, playerIn.ticksExisted + getReloadTotal());
-				if(compound.getByte(CompoundTags.AMMUNITION) == empty && worldIn.isRemote) compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
+				if(compound.getByte(CompoundTags.AMMUNITION) == empty) {
+					if(worldIn.isRemote) {
+						compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
+						clientServerTransfer.put(playerIn, playerIn.ticksExisted + getReloadTotal());					
+					} else {
+						compound.setInteger(CompoundTags.STARTED, clientServerTransfer.get(playerIn));
+					}
+				}
 			} else {
 				
 				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
@@ -98,24 +106,24 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
-		
-		NBTTagCompound compound = giveCompound(stack);
-		
-		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
-		
-		if(loadState == loaded) {
+		if(!worldIn.isRemote) {
+			NBTTagCompound compound = giveCompound(stack);
 			
-			worldIn.playSoundAtEntity(playerIn, "ambient.weather.thunder", 1f, 1f);
+			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 			
-			shoot(worldIn, playerIn, stack);
-			if(!playerIn.capabilities.isCreativeMode && stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand)) {
-				playerIn.renderBrokenItemStack(stack);
-				playerIn.destroyCurrentEquippedItem();
+			if(loadState == loaded) {
+				
+				worldIn.playSoundAtEntity(playerIn, "ambient.weather.thunder", 1f, 1f);
+				
+				shoot(worldIn, playerIn, stack);
+				if(!playerIn.capabilities.isCreativeMode && stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand)) {
+					playerIn.renderBrokenItemStack(stack);
+					playerIn.destroyCurrentEquippedItem();
+				}
+				
+				compound.setByte(CompoundTags.AMMUNITION, empty);
+				compound.setInteger(CompoundTags.STARTED, -1);
 			}
-			
-			compound.setByte(CompoundTags.AMMUNITION, empty);
-			compound.setInteger(CompoundTags.RELOAD, -1);
-			compound.setInteger(CompoundTags.STARTED, -1);
 		}
 	}
 	

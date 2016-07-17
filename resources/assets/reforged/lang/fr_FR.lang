@@ -75,6 +75,8 @@ death.attack.blunderbuss=%1$s got shredded by bullets.
 death.attack.blunderbuss.player=%1$s got shredded by bullets while fighting %2$s.
 death.attack.dart=%1$s served as a target.
 death.attack.dart.player=%1$s served as a target while fighting %2$s.
+death.attack.crossbow=%1$s got sliced by a bolt.
+death.attack.crossbow.player=%1$s got sliced by a bolt while fighting %2$s.
 
 versionchecker.ingame.outdated=Il y a une version plus nouvelles!
 versionchecker.ingame.downloadclick=Cliques ici pour télécharger.
