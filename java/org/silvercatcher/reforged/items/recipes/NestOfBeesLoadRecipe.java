@@ -1,13 +1,13 @@
 package org.silvercatcher.reforged.items.recipes;
 
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.silvercatcher.reforged.api.CompoundTags;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
@@ -16,11 +16,10 @@ import net.minecraftforge.common.ForgeHooks;
 
 public class NestOfBeesLoadRecipe implements IRecipe {
 	
+	private ItemStack[] input;
 	private ItemStack output;
-	private ItemStack input [];
-	private int aBSlot;
-	private int stasize;
-	private int c;
+	private Map<Integer, Integer> aBs, usedaBs;
+	private int NoB;
 	
 	private static void printInventory(String name, InventoryCrafting inventory) {
 	
@@ -38,91 +37,52 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 	
 	@Override
 	public boolean matches(InventoryCrafting inventory, World world) {
-		
-		//printInventory("match", inventory);
-				
-		int nestsOfBees = 0;
-		int arrowBundles = 0;
-		
+		NoB = -1;
+		aBs = new HashMap<Integer, Integer>();
 		for(int i = 0; i < inventory.getSizeInventory(); i++) {
-			
 			ItemStack stack = inventory.getStackInSlot(i);
-			
 			if(stack != null) {
-				if(stack.getItem() == ReforgedAdditions.NEST_OF_BEES) {
-					if(stack.getTagCompound().getInteger(CompoundTags.AMMUNITION) + 1 > 32) {
-						return false;
-					} else {
-						nestsOfBees++;
-						output = stack.copy();
-					}
-				} else if(stack.getItem() == ReforgedAdditions.ARROW_BUNDLE) {
-					arrowBundles = stack.stackSize;
-					if(arrowBundles > 4) {
-						arrowBundles = 4;
-					}
+				if(stack.getItem() == ReforgedAdditions.ARROW_BUNDLE) {
+					aBs.put(i, stack.stackSize);
+				} else if(stack.getItem() == ReforgedAdditions.NEST_OF_BEES &&
+						stack.getTagCompound().getInteger(CompoundTags.AMMUNITION) + 1 <= 32 && NoB == -1) {
+					NoB = i;
+					output = stack.copy();
 				} else {
-					// we don't want any other stuff!
 					return false;
 				}
 			}
 		}
-		
-		return nestsOfBees == 1 && arrowBundles > 0;
+		if(NoB == -1 || aBs.isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventory) {
-
-		//printInventory("result", inventory);
-		
-		int size = inventory.getSizeInventory();
-		
-		// remember where to get arrow bundles....better idea?
-		LinkedList<Integer> arrowBundleIndizes = new LinkedList<Integer>();
-		
-		input = new ItemStack[size];
-		
-		for(int i = 0; i < size; i++) {
-			
-			ItemStack stack = inventory.getStackInSlot(i);
-			
-			if(stack != null) {
-				Item item = stack.getItem();
-				if(item == ReforgedAdditions.NEST_OF_BEES) {
-					output = stack.copy();
-				} else if(item == ReforgedAdditions.ARROW_BUNDLE) {
-					arrowBundleIndizes.add(i);
-					input[i] = stack.copy();
-				}
-			}
+		usedaBs = new HashMap<Integer, Integer>();
+		input = new ItemStack[inventory.getSizeInventory()];
+		input[NoB] = inventory.getStackInSlot(NoB);
+		for(int index : aBs.keySet()) {
+			input[index] = inventory.getStackInSlot(index);
 		}
-		
 		NBTTagCompound compound = CompoundTags.giveCompound(output);
-		
 		int arrows = compound.getInteger(CompoundTags.AMMUNITION);
-		
-		// please terminate, please terminate,...
-		while(!arrowBundleIndizes.isEmpty()) {
-			
-			int arrowBundleSlot = arrowBundleIndizes.removeFirst();
-			aBSlot = arrowBundleSlot;
-			ItemStack arrowBundleStack = inventory.getStackInSlot(arrowBundleSlot);
-			int stsize = arrowBundleStack.stackSize;
+		for(int index : aBs.keySet()) {
+			ItemStack arrowBundleStack = inventory.getStackInSlot(index);
+			int stsize = aBs.get(index);
 			if(stsize > 4) stsize = 4;
 			arrows += stsize * 8;
 			if(arrows > 32) arrows = 32;
-			stasize = stsize;
+			usedaBs.put(index, stsize);
 		}
-		
 		compound.setInteger(CompoundTags.AMMUNITION, arrows);
-		c = 0;
 		return output;
 	}
 	
 	@Override
 	public int getRecipeSize() {
-		
 		return 9;
 	}
 	
@@ -133,9 +93,13 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 	
 	@Override
 	public ItemStack[] getRemainingItems(InventoryCrafting inventory) {
-		
-		//printInventory("remain", inventory);
-		if(c++ == 0) inventory.decrStackSize(aBSlot, stasize - 1);
+		for(int index : usedaBs.keySet()) {
+			if(inventory.getStackInSlot(index).stackSize == usedaBs.get(index)) {
+				inventory.decrStackSize(index, usedaBs.get(index));
+			} else {
+				inventory.decrStackSize(index, usedaBs.get(index) - 1);
+			}
+		}
 		return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
 	}
 }
