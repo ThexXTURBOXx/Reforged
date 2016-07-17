@@ -1,96 +1,96 @@
 itemGroup.reforged=Reforged
 
-item.firerod.name=Firerod
+item.firerod.name=Огненное Копьё
 
-item.arrow_bundle.name=Arrow Bundle
+item.arrow_bundle.name=Связка Стрел
 
-item.nest_of_bees.name=Nest Of Bees
-item.nestofbees.arrows=Arrows
+item.nest_of_bees.name=Пчелиное Гнездо
+item.nestofbees.arrows=Стрелы
 
-item.wooden_battleaxe.name=Wooden Battleaxe
-item.stone_battleaxe.name=Stone Battleaxe
-item.iron_battleaxe.name=Iron Battleaxe
-item.golden_battleaxe.name=Golden Battleaxe
-item.diamond_battleaxe.name=Diamond Battleaxe
+item.wooden_battleaxe.name=Деревянный Боевой Топор
+item.stone_battleaxe.name=Каменный Боевой Топор
+item.iron_battleaxe.name=Железный Боевой Топор
+item.golden_battleaxe.name=Золотой Боевой Топор
+item.diamond_battleaxe.name=Алмазный Боевой Топор
 
-item.wooden_boomerang.name=Wooden Boomerang
-item.stone_boomerang.name=Stone Boomerang
-item.golden_boomerang.name=Golden Boomerang
-item.iron_boomerang.name=Iron Boomerang
-item.diamond_boomerang.name=Diamond Boomerang
-item.boomerang.langBreak=The %1$s broke in your hands.
+item.wooden_boomerang.name=Деревянный Бумеранг
+item.stone_boomerang.name=Каменный Бумеранг
+item.golden_boomerang.name=Золотой Бумеранг
+item.iron_boomerang.name=Железный Бумеранг
+item.diamond_boomerang.name=Алмазный Бумеранг
+item.boomerang.langBreak=%1$s сломался в твоих руках.
 
-item.wooden_saber.name=Wooden Sabre
-item.stone_saber.name=Stone Sabre
-item.golden_saber.name=Golden Sabre
-item.iron_saber.name=Iron Sabre
-item.diamond_saber.name=Diamond Sabre
+item.wooden_saber.name=Деревянная Сабля
+item.stone_saber.name=Каменная Сабля
+item.golden_saber.name=Золотая Сабля
+item.iron_saber.name=Железная Сабля
+item.diamond_saber.name=Алмазная Сабля
 
-item.wooden_musket.name=Musket with Wooden Bayonet
-item.stone_musket.name=Musket with Stone Bayonet
-item.golden_musket.name=Musket with Golden Bayonet
-item.iron_musket.name=Musket with Iron Bayonet
-item.diamond_musket.name=Musket with Diamond Bayonet
+item.wooden_musket.name=Мушкет с деревянным штыком
+item.stone_musket.name=Мушкет с каменным штыком
+item.golden_musket.name=Мушкет с золотым штыком
+item.iron_musket.name=Мушкет с железным штыком
+item.diamond_musket.name=Мушкет с алмазным штыком
 
-item.wooden_knife.name=Wooden Knife
-item.stone_knife.name=Stone Knife
-item.golden_knife.name=Golden Knife
-item.iron_knife.name=Iron Knife
-item.diamond_knife.name=Diamond Knife
+item.wooden_knife.name=Деревянный Нож
+item.stone_knife.name=Каменный Нож
+item.golden_knife.name=Золотой Нож
+item.iron_knife.name=Железный Нож
+item.diamond_knife.name=Алмазный Нож
 
-item.wooden_katana.name=Wooden Katana
-item.stone_katana.name=Stone Katana
-item.golden_katana.name=Golden Katana
-item.iron_katana.name=Iron Katana
-item.diamond_katana.name=Diamond Katana
+item.wooden_katana.name=Деревянная Катана
+item.stone_katana.name=Каменная Катана
+item.golden_katana.name=Золотая Катана
+item.iron_katana.name=Железная Катана
+item.diamond_katana.name=Алмазная Катана
 
-item.dart_normal.name=Normal Dart
-item.dart_poison.name=Poisonous Dart
-item.dart_poison_strong.name=Very Poisionous Dart
-item.dart_slowness.name=Dart of Slowness
-item.dart_hunger.name=Dart of Hunger
-item.dart_wither.name=Dart of the Wither
-item.blowgun.name=Blowgun
+item.dart_normal.name=Обычный Дротик
+item.dart_poison.name=Ядовитый Дротик
+item.dart_poison_strong.name=Сверх-ядовитый Дротик
+item.dart_slowness.name=Дротик Замедления
+item.dart_hunger.name=Дротик Отравления
+item.dart_wither.name=Дротик Иссушения
+item.blowgun.name=Духовая Трубка
 
-item.musket_barrel.name=Musket Barrel
-item.gun_stock.name=Gun Stock
-item.blunderbuss_barrel.name=Blunderbuss Barrel
-item.blunderbuss_bullet.name=Blunderbuss Shot
-item.blunderbuss.name=Blunderbuss
-item.javelin.name=Javelin
-item.musket_bullet.name=Musket Ball
-item.musket.name=Musket
-item.musket.loadstate=Loadstate
-item.musket.loadstate.empty=Empty
-item.musket.loadstate.loading=Loading
-item.musket.loadstate.loaded=Loaded
+item.musket_barrel.name=Ствол Мушкета
+item.gun_stock.name=Ружейное Ложе
+item.blunderbuss_barrel.name=Ствол Мушкетона
+item.blunderbuss_bullet.name=Дробь для Мушкетона
+item.blunderbuss.name=Мушкетон
+item.javelin.name=Метательное Копье
+item.musket_bullet.name=Пуля для Мушкета
+item.musket.name=Мушкет
+item.musket.loadstate=Заряженность
+item.musket.loadstate.empty=Пустой
+item.musket.loadstate.loading=Перезарядка
+item.musket.loadstate.loaded=Заряжен
 
-item.keris.name=Kris
+item.keris.name=Индонезийский Крис
 
-tile.caltrop.name=Caltrop
+tile.caltrop.name=Проволочный ёж
 
-item.dynamite.name=Dynamite
+item.dynamite.name=Динамитная шашка
 
-item.crossbow.name=Crossbow
-item.crossbow_bolt.name=Crossbow Bolt
+item.crossbow.name=Арбалет
+item.crossbow_bolt.name=Арбалетная Стрела
 
-death.attack.boomerang=%1$s's head was splittered by a Boomerang.
-death.attack.boomerang.player=%1$s's head was splittered by a Boomerang while fighting %2$s.
-death.attack.javelin=%1$s got impaled.
-death.attack.javelin.player=%1$s got impaled while fighting %2$s.
-death.attack.musket=%1$s got headshooted.
-death.attack.musket.player=%1$s got headshooted while fighting %2$s.
-death.attack.blunderbuss=%1$s got shredded by bullets.
-death.attack.blunderbuss.player=%1$s got shredded by bullets while fighting %2$s.
-death.attack.dart=%1$s served as a target.
-death.attack.dart.player=%1$s served as a target while fighting %2$s.
-death.attack.caltrop=%1$s did not pay attention where he steps.
-death.attack.caltrop.player=%1$s didn't pay attention where he steps while fighting %2$s.
-death.attack.crossbow=%1$s got sliced by a bolt.
-death.attack.crossbow.player=%1$s got sliced by a bolt while fighting %2$s.
+death.attack.boomerang=Голова %1$s разлетелась в щепки благодаря Бумерангу
+death.attack.boomerang.player=Голова %1$s разлетелась в щепки благодаря Бумерангу, когда тот дрался с %2$s 
+death.attack.javelin=Игрока %1$s прокололо.
+death.attack.javelin.player=Игрока %1$s прокололо, когда тот дрался с %2$s.
+death.attack.musket=Игроку %1$s прострелили голову.
+death.attack.musket.player=Игроку %1$s прострелили голову, когда тот дрался с %2$s.
+death.attack.blunderbuss=Игрока %1$s изрешетило пулями.
+death.attack.blunderbuss.player=Игрока %1$s изрешетило пулями, когда тот дрался с %2$s.
+death.attack.dart=Игрок %1$s послужил мишенью для дротиков.
+death.attack.dart.player= Игрок %1$s послужил мишенью для дротиков, когда тот дрался с %2$s.
+death.attack.caltrop=%1$s не смотрел под ноги.
+death.attack.caltrop.player=%1$ не смотрел под ноги во время битвы с %2$s.
+death.attack.crossbow=Игрока %1$s перерезало стрелой арбалета.
+death.attack.crossbow.player=Игрока %1$s перерезало стрелой арбалета, когда тот дрался с %2$s.
 
-enchantment.goalseeker=Goalseeker
+enchantment.goalseeker=Искатель Цели
 
-versionchecker.ingame.outdated=Newer version available
-versionchecker.ingame.downloadclick=Click here to download
-versionchecker.ingame.download=Download
+versionchecker.ingame.outdated=Доступна новая версия
+versionchecker.ingame.downloadclick=Нажмите здесь, чтобы загрузить
+versionchecker.ingame.download=Загрузить
