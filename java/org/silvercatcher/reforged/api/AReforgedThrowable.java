@@ -103,8 +103,7 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 	/**@return True, if the thrower is a player in Creative Mode.
 	 * False, if the player is in Survival Mode or the thrower is an Entity*/
 	public boolean creativeUse() {
-		return (getThrower() instanceof EntityPlayer && ((EntityPlayer) getThrower()).capabilities.isCreativeMode)
-			   || !(getThrower() instanceof EntityPlayer);
+		return creativeUse(getThrower());
 	}
 	
 	/**@return True, if the given Entity is a player in Creative Mode.
