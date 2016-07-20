@@ -3,38 +3,47 @@ package org.silvercatcher.reforged;
 import java.util.Random;
 import java.util.UUID;
 
+import org.silvercatcher.reforged.api.ReforgedAdditions;
+
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+
 public class ReforgedMonsterArmourer {
 
 	private static final UUID itemModifierUUID =  UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
 	private Random random = new Random();
 	/*
 	// simple way for now
-	private static final ItemReforged [] zombieWeapons = {
+	private static final Item[] zombieWeapons = {
 			
-			ReforgedRegistry.WOODEN_BATTLE_AXE,
-			ReforgedRegistry.WOODEN_BATTLE_AXE,
-			ReforgedRegistry.WOODEN_BATTLE_AXE,
-			ReforgedRegistry.WOODEN_BATTLE_AXE,
-			ReforgedRegistry.STONE_BATTLE_AXE,
-			ReforgedRegistry.STONE_BATTLE_AXE,
-			ReforgedRegistry.STONE_BATTLE_AXE,
-			ReforgedRegistry.IRON_BATTLE_AXE,
-			ReforgedRegistry.IRON_BATTLE_AXE,
-			ReforgedRegistry.GOLDEN_BATTLE_AXE,
+			ReforgedAdditions.WOODEN_BATTLE_AXE,
+			ReforgedAdditions.WOODEN_BATTLE_AXE,
+			ReforgedAdditions.WOODEN_BATTLE_AXE,
+			ReforgedAdditions.WOODEN_BATTLE_AXE,
+			ReforgedAdditions.STONE_BATTLE_AXE,
+			ReforgedAdditions.STONE_BATTLE_AXE,
+			ReforgedAdditions.STONE_BATTLE_AXE,
+			ReforgedAdditions.IRON_BATTLE_AXE,
+			ReforgedAdditions.IRON_BATTLE_AXE,
+			ReforgedAdditions.GOLDEN_BATTLE_AXE,
 	};
 	
 	
 	@SubscribeEvent
 	public void onSpawn(EntityJoinWorldEvent event) {
 		
-		if(event.isCanceled() || event.entity == null || event.world.isRemote) return;
+		if(event.isCanceled() || event.entity == null || event.world.isRemote || 
+				!(event.entity instanceof EntityZombie)) return;
 		
-		if(event.entity instanceof EntityZombie) {
-			equipZombie((EntityZombie) event.entity);
-		}
+		equipZombie((EntityZombie) event.entity);
 	}
 
-	private Item randomFrom(Item [] selection) {
+	private Item randomFrom(Item[] selection) {
 		
 		return selection[random.nextInt(selection.length)];
 	}
@@ -47,8 +56,8 @@ public class ReforgedMonsterArmourer {
 			
 			zombie.setCurrentItemOrArmor(0, new ItemStack(item));
 			
-			zombie.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(
-					new AttributeModifier(itemModifierUUID, "Weapon Damage", 99f, 0));
+			//zombie.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(
+					//new AttributeModifier(itemModifierUUID, "Weapon Damage", 99f, 0));
 			
 		}
 	}*/

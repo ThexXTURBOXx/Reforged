@@ -19,7 +19,7 @@ public class CommonProxy {
 		
 		loadConfig(event);
 		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
-		//ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
+		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
 		ReforgedRegistry.createItems();
 		ReforgedRegistry.registerItems();
 		registerEntities();
