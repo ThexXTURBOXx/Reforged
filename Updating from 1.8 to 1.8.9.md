@@ -1,29 +1,28 @@
 # Updating to 1.8.9 Guide
 
-There are just a few changes needed in the class Helpers in the package org.silvercatcher.reforged.util
-Scroll down to the Square-Helper-Method and remove/comment out the 1.8 part and decomment the 1.8.9 part.
-Then add this import: net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-Then change the RenderCrossbowBolt-class to this one:
+There are just a few changes needed in the class Helpers in the package org.silvercatcher.reforged.util<br>
+Scroll down to the Square-Helper-Method and remove/comment out the 1.8 part and decomment the 1.8.9 part.<br>
+Then add this import: net.minecraft.client.renderer.vertex.DefaultVertexFormats;<br>
+Then change the RenderCrossbowBolt-class to this one:<br>
+
 <code>
+
 package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
 
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.WorldRenderer;
+import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderBoltCrossbow extends Render
+public class RenderBoltCrossbow extends Render<EntityCrossbowBolt>
 {
     private static final ResourceLocation arrowTextures = new ResourceLocation("textures/entity/arrow.png");
 
@@ -102,10 +101,10 @@ public class RenderBoltCrossbow extends Render
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
-		return arrowTextures;
-	}
+    protected ResourceLocation getEntityTexture(EntityCrossbowBolt entity)
+    {
+        return arrowTextures;
+    }
 }
 </code>
 
