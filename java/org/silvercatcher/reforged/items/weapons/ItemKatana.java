@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.api.IZombieEquippable;
 import org.silvercatcher.reforged.api.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -15,7 +16,7 @@ import net.minecraft.item.*;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemKatana extends ItemSword implements ItemExtension {
+public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquippable {
 
 	protected final MaterialDefinition materialDefinition;
 	protected final boolean unbreakable;
@@ -113,5 +114,17 @@ public class ItemKatana extends ItemSword implements ItemExtension {
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
 		return materialDefinition.getEnchantability();
+	}
+	
+	@Override
+	public float zombieSpawnChance() {
+		switch(materialDefinition.getMaterial()) {
+		case EMERALD: return 0;
+		case GOLD: return 1;
+		case IRON: return 2;
+		case STONE: return 3;
+		case WOOD: return 4;
+		default: return 0;
+		}
 	}
 }
