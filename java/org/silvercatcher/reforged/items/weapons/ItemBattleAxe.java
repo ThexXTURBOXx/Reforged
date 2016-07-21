@@ -99,7 +99,6 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 	@Override
 	public float zombieSpawnChance() {
 		switch(materialDefinition.getMaterial()) {
-		case EMERALD: return 0;
 		case GOLD: return 1;
 		case IRON: return 2;
 		case STONE: return 3;
