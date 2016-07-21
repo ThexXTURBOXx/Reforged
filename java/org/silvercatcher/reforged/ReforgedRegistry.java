@@ -138,6 +138,14 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.CROSSBOW = new ItemCrossbow());
 			registrationList.add(ReforgedAdditions.CROSSBOW_BOLT = new ItemCrossbowBolt());
 		}
+		
+		if(GlobalValues.PIKE) {
+			registrationList.add(ReforgedAdditions.WOODEN_PIKE = new ItemPike(ToolMaterial.WOOD));
+			registrationList.add(ReforgedAdditions.STONE_PIKE = new ItemPike(ToolMaterial.STONE));
+			registrationList.add(ReforgedAdditions.GOLDEN_PIKE = new ItemPike(ToolMaterial.GOLD));
+			registrationList.add(ReforgedAdditions.IRON_PIKE = new ItemPike(ToolMaterial.IRON));
+			registrationList.add(ReforgedAdditions.DIAMOND_PIKE = new ItemPike(ToolMaterial.EMERALD));
+		}
 	}
 	
 	/**Registers all items out of the registrationList*/

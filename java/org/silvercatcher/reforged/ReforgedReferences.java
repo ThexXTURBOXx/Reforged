@@ -57,5 +57,6 @@ public class ReforgedReferences {
 		public static final boolean CALTROP = CommonProxy.caltrop;
 		public static final boolean DYNAMITE = CommonProxy.dynamite;
 		public static final boolean CROSSBOW = CommonProxy.crossbow;
+		public static final boolean PIKE = CommonProxy.pike;
 	}
 }

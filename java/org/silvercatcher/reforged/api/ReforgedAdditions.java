@@ -11,73 +11,79 @@ import net.minecraft.item.Item;
 public abstract class ReforgedAdditions {
 	
 	//Items
-	public static Item ARROW_BUNDLE;
+	public static Item ARROW_BUNDLE,
 	
-	public static Item GUN_STOCK;
-	public static Item BLUNDERBUSS_BARREL;
-	public static Item MUSKET_BARREL;
+	GUN_STOCK,
+	BLUNDERBUSS_BARREL,
+	MUSKET_BARREL,
 	
-	public static Item BLUNDERBUSS;
-	public static Item MUSKET;
-	public static Item WOODEN_BAYONET_MUSKET;
-	public static Item STONE_BAYONET_MUSKET;
-	public static Item GOLDEN_BAYONET_MUSKET;
-	public static Item IRON_BAYONET_MUSKET;
-	public static Item DIAMOND_BAYONET_MUSKET;
+	BLUNDERBUSS,
+	MUSKET,
+	WOODEN_BAYONET_MUSKET,
+	STONE_BAYONET_MUSKET,
+	GOLDEN_BAYONET_MUSKET,
+	IRON_BAYONET_MUSKET,
+	DIAMOND_BAYONET_MUSKET,
 	
-	public static Item MUSKET_BULLET;
-	public static Item BLUNDERBUSS_SHOT;
+	MUSKET_BULLET,
+	BLUNDERBUSS_SHOT,
 	
-	public static Item NEST_OF_BEES;
+	NEST_OF_BEES,
 	
-	public static Item FIREROD;
+	FIREROD,
 	
-	public static Item WOODEN_BATTLE_AXE;
-	public static Item STONE_BATTLE_AXE;
-	public static Item GOLDEN_BATTLE_AXE;
-	public static Item IRON_BATTLE_AXE;
-	public static Item DIAMOND_BATTLE_AXE;
+	WOODEN_BATTLE_AXE,
+	STONE_BATTLE_AXE,
+	GOLDEN_BATTLE_AXE,
+	IRON_BATTLE_AXE,
+	DIAMOND_BATTLE_AXE,
 	
-	public static Item WOODEN_BOOMERANG;
-	public static Item STONE_BOOMERANG;
-	public static Item GOLDEN_BOOMERANG;
-	public static Item IRON_BOOMERANG;
-	public static Item DIAMOND_BOOMERANG;
+	WOODEN_BOOMERANG,
+	STONE_BOOMERANG,
+	GOLDEN_BOOMERANG,
+	IRON_BOOMERANG,
+	DIAMOND_BOOMERANG,
 	
-	public static Item WOODEN_SABER;
-	public static Item STONE_SABER;
-	public static Item GOLDEN_SABER;
-	public static Item IRON_SABER;
-	public static Item DIAMOND_SABER;
+	WOODEN_SABER,
+	STONE_SABER,
+	GOLDEN_SABER,
+	IRON_SABER,
+	DIAMOND_SABER,
 	
-	public static Item WOODEN_KATANA;
-	public static Item STONE_KATANA;
-	public static Item GOLDEN_KATANA;
-	public static Item IRON_KATANA;
-	public static Item DIAMOND_KATANA;
+	WOODEN_KATANA,
+	STONE_KATANA,
+	GOLDEN_KATANA,
+	IRON_KATANA,
+	DIAMOND_KATANA,
 	
-	public static Item WOODEN_KNIFE;
-	public static Item STONE_KNIFE;
-	public static Item GOLDEN_KNIFE;
-	public static Item IRON_KNIFE;
-	public static Item DIAMOND_KNIFE;
+	WOODEN_KNIFE,
+	STONE_KNIFE,
+	GOLDEN_KNIFE,
+	IRON_KNIFE,
+	DIAMOND_KNIFE,
 	
-	public static Item JAVELIN;
+	JAVELIN,
 	
-	public static Item KERIS;
+	KERIS,
 
-	public static Item DART_NORMAL;
-	public static Item DART_HUNGER;
-	public static Item DART_POISON;
-	public static Item DART_POISON_STRONG;
-	public static Item DART_SLOW;
-	public static Item DART_WITHER;
-	public static Item BLOWGUN;
+	DART_NORMAL,
+	DART_HUNGER,
+	DART_POISON,
+	DART_POISON_STRONG,
+	DART_SLOW,
+	DART_WITHER,
+	BLOWGUN,
 	
-	public static Item DYNAMITE;
+	DYNAMITE,
 	
-	public static Item CROSSBOW;
-	public static Item CROSSBOW_BOLT;
+	CROSSBOW,
+	CROSSBOW_BOLT,
+	
+	WOODEN_PIKE,
+	STONE_PIKE,
+	GOLDEN_PIKE,
+	IRON_PIKE,
+	DIAMOND_PIKE;
 	
 	//Blocks
 	public static Block CALTROP;
