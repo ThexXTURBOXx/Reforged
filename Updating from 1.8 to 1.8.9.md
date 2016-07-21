@@ -4,7 +4,7 @@ There are just a few changes needed in the class Helpers in the package org.silv
 Scroll down to the Square-Helper-Method and remove/comment out the 1.8 part and decomment the 1.8.9 part.
 Then add this import: net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 Then change the RenderCrossbowBolt-class to this one:
-
+<code>
 package org.silvercatcher.reforged.render;
 
 import org.lwjgl.opengl.GL11;
@@ -107,6 +107,6 @@ public class RenderBoltCrossbow extends Render
 		return arrowTextures;
 	}
 }
-
+</code>
 
 Then it should be finished.
