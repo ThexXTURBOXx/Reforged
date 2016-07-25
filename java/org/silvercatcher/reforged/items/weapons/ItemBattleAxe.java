@@ -41,11 +41,8 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 	
 	@Override
 	public boolean isDamageable() {
-		if(unbreakable) {
-			return false;
-		} else {
-			return true;
-		}
+		if(unbreakable) return false;
+		else return true;
 	}
 	
 	@Override

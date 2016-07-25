@@ -7,10 +7,10 @@ item.arrow_bundle.name=Gremium speculi
 item.nest_of_bees.name=Nidus apii
 item.nestofbees.arrows=Speculi
 
-item.wooden_battleaxe.name=Securis ligneus
-item.stone_battleaxe.name=Securis saxeus
-item.iron_battleaxe.name=Securis ferreus
-item.golden_battleaxe.name=Securis aureus
+item.wooden_battleaxe.name=Securis lignea
+item.stone_battleaxe.name=Securis saxea
+item.iron_battleaxe.name=Securis ferrea
+item.golden_battleaxe.name=Securis aurea
 item.diamond_battleaxe.name=Securis ex adamante
 
 item.wooden_boomerang.name=Baculum recidens ligneus
@@ -20,28 +20,28 @@ item.iron_boomerang.name=Baculum recidens ferreus
 item.diamond_boomerang.name=Baculum recidens ex adamante
 item.boomerang.langBreak=%1$s in tuo mano fregit.
 
-item.wooden_saber.name=Machaera ligneus
-item.stone_saber.name=Machaera saxeus
-item.golden_saber.name=Machaera aureus
-item.iron_saber.name=Machaera ferreus
+item.wooden_saber.name=Machaera lignea
+item.stone_saber.name=Machaera saxea
+item.golden_saber.name=Machaera aurea
+item.iron_saber.name=Machaera ferrea
 item.diamond_saber.name=Machaera ex adamante
 
-item.wooden_musket.name=Muska cum novacula ligneus
-item.stone_musket.name=Muska cum novacula saxeus
-item.golden_musket.name=Muska cum novacula aureus
-item.iron_musket.name=Muska cum novacula ferreus
+item.wooden_musket.name=Muska cum novacula lignea
+item.stone_musket.name=Muska cum novacula saxea
+item.golden_musket.name=Muska cum novacula aurea
+item.iron_musket.name=Muska cum novacula ferrea
 item.diamond_musket.name=Muska cum novacula ex adamante
 
-item.wooden_knife.name=Novacula ligneus
-item.stone_knife.name=Novacula saxeus
-item.golden_knife.name=Novacula aureus
-item.iron_knife.name=Novacula ferreus
+item.wooden_knife.name=Novacula lignea
+item.stone_knife.name=Novacula saxea
+item.golden_knife.name=Novacula aurea
+item.iron_knife.name=Novacula ferrea
 item.diamond_knife.name=Novacula ex adamante
 
-item.wooden_katana.name=Catana ligneus
-item.stone_katana.name=Catana saxeus
-item.golden_katana.name=Catana aureus
-item.iron_katana.name=Catana ferreus
+item.wooden_katana.name=Catana lignea
+item.stone_katana.name=Catana saxea
+item.golden_katana.name=Catana aurea
+item.iron_katana.name=Catana ferrea
 item.diamond_katana.name=Catana ex adamante
 
 item.dart_normal.name=Speculum usitas

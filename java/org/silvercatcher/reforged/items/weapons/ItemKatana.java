@@ -39,11 +39,8 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 	
 	@Override
 	public boolean isDamageable() {
-		if(unbreakable) {
-			return false;
-		} else {
-			return true;
-		}
+		if(unbreakable) return false;
+		else return true;
 	}
 	
 	@Override

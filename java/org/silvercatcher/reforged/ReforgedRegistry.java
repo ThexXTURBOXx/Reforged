@@ -37,7 +37,6 @@ public class ReforgedRegistry {
 	//Registry
 	/**Adds all items to the registrationList*/
 	public static void createItems() {
-
 		if(GlobalValues.NEST_OF_BEES) {
 			registrationList.add(ReforgedAdditions.ARROW_BUNDLE = new ItemArrowBundle());
 			registrationList.add(ReforgedAdditions.NEST_OF_BEES = new ItemNestOfBees());

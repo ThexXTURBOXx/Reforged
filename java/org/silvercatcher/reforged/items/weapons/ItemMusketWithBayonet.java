@@ -27,11 +27,8 @@ public class ItemMusketWithBayonet extends ItemMusket {
 	
 	@Override
 	public boolean isDamageable() {
-		if(unbreakable) {
-			return false;
-		} else {
-			return true;
-		}
+		if(unbreakable) return false;
+		else return true;
 	}
 	
 	public ItemExtension getKnife() {
