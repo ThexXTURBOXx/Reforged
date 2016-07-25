@@ -47,7 +47,8 @@ public class CommonProxy {
 	caltrop,
 	dynamite,
 	crossbow,
-	pike;
+	pike,
+	mace;
 	
 	//IDs
 	public static int goalseekerid;
@@ -78,6 +79,7 @@ public class CommonProxy {
 		dynamite = config.getBoolean("Dynamite", "Items", true, "Enable the Dynamite");
 		crossbow = config.getBoolean("Crossbow", "Items", true, "Enable the Crossbow plus Bolt");
 		pike = config.getBoolean("Pike", "Items", true, "Enable the Pike");
+		mace = config.getBoolean("Mace", "Items", true, "Enable the Mace");
 		
 		//IDs
 		goalseekerid = config.getInt("Goalseeker", "IDs", 100, 0, 256, "This specifies the Enchantment ID of the Goalseeker-Enchantment");

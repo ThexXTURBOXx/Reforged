@@ -83,7 +83,13 @@ public abstract class ReforgedAdditions {
 	STONE_PIKE,
 	GOLDEN_PIKE,
 	IRON_PIKE,
-	DIAMOND_PIKE;
+	DIAMOND_PIKE,
+	
+	WOODEN_MACE,
+	STONE_MACE,
+	GOLDEN_MACE,
+	IRON_MACE,
+	DIAMOND_MACE;
 	
 	//Blocks
 	public static Block CALTROP;

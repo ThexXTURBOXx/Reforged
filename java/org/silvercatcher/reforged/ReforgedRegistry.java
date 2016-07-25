@@ -145,6 +145,14 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.IRON_PIKE = new ItemPike(ToolMaterial.IRON));
 			registrationList.add(ReforgedAdditions.DIAMOND_PIKE = new ItemPike(ToolMaterial.EMERALD));
 		}
+		
+		if(GlobalValues.MACE) {
+			registrationList.add(ReforgedAdditions.WOODEN_MACE = new ItemMace(ToolMaterial.WOOD));
+			registrationList.add(ReforgedAdditions.STONE_MACE = new ItemMace(ToolMaterial.STONE));
+			registrationList.add(ReforgedAdditions.GOLDEN_MACE = new ItemMace(ToolMaterial.GOLD));
+			registrationList.add(ReforgedAdditions.IRON_MACE = new ItemMace(ToolMaterial.IRON));
+			registrationList.add(ReforgedAdditions.DIAMOND_MACE = new ItemMace(ToolMaterial.EMERALD));
+		}
 	}
 	
 	/**Registers all items out of the registrationList*/
