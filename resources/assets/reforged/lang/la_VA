@@ -1,0 +1,102 @@
+itemGroup.reforged=Reforged
+
+item.firerod.name=Baculum ignis
+
+item.arrow_bundle.name=Gremium speculi
+
+item.nest_of_bees.name=Nidus apii
+item.nestofbees.arrows=Speculi
+
+item.wooden_battleaxe.name=Securis ligneus
+item.stone_battleaxe.name=Securis saxeus
+item.iron_battleaxe.name=Securis ferreus
+item.golden_battleaxe.name=Securis aureus
+item.diamond_battleaxe.name=Securis ex adamante
+
+item.wooden_boomerang.name=Baculum recidens ligneus
+item.stone_boomerang.name=Baculum recidens saxeus
+item.golden_boomerang.name=Baculum recidens ferreus
+item.iron_boomerang.name=Baculum recidens aureus
+item.diamond_boomerang.name=Baculum recidens ex adamante
+item.boomerang.langBreak=%1$s in tuo mano fregit.
+
+item.wooden_saber.name=Machaera ligneus
+item.stone_saber.name=Machaera saxeus
+item.golden_saber.name=Machaera ferreus
+item.iron_saber.name=Machaera aureus
+item.diamond_saber.name=Machaera ex adamante
+
+item.wooden_musket.name=Muska cum novacula ligneus
+item.stone_musket.name=Muska cum novacula saxeus
+item.golden_musket.name=Muska cum novacula ferreus
+item.iron_musket.name=Muska cum novacula aureus
+item.diamond_musket.name=Muska cum novacula ex adamante
+
+item.wooden_knife.name=Novacula ligneus
+item.stone_knife.name=Novacula saxeus
+item.golden_knife.name=Novacula ferreus
+item.iron_knife.name=Novacula aureus
+item.diamond_knife.name=Novacula ex adamante
+
+item.wooden_katana.name=Catana ligneus
+item.stone_katana.name=Catana saxeus
+item.golden_katana.name=Catana ferreus
+item.iron_katana.name=Catana aureus
+item.diamond_katana.name=Catana ex adamante
+
+item.dart_normal.name=Speculum usitas
+item.dart_poison.name=Speculum acidus
+item.dart_poison_strong.name=Speculum acidus potens
+item.dart_slowness.name=Speculum lenitatis
+item.dart_hunger.name=Speculum famis
+item.dart_wither.name=Speculum arescentis
+item.blowgun.name=Tuba inflatilis
+
+item.musket_barrel.name=Tubus ferreus muskae
+item.gun_stock.name=Manubrium muskae
+item.blunderbuss_barrel.name=Manubrium muskae augentis
+item.blunderbuss_bullet.name=Pila muskae augentis
+item.blunderbuss.name=Muska augens
+item.javelin.name=Falarica
+item.musket_bullet.name=Pila muskae
+item.musket.name=Muska
+item.musket.loadstate=Status
+item.musket.loadstate.empty=Cassus
+item.musket.loadstate.loading=Reload **
+item.musket.loadstate.loaded=Loaded **
+
+item.keris.name=Maecenas
+
+tile.caltrop.name=Fußangel
+
+item.dynamite.name=Dynamit
+
+item.crossbow.name=Armbrust
+item.crossbow_bolt.name=Armbrustpfeil
+
+item.wooden_pike.name=Holzpike
+item.stone_pike.name=Steinpike
+item.golden_pike.name=Goldpike
+item.iron_pike.name=Eisenpike
+item.diamond_pike.name=Diamantpike
+
+death.attack.boomerang=%1$s's Schädel wurde von einem Boomerang zerteilt.
+death.attack.boomerang.player=%1$s's Schädel wurde von einem Boomerang zerteilt während er mit %2$s kämpfte.
+death.attack.javelin=%1$s wurde aufgespießt.
+death.attack.javelin.player=%1$s wurde aufgespießt während er mit %2$s kämpfte.
+death.attack.musket=%1$s bekam einen Schuss in den Kopf.
+death.attack.musket.player=%1$s bekam einen Schuss in den Kopf während er mit %2$s kämpfte.
+death.attack.blunderbuss=%1$s wurde durch Munition zerfetzt.
+death.attack.blunderbuss.player=%1$s wurde durch Munition zerfetzt während er mit %2$s kämpfte.
+death.attack.dart=%1$s diente als Zielscheibe.
+death.attack.dart.player=%1$s diente als Zielscheibe während er mit %2$s kämpfte.
+death.attack.caltrop=%1$s hat nicht darauf geachtet, wo er hintritt.
+death.attack.caltrop.player=%1$s hat nicht darauf geachtet, wo er hintritt, während er mit %2$s kämpfte.
+death.attack.crossbow=%1$s wurde von einem Pfeil zerteilt.
+death.attack.crossbow.player=%1$s wurde von einem Pfeil zerteilt, während er mit %2$s kämpfte.
+
+enchantment.goalseeker=Zielsucher
+
+versionchecker.ingame.outdated=Neuere Version verfügbar
+versionchecker.ingame.downloadclick=Hier zum herunterladen klicken
+versionchecker.ingame.download=Herunterladen
