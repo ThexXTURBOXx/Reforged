@@ -8,6 +8,7 @@ import org.silvercatcher.reforged.api.*;
 import org.silvercatcher.reforged.blocks.TileEntityCaltropBlock;
 import org.silvercatcher.reforged.items.others.*;
 import org.silvercatcher.reforged.items.weapons.*;
+import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.Render;
@@ -20,8 +21,10 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 
@@ -246,5 +249,11 @@ public class ReforgedRegistry {
 	public static void registerEventHandler(Object event) {
 		FMLCommonHandler.instance().bus().register(event);
 	    MinecraftForge.EVENT_BUS.register(event);
+	}
+	
+	public static void registerPackets() {
+		ReforgedMod.network = NetworkRegistry.INSTANCE.newSimpleChannel(ReforgedMod.ID);
+		int packetId = 0;
+		ReforgedMod.network.registerMessage(MessageCustomReachAttack.Handler.class, MessageCustomReachAttack.class, packetId++, Side.SERVER);
 	}
 }

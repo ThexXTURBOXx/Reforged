@@ -22,6 +22,7 @@ public class CommonProxy {
 		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
 		ReforgedRegistry.createItems();
 		ReforgedRegistry.registerItems();
+		ReforgedRegistry.registerPackets();
 		registerEntities();
 		Thread versionCheck = new VersionChecker();
 		versionCheck.start();
