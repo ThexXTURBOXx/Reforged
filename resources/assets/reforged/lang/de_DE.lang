@@ -80,6 +80,12 @@ item.golden_pike.name=Goldpike
 item.iron_pike.name=Eisenpike
 item.diamond_pike.name=Diamantpike
 
+item.wooden_mace.name=Holzkeule
+item.stone_mace.name=Steinkeule
+item.golden_mace.name=Goldkeule
+item.iron_mace.name=Eisenkeule
+item.diamond_mace.name=Diamantkeule
+
 death.attack.boomerang=%1$s's Schädel wurde von einem Boomerang zerteilt.
 death.attack.boomerang.player=%1$s's Schädel wurde von einem Boomerang zerteilt während er mit %2$s kämpfte.
 death.attack.javelin=%1$s wurde aufgespießt.

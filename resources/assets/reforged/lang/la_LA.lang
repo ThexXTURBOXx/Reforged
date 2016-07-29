@@ -80,6 +80,12 @@ item.golden_pike.name=Dolo aureus
 item.iron_pike.name=Dolo ferreus
 item.diamond_pike.name=Dolo ex adamante
 
+item.wooden_mace.name=Stipes ligneus
+item.stone_mace.name=Stipes saxeus
+item.golden_mace.name=Stipes aureus
+item.iron_mace.name=Stipes ferreus
+item.diamond_mace.name=Stipes ex adamante
+
 death.attack.boomerang=Calva de %1$s a baculo recidente discerpta est.
 death.attack.boomerang.player=Calva de %1$s a baculo recidente discerpta est, dum is contra %2$s pugnabat.
 death.attack.javelin=%1$s configebatur.
