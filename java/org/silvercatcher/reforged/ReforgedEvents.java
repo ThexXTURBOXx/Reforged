@@ -17,12 +17,14 @@ public class ReforgedEvents {
 	public void customReach(MouseEvent e) {
 		if(e.button == 0 && e.buttonstate) {
 			Minecraft mc = Minecraft.getMinecraft();
-			Item i = mc.thePlayer.getCurrentEquippedItem().getItem();
-			if(i instanceof ICustomReach && i instanceof ItemExtension) {
-				ICustomReach icr = (ICustomReach) i;
-				Entity hit = Helpers.getMouseOverExtended((float) icr.reach()).entityHit;
-				if(hit != null && mc.objectMouseOver.entityHit == null && hit != mc.thePlayer) {
-					ReforgedMod.network.sendToServer(new MessageCustomReachAttack(hit.getEntityId()));
+			if(mc.thePlayer.getCurrentEquippedItem() != null) {
+				Item i = mc.thePlayer.getCurrentEquippedItem().getItem();
+				if(i instanceof ICustomReach && i instanceof ItemExtension) {
+					ICustomReach icr = (ICustomReach) i;
+					Entity hit = Helpers.getMouseOverExtended((float) icr.reach()).entityHit;
+					if(hit != null && mc.objectMouseOver.entityHit == null && hit != mc.thePlayer) {
+						ReforgedMod.network.sendToServer(new MessageCustomReachAttack(hit.getEntityId()));
+					}
 				}
 			}
 		}

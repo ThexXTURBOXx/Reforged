@@ -251,9 +251,11 @@ public class ReforgedRegistry {
 	    MinecraftForge.EVENT_BUS.register(event);
 	}
 	
+	/**Registers all our Packets*/
 	public static void registerPackets() {
 		ReforgedMod.network = NetworkRegistry.INSTANCE.newSimpleChannel(ReforgedMod.ID);
 		int packetId = 0;
 		ReforgedMod.network.registerMessage(MessageCustomReachAttack.Handler.class, MessageCustomReachAttack.class, packetId++, Side.SERVER);
 	}
+	
 }

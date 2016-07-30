@@ -1,5 +1,7 @@
 package org.silvercatcher.reforged;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
@@ -21,7 +23,9 @@ public class ReforgedMod {
     public static final String VERSION = "0.7-pre4";
     
     public static SimpleNetworkWrapper network;
-
+    
+    public static final Logger LOG = LogManager.getLogger("Reforged");
+    
     public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
 		@Override
 		public Item getTabIconItem() {

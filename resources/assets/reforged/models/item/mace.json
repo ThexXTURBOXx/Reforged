@@ -2,9 +2,9 @@
     "parent": "reforged:builtin/generated",
 	"display": {
         "thirdperson": {
-            "rotation": [ 0, 90, 315 ],
-            "translation": [ 0.00, 1.50, -1.75 ],
-            "scale": [ 2.00, 2.00, 2.00 ]
+            "rotation": [ 0, 90, -45 ],
+            "translation": [ 0.00, 1.50, -5.50 ],
+            "scale": [ 1.50, 1.50, 1.50 ]
         },
         "firstperson": {
             "rotation": [ -0, 219, 25 ],
