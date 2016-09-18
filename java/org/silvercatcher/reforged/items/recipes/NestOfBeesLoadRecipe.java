@@ -70,7 +70,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 		NBTTagCompound compound = CompoundTags.giveCompound(output);
 		int arrows = compound.getInteger(CompoundTags.AMMUNITION);
 		for(int index : aBs.keySet()) {
-			ItemStack arrowBundleStack = inventory.getStackInSlot(index);
+			inventory.getStackInSlot(index);
 			int stsize = aBs.get(index);
 			if(stsize > 4) stsize = 4;
 			arrows += stsize * 8;

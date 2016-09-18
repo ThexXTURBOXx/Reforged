@@ -39,7 +39,7 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 	
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if(itemRand.nextInt(25) < ((int) 5 - zombieSpawnChance())) {
+		if(itemRand.nextInt(25) < (5 - zombieSpawnChance())) {
 			if(entity instanceof EntityLivingBase) {
 				EntityLivingBase elb = (EntityLivingBase) entity;
 				elb.addPotionEffect(new PotionEffect(2, 3, 10, false, false));

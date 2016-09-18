@@ -28,7 +28,6 @@ public class ItemDynamite extends ExtendedItem{
 	
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn) {		
-		ItemStack throwStack = stack.copy();
 		
 		if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(this)) {
 			if(!worldIn.isRemote) {

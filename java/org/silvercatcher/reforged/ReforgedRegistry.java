@@ -12,6 +12,7 @@ import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -216,7 +217,7 @@ public class ReforgedRegistry {
 	 * @param recipe The instance of the Recipe
 	 * @param recipeclass The class of the Recipe
 	 * @param category {@link Category#SHAPED} or {@link Category#SHAPELESS}?*/
-	public static void registerIRecipe(String name, IRecipe recipe, Class recipeclass, Category category) {
+	public static void registerIRecipe(String name, IRecipe recipe, Class<?> recipeclass, Category category) {
 		String catString;
 		if(category == Category.SHAPELESS) {
 			catString = "after:minecraft:shapeless";
@@ -233,14 +234,14 @@ public class ReforgedRegistry {
 	/**Helper method for registering an Entity
 	 * @param c The class of the Entity
 	 * @param name The name for the Entity*/
-	public static void registerEntity(Class c, String name) {
+	public static void registerEntity(Class<? extends Entity> c, String name) {
 		EntityRegistry.registerModEntity(c, name, ++counterEntities, ReforgedMod.instance, 120, 1, true);		
 	}
 
 	/**Helper method for binding a renderclass to a entity
 	 * @param entityclass The class of the Entity
 	 * @param renderclass The class of the Renderer*/
-	public static void registerEntityRenderer(Class entityclass, Render renderclass) {
+	public static void registerEntityRenderer(Class<? extends Entity> entityclass, Render renderclass) {
 		RenderingRegistry.registerEntityRenderingHandler(entityclass, renderclass);
 	}
 

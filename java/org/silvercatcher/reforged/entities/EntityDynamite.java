@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
 public class EntityDynamite extends AReforgedThrowable {
@@ -26,13 +25,13 @@ public class EntityDynamite extends AReforgedThrowable {
 	
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
-		Explosion e = worldObj.createExplosion(this, posX, posY, posZ, 2, true);
+		worldObj.createExplosion(this, posX, posY, posZ, 2, true);
 		return true;
 	}
 	
 	@Override
 	protected boolean onEntityHit(Entity entity) {
-		Explosion e = worldObj.createExplosion(this, posX, posY, posZ, 2, true);
+		worldObj.createExplosion(this, posX, posY, posZ, 2, true);
 		return true;
 	}
 	

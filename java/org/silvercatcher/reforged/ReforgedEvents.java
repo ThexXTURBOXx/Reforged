@@ -21,7 +21,7 @@ public class ReforgedEvents {
 				Item i = mc.thePlayer.getCurrentEquippedItem().getItem();
 				if(i instanceof ICustomReach && i instanceof ItemExtension) {
 					ICustomReach icr = (ICustomReach) i;
-					Entity hit = Helpers.getMouseOverExtended((float) icr.reach()).entityHit;
+					Entity hit = Helpers.getMouseOverExtended(icr.reach()).entityHit;
 					if(hit != null && mc.objectMouseOver.entityHit == null && hit != mc.thePlayer) {
 						ReforgedMod.network.sendToServer(new MessageCustomReachAttack(hit.getEntityId()));
 					}
