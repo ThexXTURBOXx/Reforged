@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import java.util.*;
+import java.util.List;
+import java.util.Random;
 
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.*;
@@ -31,8 +32,6 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	byte empty		= 0;
 	byte loading	= 1;
 	byte loaded		= 2;
-	
-	Map<EntityPlayer, Integer> clientServerTransfer = new HashMap<EntityPlayer, Integer>();
 	
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -82,12 +81,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 			if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(ReforgedAdditions.CROSSBOW_BOLT)) {
 				loadState = loading;
 				if(compound.getByte(CompoundTags.AMMUNITION) == empty) {
-					if(worldIn.isRemote) {
-						compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
-						clientServerTransfer.put(playerIn, playerIn.ticksExisted + getReloadTotal());					
-					} else {
-						compound.setInteger(CompoundTags.STARTED, clientServerTransfer.get(playerIn));
-					}
+					compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());				
 				}
 			} else {
 				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);

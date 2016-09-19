@@ -1,6 +1,6 @@
 package org.silvercatcher.reforged.api;
 
-import java.util.*;
+import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedMod;
 
@@ -24,11 +24,9 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		setCreativeTab(ReforgedMod.tabReforged);
 	}
 	
-	byte empty		= 0;
-	byte loading	= 1;
-	byte loaded		= 2;
-	
-	Map<EntityPlayer, Integer> clientServerTransfer = new HashMap<EntityPlayer, Integer>();
+	public static final byte empty		= 0;
+	public static final byte loading	= 1;
+	public static final byte loaded		= 2;
 	
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -59,7 +57,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		if(loadState == loading) return 40;
+		if(loadState == loading) return getReloadTotal();
 
 		return super.getMaxItemUseDuration(stack);
 	}
@@ -84,12 +82,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				
 				loadState = loading;
 				if(compound.getByte(CompoundTags.AMMUNITION) == empty) {
-					if(worldIn.isRemote) {
-						compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
-						clientServerTransfer.put(playerIn, playerIn.ticksExisted + getReloadTotal());					
-					} else {
-						compound.setInteger(CompoundTags.STARTED, clientServerTransfer.get(playerIn));
-					}
+					compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
 				}
 			} else {
 				

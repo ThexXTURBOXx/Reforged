@@ -61,7 +61,6 @@ public class ItemMusket extends AReloadable {
 
 	@Override
 	public int getReloadTotal() {
-
 		return 45;
 	}
 }

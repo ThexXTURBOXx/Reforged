@@ -1,7 +1,9 @@
 package org.silvercatcher.reforged.gui;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.api.AReloadable;
+import org.silvercatcher.reforged.api.CompoundTags;
 import org.silvercatcher.reforged.util.Helpers;
 
 //import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -25,6 +27,9 @@ public class ReloadOverlay extends Gui {
 	private static final float[] green  = new float[] {0, 1    , 0, 1};
 	
 	private final Minecraft minecraft;
+	private float amount = 0;
+	private float amountUnchecked = 0;
+	private float ticksBefore = -1;
 	
 	public ReloadOverlay() {
 	
@@ -37,7 +42,22 @@ public class ReloadOverlay extends Gui {
 	public void renderReload(RenderGameOverlayEvent event) {
 		
 		if(event instanceof RenderGameOverlayEvent.Post|| event.type != RenderGameOverlayEvent.ElementType.HOTBAR) {
-			return ;
+			return;
+		}
+		
+		if(ticksBefore == -1) {
+			ticksBefore = minecraft.theWorld.getTotalWorldTime();
+		}
+		
+		if(Mouse.isCreated() && Mouse.isButtonDown(1)) {
+			amount += minecraft.theWorld.getTotalWorldTime() - ticksBefore;
+			amountUnchecked += minecraft.theWorld.getTotalWorldTime() - ticksBefore;
+			ticksBefore = minecraft.theWorld.getTotalWorldTime();
+		} else {
+			amount = 0;
+			amountUnchecked = 0;
+			ticksBefore = -1;
+			return;
 		}
 		
 		EntityPlayer player = minecraft.thePlayer;
@@ -50,19 +70,21 @@ public class ReloadOverlay extends Gui {
 				
 				AReloadable reloadable = (AReloadable) equipped.getItem();
 				
-				int reloadLeft = reloadable.getReloadLeft(equipped, player);
-				
-				if(reloadLeft < 0) return;
-				
 				//System.out.println("left: " + reloadLeft);
 				
 				//System.out.println("total: " + reloadable.getReloadTotal());
 				
-				if(reloadLeft > reloadable.getReloadTotal()) {
-					reloadLeft = reloadable.getReloadTotal();
+				if(reloadable.giveCompound(equipped).getByte(CompoundTags.AMMUNITION) != AReloadable.loading) {
+					return;
 				}
 				
-				float done = (float) reloadLeft / reloadable.getReloadTotal();
+				if(amountUnchecked > reloadable.getReloadTotal()) {
+					amount = 0;
+				}
+				
+				System.out.println(amount);
+				
+				float done = amount / reloadable.getReloadTotal();
 				
 				//System.out.println("done: " + done);
 				
