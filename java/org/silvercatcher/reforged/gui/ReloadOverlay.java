@@ -45,21 +45,6 @@ public class ReloadOverlay extends Gui {
 			return;
 		}
 		
-		if(ticksBefore == -1) {
-			ticksBefore = minecraft.theWorld.getTotalWorldTime();
-		}
-		
-		if(Mouse.isCreated() && Mouse.isButtonDown(1)) {
-			amount += minecraft.theWorld.getTotalWorldTime() - ticksBefore;
-			amountUnchecked += minecraft.theWorld.getTotalWorldTime() - ticksBefore;
-			ticksBefore = minecraft.theWorld.getTotalWorldTime();
-		} else {
-			amount = 0;
-			amountUnchecked = 0;
-			ticksBefore = -1;
-			return;
-		}
-		
 		EntityPlayer player = minecraft.thePlayer;
 		
 		if(player != null && player.worldObj != null) {
@@ -70,9 +55,20 @@ public class ReloadOverlay extends Gui {
 				
 				AReloadable reloadable = (AReloadable) equipped.getItem();
 				
-				//System.out.println("left: " + reloadLeft);
+				if(ticksBefore == -1) {
+					ticksBefore = minecraft.theWorld.getTotalWorldTime();
+				}
 				
-				//System.out.println("total: " + reloadable.getReloadTotal());
+				if(Mouse.isCreated() && Mouse.isButtonDown(1)) {
+					amount += minecraft.theWorld.getTotalWorldTime() - ticksBefore;
+					amountUnchecked += minecraft.theWorld.getTotalWorldTime() - ticksBefore;
+					ticksBefore = minecraft.theWorld.getTotalWorldTime();
+				} else {
+					amount = 0;
+					amountUnchecked = 0;
+					ticksBefore = -1;
+					return;
+				}
 				
 				if(reloadable.giveCompound(equipped).getByte(CompoundTags.AMMUNITION) != AReloadable.loading) {
 					return;
@@ -82,11 +78,7 @@ public class ReloadOverlay extends Gui {
 					amount = 0;
 				}
 				
-				System.out.println(amount);
-				
 				float done = amount / reloadable.getReloadTotal();
-				
-				//System.out.println("done: " + done);
 				
 				GL11.glColor4f(1F, 1F, 1F, 1F);
 				GL11.glDisable(GL11.GL_LIGHTING);

@@ -47,7 +47,10 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		if(loadState == loading) return EnumAction.BLOCK;
+		if(loadState == loading) {
+			if(ReforgedMod.battlegearDetected) return EnumAction.BOW;
+			else return EnumAction.BLOCK;
+		}
 		if(loadState == loaded) return EnumAction.BOW;
 		return EnumAction.NONE;
 	}

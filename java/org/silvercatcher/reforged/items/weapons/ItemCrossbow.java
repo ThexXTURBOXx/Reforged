@@ -29,9 +29,9 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		setCreativeTab(ReforgedMod.tabReforged);
 	}
 	
-	byte empty		= 0;
-	byte loading	= 1;
-	byte loaded		= 2;
+	public static final byte empty		= 0;
+	public static final byte loading	= 1;
+	public static final byte loaded		= 2;
 	
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -51,8 +51,11 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	public EnumAction getItemUseAction(ItemStack stack) {
 		
 		byte loadState = getLoadState(stack);
-		
-		if(loadState == loading) return EnumAction.BLOCK;
+
+		if(loadState == loading) {
+			if(ReforgedMod.battlegearDetected) return EnumAction.BOW;
+			else return EnumAction.BLOCK;
+		}
 		if(loadState == loaded) return EnumAction.BOW;
 		return EnumAction.NONE;
 	}

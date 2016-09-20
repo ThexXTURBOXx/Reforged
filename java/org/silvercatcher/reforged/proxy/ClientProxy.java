@@ -17,8 +17,7 @@ import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.*;
 
 public class ClientProxy extends CommonProxy {
 
@@ -35,6 +34,11 @@ public class ClientProxy extends CommonProxy {
 		super.init(event);
 		registerItemRenderers();
 		registerEntityRenderers(Minecraft.getMinecraft().getRenderManager());
+	}
+	
+	@Override
+	public void postInit(FMLPostInitializationEvent event) {
+		super.postInit(event);
 	}
 	
 	@Override
