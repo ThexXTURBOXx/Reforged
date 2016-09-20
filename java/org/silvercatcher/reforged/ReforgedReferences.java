@@ -59,5 +59,6 @@ public class ReforgedReferences {
 		public static final boolean CROSSBOW = CommonProxy.crossbow;
 		public static final boolean PIKE = CommonProxy.pike;
 		public static final boolean MACE = CommonProxy.mace;
+		public static final boolean DIRK = CommonProxy.dirk;
 	}
 }

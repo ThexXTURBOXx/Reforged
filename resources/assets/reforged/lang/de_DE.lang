@@ -86,6 +86,12 @@ item.golden_mace.name=Goldkeule
 item.iron_mace.name=Eisenkeule
 item.diamond_mace.name=Diamantkeule
 
+item.wooden_dirk.name=Holzdolch
+item.stone_dirk.name=Steindolch
+item.golden_dirk.name=Golddolch
+item.iron_dirk.name=Eisendolch
+item.diamond_dirk.name=Diamantdolch
+
 death.attack.boomerang=%1$s's Schädel wurde von einem Boomerang zerteilt.
 death.attack.boomerang.player=%1$s's Schädel wurde von einem Boomerang zerteilt während er mit %2$s kämpfte.
 death.attack.javelin=%1$s wurde aufgespießt.

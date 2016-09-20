@@ -86,6 +86,12 @@ item.golden_mace.name=Golden Mace
 item.iron_mace.name=Iron Mace
 item.diamond_mace.name=Diamond Mace
 
+item.wooden_dirk.name=Wooden Dirk
+item.stone_dirk.name=Stone Dirk
+item.golden_dirk.name=Golden Dirk
+item.iron_dirk.name=Iron Dirk
+item.diamond_dirk.name=Diamond Dirk
+
 death.attack.boomerang=%1$s's head was splittered by a Boomerang.
 death.attack.boomerang.player=%1$s's head was splittered by a Boomerang while fighting %2$s.
 death.attack.javelin=%1$s got impaled.
