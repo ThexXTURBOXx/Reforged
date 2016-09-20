@@ -16,3 +16,8 @@ You want to have this mod translated to your language? You know 2 languages? The
 # Reforged Integration
 The repo for Reforged Integration can be found [here](https://github.com/ThexXTURBOXx/Reforged-Integration).
 Reforged Integration adds integration for mods like Thaumcraft, ProjectE etc.
+
+# Reforged CnG
+CnG = Cross'n'Grave
+The repo for Reforged CnG can be found [here](https://github.com/TheOnlySilverClaw/Reforged---Cross-and-Grave).
+Reforged CnG is the magical dimension of the Reforged Trinity.
