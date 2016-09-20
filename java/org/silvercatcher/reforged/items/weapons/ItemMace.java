@@ -4,6 +4,7 @@ import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.IZombieEquippable;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
+import org.silvercatcher.reforged.props.StunProperty;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -42,6 +43,7 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 		if(itemRand.nextInt(25) < (5 - zombieSpawnChance())) {
 			if(entity instanceof EntityLivingBase) {
 				EntityLivingBase elb = (EntityLivingBase) entity;
+				StunProperty.get(elb).setStunned(true);
 				elb.addPotionEffect(new PotionEffect(2, 3, 10, false, false));
 				elb.addPotionEffect(new PotionEffect(4, 3, 10, false, false));
 				elb.addPotionEffect(new PotionEffect(15, 3, 10, false, false));

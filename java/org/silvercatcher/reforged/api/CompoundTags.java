@@ -55,4 +55,8 @@ public class CompoundTags {
 
 	/** saves when the weapon got started reloading */
 	public static final String STARTED 	 = "started";
+	
+	/** saves whether a player is stunned */
+	public static final String STUNNED 	 = "stunned";
+	
 }
