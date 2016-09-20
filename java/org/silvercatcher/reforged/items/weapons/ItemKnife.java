@@ -78,8 +78,8 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 	
 	@Override
 	public void registerRecipes() {
-		GameRegistry.addShapelessRecipe(new ItemStack(this),
-				new ItemStack(Items.stick), materialDefinition.getRepairMaterial());
+		GameRegistry.addShapedRecipe(new ItemStack(this),
+				"sm", "  ", 's', new ItemStack(Items.stick), 'm', materialDefinition.getRepairMaterial());
 	}
 	
 	@Override
