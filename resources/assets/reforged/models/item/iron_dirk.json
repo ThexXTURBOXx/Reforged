@@ -1,0 +1,7 @@
+{
+    "parent": "reforged:item/dirk",
+
+    "textures": {
+        "layer0": "reforged:items/dirk_iron"
+    }
+}
