@@ -87,7 +87,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 					compound.setInteger(CompoundTags.STARTED, player.ticksExisted + getReloadTotal());				
 				}
 			} else {
-				world.playSoundAtEntity(player, "item.fireCharge.use", 1.0f, 0.7f);
+				world.playSoundAtEntity(player, "reforged:crossbow_reload", 1.0f, 0.7f);
 			}
 		}
 		

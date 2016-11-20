@@ -46,7 +46,7 @@ public class ItemBoomerang extends ExtendedItem {
 		
 		if(player.capabilities.isCreativeMode || player.inventory.consumeInventoryItem(this))
 	    {
-	        world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+	        world.playSoundAtEntity(player, "reforged:boomerang_throw", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
         	
 	        if (!world.isRemote) {
 	        	

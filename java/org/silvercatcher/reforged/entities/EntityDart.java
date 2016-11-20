@@ -88,7 +88,7 @@ public class EntityDart extends AReforgedThrowable {
 				}
 			}
 		}
-		//Custom sound later... [BREAK SOUND]
+		worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
 		return true;
 	}
 	

@@ -16,12 +16,14 @@ import net.minecraftforge.fml.common.registry.LanguageRegistry;
 public abstract class AReloadable extends ItemBow implements ItemExtension {
 	
 	private Item ammo;
+	private String shootsound;
 	
-	public AReloadable(String name) {
+	public AReloadable(String name, String shootsound) {
 		setMaxStackSize(1);
 		setMaxDamage(100);
 		setUnlocalizedName(name);
 		setCreativeTab(ReforgedMod.tabReforged);
+		this.shootsound = shootsound;
 	}
 	
 	public static final byte empty		= 0;
@@ -89,7 +91,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				}
 			} else {
 				
-				world.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
+				world.playSoundAtEntity(playerIn, "reforged:shotgun_reload", 1.0f, 0.7f);
 			}
 		}
 		
@@ -109,7 +111,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 			
 			if(loadState == loaded) {
 				
-				world.playSoundAtEntity(playerIn, "ambient.weather.thunder", 1f, 1f);
+				world.playSoundAtEntity(playerIn, shootsound, 1f, 1f);
 				
 				shoot(world, playerIn, stack);
 				if(!playerIn.capabilities.isCreativeMode && stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand)) {

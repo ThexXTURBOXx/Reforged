@@ -84,8 +84,9 @@ public class EntityJavelin extends AReforgedThrowable {
 			if(!worldObj.isRemote && !creativeUse()) {
 				entityDropItem(getItemStack(), 0.5f);
 			}
+			worldObj.playSoundAtEntity(this, "reforged:boomerang_hit", 1.0F, 1.0F);
 		} else {
-			//Custom sound later... [BREAK SOUND]
+			worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
 		}
 	}
 	

@@ -110,7 +110,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 						entityDropItem(getItemStack(), 0.5f);
 				} else {
-					//Custom sound later... [BREAK SOUND]
+					worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
 				}
 				setDead();
 			}
@@ -123,7 +123,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 					if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 							entityDropItem(getItemStack(), 0.5f);
 					} else {
-						//Custom sound later... [BREAK SOUND]
+						worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
 					}
 					setDead();
 				}
@@ -157,7 +157,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 				p.inventory.addItemStackToInventory(stack);
 				worldObj.playSoundAtEntity(this, "random.pop", 0.5F, 0.7F);
 			} else {
-				//Custom sound later... [BREAK SOUND]
+				worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
 			}
 			return true;
 		} else {
@@ -165,7 +165,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 			hitEntity.attackEntityFrom(causeImpactDamage(hitEntity, getThrower()), getImpactDamage(hitEntity));
 			ItemStack stack = getItemStack();
 			if(stack.getItem().isDamageable() && stack.attemptDamageItem(1, rand)) {
-				//Custom sound later... [BREAK SOUND]
+				worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
 				return true;
 			} else {
 				setItemStack(stack);

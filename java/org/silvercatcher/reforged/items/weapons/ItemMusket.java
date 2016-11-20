@@ -14,7 +14,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemMusket extends AReloadable {
 	
 	public ItemMusket() {
-		super("musket");
+		super("musket", "reforged:musket_shoot");
 	}
 	
 	@Override
