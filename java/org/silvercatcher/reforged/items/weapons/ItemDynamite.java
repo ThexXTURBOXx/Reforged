@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemDynamite extends ExtendedItem{
+public class ItemDynamite extends ExtendedItem {
 	
 	public ItemDynamite() {
 		super();
@@ -27,11 +27,11 @@ public class ItemDynamite extends ExtendedItem{
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn) {		
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {		
 		
-		if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(this)) {
-			if(!worldIn.isRemote) {
-				worldIn.spawnEntityInWorld(new EntityDynamite(worldIn, playerIn, stack));			
+		if(player.capabilities.isCreativeMode || player.inventory.consumeInventoryItem(this)) {
+			if(!world.isRemote) {
+				world.spawnEntityInWorld(new EntityDynamite(world, player, stack));			
 			}
 		}
 		return stack;

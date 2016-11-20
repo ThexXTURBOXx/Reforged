@@ -39,9 +39,9 @@ public class ReloadOverlay extends Gui {
 	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void renderReload(RenderGameOverlayEvent event) {
+	public void renderReload(RenderGameOverlayEvent e) {
 		
-		if(event instanceof RenderGameOverlayEvent.Post|| event.type != RenderGameOverlayEvent.ElementType.HOTBAR) {
+		if(e instanceof RenderGameOverlayEvent.Post || e.type != RenderGameOverlayEvent.ElementType.HOTBAR) {
 			return;
 		}
 		
@@ -106,8 +106,8 @@ public class ReloadOverlay extends Gui {
 					}
 				}
 				
-				int x0 = event.resolution.getScaledWidth() / 2 - 88 + i * 20;
-				int y0 = event.resolution.getScaledHeight() - 3;
+				int x0 = e.resolution.getScaledWidth() / 2 - 88 + i * 20;
+				int y0 = e.resolution.getScaledHeight() - 3;
 				
 				Helpers.drawRectangle(x0, y0 - (int) (done * 16), x0 + 16, y0, color);
 			}

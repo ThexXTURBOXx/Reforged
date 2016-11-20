@@ -13,14 +13,14 @@ public class EntityDynamite extends AReforgedThrowable {
 	//In the lang-files we don't need the "dynamite-damage"-String,
 	//because the dynamite can't kill anyone as it does 0 damage...
 	
-	public EntityDynamite(World worldIn) {
+	public EntityDynamite(World world) {
 		
-		super(worldIn, "dynamite");
+		super(world, "dynamite");
 	}
 	
-	public EntityDynamite(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
+	public EntityDynamite(World world, EntityLivingBase thrower, ItemStack stack) {
 		
-		super(worldIn, throwerIn, stack, "dynamite");
+		super(world, thrower, stack, "dynamite");
 	}
 	
 	@Override

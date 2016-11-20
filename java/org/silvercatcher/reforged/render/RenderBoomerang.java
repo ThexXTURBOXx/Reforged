@@ -57,9 +57,7 @@ public class RenderBoomerang extends ReforgedRender {
 	
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		
 		EntityBoomerang entityBoomerang = (EntityBoomerang) entity;
-		
 		switch(entityBoomerang.getMaterialDefinition().getPrefix()) {
 		case "diamond": return Textures.DIAMOND_BOOMERANG;
 		case "golden": return Textures.GOLDEN_BOOMERANG;

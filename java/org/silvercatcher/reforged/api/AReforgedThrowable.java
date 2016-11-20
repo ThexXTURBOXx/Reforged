@@ -13,15 +13,15 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 	
 	private final String damageName;
 	
-	public AReforgedThrowable(World worldIn, String damageName) {
+	public AReforgedThrowable(World world, String damageName) {
 		
-		super(worldIn);
+		super(world);
 		this.damageName = damageName;
 	}
 	
-	public AReforgedThrowable(World worldIn, EntityLivingBase throwerIn, ItemStack stack, String damageName) {
+	public AReforgedThrowable(World world, EntityLivingBase throwerIn, ItemStack stack, String damageName) {
 		
-		super(worldIn, throwerIn);
+		super(world, throwerIn);
 		this.damageName = damageName;
 	}
 

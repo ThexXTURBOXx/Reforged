@@ -63,10 +63,10 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 	}
 	
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World worldIn, Block blockIn, BlockPos pos,
-			EntityLivingBase playerIn) {
+	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, BlockPos pos,
+			EntityLivingBase player) {
 		
-		stack.damageItem(effectiveAgainst(blockIn) ? 2 : 3, playerIn);
+		stack.damageItem(effectiveAgainst(block) ? 2 : 3, player);
 		return true;
 	}
 	

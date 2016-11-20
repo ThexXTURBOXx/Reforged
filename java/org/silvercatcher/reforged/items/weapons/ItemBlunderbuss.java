@@ -48,17 +48,17 @@ public class ItemBlunderbuss extends AReloadable {
 	}
 	
 	@Override
-	public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
+	public void shoot(World world, EntityLivingBase playerIn, ItemStack stack) {
 		
 		for(int i = 1; i < 12; i++) {
-			worldIn.spawnEntityInWorld(new EntityBulletBlunderbuss(worldIn, playerIn, stack));
+			world.spawnEntityInWorld(new EntityBulletBlunderbuss(world, playerIn, stack));
 		}
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
+	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
 		setAmmo(ReforgedAdditions.BLUNDERBUSS_SHOT);
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn);
+		return super.onItemRightClick(itemStack, world, player);
 	}
 	
 	@Override

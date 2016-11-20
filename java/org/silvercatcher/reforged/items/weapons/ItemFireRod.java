@@ -42,15 +42,15 @@ public class ItemFireRod extends ExtendedItem {
 	}
 
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side,
+	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side,
 			float hitX, float hitY, float hitZ) {
 		
-		if(worldIn.getBlockState(pos).getBlock().isFlammable(worldIn, pos, side)) {
+		if(world.getBlockState(pos).getBlock().isFlammable(world, pos, side)) {
 			
 			BlockPos target = pos.offset(side);
 			
-			if(!(worldIn.canBlockSeeSky(pos) && worldIn.isRaining()) &&  worldIn.isAirBlock(target)) {
-				worldIn.setBlockState(target, Blocks.fire.getDefaultState());
+			if(!(world.canBlockSeeSky(pos) && world.isRaining()) &&  world.isAirBlock(target)) {
+				world.setBlockState(target, Blocks.fire.getDefaultState());
 				--stack.stackSize;
 			}
 		}

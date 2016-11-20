@@ -39,22 +39,22 @@ public class ItemBoomerang extends ExtendedItem {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World,EntityPlayer par3EntityPlayer) {
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 	   
 		// import, otherwise references will cause chaos!
-		ItemStack throwStack = par1ItemStack.copy();
+		ItemStack throwStack = stack.copy();
 		
-		if(par3EntityPlayer.capabilities.isCreativeMode || par3EntityPlayer.inventory.consumeInventoryItem(this))
+		if(player.capabilities.isCreativeMode || player.inventory.consumeInventoryItem(this))
 	    {
-	        par2World.playSoundAtEntity(par3EntityPlayer, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+	        world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
         	
-	        if (!par2World.isRemote) {
+	        if (!world.isRemote) {
 	        	
-	        	EntityBoomerang boomerang = new EntityBoomerang(par2World, par3EntityPlayer, throwStack);
-	        	par2World.spawnEntityInWorld(boomerang);
+	        	EntityBoomerang boomerang = new EntityBoomerang(world, player, throwStack);
+	        	world.spawnEntityInWorld(boomerang);
 	        }
 	    }
-	    return par1ItemStack;
+	    return stack;
 	}
 
 	@Override

@@ -13,14 +13,14 @@ import net.minecraft.world.World;
 
 public class EntityJavelin extends AReforgedThrowable {
 	
-	public EntityJavelin(World worldIn) {
+	public EntityJavelin(World world) {
 		
-		super(worldIn, "javelin");
+		super(world, "javelin");
 	}
 
-	public EntityJavelin(World worldIn, EntityLivingBase throwerIn, ItemStack stack, int durationLoaded) {
+	public EntityJavelin(World world, EntityLivingBase thrower, ItemStack stack, int durationLoaded) {
 		
-		super(worldIn, throwerIn, stack, "javelin");
+		super(world, thrower, stack, "javelin");
 		
 		setItemStack(stack);
 		setDurLoaded(durationLoaded);

@@ -35,12 +35,12 @@ public class ReforgedMonsterArmourer {
 	}
 	
 	@SubscribeEvent
-	public void onSpawn(EntityJoinWorldEvent event) {
+	public void onSpawn(EntityJoinWorldEvent e) {
 		
-		if(event.isCanceled() || event.entity == null || event.world.isRemote || 
-				!(event.entity instanceof EntityZombie) || zombieWeapons == null) return;
+		if(e.isCanceled() || e.entity == null || e.world.isRemote || 
+				!(e.entity instanceof EntityZombie) || zombieWeapons == null) return;
 		
-		equipZombie((EntityZombie) event.entity);
+		equipZombie((EntityZombie) e.entity);
 	}
 	
 	private Item randomFrom(Item[] selection) {

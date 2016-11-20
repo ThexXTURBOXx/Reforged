@@ -32,7 +32,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	
 	@SuppressWarnings("rawtypes")
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advanced) {
 
 		tooltip.add(LanguageRegistry.instance().getStringLocalization("item.nestofbees.arrows") + ": " + CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
 	}
@@ -57,11 +57,11 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		
-		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
+		player.setItemInUse(stack, getMaxItemUseDuration(stack));
 		//System.out.println(playerIn.getItemInUseDuration());
-		return itemStackIn;
+		return stack;
 	}
 	
 	@Override
@@ -72,11 +72,11 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 	
 	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+	public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
 		
-		if(entityIn instanceof EntityPlayer && isSelected) {
+		if(entity instanceof EntityPlayer && isSelected) {
 
-			EntityPlayer player = (EntityPlayer) entityIn;
+			EntityPlayer player = (EntityPlayer) entity;
 			
 			NBTTagCompound compound = CompoundTags.giveCompound(stack);
 			
@@ -91,7 +91,7 @@ public class ItemNestOfBees extends ExtendedItem {
 				if(arrows == 0) compound.setBoolean(CompoundTags.ACTIVATED, false);
 				
 				if(compound.getBoolean(CompoundTags.ACTIVATED)) {
-					shoot(worldIn, player);
+					shoot(world, player);
 					stack.damageItem(1, player);
 					arrows--;
 				}
@@ -107,13 +107,13 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 	
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
 				
 		NBTTagCompound compound = CompoundTags.giveCompound(stack);
 		
 		if(compound.getInteger(CompoundTags.AMMUNITION) > 0) {
 			compound.setBoolean(CompoundTags.ACTIVATED, true);
-	        worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 1.0f);
+	        world.playSoundAtEntity(player, "item.fireCharge.use", 1.0f, 1.0f);
 		}
 		return stack;
 	}

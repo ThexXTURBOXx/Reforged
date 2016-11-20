@@ -5,11 +5,12 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 public class ModelDart extends ReforgedModel {
+	
     public ModelRenderer shapefront;
     public ModelRenderer shapebehind;
     public ModelRenderer shapering;
     public ModelRenderer shapebehind2;
-
+    
     public ModelDart() {
     	super();
         shapefront = new ModelRenderer(this, 58, 0);
@@ -25,7 +26,7 @@ public class ModelDart extends ReforgedModel {
         shapebehind2.setRotationPoint(-1.5F, 0.0F, 0.0F);
         shapebehind2.addBox(0.0F, 0.0F, 0.0F, 1, 1, 1, 0.0F);
     }
-
+    
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         GlStateManager.pushMatrix();
@@ -61,4 +62,5 @@ public class ModelDart extends ReforgedModel {
         shapebehind2.render(f5);
         GlStateManager.popMatrix();
     }
+    
 }

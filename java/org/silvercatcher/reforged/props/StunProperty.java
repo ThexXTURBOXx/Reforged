@@ -10,7 +10,7 @@ import net.minecraftforge.common.IExtendedEntityProperties;
 
 public class StunProperty implements IExtendedEntityProperties {
 	
-	public final static String EXT_PROP_NAME = "ExtendedPlayer";
+	public final static String EXT_PROP_NAME = "ReforgedPlayer";
 	
 	private final EntityLivingBase player;
 	

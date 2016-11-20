@@ -15,14 +15,14 @@ import net.minecraft.world.World;
 
 public class EntityDart extends AReforgedThrowable {
 	
-	public EntityDart(World worldIn) {
+	public EntityDart(World world) {
 		
-		super(worldIn, "dart");
+		super(world, "dart");
 	}
 	
-	public EntityDart(World worldIn, EntityLivingBase getThrowerIn, ItemStack stack) {
+	public EntityDart(World world, EntityLivingBase thrower, ItemStack stack) {
 		
-		super(worldIn, getThrowerIn, stack, "dart");
+		super(world, thrower, stack, "dart");
 		setItemStack(stack);
 	}
 	

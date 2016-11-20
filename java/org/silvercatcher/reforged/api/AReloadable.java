@@ -74,7 +74,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
+	public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer playerIn) {
 		
 		NBTTagCompound compound = giveCompound(itemStackIn);
 		
@@ -89,7 +89,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				}
 			} else {
 				
-				worldIn.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
+				world.playSoundAtEntity(playerIn, "item.fireCharge.use", 1.0f, 0.7f);
 			}
 		}
 		
@@ -101,17 +101,17 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	}
 	
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
-		if(!worldIn.isRemote) {
+	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer playerIn, int timeLeft) {
+		if(!world.isRemote) {
 			NBTTagCompound compound = giveCompound(stack);
 			
 			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 			
 			if(loadState == loaded) {
 				
-				worldIn.playSoundAtEntity(playerIn, "ambient.weather.thunder", 1f, 1f);
+				world.playSoundAtEntity(playerIn, "ambient.weather.thunder", 1f, 1f);
 				
-				shoot(worldIn, playerIn, stack);
+				shoot(world, playerIn, stack);
 				if(!playerIn.capabilities.isCreativeMode && stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand)) {
 					playerIn.renderBrokenItemStack(stack);
 					playerIn.destroyCurrentEquippedItem();
@@ -123,10 +123,10 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		}
 	}
 	
-	public abstract void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack);
+	public abstract void shoot(World world, EntityLivingBase playerIn, ItemStack stack);
 	
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer playerIn) {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		

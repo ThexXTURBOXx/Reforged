@@ -59,4 +59,5 @@ public class MessageCustomReachAttack implements IMessage {
 			return null;
 		}
 	}
+	
 }

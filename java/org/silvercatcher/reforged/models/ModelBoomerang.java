@@ -5,13 +5,14 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 public class ModelBoomerang extends ReforgedModel {
+	
     public ModelRenderer tile1;
     public ModelRenderer tile2;
     public ModelRenderer tile3;
     public ModelRenderer tile4;
     public ModelRenderer tile5;
     public ModelRenderer tile6;
-
+    
     public ModelBoomerang() {
     	super();
         tile6 = new ModelRenderer(this, 56, 0);
@@ -33,7 +34,7 @@ public class ModelBoomerang extends ReforgedModel {
         tile5.setRotationPoint(7.0F, 0.0F, 0.0F);
         tile5.addBox(0.0F, 0.0F, 0.0F, 2, 2, 2, 0.0F);
     }
-
+    
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         tile6.render(f5);
@@ -57,4 +58,5 @@ public class ModelBoomerang extends ReforgedModel {
         GlStateManager.popMatrix();
         tile5.render(f5);
     }
+    
 }

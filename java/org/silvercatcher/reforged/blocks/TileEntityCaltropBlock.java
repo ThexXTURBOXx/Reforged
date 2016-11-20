@@ -48,22 +48,22 @@ public class TileEntityCaltropBlock extends BlockContainer implements BlockExten
 	}
 	
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
 		owner = placer;
 	}
 	
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
-		onEntityCollidedWithBlock(worldIn, pos, entityIn);
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+		onEntityCollidedWithBlock(world, pos, entity);
 	}
 	
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, Entity entityIn) {
-		if(entityIn instanceof EntityLivingBase) {
-			EntityLivingBase e = (EntityLivingBase) entityIn;
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
+		if(entity instanceof EntityLivingBase) {
+			EntityLivingBase e = (EntityLivingBase) entity;
 			if(e != owner) {
 				e.attackEntityFrom(new DamageSource("caltrop").setDamageBypassesArmor(), 8);
-				if(!worldIn.isRemote) worldIn.setBlockToAir(pos);
+				if(!world.isRemote) world.setBlockToAir(pos);
 			}
 		}
 	}

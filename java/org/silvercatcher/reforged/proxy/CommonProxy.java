@@ -15,8 +15,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
 	
-	public void preInit(FMLPreInitializationEvent event) {
-		loadConfig(event);
+	public void preInit(FMLPreInitializationEvent e) {
+		loadConfig(e);
 		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
 		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
 		ReforgedRegistry.createItems();
@@ -27,11 +27,11 @@ public class CommonProxy {
 		versionCheck.start();
 	}
 	
-	public void init(FMLInitializationEvent event) {
+	public void init(FMLInitializationEvent e) {
 		ReforgedRegistry.registerRecipes();
 	}
 	
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postInit(FMLPostInitializationEvent e) {
         ReforgedMod.battlegearDetected = Loader.isModLoaded("battlegear2");
 	}
 	

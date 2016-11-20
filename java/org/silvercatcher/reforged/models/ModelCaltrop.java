@@ -4,11 +4,12 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelCaltrop extends ReforgedModel {
+	
     public ModelRenderer spike1;
     public ModelRenderer spike2;
     public ModelRenderer spike3;
     public ModelRenderer spike_up;
-
+    
     public ModelCaltrop() {
     	super();
         spike2 = new ModelRenderer(this, 0, 0);
@@ -27,7 +28,7 @@ public class ModelCaltrop extends ReforgedModel {
         spike1.setRotationPoint(0.0F, -24.0F, 0.0F);
         spike1.addBox(0.0F, 0.0F, 0.0F, 3, 1, 1, 0.0F);
     }
-
+    
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         spike2.render(f5);
@@ -35,4 +36,5 @@ public class ModelCaltrop extends ReforgedModel {
         spike_up.render(f5);
         spike1.render(f5);
     }
+    
 }

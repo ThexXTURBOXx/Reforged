@@ -15,16 +15,16 @@ import net.minecraft.world.World;
 
 public class EntityBoomerang extends AReforgedThrowable {
 	
-	public EntityBoomerang(World worldIn) {
+	public EntityBoomerang(World world) {
 		
-		super(worldIn, "boomerang");
+		super(world, "boomerang");
 	}
 	
-	public EntityBoomerang(World worldIn, EntityLivingBase getThrowerIn, ItemStack stack) {
+	public EntityBoomerang(World world, EntityLivingBase thrower, ItemStack stack) {
 		
-		super(worldIn, getThrowerIn, stack, "boomerang");
+		super(world, thrower, stack, "boomerang");
 		setItemStack(stack);
-		setCoords(getThrowerIn.posX, getThrowerIn.posY + getThrowerIn.getEyeHeight(), getThrowerIn.posZ);
+		setCoords(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ);
 	}
 	
 	@Override

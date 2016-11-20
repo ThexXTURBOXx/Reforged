@@ -8,7 +8,7 @@
   "url": "http://minecraft.curseforge.com/projects/reforged",
   "updateUrl": "http://github.com/TheOnlySilverClaw/Reforged/releases",
   "authorList": ["Silvercatcher", "ThexXTURBOXx"],
-  "credits": "Snow_Yoshi98, baddaspig and Sunconure11 for textures. DenTheUA for in-game Wiki and translation.",
+  "credits": "Snow_Yoshi98, baddaspig and Sunconure11 for textures.",
   "logoFile": "/assets/reforged/textures/others/logo.png",
   "screenshots": [],
   "dependencies": []

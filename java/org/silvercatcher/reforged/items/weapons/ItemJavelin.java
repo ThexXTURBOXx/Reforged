@@ -22,17 +22,17 @@ public class ItemJavelin extends ExtendedItem {
 
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn)
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
-        net.minecraftforge.event.entity.player.ArrowNockEvent event = new net.minecraftforge.event.entity.player.ArrowNockEvent(playerIn, itemStackIn);
+        net.minecraftforge.event.entity.player.ArrowNockEvent event = new net.minecraftforge.event.entity.player.ArrowNockEvent(player, stack);
         if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) return event.result;
 
-        	if (playerIn.capabilities.isCreativeMode || playerIn.inventory.hasItem(this))
+        	if (player.capabilities.isCreativeMode || player.inventory.hasItem(this))
         		{
-        			playerIn.setItemInUse(itemStackIn, this.getMaxItemUseDuration(itemStackIn));
+        			player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
         		}
 
-        return itemStackIn;
+        return stack;
     }
 	
 
@@ -66,25 +66,25 @@ public class ItemJavelin extends ExtendedItem {
     }
 	
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityPlayer playerIn, int timeLeft) {
+	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int timeLeft) {
 
 		ItemStack throwStack = stack.copy();
 		
-		if(timeLeft <= getMaxItemUseDuration(stack) - 7 && (playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(this))) {
+		if(timeLeft <= getMaxItemUseDuration(stack) - 7 && (player.capabilities.isCreativeMode || player.inventory.consumeInventoryItem(this))) {
 			
-			worldIn.playSoundAtEntity(playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+			world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
-			if (!worldIn.isRemote) {
+			if (!world.isRemote) {
 				if(throwStack.stackSize > 1) {
 		        	throwStack = throwStack.splitStack(1);
 				}
-	        	worldIn.spawnEntityInWorld(new EntityJavelin(worldIn, playerIn, throwStack, stack.getMaxItemUseDuration() - timeLeft));
+	        	world.spawnEntityInWorld(new EntityJavelin(world, player, throwStack, stack.getMaxItemUseDuration() - timeLeft));
 	        }
 	    }
     }
 	
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityPlayer playerIn) {
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
 		return stack;
 	}
 	

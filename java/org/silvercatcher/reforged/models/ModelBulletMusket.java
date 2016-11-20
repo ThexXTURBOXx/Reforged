@@ -3,7 +3,8 @@ package org.silvercatcher.reforged.models;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
-public class ModelBulletMusket extends ReforgedModel {	
+public class ModelBulletMusket extends ReforgedModel {
+	
 	ModelRenderer Bullet;
 	
 	public ModelBulletMusket() {
@@ -20,4 +21,5 @@ public class ModelBulletMusket extends ReforgedModel {
 		super.render(entity, f, f1, f2, f3, f4, f5);
 		Bullet.render(f5);
 	}
+	
 }

@@ -20,4 +20,5 @@ public class RenderJavelin extends ReforgedRender {
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		return Textures.JAVELIN;
 	}
+	
 }

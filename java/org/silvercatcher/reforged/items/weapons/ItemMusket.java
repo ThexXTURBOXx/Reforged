@@ -18,15 +18,15 @@ public class ItemMusket extends AReloadable {
 	}
 	
 	@Override
-	public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
-		worldIn.spawnEntityInWorld(new EntityBulletMusket(worldIn, playerIn, stack));
+	public void shoot(World world, EntityLivingBase player, ItemStack stack) {
+		world.spawnEntityInWorld(new EntityBulletMusket(world, player, stack));
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		
 		setAmmo(ReforgedAdditions.MUSKET_BULLET);
-		return super.onItemRightClick(itemStackIn, worldIn, playerIn);
+		return super.onItemRightClick(stack, world, player);
 	}
 	
 	@Override

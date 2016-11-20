@@ -9,14 +9,14 @@ import net.minecraft.world.World;
 
 public class EntityBulletBlunderbuss extends AReforgedThrowable {
 	
-	public EntityBulletBlunderbuss(World worldIn) {
+	public EntityBulletBlunderbuss(World world) {
 		
-		super(worldIn, "blunderbuss");
+		super(world, "blunderbuss");
 	}
 	
-	public EntityBulletBlunderbuss(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
+	public EntityBulletBlunderbuss(World world, EntityLivingBase thrower, ItemStack stack) {
 		
-		super(worldIn, throwerIn, stack, "blunderbuss");
+		super(world, thrower, stack, "blunderbuss");
 		float randomNumX = rand.nextInt(21);
 		float randomNumY = rand.nextInt(21);
 		float randomNumZ = rand.nextInt(21);

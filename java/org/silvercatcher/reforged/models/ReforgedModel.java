@@ -21,4 +21,5 @@ public class ReforgedModel extends ModelBase {
         modelRenderer.rotateAngleY = y;
         modelRenderer.rotateAngleZ = z;
     }
+    
 }

@@ -14,16 +14,15 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderBoltCrossbow extends Render {
+	
     private static final ResourceLocation arrowTextures = new ResourceLocation("textures/entity/arrow.png");
     private static final String __OBFID = "CL_00000978";
-
-    public RenderBoltCrossbow(RenderManager renderManagerIn)
-    {
+    
+    public RenderBoltCrossbow(RenderManager renderManagerIn) {
         super(renderManagerIn);
     }
-
-    public void doRender(EntityCrossbowBolt arrow, double x, double y, double z, float p_180551_8_, float p_180551_9_)
-    {
+    
+    public void doRender(EntityCrossbowBolt arrow, double x, double y, double z, float p_180551_8_, float p_180551_9_) {
         this.bindEntityTexture(arrow);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GlStateManager.pushMatrix();

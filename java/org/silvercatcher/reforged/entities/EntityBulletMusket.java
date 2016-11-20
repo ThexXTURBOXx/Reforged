@@ -9,14 +9,14 @@ import net.minecraft.world.World;
 
 public class EntityBulletMusket extends AReforgedThrowable {
 	
-	public EntityBulletMusket(World worldIn) {
+	public EntityBulletMusket(World world) {
 		
-		super(worldIn, "musket");
+		super(world, "musket");
 	}
 	
-	public EntityBulletMusket(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
+	public EntityBulletMusket(World world, EntityLivingBase thrower, ItemStack stack) {
 		
-		super(worldIn, throwerIn, stack, "musket");
+		super(world, thrower, stack, "musket");
 	}
 	
 	@Override

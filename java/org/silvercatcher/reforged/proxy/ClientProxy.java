@@ -22,23 +22,23 @@ import net.minecraftforge.fml.common.event.*;
 public class ClientProxy extends CommonProxy {
 
 	@Override
-	public void preInit(FMLPreInitializationEvent event) {
+	public void preInit(FMLPreInitializationEvent e) {
 		
-		super.preInit(event);
+		super.preInit(e);
 		MinecraftForge.EVENT_BUS.register(new ReloadOverlay());
 	}
 	
 	@Override
-	public void init(FMLInitializationEvent event) {
+	public void init(FMLInitializationEvent e) {
 
-		super.init(event);
+		super.init(e);
 		registerItemRenderers();
 		registerEntityRenderers(Minecraft.getMinecraft().getRenderManager());
 	}
 	
 	@Override
-	public void postInit(FMLPostInitializationEvent event) {
-		super.postInit(event);
+	public void postInit(FMLPostInitializationEvent e) {
+		super.postInit(e);
 	}
 	
 	@Override

@@ -13,13 +13,7 @@ public class Helpers {
 	
 	/**Checks if the 2 given BlockPositions are equal*/
 	public static boolean blockPosEqual(BlockPos pos1, BlockPos pos2) {
-		int x1 = pos1.getX();
-		int x2 = pos2.getX();
-		int y1 = pos1.getY();
-		int y2 = pos2.getY();
-		int z1 = pos1.getZ();
-		int z2 = pos2.getZ();
-		return (x1 == x2 && y1 == y2 && z1 == z2);
+		return (pos1.getX() == pos2.getX() && pos1.getY() == pos2.getY() && pos1.getZ() == pos2.getZ());
 	}
 	
 	/** Helper method for creating a Rectangle*/

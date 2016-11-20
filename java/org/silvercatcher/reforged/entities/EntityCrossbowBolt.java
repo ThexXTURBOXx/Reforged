@@ -40,24 +40,24 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
     /** The amount of knockback an arrow applies when it hits a mob. */
     private int knockbackStrength;
     
-    public EntityCrossbowBolt(World worldIn)
+    public EntityCrossbowBolt(World world)
     {
-        super(worldIn);
+        super(world);
         this.renderDistanceWeight = 10.0D;
         this.setSize(0.5F, 0.5F);
     }
 
-    public EntityCrossbowBolt(World worldIn, double x, double y, double z)
+    public EntityCrossbowBolt(World world, double x, double y, double z)
     {
-        super(worldIn);
+        super(world);
         this.renderDistanceWeight = 10.0D;
         this.setSize(0.5F, 0.5F);
         this.setPosition(x, y, z);
     }
 
-    public EntityCrossbowBolt(World worldIn, EntityLivingBase shooter, EntityLivingBase p_i1755_3_, float p_i1755_4_, float p_i1755_5_)
+    public EntityCrossbowBolt(World world, EntityLivingBase shooter, EntityLivingBase p_i1755_3_, float p_i1755_4_, float p_i1755_5_)
     {
-        super(worldIn);
+        super(world);
         this.renderDistanceWeight = 10.0D;
         this.shootingEntity = shooter;
 
@@ -84,9 +84,9 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
         }
     }
 
-    public EntityCrossbowBolt(World worldIn, EntityLivingBase shooter)
+    public EntityCrossbowBolt(World world, EntityLivingBase shooter)
     {
-        super(worldIn);
+        super(world);
         this.renderDistanceWeight = 10.0D;
         this.shootingEntity = shooter;
 
@@ -523,13 +523,13 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
      * Called by a player entity when they collide with an entity
      */
     @Override
-	public void onCollideWithPlayer(EntityPlayer entityIn)
+	public void onCollideWithPlayer(EntityPlayer entity)
     {
         if (!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0)
         {
-            boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && entityIn.capabilities.isCreativeMode;
+            boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && entity.capabilities.isCreativeMode;
 
-            if (this.canBePickedUp == 1 && !entityIn.inventory.addItemStackToInventory(new ItemStack(ReforgedAdditions.CROSSBOW_BOLT, 1)))
+            if (this.canBePickedUp == 1 && !entity.inventory.addItemStackToInventory(new ItemStack(ReforgedAdditions.CROSSBOW_BOLT, 1)))
             {
                 flag = false;
             }
@@ -537,7 +537,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile
             if (flag)
             {
                 this.playSound("random.pop", 0.2F, ((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-                entityIn.onItemPickup(this, 1);
+                entity.onItemPickup(this, 1);
                 this.setDead();
             }
         }
