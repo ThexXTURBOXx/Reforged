@@ -8,13 +8,14 @@ import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
 import org.silvercatcher.reforged.props.StunProperty;
 import org.silvercatcher.reforged.util.Helpers;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -25,14 +26,14 @@ public class ReforgedEvents {
 	
 	@SubscribeEvent
 	public void customReach(MouseEvent e) {
-		if(e.button == 0 && e.buttonstate) {
+		if(e.getButton() == 0 && e.isButtonstate()) {
 			Minecraft mc = Minecraft.getMinecraft();
-			if(mc.thePlayer.getCurrentEquippedItem() != null) {
-				Item i = mc.thePlayer.getCurrentEquippedItem().getItem();
+			if(mc.player.inventory.getCurrentItem() != null) {
+				Item i = mc.player.inventory.getCurrentItem().getItem();
 				if(i instanceof ICustomReach && i instanceof ItemExtension) {
 					ICustomReach icr = (ICustomReach) i;
 					Entity hit = Helpers.getMouseOverExtended(icr.reach()).entityHit;
-					if(hit != null && mc.objectMouseOver.entityHit == null && hit != mc.thePlayer) {
+					if(hit != null && mc.objectMouseOver.entityHit == null && hit != mc.player) {
 						ReforgedMod.network.sendToServer(new MessageCustomReachAttack(hit.getEntityId()));
 					}
 				}
@@ -46,29 +47,31 @@ public class ReforgedEvents {
 	static {
 		map = new HashMap<UUID, Integer>();
 	}
-	
+	//TODO TRANSLATION!!
 	@SubscribeEvent
 	public void onTick(PlayerTickEvent e) {
 		if(!notified) {
 			notified = true;
-			if(!ReforgedMod.battlegearDetected) return;
 			EntityPlayer p = e.player;
-			String par = Character.toString(EnumChatFormatting.DARK_GRAY.toString().charAt(0));
-			p.addChatComponentMessage(new ChatComponentText(
-					"[" + par + "bReforged" + par + "7] " + par + "cYou have \"Mine & Blade Battlegear 2 - Bullseye\" " + par + "cinstalled."));
-			p.addChatComponentMessage(new ChatComponentText(
+			String par = Character.toString(ChatFormatting.DARK_GRAY.toString().charAt(0));
+			p.sendMessage(new TextComponentString(par + "7[" + par + "bReforged" + par + "7] " + par + "cYou are running Reforged 1.9/1.10!"));
+			p.sendMessage(new TextComponentString(par + "cVery experimental!!!"));
+			if(!ReforgedMod.battlegearDetected) return;
+			p.sendMessage(new TextComponentString(
+					par + "7[" + par + "bReforged" + par + "7] " + par + "cYou have \"Mine & Blade Battlegear 2 - Bullseye\" " + par + "cinstalled."));
+			p.sendMessage(new TextComponentString(
 					"" + par + "cIt has incompatibility issues with Reforged."));
-			p.addChatComponentMessage(new ChatComponentText(
+			p.sendMessage(new TextComponentString(
 					"" + par + "cSome Weapons will act different!"));
 		}
 	}
 	
 	@SubscribeEvent
 	public void onWorldTick(WorldTickEvent e) {
-		for(Entity en : ((List<Entity>) e.world.loadedEntityList)) {
+		for(Entity en : (e.world.loadedEntityList)) {
 			if(en instanceof EntityLivingBase) {
 				EntityLivingBase player = (EntityLivingBase) en;
-				if(StunProperty.get(player).isStunned()) {
+				if(StunProperty.isStunned(player)) {
 					if(!map.containsKey(player.getUniqueID())) map.put(player.getUniqueID(), 0);
 					int i = map.get(player.getUniqueID());
 					i++;
@@ -77,7 +80,7 @@ public class ReforgedEvents {
 					if(player.lastTickPosZ != player.posZ) player.posZ = player.lastTickPosZ;
 					map.put(player.getUniqueID(), i);
 					if(map.get(player.getUniqueID()) >= 60) {
-						StunProperty.get(player).setStunned(false);
+						StunProperty.setStunned(player, false);
 						map.put(player.getUniqueID(), 0);
 					}
 				}
@@ -87,8 +90,8 @@ public class ReforgedEvents {
 	
 	@SubscribeEvent
 	public void onEntityConstructing(EntityConstructing event) {
-		if(event.entity instanceof EntityLivingBase && StunProperty.get((EntityLivingBase) event.entity) == null)
-			StunProperty.register((EntityLivingBase) event.entity);
+		if(event.getEntity() instanceof EntityLivingBase && !StunProperty.isRegistered((EntityLivingBase) event.getEntity()))
+			StunProperty.register((EntityLivingBase) event.getEntity());
 	}
 	
 }

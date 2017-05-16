@@ -7,7 +7,6 @@ import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.entities.*;
 import org.silvercatcher.reforged.util.VersionChecker;
 
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.*;
@@ -15,8 +14,8 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
 	
-	public void preInit(FMLPreInitializationEvent e) {
-		loadConfig(e);
+	public void preInit(FMLPreInitializationEvent event) {
+		loadConfig(event);
 		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
 		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
 		ReforgedRegistry.createItems();
@@ -27,11 +26,11 @@ public class CommonProxy {
 		versionCheck.start();
 	}
 	
-	public void init(FMLInitializationEvent e) {
+	public void init(FMLInitializationEvent event) {
 		ReforgedRegistry.registerRecipes();
 	}
 	
-	public void postInit(FMLPostInitializationEvent e) {
+	public void postInit(FMLPostInitializationEvent event) {
         ReforgedMod.battlegearDetected = Loader.isModLoaded("battlegear2");
 	}
 	
@@ -97,7 +96,7 @@ public class CommonProxy {
 	
 	protected void registerItemRenderers() {}
 	
-	protected void registerEntityRenderers(RenderManager manager) {}
+	protected void registerEntityRenderers() {}
 	
 	private void registerEntities() {
 		

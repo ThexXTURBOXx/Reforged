@@ -3,11 +3,14 @@ package org.silvercatcher.reforged.items.weapons;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.ItemExtension;
 import org.silvercatcher.reforged.entities.EntityJavelin;
+import org.silvercatcher.reforged.util.Helpers;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -19,20 +22,19 @@ public class ItemJavelin extends ExtendedItem {
 		setMaxStackSize(8);
 		setMaxDamage(32);
 	}
-
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
-    {
-        net.minecraftforge.event.entity.player.ArrowNockEvent event = new net.minecraftforge.event.entity.player.ArrowNockEvent(player, stack);
-        if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) return event.result;
-
-        	if (player.capabilities.isCreativeMode || player.inventory.hasItem(this))
-        		{
-        			player.setItemInUse(stack, this.getMaxItemUseDuration(stack));
-        		}
-
-        return stack;
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+        if(hand == EnumHand.MAIN_HAND) {
+    		net.minecraftforge.event.entity.player.ArrowNockEvent event = new net.minecraftforge.event.entity.player.ArrowNockEvent(playerIn, playerIn.getHeldItemMainhand(), hand, worldIn, true);
+            if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event)) return event.getAction();
+            
+            if (playerIn.capabilities.isCreativeMode || Helpers.getInventorySlotContainItem(playerIn, this) >= 0)
+            {
+            	playerIn.setActiveHand(hand);
+            }
+        }
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
     }
 	
 
@@ -43,8 +45,8 @@ public class ItemJavelin extends ExtendedItem {
 				"  f",
 				" s ",
 				"s  ",
-				'f', new ItemStack(Items.flint),
-				's', new ItemStack(Items.stick));
+				'f', new ItemStack(Items.FLINT),
+				's', new ItemStack(Items.STICK));
 	}
 
 
@@ -66,25 +68,29 @@ public class ItemJavelin extends ExtendedItem {
     }
 	
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int timeLeft) {
-
-		ItemStack throwStack = stack.copy();
-		
-		if(timeLeft <= getMaxItemUseDuration(stack) - 7 && (player.capabilities.isCreativeMode || player.inventory.consumeInventoryItem(this))) {
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase playerInl, int timeLeft) {
+		if(playerInl instanceof EntityPlayer) {
 			
-			world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-
-			if (!world.isRemote) {
-				if(throwStack.stackSize > 1) {
-		        	throwStack = throwStack.splitStack(1);
+			EntityPlayer playerIn = (EntityPlayer) playerInl;
+			
+			ItemStack throwStack = stack.copy();
+			
+			if(timeLeft <= getMaxItemUseDuration(stack) - 7 && (playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, this))) {
+				
+				Helpers.playSound(worldIn, playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+				
+				if (!worldIn.isRemote) {
+					if(throwStack.getCount() > 1) {
+						throwStack = throwStack.splitStack(1);
+					}
+					worldIn.spawnEntity(new EntityJavelin(worldIn, playerIn, throwStack, stack.getMaxItemUseDuration() - timeLeft));
 				}
-	        	world.spawnEntityInWorld(new EntityJavelin(world, player, throwStack, stack.getMaxItemUseDuration() - timeLeft));
-	        }
-	    }
+			}
+		}
     }
 	
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
 		return stack;
 	}
 	

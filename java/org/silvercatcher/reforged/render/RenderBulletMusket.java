@@ -20,5 +20,4 @@ public class RenderBulletMusket extends ReforgedRender {
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		return Textures.BULLET_MUSKET;
 	}
-	
 }

@@ -5,7 +5,7 @@ import org.silvercatcher.reforged.api.AReforgedThrowable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityDynamite extends AReforgedThrowable {
@@ -13,25 +13,25 @@ public class EntityDynamite extends AReforgedThrowable {
 	//In the lang-files we don't need the "dynamite-damage"-String,
 	//because the dynamite can't kill anyone as it does 0 damage...
 	
-	public EntityDynamite(World world) {
+	public EntityDynamite(World worldIn) {
 		
-		super(world, "dynamite");
+		super(worldIn, "dynamite");
 	}
 	
-	public EntityDynamite(World world, EntityLivingBase thrower, ItemStack stack) {
+	public EntityDynamite(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		
-		super(world, thrower, stack, "dynamite");
+		super(worldIn, throwerIn, stack, "dynamite");
 	}
 	
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
-		worldObj.createExplosion(this, posX, posY, posZ, 2, true);
+		world.createExplosion(this, posX, posY, posZ, 2, true);
 		return true;
 	}
 	
 	@Override
 	protected boolean onEntityHit(Entity entity) {
-		worldObj.createExplosion(this, posX, posY, posZ, 2, true);
+		world.createExplosion(this, posX, posY, posZ, 2, true);
 		return true;
 	}
 	

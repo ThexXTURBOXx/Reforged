@@ -1,24 +1,24 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
-import java.util.Random;
 
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.*;
 import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
+import org.silvercatcher.reforged.util.Helpers;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.client.resources.model.ModelResourceLocation;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class ItemCrossbow extends ItemBow implements ItemExtension {
 	
@@ -35,16 +35,14 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	
 	@SuppressWarnings("rawtypes")
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advanced) {
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		LanguageRegistry lr = LanguageRegistry.instance();
-		
-		tooltip.add(lr.getStringLocalization("item.musket.loadstate") + ": " + (loadState == empty ? 
-				lr.getStringLocalization("item.musket.loadstate.empty")
-				: (loadState == loaded ? lr.getStringLocalization("item.musket.loadstate.loaded") : 
-					lr.getStringLocalization("item.musket.loadstate.loading"))));
+		tooltip.add(I18n.format("item.musket.loadstate") + ": " + (loadState == empty ? 
+				I18n.format("item.musket.loadstate.empty")
+				: (loadState == loaded ? I18n.format("item.musket.loadstate.loaded") : 
+					I18n.format("item.musket.loadstate.loading"))));
 	}
 	
 	@Override
@@ -75,42 +73,43 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
-		NBTTagCompound compound = giveCompound(itemStack);
-		
-		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
-		
-		if(loadState == empty) {
-			if(player.capabilities.isCreativeMode || player.inventory.consumeInventoryItem(ReforgedAdditions.CROSSBOW_BOLT)) {
-				loadState = loading;
-				if(compound.getByte(CompoundTags.AMMUNITION) == empty) {
-					compound.setInteger(CompoundTags.STARTED, player.ticksExisted + getReloadTotal());				
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+		if(hand == EnumHand.MAIN_HAND) {
+			NBTTagCompound compound = giveCompound(playerIn.getHeldItemMainhand());
+			
+			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
+			
+			if(loadState == empty) {
+				if(playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, ReforgedAdditions.CROSSBOW_BOLT)) {
+					loadState = loading;
+					if(compound.getByte(CompoundTags.AMMUNITION) == empty) {
+						compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());				
+					}
+				} else {
+					Helpers.playSound(worldIn, playerIn, "item.fireCharge.use", 1.0f, 0.7f);
 				}
-			} else {
-				world.playSoundAtEntity(player, "reforged:crossbow_reload", 1.0f, 0.7f);
 			}
+			
+			compound.setByte(CompoundTags.AMMUNITION, loadState);
+			
+			playerIn.setActiveHand(hand);
 		}
 		
-		compound.setByte(CompoundTags.AMMUNITION, loadState);
-		
-		player.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
-		
-		return itemStack;
+		return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 	}
 	
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int timeLeft) {
-		if(!world.isRemote) {
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase playerInl, int timeLeft) {
+		if(!worldIn.isRemote && playerInl instanceof EntityPlayer) {
+			EntityPlayer playerIn = (EntityPlayer) playerInl;
 			NBTTagCompound compound = giveCompound(stack);
-			
 			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 			if(loadState == loaded) {
-				
-				world.playSoundAtEntity(player, "reforged:crossbow_shoot", 1f, 1f);
-				shoot(world, player, stack);
-				if(!player.capabilities.isCreativeMode && (stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand))) {
-					player.renderBrokenItemStack(stack);
-					player.destroyCurrentEquippedItem();
+				Helpers.playSound(worldIn, playerIn, "reforged:crossbow_shoot", 1f, 1f);
+				shoot(worldIn, playerIn, new ItemStack(Items.ARROW));
+				if(!playerIn.capabilities.isCreativeMode && (stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand))) {
+					playerIn.renderBrokenItemStack(stack);
+					Helpers.destroyCurrentEquippedItem(playerIn);
 				}
 				compound.setByte(CompoundTags.AMMUNITION, empty);
 				compound.setInteger(CompoundTags.STARTED, -1);
@@ -118,15 +117,20 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		}
 	}
 	
-	public void shoot(World world, EntityLivingBase player, ItemStack stack) {
-		EntityCrossbowBolt a = new EntityCrossbowBolt(world, player);
-		a.canBePickedUp = new Random().nextInt(2);
+	public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
+		EntityCrossbowBolt a = new EntityCrossbowBolt(worldIn, playerIn) {
+			@Override
+			protected ItemStack getArrowStack() {
+				return stack;
+			}
+		};
+		a.pickupStatus = EntityCrossbowBolt.PickupStatus.DISALLOWED;
 		a.setDamage(8.0D);
-		world.spawnEntityInWorld(a);
+		worldIn.spawnEntity(a);
 	}
 	
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		if(loadState == loading) {
 			loadState = loaded;
@@ -158,7 +162,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
 	}
-	
+	/*
 	@Override
 	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining) {
         ModelResourceLocation mrl = new ModelResourceLocation(ReforgedMod.ID + ":crossbow", "inventory");
@@ -179,16 +183,16 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 			}
 		}
 		return mrl;
-	}
+	}*/
 	
 	@Override
 	public void registerRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(this), "bii",
 														  "iw ",
 														  "i w",
-														  'b', Items.bow,
-														  'i', Items.iron_ingot,
-														  'w', new ItemStack(Blocks.planks));
+														  'b', Items.BOW,
+														  'i', Items.IRON_INGOT,
+														  'w', new ItemStack(Blocks.PLANKS));
 	}
 	
 	public int getReloadLeft(ItemStack stack, EntityPlayer player) {

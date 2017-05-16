@@ -12,6 +12,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
@@ -22,7 +23,7 @@ public class BoomerangEnchRecipe implements IRecipe {
 	
 	private static void printInventory(String name, InventoryCrafting inventory) {
 	
-		if(Minecraft.getMinecraft().theWorld != null) {
+		if(Minecraft.getMinecraft().world != null) {
 			
 			System.out.append(name);
 			System.out.append(":\t[");
@@ -52,9 +53,9 @@ public class BoomerangEnchRecipe implements IRecipe {
 						!CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ENCHANTED)) {
 					boomerangs++;
 					output = stack.copy();
-				} else if(stack.getItem() == Items.gold_ingot) {
+				} else if(stack.getItem() == Items.GOLD_INGOT) {
 					gold++;
-				} else if(stack.getItem() == Items.diamond) {
+				} else if(stack.getItem() == Items.DIAMOND) {
 					diamonds++;
 				} else {
 					// we don't want any other stuff!
@@ -85,10 +86,10 @@ public class BoomerangEnchRecipe implements IRecipe {
 			if(stack != null) {
 				if(stack.getItem() instanceof ItemBoomerang) {
 					output = stack.copy();
-				} else if(stack.getItem() == Items.gold_ingot) {
+				} else if(stack.getItem() == Items.GOLD_INGOT) {
 					goldSlots.add(i);
 					input[i] = stack.copy();
-				} else if(stack.getItem() == Items.iron_ingot) {
+				} else if(stack.getItem() == Items.IRON_INGOT) {
 					ironSlots.add(i);
 					input[i] = stack.copy();
 				}
@@ -110,12 +111,11 @@ public class BoomerangEnchRecipe implements IRecipe {
 	
 	@Override
 	public ItemStack getRecipeOutput() {
-		return output;
+		return output == null ? ItemStack.EMPTY : output;
 	}
 	
 	@Override
-	public ItemStack[] getRemainingItems(InventoryCrafting inventory) {
-		
+	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inventory) {
 		//printInventory("remain", inventory);
 		return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
 	}

@@ -3,27 +3,27 @@ package org.silvercatcher.reforged.api;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.util.Helpers;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public abstract class AReloadable extends ItemBow implements ItemExtension {
 	
 	private Item ammo;
-	private String shootsound;
 	
-	public AReloadable(String name, String shootsound) {
+	public AReloadable(String name) {
 		setMaxStackSize(1);
 		setMaxDamage(100);
 		setUnlocalizedName(name);
 		setCreativeTab(ReforgedMod.tabReforged);
-		this.shootsound = shootsound;
 	}
 	
 	public static final byte empty		= 0;
@@ -36,12 +36,10 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		
-		LanguageRegistry lr = LanguageRegistry.instance();
-		
-		tooltip.add(lr.getStringLocalization("item.musket.loadstate") + ": " + (loadState == empty ? 
-				lr.getStringLocalization("item.musket.loadstate.empty")
-				: (loadState == loaded ? lr.getStringLocalization("item.musket.loadstate.loaded") : 
-					lr.getStringLocalization("item.musket.loadstate.loading"))));
+		tooltip.add(I18n.format("item.musket.loadstate") + ": " + (loadState == empty ? 
+				I18n.format("item.musket.loadstate.empty")
+				: (loadState == loaded ? I18n.format("item.musket.loadstate.loaded") : 
+					I18n.format("item.musket.loadstate.loading"))));
 	}
 	
 	@Override
@@ -76,47 +74,53 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStackIn, World world, EntityPlayer playerIn) {
-		
-		NBTTagCompound compound = giveCompound(itemStackIn);
-		
-		byte loadState = compound.getByte(CompoundTags.AMMUNITION);
-		
-		if(loadState == empty) {
-			if(playerIn.capabilities.isCreativeMode || playerIn.inventory.consumeInventoryItem(getAmmo())) {
-				
-				loadState = loading;
-				if(compound.getByte(CompoundTags.AMMUNITION) == empty) {
-					compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+		if(hand == EnumHand.MAIN_HAND) {
+			NBTTagCompound compound = giveCompound(playerIn.getHeldItemMainhand());
+			
+			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
+			
+			if(loadState == empty) {
+				if(playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, getAmmo())) {
+					
+					loadState = loading;
+					if(compound.getByte(CompoundTags.AMMUNITION) == empty) {
+						compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
+					}
+				} else {
+					worldIn.playSound(playerIn, playerIn.getPosition(), new SoundEvent(
+							new ResourceLocation(ReforgedMod.ID, "item.fireCharge.use")),
+							SoundCategory.MASTER, 1.0f, 0.7f);
 				}
-			} else {
-				
-				world.playSoundAtEntity(playerIn, "reforged:shotgun_reload", 1.0f, 0.7f);
 			}
+			
+			compound.setByte(CompoundTags.AMMUNITION, loadState);
+			
+			playerIn.setActiveHand(hand);
+			
+			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
-		
-		compound.setByte(CompoundTags.AMMUNITION, loadState);
-		
-		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
-		
-		return itemStackIn;
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 	}
 	
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer playerIn, int timeLeft) {
-		if(!world.isRemote) {
+	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase playerInl, int timeLeft) {
+		if(!worldIn.isRemote && playerInl instanceof EntityPlayer) {
+			EntityPlayer playerIn = (EntityPlayer) playerInl;
+			
 			NBTTagCompound compound = giveCompound(stack);
 			
 			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 			
 			if(loadState == loaded) {
 				
-				world.playSoundAtEntity(playerIn, shootsound, 1f, 1f);
+				Helpers.playSound(worldIn, playerIn, "ambient.weather.thunder", 1f, 1f);
 				
-				shoot(world, playerIn, stack);
-				if(!playerIn.capabilities.isCreativeMode && stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand)) {
+				shoot(worldIn, playerIn, stack);
+				if(playerIn instanceof EntityPlayer && 
+						(!playerIn.capabilities.isCreativeMode && stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand))) {
 					playerIn.renderBrokenItemStack(stack);
-					playerIn.destroyCurrentEquippedItem();
+					Helpers.destroyCurrentEquippedItem(playerIn);
 				}
 				
 				compound.setByte(CompoundTags.AMMUNITION, empty);
@@ -125,10 +129,10 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		}
 	}
 	
-	public abstract void shoot(World world, EntityLivingBase playerIn, ItemStack stack);
+	public abstract void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack);
 	
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer playerIn) {
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 		

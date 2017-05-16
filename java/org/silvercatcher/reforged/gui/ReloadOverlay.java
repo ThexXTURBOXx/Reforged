@@ -39,30 +39,30 @@ public class ReloadOverlay extends Gui {
 	
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void renderReload(RenderGameOverlayEvent e) {
+	public void renderReload(RenderGameOverlayEvent event) {
 		
-		if(e instanceof RenderGameOverlayEvent.Post || e.type != RenderGameOverlayEvent.ElementType.HOTBAR) {
+		if(event instanceof RenderGameOverlayEvent.Post|| event.getType() != RenderGameOverlayEvent.ElementType.HOTBAR) {
 			return;
 		}
 		
-		EntityPlayer player = minecraft.thePlayer;
+		EntityPlayer player = minecraft.player;
 		
-		if(player != null && player.worldObj != null) {
+		if(player != null && player.world != null) {
 			
-			ItemStack equipped = player.getCurrentEquippedItem();
+			ItemStack equipped = player.inventory.getCurrentItem();
 						
 			if(equipped != null && equipped.getItem() instanceof AReloadable) {
 				
 				AReloadable reloadable = (AReloadable) equipped.getItem();
 				
 				if(ticksBefore == -1) {
-					ticksBefore = minecraft.theWorld.getTotalWorldTime();
+					ticksBefore = minecraft.world.getTotalWorldTime();
 				}
 				
 				if(Mouse.isCreated() && Mouse.isButtonDown(1)) {
-					amount += minecraft.theWorld.getTotalWorldTime() - ticksBefore;
-					amountUnchecked += minecraft.theWorld.getTotalWorldTime() - ticksBefore;
-					ticksBefore = minecraft.theWorld.getTotalWorldTime();
+					amount += minecraft.world.getTotalWorldTime() - ticksBefore;
+					amountUnchecked += minecraft.world.getTotalWorldTime() - ticksBefore;
+					ticksBefore = minecraft.world.getTotalWorldTime();
 				} else {
 					amount = 0;
 					amountUnchecked = 0;
@@ -106,8 +106,8 @@ public class ReloadOverlay extends Gui {
 					}
 				}
 				
-				int x0 = e.resolution.getScaledWidth() / 2 - 88 + i * 20;
-				int y0 = e.resolution.getScaledHeight() - 3;
+				int x0 = event.getResolution().getScaledWidth() / 2 - 88 + i * 20;
+				int y0 = event.getResolution().getScaledHeight() - 3;
 				
 				Helpers.drawRectangle(x0, y0 - (int) (done * 16), x0 + 16, y0, color);
 			}

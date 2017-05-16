@@ -7,8 +7,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -30,31 +30,30 @@ public class ItemFireRod extends ExtendedItem {
 				"  c",
 				" s ",
 				"s  ",
-				'c', new ItemStack(Items.coal, 1, 0),
-				's', Items.stick);
+				'c', new ItemStack(Items.COAL, 1, 0),
+				's', Items.STICK);
 		
 		GameRegistry.addRecipe(new ItemStack(this),
 				"  c",
 				" s ",
 				"s  ",
-				'c', new ItemStack(Items.coal, 1, 1),
-				's', Items.stick);
+				'c', new ItemStack(Items.COAL, 1, 1),
+				's', Items.STICK);
 	}
-
+	
 	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side,
-			float hitX, float hitY, float hitZ) {
-		
-		if(world.getBlockState(pos).getBlock().isFlammable(world, pos, side)) {
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+			EnumFacing side, float hitX, float hitY, float hitZ) {
+		if(worldIn.getBlockState(pos).getBlock().isFlammable(worldIn, pos, side)) {
 			
 			BlockPos target = pos.offset(side);
 			
-			if(!(world.canBlockSeeSky(pos) && world.isRaining()) &&  world.isAirBlock(target)) {
-				world.setBlockState(target, Blocks.fire.getDefaultState());
-				--stack.stackSize;
+			if(!(worldIn.canBlockSeeSky(pos) && worldIn.isRaining()) &&  worldIn.isAirBlock(target)) {
+				worldIn.setBlockState(target, Blocks.FIRE.getDefaultState());
+				player.getHeldItemMainhand().setCount(player.getHeldItemMainhand().getCount() - 1);
 			}
 		}
-		return true;
+		return EnumActionResult.SUCCESS;
 	}
 	
 	@Override
@@ -64,7 +63,7 @@ public class ItemFireRod extends ExtendedItem {
 			entity.setFire(FIRE_DURATION);
 		}
 		if(!player.capabilities.isCreativeMode) {
-			--stack.stackSize;
+			stack.setCount(stack.getCount() - 1);
 		}
 		return false;
 	}

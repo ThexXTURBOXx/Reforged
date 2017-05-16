@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack;
  * this class is just for less @override trouble...
  */
 public abstract class ExtendedItem extends Item implements ItemExtension {
-	
+
 	public ExtendedItem() {
 		setCreativeTab(ReforgedMod.tabReforged);
 	}
@@ -25,7 +25,7 @@ public abstract class ExtendedItem extends Item implements ItemExtension {
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
 	}
-	
+
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		return false;
@@ -35,5 +35,4 @@ public abstract class ExtendedItem extends Item implements ItemExtension {
 	public float getHitDamage() {
 		return 0f;
 	}
-	
 }

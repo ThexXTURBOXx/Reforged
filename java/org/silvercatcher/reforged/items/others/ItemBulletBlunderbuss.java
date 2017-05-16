@@ -22,8 +22,8 @@ public class ItemBulletBlunderbuss extends ExtendedItem {
 				" h ",
 				" g ",
 				" p ",
-				'h', new ItemStack(Blocks.gravel),
-				'g', Items.gunpowder,
-				'p', Items.paper);
+				'h', new ItemStack(Blocks.GRAVEL),
+				'g', Items.GUNPOWDER,
+				'p', Items.PAPER);
 	}
 }

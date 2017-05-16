@@ -4,89 +4,88 @@ import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.api.CompoundTags;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.material.MaterialDefinition;
+import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.BlockPos;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityBoomerang extends AReforgedThrowable {
+
+	public static final DataParameter<Double> THROWER_X = EntityDataManager.<Double>createKey(EntityBoomerang.class, DOUBLE);
+	public static final DataParameter<Double> THROWER_Y = EntityDataManager.<Double>createKey(EntityBoomerang.class, DOUBLE);
+	public static final DataParameter<Double> THROWER_Z = EntityDataManager.<Double>createKey(EntityBoomerang.class, DOUBLE);
+	public static final DataParameter<ItemStack>  STACK = EntityDataManager.<ItemStack>createKey(EntityBoomerang.class, ITEMSTACK);
 	
-	public EntityBoomerang(World world) {
-		
-		super(world, "boomerang");
+	public EntityBoomerang(World worldIn) {
+		super(worldIn, "boomerang");
 	}
 	
-	public EntityBoomerang(World world, EntityLivingBase thrower, ItemStack stack) {
-		
-		super(world, thrower, stack, "boomerang");
+	public EntityBoomerang(World worldIn, EntityLivingBase thrower, ItemStack stack) {
+		super(worldIn, thrower, stack, "boomerang");
 		setItemStack(stack);
 		setCoords(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ);
+		dataManager.set(INITIATED, true);
 	}
 	
 	@Override
 	protected void entityInit() {
-		
 		super.entityInit();
-		
-		// id 5 = ItemStack of Boomerang, type 5 = ItemStack
-		dataWatcher.addObjectByDataType(5, 5);
-		
-		// id 6 = posX, type 3 = float
-		dataWatcher.addObjectByDataType(6, 3);
-		
-		// id 7 = posY, type 3 = float
-		dataWatcher.addObjectByDataType(7, 3);
-		
-		// id 8 = posZ, type 3 = float
-		dataWatcher.addObjectByDataType(8, 3);
+		dataManager.register(STACK, ItemStack.EMPTY);
+		dataManager.register(THROWER_X, 0D);
+		dataManager.register(THROWER_Y, 0D);
+		dataManager.register(THROWER_Z, 0D);
 	}
-
+	
 	public ItemStack getItemStack() {
-		
-		return dataWatcher.getWatchableObjectItemStack(5);
+		return dataManager.get(STACK);
 	}
 	
 	public void setItemStack(ItemStack stack) {
-		
 		if(stack == null || !(stack.getItem() instanceof ItemBoomerang)) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
-		dataWatcher.updateObject(5, stack);
+		dataManager.set(STACK, stack);
 	}
 	
 	public void setCoords(double playerX, double playerY, double playerZ) {
-		
-		dataWatcher.updateObject(6, (float) playerX);
-		dataWatcher.updateObject(7, (float) playerY);
-		dataWatcher.updateObject(8, (float) playerZ);
+		dataManager.set(THROWER_X, playerX);
+		dataManager.set(THROWER_Y, playerY);
+		dataManager.set(THROWER_Z, playerZ);
 	}
 	
 	public double getPosX() {
-		return dataWatcher.getWatchableObjectFloat(6);
+		return dataManager.get(THROWER_X);
 	}
 	
 	public double getPosY() {
-		return dataWatcher.getWatchableObjectFloat(7);
+		return dataManager.get(THROWER_Y);
 	}
 	
 	public double getPosZ() {
-		return dataWatcher.getWatchableObjectFloat(8);
+		return dataManager.get(THROWER_Z);
 	}
 	
 	public MaterialDefinition getMaterialDefinition() {
-
-		return ((ItemBoomerang) getItemStack().getItem()).getMaterialDefinition();
+		MaterialDefinition md;
+		try {
+			md = ((ItemBoomerang) getItemStack().
+					getItem()).
+					getMaterialDefinition();
+		} catch(NullPointerException e) {
+			md = null;
+		}
+		return md;
 	}
 	
 	@Override
-	public void onUpdate() {
-		
-		super.onUpdate();
-		
+	public void onUpdated() {
 		if(getThrower() != null && CompoundTags.giveCompound(getItemStack()).getBoolean(CompoundTags.ENCHANTED)) {
 			setCoords(getThrower().posX, getThrower().posY + getThrower().getEyeHeight(), getThrower().posZ);
 		}
@@ -94,36 +93,40 @@ public class EntityBoomerang extends AReforgedThrowable {
 		double dx = this.posX - getPosX();
 		double dy = this.posY - getPosY();
 		double dz = this.posZ - getPosZ();
+		
 		double d = Math.sqrt(dx * dx + dy * dy + dz * dz);
 		
 		dx /= d;
 		dy /= d;
 		dz /= d;
 		
-		motionX -= 0.05D * dx;
-		motionY -= 0.05D * dy;
-		motionZ -= 0.05D * dz;
+		setVelocity(motionX - (0.05D * dx), motionY - (0.05D * dy), motionZ - (0.05D * dz));
 		
-		//After 103 ticks, the Boomerang drops exactly where the thrower stood
+		/*motionX -= (0.05D * dx);
+		motionY -= (0.05D * dy);
+		motionZ -= (0.05D * dz);*/
+		
 		if(isInWater()) {
-			if(!worldObj.isRemote) {
+			if(!world.isRemote) {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 						entityDropItem(getItemStack(), 0.5f);
 				} else {
-					worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
+					//Custom sound later... [BREAK SOUND]
 				}
 				setDead();
 			}
 		}
+		
+		//After 103 ticks, the Boomerang drops exactly where the thrower stood
 		if(ticksExisted >= 103) {
 			if(CompoundTags.giveCompound(getItemStack()).getBoolean(CompoundTags.ENCHANTED)) {
 				if(onEntityHit(getThrower())) setDead();
 			} else {
-				if(!worldObj.isRemote) {
+				if(!world.isRemote) {
 					if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 							entityDropItem(getItemStack(), 0.5f);
 					} else {
-						worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
+						//Custom sound later... [BREAK SOUND]
 					}
 					setDead();
 				}
@@ -135,11 +138,10 @@ public class EntityBoomerang extends AReforgedThrowable {
 	protected float getGravityVelocity() {
 		return 0f;
 	}
-
+	
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
-		
-		if(!worldObj.isRemote) {
+		if(!world.isRemote) {
 			if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 				entityDropItem(getItemStack(), 0.5f);
 			}
@@ -155,9 +157,9 @@ public class EntityBoomerang extends AReforgedThrowable {
 			EntityPlayer p = (EntityPlayer) hitEntity;
 			if(stack.getMaxDamage() - stack.getItemDamage() > 0 && !creativeUse()) {
 				p.inventory.addItemStackToInventory(stack);
-				worldObj.playSoundAtEntity(this, "random.pop", 0.5F, 0.7F);
+				Helpers.playSound(world, this, "random.pop", 0.5F, 0.7F);
 			} else {
-				worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
+				//Custom sound later... [BREAK SOUND]
 			}
 			return true;
 		} else {
@@ -165,7 +167,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 			hitEntity.attackEntityFrom(causeImpactDamage(hitEntity, getThrower()), getImpactDamage(hitEntity));
 			ItemStack stack = getItemStack();
 			if(stack.getItem().isDamageable() && stack.attemptDamageItem(1, rand)) {
-				worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
+				//Custom sound later... [BREAK SOUND]
 				return true;
 			} else {
 				setItemStack(stack);
@@ -190,14 +192,15 @@ public class EntityBoomerang extends AReforgedThrowable {
 	
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tagCompund) {
-		
 		super.readEntityFromNBT(tagCompund);
-		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
+		setItemStack(new ItemStack(tagCompund.getCompoundTag("item")));
 		setCoords(tagCompund.getDouble("playerX"), tagCompund.getDouble("playerY"), tagCompund.getDouble("playerZ"));
 	}
 
 	@Override
 	protected float getImpactDamage(Entity target) {
-		return getMaterialDefinition().getDamageVsEntity() + 5;
+		return getMaterialDefinition().
+				getDamageVsEntity() + 5;
 	}
+	
 }

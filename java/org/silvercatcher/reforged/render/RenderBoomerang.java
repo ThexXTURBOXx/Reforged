@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -31,19 +31,19 @@ public class RenderBoomerang extends ReforgedRender {
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
 		int boomerangCount = 1;
-		for(Object o : Minecraft.getMinecraft().theWorld.loadedEntityList) {
+		for(Object o : Minecraft.getMinecraft().world.loadedEntityList) {
 			if(o instanceof EntityBoomerang) {
-				EntityPlayer player = Minecraft.getMinecraft().thePlayer;
+				EntityPlayer player = Minecraft.getMinecraft().player;
 				EntityBoomerang boomerang = (EntityBoomerang) o;
-				Vec3 look = player.getLookVec();
-				Vec3 boomerangvec = new Vec3(boomerang.posX - player.posX,
+				Vec3d look = player.getLookVec();
+				Vec3d boomerangvec = new Vec3d(boomerang.posX - player.posX,
 						(boomerang.getEntityBoundingBox().minY + boomerang.height / 2)
 						- player.posY + player.getEyeHeight(),
 						boomerang.posZ - player.posZ);
 				double d0 = boomerangvec.lengthVector();
 				double d1 = look.dotProduct(boomerangvec);
 				boolean seen = d1 > 1 - 0.25 / d0;
-				if(seen && Minecraft.getMinecraft().thePlayer.canEntityBeSeen(boomerang)) {
+				if(seen && Minecraft.getMinecraft().player.canEntityBeSeen(boomerang)) {
 					boomerangCount++;
 				}
 			}
@@ -57,7 +57,9 @@ public class RenderBoomerang extends ReforgedRender {
 	
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
+		
 		EntityBoomerang entityBoomerang = (EntityBoomerang) entity;
+		
 		switch(entityBoomerang.getMaterialDefinition().getPrefix()) {
 		case "diamond": return Textures.DIAMOND_BOOMERANG;
 		case "golden": return Textures.GOLDEN_BOOMERANG;

@@ -4,11 +4,10 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelJavelin extends ReforgedModel {
-	
     public ModelRenderer stick;
     public ModelRenderer front1;
     public ModelRenderer front2;
-    
+
     public ModelJavelin() {
     	super();
         front2 = new ModelRenderer(this, 0, 6);
@@ -24,12 +23,11 @@ public class ModelJavelin extends ReforgedModel {
         stick.addBox(0.0F, 0.0F, 0.0F, 30, 1, 1, 0.0F);
         setRotateAngle(stick, 0.7853981633974483F, 0.0F, 0.0F);
     }
-    
+
     @Override
     public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) { 
         front2.render(f5);
         front1.render(f5);
         stick.render(f5);
     }
-    
 }

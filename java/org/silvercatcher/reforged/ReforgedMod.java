@@ -6,10 +6,11 @@ import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraftforge.fml.common.*;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
@@ -18,7 +19,7 @@ public class ReforgedMod {
 	
 	public static final String NAME = "Reforged";
 	public static final String ID = "reforged";
-	public static final String VERSION = "0.7";
+	public static final String VERSION = "0.7-pre4";
 	
 	public static boolean battlegearDetected;
 	
@@ -28,8 +29,8 @@ public class ReforgedMod {
 	
 	public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
 		@Override
-		public Item getTabIconItem() {
-			return ReforgedAdditions.IRON_BATTLE_AXE;
+		public ItemStack getTabIconItem() {
+			return new ItemStack(ReforgedAdditions.IRON_BATTLE_AXE);
 		}
 	};
 	

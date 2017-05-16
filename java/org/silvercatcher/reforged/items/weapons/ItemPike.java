@@ -54,7 +54,7 @@ public class ItemPike extends ExtendedItem {
 				" s ",
 				"s  ",
 				'm', materialDefinition.getRepairMaterial(),
-				's', Items.stick);
+				's', Items.STICK);
 	}
 	
 	@Override

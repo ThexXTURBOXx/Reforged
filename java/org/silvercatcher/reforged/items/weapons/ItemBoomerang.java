@@ -6,10 +6,12 @@ import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.items.recipes.BoomerangEnchRecipe;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
+import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.oredict.RecipeSorter.Category;
@@ -39,22 +41,19 @@ public class ItemBoomerang extends ExtendedItem {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-	   
-		// import, otherwise references will cause chaos!
-		ItemStack throwStack = stack.copy();
-		
-		if(player.capabilities.isCreativeMode || player.inventory.consumeInventoryItem(this))
-	    {
-	        world.playSoundAtEntity(player, "reforged:boomerang_throw", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-        	
-	        if (!world.isRemote) {
-	        	
-	        	EntityBoomerang boomerang = new EntityBoomerang(world, player, throwStack);
-	        	world.spawnEntityInWorld(boomerang);
-	        }
-	    }
-	    return stack;
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+		if(hand == EnumHand.MAIN_HAND) {
+			// import, otherwise references will cause chaos!
+			ItemStack throwStack = playerIn.getHeldItemMainhand().copy();
+			if(playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, this)) {
+				Helpers.playSound(worldIn, playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		        if (!worldIn.isRemote) {
+		        	EntityBoomerang boomerang = new EntityBoomerang(worldIn, playerIn, throwStack);
+		        	worldIn.spawnEntity(boomerang);
+		        }
+		    }
+		}
+	    return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 	}
 
 	@Override
@@ -65,7 +64,7 @@ public class ItemBoomerang extends ExtendedItem {
 					"  w",
 					"  x",
 					'x', materialDefinition.getRepairMaterial(),
-					'w', Items.stick);
+					'w', Items.STICK);
 			ReforgedRegistry.registerIRecipe("EnchantBoomerang", new BoomerangEnchRecipe(), BoomerangEnchRecipe.class, Category.SHAPELESS);
 	}
 	
@@ -80,12 +79,10 @@ public class ItemBoomerang extends ExtendedItem {
 	}
 	
 	public ToolMaterial getMaterial() {
-		
 		return materialDefinition.getMaterial();
 	}
 	
 	public MaterialDefinition getMaterialDefinition() {
-		
 		return materialDefinition;
 	}
 	
@@ -93,4 +90,5 @@ public class ItemBoomerang extends ExtendedItem {
 	public int getItemEnchantability(ItemStack stack) {
 		return materialDefinition.getEnchantability();
 	}
+	
 }

@@ -12,6 +12,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.util.DamageSource;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -54,9 +55,9 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 				
 				int armorvalue = 0;
 
-				for(int i = 1; i < 4; i++) {
+				for(int i = 3; i < 6; i++) {
 					
-					ItemStack armorStack = target.getEquipmentInSlot(i);
+					ItemStack armorStack = target.getItemStackFromSlot(EntityEquipmentSlot.values()[i]);
 					if(armorStack != null && armorStack.getItem() instanceof ItemArmor) {
 						armorvalue += ((ItemArmor) armorStack.getItem()).damageReduceAmount;
 					}
@@ -90,7 +91,7 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 				" m ",
 				"s  ",
 				'm', materialDefinition.getRepairMaterial(),
-				's', Items.stick);
+				's', Items.STICK);
 	}
 
 	@Override

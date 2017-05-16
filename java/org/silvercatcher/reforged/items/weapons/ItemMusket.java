@@ -8,31 +8,33 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemMusket extends AReloadable {
 	
 	public ItemMusket() {
-		super("musket", "reforged:musket_shoot");
+		super("musket");
 	}
 	
 	@Override
-	public void shoot(World world, EntityLivingBase player, ItemStack stack) {
-		world.spawnEntityInWorld(new EntityBulletMusket(world, player, stack));
+	public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
+		worldIn.spawnEntity(new EntityBulletMusket(worldIn, playerIn, stack));
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		
 		setAmmo(ReforgedAdditions.MUSKET_BULLET);
-		return super.onItemRightClick(stack, world, player);
+		return super.onItemRightClick(worldIn, playerIn, hand);
 	}
 	
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
 		
-		return (repair.getItem() == Items.iron_ingot);
+		return (repair.getItem() == Items.IRON_INGOT);
 	}
 	
 	@Override

@@ -2,14 +2,16 @@ package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.entities.EntityDynamite;
+import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class ItemDynamite extends ExtendedItem {
+public class ItemDynamite extends ExtendedItem{
 	
 	public ItemDynamite() {
 		super();
@@ -22,19 +24,19 @@ public class ItemDynamite extends ExtendedItem {
 		GameRegistry.addShapedRecipe(new ItemStack(this, 2), " s ",
 														     " g ",
 														     " g ",
-														     's', new ItemStack(Items.string),
-														     'g', new ItemStack(Items.gunpowder));
+														     's', new ItemStack(Items.STRING),
+														     'g', new ItemStack(Items.GUNPOWDER));
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {		
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {		
 		
-		if(player.capabilities.isCreativeMode || player.inventory.consumeInventoryItem(this)) {
-			if(!world.isRemote) {
-				world.spawnEntityInWorld(new EntityDynamite(world, player, stack));			
+		if(playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, this)) {
+			if(!worldIn.isRemote) {
+				worldIn.spawnEntity(new EntityDynamite(worldIn, playerIn, playerIn.getHeldItemMainhand()));			
 			}
 		}
-		return stack;
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 	}
 	
 }

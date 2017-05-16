@@ -36,9 +36,8 @@ public class RenderDart extends ReforgedRender {
 					 	 
 		case "wither": return Textures.WITHER_DART;
 		
-		default: throw new IllegalArgumentException("No Dart-Effect called " + entityDart.getEffect() + " found!");
+		default: throw new IllegalArgumentException("No Item called " + entityDart.getEffect() + " found!");
 				
 		}
 	}
-	
 }

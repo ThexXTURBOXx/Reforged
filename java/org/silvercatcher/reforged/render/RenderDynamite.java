@@ -20,5 +20,4 @@ public class RenderDynamite extends ReforgedRender {
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		return Textures.DYNAMITE;
 	}
-	
 }

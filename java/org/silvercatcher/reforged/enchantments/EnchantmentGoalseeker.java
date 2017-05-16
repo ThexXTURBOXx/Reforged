@@ -1,22 +1,20 @@
 package org.silvercatcher.reforged.enchantments;
 
-import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
-
+import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public class EnchantmentGoalseeker extends Enchantment {
 	
 	public EnchantmentGoalseeker() {
-		super(GlobalValues.GOALSEEKERID, new ResourceLocation("goalseeker"), 1, EnumEnchantmentType.BOW);
+		super(Rarity.VERY_RARE, EnumEnchantmentType.BOW, new EntityEquipmentSlot[] {EntityEquipmentSlot.MAINHAND});
 	}
 	
 	@Override
 	public String getName() {
-		return LanguageRegistry.instance().getStringLocalization("enchantment.goalseeker");
+		return I18n.format("enchantment.goalseeker");
 	}
 	
 	@Override

@@ -35,21 +35,21 @@ public class MessageCustomReachAttack implements IMessage {
 		
 		@Override
 		public IMessage onMessage(final MessageCustomReachAttack message, MessageContext ctx) {
-			final EntityPlayerMP thePlayer = ctx.getServerHandler().playerEntity;
-			thePlayer.getServerForPlayer().addScheduledTask(
+			final EntityPlayerMP player = ctx.getServerHandler().player;
+			player.getServer().addScheduledTask(
 					new Runnable() {
 						@Override
 						public void run() {
-							Entity theEntity = thePlayer.worldObj.getEntityByID(message.entityId);
-							if (thePlayer.getCurrentEquippedItem() == null) {
+							Entity theEntity = player.world.getEntityByID(message.entityId);
+							if (player.inventory.getCurrentItem() == null) {
 								return;
 							}
-							if (thePlayer.getCurrentEquippedItem().getItem() instanceof ICustomReach) {
-								ICustomReach theExtendedReachWeapon = (ICustomReach) thePlayer.getCurrentEquippedItem().getItem();
-								double distanceSq = thePlayer.getDistanceSqToEntity(theEntity);
+							if (player.inventory.getCurrentItem().getItem() instanceof ICustomReach) {
+								ICustomReach theExtendedReachWeapon = (ICustomReach) player.inventory.getCurrentItem().getItem();
+								double distanceSq = player.getDistanceSqToEntity(theEntity);
 								double reachSq = theExtendedReachWeapon.reach() * theExtendedReachWeapon.reach();
 								if (reachSq >= distanceSq) {
-									thePlayer.attackTargetEntityWithCurrentItem(theEntity);
+									player.attackTargetEntityWithCurrentItem(theEntity);
 								}
 							}
 							return;
@@ -59,5 +59,4 @@ public class MessageCustomReachAttack implements IMessage {
 			return null;
 		}
 	}
-	
 }

@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.entities;
 
 import org.silvercatcher.reforged.api.AReforgedThrowable;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.others.ItemDart;
 
 import net.minecraft.entity.Entity;
@@ -8,35 +9,38 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityDart extends AReforgedThrowable {
 	
-	public EntityDart(World world) {
+	public static final DataParameter<ItemStack> STACK = EntityDataManager.<ItemStack>createKey(EntityDart.class, ITEMSTACK);
+	
+	public EntityDart(World worldIn) {
 		
-		super(world, "dart");
+		super(worldIn, "dart");
 	}
 	
-	public EntityDart(World world, EntityLivingBase thrower, ItemStack stack) {
+	public EntityDart(World worldIn, EntityLivingBase getThrowerIn, ItemStack stack) {
 		
-		super(world, thrower, stack, "dart");
+		super(worldIn, getThrowerIn, stack, "dart");
 		setItemStack(stack);
+		dataManager.set(INITIATED, true);
 	}
 	
 	@Override
 	protected void entityInit() {
 		super.entityInit();
-		
-		// id 5 = ItemStack of Dart, type 5 = ItemStack
-		dataWatcher.addObjectByDataType(5, 5);
+		dataManager.register(STACK, new ItemStack(ReforgedAdditions.DART_NORMAL));
 	}
 
 	public ItemStack getItemStack() {
 		
-		return dataWatcher.getWatchableObjectItemStack(5);
+		return dataManager.get(STACK);
 	}
 	
 	public void setItemStack(ItemStack stack) {
@@ -44,7 +48,7 @@ public class EntityDart extends AReforgedThrowable {
 		if(stack == null || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
-		dataWatcher.updateObject(5, stack);
+		dataManager.set(STACK, stack);
 	}
 	
 	public String getEffect() {
@@ -53,8 +57,8 @@ public class EntityDart extends AReforgedThrowable {
 	
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
-		if(!worldObj.isRemote && rand.nextInt(4) == 0 && !creativeUse()) {
-			entityDropItem(new ItemStack(Items.feather), 1);	
+		if(!world.isRemote && rand.nextInt(4) == 0 && !creativeUse()) {
+			entityDropItem(new ItemStack(Items.FEATHER), 1);	
 		}
 		return true;
 	}
@@ -72,23 +76,23 @@ public class EntityDart extends AReforgedThrowable {
 				
 				case "normal": break;
 				
-				case "hunger": p.addPotionEffect(new PotionEffect(Potion.hunger.getId(), 300, 1)); break;
+				case "hunger": p.addPotionEffect(new PotionEffect(getPotion("hunger"), 300, 1)); break;
 				
-				case "poison": p.addPotionEffect(new PotionEffect(Potion.poison.getId(), 200, 1)); break;
+				case "poison": p.addPotionEffect(new PotionEffect(getPotion("poison"), 200, 1)); break;
 				
-				case "poison_strong": p.addPotionEffect(new PotionEffect(Potion.poison.getId(), 300, 2)); break;
+				case "poison_strong": p.addPotionEffect(new PotionEffect(getPotion("posion"), 300, 2)); break;
 				
-				case "slowness": p.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), 300, 1));
-				p.addPotionEffect(new PotionEffect(Potion.digSlowdown.getId(), 300, 1)); break;
+				case "slowness": p.addPotionEffect(new PotionEffect(getPotion("slowness"), 300, 1));
+				p.addPotionEffect(new PotionEffect(getPotion("mining_fatigue"), 300, 1)); break;
 				
-				case "wither": p.addPotionEffect(new PotionEffect(Potion.wither.getId(), 300, 1)); break;
+				case "wither": p.addPotionEffect(new PotionEffect(getPotion("wither"), 300, 1)); break;
 				
 				default: throw new IllegalArgumentException("No effect called " + getEffect().substring(5) + " found!");
 				
 				}
 			}
 		}
-		worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
+		//Custom sound later... [BREAK SOUND]
 		return true;
 	}
 	
@@ -112,12 +116,16 @@ public class EntityDart extends AReforgedThrowable {
 		
 		super.readEntityFromNBT(tagCompund);
 		
-		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
+		setItemStack(new ItemStack(tagCompund.getCompoundTag("item")));
 	}
 
 	@Override
 	protected float getImpactDamage(Entity target) {
 
 		return 5f;
+	}
+	
+	private Potion getPotion(String name) {
+		return Potion.getPotionFromResourceLocation(name);
 	}
 }

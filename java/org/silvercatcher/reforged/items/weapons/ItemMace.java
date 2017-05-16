@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -43,11 +44,11 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 		if(itemRand.nextInt(25) < (5 - zombieSpawnChance())) {
 			if(entity instanceof EntityLivingBase) {
 				EntityLivingBase elb = (EntityLivingBase) entity;
-				StunProperty.get(elb).setStunned(true);
-				elb.addPotionEffect(new PotionEffect(2, 3, 10, false, false));
-				elb.addPotionEffect(new PotionEffect(4, 3, 10, false, false));
-				elb.addPotionEffect(new PotionEffect(15, 3, 10, false, false));
-				elb.addPotionEffect(new PotionEffect(18, 3, 10, false, false));
+				StunProperty.setStunned(player, true);
+				elb.addPotionEffect(new PotionEffect(getPotion("slowness"), 3, 10, false, false));
+				elb.addPotionEffect(new PotionEffect(getPotion("mining_fatigue"), 3, 10, false, false));
+				elb.addPotionEffect(new PotionEffect(getPotion("blindness"), 3, 10, false, false));
+				elb.addPotionEffect(new PotionEffect(getPotion("weakness"), 3, 10, false, false));
 			}
 		}
 		return super.onLeftClickEntity(stack, player, entity);
@@ -61,7 +62,7 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 				" wm",
 				"w  ",
 				'm', materialDefinition.getRepairMaterial(),
-				'w', new ItemStack(Blocks.planks));
+				'w', new ItemStack(Blocks.PLANKS));
 	}
 	
 	@Override
@@ -91,6 +92,10 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 		case WOOD: return 4;
 		default: return 0;
 		}
+	}
+	
+	private Potion getPotion(String name) {
+		return Potion.getPotionFromResourceLocation(name);
 	}
 	
 }

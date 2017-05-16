@@ -9,14 +9,14 @@ import net.minecraft.world.World;
 
 public class EntityBulletBlunderbuss extends AReforgedThrowable {
 	
-	public EntityBulletBlunderbuss(World world) {
+	public EntityBulletBlunderbuss(World worldIn) {
 		
-		super(world, "blunderbuss");
+		super(worldIn, "blunderbuss");
 	}
 	
-	public EntityBulletBlunderbuss(World world, EntityLivingBase thrower, ItemStack stack) {
+	public EntityBulletBlunderbuss(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		
-		super(world, thrower, stack, "blunderbuss");
+		super(worldIn, throwerIn, stack, "blunderbuss");
 		float randomNumX = rand.nextInt(21);
 		float randomNumY = rand.nextInt(21);
 		float randomNumZ = rand.nextInt(21);
@@ -35,8 +35,7 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 	}
 	
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
+	public void onUpdated() {
 		if(ticksExisted >= 30) {
 			setDead();
 		}

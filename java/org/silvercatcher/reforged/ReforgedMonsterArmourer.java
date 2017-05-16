@@ -7,6 +7,7 @@ import org.silvercatcher.reforged.api.IZombieEquippable;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityZombie;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
@@ -23,8 +24,8 @@ public class ReforgedMonsterArmourer {
 	
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load e) {
-		if(e.isCanceled() || e.world.isRemote) return;
-		List<Item> list = new ArrayList<>();
+		if(e.isCanceled() || e.getWorld().isRemote) return;
+		List<Item> list = new ArrayList<Item>();
 		for(Item i : ReforgedRegistry.registrationList) {
 			if(i instanceof IZombieEquippable) {
 				for(int c = 0; c < ((IZombieEquippable) i).zombieSpawnChance(); c++) list.add(i);
@@ -35,12 +36,12 @@ public class ReforgedMonsterArmourer {
 	}
 	
 	@SubscribeEvent
-	public void onSpawn(EntityJoinWorldEvent e) {
+	public void onSpawn(EntityJoinWorldEvent event) {
 		
-		if(e.isCanceled() || e.entity == null || e.world.isRemote || 
-				!(e.entity instanceof EntityZombie) || zombieWeapons == null) return;
+		if(event.isCanceled() || event.getEntity() == null || event.getWorld().isRemote || 
+				!(event.getEntity() instanceof EntityZombie) || zombieWeapons == null) return;
 		
-		equipZombie((EntityZombie) e.entity);
+		equipZombie((EntityZombie) event.getEntity());
 	}
 	
 	private Item randomFrom(Item[] selection) {
@@ -49,13 +50,12 @@ public class ReforgedMonsterArmourer {
 	
 	private void equipZombie(EntityZombie zombie) {
 		
-		if(zombie.getCurrentArmor(0) == null && random.nextInt(10) == 0) {
+		if(zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND) == null && random.nextInt(10) == 0) {
 			
 			Item item = randomFrom(zombieWeapons);
+			zombie.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(item));
 			
-			zombie.setCurrentItemOrArmor(0, new ItemStack(item));
-			
-			zombie.getEntityAttribute(SharedMonsterAttributes.attackDamage).applyModifier(
+			zombie.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).applyModifier(
 					new AttributeModifier(itemModifierUUID, "Weapon Damage", 99f, 0));
 			
 		}

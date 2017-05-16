@@ -11,6 +11,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
@@ -23,8 +24,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 	
 	private static void printInventory(String name, InventoryCrafting inventory) {
 	
-		if(Minecraft.getMinecraft().theWorld != null) {
-			
+		if(Minecraft.getMinecraft().world != null) {
 			System.out.append(name);
 			System.out.append(":\t[");
 			for(int i = 0; i < inventory.getSizeInventory(); i++) {
@@ -43,7 +43,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			ItemStack stack = inventory.getStackInSlot(i);
 			if(stack != null) {
 				if(stack.getItem() == ReforgedAdditions.ARROW_BUNDLE) {
-					aBs.put(i, stack.stackSize);
+					aBs.put(i, stack.getCount());
 				} else if(stack.getItem() == ReforgedAdditions.NEST_OF_BEES &&
 						stack.getTagCompound().getInteger(CompoundTags.AMMUNITION) + 1 <= 32 && NoB == -1) {
 					NoB = i;
@@ -88,13 +88,13 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 	
 	@Override
 	public ItemStack getRecipeOutput() {
-		return output;
+		return output == null ? ItemStack.EMPTY : output;
 	}
 	
 	@Override
-	public ItemStack[] getRemainingItems(InventoryCrafting inventory) {
+	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inventory) {
 		for(int index : usedaBs.keySet()) {
-			if(inventory.getStackInSlot(index).stackSize == usedaBs.get(index)) {
+			if(inventory.getStackInSlot(index).getCount() == usedaBs.get(index)) {
 				inventory.decrStackSize(index, usedaBs.get(index));
 			} else {
 				inventory.decrStackSize(index, usedaBs.get(index) - 1);

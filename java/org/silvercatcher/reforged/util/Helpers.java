@@ -4,16 +4,27 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
-//For 1.8.9: import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
+import net.minecraft.util.math.*;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
 
 public class Helpers {
 	
 	/**Checks if the 2 given BlockPositions are equal*/
 	public static boolean blockPosEqual(BlockPos pos1, BlockPos pos2) {
-		return (pos1.getX() == pos2.getX() && pos1.getY() == pos2.getY() && pos1.getZ() == pos2.getZ());
+		int x1 = pos1.getX();
+		int x2 = pos2.getX();
+		int y1 = pos1.getY();
+		int y2 = pos2.getY();
+		int z1 = pos1.getZ();
+		int z2 = pos2.getZ();
+		return (x1 == x2 && y1 == y2 && z1 == z2);
 	}
 	
 	/** Helper method for creating a Rectangle*/
@@ -32,27 +43,17 @@ public class Helpers {
         }
         
         Tessellator tessellator = Tessellator.getInstance();
-        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        VertexBuffer worldrenderer = tessellator.getBuffer();
         GlStateManager.enableBlend();
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.color(color[0], color[1], color[2], color[3]);
         
-        //1.8
-        worldrenderer.startDrawingQuads();
-        worldrenderer.addVertex(left, bottom, 0.0D);
-        worldrenderer.addVertex(right, bottom, 0.0D);
-        worldrenderer.addVertex(right, top, 0.0D);
-        worldrenderer.addVertex(left, top, 0.0D);
-        
-        //1.8.9
-        /*
         worldrenderer.begin(7, DefaultVertexFormats.POSITION);
-        worldrenderer.pos((double)left, (double)bottom, 0.0D).endVertex();
-        worldrenderer.pos((double)right, (double)bottom, 0.0D).endVertex();
-        worldrenderer.pos((double)right, (double)top, 0.0D).endVertex();
-        worldrenderer.pos((double)left, (double)top, 0.0D).endVertex();
-        */
+        worldrenderer.pos(left, bottom, 0.0D).endVertex();
+        worldrenderer.pos(right, bottom, 0.0D).endVertex();
+        worldrenderer.pos(right, top, 0.0D).endVertex();
+        worldrenderer.pos(left, top, 0.0D).endVertex();
         
         tessellator.draw();
         GlStateManager.enableTexture2D();
@@ -60,7 +61,7 @@ public class Helpers {
 	}
 	
 	/**Thanks to Jabelar!!!*/
-	public static MovingObjectPosition getMouseOverExtended(float distance) {
+	public static RayTraceResult getMouseOverExtended(float distance) {
 	    Minecraft mc = FMLClientHandler.instance().getClient();
 	    Entity theRenderViewEntity = mc.getRenderViewEntity();
 	    AxisAlignedBB theViewBoundingBox = new AxisAlignedBB(
@@ -71,21 +72,21 @@ public class Helpers {
 	            theRenderViewEntity.posY+1.5D,
 	            theRenderViewEntity.posZ+0.5D
 	            );
-	    MovingObjectPosition returnMOP = null;
-	    if (mc.theWorld != null) {
+	    RayTraceResult returnMOP = null;
+	    if (mc.world != null) {
 	        double var2 = distance;
 	        returnMOP = theRenderViewEntity.rayTrace(var2, 0);
 	        double calcdist = var2;
-	        Vec3 pos = theRenderViewEntity.getPositionEyes(0);
+	        Vec3d pos = theRenderViewEntity.getPositionEyes(0);
 	        var2 = calcdist;
 	        if (returnMOP != null) {
 	            calcdist = returnMOP.hitVec.distanceTo(pos);
 	        }
-	        Vec3 lookvec = theRenderViewEntity.getLook(0);
-	        Vec3 var8 = pos.addVector(lookvec.xCoord * var2, lookvec.yCoord * var2, lookvec.zCoord * var2);
+	        Vec3d lookvec = theRenderViewEntity.getLook(0);
+	        Vec3d var8 = pos.addVector(lookvec.xCoord * var2, lookvec.yCoord * var2, lookvec.zCoord * var2);
 	        Entity pointedEntity = null;
 	        float var9 = 1.0F;
-	        List<Entity> list = mc.theWorld.getEntitiesWithinAABBExcludingEntity(theRenderViewEntity, 
+	        List<Entity> list = mc.world.getEntitiesWithinAABBExcludingEntity(theRenderViewEntity, 
 	              theViewBoundingBox.addCoord(
 	                    lookvec.xCoord * var2,
 	                    lookvec.yCoord * var2,
@@ -102,7 +103,7 @@ public class Helpers {
 	                      entity.posY+entity.height, 
 	                      entity.posZ+entity.width/2);
 	                aabb.expand(bordersize, bordersize, bordersize);
-	                MovingObjectPosition mop0 = aabb.calculateIntercept(pos, var8);
+	                RayTraceResult mop0 = aabb.calculateIntercept(pos, var8);
 	                if (aabb.isVecInside(pos)) {
 	                    if (0.0D < d || d == 0.0D) {
 	                        pointedEntity = entity;
@@ -118,10 +119,48 @@ public class Helpers {
 	            }
 	        }
 	        if (pointedEntity != null && (d < calcdist || returnMOP == null)) {
-	             returnMOP = new MovingObjectPosition(pointedEntity);
+	             returnMOP = new RayTraceResult(pointedEntity);
 	        }
 	    }
 	    return returnMOP;
+	}
+	
+	public static boolean consumeInventoryItem(EntityPlayer player, Item itemIn) {
+		int i = getInventorySlotContainItem(player, itemIn);
+		if(i < 0) {
+			return false;
+		} else {
+			ItemStack item = player.inventory.mainInventory.get(i);
+			item.setCount(item.getCount() - 1);
+			if(item.getCount() <= 0) {
+				player.inventory.mainInventory.set(i, ItemStack.EMPTY);
+			}
+			return true;
+		}
+	}
+	
+	public static int getInventorySlotContainItem(EntityPlayer player, Item itemIn) {
+        for(int i = 0; i < player.inventory.mainInventory.size(); ++i) {
+            if(player.inventory.mainInventory.get(i) != null && !player.inventory.mainInventory.get(i).equals(ItemStack.EMPTY) && player.inventory.mainInventory.get(i).getItem() == itemIn) {
+                return i;
+            }
+        }
+        return -1;
+    }
+	
+	public static void destroyCurrentEquippedItem(EntityPlayer player) {
+        ItemStack orig = player.inventory.getCurrentItem();
+        player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+        net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(player, orig, EnumHand.MAIN_HAND);
+    }
+	
+	public static void playSound(World w, Entity e, String name, double volume, double pitch) {
+		playSound(w, e, name, (float) volume, (float) pitch);
+	}
+	
+	public static void playSound(World w, Entity e, String name, float volume, float pitch) {
+		w.playSound(e.posX, e.posY, e.posZ, new SoundEvent(new ResourceLocation(name)),
+				SoundCategory.MASTER, volume, pitch, false);
 	}
 	
 }

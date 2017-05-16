@@ -24,30 +24,30 @@ public class ItemDart extends ExtendedItem {
 				 " f ",
 				 " s ",
 				 "vsv",
-				 'f', Items.flint,
-				 's', Items.stick,
-				 'v', Items.feather); break;
+				 'f', Items.FLINT,
+				 's', Items.STICK,
+				 'v', Items.FEATHER); break;
 			
 		case "hunger": GameRegistry.addShapelessRecipe(new ItemStack(this),
 				ReforgedAdditions.DART_NORMAL,
-				Items.rotten_flesh); break;
+				Items.ROTTEN_FLESH); break;
 			
 		case "poison": GameRegistry.addShapelessRecipe(new ItemStack(this),
 				ReforgedAdditions.DART_NORMAL,
-				new ItemStack(Blocks.cactus)); break;
+				new ItemStack(Blocks.CACTUS)); break;
 			
 		case "poison_strong": GameRegistry.addShapelessRecipe(new ItemStack(this),
 				ReforgedAdditions.DART_NORMAL,
-				Items.spider_eye); break;
+				Items.SPIDER_EYE); break;
 			
 		case "slowness": GameRegistry.addShapelessRecipe(new ItemStack(this),
 				ReforgedAdditions.DART_NORMAL,
-				Items.slime_ball); break;
+				Items.SLIME_BALL); break;
 			
 		case "wither": GameRegistry.addShapelessRecipe(new ItemStack(this),
 				ReforgedAdditions.DART_NORMAL,
-				Items.spider_eye,
-				Items.bone); break;
+				Items.SPIDER_EYE,
+				Items.BONE); break;
 			
 		default: throw new IllegalArgumentException("Could not register recipe of the item: " + getUnlocalizedName());
 		

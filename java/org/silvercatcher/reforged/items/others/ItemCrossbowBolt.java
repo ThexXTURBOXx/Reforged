@@ -18,8 +18,8 @@ public class ItemCrossbowBolt extends ExtendedItem {
 	public void registerRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(this, 4), "i ",
 															 "f ",
-															 'i', Items.iron_ingot,
-															 'f', Items.feather);
+															 'i', Items.IRON_INGOT,
+															 'f', Items.FEATHER);
 	}
 	
 }

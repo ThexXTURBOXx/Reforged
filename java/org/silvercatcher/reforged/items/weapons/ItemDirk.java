@@ -62,7 +62,7 @@ public class ItemDirk extends ItemSword implements ItemExtension, IZombieEquippa
 	@Override
 	public void registerRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(this),
-				"m ", "s ", 's', new ItemStack(Items.stick), 'm', materialDefinition.getRepairMaterial());
+				"m ", "s ", 's', new ItemStack(Items.STICK), 'm', materialDefinition.getRepairMaterial());
 	}
 	
 	@Override

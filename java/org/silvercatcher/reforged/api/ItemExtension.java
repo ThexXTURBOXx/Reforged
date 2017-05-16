@@ -27,7 +27,7 @@ public interface ItemExtension {
 		
 		Multimap modifiers =  HashMultimap.create();
 		
-		modifiers.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
+		modifiers.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
 				new AttributeModifier(itemModifierUUID, "Weapon Damage", getHitDamage(stack), 0));
 		return modifiers;
 	}
@@ -42,7 +42,7 @@ public interface ItemExtension {
 			
 			Entry <Integer, Integer> entry = (Entry<Integer, Integer>) o;
 			
-			Enchantment e = Enchantment.getEnchantmentById(entry.getKey());
+			Enchantment e = Enchantment.getEnchantmentByID(entry.getKey());
 			
 			if(e instanceof EnchantmentDamage) {
 				
@@ -72,7 +72,7 @@ public interface ItemExtension {
 				
 				Entry <Integer, Integer> entry = (Entry<Integer, Integer>) o;
 				
-				Enchantment e = Enchantment.getEnchantmentById(entry.getKey());
+				Enchantment e = Enchantment.getEnchantmentByID(entry.getKey());
 				
 				if(e instanceof EnchantmentDamage) {
 					
@@ -81,7 +81,7 @@ public interface ItemExtension {
 					if(ed.damageType != 0) {
 						
 						extraDamage += e.calcDamageByCreature(EnchantmentHelper.getEnchantmentLevel(
-								e.effectId, stack), living.getCreatureAttribute());
+								e, stack), living.getCreatureAttribute());
 					}
 				}
 			}

@@ -8,13 +8,13 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.BlockPos;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -53,27 +53,27 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 				"xsx",
 				" s ",
 				'x', materialDefinition.getRepairMaterial(),
-				's', Items.stick);
+				's', Items.STICK);
 	}
-
+	
 	@Override
-	public float getStrVsBlock(ItemStack stack, Block block) {
+	public float getStrVsBlock(ItemStack stack, IBlockState block) {
 		
 		return effectiveAgainst(block) ? materialDefinition.getEfficiencyOnProperMaterial() + 0.5f : 1f;
 	}
 	
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, BlockPos pos,
-			EntityLivingBase player) {
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState blockIn, BlockPos pos,
+			EntityLivingBase playerIn) {
 		
-		stack.damageItem(effectiveAgainst(block) ? 2 : 3, player);
+		stack.damageItem(effectiveAgainst(blockIn) ? 2 : 3, playerIn);
 		return true;
 	}
 	
-	protected boolean effectiveAgainst(Block target) {
+	protected boolean effectiveAgainst(IBlockState target) {
 		
 		Material material = target.getMaterial();
-		return (material == Material.wood || material == Material.plants || material == Material.vine);
+		return (material == Material.WOOD || material == Material.PLANTS || material == Material.VINE);
 	}
 
 	@Override

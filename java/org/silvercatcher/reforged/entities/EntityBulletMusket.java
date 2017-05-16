@@ -9,14 +9,14 @@ import net.minecraft.world.World;
 
 public class EntityBulletMusket extends AReforgedThrowable {
 	
-	public EntityBulletMusket(World world) {
-		
-		super(world, "musket");
+	public EntityBulletMusket(World worldIn) {
+		super(worldIn, "musket");
+		setNoGravity(true);
 	}
 	
-	public EntityBulletMusket(World world, EntityLivingBase thrower, ItemStack stack) {
-		
-		super(world, thrower, stack, "musket");
+	public EntityBulletMusket(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
+		super(worldIn, throwerIn, stack, "musket");
+		setNoGravity(true);
 	}
 	
 	@Override
@@ -27,7 +27,7 @@ public class EntityBulletMusket extends AReforgedThrowable {
 	
 	@Override
 	protected float getImpactDamage(Entity target) {
-
 		return 10f;
 	}
+	
 }

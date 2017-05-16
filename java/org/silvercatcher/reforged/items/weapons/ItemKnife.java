@@ -15,7 +15,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Vec3;
+import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquippable {
@@ -55,8 +55,8 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 				
 				EntityLivingBase target = (EntityLivingBase) entity;
 				
-				Vec3 look = target.getLookVec();
-				Vec3 attacker = new Vec3(player.posX - target.posX,
+				Vec3d look = target.getLookVec();
+				Vec3d attacker = new Vec3d(player.posX - target.posX,
 						(player.getEntityBoundingBox().minY + player.height / 2)
 						- target.posY + target.getEyeHeight(),
 						player.posZ - target.posZ);
@@ -79,7 +79,7 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 	@Override
 	public void registerRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(this),
-				"sm", "  ", 's', new ItemStack(Items.stick), 'm', materialDefinition.getRepairMaterial());
+				"sm", "  ", 's', new ItemStack(Items.STICK), 'm', materialDefinition.getRepairMaterial());
 	}
 	
 	@Override

@@ -8,19 +8,21 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBlunderbuss extends AReloadable {	
 	
 	public ItemBlunderbuss() {
-		super("blunderbuss", "reforged:shotgun_shoot");
+		super("blunderbuss");
 	}
 	
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
 		
-		return (repair.getItem() == Items.iron_ingot);
+		return (repair.getItem() == Items.IRON_INGOT);
 	}
 	
 	@Override
@@ -48,17 +50,17 @@ public class ItemBlunderbuss extends AReloadable {
 	}
 	
 	@Override
-	public void shoot(World world, EntityLivingBase playerIn, ItemStack stack) {
+	public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
 		
 		for(int i = 1; i < 12; i++) {
-			world.spawnEntityInWorld(new EntityBulletBlunderbuss(world, playerIn, stack));
+			worldIn.spawnEntity(new EntityBulletBlunderbuss(worldIn, playerIn, stack));
 		}
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player) {
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		setAmmo(ReforgedAdditions.BLUNDERBUSS_SHOT);
-		return super.onItemRightClick(itemStack, world, player);
+		return super.onItemRightClick(worldIn, playerIn, hand);
 	}
 	
 	@Override

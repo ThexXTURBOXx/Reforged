@@ -5,17 +5,20 @@ import java.util.List;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.*;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
+import org.silvercatcher.reforged.util.Helpers;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.common.registry.LanguageRegistry;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ItemNestOfBees extends ExtendedItem {
@@ -32,9 +35,9 @@ public class ItemNestOfBees extends ExtendedItem {
 	
 	@SuppressWarnings("rawtypes")
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advanced) {
+	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
 
-		tooltip.add(LanguageRegistry.instance().getStringLocalization("item.nestofbees.arrows") + ": " + CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
+		tooltip.add(I18n.format("item.nestofbees.arrows") + ": " + CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
 	}
 	
 	@Override
@@ -44,9 +47,9 @@ public class ItemNestOfBees extends ExtendedItem {
 				"lwl",
 				"lsl",
 				"lll",
-				'l', Items.leather,
-				's', Items.string,
-				'w', Item.getItemFromBlock(Blocks.planks));
+				'l', Items.LEATHER,
+				's', Items.STRING,
+				'w', Item.getItemFromBlock(Blocks.PLANKS));
 		ReforgedRegistry.registerIRecipe("ReloadNoB", new NestOfBeesLoadRecipe(), NestOfBeesLoadRecipe.class, Category.SHAPELESS);
 	}
 	
@@ -57,11 +60,12 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 	
 	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		
-		player.setItemInUse(stack, getMaxItemUseDuration(stack));
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+		if(hand == EnumHand.MAIN_HAND) {
+			playerIn.setActiveHand(hand);
+		}
 		//System.out.println(playerIn.getItemInUseDuration());
-		return stack;
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 	}
 	
 	@Override
@@ -72,11 +76,11 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 	
 	@Override
-	public void onUpdate(ItemStack stack, World world, Entity entity, int itemSlot, boolean isSelected) {
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		
-		if(entity instanceof EntityPlayer && isSelected) {
+		if(entityIn instanceof EntityPlayer && isSelected) {
 
-			EntityPlayer player = (EntityPlayer) entity;
+			EntityPlayer player = (EntityPlayer) entityIn;
 			
 			NBTTagCompound compound = CompoundTags.giveCompound(stack);
 			
@@ -91,7 +95,7 @@ public class ItemNestOfBees extends ExtendedItem {
 				if(arrows == 0) compound.setBoolean(CompoundTags.ACTIVATED, false);
 				
 				if(compound.getBoolean(CompoundTags.ACTIVATED)) {
-					shoot(world, player);
+					shoot(worldIn, player);
 					stack.damageItem(1, player);
 					arrows--;
 				}
@@ -107,13 +111,13 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 	
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
 				
 		NBTTagCompound compound = CompoundTags.giveCompound(stack);
 		
 		if(compound.getInteger(CompoundTags.AMMUNITION) > 0) {
 			compound.setBoolean(CompoundTags.ACTIVATED, true);
-	        world.playSoundAtEntity(player, "item.fireCharge.use", 1.0f, 1.0f);
+			Helpers.playSound(worldIn, playerIn, "item.fireCharge.use", 1.0f, 1.0f);
 		}
 		return stack;
 	}
@@ -121,13 +125,18 @@ public class ItemNestOfBees extends ExtendedItem {
 	protected void shoot(World world, EntityPlayer shooter) {
 		
 		if(!world.isRemote) {
-			EntityArrow arrow = new EntityArrow(world, shooter, 1f);
+			EntityArrow arrow = new EntityArrow(world, shooter) {
+				@Override
+				protected ItemStack getArrowStack() {
+					return new ItemStack(Items.ARROW);
+				}
+			};
 			arrow.setDamage(2);
 			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ,
 					3 + itemRand.nextFloat() / 2f, 1.5f);
-			world.spawnEntityInWorld(arrow);
+			world.spawnEntity(arrow);
 		}
-        world.playSoundAtEntity(shooter, "fireworks.launch", 3.0f, 1.0f);
+		Helpers.playSound(world, shooter, "fireworks.launch", 3.0f, 1.0f);
 	}
 	
 	@Override

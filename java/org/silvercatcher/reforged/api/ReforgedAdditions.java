@@ -7,7 +7,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 
 /**WARNING: If an Item is turned off in Config,
- * it will be null here!*/
+ * it could cause a NullPointerException here!*/
 public abstract class ReforgedAdditions {
 	
 	//Items

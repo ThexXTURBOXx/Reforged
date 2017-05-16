@@ -58,5 +58,4 @@ public class ModelBoomerang extends ReforgedModel {
         GlStateManager.popMatrix();
         tile5.render(f5);
     }
-    
 }

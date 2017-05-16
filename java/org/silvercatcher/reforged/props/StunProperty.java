@@ -1,57 +1,31 @@
 package org.silvercatcher.reforged.props;
 
-import org.silvercatcher.reforged.api.CompoundTags;
+import java.util.*;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
+import net.minecraft.entity.monster.EntityZombieVillager;
+import net.minecraft.network.datasync.*;
 
-public class StunProperty implements IExtendedEntityProperties {
+public class StunProperty {
 	
-	public final static String EXT_PROP_NAME = "ReforgedPlayer";
-	
-	private final EntityLivingBase player;
-	
-	private boolean stunned;
-	
-	public StunProperty(EntityLivingBase player) {
-		stunned = false;
-		this.player = player;
-	}
+	public static final DataParameter<Boolean> STUN = EntityDataManager.<Boolean>createKey(EntityZombieVillager.class, DataSerializers.BOOLEAN);
+	public static final List<UUID> registered = new ArrayList<UUID>();
 	
 	public static final void register(EntityLivingBase player) {
-		player.registerExtendedProperties(StunProperty.EXT_PROP_NAME, new StunProperty(player));
+		player.getDataManager().register(STUN, false);
+		registered.add(player.getUniqueID());
 	}
 	
-	public static final StunProperty get(EntityLivingBase player) {
-		return (StunProperty) player.getExtendedProperties(EXT_PROP_NAME);
+	public static boolean isRegistered(EntityLivingBase player) {
+		return registered.contains(player.getUniqueID());
 	}
 	
-	public boolean isStunned() {
-		return stunned;
+	public static boolean isStunned(EntityLivingBase player) {
+		return player.getDataManager().get(STUN);
 	}
 	
-	public void setStunned(boolean whether) {
-		stunned = whether;
+	public static void setStunned(EntityLivingBase player, boolean whether) {
+		player.getDataManager().set(STUN, whether);
 	}
-	
-	@Override
-	public void saveNBTData(NBTTagCompound compound) {
-		NBTTagCompound properties = new NBTTagCompound();
-		properties.setBoolean(CompoundTags.STUNNED, stunned);
-		compound.setTag(EXT_PROP_NAME, properties);
-		
-	}
-
-	@Override
-	public void loadNBTData(NBTTagCompound compound) {
-		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
-		stunned = properties.getBoolean(CompoundTags.STUNNED);
-	}
-	
-	@Override
-	public void init(Entity entity, World world) {}
 	
 }

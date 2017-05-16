@@ -11,7 +11,6 @@ import org.silvercatcher.reforged.items.weapons.*;
 import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -19,8 +18,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -62,7 +61,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.STONE_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.GOLD));
 			registrationList.add(ReforgedAdditions.IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.EMERALD));
+			registrationList.add(ReforgedAdditions.DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.DIAMOND));
 			registrationList.add(ReforgedAdditions.MUSKET_BULLET = new ItemBulletMusket());
 			registrationList.add(ReforgedAdditions.BLUNDERBUSS = new ItemBlunderbuss());
 			registrationList.add(ReforgedAdditions.BLUNDERBUSS_SHOT = new ItemBulletBlunderbuss());
@@ -76,7 +75,7 @@ public class ReforgedRegistry {
 			//This has to be registered! Else, the Creative Tab would be broken!
 			registrationList.add(ReforgedAdditions.IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
 		if(GlobalValues.BATTLEAXE) {
-			registrationList.add(ReforgedAdditions.DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.EMERALD));
+			registrationList.add(ReforgedAdditions.DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.DIAMOND));
 		}
 		
 		if(GlobalValues.BOOMERANG) {
@@ -84,7 +83,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.STONE_BOOMERANG = new ItemBoomerang(ToolMaterial.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_BOOMERANG = new ItemBoomerang(ToolMaterial.GOLD));
 			registrationList.add(ReforgedAdditions.IRON_BOOMERANG = new ItemBoomerang(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_BOOMERANG = new ItemBoomerang(ToolMaterial.EMERALD));
+			registrationList.add(ReforgedAdditions.DIAMOND_BOOMERANG = new ItemBoomerang(ToolMaterial.DIAMOND));
 		}
 		
 		if(GlobalValues.SABRE) {
@@ -92,7 +91,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.STONE_SABER = new ItemSaber(ToolMaterial.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_SABER = new ItemSaber(ToolMaterial.GOLD));
 			registrationList.add(ReforgedAdditions.IRON_SABER = new ItemSaber(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_SABER = new ItemSaber(ToolMaterial.EMERALD));
+			registrationList.add(ReforgedAdditions.DIAMOND_SABER = new ItemSaber(ToolMaterial.DIAMOND));
 		}
 		
 		if(GlobalValues.KNIFE) {
@@ -100,7 +99,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.STONE_KNIFE = new ItemKnife(ToolMaterial.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_KNIFE = new ItemKnife(ToolMaterial.GOLD));
 			registrationList.add(ReforgedAdditions.IRON_KNIFE = new ItemKnife(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_KNIFE = new ItemKnife(ToolMaterial.EMERALD));
+			registrationList.add(ReforgedAdditions.DIAMOND_KNIFE = new ItemKnife(ToolMaterial.DIAMOND));
 		}
 		
 		if(GlobalValues.KATANA) {
@@ -108,7 +107,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.STONE_KATANA = new ItemKatana(ToolMaterial.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_KATANA = new ItemKatana(ToolMaterial.GOLD));
 			registrationList.add(ReforgedAdditions.IRON_KATANA = new ItemKatana(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_KATANA = new ItemKatana(ToolMaterial.EMERALD));
+			registrationList.add(ReforgedAdditions.DIAMOND_KATANA = new ItemKatana(ToolMaterial.DIAMOND));
 		}
 		
 		if(GlobalValues.JAVELIN) {
@@ -147,7 +146,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.STONE_PIKE = new ItemPike(ToolMaterial.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_PIKE = new ItemPike(ToolMaterial.GOLD));
 			registrationList.add(ReforgedAdditions.IRON_PIKE = new ItemPike(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_PIKE = new ItemPike(ToolMaterial.EMERALD));
+			registrationList.add(ReforgedAdditions.DIAMOND_PIKE = new ItemPike(ToolMaterial.DIAMOND));
 		}
 		
 		if(GlobalValues.MACE) {
@@ -155,7 +154,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.STONE_MACE = new ItemMace(ToolMaterial.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_MACE = new ItemMace(ToolMaterial.GOLD));
 			registrationList.add(ReforgedAdditions.IRON_MACE = new ItemMace(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_MACE = new ItemMace(ToolMaterial.EMERALD));
+			registrationList.add(ReforgedAdditions.DIAMOND_MACE = new ItemMace(ToolMaterial.DIAMOND));
 		}
 		
 		if(GlobalValues.DIRK) {
@@ -163,7 +162,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.STONE_DIRK = new ItemDirk(ToolMaterial.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_DIRK = new ItemDirk(ToolMaterial.GOLD));
 			registrationList.add(ReforgedAdditions.IRON_DIRK = new ItemDirk(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_DIRK = new ItemDirk(ToolMaterial.EMERALD));
+			registrationList.add(ReforgedAdditions.DIAMOND_DIRK = new ItemDirk(ToolMaterial.DIAMOND));
 		}
 	}
 	
@@ -171,12 +170,12 @@ public class ReforgedRegistry {
 	public static void registerItems() {
 		//Register all Items
 		for(Item item : registrationList) {
-			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
+			GameRegistry.register(item, new ResourceLocation(ReforgedMod.ID, item.getUnlocalizedName().substring(5)));
 		}
 		
 		//Register all Blocks
 		for(Block block : registrationListBlocks) {
-			GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
+			GameRegistry.register(block, new ResourceLocation(ReforgedMod.ID, block.getUnlocalizedName().substring(5)));
 		}
 	}
 	
@@ -201,22 +200,22 @@ public class ReforgedRegistry {
 					"   ",
 					"ssp",
 					"   ",
-					's', Items.stick,
-					'p', Blocks.planks);
+					's', Items.STICK,
+					'p', Blocks.PLANKS);
 		
 			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.MUSKET_BARREL),
 					"   ",
 					"iif",
 					"  i",
-					'i', Items.iron_ingot,
-					'f', Items.flint_and_steel);
+					'i', Items.IRON_INGOT,
+					'f', Items.FLINT_AND_STEEL);
 
 			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL),
 					"i  ",
 					" if",
 					"i i",
-					'i', Items.iron_ingot,
-					'f', Items.flint_and_steel);
+					'i', Items.IRON_INGOT,
+					'f', Items.FLINT_AND_STEEL);
 		}
 	}
 	
@@ -235,22 +234,14 @@ public class ReforgedRegistry {
 			throw new IllegalArgumentException("The Category called " + category.name() + " couldn't be found!");
 		}
 		GameRegistry.addRecipe(recipe);
-		RecipeSorter.register(name, recipeclass, category, catString);
-		//NEI and JEI IRecipe Registry [todo]
+		RecipeSorter.register(ReforgedMod.ID + ":" + name, recipeclass, category, catString);
 	}
 
 	/**Helper method for registering an Entity
 	 * @param c The class of the Entity
 	 * @param name The name for the Entity*/
 	public static void registerEntity(Class<? extends Entity> c, String name) {
-		EntityRegistry.registerModEntity(c, name, ++counterEntities, ReforgedMod.instance, 120, 1, true);		
-	}
-
-	/**Helper method for binding a renderclass to a entity
-	 * @param entityclass The class of the Entity
-	 * @param renderclass The class of the Renderer*/
-	public static void registerEntityRenderer(Class<? extends Entity> entityclass, Render renderclass) {
-		RenderingRegistry.registerEntityRenderingHandler(entityclass, renderclass);
+		EntityRegistry.registerModEntity(new ResourceLocation(ReforgedMod.ID, name), c, name, ++counterEntities, ReforgedMod.instance, 120, 1, true);		
 	}
 
 	/**Helper method for registering our EventHandler
