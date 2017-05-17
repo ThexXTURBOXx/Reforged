@@ -17,12 +17,13 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
-@Mod(modid = ReforgedMod.ID, version = ReforgedMod.VERSION, name = ReforgedMod.NAME)
+@Mod(modid = ReforgedMod.ID, version = ReforgedMod.VERSION, name = ReforgedMod.NAME, updateJSON = ReforgedMod.UPDATE_JSON)
 public class ReforgedMod {
 	
 	public static final String NAME = "Reforged";
 	public static final String ID = "reforged";
-	public static final String VERSION = "0.7-pre4";
+	public static final String VERSION = "0.8";
+	public static final String UPDATE_JSON = "https://raw.githubusercontent.com/ThexXTURBOXx/Reforged/1.11.2/update.json";
 	
 	@CapabilityInject(IStunProperty.class)
 	public static final Capability<IStunProperty> STUN_PROP = null;
