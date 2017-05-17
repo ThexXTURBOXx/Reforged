@@ -130,13 +130,6 @@ public class ClientProxy extends CommonProxy {
 					return new RenderDynamite(manager);
 				}
 			});
-		if(GlobalValues.CROSSBOW)
-			RenderingRegistry.registerEntityRenderingHandler(EntityCrossbowBolt.class, new IRenderFactory<EntityCrossbowBolt>() {
-				@Override
-				public Render<? super EntityCrossbowBolt> createRenderFor(RenderManager manager) {
-					return new RenderCrossbowBolt(manager);
-				}
-			});
 	}
 	
 	@Override

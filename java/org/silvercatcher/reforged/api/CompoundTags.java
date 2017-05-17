@@ -53,10 +53,13 @@ public class CompoundTags {
 	/** saves whether reloading got cancelled */
 	public static final String CANCELLED 	 = "cancelled";
 
-	/** saves when the weapon got started reloading */
+	/** saves whether the weapon got started reloading */
 	public static final String STARTED 	 = "started";
 	
 	/** saves whether a player is stunned */
 	public static final String STUNNED 	 = "stunned";
+
+	/** saves how long the weapon was relaoding */
+	public static final String TIME 	 = "time";
 	
 }

@@ -18,7 +18,7 @@ import net.minecraftforge.common.ForgeHooks;
 public class NestOfBeesLoadRecipe implements IRecipe {
 	
 	private ItemStack[] input;
-	private ItemStack output;
+	private ItemStack output = ItemStack.EMPTY;
 	private Map<Integer, Integer> aBs, usedaBs;
 	private int NoB;
 	
@@ -41,7 +41,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 		aBs = new HashMap<Integer, Integer>();
 		for(int i = 0; i < inventory.getSizeInventory(); i++) {
 			ItemStack stack = inventory.getStackInSlot(i);
-			if(stack != null) {
+			if(stack != null && !stack.equals(ItemStack.EMPTY)) {
 				if(stack.getItem() == ReforgedAdditions.ARROW_BUNDLE) {
 					aBs.put(i, stack.getCount());
 				} else if(stack.getItem() == ReforgedAdditions.NEST_OF_BEES &&
@@ -88,7 +88,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 	
 	@Override
 	public ItemStack getRecipeOutput() {
-		return output == null ? ItemStack.EMPTY : output;
+		return output;
 	}
 	
 	@Override

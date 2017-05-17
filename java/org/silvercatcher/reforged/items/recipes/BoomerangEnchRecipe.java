@@ -18,7 +18,7 @@ import net.minecraftforge.common.ForgeHooks;
 
 public class BoomerangEnchRecipe implements IRecipe {
 	
-	private ItemStack output;
+	private ItemStack output = ItemStack.EMPTY;
 	private ItemStack input [];
 	
 	private static void printInventory(String name, InventoryCrafting inventory) {
@@ -111,7 +111,7 @@ public class BoomerangEnchRecipe implements IRecipe {
 	
 	@Override
 	public ItemStack getRecipeOutput() {
-		return output == null ? ItemStack.EMPTY : output;
+		return output;
 	}
 	
 	@Override

@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.entities;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.others.ItemDart;
+import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -92,7 +93,7 @@ public class EntityDart extends AReforgedThrowable {
 				}
 			}
 		}
-		//Custom sound later... [BREAK SOUND]
+		Helpers.playSound(world, this, "reforged:boomerang_break", 1.0F, 1.0F);
 		return true;
 	}
 	

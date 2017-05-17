@@ -1,6 +1,5 @@
 package org.silvercatcher.reforged.enchantments;
 
-import net.minecraft.client.resources.I18n;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -14,7 +13,7 @@ public class EnchantmentGoalseeker extends Enchantment {
 	
 	@Override
 	public String getName() {
-		return I18n.format("enchantment.goalseeker");
+		return "enchantment.goalseeker";
 	}
 	
 	@Override

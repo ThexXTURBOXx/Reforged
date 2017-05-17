@@ -100,7 +100,13 @@ public class EntityBoomerang extends AReforgedThrowable {
 		dy /= d;
 		dz /= d;
 		
-		setVelocity(motionX - (0.05D * dx), motionY - (0.05D * dy), motionZ - (0.05D * dz));
+		if(world.isRemote) {
+			setVelocity(motionX - (0.05D * dx), motionY - (0.05D * dy), motionZ - (0.05D * dz));
+		} else {
+			motionX -= (0.05D * dx);
+			motionY -= (0.05D * dy);
+			motionZ -= (0.05D * dz);
+		}
 		
 		/*motionX -= (0.05D * dx);
 		motionY -= (0.05D * dy);
@@ -111,7 +117,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 						entityDropItem(getItemStack(), 0.5f);
 				} else {
-					//Custom sound later... [BREAK SOUND]
+					Helpers.playSound(world, this, "reforged:boomerang_break", 1.0F, 1.0F);
 				}
 				setDead();
 			}
@@ -126,7 +132,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 					if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 							entityDropItem(getItemStack(), 0.5f);
 					} else {
-						//Custom sound later... [BREAK SOUND]
+						Helpers.playSound(world, this, "reforged:boomerang_break", 1.0F, 1.0F);
 					}
 					setDead();
 				}
@@ -159,7 +165,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 				p.inventory.addItemStackToInventory(stack);
 				Helpers.playSound(world, this, "random.pop", 0.5F, 0.7F);
 			} else {
-				//Custom sound later... [BREAK SOUND]
+				Helpers.playSound(world, this, "reforged:boomerang_break", 1.0F, 1.0F);
 			}
 			return true;
 		} else {
@@ -167,7 +173,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 			hitEntity.attackEntityFrom(causeImpactDamage(hitEntity, getThrower()), getImpactDamage(hitEntity));
 			ItemStack stack = getItemStack();
 			if(stack.getItem().isDamageable() && stack.attemptDamageItem(1, rand)) {
-				//Custom sound later... [BREAK SOUND]
+				Helpers.playSound(world, this, "reforged:boomerang_break", 1.0F, 1.0F);
 				return true;
 			} else {
 				setItemStack(stack);

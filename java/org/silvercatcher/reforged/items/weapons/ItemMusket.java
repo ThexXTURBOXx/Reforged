@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemMusket extends AReloadable {
 	
 	public ItemMusket() {
-		super("musket");
+		super("musket", "reforged:musket_shoot");
 	}
 	
 	@Override
@@ -26,8 +26,9 @@ public class ItemMusket extends AReloadable {
 	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		
-		setAmmo(ReforgedAdditions.MUSKET_BULLET);
+		if(hand == EnumHand.MAIN_HAND) {
+			setAmmo(ReforgedAdditions.MUSKET_BULLET);
+		}
 		return super.onItemRightClick(worldIn, playerIn, hand);
 	}
 	

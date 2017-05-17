@@ -77,15 +77,15 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 	public AReforgedThrowable(World worldIn, EntityLivingBase thrower, ItemStack stack, String damageName) {
 		super(worldIn, thrower);
 		this.damageName = damageName;
-        setLocationAndAngles(thrower.posX, thrower.posY + (double)thrower.getEyeHeight(), thrower.posZ, thrower.rotationYaw, thrower.rotationPitch);
-        posX -= (double)(MathHelper.cos(rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+        setLocationAndAngles(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ, thrower.rotationYaw, thrower.rotationPitch);
+        posX -= MathHelper.cos(rotationYaw / 180.0F * (float)Math.PI) * 0.16F;
         posY -= 0.10000000149011612D;
-        posZ -= (double)(MathHelper.sin(rotationYaw / 180.0F * (float)Math.PI) * 0.16F);
+        posZ -= MathHelper.sin(rotationYaw / 180.0F * (float)Math.PI) * 0.16F;
         setPosition(posX, posY, posZ);
         float f = 0.4F;
-        motionX = (double)(-MathHelper.sin(rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rotationPitch / 180.0F * (float)Math.PI) * f);
-        motionZ = (double)(MathHelper.cos(rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rotationPitch / 180.0F * (float)Math.PI) * f);
-        motionY = (double)(-MathHelper.sin(rotationPitch / 180.0F * (float)Math.PI) * f);
+        motionX = -MathHelper.sin(rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rotationPitch / 180.0F * (float)Math.PI) * f;
+        motionZ = MathHelper.cos(rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rotationPitch / 180.0F * (float)Math.PI) * f;
+        motionY = -MathHelper.sin(rotationPitch / 180.0F * (float)Math.PI) * f;
         setThrowableHeading(motionX, motionY, motionZ, 1.5F, 1.0F);
 	}
 	

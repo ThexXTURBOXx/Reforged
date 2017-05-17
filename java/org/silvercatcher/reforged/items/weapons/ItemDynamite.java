@@ -33,10 +33,10 @@ public class ItemDynamite extends ExtendedItem{
 		
 		if(playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, this)) {
 			if(!worldIn.isRemote) {
-				worldIn.spawnEntity(new EntityDynamite(worldIn, playerIn, playerIn.getHeldItemMainhand()));			
+				worldIn.spawnEntity(new EntityDynamite(worldIn, playerIn, playerIn.getHeldItem(hand)));			
 			}
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(hand));
 	}
 	
 }

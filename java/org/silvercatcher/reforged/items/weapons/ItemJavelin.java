@@ -33,8 +33,9 @@ public class ItemJavelin extends ExtendedItem {
             {
             	playerIn.setActiveHand(hand);
             }
+            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
         }
-        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
+        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemOffhand());
     }
 	
 

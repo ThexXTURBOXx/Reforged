@@ -4,11 +4,14 @@ import java.io.File;
 
 import org.silvercatcher.reforged.*;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.*;
 import org.silvercatcher.reforged.props.*;
 import org.silvercatcher.reforged.util.VersionChecker;
 
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
@@ -24,6 +27,7 @@ public class CommonProxy {
 		ReforgedRegistry.createItems();
 		ReforgedRegistry.registerItems();
 		ReforgedRegistry.registerPackets();
+		Enchantment.REGISTRY.register(goalseekerid, new ResourceLocation(ReforgedMod.ID, "goalseeker"), ReforgedAdditions.goalseeker);
 		CapabilityManager.INSTANCE.register(IStunProperty.class, new StorageStun(), DefaultStunImpl.class);
 		registerEntities();
 		Thread versionCheck = new VersionChecker();
@@ -116,7 +120,6 @@ public class CommonProxy {
 		if(GlobalValues.BLOWGUN) ReforgedRegistry.registerEntity(EntityDart.class, "Dart");
 		if(GlobalValues.CALTROP) GameRegistry.registerTileEntity(TileEntityCaltropEntity.class, "Caltrop");
 		if(GlobalValues.DYNAMITE) ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
-		if(GlobalValues.CROSSBOW) ReforgedRegistry.registerEntity(EntityCrossbowBolt.class, "BoltCrossbow");
 	}
 	
 	public void registerItemRenderer(Item item, int meta, String id) {}

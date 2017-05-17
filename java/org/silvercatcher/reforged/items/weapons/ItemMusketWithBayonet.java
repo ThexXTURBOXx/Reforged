@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemMusketWithBayonet extends ItemMusket {
-
+	
 	protected final MaterialDefinition materialDefinition;
 	protected final boolean unbreakable;
 	

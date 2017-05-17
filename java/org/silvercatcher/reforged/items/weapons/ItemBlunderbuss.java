@@ -16,7 +16,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemBlunderbuss extends AReloadable {	
 	
 	public ItemBlunderbuss() {
-		super("blunderbuss");
+		super("blunderbuss", "reforged:shotgun_shoot");
 	}
 	
 	@Override

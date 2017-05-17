@@ -1,3 +1,10 @@
 {
-    "crossbow_shoot": {"category": "master","sounds": [{"name": "crossbow_shoot","stream": false}]}
+    "boomerang_break": {"category": "master","sounds": [{"name": "reforged:boomerang_break","stream": false}]},
+    "boomerang_hit": {"category": "master","sounds": [{"name": "reforged:boomerang_hit","stream": false}]},
+    "boomerang_throw": {"category": "master","sounds": [{"name": "reforged:boomerang_throw","stream": false}]},
+    "crossbow_reload": {"category": "master","sounds": [{"name": "reforged:crossbow_reload","stream": false}]},
+    "crossbow_shoot": {"category": "master","sounds": [{"name": "reforged:crossbow_shoot","stream": false}]},
+    "musket_shoot": {"category": "master","sounds": [{"name": "reforged:musket_shoot","stream": false}]},
+    "shotgun_reload": {"category": "master","sounds": [{"name": "reforged:shotgun_reload","stream": false}]},
+    "shotgun_shoot": {"category": "master","sounds": [{"name": "reforged:shotgun_shoot","stream": false}]}
 }

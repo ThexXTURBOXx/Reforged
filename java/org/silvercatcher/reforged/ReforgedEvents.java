@@ -25,6 +25,7 @@ import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
 
 public class ReforgedEvents {
 	
@@ -54,11 +55,12 @@ public class ReforgedEvents {
 	//TODO TRANSLATION!!
 	@SubscribeEvent
 	public void onTick(PlayerTickEvent e) {
+		if(e.side == Side.CLIENT) notified = true;
 		if(!notified) {
 			notified = true;
 			EntityPlayer p = e.player;
 			String par = Character.toString(ChatFormatting.DARK_GRAY.toString().charAt(0));
-			p.sendMessage(new TextComponentString(par + "7[" + par + "bReforged" + par + "7] " + par + "cYou are running Reforged 1.9/1.10!"));
+			p.sendMessage(new TextComponentString(par + "7[" + par + "bReforged" + par + "7] " + par + "cYou are running Reforged 1.9/1.10/1.11!"));
 			p.sendMessage(new TextComponentString(par + "cVery experimental!!!"));
 			if(!ReforgedMod.battlegearDetected) return;
 			p.sendMessage(new TextComponentString(

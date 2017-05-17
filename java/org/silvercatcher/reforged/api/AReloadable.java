@@ -8,8 +8,7 @@ import org.silvercatcher.reforged.util.Helpers;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -21,17 +20,27 @@ import net.minecraft.world.World;
 public abstract class AReloadable extends ItemBow implements ItemExtension {
 	
 	private Item ammo;
+	private String shootsound;
 	
-	public AReloadable(String name) {
+	public AReloadable(String name, String shootsound) {
 		setMaxStackSize(1);
 		setMaxDamage(100);
 		setUnlocalizedName(name);
 		setCreativeTab(ReforgedMod.tabReforged);
+		this.shootsound = shootsound;
 	}
 	
 	public static final byte empty		= 0;
 	public static final byte loading	= 1;
 	public static final byte loaded		= 2;
+	
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+		if(giveCompound(stack).getBoolean(CompoundTags.STARTED) && giveCompound(stack).getByte(CompoundTags.AMMUNITION) == loading) {
+			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
+		}
+	}
 	
 	@SuppressWarnings("rawtypes")
 	@Override
@@ -88,11 +97,12 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 					
 					loadState = loading;
 					if(compound.getByte(CompoundTags.AMMUNITION) == empty) {
-						compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
+						compound.setBoolean(CompoundTags.STARTED, true);
+						compound.setInteger(CompoundTags.TIME, 0);
 					}
 				} else {
 					worldIn.playSound(playerIn, playerIn.getPosition(), new SoundEvent(
-							new ResourceLocation(ReforgedMod.ID, "item.fireCharge.use")),
+							new ResourceLocation(ReforgedMod.ID, "reforged:shotgun_reload")),
 							SoundCategory.MASTER, 1.0f, 0.7f);
 				}
 			}
@@ -103,7 +113,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 			
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
+		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemOffhand());
 	}
 	
 	@Override
@@ -117,7 +127,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 			
 			if(loadState == loaded) {
 				
-				Helpers.playSound(worldIn, playerIn, "ambient.weather.thunder", 1f, 1f);
+				Helpers.playSound(worldIn, playerIn, shootsound, 1f, 1f);
 				
 				shoot(worldIn, playerIn, stack);
 				if(playerIn instanceof EntityPlayer && 
@@ -127,9 +137,14 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				}
 				
 				compound.setByte(CompoundTags.AMMUNITION, empty);
-				compound.setInteger(CompoundTags.STARTED, -1);
+				compound.setBoolean(CompoundTags.STARTED, false);
+				compound.setInteger(CompoundTags.TIME, -1);
 			}
 		}
+	}
+	
+	public int getReloadTime(ItemStack stack) {
+		return giveCompound(stack).getInteger(CompoundTags.TIME);
 	}
 	
 	public abstract void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack);
@@ -173,10 +188,11 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		return ItemExtension.super.getAttributeModifiers(stack);
 	}
 	
+	@Override
 	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
         if(equipmentSlot == EntityEquipmentSlot.MAINHAND && getHitDamage() > 0) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", (double) getHitDamage(), 0));
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(), new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getHitDamage(), 0));
         }
         return multimap;
     }

@@ -14,5 +14,37 @@
             "translation": [ 8.75, 2.25, 2.00 ],
             "scale": [ 1.80, 1.80, 1.80 ]
         }
-    }
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "pull": 1
+            },
+            "model": "reforged:item/crossbow_1"
+        },
+        {
+            "predicate": {
+                "pull": 2
+            },
+            "model": "reforged:item/crossbow_2"
+        },
+        {
+            "predicate": {
+                "pull": 3
+            },
+            "model": "reforged:item/crossbow_3"
+        },
+        {
+            "predicate": {
+                "pull": 4
+            },
+            "model": "reforged:item/crossbow_4"
+        },
+        {
+            "predicate": {
+                "pull": 5
+            },
+            "model": "reforged:item/crossbow_5"
+        }
+    ]
 }

@@ -39,9 +39,10 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 			EntityLivingBase e = (EntityLivingBase) entity;
 			if(e.getHealth() <= getHitDamage() && !(e instanceof EntityPlayer)) {
 				World w = e.getEntityWorld();
-		        if (!w.isRemote) {
+		        if(!w.isRemote) {
 		        	int amount = player.experienceLevel / 2;
 		            while (amount > 0) {
+		                System.out.println(amount);
 		                int j = EntityXPOrb.getXPSplit(amount);
 		                amount -= j;
 		                w.spawnEntity(new EntityXPOrb(w, e.posX + 0.5D, e.posY + 0.5D, e.posZ + 0.5D, j));
