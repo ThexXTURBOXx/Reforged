@@ -5,14 +5,18 @@
     "1.8-recommended": "0.7-final",
     "1.8.9-latest": "0.7-final",
     "1.8.9-recommended": "0.7-final",
-    "1.10-latest": "0.8",
-    "1.10-recommended": "0.8",
-    "1.10.2-latest": "0.8",
-    "1.10.2-recommended": "0.8",
-    "1.11-latest": "0.8",
-    "1.11-recommended": "0.8",
-    "1.11.2-latest": "0.8",
-    "1.11.2-recommended": "0.8"
+    "1.9-latest": "0.7",
+    "1.9-recommended": "0.7",
+    "1.9.4-latest": "0.7",
+    "1.9.4-recommended": "0.7",
+    "1.10-latest": "0.7",
+    "1.10-recommended": "0.7",
+    "1.10.2-latest": "0.7",
+    "1.10.2-recommended": "0.7",
+    "1.11-latest": "0.7",
+    "1.11-recommended": "0.7",
+    "1.11.2-latest": "0.7",
+    "1.11.2-recommended": "0.7"
   },
   "1.8": {
     "0.7-final": "Readded compatibility with Reforged Integration"
@@ -20,16 +24,22 @@
   "1.8.9": {
     "0.7-final": "Readded compatibility with Reforged Integration"
   },
+  "1.9": {
+    "0.7": "First release for 1.9+"
+  },
+  "1.9.4": {
+    "0.7": "First release for 1.9+"
+  },
   "1.10": {
-    "0.7": "First release for 1.01+"
+    "0.7": "First release for 1.9+"
   },
   "1.10.2": {
-    "0.7": "First release for 1.10+"
+    "0.7": "First release for 1.9+"
   },
   "1.11": {
-    "0.7": "First release for 1.10+"
+    "0.7": "First release for 1.9+"
   },
   "1.11.2": {
-    "0.7": "First release for 1.10+"
+    "0.7": "First release for 1.9+"
   }
 }
