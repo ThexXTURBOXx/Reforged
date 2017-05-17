@@ -55,6 +55,11 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	}
 	
 	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return false;
+	}
+	
+	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
 		
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);

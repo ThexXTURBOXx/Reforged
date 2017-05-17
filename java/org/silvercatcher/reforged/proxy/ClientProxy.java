@@ -93,6 +93,15 @@ public class ClientProxy extends CommonProxy {
 			});
 		}
 		
+		if(GlobalValues.CROSSBOW) {
+			RenderingRegistry.registerEntityRenderingHandler(EntityCrossbowBolt.class, new IRenderFactory<EntityCrossbowBolt>() {
+				@Override
+				public Render<? super EntityCrossbowBolt> createRenderFor(RenderManager manager) {
+					return new RenderCrossbowBolt(manager);
+				}
+			});
+		}
+		
 		if(GlobalValues.MUSKET) {
 			RenderingRegistry.registerEntityRenderingHandler(EntityBulletMusket.class, new IRenderFactory<EntityBulletMusket>() {
 				@Override

@@ -117,6 +117,7 @@ public class CommonProxy {
 			ReforgedRegistry.registerEntity(EntityBulletBlunderbuss.class, "BulletBlunderbuss");
 		}
 		
+		if(GlobalValues.CROSSBOW) ReforgedRegistry.registerEntity(EntityCrossbowBolt.class, "CrossbowBolt");
 		if(GlobalValues.BLOWGUN) ReforgedRegistry.registerEntity(EntityDart.class, "Dart");
 		if(GlobalValues.CALTROP) GameRegistry.registerTileEntity(TileEntityCaltropEntity.class, "Caltrop");
 		if(GlobalValues.DYNAMITE) ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");

@@ -1,11 +1,13 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Nullable;
 
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.*;
+import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
 import org.silvercatcher.reforged.util.Helpers;
 
 import com.google.common.collect.Multimap;
@@ -14,7 +16,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -148,7 +149,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 			if(loadState == loaded) {
 				Helpers.playSound(worldIn, playerIn, "reforged:crossbow_shoot", 1f, 1f);
-				if(!worldIn.isRemote) shoot(worldIn, playerIn, new ItemStack(Items.ARROW));
+				if(!worldIn.isRemote) shoot(worldIn, playerIn, new ItemStack(ReforgedAdditions.CROSSBOW_BOLT));
 				if(!playerIn.capabilities.isCreativeMode && (stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand))) {
 					playerIn.renderBrokenItemStack(stack);
 					Helpers.destroyCurrentEquippedItem(playerIn);
@@ -161,9 +162,10 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	}
 	
 	public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
-		EntityArrow a = new ItemArrow().createArrow(worldIn, stack, playerIn);
-        a.setAim(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, getArrowVelocity(40) * 3.0F, 1.0F);
-        a.pickupStatus = PickupStatus.DISALLOWED;
+		EntityCrossbowBolt a = new EntityCrossbowBolt(worldIn, playerIn);
+		a.setAim(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, getArrowVelocity(40) * 3.0F, 1.0F);
+		a.pickupStatus = PickupStatus.getByOrdinal(new Random().nextInt(2));
+		a.setDamage(8.0D);
 		worldIn.spawnEntity(a);
 	}
 	
