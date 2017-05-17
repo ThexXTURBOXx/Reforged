@@ -38,6 +38,12 @@ public class EntityJavelin extends AReforgedThrowable {
 		this.motionX *= (durationLoaded / 20);
 		this.motionY *= (durationLoaded / 20);
 		this.motionZ *= (durationLoaded / 20);
+		setInited();
+	}
+	
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
 	}
 	
 	@Override

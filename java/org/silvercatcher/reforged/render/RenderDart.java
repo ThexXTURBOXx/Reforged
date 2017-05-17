@@ -5,24 +5,21 @@ import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.models.ModelDart;
 
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderDart extends ReforgedRender {
+public class RenderDart extends ReforgedRender<EntityDart> {
 	
 	public RenderDart(RenderManager renderManager) {
 		super(renderManager, new ModelDart(), -90);
 	}
 	
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(EntityDart entity) {
 		
-		EntityDart entityDart = (EntityDart) entity;
-		
-		switch(entityDart.getEffect()) {
+		switch(entity.getEffect()) {
 		
 		case "normal": return Textures.NORMAL_DART;
 		
@@ -36,7 +33,7 @@ public class RenderDart extends ReforgedRender {
 					 	 
 		case "wither": return Textures.WITHER_DART;
 		
-		default: throw new IllegalArgumentException("No Item called " + entityDart.getEffect() + " found!");
+		default: throw new IllegalArgumentException("No Item called " + entity.getEffect() + " found!");
 				
 		}
 	}

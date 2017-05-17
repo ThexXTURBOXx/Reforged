@@ -43,7 +43,7 @@ public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
 		GL11.glRotated(yaw + modifier, 0, 1, 0);
-		model.render(theEntity,(float) x,(float) y,(float) z, yaw, partialTicks, 0.0475F);
+		model.render(theEntity,(float) x,(float) y,(float) z, yaw + modifier, partialTicks, 0.0475F);
 		GL11.glPopMatrix();
 	}
 	

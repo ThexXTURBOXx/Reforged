@@ -21,6 +21,7 @@ public class EntityDynamite extends AReforgedThrowable {
 	public EntityDynamite(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		
 		super(worldIn, throwerIn, stack, "dynamite");
+		setInited();
 	}
 	
 	@Override

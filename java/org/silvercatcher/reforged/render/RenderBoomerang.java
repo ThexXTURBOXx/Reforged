@@ -8,7 +8,6 @@ import org.silvercatcher.reforged.models.ModelBoomerang;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.Vec3d;
@@ -16,7 +15,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderBoomerang extends ReforgedRender {
+public class RenderBoomerang extends ReforgedRender<EntityBoomerang> {
 	
 	protected float yawb = modifier;
 	
@@ -25,7 +24,7 @@ public class RenderBoomerang extends ReforgedRender {
 	}
 	
 	@Override
-	public void renderEntityModel(Entity theEntity, double x, double y, double z, float yaw, float partialTick) {
+	public void renderEntityModel(EntityBoomerang theEntity, double x, double y, double z, float yaw, float partialTick) {
 		GL11.glPushMatrix();
 		bindTexture(getEntityTexture(theEntity));
 		GL11.glTranslated(x, y, z);
@@ -49,26 +48,24 @@ public class RenderBoomerang extends ReforgedRender {
 			}
 		}
 		//If the number is set higher, then the Boomerang will rotate faster, otherwise slower
-		yawb += ((double) 3 / boomerangCount);
+		yawb += ((double) 5 / boomerangCount);
 		GL11.glRotated(yawb, 0, 1, 0);
 		model.render(theEntity,(float) x,(float) y,(float) z, yawb, partialTick, 0.0475F);
 		GL11.glPopMatrix();
 	}
 	
 	@Override
-	protected ResourceLocation getEntityTexture(Entity entity) {
+	protected ResourceLocation getEntityTexture(EntityBoomerang entity) {
 		
-		EntityBoomerang entityBoomerang = (EntityBoomerang) entity;
-		
-		switch(entityBoomerang.getMaterialDefinition().getPrefix()) {
+		switch(entity.getMaterialDefinition().getPrefix()) {
 		case "diamond": return Textures.DIAMOND_BOOMERANG;
 		case "golden": return Textures.GOLDEN_BOOMERANG;
 		case "iron": return Textures.IRON_BOOMERANG;
 		case "stone": return Textures.STONE_BOOMERANG;
 		case "wooden": return Textures.WOODEN_BOOMERANG;
 		default:
-			if(MaterialManager.isFullyAdded(entityBoomerang.getMaterialDefinition().getMaterial())) {
-				return MaterialManager.getTextures(entityBoomerang.getMaterialDefinition().getMaterial())[0];
+			if(MaterialManager.isFullyAdded(entity.getMaterialDefinition().getMaterial())) {
+				return MaterialManager.getTextures(entity.getMaterialDefinition().getMaterial())[0];
 			} else {
 				return null;
 			}		

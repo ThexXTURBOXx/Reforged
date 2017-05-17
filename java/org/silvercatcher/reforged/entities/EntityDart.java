@@ -29,7 +29,7 @@ public class EntityDart extends AReforgedThrowable {
 		
 		super(worldIn, getThrowerIn, stack, "dart");
 		setItemStack(stack);
-		dataManager.set(INITIATED, true);
+		setInited();
 	}
 	
 	@Override

@@ -31,7 +31,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 		super(worldIn, thrower, stack, "boomerang");
 		setItemStack(stack);
 		setCoords(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ);
-		dataManager.set(INITIATED, true);
+		setInited();
 	}
 	
 	@Override

@@ -5,7 +5,7 @@ import java.util.*;
 import org.silvercatcher.reforged.api.ICustomReach;
 import org.silvercatcher.reforged.api.ItemExtension;
 import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
-import org.silvercatcher.reforged.props.StunProperty;
+import org.silvercatcher.reforged.props.IStunProperty;
 import org.silvercatcher.reforged.util.Helpers;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
@@ -15,9 +15,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.nbt.NBTPrimitive;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.event.MouseEvent;
-import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ICapabilitySerializable;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
@@ -71,7 +75,8 @@ public class ReforgedEvents {
 		for(Entity en : (e.world.loadedEntityList)) {
 			if(en instanceof EntityLivingBase) {
 				EntityLivingBase player = (EntityLivingBase) en;
-				if(StunProperty.isStunned(player)) {
+				IStunProperty prop = player.getCapability(ReforgedMod.STUN_PROP, null);
+				if(prop != null && prop.isStunned()) {
 					if(!map.containsKey(player.getUniqueID())) map.put(player.getUniqueID(), 0);
 					int i = map.get(player.getUniqueID());
 					i++;
@@ -80,7 +85,7 @@ public class ReforgedEvents {
 					if(player.lastTickPosZ != player.posZ) player.posZ = player.lastTickPosZ;
 					map.put(player.getUniqueID(), i);
 					if(map.get(player.getUniqueID()) >= 60) {
-						StunProperty.setStunned(player, false);
+						prop.setStunned(false);
 						map.put(player.getUniqueID(), 0);
 					}
 				}
@@ -89,9 +94,34 @@ public class ReforgedEvents {
 	}
 	
 	@SubscribeEvent
-	public void onEntityConstructing(EntityConstructing event) {
-		if(event.getEntity() instanceof EntityLivingBase && !StunProperty.isRegistered((EntityLivingBase) event.getEntity()))
-			StunProperty.register((EntityLivingBase) event.getEntity());
+	public void onEntityConstructing(AttachCapabilitiesEvent e) {
+		if(e.getObject() instanceof EntityLivingBase) {
+			e.addCapability(IStunProperty.EXT_PROP_NAME, new ICapabilitySerializable<NBTPrimitive>() {
+				
+	            IStunProperty inst = ReforgedMod.STUN_PROP.getDefaultInstance();
+	            
+	            @Override
+	            public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+	                return capability == ReforgedMod.STUN_PROP;
+	            }
+
+	            @Override
+	            public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+	                return capability == ReforgedMod.STUN_PROP ? ReforgedMod.STUN_PROP.<T>cast(inst) : null;
+	            }
+
+	            @Override
+	            public NBTPrimitive serializeNBT() {
+	                return (NBTPrimitive)ReforgedMod.STUN_PROP.getStorage().writeNBT(ReforgedMod.STUN_PROP, inst, null);
+	            }
+
+	            @Override
+	            public void deserializeNBT(NBTPrimitive nbt) {
+	            	ReforgedMod.STUN_PROP.getStorage().readNBT(ReforgedMod.STUN_PROP, inst, null, nbt);
+	            }
+	            
+			});
+		}
 	}
 	
 }

@@ -1,10 +1,11 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.IZombieEquippable;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
-import org.silvercatcher.reforged.props.StunProperty;
+import org.silvercatcher.reforged.props.IStunProperty;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -44,11 +45,14 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 		if(itemRand.nextInt(25) < (5 - zombieSpawnChance())) {
 			if(entity instanceof EntityLivingBase) {
 				EntityLivingBase elb = (EntityLivingBase) entity;
-				StunProperty.setStunned(player, true);
-				elb.addPotionEffect(new PotionEffect(getPotion("slowness"), 3, 10, false, false));
-				elb.addPotionEffect(new PotionEffect(getPotion("mining_fatigue"), 3, 10, false, false));
-				elb.addPotionEffect(new PotionEffect(getPotion("blindness"), 3, 10, false, false));
-				elb.addPotionEffect(new PotionEffect(getPotion("weakness"), 3, 10, false, false));
+				IStunProperty prop = elb.getCapability(ReforgedMod.STUN_PROP, null);
+				if(prop != null) {
+					prop.setStunned(true);
+					elb.addPotionEffect(new PotionEffect(getPotion("slowness"), 3, 10, false, false));
+					elb.addPotionEffect(new PotionEffect(getPotion("mining_fatigue"), 3, 10, false, false));
+					elb.addPotionEffect(new PotionEffect(getPotion("blindness"), 3, 10, false, false));
+					elb.addPotionEffect(new PotionEffect(getPotion("weakness"), 3, 10, false, false));
+				}
 			}
 		}
 		return super.onLeftClickEntity(stack, player, entity);

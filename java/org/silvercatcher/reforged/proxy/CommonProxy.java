@@ -5,8 +5,10 @@ import java.io.File;
 import org.silvercatcher.reforged.*;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.entities.*;
+import org.silvercatcher.reforged.props.*;
 import org.silvercatcher.reforged.util.VersionChecker;
 
+import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.event.*;
@@ -21,6 +23,7 @@ public class CommonProxy {
 		ReforgedRegistry.createItems();
 		ReforgedRegistry.registerItems();
 		ReforgedRegistry.registerPackets();
+		CapabilityManager.INSTANCE.register(IStunProperty.class, new StorageStun(), DefaultStunImpl.class);
 		registerEntities();
 		Thread versionCheck = new VersionChecker();
 		versionCheck.start();

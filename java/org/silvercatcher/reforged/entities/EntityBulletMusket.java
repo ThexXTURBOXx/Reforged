@@ -17,6 +17,10 @@ public class EntityBulletMusket extends AReforgedThrowable {
 	public EntityBulletMusket(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		super(worldIn, throwerIn, stack, "musket");
 		setNoGravity(true);
+		motionX *= 5;
+		motionY *= 5;
+		motionZ *= 5;
+		setInited();
 	}
 	
 	@Override

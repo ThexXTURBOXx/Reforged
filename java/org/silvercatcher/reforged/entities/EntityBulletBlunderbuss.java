@@ -32,6 +32,10 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 		this.motionX += randomNumX / 100;
 		this.motionY += randomNumY / 100;
 		this.motionZ += randomNumZ / 100;
+		motionX *= 5;
+		motionY *= 5;
+		motionZ *= 5;
+		setInited();
 	}
 	
 	@Override

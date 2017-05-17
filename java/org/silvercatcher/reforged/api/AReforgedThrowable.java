@@ -2,8 +2,6 @@ package org.silvercatcher.reforged.api;
 
 import java.io.IOException;
 
-import org.silvercatcher.reforged.entities.EntityBoomerang;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -64,7 +62,7 @@ public abstract class AReforgedThrowable extends EntityThrowable {
         }
     };
     
-	public static final DataParameter<Boolean> INITIATED = EntityDataManager.<Boolean>createKey(EntityBoomerang.class, DataSerializers.BOOLEAN);
+	public static final DataParameter<Boolean> INITIATED = EntityDataManager.<Boolean>createKey(AReforgedThrowable.class, DataSerializers.BOOLEAN);
 	
 	static {
 		DataSerializers.registerSerializer(DOUBLE);
@@ -89,6 +87,10 @@ public abstract class AReforgedThrowable extends EntityThrowable {
         motionZ = (double)(MathHelper.cos(rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rotationPitch / 180.0F * (float)Math.PI) * f);
         motionY = (double)(-MathHelper.sin(rotationPitch / 180.0F * (float)Math.PI) * f);
         setThrowableHeading(motionX, motionY, motionZ, 1.5F, 1.0F);
+	}
+	
+	public void setInited() {
+		dataManager.set(INITIATED, true);
 	}
 	
 	@Override
@@ -122,7 +124,7 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 					? (EntityLivingBase) target.entityHit : target.entityHit); 
 		}
 		
-		if(broken) setDead();
+		if(broken && !world.isRemote) setDead();
 	}
 	
 	protected boolean isInited() {
