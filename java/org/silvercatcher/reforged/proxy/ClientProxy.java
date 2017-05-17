@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.*;
 import net.minecraftforge.fml.common.event.*;
@@ -137,4 +138,11 @@ public class ClientProxy extends CommonProxy {
 				}
 			});
 	}
+	
+	@Override
+	public void registerItemRenderer(Item item, int meta, String id) {
+		super.registerItemRenderer(item, meta, id);
+		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(ReforgedMod.ID + ":" + id, "inventory"));
+	}
+	
 }

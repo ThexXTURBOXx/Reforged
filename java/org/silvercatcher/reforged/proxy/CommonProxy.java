@@ -8,6 +8,7 @@ import org.silvercatcher.reforged.entities.*;
 import org.silvercatcher.reforged.props.*;
 import org.silvercatcher.reforged.util.VersionChecker;
 
+import net.minecraft.item.Item;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
@@ -31,6 +32,7 @@ public class CommonProxy {
 	
 	public void init(FMLInitializationEvent event) {
 		ReforgedRegistry.registerRecipes();
+		GameRegistry.registerTileEntity(TileEntityCaltropEntity.class, "caltrop");
 	}
 	
 	public void postInit(FMLPostInitializationEvent event) {
@@ -116,4 +118,7 @@ public class CommonProxy {
 		if(GlobalValues.DYNAMITE) ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
 		if(GlobalValues.CROSSBOW) ReforgedRegistry.registerEntity(EntityCrossbowBolt.class, "BoltCrossbow");
 	}
+	
+	public void registerItemRenderer(Item item, int meta, String id) {}
+	
 }

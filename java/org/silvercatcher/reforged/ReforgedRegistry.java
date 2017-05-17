@@ -14,9 +14,8 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
+import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
-import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -176,6 +175,10 @@ public class ReforgedRegistry {
 		//Register all Blocks
 		for(Block block : registrationListBlocks) {
 			GameRegistry.register(block, new ResourceLocation(ReforgedMod.ID, block.getUnlocalizedName().substring(5)));
+			ItemBlock itemBlock = new ItemBlock(block);
+			itemBlock.setRegistryName(block.getRegistryName());
+			GameRegistry.register(itemBlock);
+			ReforgedMod.proxy.registerItemRenderer(itemBlock, 0, block.getUnlocalizedName().substring(5));
 		}
 	}
 	
