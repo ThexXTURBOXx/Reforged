@@ -5,10 +5,10 @@
     "1.8-recommended": "0.7-final",
     "1.8.9-latest": "0.7-final",
     "1.8.9-recommended": "0.7-final",
-    "1.11-latest": "0.7-final",
-    "1.11-recommended": "0.7-final",
-    "1.11.2-latest": "0.7-final",
-    "1.11.2-recommended": "0.7-final"
+    "1.11-latest": "0.7",
+    "1.11-recommended": "0.7",
+    "1.11.2-latest": "0.7",
+    "1.11.2-recommended": "0.7"
   },
   "1.8": {
     "0.7-final": "Readded compatibility with Reforged Integration"
@@ -17,9 +17,9 @@
     "0.7-final": "Readded compatibility with Reforged Integration"
   },
   "1.11": {
-    "0.7-final": "First release for 1.11+"
+    "0.7": "First release for 1.11+"
   },
   "1.11.2": {
-    "0.7-final": "First release for 1.11+"
+    "0.7": "First release for 1.11+"
   }
 }
