@@ -125,12 +125,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	protected void shoot(World world, EntityPlayer shooter) {
 		
 		if(!world.isRemote) {
-			EntityArrow arrow = new EntityArrow(world, shooter) {
-				@Override
-				protected ItemStack getArrowStack() {
-					return new ItemStack(Items.ARROW);
-				}
-			};
+			EntityArrow arrow = new ItemArrow().createArrow(world, new ItemStack(Items.ARROW), shooter);
 			arrow.setDamage(2);
 			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ,
 					3 + itemRand.nextFloat() / 2f, 1.5f);

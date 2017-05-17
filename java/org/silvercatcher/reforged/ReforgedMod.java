@@ -17,7 +17,6 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 
-@Mod(modid = ReforgedMod.ID, version = ReforgedMod.VERSION, name = ReforgedMod.NAME, updateJSON = ReforgedMod.UPDATE_JSON)
 public class ReforgedMod {
 	
 	public static final String NAME = "Reforged";

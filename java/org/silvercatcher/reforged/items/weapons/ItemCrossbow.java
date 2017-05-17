@@ -66,9 +66,16 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-		if(giveCompound(stack).getBoolean(CompoundTags.STARTED) && getLoadState(stack) == loading) {
-			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
+		if(!worldIn.isRemote) {
+			if(giveCompound(stack).getBoolean(CompoundTags.STARTED) && getLoadState(stack) == loading) {
+				giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
+			}
 		}
+	}
+	
+	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return false;
 	}
 	
 	public static final byte empty		= 0;

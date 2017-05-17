@@ -4,7 +4,7 @@
   "name": "Reforged",
   "description": "A successor (not port) of Balkon's Weapon Mod, will add primitive, medieval and some gunpowder weapons.",
   "version": "${version}",
-  "mcversion": "${mcversion}",
+  "mcversion": ["1.11", "1.11.2"],
   "url": "http://minecraft.curseforge.com/projects/reforged",
   "updateUrl": "http://github.com/TheOnlySilverClaw/Reforged/releases",
   "authorList": ["Silvercatcher", "ThexXTURBOXx"],

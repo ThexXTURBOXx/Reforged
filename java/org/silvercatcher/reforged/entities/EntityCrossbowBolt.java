@@ -45,7 +45,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     	}
     }
     });
-    private static final DataParameter<Integer> COLOR = EntityDataManager.<Integer>createKey(EntityTippedArrow.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> COLOR = EntityDataManager.<Integer>createKey(EntityCrossbowBolt.class, DataSerializers.VARINT);
     private PotionType potion = PotionTypes.EMPTY;
     private final Set<PotionEffect> customPotionEffects = Sets.<PotionEffect>newHashSet();
     private boolean field_191509_at;
