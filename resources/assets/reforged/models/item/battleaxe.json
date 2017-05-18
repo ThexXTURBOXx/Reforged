@@ -1,12 +1,12 @@
 {
     "parent": "reforged:builtin/generated",
     "display": {
-        "thirdperson": {
+        "thirdperson_righthand": {
             "rotation": [ 5, 85, 305 ],
             "translation": [ 0.25, 0.75, -4.25 ],
             "scale": [ 1.2, 1.2, 1.2 ]
         },
-        "firstperson": {
+        "firstperson_righthand": {
             "rotation": [ 350, 225, 20 ],
             "translation": [ 0.75, 5.5, 3.5 ],
             "scale": [ 2.0, 2.0, 2.0 ]

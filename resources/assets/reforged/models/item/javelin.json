@@ -4,12 +4,12 @@
         "layer0": "reforged:items/javelin"
     },
 	"display": {
-		"thirdperson": {
+		"thirdperson_righthand": {
 			"rotation": [ 179, 88, 224 ],
 			"translation": [ 0.00, 1.50, -1.50 ],
 			"scale": [ 2.00, 2.00, 2.00 ]
 		},
-		"firstperson": {
+		"firstperson_righthand": {
 			"rotation": [ 0, 225, 25 ],
 			"translation": [ 7.50, 2.75, 0.00 ],
 			"scale": [ 2.25, 2.25, 2.25 ]

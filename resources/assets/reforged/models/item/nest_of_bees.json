@@ -4,12 +4,12 @@
         "layer0": "reforged:items/nob_filled"
     },
     "display": {
-        "thirdperson": {
+        "thirdperson_righthand": {
             "rotation": [ 0, 85, 310 ],
             "translation": [ 0, 1.25, -3.5 ],
             "scale": [ 1.2, 1.2, 2.0 ]
         },
-        "firstperson": {
+        "firstperson_righthand": {
             "rotation": [ 0, 220, 55 ],
             "translation": [ 0, 4, 2 ],
             "scale": [ 2.8, 2.8, 2.8 ]

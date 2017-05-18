@@ -4,7 +4,7 @@
         "layer0": "reforged:items/crossbow_1"
     },
     "display": {
-        "firstperson": {
+        "firstperson_righthand": {
             "rotation": [ -10, -145, -30 ],
             "translation": [ -3.00, 3.50, 3.00 ],
             "scale": [ 1.80, 1.80, 1.80 ]
