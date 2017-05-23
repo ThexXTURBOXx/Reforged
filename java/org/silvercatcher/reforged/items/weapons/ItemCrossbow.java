@@ -75,7 +75,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-		return false;
+		return true;
 	}
 	
 	public static final byte empty		= 0;

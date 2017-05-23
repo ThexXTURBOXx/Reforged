@@ -14,6 +14,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityBoomerang extends AReforgedThrowable {
@@ -117,7 +118,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 						entityDropItem(getItemStack(), 0.5f);
 				} else {
-					Helpers.playSound(world, this, "reforged:boomerang_break", 1.0F, 1.0F);
+					Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 				}
 				setDead();
 			}
@@ -132,7 +133,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 					if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 							entityDropItem(getItemStack(), 0.5f);
 					} else {
-						Helpers.playSound(world, this, "reforged:boomerang_break", 1.0F, 1.0F);
+						Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 					}
 					setDead();
 				}
@@ -146,10 +147,20 @@ public class EntityBoomerang extends AReforgedThrowable {
 	}
 	
 	@Override
+	protected void onImpact(RayTraceResult target) {
+		super.onImpact(target);
+	}
+	
+	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
 		if(!world.isRemote) {
 			if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 				entityDropItem(getItemStack(), 0.5f);
+				Helpers.playSound(world, this, "boomerang_hit", 2.0F, 1.0F);
+			} else if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
+				Helpers.playSound(world, this, "boomerang_break", 2.0F, 1.0F);
+			} else if(creativeUse()) {
+				Helpers.playSound(world, this, "boomerang_hit", 2.0F, 1.0F);
 			}
 		}
 		return true;
@@ -164,8 +175,8 @@ public class EntityBoomerang extends AReforgedThrowable {
 			if(stack.getMaxDamage() - stack.getItemDamage() > 0 && !creativeUse()) {
 				p.inventory.addItemStackToInventory(stack);
 				Helpers.playSound(world, this, "random.pop", 0.5F, 0.7F);
-			} else {
-				Helpers.playSound(world, this, "reforged:boomerang_break", 1.0F, 1.0F);
+			} else if(!creativeUse()) {
+				Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 			}
 			return true;
 		} else {
@@ -173,7 +184,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 			hitEntity.attackEntityFrom(causeImpactDamage(hitEntity, getThrower()), getImpactDamage(hitEntity));
 			ItemStack stack = getItemStack();
 			if(stack.getItem().isDamageable() && stack.attemptDamageItem(1, rand)) {
-				Helpers.playSound(world, this, "reforged:boomerang_break", 1.0F, 1.0F);
+				Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 				return true;
 			} else {
 				setItemStack(stack);

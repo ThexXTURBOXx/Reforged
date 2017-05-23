@@ -46,7 +46,7 @@ public class ItemBoomerang extends ExtendedItem {
 			// import, otherwise references will cause chaos!
 			ItemStack throwStack = playerIn.getHeldItemMainhand().copy();
 			if(playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, this)) {
-				Helpers.playSound(worldIn, playerIn, "reforged:boomerang_throw", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+				Helpers.playSound(worldIn, playerIn, "boomerang_throw", 0.5F, 1.0);
 		        if (!worldIn.isRemote) {
 		        	EntityBoomerang boomerang = new EntityBoomerang(worldIn, playerIn, throwStack);
 		        	worldIn.spawnEntity(boomerang);

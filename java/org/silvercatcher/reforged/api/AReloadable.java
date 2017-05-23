@@ -56,7 +56,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-		return false;
+		return true;
 	}
 	
 	@Override
@@ -106,9 +106,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 						compound.setInteger(CompoundTags.TIME, 0);
 					}
 				} else {
-					worldIn.playSound(playerIn, playerIn.getPosition(), new SoundEvent(
-							new ResourceLocation(ReforgedMod.ID, "reforged:shotgun_reload")),
-							SoundCategory.MASTER, 1.0f, 0.7f);
+					Helpers.playSound(worldIn, playerIn, "shotgun_reload", 1.0f, 0.7f);
 				}
 			}
 			
@@ -145,6 +143,9 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				compound.setBoolean(CompoundTags.STARTED, false);
 				compound.setInteger(CompoundTags.TIME, -1);
 			}
+		}
+		if(worldIn.isRemote && playerInl instanceof EntityPlayer) {
+			Helpers.playSound(worldIn, (EntityPlayer) playerInl, shootsound, 1f, 1f);
 		}
 	}
 	

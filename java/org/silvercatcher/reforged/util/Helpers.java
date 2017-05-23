@@ -2,6 +2,8 @@ package org.silvercatcher.reforged.util;
 
 import java.util.List;
 
+import org.silvercatcher.reforged.ReforgedMod;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -159,8 +161,8 @@ public class Helpers {
 	}
 	
 	public static void playSound(World w, Entity e, String name, float volume, float pitch) {
-		w.playSound(e.posX, e.posY, e.posZ, new SoundEvent(new ResourceLocation(name)),
-				SoundCategory.MASTER, volume, pitch, false);
+		w.playSound(null, e.posX, e.posY, e.posZ, new SoundEvent(new ResourceLocation(ReforgedMod.ID, name)),
+				SoundCategory.MASTER, volume, pitch);
 	}
 	
 }
