@@ -3,26 +3,16 @@
     "textures": {
         "layer0": "reforged:items/musket_bullet"
     },
-	"display": {
-		"thirdperson_righthand": {
-			"rotation": [ 176, 266, 255 ],
-			"translation": [ 0.00, 1.25, -1.25 ],
-			"scale": [ 0.50, 0.50, 0.50 ]
-		},
-		"firstperson_righthand": {
-			"rotation": [ 0, 225, 25 ],
-			"translation": [ 7.50, 2.75, 0.00 ],
-			"scale": [ 2.25, 2.25, 2.25 ]
-		},
-		"gui": {
-			"rotation": [ 0, 0, 0 ],
-			"translation": [ 0.00, 0.00, 0.00 ],
-			"scale": [ 1.00, 1.00, 1.00 ]
-		},
-		"head": {
-			"rotation": [ 0, 0, 0 ],
-			"translation": [ 0.00, 0.00, 0.00 ],
-			"scale": [ 1.00, 1.00, 1.00 ]
-		}
-	}
+    "display": {
+        "thirdperson_righthand": {
+            "rotation": [ 0, 0, 0 ],
+            "translation": [ 0.00, 0.75, -0.25 ],
+            "scale": [ 0.25, 0.25, 1.53 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 0, 74, 0 ],
+            "translation": [ 4.50, 2.50, 0.00 ],
+            "scale": [ 0.50, 0.50, 1.40 ]
+        }
+    }
 }

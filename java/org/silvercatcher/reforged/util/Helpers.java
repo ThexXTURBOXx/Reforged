@@ -2,7 +2,7 @@ package org.silvercatcher.reforged.util;
 
 import java.util.List;
 
-import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.proxy.CommonProxy;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.*;
@@ -11,7 +11,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.client.FMLClientHandler;
@@ -143,7 +144,7 @@ public class Helpers {
 	
 	public static int getInventorySlotContainItem(EntityPlayer player, Item itemIn) {
         for(int i = 0; i < player.inventory.mainInventory.size(); ++i) {
-            if(player.inventory.mainInventory.get(i) != null && !player.inventory.mainInventory.get(i).equals(ItemStack.EMPTY) && player.inventory.mainInventory.get(i).getItem() == itemIn) {
+            if(player.inventory.mainInventory.get(i) != null && !player.inventory.mainInventory.get(i).isEmpty() && player.inventory.mainInventory.get(i).getItem() == itemIn) {
                 return i;
             }
         }
@@ -161,7 +162,7 @@ public class Helpers {
 	}
 	
 	public static void playSound(World w, Entity e, String name, float volume, float pitch) {
-		w.playSound(null, e.posX, e.posY, e.posZ, new SoundEvent(new ResourceLocation(ReforgedMod.ID, name)),
+		w.playSound(null, e.posX, e.posY, e.posZ, CommonProxy.getSound(name),
 				SoundCategory.MASTER, volume, pitch);
 	}
 	

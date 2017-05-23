@@ -58,7 +58,7 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 				for(int i = 3; i < 6; i++) {
 					
 					ItemStack armorStack = target.getItemStackFromSlot(EntityEquipmentSlot.values()[i]);
-					if(armorStack != null && armorStack.getItem() instanceof ItemArmor) {
+					if(armorStack != null && !armorStack.isEmpty() && armorStack.getItem() instanceof ItemArmor) {
 						armorvalue += ((ItemArmor) armorStack.getItem()).damageReduceAmount;
 					}
 				}

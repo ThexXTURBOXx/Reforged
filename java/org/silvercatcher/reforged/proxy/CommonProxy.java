@@ -7,11 +7,11 @@ import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.*;
 import org.silvercatcher.reforged.props.*;
-import org.silvercatcher.reforged.util.VersionChecker;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.Loader;
@@ -19,6 +19,8 @@ import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
+	
+	public static final String[] sounds = new String[] {"boomerang_break", "boomerang_hit", "boomerang_throw" , "crossbow_reload", "crossbow_shoot", "musket_shoot", "shotgun_reload", "shotgun_shoot"};
 	
 	public void preInit(FMLPreInitializationEvent event) {
 		loadConfig(event);
@@ -29,9 +31,11 @@ public class CommonProxy {
 		ReforgedRegistry.registerPackets();
 		Enchantment.REGISTRY.register(goalseekerid, new ResourceLocation(ReforgedMod.ID, "goalseeker"), ReforgedAdditions.goalseeker);
 		CapabilityManager.INSTANCE.register(IStunProperty.class, new StorageStun(), DefaultStunImpl.class);
+		for(String s : sounds) {
+			ResourceLocation loc = new ResourceLocation(ReforgedMod.ID, s);
+			GameRegistry.register(new SoundEvent(loc), loc);
+		}
 		registerEntities();
-		Thread versionCheck = new VersionChecker();
-		versionCheck.start();
 	}
 	
 	public void init(FMLInitializationEvent event) {
@@ -124,5 +128,9 @@ public class CommonProxy {
 	}
 	
 	public void registerItemRenderer(Item item, int meta, String id) {}
+	
+	public static SoundEvent getSound(String name) {
+		return SoundEvent.REGISTRY.getObject(new ResourceLocation(ReforgedMod.ID, name));
+	}
 	
 }

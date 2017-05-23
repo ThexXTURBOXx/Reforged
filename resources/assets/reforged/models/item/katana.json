@@ -2,24 +2,14 @@
     "parent": "reforged:builtin/generated",
 	"display": {
 		"thirdperson_righthand": {
-			"rotation": [ 358, 92, 296 ],
-			"translation": [ 0.00, -1.00, -6.25 ],
-			"scale": [ 1.00, 1.00, 1.00 ]
+			"rotation": [ 316, 272, 0 ],
+            "translation": [ 0.00, 9.00, 0.25 ],
+            "scale": [ 1.00, 1.00, 1.00 ]
 		},
 		"firstperson_righthand": {
-			"rotation": [ 0, 225, 25 ],
-			"translation": [ 7.50, 2.75, 0.00 ],
-			"scale": [ 2.25, 2.25, 2.25 ]
-		},
-		"gui": {
-			"rotation": [ 0, 0, 0 ],
-			"translation": [ 0.00, 0.00, 0.00 ],
-			"scale": [ 1.00, 1.00, 1.00 ]
-		},
-		"head": {
-			"rotation": [ 0, 0, 0 ],
-			"translation": [ 0.00, 0.00, 0.00 ],
-			"scale": [ 1.00, 1.00, 1.00 ]
+			"rotation": [ 184, 283, 261 ],
+            "translation": [ 15.00, 7.75, -13.25 ],
+            "scale": [ 1.75, 1.75, 1.75 ]
 		}
 	}
 }

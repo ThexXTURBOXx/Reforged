@@ -6,18 +6,13 @@ import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.material.MaterialManager;
 import org.silvercatcher.reforged.models.ModelBoomerang;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderBoomerang extends ReforgedRender<EntityBoomerang> {
-	
-	protected float yawb = modifier;
 	
 	public RenderBoomerang(RenderManager renderManager) {
 		super(renderManager, new ModelBoomerang(), 90);
@@ -29,28 +24,8 @@ public class RenderBoomerang extends ReforgedRender<EntityBoomerang> {
 		bindTexture(getEntityTexture(theEntity));
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
-		int boomerangCount = 1;
-		for(Object o : Minecraft.getMinecraft().world.loadedEntityList) {
-			if(o instanceof EntityBoomerang) {
-				EntityPlayer player = Minecraft.getMinecraft().player;
-				EntityBoomerang boomerang = (EntityBoomerang) o;
-				Vec3d look = player.getLookVec();
-				Vec3d boomerangvec = new Vec3d(boomerang.posX - player.posX,
-						(boomerang.getEntityBoundingBox().minY + boomerang.height / 2)
-						- player.posY + player.getEyeHeight(),
-						boomerang.posZ - player.posZ);
-				double d0 = boomerangvec.lengthVector();
-				double d1 = look.dotProduct(boomerangvec);
-				boolean seen = d1 > 1 - 0.25 / d0;
-				if(seen && Minecraft.getMinecraft().player.canEntityBeSeen(boomerang)) {
-					boomerangCount++;
-				}
-			}
-		}
-		//If the number is set higher, then the Boomerang will rotate faster, otherwise slower
-		yawb += ((double) 5 / boomerangCount);
-		GL11.glRotated(yawb, 0, 1, 0);
-		model.render(theEntity,(float) x,(float) y,(float) z, yawb, partialTick, 0.0475F);
+		GL11.glRotatef((theEntity.prevRotationYaw + (theEntity.rotationYaw - theEntity.prevRotationYaw) * partialTick) - 90F, 0.0F, 1.0F, 0.0F);
+		model.render(theEntity,(float) x,(float) y,(float) z, yaw, partialTick, 0.0475F);
 		GL11.glPopMatrix();
 	}
 	

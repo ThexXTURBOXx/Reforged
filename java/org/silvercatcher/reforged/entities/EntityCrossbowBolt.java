@@ -20,7 +20,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
-import net.minecraft.entity.projectile.EntityTippedArrow;
 import net.minecraft.init.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,7 +38,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 	
     private static final Predicate<Entity> ARROW_TARGETS = Predicates.and(new Predicate[] {EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, new Predicate<Entity>()
     {
-    	public boolean apply(@Nullable Entity p_apply_1_)
+    	@Override
+		public boolean apply(@Nullable Entity p_apply_1_)
     	{
     		return p_apply_1_.canBeCollidedWith();
     	}
@@ -88,7 +88,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 
     public EntityCrossbowBolt(World worldIn, EntityLivingBase shooter)
     {
-        this(worldIn, shooter.posX, shooter.posY + (double)shooter.getEyeHeight() - 0.10000000149011612D, shooter.posZ);
+        this(worldIn, shooter.posX, shooter.posY + shooter.getEyeHeight() - 0.10000000149011612D, shooter.posZ);
         this.shootingEntity = shooter;
 
         if (shooter instanceof EntityPlayer)
@@ -152,7 +152,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     /**
      * Checks if the entity is in range to render.
      */
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public boolean isInRangeToRenderDist(double distance)
     {
         double d0 = this.getEntityBoundingBox().getAverageEdgeLength() * 10.0D;
@@ -166,7 +167,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
         return distance < d0 * d0;
     }
 
-    protected void entityInit()
+    @Override
+	protected void entityInit()
     {
         this.dataManager.register(CRITICAL, Byte.valueOf((byte)0));
         this.dataManager.register(COLOR, Integer.valueOf(-1));
@@ -177,7 +179,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
         float f = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
         float f1 = -MathHelper.sin(pitch * 0.017453292F);
         float f2 = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
-        this.setThrowableHeading((double)f, (double)f1, (double)f2, velocity, inaccuracy);
+        this.setThrowableHeading(f, f1, f2, velocity, inaccuracy);
         this.motionX += shooter.motionX;
         this.motionZ += shooter.motionZ;
 
@@ -190,24 +192,25 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     /**
      * Similar to setArrowHeading, it's point the throwable entity to a x, y, z direction.
      */
-    public void setThrowableHeading(double x, double y, double z, float velocity, float inaccuracy)
+    @Override
+	public void setThrowableHeading(double x, double y, double z, float velocity, float inaccuracy)
     {
         float f = MathHelper.sqrt(x * x + y * y + z * z);
-        x = x / (double)f;
-        y = y / (double)f;
-        z = z / (double)f;
-        x = x + this.rand.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
-        y = y + this.rand.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
-        z = z + this.rand.nextGaussian() * 0.007499999832361937D * (double)inaccuracy;
-        x = x * (double)velocity;
-        y = y * (double)velocity;
-        z = z * (double)velocity;
+        x = x / f;
+        y = y / f;
+        z = z / f;
+        x = x + this.rand.nextGaussian() * 0.007499999832361937D * inaccuracy;
+        y = y + this.rand.nextGaussian() * 0.007499999832361937D * inaccuracy;
+        z = z + this.rand.nextGaussian() * 0.007499999832361937D * inaccuracy;
+        x = x * velocity;
+        y = y * velocity;
+        z = z * velocity;
         this.motionX = x;
         this.motionY = y;
         this.motionZ = z;
         float f1 = MathHelper.sqrt(x * x + z * z);
         this.rotationYaw = (float)(MathHelper.atan2(x, z) * (180D / Math.PI));
-        this.rotationPitch = (float)(MathHelper.atan2(y, (double)f1) * (180D / Math.PI));
+        this.rotationPitch = (float)(MathHelper.atan2(y, f1) * (180D / Math.PI));
         this.prevRotationYaw = this.rotationYaw;
         this.prevRotationPitch = this.rotationPitch;
         this.ticksInGround = 0;
@@ -216,7 +219,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     /**
      * Set the position and rotation values directly without any clamping.
      */
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void setPositionAndRotationDirect(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean teleport)
     {
         this.setPosition(x, y, z);
@@ -226,7 +230,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     /**
      * Updates the velocity of the entity to a new value.
      */
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void setVelocity(double x, double y, double z)
     {
         this.motionX = x;
@@ -236,7 +241,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
         if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F)
         {
             float f = MathHelper.sqrt(x * x + z * z);
-            this.rotationPitch = (float)(MathHelper.atan2(y, (double)f) * (180D / Math.PI));
+            this.rotationPitch = (float)(MathHelper.atan2(y, f) * (180D / Math.PI));
             this.rotationYaw = (float)(MathHelper.atan2(x, z) * (180D / Math.PI));
             this.prevRotationPitch = this.rotationPitch;
             this.prevRotationYaw = this.rotationYaw;
@@ -248,7 +253,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     /**
      * Called to update the entity's position/logic.
      */
-    public void onUpdate()
+    @Override
+	public void onUpdate()
     {
         super.onUpdate();
 
@@ -256,7 +262,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
         {
             float f = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.rotationYaw = (float)(MathHelper.atan2(this.motionX, this.motionZ) * (180D / Math.PI));
-            this.rotationPitch = (float)(MathHelper.atan2(this.motionY, (double)f) * (180D / Math.PI));
+            this.rotationPitch = (float)(MathHelper.atan2(this.motionY, f) * (180D / Math.PI));
             this.prevRotationYaw = this.rotationYaw;
             this.prevRotationPitch = this.rotationPitch;
         }
@@ -287,9 +293,9 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
             if ((block != this.inTile || j != this.inData) && !this.world.collidesWithAnyBlock(this.getEntityBoundingBox().expandXyz(0.05D)))
             {
                 this.inGround = false;
-                this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
-                this.motionY *= (double)(this.rand.nextFloat() * 0.2F);
-                this.motionZ *= (double)(this.rand.nextFloat() * 0.2F);
+                this.motionX *= this.rand.nextFloat() * 0.2F;
+                this.motionY *= this.rand.nextFloat() * 0.2F;
+                this.motionZ *= this.rand.nextFloat() * 0.2F;
                 this.ticksInGround = 0;
                 this.ticksInAir = 0;
             }
@@ -346,7 +352,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
             {
                 for (int k = 0; k < 4; ++k)
                 {
-                    this.world.spawnParticle(EnumParticleTypes.CRIT, this.posX + this.motionX * (double)k / 4.0D, this.posY + this.motionY * (double)k / 4.0D, this.posZ + this.motionZ * (double)k / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ, new int[0]);
+                    this.world.spawnParticle(EnumParticleTypes.CRIT, this.posX + this.motionX * k / 4.0D, this.posY + this.motionY * k / 4.0D, this.posZ + this.motionZ * k / 4.0D, -this.motionX, -this.motionY + 0.2D, -this.motionZ, new int[0]);
                 }
             }
 
@@ -356,7 +362,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
             float f4 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
             this.rotationYaw = (float)(MathHelper.atan2(this.motionX, this.motionZ) * (180D / Math.PI));
 
-            for (this.rotationPitch = (float)(MathHelper.atan2(this.motionY, (double)f4) * (180D / Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
+            for (this.rotationPitch = (float)(MathHelper.atan2(this.motionY, f4) * (180D / Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F)
             {
                 ;
             }
@@ -397,9 +403,9 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
                 this.extinguish();
             }
 
-            this.motionX *= (double)f1;
-            this.motionY *= (double)f1;
-            this.motionZ *= (double)f1;
+            this.motionX *= f1;
+            this.motionY *= f1;
+            this.motionZ *= f1;
 
             if (!this.hasNoGravity())
             {
@@ -443,7 +449,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
         if (entity != null)
         {
             float f = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-            int i = MathHelper.ceil((double)f * this.damage);
+            int i = MathHelper.ceil(f * this.damage);
 
             if (this.getIsCritical())
             {
@@ -466,7 +472,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
                 entity.setFire(5);
             }
 
-            if (entity.attackEntityFrom(damagesource, (float)i))
+            if (entity.attackEntityFrom(damagesource, i))
             {
                 if (entity instanceof EntityLivingBase)
                 {
@@ -483,7 +489,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 
                         if (f1 > 0.0F)
                         {
-                            entitylivingbase.addVelocity(this.motionX * (double)this.knockbackStrength * 0.6000000238418579D / (double)f1, 0.1D, this.motionZ * (double)this.knockbackStrength * 0.6000000238418579D / (double)f1);
+                            entitylivingbase.addVelocity(this.motionX * this.knockbackStrength * 0.6000000238418579D / f1, 0.1D, this.motionZ * this.knockbackStrength * 0.6000000238418579D / f1);
                         }
                     }
 
@@ -537,13 +543,13 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
             IBlockState iblockstate = this.world.getBlockState(blockpos);
             this.inTile = iblockstate.getBlock();
             this.inData = this.inTile.getMetaFromState(iblockstate);
-            this.motionX = (double)((float)(raytraceResultIn.hitVec.xCoord - this.posX));
-            this.motionY = (double)((float)(raytraceResultIn.hitVec.yCoord - this.posY));
-            this.motionZ = (double)((float)(raytraceResultIn.hitVec.zCoord - this.posZ));
+            this.motionX = ((float)(raytraceResultIn.hitVec.xCoord - this.posX));
+            this.motionY = ((float)(raytraceResultIn.hitVec.yCoord - this.posY));
+            this.motionZ = ((float)(raytraceResultIn.hitVec.zCoord - this.posZ));
             float f2 = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-            this.posX -= this.motionX / (double)f2 * 0.05000000074505806D;
-            this.posY -= this.motionY / (double)f2 * 0.05000000074505806D;
-            this.posZ -= this.motionZ / (double)f2 * 0.05000000074505806D;
+            this.posX -= this.motionX / f2 * 0.05000000074505806D;
+            this.posY -= this.motionY / f2 * 0.05000000074505806D;
+            this.posZ -= this.motionZ / f2 * 0.05000000074505806D;
             this.playSound(SoundEvents.ENTITY_ARROW_HIT, 1.0F, 1.2F / (this.rand.nextFloat() * 0.2F + 0.9F));
             this.inGround = true;
             this.arrowShake = 7;
@@ -559,7 +565,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     /**
      * Tries to move the entity towards the specified location.
      */
-    public void move(MoverType type, double x, double y, double z)
+    @Override
+	public void move(MoverType type, double x, double y, double z)
     {
         super.move(type, x, y, z);
 
@@ -597,7 +604,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 
         for (int i = 0; i < list.size(); ++i)
         {
-            Entity entity1 = (Entity)list.get(i);
+            Entity entity1 = list.get(i);
 
             if (entity1 != this.shootingEntity || this.ticksInAir >= 5)
             {
@@ -630,20 +637,20 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 
         if (i != -1 && particleCount > 0)
         {
-            double d0 = (double)(i >> 16 & 255) / 255.0D;
-            double d1 = (double)(i >> 8 & 255) / 255.0D;
-            double d2 = (double)(i >> 0 & 255) / 255.0D;
+            double d0 = (i >> 16 & 255) / 255.0D;
+            double d1 = (i >> 8 & 255) / 255.0D;
+            double d2 = (i >> 0 & 255) / 255.0D;
 
             for (int j = 0; j < particleCount; ++j)
             {
-                this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, d0, d1, d2, new int[0]);
+                this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + (this.rand.nextDouble() - 0.5D) * this.width, this.posY + this.rand.nextDouble() * this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, d0, d1, d2, new int[0]);
             }
         }
     }
 
     public int getColor()
     {
-        return ((Integer)this.dataManager.get(COLOR)).intValue();
+        return this.dataManager.get(COLOR).intValue();
     }
 
     private void func_191507_d(int p_191507_1_)
@@ -660,13 +667,14 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     /**
      * (abstract) Protected helper method to write subclass entity data to NBT.
      */
-    public void writeEntityToNBT(NBTTagCompound compound)
+    @Override
+	public void writeEntityToNBT(NBTTagCompound compound)
     {
         compound.setInteger("xTile", this.xTile);
         compound.setInteger("yTile", this.yTile);
         compound.setInteger("zTile", this.zTile);
         compound.setShort("life", (short)this.ticksInGround);
-        ResourceLocation resourcelocation = (ResourceLocation)Block.REGISTRY.getNameForObject(this.inTile);
+        ResourceLocation resourcelocation = Block.REGISTRY.getNameForObject(this.inTile);
         compound.setString("inTile", resourcelocation == null ? "" : resourcelocation.toString());
         compound.setByte("inData", (byte)this.inData);
         compound.setByte("shake", (byte)this.arrowShake);
@@ -677,7 +685,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 
         if (this.potion != PotionTypes.EMPTY && this.potion != null)
         {
-            compound.setString("Potion", ((ResourceLocation)PotionType.REGISTRY.getNameForObject(this.potion)).toString());
+            compound.setString("Potion", PotionType.REGISTRY.getNameForObject(this.potion).toString());
         }
 
         if (this.field_191509_at)
@@ -701,7 +709,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     /**
      * (abstract) Protected helper method to read subclass entity data from NBT.
      */
-    public void readEntityFromNBT(NBTTagCompound compound)
+    @Override
+	public void readEntityFromNBT(NBTTagCompound compound)
     {
         this.xTile = compound.getInteger("xTile");
         this.yTile = compound.getInteger("yTile");
@@ -760,7 +769,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     /**
      * Called by a player entity when they collide with an entity
      */
-    public void onCollideWithPlayer(EntityPlayer entityIn)
+    @Override
+	public void onCollideWithPlayer(EntityPlayer entityIn)
     {
         if (!this.world.isRemote && this.inGround && this.arrowShake <= 0)
         {
@@ -787,7 +797,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
      * returns if this entity triggers Block.onEntityWalking on the blocks they walk on. used for spiders and wolves to
      * prevent them from trampling crops
      */
-    protected boolean canTriggerWalking()
+    @Override
+	protected boolean canTriggerWalking()
     {
         return false;
     }
@@ -813,12 +824,14 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     /**
      * Returns true if it's possible to attack this entity with an item.
      */
-    public boolean canBeAttackedWithItem()
+    @Override
+	public boolean canBeAttackedWithItem()
     {
         return false;
     }
 
-    public float getEyeHeight()
+    @Override
+	public float getEyeHeight()
     {
         return 0.0F;
     }
@@ -828,7 +841,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
      */
     public void setIsCritical(boolean critical)
     {
-        byte b0 = ((Byte)this.dataManager.get(CRITICAL)).byteValue();
+        byte b0 = this.dataManager.get(CRITICAL).byteValue();
 
         if (critical)
         {
@@ -845,7 +858,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
      */
     public boolean getIsCritical()
     {
-        byte b0 = ((Byte)this.dataManager.get(CRITICAL)).byteValue();
+        byte b0 = this.dataManager.get(CRITICAL).byteValue();
         return (b0 & 1) != 0;
     }
 
@@ -853,11 +866,11 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     {
         int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.POWER, p_190547_1_);
         int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.PUNCH, p_190547_1_);
-        this.setDamage((double)(p_190547_2_ * 2.0F) + this.rand.nextGaussian() * 0.25D + (double)((float)this.world.getDifficulty().getDifficultyId() * 0.11F));
+        this.setDamage(p_190547_2_ * 2.0F + this.rand.nextGaussian() * 0.25D + this.world.getDifficulty().getDifficultyId() * 0.11F);
 
         if (i > 0)
         {
-            this.setDamage(this.getDamage() + (double)i * 0.5D + 0.5D);
+            this.setDamage(this.getDamage() + i * 0.5D + 0.5D);
         }
 
         if (j > 0)
@@ -871,7 +884,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
         }
     }
 
-    @SideOnly(Side.CLIENT)
+    @Override
+	@SideOnly(Side.CLIENT)
     public void handleStatusUpdate(byte id)
     {
         if (id == 0)
@@ -880,13 +894,13 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 
             if (i != -1)
             {
-                double d0 = (double)(i >> 16 & 255) / 255.0D;
-                double d1 = (double)(i >> 8 & 255) / 255.0D;
-                double d2 = (double)(i >> 0 & 255) / 255.0D;
+                double d0 = (i >> 16 & 255) / 255.0D;
+                double d1 = (i >> 8 & 255) / 255.0D;
+                double d2 = (i >> 0 & 255) / 255.0D;
 
                 for (int j = 0; j < 20; ++j)
                 {
-                    this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + (this.rand.nextDouble() - 0.5D) * (double)this.width, this.posY + this.rand.nextDouble() * (double)this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * (double)this.width, d0, d1, d2, new int[0]);
+                    this.world.spawnParticle(EnumParticleTypes.SPELL_MOB, this.posX + (this.rand.nextDouble() - 0.5D) * this.width, this.posY + this.rand.nextDouble() * this.height, this.posZ + (this.rand.nextDouble() - 0.5D) * this.width, d0, d1, d2, new int[0]);
                 }
             }
         }

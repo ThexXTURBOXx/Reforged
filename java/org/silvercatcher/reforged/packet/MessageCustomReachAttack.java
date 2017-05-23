@@ -41,7 +41,7 @@ public class MessageCustomReachAttack implements IMessage {
 						@Override
 						public void run() {
 							Entity theEntity = player.world.getEntityByID(message.entityId);
-							if (player.inventory.getCurrentItem() == null) {
+							if (player.inventory.getCurrentItem() == null || player.inventory.getCurrentItem().isEmpty()) {
 								return;
 							}
 							if (player.inventory.getCurrentItem().getItem() instanceof ICustomReach) {

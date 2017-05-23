@@ -1,14 +1,11 @@
 package org.silvercatcher.reforged.api;
 
-import java.io.IOException;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.datasync.*;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
@@ -18,56 +15,8 @@ import net.minecraft.world.World;
 public abstract class AReforgedThrowable extends EntityThrowable {
 	
 	private final String damageName;
-	
-	public static final DataSerializer<Double> DOUBLE = new DataSerializer<Double>()
-    {
-        @Override
-		public void write(PacketBuffer buf, Double value)
-        {
-            buf.writeDouble(value);
-        }
-        @Override
-		public Double read(PacketBuffer buf)
-        {
-            return buf.readDouble();
-        }
-        @Override
-		public DataParameter<Double> createKey(int id)
-        {
-            return new DataParameter(id, this);
-        }
-    };
-    
-    public static final DataSerializer<ItemStack> ITEMSTACK = new DataSerializer<ItemStack>()
-    {
-        @Override
-		public void write(PacketBuffer buf, ItemStack value)
-        {
-            buf.writeItemStack(value);
-        }
-        @Override
-		public ItemStack read(PacketBuffer buf)
-        {
-            try {
-				return buf.readItemStack();
-			} catch (IOException e) {
-				e.printStackTrace();
-				return null;
-			}
-        }
-        @Override
-		public DataParameter<ItemStack> createKey(int id)
-        {
-            return new DataParameter(id, this);
-        }
-    };
     
 	public static final DataParameter<Boolean> INITIATED = EntityDataManager.<Boolean>createKey(AReforgedThrowable.class, DataSerializers.BOOLEAN);
-	
-	static {
-		DataSerializers.registerSerializer(DOUBLE);
-		DataSerializers.registerSerializer(ITEMSTACK);
-	}
 	
 	public AReforgedThrowable(World worldIn, String damageName) {
 		super(worldIn);

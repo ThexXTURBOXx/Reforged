@@ -109,6 +109,11 @@ death.attack.crossbow.player=%1$s got sliced by a bolt while fighting %2$s.
 
 enchantment.goalseeker=Goalseeker
 
-versionchecker.ingame.outdated=Newer version available
-versionchecker.ingame.downloadclick=Click here to download
-versionchecker.ingame.download=Download
+reforged.subtitle.boomerang_break=Boomerang breaks
+reforged.subtitle.boomerang_hit=Boomerang hits
+reforged.subtitle.boomerang_throw=Throw Boomerang
+reforged.subtitle.crossbow_reload=Crossbow reloads
+reforged.subtitle.crossbow_shoot=Crossbow shoots
+reforged.subtitle.musket_shoot=Gun shoots
+reforged.subtitle.shotgun_reload=Gun reloads
+reforged.subtitle.shotgun_shoot=Gun shoots

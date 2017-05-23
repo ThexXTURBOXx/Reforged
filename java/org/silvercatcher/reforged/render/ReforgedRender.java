@@ -29,9 +29,9 @@ public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 	}
 	
 	@Override
-	public void doRender(T Bullet, double x, double y, double z, float yaw, float partialTicks) {
-		super.doRender(Bullet, x, y, z, yaw, partialTicks);
-		renderEntityModel(Bullet, x, y, z, yaw, partialTicks);
+	public void doRender(T bullet, double x, double y, double z, float yaw, float partialTicks) {
+		super.doRender(bullet, x, y, z, yaw, partialTicks);
+		renderEntityModel(bullet, x, y, z, yaw, partialTicks);
 	}
 	
 	/**If you find any little issues while flying, just change partialTick in the render-method to 0. Could fix it... 
@@ -42,7 +42,8 @@ public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 		bindTexture(getEntityTexture(theEntity));
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
-		GL11.glRotated(yaw + modifier, 0, 1, 0);
+		GL11.glRotated(theEntity.prevRotationYaw + (theEntity.rotationYaw - theEntity.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
+		GL11.glRotated(theEntity.prevRotationPitch + (theEntity.rotationPitch - theEntity.prevRotationPitch) * partialTicks, 0.0F, 0.0F, 1.0F);
 		model.render(theEntity,(float) x,(float) y,(float) z, yaw + modifier, partialTicks, 0.0475F);
 		GL11.glPopMatrix();
 	}

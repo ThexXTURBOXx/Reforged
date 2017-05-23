@@ -44,11 +44,11 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
             		if(stack.getItem() instanceof ItemCrossbow && player.getActiveHand() == EnumHand.MAIN_HAND) {
             			if(getLoadState(stack) == loading) {
             				int left = getReloadLeft(stack, player);
-            				if(left > 10) {
+            				if(left > 15) {
             					mrl = 1;
-            				} else if(left > 0) {
+            				} else if(left > 5) {
             					mrl = 2;
-            				} else if(left > -10) {
+            				} else if(left > -5) {
             					mrl = 4;
             				} else {
             					mrl = 5;
@@ -136,7 +136,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 						compound.setInteger(CompoundTags.TIME, 0);
 					}
 				} else {
-					Helpers.playSound(worldIn, playerIn, "reforged:crossbow_reload", 1.0f, 0.7f);
+					Helpers.playSound(worldIn, playerIn, "crossbow_reload", 1.0f, 0.7f);
 				}
 			}
 			
@@ -155,7 +155,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 			NBTTagCompound compound = giveCompound(stack);
 			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 			if(loadState == loaded) {
-				Helpers.playSound(worldIn, playerIn, "reforged:crossbow_shoot", 1f, 1f);
+				Helpers.playSound(worldIn, playerIn, "crossbow_shoot", 1f, 1f);
 				if(!worldIn.isRemote) shoot(worldIn, playerIn, new ItemStack(ReforgedAdditions.CROSSBOW_BOLT));
 				if(!playerIn.capabilities.isCreativeMode && (stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand))) {
 					playerIn.renderBrokenItemStack(stack);

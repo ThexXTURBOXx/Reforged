@@ -19,7 +19,6 @@ import net.minecraftforge.common.ForgeHooks;
 public class BoomerangEnchRecipe implements IRecipe {
 	
 	private ItemStack output = ItemStack.EMPTY;
-	private ItemStack input [];
 	
 	private static void printInventory(String name, InventoryCrafting inventory) {
 	
@@ -48,7 +47,7 @@ public class BoomerangEnchRecipe implements IRecipe {
 			
 			ItemStack stack = inventory.getStackInSlot(i);
 			
-			if(stack != null) {
+			if(stack != null && !stack.isEmpty()) {
 				if(stack.getItem() instanceof ItemBoomerang &&
 						!CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ENCHANTED)) {
 					boomerangs++;
@@ -77,21 +76,17 @@ public class BoomerangEnchRecipe implements IRecipe {
 		LinkedList<Integer> goldSlots = new LinkedList<Integer>();
 		LinkedList<Integer> ironSlots = new LinkedList<Integer>();
 		
-		input = new ItemStack[size];
-		
 		for(int i = 0; i < size; i++) {
 			
 			ItemStack stack = inventory.getStackInSlot(i);
 			
-			if(stack != null) {
+			if(stack != null && !stack.isEmpty()) {
 				if(stack.getItem() instanceof ItemBoomerang) {
 					output = stack.copy();
 				} else if(stack.getItem() == Items.GOLD_INGOT) {
 					goldSlots.add(i);
-					input[i] = stack.copy();
 				} else if(stack.getItem() == Items.IRON_INGOT) {
 					ironSlots.add(i);
-					input[i] = stack.copy();
 				}
 			}
 		}
@@ -111,7 +106,11 @@ public class BoomerangEnchRecipe implements IRecipe {
 	
 	@Override
 	public ItemStack getRecipeOutput() {
-		return output;
+		ItemStack output = new ItemStack(ReforgedAdditions.DIAMOND_BOOMERANG);
+		NBTTagCompound compound = CompoundTags.giveCompound(output);
+		output.addEnchantment(ReforgedAdditions.goalseeker, 1);
+		compound.setBoolean(CompoundTags.ENCHANTED, true);
+		return this.output.isEmpty() ? this.output : output;
 	}
 	
 	@Override

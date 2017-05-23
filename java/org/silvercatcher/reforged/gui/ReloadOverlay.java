@@ -51,7 +51,7 @@ public class ReloadOverlay extends Gui {
 			
 			ItemStack equipped = player.inventory.getCurrentItem();
 						
-			if(equipped != null && equipped.getItem() instanceof AReloadable) {
+			if(equipped != null && !equipped.isEmpty() && equipped.getItem() instanceof AReloadable) {
 				
 				AReloadable reloadable = (AReloadable) equipped.getItem();
 				

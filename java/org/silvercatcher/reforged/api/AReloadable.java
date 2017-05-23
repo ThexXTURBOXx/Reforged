@@ -145,7 +145,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 			}
 		}
 		if(worldIn.isRemote && playerInl instanceof EntityPlayer) {
-			Helpers.playSound(worldIn, (EntityPlayer) playerInl, shootsound, 1f, 1f);
+			Helpers.playSound(worldIn, playerInl, shootsound, 1f, 1f);
 		}
 	}
 	

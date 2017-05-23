@@ -10,8 +10,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.network.datasync.*;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +18,7 @@ import net.minecraft.world.World;
 
 public class EntityDart extends AReforgedThrowable {
 	
-	public static final DataParameter<ItemStack> STACK = EntityDataManager.<ItemStack>createKey(EntityDart.class, ITEMSTACK);
+	public static final DataParameter<ItemStack> STACK = EntityDataManager.<ItemStack>createKey(EntityDart.class, DataSerializers.OPTIONAL_ITEM_STACK);
 	
 	public EntityDart(World worldIn) {
 		
@@ -46,7 +45,7 @@ public class EntityDart extends AReforgedThrowable {
 	
 	public void setItemStack(ItemStack stack) {
 		
-		if(stack == null || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
+		if(stack == null || stack.isEmpty() || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
 		dataManager.set(STACK, stack);
@@ -93,7 +92,7 @@ public class EntityDart extends AReforgedThrowable {
 				}
 			}
 		}
-		Helpers.playSound(world, this, "reforged:boomerang_break", 1.0F, 1.0F);
+		Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 		return true;
 	}
 	
@@ -107,7 +106,7 @@ public class EntityDart extends AReforgedThrowable {
 		
 		super.writeEntityToNBT(tagCompound);
 		
-		if(getItemStack() != null) {
+		if(getItemStack() != null && !getItemStack().isEmpty()) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
 		}
 	}

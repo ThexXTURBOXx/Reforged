@@ -9,20 +9,22 @@ import org.silvercatcher.reforged.util.Helpers;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.datasync.DataParameter;
-import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.network.datasync.*;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityBoomerang extends AReforgedThrowable {
 
-	public static final DataParameter<Double> THROWER_X = EntityDataManager.<Double>createKey(EntityBoomerang.class, DOUBLE);
-	public static final DataParameter<Double> THROWER_Y = EntityDataManager.<Double>createKey(EntityBoomerang.class, DOUBLE);
-	public static final DataParameter<Double> THROWER_Z = EntityDataManager.<Double>createKey(EntityBoomerang.class, DOUBLE);
-	public static final DataParameter<ItemStack>  STACK = EntityDataManager.<ItemStack>createKey(EntityBoomerang.class, ITEMSTACK);
+	public static final DataParameter<Float> THROWER_X = EntityDataManager.<Float>createKey(EntityBoomerang.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> THROWER_Y = EntityDataManager.<Float>createKey(EntityBoomerang.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> THROWER_Z = EntityDataManager.<Float>createKey(EntityBoomerang.class, DataSerializers.FLOAT);
+	public static final DataParameter<Float> YAW = EntityDataManager.<Float>createKey(EntityBoomerang.class, DataSerializers.FLOAT);
+	public static final DataParameter<ItemStack>  STACK = EntityDataManager.<ItemStack>createKey(EntityBoomerang.class, DataSerializers.OPTIONAL_ITEM_STACK);
 	
 	public EntityBoomerang(World worldIn) {
 		super(worldIn, "boomerang");
@@ -39,9 +41,11 @@ public class EntityBoomerang extends AReforgedThrowable {
 	protected void entityInit() {
 		super.entityInit();
 		dataManager.register(STACK, ItemStack.EMPTY);
-		dataManager.register(THROWER_X, 0D);
-		dataManager.register(THROWER_Y, 0D);
-		dataManager.register(THROWER_Z, 0D);
+		dataManager.register(YAW, 0F);
+		dataManager.register(THROWER_X, 0F);
+		dataManager.register(THROWER_Y, 0F);
+		dataManager.register(THROWER_Z, 0F);
+		rotationYaw = dataManager.get(YAW);
 	}
 	
 	public ItemStack getItemStack() {
@@ -49,16 +53,16 @@ public class EntityBoomerang extends AReforgedThrowable {
 	}
 	
 	public void setItemStack(ItemStack stack) {
-		if(stack == null || !(stack.getItem() instanceof ItemBoomerang)) {
+		if(stack == null || stack.isEmpty() || !(stack.getItem() instanceof ItemBoomerang)) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
 		dataManager.set(STACK, stack);
 	}
 	
 	public void setCoords(double playerX, double playerY, double playerZ) {
-		dataManager.set(THROWER_X, playerX);
-		dataManager.set(THROWER_Y, playerY);
-		dataManager.set(THROWER_Z, playerZ);
+		dataManager.set(THROWER_X, (float) playerX);
+		dataManager.set(THROWER_Y, (float) playerY);
+		dataManager.set(THROWER_Z, (float) playerZ);
 	}
 	
 	public double getPosX() {
@@ -87,6 +91,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 	
 	@Override
 	public void onUpdated() {
+		
 		if(getThrower() != null && CompoundTags.giveCompound(getItemStack()).getBoolean(CompoundTags.ENCHANTED)) {
 			setCoords(getThrower().posX, getThrower().posY + getThrower().getEyeHeight(), getThrower().posZ);
 		}
@@ -101,23 +106,15 @@ public class EntityBoomerang extends AReforgedThrowable {
 		dy /= d;
 		dz /= d;
 		
-		if(world.isRemote) {
-			setVelocity(motionX - (0.05D * dx), motionY - (0.05D * dy), motionZ - (0.05D * dz));
-		} else {
-			motionX -= (0.05D * dx);
-			motionY -= (0.05D * dy);
-			motionZ -= (0.05D * dz);
-		}
-		
-		/*motionX -= (0.05D * dx);
+		motionX -= (0.05D * dx);
 		motionY -= (0.05D * dy);
-		motionZ -= (0.05D * dz);*/
+		motionZ -= (0.05D * dz);
 		
 		if(isInWater()) {
 			if(!world.isRemote) {
 				if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 						entityDropItem(getItemStack(), 0.5f);
-				} else {
+				} else if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
 					Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 				}
 				setDead();
@@ -132,13 +129,15 @@ public class EntityBoomerang extends AReforgedThrowable {
 				if(!world.isRemote) {
 					if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
 							entityDropItem(getItemStack(), 0.5f);
-					} else {
+					} else if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
 						Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 					}
 					setDead();
 				}
 			}
 		}
+		this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
+		rotationYaw += 20;
 	}
 	
 	@Override
@@ -174,8 +173,9 @@ public class EntityBoomerang extends AReforgedThrowable {
 			EntityPlayer p = (EntityPlayer) hitEntity;
 			if(stack.getMaxDamage() - stack.getItemDamage() > 0 && !creativeUse()) {
 				p.inventory.addItemStackToInventory(stack);
-				Helpers.playSound(world, this, "random.pop", 0.5F, 0.7F);
-			} else if(!creativeUse()) {
+				world.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_ITEM_PICKUP,
+						SoundCategory.MASTER, 0.5F, 0.7F);
+			} else if(getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
 				Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 			}
 			return true;
@@ -201,8 +201,9 @@ public class EntityBoomerang extends AReforgedThrowable {
 		tagCompound.setDouble("playerX", getPosX());
 		tagCompound.setDouble("playerY", getPosY());
 		tagCompound.setDouble("playerZ", getPosZ());
+		tagCompound.setDouble("yawreforged", dataManager.get(YAW));
 		
-		if(getItemStack() != null) {
+		if(getItemStack() != null && !getItemStack().isEmpty()) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
 		}
 	}
@@ -212,6 +213,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 		super.readEntityFromNBT(tagCompund);
 		setItemStack(new ItemStack(tagCompund.getCompoundTag("item")));
 		setCoords(tagCompund.getDouble("playerX"), tagCompund.getDouble("playerY"), tagCompund.getDouble("playerZ"));
+		dataManager.set(YAW, tagCompund.getFloat("yawreforged"));
 	}
 
 	@Override

@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 
 public class EntityJavelin extends AReforgedThrowable {
 	
-	public static final DataParameter<ItemStack> STACK = EntityDataManager.<ItemStack>createKey(EntityJavelin.class, ITEMSTACK);
+	public static final DataParameter<ItemStack> STACK = EntityDataManager.<ItemStack>createKey(EntityJavelin.class, DataSerializers.OPTIONAL_ITEM_STACK);
 	public static final DataParameter<Integer> DURATION = EntityDataManager.<Integer>createKey(EntityJavelin.class, DataSerializers.VARINT);
 	
 	public EntityJavelin(World worldIn) {
@@ -60,7 +60,7 @@ public class EntityJavelin extends AReforgedThrowable {
 	
 	public void setItemStack(ItemStack stack) {
 		
-		if(stack == null || !(stack.getItem() instanceof ItemJavelin)) {
+		if(stack == null || stack.isEmpty() || !(stack.getItem() instanceof ItemJavelin)) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
 		dataManager.set(STACK, stack);
@@ -93,7 +93,7 @@ public class EntityJavelin extends AReforgedThrowable {
 				entityDropItem(getItemStack(), 0.5f);
 			}
 		} else {
-			Helpers.playSound(world, this, "reforged:boomerang_break", 1.0F, 1.0F);
+			Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 		}
 	}
 	
@@ -118,7 +118,7 @@ public class EntityJavelin extends AReforgedThrowable {
 		
 		tagCompound.setInteger("durloaded", getDurLoaded());
 		
-		if(getItemStack() != null) {
+		if(getItemStack() != null & !getItemStack().isEmpty()) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
 		}
 	}

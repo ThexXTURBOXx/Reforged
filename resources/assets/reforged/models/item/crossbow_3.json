@@ -1,5 +1,12 @@
 {
     "parent": "reforged:item/crossbow",
+    "display": {
+        "firstperson_righthand": {
+            "rotation": [ 117, 7, 134 ],
+            "translation": [ 6.75, 7.00, 2.00 ],
+            "scale": [ 1.80, 1.80, 1.80 ]
+        }
+    },
     "textures": {
         "layer0": "reforged:items/crossbow_4"
     }

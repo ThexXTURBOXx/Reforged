@@ -25,7 +25,8 @@ public class RenderCrossbowBolt extends Render<EntityCrossbowBolt>
     /**
      * Renders the desired {@code T} type Entity.
      */
-    public void doRender(EntityCrossbowBolt entity, double x, double y, double z, float entityYaw, float partialTicks)
+    @Override
+	public void doRender(EntityCrossbowBolt entity, double x, double y, double z, float entityYaw, float partialTicks)
     {
         this.bindEntityTexture(entity);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -47,7 +48,7 @@ public class RenderCrossbowBolt extends Render<EntityCrossbowBolt>
         float f7 = 0.3125F;
         float f8 = 0.05625F;
         GlStateManager.enableRescaleNormal();
-        float f9 = (float)entity.arrowShake - partialTicks;
+        float f9 = entity.arrowShake - partialTicks;
 
         if (f9 > 0.0F)
         {
@@ -107,7 +108,8 @@ public class RenderCrossbowBolt extends Render<EntityCrossbowBolt>
     /**
      * Returns the location of an entity's texture. Doesn't seem to be called unless you call Render.bindEntityTexture.
      */
-    protected ResourceLocation getEntityTexture(EntityCrossbowBolt entity)
+    @Override
+	protected ResourceLocation getEntityTexture(EntityCrossbowBolt entity)
     {
         return entity.getColor() > 0 ? RES_TIPPED_ARROW : RES_ARROW;
     }

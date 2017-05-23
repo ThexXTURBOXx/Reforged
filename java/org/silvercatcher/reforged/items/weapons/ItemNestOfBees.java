@@ -5,15 +5,13 @@ import java.util.List;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.*;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
-import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
+import net.minecraft.init.*;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
@@ -117,7 +115,9 @@ public class ItemNestOfBees extends ExtendedItem {
 		
 		if(compound.getInteger(CompoundTags.AMMUNITION) > 0) {
 			compound.setBoolean(CompoundTags.ACTIVATED, true);
-			Helpers.playSound(worldIn, playerIn, "item.fireCharge.use", 1.0f, 1.0f);
+			
+			worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ITEM_FIRECHARGE_USE,
+					SoundCategory.MASTER, 1.0f, 1.0f);
 		}
 		return stack;
 	}
@@ -126,12 +126,14 @@ public class ItemNestOfBees extends ExtendedItem {
 		
 		if(!world.isRemote) {
 			EntityArrow arrow = new ItemArrow().createArrow(world, new ItemStack(Items.ARROW), shooter);
+			arrow.setAim(shooter, shooter.rotationPitch, shooter.rotationYaw, 0.0F, ItemBow.getArrowVelocity(40) * 3.0F, 1.0F);
 			arrow.setDamage(2);
 			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ,
 					3 + itemRand.nextFloat() / 2f, 1.5f);
 			world.spawnEntity(arrow);
 		}
-		Helpers.playSound(world, shooter, "fireworks.launch", 3.0f, 1.0f);
+		world.playSound(null, shooter.posX, shooter.posY, shooter.posZ, SoundEvents.ENTITY_FIREWORK_LAUNCH,
+				SoundCategory.MASTER, 3.0f, 1.0f);
 	}
 	
 	@Override

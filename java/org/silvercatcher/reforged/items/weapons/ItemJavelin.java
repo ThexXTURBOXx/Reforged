@@ -8,6 +8,7 @@ import org.silvercatcher.reforged.util.Helpers;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
@@ -78,8 +79,8 @@ public class ItemJavelin extends ExtendedItem {
 			
 			if(timeLeft <= getMaxItemUseDuration(stack) - 7 && (playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, this))) {
 				
-				Helpers.playSound(worldIn, playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
-				
+				worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_ARROW_SHOOT,
+						SoundCategory.MASTER, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 				if (!worldIn.isRemote) {
 					if(throwStack.getCount() > 1) {
 						throwStack = throwStack.splitStack(1);

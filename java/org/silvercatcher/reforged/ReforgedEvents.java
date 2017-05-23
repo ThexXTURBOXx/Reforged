@@ -8,8 +8,6 @@ import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
 import org.silvercatcher.reforged.props.IStunProperty;
 import org.silvercatcher.reforged.util.Helpers;
 
-import com.mojang.realmsclient.gui.ChatFormatting;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -26,14 +24,16 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ReforgedEvents {
 	
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void customReach(MouseEvent e) {
 		if(e.getButton() == 0 && e.isButtonstate()) {
 			Minecraft mc = Minecraft.getMinecraft();
-			if(mc.player.inventory.getCurrentItem() != null) {
+			if(mc.player.inventory.getCurrentItem() != null && !mc.player.inventory.getCurrentItem().isEmpty()) {
 				Item i = mc.player.inventory.getCurrentItem().getItem();
 				if(i instanceof ICustomReach && i instanceof ItemExtension) {
 					ICustomReach icr = (ICustomReach) i;
@@ -59,7 +59,7 @@ public class ReforgedEvents {
 		if(!notified) {
 			notified = true;
 			EntityPlayer p = e.player;
-			String par = Character.toString(ChatFormatting.DARK_GRAY.toString().charAt(0));
+			String par = "\u00A7";
 			p.sendMessage(new TextComponentString(par + "7[" + par + "bReforged" + par + "7] " + par + "cYou are running Reforged 1.9/1.10/1.11!"));
 			p.sendMessage(new TextComponentString(par + "cVery experimental!!!"));
 			if(!ReforgedMod.battlegearDetected) return;

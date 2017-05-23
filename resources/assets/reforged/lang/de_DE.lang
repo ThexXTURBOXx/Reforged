@@ -109,6 +109,11 @@ death.attack.crossbow.player=%1$s wurde von einem Pfeil zerteilt, während er mi
 
 enchantment.goalseeker=Zielsucher
 
-versionchecker.ingame.outdated=Neuere Version verfügbar
-versionchecker.ingame.downloadclick=Hier zum herunterladen klicken
-versionchecker.ingame.download=Herunterladen
+reforged.subtitle.boomerang_break=Bumerang bricht
+reforged.subtitle.boomerang_hit=Bumerang trifft
+reforged.subtitle.boomerang_throw=Bumerang werfen
+reforged.subtitle.crossbow_reload=Armbrust lädt nach
+reforged.subtitle.crossbow_shoot=Armbrust schießt
+reforged.subtitle.musket_shoot=Feuerwaffe schießt
+reforged.subtitle.shotgun_reload=Feuerwaffe lädt nach
+reforged.subtitle.shotgun_shoot=Feuerwaffe schießt
