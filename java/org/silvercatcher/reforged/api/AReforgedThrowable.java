@@ -27,14 +27,13 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		super(worldIn, thrower);
 		this.damageName = damageName;
         setLocationAndAngles(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ, thrower.rotationYaw, thrower.rotationPitch);
-        posX -= MathHelper.cos(rotationYaw / 180.0F * (float)Math.PI) * 0.16F;
+        posX -= MathHelper.cos(rotationYaw / 180.0F * (float)Math.PI) * 0.25;
         posY -= 0.10000000149011612D;
-        posZ -= MathHelper.sin(rotationYaw / 180.0F * (float)Math.PI) * 0.16F;
+        posZ -= MathHelper.sin(rotationYaw / 180.0F * (float)Math.PI) * 0.25;
         setPosition(posX, posY, posZ);
-        float f = 0.4F;
-        motionX = -MathHelper.sin(rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rotationPitch / 180.0F * (float)Math.PI) * f;
-        motionZ = MathHelper.cos(rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rotationPitch / 180.0F * (float)Math.PI) * f;
-        motionY = -MathHelper.sin(rotationPitch / 180.0F * (float)Math.PI) * f;
+        motionX = -MathHelper.sin(rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rotationPitch / 180.0F * (float)Math.PI);
+        motionZ = MathHelper.cos(rotationYaw / 180.0F * (float)Math.PI) * MathHelper.cos(rotationPitch / 180.0F * (float)Math.PI);
+        motionY = -MathHelper.sin(rotationPitch / 180.0F * (float)Math.PI);
         setThrowableHeading(motionX, motionY, motionZ, 1.5F, 1.0F);
 	}
 	
@@ -63,8 +62,11 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		if(!world.isRemote) {
 			boolean broken;
 			if(target.entityHit == null) {
-				broken = onBlockHit(target.getBlockPos());
+				broken = world.getBlockState(target.getBlockPos()).getCollisionBoundingBox(world, target.getBlockPos()) != null ? onBlockHit(target.getBlockPos()) : false;
 			} else {
+				if(target.entityHit instanceof EntityLivingBase && target.entityHit.equals(getThrower()) && ticksExisted < 5) {
+					return;
+				}
 				broken = onEntityHit(target.entityHit instanceof EntityLivingBase
 						? (EntityLivingBase) target.entityHit : target.entityHit); 
 			}

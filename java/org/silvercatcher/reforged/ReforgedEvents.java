@@ -60,15 +60,14 @@ public class ReforgedEvents {
 			notified = true;
 			EntityPlayer p = e.player;
 			String par = "\u00A7";
-			p.sendMessage(new TextComponentString(par + "7[" + par + "bReforged" + par + "7] " + par + "cYou are running Reforged 1.9/1.10/1.11!"));
-			p.sendMessage(new TextComponentString(par + "cVery experimental!!!"));
-			if(!ReforgedMod.battlegearDetected) return;
-			p.sendMessage(new TextComponentString(
-					par + "7[" + par + "bReforged" + par + "7] " + par + "cYou have \"Mine & Blade Battlegear 2 - Bullseye\" " + par + "cinstalled."));
-			p.sendMessage(new TextComponentString(
-					"" + par + "cIt has incompatibility issues with Reforged."));
-			p.sendMessage(new TextComponentString(
-					"" + par + "cSome Weapons will act different!"));
+			if(ReforgedMod.battlegearDetected) {
+				p.sendMessage(new TextComponentString(
+						par + "7[" + par + "bReforged" + par + "7] " + par + "cYou have \"Mine & Blade Battlegear 2 - Bullseye\" " + par + "cinstalled."));
+				p.sendMessage(new TextComponentString(
+						"" + par + "cPatch loaded, because it has incompatibility issues with Reforged."));
+				p.sendMessage(new TextComponentString(
+						"" + par + "cSome Weapons will act different (but they hopefully work)!"));
+			}
 		}
 	}
 	

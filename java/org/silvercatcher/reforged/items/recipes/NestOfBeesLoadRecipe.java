@@ -33,7 +33,6 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 	
 	@Override
 	public boolean matches(InventoryCrafting inventory, World world) {
-		System.out.println("matches");
 		NoB = -1;
 		aB = -1;
 		for(int i = 0; i < inventory.getSizeInventory(); i++) {
@@ -41,20 +40,16 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			if(stack != null && !stack.isEmpty()) {
 				if(stack.getItem() == ReforgedAdditions.ARROW_BUNDLE && aB == -1) {
 					aB = i;
-					System.out.println("ab: " + i);
 				} else if(stack.getItem() == ReforgedAdditions.NEST_OF_BEES &&
 						stack.getTagCompound().getInteger(CompoundTags.AMMUNITION) + 8 <= 32 && NoB == -1) {
 					NoB = i;
 					output = stack.copy();
-					System.out.println("nob: " + i);
 				} else {
-					System.out.println("WRONG " + i + ", " + stack.getDisplayName());
 					return false;
 				}
 			}
 		}
 		if(NoB == -1 || aB == -1) {
-			System.out.println("nob: " + NoB + ", ab: " + aB);
 			return false;
 		}
 		return true;

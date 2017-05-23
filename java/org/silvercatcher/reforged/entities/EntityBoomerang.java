@@ -15,7 +15,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.*;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityBoomerang extends AReforgedThrowable {
@@ -143,11 +142,6 @@ public class EntityBoomerang extends AReforgedThrowable {
 	@Override
 	protected float getGravityVelocity() {
 		return 0f;
-	}
-	
-	@Override
-	protected void onImpact(RayTraceResult target) {
-		super.onImpact(target);
 	}
 	
 	@Override

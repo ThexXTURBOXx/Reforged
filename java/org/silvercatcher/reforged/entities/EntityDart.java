@@ -92,7 +92,6 @@ public class EntityDart extends AReforgedThrowable {
 				}
 			}
 		}
-		Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 		return true;
 	}
 	
