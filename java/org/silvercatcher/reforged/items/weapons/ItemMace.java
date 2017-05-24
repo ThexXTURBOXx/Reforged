@@ -42,7 +42,7 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if (itemRand.nextInt(25) < (5 - zombieSpawnChance())) {
+		if (itemRand.nextInt(25) < (8 - zombieSpawnChance())) {
 			if (entity instanceof EntityLivingBase) {
 				EntityLivingBase elb = (EntityLivingBase) entity;
 				StunProperty.get(elb).setStunned(true);
