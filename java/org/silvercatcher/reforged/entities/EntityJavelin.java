@@ -120,7 +120,7 @@ public class EntityJavelin extends AReforgedThrowable {
 
 		tagCompound.setInteger("durloaded", getDurLoaded());
 
-		if (getItemStack() != null & !getItemStack().isEmpty()) {
+		if (getItemStack() != null && !getItemStack().isEmpty()) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
 		}
 	}

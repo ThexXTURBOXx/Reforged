@@ -37,7 +37,6 @@ public class ReforgedMonsterArmourer {
 			zombieWeapons = null;
 		else
 			zombieWeapons = list.toArray(new Item[list.size()]);
-		for(Item i : zombieWeapons) System.out.println(i.getUnlocalizedName());
 	}
 
 	@SubscribeEvent
