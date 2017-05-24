@@ -6,24 +6,24 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemStack;
 
 public class EnchantmentGoalseeker extends Enchantment {
-	
+
 	public EnchantmentGoalseeker() {
-		super(Rarity.VERY_RARE, EnumEnchantmentType.BOW, new EntityEquipmentSlot[] {EntityEquipmentSlot.MAINHAND});
+		super(Rarity.VERY_RARE, EnumEnchantmentType.BOW, new EntityEquipmentSlot[] { EntityEquipmentSlot.MAINHAND });
 	}
-	
+
 	@Override
 	public String getName() {
 		return "enchantment.goalseeker";
 	}
-	
+
 	@Override
 	public boolean canApply(ItemStack stack) {
 		return false;
 	}
-	
+
 	@Override
 	public int getMaxEnchantability(int enchantmentLevel) {
 		return 1;
 	}
-	
+
 }

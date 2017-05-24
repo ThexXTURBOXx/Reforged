@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBulletBlunderbuss extends ExtendedItem {
-	
+
 	public ItemBulletBlunderbuss() {
 		super();
 		setMaxStackSize(64);
@@ -17,13 +17,8 @@ public class ItemBulletBlunderbuss extends ExtendedItem {
 
 	@Override
 	public void registerRecipes() {
-		
-		GameRegistry.addShapedRecipe(new ItemStack(this, 8),
-				" h ",
-				" g ",
-				" p ",
-				'h', new ItemStack(Blocks.GRAVEL),
-				'g', Items.GUNPOWDER,
-				'p', Items.PAPER);
+
+		GameRegistry.addShapedRecipe(new ItemStack(this, 8), " h ", " g ", " p ", 'h', new ItemStack(Blocks.GRAVEL),
+				'g', Items.GUNPOWDER, 'p', Items.PAPER);
 	}
 }

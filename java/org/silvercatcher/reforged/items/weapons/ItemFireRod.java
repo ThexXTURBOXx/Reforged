@@ -15,59 +15,49 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemFireRod extends ExtendedItem {
 
 	public static final int FIRE_DURATION = 10;
-	
+
 	public ItemFireRod() {
 		super();
 		setUnlocalizedName("firerod");
 		setMaxStackSize(32);
 	}
 
-
 	@Override
 	public void registerRecipes() {
-	
-		GameRegistry.addRecipe(new ItemStack(this),
-				"  c",
-				" s ",
-				"s  ",
-				'c', new ItemStack(Items.COAL, 1, 0),
-				's', Items.STICK);
-		
-		GameRegistry.addRecipe(new ItemStack(this),
-				"  c",
-				" s ",
-				"s  ",
-				'c', new ItemStack(Items.COAL, 1, 1),
-				's', Items.STICK);
+
+		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 0), 's',
+				Items.STICK);
+
+		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 1), 's',
+				Items.STICK);
 	}
-	
+
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
-			EnumFacing side, float hitX, float hitY, float hitZ) {
-		if(worldIn.getBlockState(pos).getBlock().isFlammable(worldIn, pos, side)) {
-			
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side,
+			float hitX, float hitY, float hitZ) {
+		if (worldIn.getBlockState(pos).getBlock().isFlammable(worldIn, pos, side)) {
+
 			BlockPos target = pos.offset(side);
-			
-			if(!(worldIn.canBlockSeeSky(pos) && worldIn.isRaining()) &&  worldIn.isAirBlock(target)) {
+
+			if (!(worldIn.canBlockSeeSky(pos) && worldIn.isRaining()) && worldIn.isAirBlock(target)) {
 				worldIn.setBlockState(target, Blocks.FIRE.getDefaultState());
 				player.getHeldItemMainhand().setCount(player.getHeldItemMainhand().getCount() - 1);
 			}
 		}
 		return EnumActionResult.SUCCESS;
 	}
-	
+
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		
-		if(!entity.isImmuneToFire()) {
+
+		if (!entity.isImmuneToFire()) {
 			entity.setFire(FIRE_DURATION);
 		}
-		if(!player.capabilities.isCreativeMode) {
+		if (!player.capabilities.isCreativeMode) {
 			stack.setCount(stack.getCount() - 1);
 		}
 		return false;
 	}
-
 
 	@Override
 	public float getHitDamage() {

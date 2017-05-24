@@ -11,11 +11,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderJavelin extends ReforgedRender<EntityJavelin> {
-	
+
 	public RenderJavelin(RenderManager renderManager) {
 		super(renderManager, new ModelJavelin(), 90);
 	}
-	
+
 	@Override
 	protected ResourceLocation getEntityTexture(EntityJavelin entity) {
 		return Textures.JAVELIN;

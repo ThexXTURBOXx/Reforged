@@ -9,39 +9,39 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityDynamite extends AReforgedThrowable {
-	
-	//In the lang-files we don't need the "dynamite-damage"-String,
-	//because the dynamite can't kill anyone as it does 0 damage...
-	
+
+	// In the lang-files we don't need the "dynamite-damage"-String,
+	// because the dynamite can't kill anyone as it does 0 damage...
+
 	public EntityDynamite(World worldIn) {
-		
+
 		super(worldIn, "dynamite");
 	}
-	
+
 	public EntityDynamite(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
-		
+
 		super(worldIn, throwerIn, stack, "dynamite");
 		setInited();
 	}
-	
+
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
 		world.createExplosion(this, posX, posY, posZ, 2, true);
 		return true;
 	}
-	
+
 	@Override
 	protected boolean onEntityHit(Entity entity) {
 		world.createExplosion(this, posX, posY, posZ, 2, true);
 		return true;
 	}
-	
+
 	@Override
 	protected float getImpactDamage(Entity target) {
 
 		return 0f;
 	}
-	
+
 	@Override
 	protected float getGravityVelocity() {
 		return 0.05F;

@@ -3,7 +3,6 @@ package org.silvercatcher.reforged.entities;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.others.ItemDart;
-import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,21 +16,22 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public class EntityDart extends AReforgedThrowable {
-	
-	public static final DataParameter<ItemStack> STACK = EntityDataManager.<ItemStack>createKey(EntityDart.class, DataSerializers.OPTIONAL_ITEM_STACK);
-	
+
+	public static final DataParameter<ItemStack> STACK = EntityDataManager.<ItemStack>createKey(EntityDart.class,
+			DataSerializers.OPTIONAL_ITEM_STACK);
+
 	public EntityDart(World worldIn) {
-		
+
 		super(worldIn, "dart");
 	}
-	
+
 	public EntityDart(World worldIn, EntityLivingBase getThrowerIn, ItemStack stack) {
-		
+
 		super(worldIn, getThrowerIn, stack, "dart");
 		setItemStack(stack);
 		setInited();
 	}
-	
+
 	@Override
 	protected void entityInit() {
 		super.entityInit();
@@ -39,62 +39,74 @@ public class EntityDart extends AReforgedThrowable {
 	}
 
 	public ItemStack getItemStack() {
-		
+
 		return dataManager.get(STACK);
 	}
-	
+
 	public void setItemStack(ItemStack stack) {
-		
-		if(stack == null || stack.isEmpty() || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
+
+		if (stack == null || stack.isEmpty() || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
 		dataManager.set(STACK, stack);
 	}
-	
+
 	public String getEffect() {
 		return ((ItemDart) getItemStack().getItem()).getUnlocalizedName().substring(10);
 	}
-	
+
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
-		if(!world.isRemote && rand.nextInt(4) == 0 && !creativeUse()) {
-			entityDropItem(new ItemStack(Items.FEATHER), 1);	
+		if (!world.isRemote && rand.nextInt(4) == 0 && !creativeUse()) {
+			entityDropItem(new ItemStack(Items.FEATHER), 1);
 		}
 		return true;
 	}
-	
+
 	@Override
 	protected boolean onEntityHit(Entity entity) {
 		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity));
-		if(!entity.isDead) {
+		if (!entity.isDead) {
 			// Still alive after first damage
-			if(entity instanceof EntityLivingBase) {
-				
+			if (entity instanceof EntityLivingBase) {
+
 				EntityLivingBase p = (EntityLivingBase) entity;
-				
-				switch(getEffect()) {
-				
-				case "normal": break;
-				
-				case "hunger": p.addPotionEffect(new PotionEffect(getPotion("hunger"), 300, 1)); break;
-				
-				case "poison": p.addPotionEffect(new PotionEffect(getPotion("poison"), 200, 1)); break;
-				
-				case "poison_strong": p.addPotionEffect(new PotionEffect(getPotion("posion"), 300, 2)); break;
-				
-				case "slowness": p.addPotionEffect(new PotionEffect(getPotion("slowness"), 300, 1));
-				p.addPotionEffect(new PotionEffect(getPotion("mining_fatigue"), 300, 1)); break;
-				
-				case "wither": p.addPotionEffect(new PotionEffect(getPotion("wither"), 300, 1)); break;
-				
-				default: throw new IllegalArgumentException("No effect called " + getEffect().substring(5) + " found!");
-				
+
+				switch (getEffect()) {
+
+				case "normal":
+					break;
+
+				case "hunger":
+					p.addPotionEffect(new PotionEffect(getPotion("hunger"), 300, 1));
+					break;
+
+				case "poison":
+					p.addPotionEffect(new PotionEffect(getPotion("poison"), 200, 1));
+					break;
+
+				case "poison_strong":
+					p.addPotionEffect(new PotionEffect(getPotion("posion"), 300, 2));
+					break;
+
+				case "slowness":
+					p.addPotionEffect(new PotionEffect(getPotion("slowness"), 300, 1));
+					p.addPotionEffect(new PotionEffect(getPotion("mining_fatigue"), 300, 1));
+					break;
+
+				case "wither":
+					p.addPotionEffect(new PotionEffect(getPotion("wither"), 300, 1));
+					break;
+
+				default:
+					throw new IllegalArgumentException("No effect called " + getEffect().substring(5) + " found!");
+
 				}
 			}
 		}
 		return true;
 	}
-	
+
 	@Override
 	protected float getGravityVelocity() {
 		return 0.03F;
@@ -102,19 +114,19 @@ public class EntityDart extends AReforgedThrowable {
 
 	@Override
 	public void writeEntityToNBT(NBTTagCompound tagCompound) {
-		
+
 		super.writeEntityToNBT(tagCompound);
-		
-		if(getItemStack() != null && !getItemStack().isEmpty()) {
+
+		if (getItemStack() != null && !getItemStack().isEmpty()) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
 		}
 	}
-	
+
 	@Override
 	public void readEntityFromNBT(NBTTagCompound tagCompund) {
-		
+
 		super.readEntityFromNBT(tagCompund);
-		
+
 		setItemStack(new ItemStack(tagCompund.getCompoundTag("item")));
 	}
 
@@ -123,7 +135,7 @@ public class EntityDart extends AReforgedThrowable {
 
 		return 5f;
 	}
-	
+
 	private Potion getPotion(String name) {
 		return Potion.getPotionFromResourceLocation(name);
 	}

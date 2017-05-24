@@ -8,12 +8,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EntityBulletMusket extends AReforgedThrowable {
-	
+
 	public EntityBulletMusket(World worldIn) {
 		super(worldIn, "musket");
 		setNoGravity(true);
 	}
-	
+
 	public EntityBulletMusket(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
 		super(worldIn, throwerIn, stack, "musket");
 		setNoGravity(true);
@@ -22,16 +22,16 @@ public class EntityBulletMusket extends AReforgedThrowable {
 		motionZ *= 5;
 		setInited();
 	}
-	
+
 	@Override
 	protected boolean onEntityHit(Entity entity) {
 		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity));
 		return true;
 	}
-	
+
 	@Override
 	protected float getImpactDamage(Entity target) {
 		return 10f;
 	}
-	
+
 }

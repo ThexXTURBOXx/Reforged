@@ -11,30 +11,37 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderDart extends ReforgedRender<EntityDart> {
-	
+
 	public RenderDart(RenderManager renderManager) {
 		super(renderManager, new ModelDart(), -90);
 	}
-	
+
 	@Override
 	protected ResourceLocation getEntityTexture(EntityDart entity) {
-		
-		switch(entity.getEffect()) {
-		
-		case "normal": return Textures.NORMAL_DART;
-		
-		case "hunger": return Textures.HUNGER_DART;
-		
-		case "poison": return Textures.POISON_DART;
-		
-		case "poison_strong": return Textures.POISON_2_DART;
-		
-		case "slowness": return Textures.SLOW_DART;
-					 	 
-		case "wither": return Textures.WITHER_DART;
-		
-		default: throw new IllegalArgumentException("No Item called " + entity.getEffect() + " found!");
-				
+
+		switch (entity.getEffect()) {
+
+		case "normal":
+			return Textures.NORMAL_DART;
+
+		case "hunger":
+			return Textures.HUNGER_DART;
+
+		case "poison":
+			return Textures.POISON_DART;
+
+		case "poison_strong":
+			return Textures.POISON_2_DART;
+
+		case "slowness":
+			return Textures.SLOW_DART;
+
+		case "wither":
+			return Textures.WITHER_DART;
+
+		default:
+			throw new IllegalArgumentException("No Item called " + entity.getEffect() + " found!");
+
 		}
 	}
 }
