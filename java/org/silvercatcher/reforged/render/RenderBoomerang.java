@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderBoomerang extends ReforgedRender {
 	
-	protected float yawb = modifier;
+	protected float yawb = 90;
 	
 	public RenderBoomerang(RenderManager renderManager) {
 		super(renderManager, new ModelBoomerang(), 90);
@@ -49,7 +49,7 @@ public class RenderBoomerang extends ReforgedRender {
 			}
 		}
 		//If the number is set higher, then the Boomerang will rotate faster, otherwise slower
-		yawb += ((double) 3 / boomerangCount);
+		yawb += ((double) 5 / boomerangCount);
 		GL11.glRotated(yawb, 0, 1, 0);
 		model.render(theEntity,(float) x,(float) y,(float) z, yawb, partialTick, 0.0475F);
 		GL11.glPopMatrix();
