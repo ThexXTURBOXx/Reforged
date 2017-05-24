@@ -14,15 +14,17 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.client.event.MouseEvent;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ReforgedEvents {
 	
+	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void customReach(MouseEvent e) {
 		if(e.button == 0 && e.buttonstate) {
@@ -49,17 +51,19 @@ public class ReforgedEvents {
 	
 	@SubscribeEvent
 	public void onTick(PlayerTickEvent e) {
+		if(e.side == Side.CLIENT) notified = true;
 		if(!notified) {
 			notified = true;
-			if(!ReforgedMod.battlegearDetected) return;
 			EntityPlayer p = e.player;
-			String par = Character.toString(EnumChatFormatting.DARK_GRAY.toString().charAt(0));
-			p.addChatComponentMessage(new ChatComponentText(
-					"[" + par + "bReforged" + par + "7] " + par + "cYou have \"Mine & Blade Battlegear 2 - Bullseye\" " + par + "cinstalled."));
-			p.addChatComponentMessage(new ChatComponentText(
-					"" + par + "cIt has incompatibility issues with Reforged."));
-			p.addChatComponentMessage(new ChatComponentText(
-					"" + par + "cSome Weapons will act different!"));
+			String par = "\u00A7";
+			if(ReforgedMod.battlegearDetected) {
+				p.addChatMessage(new ChatComponentText(
+						par + "7[" + par + "bReforged" + par + "7] " + par + "cYou have \"Mine & Blade Battlegear 2 - Bullseye\" " + par + "cinstalled."));
+				p.addChatMessage(new ChatComponentText(
+						"" + par + "cPatch loaded, because it has incompatibility issues with Reforged."));
+				p.addChatMessage(new ChatComponentText(
+						"" + par + "cSome Weapons will act different (but they hopefully work)!"));
+			}
 		}
 	}
 	

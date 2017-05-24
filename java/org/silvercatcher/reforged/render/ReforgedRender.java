@@ -15,12 +15,10 @@ public abstract class ReforgedRender extends Render {
 	
 	ReforgedModel model;
 	float scale = 1;
-	int modifier = 0;
 	
 	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, int rotationModifier) {
 		super(renderManager);
 		this.model = model;
-		this.modifier = rotationModifier;
 	}
 	
 	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, float scale, int rotationModifier) {
@@ -41,7 +39,8 @@ public abstract class ReforgedRender extends Render {
 		bindTexture(getEntityTexture(theEntity));
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
-		GL11.glRotated(yaw + modifier, 0, 1, 0);
+		GL11.glRotated(theEntity.prevRotationYaw + (theEntity.rotationYaw - theEntity.prevRotationYaw) * partialTick - 90.0F, 0.0F, 1.0F, 0.0F);
+		GL11.glRotated(theEntity.prevRotationPitch + (theEntity.rotationPitch - theEntity.prevRotationPitch) * partialTick, 0.0F, 0.0F, 1.0F);
 		model.render(theEntity,(float) x,(float) y,(float) z, yaw, partialTick, 0.0475F);
 		GL11.glPopMatrix();
 	}

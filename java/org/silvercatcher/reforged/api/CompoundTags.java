@@ -59,4 +59,7 @@ public class CompoundTags {
 	/** saves whether a player is stunned */
 	public static final String STUNNED 	 = "stunned";
 	
+	/** saves how long the weapon was relaoding */
+	public static final String TIME 	 = "time";
+	
 }

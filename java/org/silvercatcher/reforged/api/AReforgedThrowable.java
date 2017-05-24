@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.api;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,19 +33,17 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 
 	@Override
 	protected void onImpact(MovingObjectPosition target) {
-		
 		boolean broken;
-		
 		if(target.entityHit == null) {
-			
-			broken = onBlockHit(target.getBlockPos());
-			
+			IBlockState state = worldObj.getBlockState(target.getBlockPos());
+			broken = state.getBlock().getCollisionBoundingBox(worldObj, target.getBlockPos(), state) != null ? onBlockHit(target.getBlockPos()) : false;
 		} else {
-			
+			if(target.entityHit instanceof EntityLivingBase && target.entityHit.equals(getThrower()) && ticksExisted < 5) {
+				return;
+			}
 			broken = onEntityHit(target.entityHit instanceof EntityLivingBase
 					? (EntityLivingBase) target.entityHit : target.entityHit); 
 		}
-		
 		if(broken) setDead();
 	}
 	

@@ -6,6 +6,7 @@ import org.silvercatcher.reforged.ReforgedMod;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
@@ -24,6 +25,21 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		setUnlocalizedName(name);
 		setCreativeTab(ReforgedMod.tabReforged);
 		this.shootsound = shootsound;
+	}
+	
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+		if(!(entityIn instanceof EntityPlayer)) return;
+		if(giveCompound(stack).getBoolean(CompoundTags.STARTED) && giveCompound(stack).getByte(CompoundTags.AMMUNITION) == loading &&
+				ItemStack.areItemStacksEqual(stack, ((EntityPlayer) entityIn).getItemInUse())) {
+			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
+		}
+	}
+	
+	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return false;
 	}
 	
 	public static final byte empty		= 0;
@@ -87,7 +103,8 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				
 				loadState = loading;
 				if(compound.getByte(CompoundTags.AMMUNITION) == empty) {
-					compound.setInteger(CompoundTags.STARTED, playerIn.ticksExisted + getReloadTotal());
+					compound.setBoolean(CompoundTags.STARTED, true);
+					compound.setInteger(CompoundTags.TIME, 0);
 				}
 			} else {
 				
@@ -120,9 +137,14 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				}
 				
 				compound.setByte(CompoundTags.AMMUNITION, empty);
-				compound.setInteger(CompoundTags.STARTED, -1);
+				compound.setBoolean(CompoundTags.STARTED, false);
 			}
+			compound.setInteger(CompoundTags.TIME, -1);
 		}
+	}
+	
+	public int getReloadTime(ItemStack stack) {
+		return giveCompound(stack).getInteger(CompoundTags.TIME);
 	}
 	
 	public abstract void shoot(World world, EntityLivingBase playerIn, ItemStack stack);
@@ -150,14 +172,6 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 			compound.setByte(CompoundTags.AMMUNITION, empty);
 		}
 		return compound;
-	}
-	
-	public int getReloadStarted(ItemStack stack) {
-		return giveCompound(stack).getInteger(CompoundTags.STARTED);
-	}
-	
-	public int getReloadLeft(ItemStack stack, EntityPlayer player) {
-		return (getReloadStarted(stack) - player.ticksExisted);
 	}
 	
 	@SuppressWarnings("rawtypes")
