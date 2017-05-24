@@ -5,7 +5,6 @@ import java.io.File;
 import org.silvercatcher.reforged.*;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.entities.*;
-import org.silvercatcher.reforged.util.VersionChecker;
 
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraftforge.common.config.Configuration;
@@ -23,8 +22,6 @@ public class CommonProxy {
 		ReforgedRegistry.registerItems();
 		ReforgedRegistry.registerPackets();
 		registerEntities();
-		Thread versionCheck = new VersionChecker();
-		versionCheck.start();
 	}
 	
 	public void init(FMLInitializationEvent e) {
