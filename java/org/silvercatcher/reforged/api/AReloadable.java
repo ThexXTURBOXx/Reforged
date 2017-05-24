@@ -37,7 +37,10 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-		if(giveCompound(stack).getBoolean(CompoundTags.STARTED) && giveCompound(stack).getByte(CompoundTags.AMMUNITION) == loading) {
+		if(!(entityIn instanceof EntityLivingBase)) return;
+		if(giveCompound(stack).getBoolean(CompoundTags.STARTED) && giveCompound(stack).getByte(CompoundTags.AMMUNITION) == loading &&
+				ItemStack.areItemStacksEqual(stack, ((EntityLivingBase) entityIn).getActiveItemStack())) {
+			System.out.println("lel");
 			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
 		}
 	}
@@ -142,10 +145,9 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				compound.setByte(CompoundTags.AMMUNITION, empty);
 				compound.setBoolean(CompoundTags.STARTED, false);
 				compound.setInteger(CompoundTags.TIME, -1);
+			} else {
+				compound.setInteger(CompoundTags.TIME, -1);
 			}
-		}
-		if(worldIn.isRemote && playerInl instanceof EntityPlayer) {
-			Helpers.playSound(worldIn, playerInl, shootsound, 1f, 1f);
 		}
 	}
 	
