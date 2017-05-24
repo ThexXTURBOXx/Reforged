@@ -37,15 +37,14 @@ public class ReforgedMonsterArmourer {
 			zombieWeapons = null;
 		else
 			zombieWeapons = list.toArray(new Item[list.size()]);
+		for(Item i : zombieWeapons) System.out.println(i.getUnlocalizedName());
 	}
 
 	@SubscribeEvent
 	public void onSpawn(EntityJoinWorldEvent event) {
-
 		if (event.isCanceled() || event.getEntity() == null || event.getWorld().isRemote
 				|| !(event.getEntity() instanceof EntityZombie) || zombieWeapons == null)
 			return;
-
 		equipZombie((EntityZombie) event.getEntity());
 	}
 
@@ -54,9 +53,7 @@ public class ReforgedMonsterArmourer {
 	}
 
 	private void equipZombie(EntityZombie zombie) {
-
-		if (zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND) == null && random.nextInt(10) == 0) {
-
+		if ((zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND) == null || zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).isEmpty()) && random.nextInt(10) == 0) {
 			Item item = randomFrom(zombieWeapons);
 			zombie.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(item));
 

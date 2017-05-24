@@ -28,7 +28,7 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 	}
 
 	public ItemBattleAxe(ToolMaterial material, boolean unbreakable) {
-		super(material);
+		super(material, material.getDamageVsEntity(), -3.0F);
 		setMaxStackSize(1);
 
 		this.unbreakable = unbreakable;
