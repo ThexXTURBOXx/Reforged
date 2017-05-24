@@ -54,7 +54,7 @@ public class TileEntityCaltropBlock extends BlockContainer implements BlockExten
 	
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-		return getBoundingBox(blockState, null, pos);
+		return NULL_AABB;
 	}
 	
 	@Override

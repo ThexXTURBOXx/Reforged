@@ -40,7 +40,6 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		if(!(entityIn instanceof EntityLivingBase)) return;
 		if(giveCompound(stack).getBoolean(CompoundTags.STARTED) && giveCompound(stack).getByte(CompoundTags.AMMUNITION) == loading &&
 				ItemStack.areItemStacksEqual(stack, ((EntityLivingBase) entityIn).getActiveItemStack())) {
-			System.out.println("lel");
 			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
 		}
 	}
@@ -144,10 +143,8 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				
 				compound.setByte(CompoundTags.AMMUNITION, empty);
 				compound.setBoolean(CompoundTags.STARTED, false);
-				compound.setInteger(CompoundTags.TIME, -1);
-			} else {
-				compound.setInteger(CompoundTags.TIME, -1);
 			}
+			compound.setInteger(CompoundTags.TIME, -1);
 		}
 	}
 	
@@ -180,14 +177,6 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 			compound.setByte(CompoundTags.AMMUNITION, empty);
 		}
 		return compound;
-	}
-	
-	public int getReloadStarted(ItemStack stack) {
-		return giveCompound(stack).getInteger(CompoundTags.STARTED);
-	}
-	
-	public int getReloadLeft(ItemStack stack, EntityPlayer player) {
-		return (getReloadStarted(stack) - player.ticksExisted);
 	}
 	
 	@SuppressWarnings("rawtypes")

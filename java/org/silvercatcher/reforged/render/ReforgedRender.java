@@ -20,7 +20,7 @@ public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, int rotationModifier) {
 		super(renderManager);
 		this.model = model;
-		this.modifier = rotationModifier;
+		modifier = rotationModifier;
 	}
 	
 	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, float scale, int rotationModifier) {
