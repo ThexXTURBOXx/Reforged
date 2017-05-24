@@ -22,85 +22,87 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 
 	protected final MaterialDefinition materialDefinition;
 	protected final boolean unbreakable;
-	
+
 	public ItemBattleAxe(ToolMaterial material) {
 		this(material, false);
 	}
-	
+
 	public ItemBattleAxe(ToolMaterial material, boolean unbreakable) {
 		super(material);
 		setMaxStackSize(1);
-		
+
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setUnlocalizedName(materialDefinition.getPrefixedName("battleaxe"));
 		setMaxDamage(materialDefinition.getMaxUses());
-		
+
 		setCreativeTab(ReforgedMod.tabReforged);
 	}
-	
+
 	@Override
 	public boolean isDamageable() {
-		if(unbreakable) return false;
-		else return true;
+		if (unbreakable)
+			return false;
+		else
+			return true;
 	}
-	
+
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ItemStack(this),
-				"xxx",
-				"xsx",
-				" s ",
-				'x', materialDefinition.getRepairMaterial(),
+		GameRegistry.addRecipe(new ItemStack(this), "xxx", "xsx", " s ", 'x', materialDefinition.getRepairMaterial(),
 				's', Items.stick);
 	}
 
 	@Override
 	public float getStrVsBlock(ItemStack stack, Block block) {
-		
+
 		return effectiveAgainst(block) ? materialDefinition.getEfficiencyOnProperMaterial() + 0.5f : 1f;
 	}
-	
+
 	@Override
-	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, BlockPos pos,
-			EntityLivingBase player) {
-		
+	public boolean onBlockDestroyed(ItemStack stack, World world, Block block, BlockPos pos, EntityLivingBase player) {
+
 		stack.damageItem(effectiveAgainst(block) ? 2 : 3, player);
 		return true;
 	}
-	
+
 	protected boolean effectiveAgainst(Block target) {
-		
+
 		Material material = target.getMaterial();
 		return (material == Material.wood || material == Material.plants || material == Material.vine);
 	}
 
 	@Override
 	public float getHitDamage() {
-		
+
 		return materialDefinition.getDamageVsEntity() * 1.5f + 4f;
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
 	}
-	
+
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
 		return materialDefinition.getEnchantability();
 	}
-	
+
 	@Override
 	public float zombieSpawnChance() {
-		switch(materialDefinition.getMaterial()) {
-		case GOLD: return 1;
-		case IRON: return 2;
-		case STONE: return 3;
-		case WOOD: return 4;
-		default: return 0;
+		switch (materialDefinition.getMaterial()) {
+		case GOLD:
+			return 1;
+		case IRON:
+			return 2;
+		case STONE:
+			return 3;
+		case WOOD:
+			return 4;
+		default:
+			return 0;
 		}
 	}
 }

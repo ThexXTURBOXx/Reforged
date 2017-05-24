@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBulletMusket extends ExtendedItem {
-	
+
 	public ItemBulletMusket() {
 		super();
 		setMaxStackSize(64);
@@ -16,13 +16,8 @@ public class ItemBulletMusket extends ExtendedItem {
 
 	@Override
 	public void registerRecipes() {
-		
-		GameRegistry.addShapedRecipe(new ItemStack(this, 8),
-				" i ",
-				" g ",
-				" p ",
-				'i', Items.iron_ingot,
-				'g', Items.gunpowder,
-				'p', Items.paper);
+
+		GameRegistry.addShapedRecipe(new ItemStack(this, 8), " i ", " g ", " p ", 'i', Items.iron_ingot, 'g',
+				Items.gunpowder, 'p', Items.paper);
 	}
 }

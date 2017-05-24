@@ -11,14 +11,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderDynamite extends ReforgedRender {
-	
+
 	public RenderDynamite(RenderManager renderManager) {
 		super(renderManager, new ModelDynamite(), 0);
 	}
-	
+
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		return Textures.DYNAMITE;
 	}
-	
+
 }

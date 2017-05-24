@@ -15,60 +15,50 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 public class ItemFireRod extends ExtendedItem {
 
 	public static final int FIRE_DURATION = 10;
-	
+
 	public ItemFireRod() {
 		super();
 		setUnlocalizedName("firerod");
 		setMaxStackSize(32);
 	}
 
-
 	@Override
 	public void registerRecipes() {
-	
-		GameRegistry.addRecipe(new ItemStack(this),
-				"  c",
-				" s ",
-				"s  ",
-				'c', new ItemStack(Items.coal, 1, 0),
-				's', Items.stick);
-		
-		GameRegistry.addRecipe(new ItemStack(this),
-				"  c",
-				" s ",
-				"s  ",
-				'c', new ItemStack(Items.coal, 1, 1),
-				's', Items.stick);
+
+		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.coal, 1, 0), 's',
+				Items.stick);
+
+		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.coal, 1, 1), 's',
+				Items.stick);
 	}
 
 	@Override
 	public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, BlockPos pos, EnumFacing side,
 			float hitX, float hitY, float hitZ) {
-		
-		if(world.getBlockState(pos).getBlock().isFlammable(world, pos, side)) {
-			
+
+		if (world.getBlockState(pos).getBlock().isFlammable(world, pos, side)) {
+
 			BlockPos target = pos.offset(side);
-			
-			if(!(world.canBlockSeeSky(pos) && world.isRaining()) &&  world.isAirBlock(target)) {
+
+			if (!(world.canBlockSeeSky(pos) && world.isRaining()) && world.isAirBlock(target)) {
 				world.setBlockState(target, Blocks.fire.getDefaultState());
 				--stack.stackSize;
 			}
 		}
 		return true;
 	}
-	
+
 	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		
-		if(!entity.isImmuneToFire()) {
+
+		if (!entity.isImmuneToFire()) {
 			entity.setFire(FIRE_DURATION);
 		}
-		if(!player.capabilities.isCreativeMode) {
+		if (!player.capabilities.isCreativeMode) {
 			--stack.stackSize;
 		}
 		return false;
 	}
-
 
 	@Override
 	public float getHitDamage() {

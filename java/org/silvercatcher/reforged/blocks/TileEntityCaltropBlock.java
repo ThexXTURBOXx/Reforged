@@ -23,9 +23,9 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class TileEntityCaltropBlock extends BlockContainer implements BlockExtension {
-	
+
 	private EntityLivingBase owner;
-	
+
 	public TileEntityCaltropBlock() {
 		super(Material.grass);
 		setUnlocalizedName("caltrop");
@@ -33,53 +33,52 @@ public class TileEntityCaltropBlock extends BlockContainer implements BlockExten
 		setBlockBounds(0.35F, 0.0F, 0.35F, 0.65F, 0.5F, 0.65F);
 		setResistance(30);
 	}
-	
+
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityCaltropEntity();
 	}
-	
+
 	@Override
 	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this, 4), " i ",
-														     " i ",
-													         "i i",
-														     'i', new ItemStack(Blocks.iron_bars));
+		GameRegistry.addShapedRecipe(new ItemStack(this, 4), " i ", " i ", "i i", 'i', new ItemStack(Blocks.iron_bars));
 	}
-	
+
 	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer,
+			ItemStack stack) {
 		owner = placer;
 	}
-	
+
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
 		onEntityCollidedWithBlock(world, pos, entity);
 	}
-	
+
 	@Override
 	public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
-		if(entity instanceof EntityLivingBase) {
+		if (entity instanceof EntityLivingBase) {
 			EntityLivingBase e = (EntityLivingBase) entity;
-			if(e != owner) {
+			if (e != owner) {
 				e.attackEntityFrom(new DamageSource("caltrop").setDamageBypassesArmor(), 8);
-				if(!world.isRemote) world.setBlockToAir(pos);
+				if (!world.isRemote)
+					world.setBlockToAir(pos);
 			}
 		}
 	}
-	
+
 	@Override
 	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
 		List<ItemStack> items = new ArrayList<>();
 		items.add(new ItemStack(ReforgedAdditions.CALTROP));
 		return items;
 	}
-	
+
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
 	}
-	
+
 	@Override
 	public boolean isNormalCube(IBlockAccess world, BlockPos pos) {
 		return false;

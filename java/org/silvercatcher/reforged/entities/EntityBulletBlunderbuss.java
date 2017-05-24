@@ -8,36 +8,36 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public class EntityBulletBlunderbuss extends AReforgedThrowable {
-	
+
 	public EntityBulletBlunderbuss(World world) {
-		
+
 		super(world, "blunderbuss");
 	}
-	
+
 	public EntityBulletBlunderbuss(World world, EntityLivingBase thrower, ItemStack stack) {
-		
+
 		super(world, thrower, stack, "blunderbuss");
 		float randomNumX = rand.nextInt(21);
 		float randomNumY = rand.nextInt(21);
 		float randomNumZ = rand.nextInt(21);
-		if(rand.nextBoolean()) {
+		if (rand.nextBoolean()) {
 			randomNumX = 0 - randomNumX;
 		}
-		if(rand.nextBoolean()) {
+		if (rand.nextBoolean()) {
 			randomNumY = 0 - randomNumY;
 		}
-		if(rand.nextBoolean()) {
+		if (rand.nextBoolean()) {
 			randomNumZ = 0 - randomNumZ;
 		}
 		this.motionX += randomNumX / 100;
 		this.motionY += randomNumY / 100;
 		this.motionZ += randomNumZ / 100;
 	}
-	
+
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		if(ticksExisted >= 30) {
+		if (ticksExisted >= 30) {
 			setDead();
 		}
 	}

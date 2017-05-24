@@ -11,14 +11,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class RenderBulletMusket extends ReforgedRender {
-	
+
 	public RenderBulletMusket(RenderManager renderManager) {
 		super(renderManager, new ModelBulletMusket(), 0);
 	}
-	
+
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		return Textures.BULLET_MUSKET;
 	}
-	
+
 }
