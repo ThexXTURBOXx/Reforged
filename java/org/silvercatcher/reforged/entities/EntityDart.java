@@ -86,7 +86,7 @@ public class EntityDart extends AReforgedThrowable {
 					break;
 
 				case "poison_strong":
-					p.addPotionEffect(new PotionEffect(getPotion("posion"), 300, 2));
+					p.addPotionEffect(new PotionEffect(getPotion("poison"), 300, 2));
 					break;
 
 				case "slowness":
