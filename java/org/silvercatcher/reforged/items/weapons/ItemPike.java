@@ -4,11 +4,10 @@ import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemPike extends ExtendedItem {
@@ -48,22 +47,25 @@ public class ItemPike extends ExtendedItem {
 	}
 
 	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		super.hitEntity(stack, target, attacker);
+		float damage = getHitDamage();
+		if (attacker instanceof EntityPlayer)
+			damage = damage + getEnchantmentBonus(stack, (EntityPlayer) attacker, target);
+		if (attacker.isRiding()) {
+			damage += getHitDamage() / 2;
+		}
+		target.attackEntityFrom(getDamage(attacker), damage);
+		stack.damageItem(1, attacker);
+		return true;
+	}
+
+	@Override
 	public boolean isDamageable() {
 		if (unbreakable)
 			return false;
 		else
 			return true;
-	}
-
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		super.onLeftClickEntity(stack, player, entity);
-		float damage = getHitDamage(stack) + getEnchantmentBonus(stack, player, entity);
-		if (entity.isRiding()) {
-			damage += getHitDamage() / 2;
-		}
-		entity.attackEntityFrom(DamageSource.causePlayerDamage(player), damage);
-		return true;
 	}
 
 	@Override

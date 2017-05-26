@@ -2,7 +2,7 @@ package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.api.ExtendedItem;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -28,6 +28,20 @@ public class ItemFireRod extends ExtendedItem {
 	}
 
 	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		super.hitEntity(stack, target, attacker);
+		if (!target.isImmuneToFire()) {
+			target.setFire(FIRE_DURATION);
+		}
+		if (attacker instanceof EntityPlayer) {
+			if (!((EntityPlayer) attacker).capabilities.isCreativeMode) {
+				stack.setCount(stack.getCount() - 1);
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side,
 			float hitX, float hitY, float hitZ) {
 		if (worldIn.getBlockState(pos).getBlock().isFlammable(worldIn, pos, side)) {
@@ -40,18 +54,6 @@ public class ItemFireRod extends ExtendedItem {
 			}
 		}
 		return EnumActionResult.SUCCESS;
-	}
-
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-
-		if (!entity.isImmuneToFire()) {
-			entity.setFire(FIRE_DURATION);
-		}
-		if (!player.capabilities.isCreativeMode) {
-			stack.setCount(stack.getCount() - 1);
-		}
-		return false;
 	}
 
 	@Override

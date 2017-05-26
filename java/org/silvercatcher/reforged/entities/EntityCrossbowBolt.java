@@ -47,17 +47,21 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 			DataSerializers.VARINT);
 	private static final DataParameter<Byte> CRITICAL = EntityDataManager.<Byte>createKey(EntityCrossbowBolt.class,
 			DataSerializers.BYTE);
+
 	public static int func_191508_b(ItemStack p_191508_0_) {
 		NBTTagCompound nbttagcompound = p_191508_0_.getTagCompound();
 		return nbttagcompound != null && nbttagcompound.hasKey("CustomPotionColor", 99)
 				? nbttagcompound.getInteger("CustomPotionColor")
 				: -1;
 	}
+
 	public static void registerFixesArrow(DataFixer fixer, String name) {
 	}
+
 	public static void registerFixesTippedArrow(DataFixer fixer) {
 		EntityArrow.registerFixesArrow(fixer, "TippedArrow");
 	}
+
 	private PotionType potion = PotionTypes.EMPTY;
 	private final Set<PotionEffect> customPotionEffects = Sets.<PotionEffect>newHashSet();
 	private boolean field_191509_at;

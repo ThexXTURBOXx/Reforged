@@ -47,6 +47,12 @@ public class ItemMusket extends AReloadable {
 	}
 
 	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		stack.damageItem(1, attacker);
+		return super.hitEntity(stack, target, attacker);
+	}
+
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (hand == EnumHand.MAIN_HAND) {
 			setAmmo(ReforgedAdditions.MUSKET_BULLET);

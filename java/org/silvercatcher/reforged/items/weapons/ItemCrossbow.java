@@ -68,6 +68,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 			}
 		});
 	}
+
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
 
@@ -78,6 +79,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 						: (loadState == loaded ? I18n.format("item.musket.loadstate.loaded")
 								: I18n.format("item.musket.loadstate.loading"))));
 	}
+
 	private ItemStack findAmmo(EntityPlayer player) {
 		if (this.isArrow(player.getHeldItem(EnumHand.OFF_HAND))) {
 			return player.getHeldItem(EnumHand.OFF_HAND);

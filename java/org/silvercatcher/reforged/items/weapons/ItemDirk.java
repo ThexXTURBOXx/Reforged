@@ -8,13 +8,10 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemDirk extends ItemSword implements ItemExtension, IZombieEquippable {
@@ -55,23 +52,20 @@ public class ItemDirk extends ItemSword implements ItemExtension, IZombieEquippa
 	}
 
 	@Override
-	public boolean isDamageable() {
-		return !unbreakable;
-	}
-
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if (!super.onLeftClickEntity(stack, player, entity)) {
-			if (entity instanceof EntityLivingBase) {
-				EntityLivingBase target = (EntityLivingBase) entity;
-				if (player.isSneaking()) {
-					target.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage() + 2f);
-				} else {
-					target.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage());
-				}
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (!super.hitEntity(stack, target, attacker)) {
+			if (attacker.isSneaking()) {
+				target.attackEntityFrom(getDamage(attacker), getHitDamage() + 2f);
+			} else {
+				target.attackEntityFrom(getDamage(attacker), getHitDamage());
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public boolean isDamageable() {
+		return !unbreakable;
 	}
 
 	@Override

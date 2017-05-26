@@ -15,6 +15,11 @@ public class ItemArrowBundle extends ExtendedItem {
 	}
 
 	@Override
+	public boolean isWeapon() {
+		return false;
+	}
+
+	@Override
 	public void registerRecipes() {
 
 		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(Items.STRING), new ItemStack(Items.ARROW),

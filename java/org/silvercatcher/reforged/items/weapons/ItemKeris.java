@@ -7,7 +7,6 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -50,18 +49,17 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 	}
 
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if (entity instanceof EntityLivingBase) {
-			EntityLivingBase e = (EntityLivingBase) entity;
-			if (e.getHealth() <= getHitDamage() && !(e instanceof EntityPlayer)) {
-				World w = e.getEntityWorld();
-				if (!w.isRemote) {
-					int amount = player.experienceLevel / 2;
-					while (amount > 0) {
-						int j = EntityXPOrb.getXPSplit(amount);
-						amount -= j;
-						w.spawnEntity(new EntityXPOrb(w, e.posX + 0.5D, e.posY + 0.5D, e.posZ + 0.5D, j));
-					}
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		super.hitEntity(stack, target, attacker);
+		if (target.getHealth() <= getHitDamage() && !(attacker instanceof EntityPlayer)) {
+			World w = target.getEntityWorld();
+			if (!w.isRemote) {
+				int amount = ((EntityPlayer) attacker).experienceLevel / 2;
+				while (amount > 0) {
+					int j = EntityXPOrb.getXPSplit(amount);
+					amount -= j;
+					w.spawnEntity(
+							new EntityXPOrb(w, attacker.posX + 0.5D, attacker.posY + 0.5D, attacker.posZ + 0.5D, j));
 				}
 			}
 		}

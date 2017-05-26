@@ -16,6 +16,11 @@ public class ItemBulletBlunderbuss extends ExtendedItem {
 	}
 
 	@Override
+	public boolean isWeapon() {
+		return false;
+	}
+
+	@Override
 	public void registerRecipes() {
 
 		GameRegistry.addShapedRecipe(new ItemStack(this, 8), " h ", " g ", " p ", 'h', new ItemStack(Blocks.GRAVEL),

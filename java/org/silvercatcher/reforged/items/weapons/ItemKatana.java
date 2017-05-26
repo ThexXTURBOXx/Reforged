@@ -8,13 +8,11 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquippable {
@@ -59,50 +57,48 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 	}
 
 	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+
+		if (!super.hitEntity(stack, target, attacker)) {
+
+			int armorvalue = 0;
+
+			for (int i = 3; i < 6; i++) {
+
+				ItemStack armorStack = target.getItemStackFromSlot(EntityEquipmentSlot.values()[i]);
+				if (armorStack != null && !armorStack.isEmpty() && armorStack.getItem() instanceof ItemArmor) {
+					armorvalue += ((ItemArmor) armorStack.getItem()).damageReduceAmount;
+				}
+			}
+
+			float damage = getHitDamage();
+
+			if (attacker instanceof EntityPlayer)
+				damage = damage + getEnchantmentBonus(stack, (EntityPlayer) attacker, target);
+
+			if (armorvalue < 12) {
+
+				damage *= 1.5f;
+				target.hurtResistantTime = 0;
+			}
+
+			if (armorvalue > 6) {
+
+				stack.damageItem(1, target);
+			}
+
+			target.attackEntityFrom(getDamage(attacker), damage);
+		}
+
+		return true;
+	}
+
+	@Override
 	public boolean isDamageable() {
 		if (unbreakable)
 			return false;
 		else
 			return true;
-	}
-
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-
-		if (!super.onLeftClickEntity(stack, player, entity)) {
-
-			if (entity instanceof EntityLivingBase) {
-
-				EntityLivingBase target = (EntityLivingBase) entity;
-
-				int armorvalue = 0;
-
-				for (int i = 3; i < 6; i++) {
-
-					ItemStack armorStack = target.getItemStackFromSlot(EntityEquipmentSlot.values()[i]);
-					if (armorStack != null && !armorStack.isEmpty() && armorStack.getItem() instanceof ItemArmor) {
-						armorvalue += ((ItemArmor) armorStack.getItem()).damageReduceAmount;
-					}
-				}
-
-				float damage = getHitDamage() + getEnchantmentBonus(stack, player, entity);
-
-				if (armorvalue < 12) {
-
-					damage *= 1.5f;
-					target.hurtResistantTime = 0;
-				}
-
-				if (armorvalue > 6) {
-
-					stack.damageItem(1, target);
-				}
-
-				target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage);
-			}
-		}
-
-		return true;
 	}
 
 	@Override

@@ -34,6 +34,11 @@ public class ItemBlowGun extends ExtendedItem {
 	}
 
 	@Override
+	public boolean isWeapon() {
+		return false;
+	}
+
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (hand == EnumHand.MAIN_HAND) {
 			net.minecraftforge.event.entity.player.ArrowNockEvent event = new net.minecraftforge.event.entity.player.ArrowNockEvent(

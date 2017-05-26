@@ -7,9 +7,7 @@ import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
 import org.silvercatcher.reforged.props.IStunProperty;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
@@ -57,29 +55,27 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 	}
 
 	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (itemRand.nextInt(25) < (8 - zombieSpawnChance())) {
+			IStunProperty prop = target.getCapability(ReforgedMod.STUN_PROP, null);
+			if (prop != null) {
+				prop.setStunned(true);
+				target.addPotionEffect(new PotionEffect(getPotion("slowness"), 3, 10, false, false));
+				target.addPotionEffect(new PotionEffect(getPotion("mining_fatigue"), 3, 10, false, false));
+				target.addPotionEffect(new PotionEffect(getPotion("blindness"), 3, 10, false, false));
+				target.addPotionEffect(new PotionEffect(getPotion("weakness"), 3, 10, false, false));
+			}
+		}
+		stack.damageItem(1, attacker);
+		return super.hitEntity(stack, target, attacker);
+	}
+
+	@Override
 	public boolean isDamageable() {
 		if (unbreakable)
 			return false;
 		else
 			return true;
-	}
-
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		if (itemRand.nextInt(25) < (8 - zombieSpawnChance())) {
-			if (entity instanceof EntityLivingBase) {
-				EntityLivingBase elb = (EntityLivingBase) entity;
-				IStunProperty prop = elb.getCapability(ReforgedMod.STUN_PROP, null);
-				if (prop != null) {
-					prop.setStunned(true);
-					elb.addPotionEffect(new PotionEffect(getPotion("slowness"), 3, 10, false, false));
-					elb.addPotionEffect(new PotionEffect(getPotion("mining_fatigue"), 3, 10, false, false));
-					elb.addPotionEffect(new PotionEffect(getPotion("blindness"), 3, 10, false, false));
-					elb.addPotionEffect(new PotionEffect(getPotion("weakness"), 3, 10, false, false));
-				}
-			}
-		}
-		return super.onLeftClickEntity(stack, player, entity);
 	}
 
 	@Override

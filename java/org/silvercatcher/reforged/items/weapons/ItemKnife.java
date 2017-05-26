@@ -8,13 +8,10 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
-import net.minecraft.util.DamageSource;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -56,40 +53,35 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 	}
 
 	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+
+		if (!super.hitEntity(stack, target, attacker)) {
+
+			Vec3d look = target.getLookVec();
+			Vec3d attackervec = new Vec3d(attacker.posX - target.posX,
+					(attacker.getEntityBoundingBox().minY + attacker.height / 2) - target.posY + target.getEyeHeight(),
+					attacker.posZ - target.posZ);
+			double d0 = attackervec.lengthVector();
+
+			double d1 = look.dotProduct(attackervec);
+
+			boolean seen = d1 > 1 - 0.25 / d0;
+
+			if (!seen && target.canEntityBeSeen(attacker)) {
+				target.attackEntityFrom(getDamage(attacker), getHitDamage() + 2f);
+			} else {
+				target.attackEntityFrom(getDamage(attacker), getHitDamage());
+			}
+		}
+		return false;
+	}
+
+	@Override
 	public boolean isDamageable() {
 		if (unbreakable)
 			return false;
 		else
 			return true;
-	}
-
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-
-		if (!super.onLeftClickEntity(stack, player, entity)) {
-
-			if (entity instanceof EntityLivingBase) {
-
-				EntityLivingBase target = (EntityLivingBase) entity;
-
-				Vec3d look = target.getLookVec();
-				Vec3d attacker = new Vec3d(player.posX - target.posX,
-						(player.getEntityBoundingBox().minY + player.height / 2) - target.posY + target.getEyeHeight(),
-						player.posZ - target.posZ);
-				double d0 = attacker.lengthVector();
-
-				double d1 = look.dotProduct(attacker);
-
-				boolean seen = d1 > 1 - 0.25 / d0;
-
-				if (!seen && target.canEntityBeSeen(player)) {
-					target.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage() + 2f);
-				} else {
-					target.attackEntityFrom(DamageSource.causePlayerDamage(player), getHitDamage());
-				}
-			}
-		}
-		return false;
 	}
 
 	@Override

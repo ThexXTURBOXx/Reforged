@@ -26,6 +26,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 
 	private Item ammo;
 	private String shootsound;
+
 	public AReloadable(String name, String shootsound) {
 		setMaxStackSize(1);
 		setMaxDamage(100);
@@ -57,10 +58,14 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	@Override
 	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
 		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
-		if (equipmentSlot == EntityEquipmentSlot.MAINHAND && getHitDamage() > 0) {
+
+		if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
 			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
 					new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getHitDamage(), 0));
+			multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
+					new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", getAttackSpeed(null), 0));
 		}
+
 		return multimap;
 	}
 

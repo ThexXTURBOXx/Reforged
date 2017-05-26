@@ -26,6 +26,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			System.out.println();
 		}
 	}
+
 	private ItemStack output = ItemStack.EMPTY;
 	private int aB;
 
