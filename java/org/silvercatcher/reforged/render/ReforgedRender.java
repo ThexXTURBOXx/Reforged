@@ -35,10 +35,9 @@ public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 	}
 
 	/**
-	 * If you find any little issues while flying, just change partialTick in
-	 * the render-method to 0. Could fix it... I am not sure if I should let it
-	 * like this, but for now it works ^^ I will change it, when needed -
-	 * ThexXTURBOXx
+	 * If you find any little issues while flying, just change partialTick in the
+	 * render-method to 0. Could fix it... I am not sure if I should let it like
+	 * this, but for now it works ^^ I will change it, when needed - ThexXTURBOXx
 	 */
 	public void renderEntityModel(T theEntity, double x, double y, double z, float yaw, float partialTicks) {
 		GL11.glPushMatrix();

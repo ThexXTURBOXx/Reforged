@@ -52,7 +52,8 @@ public class ReforgedMonsterArmourer {
 	}
 
 	private void equipZombie(EntityZombie zombie) {
-		if ((zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND) == null || zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).isEmpty()) && random.nextInt(10) == 0) {
+		if ((zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND) == null
+				|| zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).isEmpty()) && random.nextInt(10) == 0) {
 			Item item = randomFrom(zombieWeapons);
 			zombie.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(item));
 

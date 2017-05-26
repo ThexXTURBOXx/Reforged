@@ -6,8 +6,8 @@ import net.minecraft.nbt.NBTTagCompound;
 public class CompoundTags {
 
 	/**
-	 * make sure we get no NPEs by using this method! if anyone knows a less
-	 * stupid way, tell me!
+	 * make sure we get no NPEs by using this method! if anyone knows a less stupid
+	 * way, tell me!
 	 * 
 	 * @param stack
 	 * @return
@@ -32,15 +32,15 @@ public class CompoundTags {
 	public static final String CATALYST = "catalyst";
 
 	/**
-	 * saves the impact damage a thrown or shot entity (javelin, bullet, etc.)
-	 * will do even if damage depends on other factors (e.g. speed on impact),
-	 * the base value can be saved here
+	 * saves the impact damage a thrown or shot entity (javelin, bullet, etc.) will
+	 * do even if damage depends on other factors (e.g. speed on impact), the base
+	 * value can be saved here
 	 */
 	public static final String IMPACT_DAMAGE = "impact_damage";
 
 	/**
-	 * saves the amount of damage an item, currently represented as an entity,
-	 * has taken
+	 * saves the amount of damage an item, currently represented as an entity, has
+	 * taken
 	 */
 	public static final String ITEM_DAMAGE = "item_damage";
 

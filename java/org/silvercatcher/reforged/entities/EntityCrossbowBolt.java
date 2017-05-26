@@ -121,7 +121,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 	public static int func_191508_b(ItemStack p_191508_0_) {
 		NBTTagCompound nbttagcompound = p_191508_0_.getTagCompound();
 		return nbttagcompound != null && nbttagcompound.hasKey("CustomPotionColor", 99)
-				? nbttagcompound.getInteger("CustomPotionColor") : -1;
+				? nbttagcompound.getInteger("CustomPotionColor")
+				: -1;
 	}
 
 	private void refreshColor() {
@@ -709,8 +710,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 	}
 
 	/**
-	 * returns if this entity triggers Block.onEntityWalking on the blocks they
-	 * walk on. used for spiders and wolves to prevent them from trampling crops
+	 * returns if this entity triggers Block.onEntityWalking on the blocks they walk
+	 * on. used for spiders and wolves to prevent them from trampling crops
 	 */
 	@Override
 	protected boolean canTriggerWalking() {
@@ -746,8 +747,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 	}
 
 	/**
-	 * Whether the arrow has a stream of critical hit particles flying behind
-	 * it.
+	 * Whether the arrow has a stream of critical hit particles flying behind it.
 	 */
 	public void setIsCritical(boolean critical) {
 		byte b0 = this.dataManager.get(CRITICAL).byteValue();
@@ -760,8 +760,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 	}
 
 	/**
-	 * Whether the arrow has a stream of critical hit particles flying behind
-	 * it.
+	 * Whether the arrow has a stream of critical hit particles flying behind it.
 	 */
 	public boolean getIsCritical() {
 		byte b0 = this.dataManager.get(CRITICAL).byteValue();
