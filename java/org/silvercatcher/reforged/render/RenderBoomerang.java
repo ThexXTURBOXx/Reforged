@@ -19,20 +19,6 @@ public class RenderBoomerang extends ReforgedRender<EntityBoomerang> {
 	}
 
 	@Override
-	public void renderEntityModel(EntityBoomerang theEntity, double x, double y, double z, float yaw,
-			float partialTick) {
-		GL11.glPushMatrix();
-		bindTexture(getEntityTexture(theEntity));
-		GL11.glTranslated(x, y, z);
-		GL11.glScalef(scale, scale, scale);
-		GL11.glRotatef(
-				(theEntity.prevRotationYaw + (theEntity.rotationYaw - theEntity.prevRotationYaw) * partialTick) - 90F,
-				0.0F, 1.0F, 0.0F);
-		model.render(theEntity, (float) x, (float) y, (float) z, yaw, partialTick, 0.0475F);
-		GL11.glPopMatrix();
-	}
-
-	@Override
 	protected ResourceLocation getEntityTexture(EntityBoomerang entity) {
 
 		switch (entity.getMaterialDefinition().getPrefix()) {
@@ -53,5 +39,19 @@ public class RenderBoomerang extends ReforgedRender<EntityBoomerang> {
 				return null;
 			}
 		}
+	}
+
+	@Override
+	public void renderEntityModel(EntityBoomerang theEntity, double x, double y, double z, float yaw,
+			float partialTick) {
+		GL11.glPushMatrix();
+		bindTexture(getEntityTexture(theEntity));
+		GL11.glTranslated(x, y, z);
+		GL11.glScalef(scale, scale, scale);
+		GL11.glRotatef(
+				(theEntity.prevRotationYaw + (theEntity.rotationYaw - theEntity.prevRotationYaw) * partialTick) - 90F,
+				0.0F, 1.0F, 0.0F);
+		model.render(theEntity, (float) x, (float) y, (float) z, yaw, partialTick, 0.0475F);
+		GL11.glPopMatrix();
 	}
 }

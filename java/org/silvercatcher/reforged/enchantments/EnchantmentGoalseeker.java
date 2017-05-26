@@ -12,11 +12,6 @@ public class EnchantmentGoalseeker extends Enchantment {
 	}
 
 	@Override
-	public String getName() {
-		return "enchantment.goalseeker";
-	}
-
-	@Override
 	public boolean canApply(ItemStack stack) {
 		return false;
 	}
@@ -24,6 +19,11 @@ public class EnchantmentGoalseeker extends Enchantment {
 	@Override
 	public int getMaxEnchantability(int enchantmentLevel) {
 		return 1;
+	}
+
+	@Override
+	public String getName() {
+		return "enchantment.goalseeker";
 	}
 
 }

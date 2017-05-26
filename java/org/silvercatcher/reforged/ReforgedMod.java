@@ -48,11 +48,6 @@ public class ReforgedMod {
 	public static CommonProxy proxy;
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		proxy.preInit(event);
-	}
-
-	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
 	}
@@ -60,6 +55,11 @@ public class ReforgedMod {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit(event);
+	}
+
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		proxy.preInit(event);
 	}
 
 }

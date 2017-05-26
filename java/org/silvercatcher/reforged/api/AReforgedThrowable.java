@@ -14,15 +14,10 @@ import net.minecraft.world.World;
 
 public abstract class AReforgedThrowable extends EntityThrowable {
 
-	private final String damageName;
-
 	public static final DataParameter<Boolean> INITIATED = EntityDataManager
 			.<Boolean>createKey(AReforgedThrowable.class, DataSerializers.BOOLEAN);
 
-	public AReforgedThrowable(World worldIn, String damageName) {
-		super(worldIn);
-		this.damageName = damageName;
-	}
+	private final String damageName;
 
 	public AReforgedThrowable(World worldIn, EntityLivingBase thrower, ItemStack stack, String damageName) {
 		super(worldIn, thrower);
@@ -41,19 +36,39 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		setThrowableHeading(motionX, motionY, motionZ, 1.5F, 1.0F);
 	}
 
-	public void setInited() {
-		dataManager.set(INITIATED, true);
+	public AReforgedThrowable(World worldIn, String damageName) {
+		super(worldIn);
+		this.damageName = damageName;
 	}
 
-	@Override
-	public void onUpdate() {
-		if (isInited()) {
-			super.onUpdate();
-			onUpdated();
-		}
+	/**
+	 * Causes the damage, which is set in the constructor
+	 * 
+	 * @param target
+	 *            the entity which got hit
+	 * @param shooter
+	 *            the mob which shot
+	 * @return the specified DamageSource
+	 */
+	protected DamageSource causeImpactDamage(Entity target, EntityLivingBase shooter) {
+		return new EntityDamageSourceIndirect(damageName, target, shooter).setProjectile();
 	}
 
-	public void onUpdated() {
+	/**
+	 * @return True, if the thrower is a player in Creative Mode. False, if the
+	 *         player is in Survival Mode or the thrower is an Entity
+	 */
+	public boolean creativeUse() {
+		return creativeUse(getThrower());
+	}
+
+	/**
+	 * @return True, if the given Entity is a player in Creative Mode. False, if the
+	 *         player is in Survival Mode or the entity is a normal Entity
+	 */
+	public boolean creativeUse(Entity e) {
+		return (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode)
+				|| !(e instanceof EntityPlayer);
 	}
 
 	@Override
@@ -63,24 +78,18 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 	}
 
 	@Override
-	protected void onImpact(RayTraceResult target) {
-		if (!world.isRemote) {
-			boolean broken;
-			if (target.entityHit == null) {
-				broken = world.getBlockState(target.getBlockPos()).getCollisionBoundingBox(world,
-						target.getBlockPos()) != null ? onBlockHit(target.getBlockPos()) : false;
-			} else {
-				if (target.entityHit instanceof EntityLivingBase && target.entityHit.equals(getThrower())
-						&& ticksExisted < 5) {
-					return;
-				}
-				broken = onEntityHit(target.entityHit instanceof EntityLivingBase ? (EntityLivingBase) target.entityHit
-						: target.entityHit);
-			}
-			if (broken)
-				setDead();
-		}
+	protected float getGravityVelocity() {
+		return 0.005f;
 	}
+
+	/**
+	 * Sets the damage which should be caused. It is set in half-lives.
+	 * 
+	 * @param target
+	 *            The mob which gets hit
+	 * @return the amount of damage
+	 */
+	protected abstract float getImpactDamage(Entity target);
 
 	protected boolean isInited() {
 		return dataManager.get(INITIATED);
@@ -119,38 +128,35 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		return onEntityHit((Entity) living);
 	}
 
-	/**
-	 * Causes the damage, which is set in the constructor
-	 * 
-	 * @param target
-	 *            the entity which got hit
-	 * @param shooter
-	 *            the mob which shot
-	 * @return the specified DamageSource
-	 */
-	protected DamageSource causeImpactDamage(Entity target, EntityLivingBase shooter) {
-		return new EntityDamageSourceIndirect(damageName, target, shooter).setProjectile();
-	}
-
-	/**
-	 * Sets the damage which should be caused. It is set in half-lives.
-	 * 
-	 * @param target
-	 *            The mob which gets hit
-	 * @return the amount of damage
-	 */
-	protected abstract float getImpactDamage(Entity target);
-
 	@Override
-	protected float getGravityVelocity() {
-		return 0.005f;
+	protected void onImpact(RayTraceResult target) {
+		if (!world.isRemote) {
+			boolean broken;
+			if (target.entityHit == null) {
+				broken = world.getBlockState(target.getBlockPos()).getCollisionBoundingBox(world,
+						target.getBlockPos()) != null ? onBlockHit(target.getBlockPos()) : false;
+			} else {
+				if (target.entityHit instanceof EntityLivingBase && target.entityHit.equals(getThrower())
+						&& ticksExisted < 5) {
+					return;
+				}
+				broken = onEntityHit(target.entityHit instanceof EntityLivingBase ? (EntityLivingBase) target.entityHit
+						: target.entityHit);
+			}
+			if (broken)
+				setDead();
+		}
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound tagCompound) {
+	public void onUpdate() {
+		if (isInited()) {
+			super.onUpdate();
+			onUpdated();
+		}
+	}
 
-		super.writeEntityToNBT(tagCompound);
-		tagCompound.setBoolean("initiated", dataManager.get(INITIATED));
+	public void onUpdated() {
 	}
 
 	@Override
@@ -160,21 +166,15 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		dataManager.set(INITIATED, tagCompund.getBoolean("initiated"));
 	}
 
-	/**
-	 * @return True, if the thrower is a player in Creative Mode. False, if the
-	 *         player is in Survival Mode or the thrower is an Entity
-	 */
-	public boolean creativeUse() {
-		return creativeUse(getThrower());
+	public void setInited() {
+		dataManager.set(INITIATED, true);
 	}
 
-	/**
-	 * @return True, if the given Entity is a player in Creative Mode. False, if the
-	 *         player is in Survival Mode or the entity is a normal Entity
-	 */
-	public boolean creativeUse(Entity e) {
-		return (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode)
-				|| !(e instanceof EntityPlayer);
+	@Override
+	public void writeEntityToNBT(NBTTagCompound tagCompound) {
+
+		super.writeEntityToNBT(tagCompound);
+		tagCompound.setBoolean("initiated", dataManager.get(INITIATED));
 	}
 
 }

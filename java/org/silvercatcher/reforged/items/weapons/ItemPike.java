@@ -30,6 +30,24 @@ public class ItemPike extends ExtendedItem {
 	}
 
 	@Override
+	public float getHitDamage() {
+		return materialDefinition.getDamageVsEntity() + 5f;
+	}
+
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return materialDefinition.getEnchantability();
+	}
+
+	public ToolMaterial getMaterial() {
+		return materialDefinition.getMaterial();
+	}
+
+	public MaterialDefinition getMaterialDefinition() {
+		return materialDefinition;
+	}
+
+	@Override
 	public boolean isDamageable() {
 		if (unbreakable)
 			return false;
@@ -53,24 +71,6 @@ public class ItemPike extends ExtendedItem {
 
 		GameRegistry.addRecipe(new ItemStack(this), "  m", " s ", "s  ", 'm', materialDefinition.getRepairMaterial(),
 				's', Items.STICK);
-	}
-
-	@Override
-	public float getHitDamage() {
-		return materialDefinition.getDamageVsEntity() + 5f;
-	}
-
-	public ToolMaterial getMaterial() {
-		return materialDefinition.getMaterial();
-	}
-
-	public MaterialDefinition getMaterialDefinition() {
-		return materialDefinition;
-	}
-
-	@Override
-	public int getItemEnchantability(ItemStack stack) {
-		return materialDefinition.getEnchantability();
 	}
 
 }

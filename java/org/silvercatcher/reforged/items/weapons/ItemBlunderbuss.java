@@ -20,6 +20,11 @@ public class ItemBlunderbuss extends AReloadable {
 	}
 
 	@Override
+	public float getHitDamage() {
+		return 2f;
+	}
+
+	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
 
 		return (repair.getItem() == Items.IRON_INGOT);
@@ -32,28 +37,14 @@ public class ItemBlunderbuss extends AReloadable {
 	}
 
 	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL),
-				new ItemStack(ReforgedAdditions.GUN_STOCK));
-	}
-
-	@Override
-	public float getHitDamage() {
-		return 2f;
-	}
-
-	@Override
 	public int getItemEnchantability(ItemStack stack) {
 		return ToolMaterial.IRON.getEnchantability();
 	}
 
 	@Override
-	public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
+	public int getReloadTotal() {
 
-		for (int i = 1; i < 12; i++) {
-			worldIn.spawnEntity(new EntityBulletBlunderbuss(worldIn, playerIn, stack));
-		}
+		return 40;
 	}
 
 	@Override
@@ -63,8 +54,17 @@ public class ItemBlunderbuss extends AReloadable {
 	}
 
 	@Override
-	public int getReloadTotal() {
+	public void registerRecipes() {
 
-		return 40;
+		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL),
+				new ItemStack(ReforgedAdditions.GUN_STOCK));
+	}
+
+	@Override
+	public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
+
+		for (int i = 1; i < 12; i++) {
+			worldIn.spawnEntity(new EntityBulletBlunderbuss(worldIn, playerIn, stack));
+		}
 	}
 }

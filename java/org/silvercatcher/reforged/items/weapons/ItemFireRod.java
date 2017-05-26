@@ -23,13 +23,8 @@ public class ItemFireRod extends ExtendedItem {
 	}
 
 	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 0), 's',
-				Items.STICK);
-
-		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 1), 's',
-				Items.STICK);
+	public float getHitDamage() {
+		return 1.5f;
 	}
 
 	@Override
@@ -60,7 +55,12 @@ public class ItemFireRod extends ExtendedItem {
 	}
 
 	@Override
-	public float getHitDamage() {
-		return 1.5f;
+	public void registerRecipes() {
+
+		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 0), 's',
+				Items.STICK);
+
+		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 1), 's',
+				Items.STICK);
 	}
 }

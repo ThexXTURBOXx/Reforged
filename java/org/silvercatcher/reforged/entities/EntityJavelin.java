@@ -45,27 +45,29 @@ public class EntityJavelin extends AReforgedThrowable {
 	}
 
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
-	}
-
-	@Override
 	protected void entityInit() {
 		super.entityInit();
 		dataManager.register(STACK, new ItemStack(ReforgedAdditions.JAVELIN));
 		dataManager.register(DURATION, 1);
 	}
 
-	public ItemStack getItemStack() {
-		return dataManager.get(STACK);
+	public int getDurLoaded() {
+		return dataManager.get(DURATION);
 	}
 
-	public void setItemStack(ItemStack stack) {
+	@Override
+	protected float getGravityVelocity() {
+		return 0.03F;
+	}
 
-		if (stack == null || stack.isEmpty() || !(stack.getItem() instanceof ItemJavelin)) {
-			throw new IllegalArgumentException("Invalid Itemstack!");
-		}
-		dataManager.set(STACK, stack);
+	@Override
+	protected float getImpactDamage(Entity target) {
+
+		return 5 + getDurLoaded() / 10;
+	}
+
+	public ItemStack getItemStack() {
+		return dataManager.get(STACK);
 	}
 
 	@Override
@@ -99,8 +101,17 @@ public class EntityJavelin extends AReforgedThrowable {
 		}
 	}
 
-	public int getDurLoaded() {
-		return dataManager.get(DURATION);
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound tagCompund) {
+
+		super.readEntityFromNBT(tagCompund);
+		setDurLoaded(tagCompund.getInteger("durloaded"));
+		setItemStack(new ItemStack(tagCompund.getCompoundTag("item")));
 	}
 
 	public void setDurLoaded(int durloaded) {
@@ -108,9 +119,12 @@ public class EntityJavelin extends AReforgedThrowable {
 		dataManager.set(DURATION, durloaded);
 	}
 
-	@Override
-	protected float getGravityVelocity() {
-		return 0.03F;
+	public void setItemStack(ItemStack stack) {
+
+		if (stack == null || stack.isEmpty() || !(stack.getItem() instanceof ItemJavelin)) {
+			throw new IllegalArgumentException("Invalid Itemstack!");
+		}
+		dataManager.set(STACK, stack);
 	}
 
 	@Override
@@ -123,19 +137,5 @@ public class EntityJavelin extends AReforgedThrowable {
 		if (getItemStack() != null && !getItemStack().isEmpty()) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
 		}
-	}
-
-	@Override
-	public void readEntityFromNBT(NBTTagCompound tagCompund) {
-
-		super.readEntityFromNBT(tagCompund);
-		setDurLoaded(tagCompund.getInteger("durloaded"));
-		setItemStack(new ItemStack(tagCompund.getCompoundTag("item")));
-	}
-
-	@Override
-	protected float getImpactDamage(Entity target) {
-
-		return 5 + getDurLoaded() / 10;
 	}
 }

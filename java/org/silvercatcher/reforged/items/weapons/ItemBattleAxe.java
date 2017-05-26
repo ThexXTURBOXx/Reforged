@@ -39,25 +39,40 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 		setCreativeTab(ReforgedMod.tabReforged);
 	}
 
-	@Override
-	public boolean isDamageable() {
-		if (unbreakable)
-			return false;
-		else
-			return true;
+	protected boolean effectiveAgainst(IBlockState target) {
+
+		Material material = target.getMaterial();
+		return (material == Material.WOOD || material == Material.PLANTS || material == Material.VINE);
 	}
 
 	@Override
-	public void registerRecipes() {
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		return ItemExtension.super.getAttributeModifiers(stack);
+	}
 
-		GameRegistry.addRecipe(new ItemStack(this), "xxx", "xsx", " s ", 'x', materialDefinition.getRepairMaterial(),
-				's', Items.STICK);
+	@Override
+	public float getHitDamage() {
+
+		return materialDefinition.getDamageVsEntity() * 1.5f + 4f;
+	}
+
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return materialDefinition.getEnchantability();
 	}
 
 	@Override
 	public float getStrVsBlock(ItemStack stack, IBlockState block) {
 
 		return effectiveAgainst(block) ? materialDefinition.getEfficiencyOnProperMaterial() + 0.5f : 1f;
+	}
+
+	@Override
+	public boolean isDamageable() {
+		if (unbreakable)
+			return false;
+		else
+			return true;
 	}
 
 	@Override
@@ -68,27 +83,11 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 		return true;
 	}
 
-	protected boolean effectiveAgainst(IBlockState target) {
-
-		Material material = target.getMaterial();
-		return (material == Material.WOOD || material == Material.PLANTS || material == Material.VINE);
-	}
-
 	@Override
-	public float getHitDamage() {
+	public void registerRecipes() {
 
-		return materialDefinition.getDamageVsEntity() * 1.5f + 4f;
-	}
-
-	@SuppressWarnings("rawtypes")
-	@Override
-	public Multimap getAttributeModifiers(ItemStack stack) {
-		return ItemExtension.super.getAttributeModifiers(stack);
-	}
-
-	@Override
-	public int getItemEnchantability(ItemStack stack) {
-		return materialDefinition.getEnchantability();
+		GameRegistry.addRecipe(new ItemStack(this), "xxx", "xsx", " s ", 'x', materialDefinition.getRepairMaterial(),
+				's', Items.STICK);
 	}
 
 	@Override

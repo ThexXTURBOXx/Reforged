@@ -25,14 +25,6 @@ public class MaterialManager {
 		definitionMap.put(ToolMaterial.DIAMOND, new MaterialDefinition("diamond", ToolMaterial.DIAMOND));
 	}
 
-	public static Set<Entry<ToolMaterial, MaterialDefinition>> getEntries() {
-		return definitionMap.entrySet();
-	}
-
-	public static MaterialDefinition getMaterialDefinition(ToolMaterial material) {
-		return definitionMap.get(material);
-	}
-
 	public static void addMaterialDefinition(ToolMaterial material, MaterialDefinition definition) {
 		definitionMap.put(material, definition);
 	}
@@ -42,12 +34,20 @@ public class MaterialManager {
 		itemMap.put(material, items);
 	}
 
-	public static ResourceLocation[] getTextures(ToolMaterial material) {
-		return textureMap.get(material);
+	public static Set<Entry<ToolMaterial, MaterialDefinition>> getEntries() {
+		return definitionMap.entrySet();
 	}
 
 	public static Item[] getItems(ToolMaterial material) {
 		return itemMap.get(material);
+	}
+
+	public static MaterialDefinition getMaterialDefinition(ToolMaterial material) {
+		return definitionMap.get(material);
+	}
+
+	public static ResourceLocation[] getTextures(ToolMaterial material) {
+		return textureMap.get(material);
 	}
 
 	public static boolean isFullyAdded(ToolMaterial tm) {

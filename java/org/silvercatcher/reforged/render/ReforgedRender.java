@@ -17,15 +17,15 @@ public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 	float scale = 1;
 	int modifier = 0;
 
+	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, float scale, int rotationModifier) {
+		this(renderManager, model, rotationModifier);
+		this.scale = scale;
+	}
+
 	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, int rotationModifier) {
 		super(renderManager);
 		this.model = model;
 		modifier = rotationModifier;
-	}
-
-	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, float scale, int rotationModifier) {
-		this(renderManager, model, rotationModifier);
-		this.scale = scale;
 	}
 
 	@Override
@@ -33,6 +33,9 @@ public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 		super.doRender(bullet, x, y, z, yaw, partialTicks);
 		renderEntityModel(bullet, x, y, z, yaw, partialTicks);
 	}
+
+	@Override
+	protected abstract ResourceLocation getEntityTexture(T entity);
 
 	/**
 	 * If you find any little issues while flying, just change partialTick in the
@@ -53,8 +56,5 @@ public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 		model.render(theEntity, (float) x, (float) y, (float) z, yaw + modifier, partialTicks, 0.0475F);
 		GL11.glPopMatrix();
 	}
-
-	@Override
-	protected abstract ResourceLocation getEntityTexture(T entity);
 
 }

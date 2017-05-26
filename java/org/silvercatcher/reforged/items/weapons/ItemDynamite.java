@@ -20,12 +20,6 @@ public class ItemDynamite extends ExtendedItem {
 	}
 
 	@Override
-	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this, 2), " s ", " g ", " g ", 's', new ItemStack(Items.STRING), 'g',
-				new ItemStack(Items.GUNPOWDER));
-	}
-
-	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 
 		if (playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, this)) {
@@ -34,6 +28,12 @@ public class ItemDynamite extends ExtendedItem {
 			}
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(hand));
+	}
+
+	@Override
+	public void registerRecipes() {
+		GameRegistry.addShapedRecipe(new ItemStack(this, 2), " s ", " g ", " g ", 's', new ItemStack(Items.STRING), 'g',
+				new ItemStack(Items.GUNPOWDER));
 	}
 
 }

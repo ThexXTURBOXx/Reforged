@@ -35,6 +35,28 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 	}
 
 	@Override
+	public float getHitDamage() {
+		return materialDefinition.getDamageVsEntity() + 5f;
+	}
+
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return materialDefinition.getEnchantability();
+	}
+
+	public ToolMaterial getMaterial() {
+		return materialDefinition.getMaterial();
+	}
+
+	public MaterialDefinition getMaterialDefinition() {
+		return materialDefinition;
+	}
+
+	private Potion getPotion(String name) {
+		return Potion.getPotionFromResourceLocation(name);
+	}
+
+	@Override
 	public boolean isDamageable() {
 		if (unbreakable)
 			return false;
@@ -68,24 +90,6 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 	}
 
 	@Override
-	public float getHitDamage() {
-		return materialDefinition.getDamageVsEntity() + 5f;
-	}
-
-	public ToolMaterial getMaterial() {
-		return materialDefinition.getMaterial();
-	}
-
-	public MaterialDefinition getMaterialDefinition() {
-		return materialDefinition;
-	}
-
-	@Override
-	public int getItemEnchantability(ItemStack stack) {
-		return materialDefinition.getEnchantability();
-	}
-
-	@Override
 	public float zombieSpawnChance() {
 		switch (materialDefinition.getMaterial()) {
 		case GOLD:
@@ -99,10 +103,6 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 		default:
 			return 0;
 		}
-	}
-
-	private Potion getPotion(String name) {
-		return Potion.getPotionFromResourceLocation(name);
 	}
 
 }

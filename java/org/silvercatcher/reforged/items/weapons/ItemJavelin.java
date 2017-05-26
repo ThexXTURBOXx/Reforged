@@ -25,6 +25,26 @@ public class ItemJavelin extends ExtendedItem {
 	}
 
 	@Override
+	public float getHitDamage() {
+		return 3f;
+	}
+
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return ToolMaterial.STONE.getEnchantability();
+	}
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack) {
+		return EnumAction.BOW;
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+		return ItemExtension.USE_DURATON;
+	}
+
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (hand == EnumHand.MAIN_HAND) {
 			net.minecraftforge.event.entity.player.ArrowNockEvent event = new net.minecraftforge.event.entity.player.ArrowNockEvent(
@@ -41,25 +61,8 @@ public class ItemJavelin extends ExtendedItem {
 	}
 
 	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), "  f", " s ", "s  ", 'f', new ItemStack(Items.FLINT), 's',
-				new ItemStack(Items.STICK));
-	}
-
-	@Override
-	public float getHitDamage() {
-		return 3f;
-	}
-
-	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.BOW;
-	}
-
-	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
-		return ItemExtension.USE_DURATON;
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
+		return stack;
 	}
 
 	@Override
@@ -87,12 +90,9 @@ public class ItemJavelin extends ExtendedItem {
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
-		return stack;
-	}
+	public void registerRecipes() {
 
-	@Override
-	public int getItemEnchantability(ItemStack stack) {
-		return ToolMaterial.STONE.getEnchantability();
+		GameRegistry.addRecipe(new ItemStack(this), "  f", " s ", "s  ", 'f', new ItemStack(Items.FLINT), 's',
+				new ItemStack(Items.STICK));
 	}
 }

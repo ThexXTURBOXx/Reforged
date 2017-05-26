@@ -30,11 +30,6 @@ public abstract class ExtendedItem extends Item implements ItemExtension {
 	}
 
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-		return false;
-	}
-
-	@Override
 	public float getHitDamage() {
 		return 0f;
 	}
@@ -47,6 +42,11 @@ public abstract class ExtendedItem extends Item implements ItemExtension {
 					new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getHitDamage(), 0));
 		}
 		return multimap;
+	}
+
+	@Override
+	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+		return false;
 	}
 
 }

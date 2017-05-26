@@ -38,21 +38,28 @@ public class EntityDart extends AReforgedThrowable {
 		dataManager.register(STACK, new ItemStack(ReforgedAdditions.DART_NORMAL));
 	}
 
+	public String getEffect() {
+		return ((ItemDart) getItemStack().getItem()).getUnlocalizedName().substring(10);
+	}
+
+	@Override
+	protected float getGravityVelocity() {
+		return 0.03F;
+	}
+
+	@Override
+	protected float getImpactDamage(Entity target) {
+
+		return 5f;
+	}
+
 	public ItemStack getItemStack() {
 
 		return dataManager.get(STACK);
 	}
 
-	public void setItemStack(ItemStack stack) {
-
-		if (stack == null || stack.isEmpty() || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
-			throw new IllegalArgumentException("Invalid Itemstack!");
-		}
-		dataManager.set(STACK, stack);
-	}
-
-	public String getEffect() {
-		return ((ItemDart) getItemStack().getItem()).getUnlocalizedName().substring(10);
+	private Potion getPotion(String name) {
+		return Potion.getPotionFromResourceLocation(name);
 	}
 
 	@Override
@@ -108,8 +115,19 @@ public class EntityDart extends AReforgedThrowable {
 	}
 
 	@Override
-	protected float getGravityVelocity() {
-		return 0.03F;
+	public void readEntityFromNBT(NBTTagCompound tagCompund) {
+
+		super.readEntityFromNBT(tagCompund);
+
+		setItemStack(new ItemStack(tagCompund.getCompoundTag("item")));
+	}
+
+	public void setItemStack(ItemStack stack) {
+
+		if (stack == null || stack.isEmpty() || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
+			throw new IllegalArgumentException("Invalid Itemstack!");
+		}
+		dataManager.set(STACK, stack);
 	}
 
 	@Override
@@ -120,23 +138,5 @@ public class EntityDart extends AReforgedThrowable {
 		if (getItemStack() != null && !getItemStack().isEmpty()) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
 		}
-	}
-
-	@Override
-	public void readEntityFromNBT(NBTTagCompound tagCompund) {
-
-		super.readEntityFromNBT(tagCompund);
-
-		setItemStack(new ItemStack(tagCompund.getCompoundTag("item")));
-	}
-
-	@Override
-	protected float getImpactDamage(Entity target) {
-
-		return 5f;
-	}
-
-	private Potion getPotion(String name) {
-		return Potion.getPotionFromResourceLocation(name);
 	}
 }

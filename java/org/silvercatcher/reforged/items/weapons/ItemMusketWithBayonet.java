@@ -26,11 +26,9 @@ public class ItemMusketWithBayonet extends ItemMusket {
 	}
 
 	@Override
-	public boolean isDamageable() {
-		if (unbreakable)
-			return false;
-		else
-			return true;
+	public float getHitDamage() {
+
+		return super.getHitDamage() + getKnife().getHitDamage();
 	}
 
 	public ItemExtension getKnife() {
@@ -56,13 +54,15 @@ public class ItemMusketWithBayonet extends ItemMusket {
 	}
 
 	@Override
-	public void registerRecipes() {
-		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(ReforgedAdditions.MUSKET), getKnife());
+	public boolean isDamageable() {
+		if (unbreakable)
+			return false;
+		else
+			return true;
 	}
 
 	@Override
-	public float getHitDamage() {
-
-		return super.getHitDamage() + getKnife().getHitDamage();
+	public void registerRecipes() {
+		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(ReforgedAdditions.MUSKET), getKnife());
 	}
 }

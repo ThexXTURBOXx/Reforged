@@ -25,15 +25,8 @@ public class EntityDynamite extends AReforgedThrowable {
 	}
 
 	@Override
-	protected boolean onBlockHit(BlockPos blockPos) {
-		world.createExplosion(this, posX, posY, posZ, 2, true);
-		return true;
-	}
-
-	@Override
-	protected boolean onEntityHit(Entity entity) {
-		world.createExplosion(this, posX, posY, posZ, 2, true);
-		return true;
+	protected float getGravityVelocity() {
+		return 0.05F;
 	}
 
 	@Override
@@ -43,7 +36,14 @@ public class EntityDynamite extends AReforgedThrowable {
 	}
 
 	@Override
-	protected float getGravityVelocity() {
-		return 0.05F;
+	protected boolean onBlockHit(BlockPos blockPos) {
+		world.createExplosion(this, posX, posY, posZ, 2, true);
+		return true;
+	}
+
+	@Override
+	protected boolean onEntityHit(Entity entity) {
+		world.createExplosion(this, posX, posY, posZ, 2, true);
+		return true;
 	}
 }

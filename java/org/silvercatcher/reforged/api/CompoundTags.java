@@ -5,23 +5,6 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class CompoundTags {
 
-	/**
-	 * make sure we get no NPEs by using this method! if anyone knows a less stupid
-	 * way, tell me!
-	 * 
-	 * @param stack
-	 * @return
-	 */
-	public static NBTTagCompound giveCompound(ItemStack stack) {
-
-		NBTTagCompound compound = stack.getTagCompound();
-		if (compound == null) {
-			compound = new NBTTagCompound();
-			stack.setTagCompound(compound);
-		}
-		return compound;
-	}
-
 	/** saves the delay in ticks until an action should be called */
 	public static final String DELAY = "delay";
 
@@ -64,5 +47,22 @@ public class CompoundTags {
 
 	/** saves how long the weapon was relaoding */
 	public static final String TIME = "time";
+
+	/**
+	 * make sure we get no NPEs by using this method! if anyone knows a less stupid
+	 * way, tell me!
+	 * 
+	 * @param stack
+	 * @return
+	 */
+	public static NBTTagCompound giveCompound(ItemStack stack) {
+
+		NBTTagCompound compound = stack.getTagCompound();
+		if (compound == null) {
+			compound = new NBTTagCompound();
+			stack.setTagCompound(compound);
+		}
+		return compound;
+	}
 
 }

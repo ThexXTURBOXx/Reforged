@@ -31,7 +31,6 @@ public class ItemNestOfBees extends ExtendedItem {
 		setMaxStackSize(1);
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
 
@@ -40,18 +39,27 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 
 	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), "lwl", "lsl", "lll", 'l', Items.LEATHER, 's', Items.STRING, 'w',
-				Item.getItemFromBlock(Blocks.PLANKS));
-		ReforgedRegistry.registerIRecipe("ReloadNoB", new NestOfBeesLoadRecipe(), NestOfBeesLoadRecipe.class,
-				Category.SHAPELESS);
-	}
-
-	@Override
 	public float getHitDamage() {
 
 		return 0f;
+	}
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack) {
+
+		NBTTagCompound compound = CompoundTags.giveCompound(stack);
+
+		if (compound.getBoolean(CompoundTags.ACTIVATED)) {
+			return EnumAction.BOW;
+		}
+		return EnumAction.NONE;
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+
+		return CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ACTIVATED) ? ItemExtension.USE_DURATON
+				: buildup;
 	}
 
 	@Override
@@ -64,10 +72,17 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
 
-		return CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ACTIVATED) ? ItemExtension.USE_DURATON
-				: buildup;
+		NBTTagCompound compound = CompoundTags.giveCompound(stack);
+
+		if (compound.getInteger(CompoundTags.AMMUNITION) > 0) {
+			compound.setBoolean(CompoundTags.ACTIVATED, true);
+
+			worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ITEM_FIRECHARGE_USE,
+					SoundCategory.MASTER, 1.0f, 1.0f);
+		}
+		return stack;
 	}
 
 	@Override
@@ -107,17 +122,12 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
+	public void registerRecipes() {
 
-		NBTTagCompound compound = CompoundTags.giveCompound(stack);
-
-		if (compound.getInteger(CompoundTags.AMMUNITION) > 0) {
-			compound.setBoolean(CompoundTags.ACTIVATED, true);
-
-			worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ITEM_FIRECHARGE_USE,
-					SoundCategory.MASTER, 1.0f, 1.0f);
-		}
-		return stack;
+		GameRegistry.addRecipe(new ItemStack(this), "lwl", "lsl", "lll", 'l', Items.LEATHER, 's', Items.STRING, 'w',
+				Item.getItemFromBlock(Blocks.PLANKS));
+		ReforgedRegistry.registerIRecipe("ReloadNoB", new NestOfBeesLoadRecipe(), NestOfBeesLoadRecipe.class,
+				Category.SHAPELESS);
 	}
 
 	protected void shoot(World world, EntityPlayer shooter) {
@@ -132,16 +142,5 @@ public class ItemNestOfBees extends ExtendedItem {
 		}
 		world.playSound(null, shooter.posX, shooter.posY, shooter.posZ, SoundEvents.ENTITY_FIREWORK_LAUNCH,
 				SoundCategory.MASTER, 3.0f, 1.0f);
-	}
-
-	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-
-		NBTTagCompound compound = CompoundTags.giveCompound(stack);
-
-		if (compound.getBoolean(CompoundTags.ACTIVATED)) {
-			return EnumAction.BOW;
-		}
-		return EnumAction.NONE;
 	}
 }

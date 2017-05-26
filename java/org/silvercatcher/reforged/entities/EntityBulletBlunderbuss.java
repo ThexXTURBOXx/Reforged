@@ -39,10 +39,8 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 	}
 
 	@Override
-	public void onUpdated() {
-		if (ticksExisted >= 30) {
-			setDead();
-		}
+	protected float getImpactDamage(Entity target) {
+		return (((30 - ticksExisted) / 4) + 4f);
 	}
 
 	@Override
@@ -52,7 +50,9 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 	}
 
 	@Override
-	protected float getImpactDamage(Entity target) {
-		return (((30 - ticksExisted) / 4) + 4f);
+	public void onUpdated() {
+		if (ticksExisted >= 30) {
+			setDead();
+		}
 	}
 }

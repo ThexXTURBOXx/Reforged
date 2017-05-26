@@ -24,6 +24,16 @@ public class ItemBlowGun extends ExtendedItem {
 	}
 
 	@Override
+	public EnumAction getItemUseAction(ItemStack stack) {
+		return EnumAction.BOW;
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+		return ItemExtension.USE_DURATON;
+	}
+
+	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (hand == EnumHand.MAIN_HAND) {
 			net.minecraftforge.event.entity.player.ArrowNockEvent event = new net.minecraftforge.event.entity.player.ArrowNockEvent(
@@ -37,11 +47,6 @@ public class ItemBlowGun extends ExtendedItem {
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemOffhand());
-	}
-
-	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.BOW;
 	}
 
 	@Override
@@ -92,11 +97,6 @@ public class ItemBlowGun extends ExtendedItem {
 				}
 			}
 		}
-	}
-
-	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
-		return ItemExtension.USE_DURATON;
 	}
 
 	@Override

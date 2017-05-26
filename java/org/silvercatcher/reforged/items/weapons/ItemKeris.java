@@ -34,6 +34,22 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 	}
 
 	@Override
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		return ItemExtension.super.getAttributeModifiers(stack);
+	}
+
+	@Override
+	public float getHitDamage() {
+		return materialDefinition.getDamageVsEntity() + 2f;
+	}
+
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		// Sunconure11 wanted high enchantability ^^
+		return materialDefinition.getEnchantability() + 8;
+	}
+
+	@Override
 	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
 		if (entity instanceof EntityLivingBase) {
 			EntityLivingBase e = (EntityLivingBase) entity;
@@ -56,21 +72,5 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 	public void registerRecipes() {
 
 		GameRegistry.addRecipe(new ItemStack(this), " m ", " m ", " s ", 'm', Items.IRON_INGOT, 's', Items.GOLD_INGOT);
-	}
-
-	@Override
-	public float getHitDamage() {
-		return materialDefinition.getDamageVsEntity() + 2f;
-	}
-
-	@Override
-	public Multimap getAttributeModifiers(ItemStack stack) {
-		return ItemExtension.super.getAttributeModifiers(stack);
-	}
-
-	@Override
-	public int getItemEnchantability(ItemStack stack) {
-		// Sunconure11 wanted high enchantability ^^
-		return materialDefinition.getEnchantability() + 8;
 	}
 }

@@ -40,6 +40,21 @@ public class ItemDirk extends ItemSword implements ItemExtension, IZombieEquippa
 	}
 
 	@Override
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		return ItemExtension.super.getAttributeModifiers(stack);
+	}
+
+	@Override
+	public float getHitDamage() {
+		return materialDefinition.getDamageVsEntity() + 2f;
+	}
+
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return materialDefinition.getEnchantability();
+	}
+
+	@Override
 	public boolean isDamageable() {
 		return !unbreakable;
 	}
@@ -63,21 +78,6 @@ public class ItemDirk extends ItemSword implements ItemExtension, IZombieEquippa
 	public void registerRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(this), "m ", "s ", 's', new ItemStack(Items.STICK), 'm',
 				materialDefinition.getRepairMaterial());
-	}
-
-	@Override
-	public float getHitDamage() {
-		return materialDefinition.getDamageVsEntity() + 2f;
-	}
-
-	@Override
-	public Multimap getAttributeModifiers(ItemStack stack) {
-		return ItemExtension.super.getAttributeModifiers(stack);
-	}
-
-	@Override
-	public int getItemEnchantability(ItemStack stack) {
-		return materialDefinition.getEnchantability();
 	}
 
 	@Override

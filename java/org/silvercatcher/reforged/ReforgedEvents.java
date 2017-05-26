@@ -28,6 +28,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ReforgedEvents {
 
+	public static boolean notified = false;
+
+	public static Map<UUID, Integer> map;
+	static {
+		map = new HashMap<UUID, Integer>();
+	}
+
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void customReach(MouseEvent e) {
@@ -46,11 +53,36 @@ public class ReforgedEvents {
 		}
 	}
 
-	public static boolean notified = false;
-	public static Map<UUID, Integer> map;
+	@SubscribeEvent
+	public void onEntityConstructing(AttachCapabilitiesEvent e) {
+		if (e.getObject() instanceof EntityLivingBase) {
+			e.addCapability(IStunProperty.EXT_PROP_NAME, new ICapabilitySerializable<NBTPrimitive>() {
 
-	static {
-		map = new HashMap<UUID, Integer>();
+				IStunProperty inst = ReforgedMod.STUN_PROP.getDefaultInstance();
+
+				@Override
+				public void deserializeNBT(NBTPrimitive nbt) {
+					ReforgedMod.STUN_PROP.getStorage().readNBT(ReforgedMod.STUN_PROP, inst, null, nbt);
+				}
+
+				@Override
+				public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+					return capability == ReforgedMod.STUN_PROP ? ReforgedMod.STUN_PROP.<T>cast(inst) : null;
+				}
+
+				@Override
+				public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+					return capability == ReforgedMod.STUN_PROP;
+				}
+
+				@Override
+				public NBTPrimitive serializeNBT() {
+					return (NBTPrimitive) ReforgedMod.STUN_PROP.getStorage().writeNBT(ReforgedMod.STUN_PROP, inst,
+							null);
+				}
+
+			});
+		}
 	}
 
 	// TODO TRANSLATION!!
@@ -97,38 +129,6 @@ public class ReforgedEvents {
 					}
 				}
 			}
-		}
-	}
-
-	@SubscribeEvent
-	public void onEntityConstructing(AttachCapabilitiesEvent e) {
-		if (e.getObject() instanceof EntityLivingBase) {
-			e.addCapability(IStunProperty.EXT_PROP_NAME, new ICapabilitySerializable<NBTPrimitive>() {
-
-				IStunProperty inst = ReforgedMod.STUN_PROP.getDefaultInstance();
-
-				@Override
-				public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
-					return capability == ReforgedMod.STUN_PROP;
-				}
-
-				@Override
-				public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-					return capability == ReforgedMod.STUN_PROP ? ReforgedMod.STUN_PROP.<T>cast(inst) : null;
-				}
-
-				@Override
-				public NBTPrimitive serializeNBT() {
-					return (NBTPrimitive) ReforgedMod.STUN_PROP.getStorage().writeNBT(ReforgedMod.STUN_PROP, inst,
-							null);
-				}
-
-				@Override
-				public void deserializeNBT(NBTPrimitive nbt) {
-					ReforgedMod.STUN_PROP.getStorage().readNBT(ReforgedMod.STUN_PROP, inst, null, nbt);
-				}
-
-			});
 		}
 	}
 

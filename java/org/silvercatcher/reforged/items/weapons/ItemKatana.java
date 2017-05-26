@@ -39,6 +39,26 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 	}
 
 	@Override
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		return ItemExtension.super.getAttributeModifiers(stack);
+	}
+
+	@Override
+	public float getHitDamage() {
+		return materialDefinition.getDamageVsEntity() + 2f;
+	}
+
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return materialDefinition.getEnchantability();
+	}
+
+	public ToolMaterial getMaterial() {
+
+		return materialDefinition.getMaterial();
+	}
+
+	@Override
 	public boolean isDamageable() {
 		if (unbreakable)
 			return false;
@@ -90,26 +110,6 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 
 		GameRegistry.addRecipe(new ItemStack(this), "  m", " m ", "s  ", 'm', materialDefinition.getRepairMaterial(),
 				's', Items.STICK);
-	}
-
-	@Override
-	public float getHitDamage() {
-		return materialDefinition.getDamageVsEntity() + 2f;
-	}
-
-	@Override
-	public Multimap getAttributeModifiers(ItemStack stack) {
-		return ItemExtension.super.getAttributeModifiers(stack);
-	}
-
-	public ToolMaterial getMaterial() {
-
-		return materialDefinition.getMaterial();
-	}
-
-	@Override
-	public int getItemEnchantability(ItemStack stack) {
-		return materialDefinition.getEnchantability();
 	}
 
 	@Override

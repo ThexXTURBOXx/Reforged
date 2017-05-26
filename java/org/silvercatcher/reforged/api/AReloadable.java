@@ -19,9 +19,13 @@ import net.minecraft.world.World;
 
 public abstract class AReloadable extends ItemBow implements ItemExtension {
 
+	public static final byte empty = 0;
+	public static final byte loading = 1;
+
+	public static final byte loaded = 2;
+
 	private Item ammo;
 	private String shootsound;
-
 	public AReloadable(String name, String shootsound) {
 		setMaxStackSize(1);
 		setMaxDamage(100);
@@ -30,23 +34,6 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		this.shootsound = shootsound;
 	}
 
-	public static final byte empty = 0;
-	public static final byte loading = 1;
-	public static final byte loaded = 2;
-
-	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-		if (!(entityIn instanceof EntityLivingBase))
-			return;
-		if (giveCompound(stack).getBoolean(CompoundTags.STARTED)
-				&& giveCompound(stack).getByte(CompoundTags.AMMUNITION) == loading
-				&& ItemStack.areItemStacksEqual(stack, ((EntityLivingBase) entityIn).getActiveItemStack())) {
-			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
-		}
-	}
-
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
 
@@ -58,9 +45,23 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 								: I18n.format("item.musket.loadstate.loading"))));
 	}
 
+	private Item getAmmo() {
+		return ammo;
+	}
+
 	@Override
-	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-		return true;
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		return ItemExtension.super.getAttributeModifiers(stack);
+	}
+
+	@Override
+	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
+		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
+		if (equipmentSlot == EntityEquipmentSlot.MAINHAND && getHitDamage() > 0) {
+			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
+					new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getHitDamage(), 0));
+		}
+		return multimap;
 	}
 
 	@Override
@@ -90,12 +91,21 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		return super.getMaxItemUseDuration(stack);
 	}
 
-	protected void setAmmo(Item ammo) {
-		this.ammo = ammo;
+	public int getReloadTime(ItemStack stack) {
+		return giveCompound(stack).getInteger(CompoundTags.TIME);
 	}
 
-	private Item getAmmo() {
-		return ammo;
+	public abstract int getReloadTotal();
+
+	public NBTTagCompound giveCompound(ItemStack stack) {
+
+		NBTTagCompound compound = CompoundTags.giveCompound(stack);
+
+		if (!compound.hasKey(CompoundTags.AMMUNITION)) {
+
+			compound.setByte(CompoundTags.AMMUNITION, empty);
+		}
+		return compound;
 	}
 
 	@Override
@@ -128,6 +138,18 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	}
 
 	@Override
+	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
+
+		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
+
+		if (loadState == loading) {
+			loadState = loaded;
+		}
+		giveCompound(stack).setByte(CompoundTags.AMMUNITION, loadState);
+		return stack;
+	}
+
+	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase playerInl, int timeLeft) {
 		if (!worldIn.isRemote && playerInl instanceof EntityPlayer) {
 			EntityPlayer playerIn = (EntityPlayer) playerInl;
@@ -154,51 +176,27 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		}
 	}
 
-	public int getReloadTime(ItemStack stack) {
-		return giveCompound(stack).getInteger(CompoundTags.TIME);
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+		if (!(entityIn instanceof EntityLivingBase))
+			return;
+		if (giveCompound(stack).getBoolean(CompoundTags.STARTED)
+				&& giveCompound(stack).getByte(CompoundTags.AMMUNITION) == loading
+				&& ItemStack.areItemStacksEqual(stack, ((EntityLivingBase) entityIn).getActiveItemStack())) {
+			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
+		}
+	}
+
+	protected void setAmmo(Item ammo) {
+		this.ammo = ammo;
 	}
 
 	public abstract void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack);
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
-
-		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
-
-		if (loadState == loading) {
-			loadState = loaded;
-		}
-		giveCompound(stack).setByte(CompoundTags.AMMUNITION, loadState);
-		return stack;
-	}
-
-	public abstract int getReloadTotal();
-
-	public NBTTagCompound giveCompound(ItemStack stack) {
-
-		NBTTagCompound compound = CompoundTags.giveCompound(stack);
-
-		if (!compound.hasKey(CompoundTags.AMMUNITION)) {
-
-			compound.setByte(CompoundTags.AMMUNITION, empty);
-		}
-		return compound;
-	}
-
-	@SuppressWarnings("rawtypes")
-	@Override
-	public Multimap getAttributeModifiers(ItemStack stack) {
-		return ItemExtension.super.getAttributeModifiers(stack);
-	}
-
-	@Override
-	public Multimap<String, AttributeModifier> getItemAttributeModifiers(EntityEquipmentSlot equipmentSlot) {
-		Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
-		if (equipmentSlot == EntityEquipmentSlot.MAINHAND && getHitDamage() > 0) {
-			multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
-					new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getHitDamage(), 0));
-		}
-		return multimap;
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return true;
 	}
 
 }

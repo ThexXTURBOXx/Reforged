@@ -23,32 +23,6 @@ public class CommonProxy {
 	public static final String[] sounds = new String[] { "boomerang_break", "boomerang_hit", "boomerang_throw",
 			"crossbow_reload", "crossbow_shoot", "musket_shoot", "shotgun_reload", "shotgun_shoot" };
 
-	public void preInit(FMLPreInitializationEvent event) {
-		loadConfig(event);
-		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
-		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
-		ReforgedRegistry.createItems();
-		ReforgedRegistry.registerItems();
-		ReforgedRegistry.registerPackets();
-		Enchantment.REGISTRY.register(goalseekerid, new ResourceLocation(ReforgedMod.ID, "goalseeker"),
-				ReforgedAdditions.goalseeker);
-		CapabilityManager.INSTANCE.register(IStunProperty.class, new StorageStun(), DefaultStunImpl.class);
-		for (String s : sounds) {
-			ResourceLocation loc = new ResourceLocation(ReforgedMod.ID, s);
-			GameRegistry.register(new SoundEvent(loc), loc);
-		}
-		registerEntities();
-	}
-
-	public void init(FMLInitializationEvent event) {
-		ReforgedRegistry.registerRecipes();
-		GameRegistry.registerTileEntity(TileEntityCaltropEntity.class, "caltrop");
-	}
-
-	public void postInit(FMLPostInitializationEvent event) {
-		ReforgedMod.battlegearDetected = Loader.isModLoaded("battlegear2");
-	}
-
 	// Items for Config
 	public static boolean battleaxe, blowgun, boomerang, firerod, javelin, katana, knife, musket, nest_of_bees, sabre,
 			keris, caltrop, dynamite, crossbow, pike, mace, dirk;
@@ -57,6 +31,15 @@ public class CommonProxy {
 	public static int goalseekerid;
 
 	public static final String items = "Items";
+
+	public static SoundEvent getSound(String name) {
+		return SoundEvent.REGISTRY.getObject(new ResourceLocation(ReforgedMod.ID, name));
+	}
+
+	public void init(FMLInitializationEvent event) {
+		ReforgedRegistry.registerRecipes();
+		GameRegistry.registerTileEntity(TileEntityCaltropEntity.class, "caltrop");
+	}
 
 	private void loadConfig(FMLPreInitializationEvent e) {
 		File configdir = new File(e.getModConfigurationDirectory(), ReforgedMod.NAME);
@@ -96,10 +79,25 @@ public class CommonProxy {
 		config.save();
 	}
 
-	protected void registerItemRenderers() {
+	public void postInit(FMLPostInitializationEvent event) {
+		ReforgedMod.battlegearDetected = Loader.isModLoaded("battlegear2");
 	}
 
-	protected void registerEntityRenderers() {
+	public void preInit(FMLPreInitializationEvent event) {
+		loadConfig(event);
+		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
+		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
+		ReforgedRegistry.createItems();
+		ReforgedRegistry.registerItems();
+		ReforgedRegistry.registerPackets();
+		Enchantment.REGISTRY.register(goalseekerid, new ResourceLocation(ReforgedMod.ID, "goalseeker"),
+				ReforgedAdditions.goalseeker);
+		CapabilityManager.INSTANCE.register(IStunProperty.class, new StorageStun(), DefaultStunImpl.class);
+		for (String s : sounds) {
+			ResourceLocation loc = new ResourceLocation(ReforgedMod.ID, s);
+			GameRegistry.register(new SoundEvent(loc), loc);
+		}
+		registerEntities();
 	}
 
 	private void registerEntities() {
@@ -124,11 +122,13 @@ public class CommonProxy {
 			ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
 	}
 
+	protected void registerEntityRenderers() {
+	}
+
 	public void registerItemRenderer(Item item, int meta, String id) {
 	}
 
-	public static SoundEvent getSound(String name) {
-		return SoundEvent.REGISTRY.getObject(new ResourceLocation(ReforgedMod.ID, name));
+	protected void registerItemRenderers() {
 	}
 
 }

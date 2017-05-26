@@ -30,6 +30,26 @@ public class Helpers {
 		return (x1 == x2 && y1 == y2 && z1 == z2);
 	}
 
+	public static boolean consumeInventoryItem(EntityPlayer player, Item itemIn) {
+		int i = getInventorySlotContainItem(player, itemIn);
+		if (i < 0) {
+			return false;
+		} else {
+			ItemStack item = player.inventory.mainInventory.get(i);
+			item.setCount(item.getCount() - 1);
+			if (item.getCount() <= 0) {
+				player.inventory.mainInventory.set(i, ItemStack.EMPTY);
+			}
+			return true;
+		}
+	}
+
+	public static void destroyCurrentEquippedItem(EntityPlayer player) {
+		ItemStack orig = player.inventory.getCurrentItem();
+		player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+		net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(player, orig, EnumHand.MAIN_HAND);
+	}
+
 	/** Helper method for creating a Rectangle */
 	public static void drawRectangle(int left, int top, int right, int bottom, float[] color) {
 
@@ -61,6 +81,16 @@ public class Helpers {
 		tessellator.draw();
 		GlStateManager.enableTexture2D();
 		GlStateManager.disableBlend();
+	}
+
+	public static int getInventorySlotContainItem(EntityPlayer player, Item itemIn) {
+		for (int i = 0; i < player.inventory.mainInventory.size(); ++i) {
+			if (player.inventory.mainInventory.get(i) != null && !player.inventory.mainInventory.get(i).isEmpty()
+					&& player.inventory.mainInventory.get(i).getItem() == itemIn) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	/** Thanks to Jabelar!!! */
@@ -115,36 +145,6 @@ public class Helpers {
 			}
 		}
 		return returnMOP;
-	}
-
-	public static boolean consumeInventoryItem(EntityPlayer player, Item itemIn) {
-		int i = getInventorySlotContainItem(player, itemIn);
-		if (i < 0) {
-			return false;
-		} else {
-			ItemStack item = player.inventory.mainInventory.get(i);
-			item.setCount(item.getCount() - 1);
-			if (item.getCount() <= 0) {
-				player.inventory.mainInventory.set(i, ItemStack.EMPTY);
-			}
-			return true;
-		}
-	}
-
-	public static int getInventorySlotContainItem(EntityPlayer player, Item itemIn) {
-		for (int i = 0; i < player.inventory.mainInventory.size(); ++i) {
-			if (player.inventory.mainInventory.get(i) != null && !player.inventory.mainInventory.get(i).isEmpty()
-					&& player.inventory.mainInventory.get(i).getItem() == itemIn) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	public static void destroyCurrentEquippedItem(EntityPlayer player) {
-		ItemStack orig = player.inventory.getCurrentItem();
-		player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
-		net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(player, orig, EnumHand.MAIN_HAND);
 	}
 
 	public static void playSound(World w, Entity e, String name, double volume, double pitch) {

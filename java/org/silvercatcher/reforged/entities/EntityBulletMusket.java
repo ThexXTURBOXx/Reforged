@@ -24,14 +24,14 @@ public class EntityBulletMusket extends AReforgedThrowable {
 	}
 
 	@Override
-	protected boolean onEntityHit(Entity entity) {
-		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity));
-		return true;
+	protected float getImpactDamage(Entity target) {
+		return 10f;
 	}
 
 	@Override
-	protected float getImpactDamage(Entity target) {
-		return 10f;
+	protected boolean onEntityHit(Entity entity) {
+		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity));
+		return true;
 	}
 
 }

@@ -40,11 +40,6 @@ public class TileEntityCaltropBlock extends BlockContainer implements BlockExten
 	}
 
 	@Override
-	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this, 4), " i ", " i ", "i i", 'i', new ItemStack(Blocks.IRON_BARS));
-	}
-
-	@Override
 	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
 		return new AxisAlignedBB(0.35F, 0.0F, 0.35F, 0.65F, 0.5F, 0.65F);
 	}
@@ -52,6 +47,33 @@ public class TileEntityCaltropBlock extends BlockContainer implements BlockExten
 	@Override
 	public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
 		return NULL_AABB;
+	}
+
+	@Override
+	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
+		List<ItemStack> items = new ArrayList<>();
+		items.add(new ItemStack(ReforgedAdditions.CALTROP));
+		return items;
+	}
+
+	@Override
+	public boolean isBlockNormalCube(IBlockState state) {
+		return isOpaqueCube(state);
+	}
+
+	@Override
+	public boolean isNormalCube(IBlockState state) {
+		return isOpaqueCube(state);
+	}
+
+	@Override
+	public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
+		return isOpaqueCube(state);
+	}
+
+	@Override
+	public boolean isOpaqueCube(IBlockState state) {
+		return false;
 	}
 
 	@Override
@@ -73,29 +95,7 @@ public class TileEntityCaltropBlock extends BlockContainer implements BlockExten
 	}
 
 	@Override
-	public List<ItemStack> getDrops(IBlockAccess world, BlockPos pos, IBlockState state, int fortune) {
-		List<ItemStack> items = new ArrayList<>();
-		items.add(new ItemStack(ReforgedAdditions.CALTROP));
-		return items;
-	}
-
-	@Override
-	public boolean isOpaqueCube(IBlockState state) {
-		return false;
-	}
-
-	@Override
-	public boolean isNormalCube(IBlockState state, IBlockAccess world, BlockPos pos) {
-		return isOpaqueCube(state);
-	}
-
-	@Override
-	public boolean isNormalCube(IBlockState state) {
-		return isOpaqueCube(state);
-	}
-
-	@Override
-	public boolean isBlockNormalCube(IBlockState state) {
-		return isOpaqueCube(state);
+	public void registerRecipes() {
+		GameRegistry.addShapedRecipe(new ItemStack(this, 4), " i ", " i ", "i i", 'i', new ItemStack(Blocks.IRON_BARS));
 	}
 }

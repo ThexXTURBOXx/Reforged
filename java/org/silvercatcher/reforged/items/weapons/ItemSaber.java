@@ -39,6 +39,22 @@ public class ItemSaber extends ItemSword implements ItemExtension, IZombieEquipp
 	}
 
 	@Override
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		return ItemExtension.super.getAttributeModifiers(stack);
+	}
+
+	@Override
+	public float getHitDamage() {
+
+		return materialDefinition.getDamageVsEntity() + 3.5f;
+	}
+
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return materialDefinition.getEnchantability();
+	}
+
+	@Override
 	public boolean isDamageable() {
 		if (unbreakable)
 			return false;
@@ -68,23 +84,6 @@ public class ItemSaber extends ItemSword implements ItemExtension, IZombieEquipp
 
 		GameRegistry.addRecipe(new ItemStack(this), " b ", "b  ", "s  ", 'b', materialDefinition.getRepairMaterial(),
 				's', Items.STICK);
-	}
-
-	@Override
-	public float getHitDamage() {
-
-		return materialDefinition.getDamageVsEntity() + 3.5f;
-	}
-
-	@SuppressWarnings("rawtypes")
-	@Override
-	public Multimap getAttributeModifiers(ItemStack stack) {
-		return ItemExtension.super.getAttributeModifiers(stack);
-	}
-
-	@Override
-	public int getItemEnchantability(ItemStack stack) {
-		return materialDefinition.getEnchantability();
 	}
 
 	@Override

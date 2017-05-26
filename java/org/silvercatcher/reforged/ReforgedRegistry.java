@@ -169,6 +169,55 @@ public class ReforgedRegistry {
 		}
 	}
 
+	/**
+	 * Helper method for registering an Entity
+	 * 
+	 * @param c
+	 *            The class of the Entity
+	 * @param name
+	 *            The name for the Entity
+	 */
+	public static void registerEntity(Class<? extends Entity> c, String name) {
+		EntityRegistry.registerModEntity(new ResourceLocation(ReforgedMod.ID, name), c, name, ++counterEntities,
+				ReforgedMod.instance, 120, 1, true);
+	}
+
+	/**
+	 * Helper method for registering our EventHandler
+	 * 
+	 * @param ReforgedEvents
+	 *            The instance of our EventHandler
+	 */
+	public static void registerEventHandler(Object event) {
+		FMLCommonHandler.instance().bus().register(event);
+		MinecraftForge.EVENT_BUS.register(event);
+	}
+
+	/**
+	 * Helper method for registering an Custom IRecipe
+	 * 
+	 * @param name
+	 *            The name for the Recipe
+	 * @param recipe
+	 *            The instance of the Recipe
+	 * @param recipeclass
+	 *            The class of the Recipe
+	 * @param category
+	 *            {@link Category#SHAPED} or {@link Category#SHAPELESS}?
+	 */
+	public static void registerIRecipe(String name, IRecipe recipe, Class<?> recipeclass, Category category) {
+		String catString;
+		if (category == Category.SHAPELESS) {
+			catString = "after:minecraft:shapeless";
+		} else if (category == Category.SHAPED) {
+			catString = "after:minecraft:shaped";
+		} else {
+			throw new IllegalArgumentException("The Category called " + category.name() + " couldn't be found!");
+		}
+		GameRegistry.addRecipe(recipe);
+		RecipeSorter.register(ReforgedMod.ID + ":" + name, recipeclass, category, catString);
+	}
+
 	/** Registers all items out of the registrationList */
 	public static void registerItems() {
 		// Register all Items
@@ -184,6 +233,14 @@ public class ReforgedRegistry {
 			GameRegistry.register(itemBlock);
 			ReforgedMod.proxy.registerItemRenderer(itemBlock, 0, block.getUnlocalizedName().substring(5));
 		}
+	}
+
+	/** Registers all our Packets */
+	public static void registerPackets() {
+		ReforgedMod.network = NetworkRegistry.INSTANCE.newSimpleChannel(ReforgedMod.ID);
+		int packetId = 0;
+		ReforgedMod.network.registerMessage(MessageCustomReachAttack.Handler.class, MessageCustomReachAttack.class,
+				packetId++, Side.SERVER);
 	}
 
 	/** Registers all recipes of the registered items */
@@ -212,63 +269,6 @@ public class ReforgedRegistry {
 			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL), "i  ", " if", "i i", 'i',
 					Items.IRON_INGOT, 'f', Items.FLINT_AND_STEEL);
 		}
-	}
-
-	/**
-	 * Helper method for registering an Custom IRecipe
-	 * 
-	 * @param name
-	 *            The name for the Recipe
-	 * @param recipe
-	 *            The instance of the Recipe
-	 * @param recipeclass
-	 *            The class of the Recipe
-	 * @param category
-	 *            {@link Category#SHAPED} or {@link Category#SHAPELESS}?
-	 */
-	public static void registerIRecipe(String name, IRecipe recipe, Class<?> recipeclass, Category category) {
-		String catString;
-		if (category == Category.SHAPELESS) {
-			catString = "after:minecraft:shapeless";
-		} else if (category == Category.SHAPED) {
-			catString = "after:minecraft:shaped";
-		} else {
-			throw new IllegalArgumentException("The Category called " + category.name() + " couldn't be found!");
-		}
-		GameRegistry.addRecipe(recipe);
-		RecipeSorter.register(ReforgedMod.ID + ":" + name, recipeclass, category, catString);
-	}
-
-	/**
-	 * Helper method for registering an Entity
-	 * 
-	 * @param c
-	 *            The class of the Entity
-	 * @param name
-	 *            The name for the Entity
-	 */
-	public static void registerEntity(Class<? extends Entity> c, String name) {
-		EntityRegistry.registerModEntity(new ResourceLocation(ReforgedMod.ID, name), c, name, ++counterEntities,
-				ReforgedMod.instance, 120, 1, true);
-	}
-
-	/**
-	 * Helper method for registering our EventHandler
-	 * 
-	 * @param ReforgedEvents
-	 *            The instance of our EventHandler
-	 */
-	public static void registerEventHandler(Object event) {
-		FMLCommonHandler.instance().bus().register(event);
-		MinecraftForge.EVENT_BUS.register(event);
-	}
-
-	/** Registers all our Packets */
-	public static void registerPackets() {
-		ReforgedMod.network = NetworkRegistry.INSTANCE.newSimpleChannel(ReforgedMod.ID);
-		int packetId = 0;
-		ReforgedMod.network.registerMessage(MessageCustomReachAttack.Handler.class, MessageCustomReachAttack.class,
-				packetId++, Side.SERVER);
 	}
 
 }

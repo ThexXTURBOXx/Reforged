@@ -23,14 +23,6 @@ import net.minecraftforge.fml.common.event.*;
 public class ClientProxy extends CommonProxy {
 
 	@Override
-	public void preInit(FMLPreInitializationEvent event) {
-
-		super.preInit(event);
-		MinecraftForge.EVENT_BUS.register(new ReloadOverlay());
-		registerEntityRenderers();
-	}
-
-	@Override
 	public void init(FMLInitializationEvent event) {
 
 		super.init(event);
@@ -43,45 +35,11 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	protected void registerItemRenderers() {
+	public void preInit(FMLPreInitializationEvent event) {
 
-		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-
-		String inventory = "inventory";
-		/*
-		 * if(GlobalValues.CROSSBOW) {
-		 * ModelBakery.registerItemVariants(ReforgedAdditions.CROSSBOW, new
-		 * ResourceLocation(ReforgedMod.ID + ":crossbow"), new
-		 * ResourceLocation(ReforgedMod.ID + ":crossbow_1"), new
-		 * ResourceLocation(ReforgedMod.ID + ":crossbow_2"), new
-		 * ResourceLocation(ReforgedMod.ID + ":crossbow_3"), new
-		 * ResourceLocation(ReforgedMod.ID + ":crossbow_4"), new
-		 * ResourceLocation(ReforgedMod.ID + ":crossbow_5")); }
-		 */
-		for (Item item : ReforgedRegistry.registrationList) {
-			mesher.register(item, 0, new ModelResourceLocation(
-					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
-		}
-
-		for (Block item : ReforgedRegistry.registrationListBlocks) {
-			mesher.register(Item.getItemFromBlock(item), 0, new ModelResourceLocation(
-					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
-		}
-
-		if (GlobalValues.NEST_OF_BEES) {
-			mesher.register(ReforgedAdditions.NEST_OF_BEES, 1, new ModelResourceLocation(
-					ReforgedMod.ID + ":" + ReforgedAdditions.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_empty",
-					inventory));
-
-			mesher.register(ReforgedAdditions.NEST_OF_BEES, 2, new ModelResourceLocation(
-					ReforgedMod.ID + ":" + ReforgedAdditions.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_powder",
-					inventory));
-		}
-		/*
-		 * if(GlobalValues.CROSSBOW) { for(int i = 1; i <= 5; i++) {
-		 * mesher.register(ReforgedAdditions.CROSSBOW, i, new
-		 * ModelResourceLocation(ReforgedMod.ID + ":" + "crossbow_" + i)); } }
-		 */
+		super.preInit(event);
+		MinecraftForge.EVENT_BUS.register(new ReloadOverlay());
+		registerEntityRenderers();
 	}
 
 	@Override
@@ -155,6 +113,48 @@ public class ClientProxy extends CommonProxy {
 		super.registerItemRenderer(item, meta, id);
 		ModelLoader.setCustomModelResourceLocation(item, meta,
 				new ModelResourceLocation(ReforgedMod.ID + ":" + id, "inventory"));
+	}
+
+	@Override
+	protected void registerItemRenderers() {
+
+		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+
+		String inventory = "inventory";
+		/*
+		 * if(GlobalValues.CROSSBOW) {
+		 * ModelBakery.registerItemVariants(ReforgedAdditions.CROSSBOW, new
+		 * ResourceLocation(ReforgedMod.ID + ":crossbow"), new
+		 * ResourceLocation(ReforgedMod.ID + ":crossbow_1"), new
+		 * ResourceLocation(ReforgedMod.ID + ":crossbow_2"), new
+		 * ResourceLocation(ReforgedMod.ID + ":crossbow_3"), new
+		 * ResourceLocation(ReforgedMod.ID + ":crossbow_4"), new
+		 * ResourceLocation(ReforgedMod.ID + ":crossbow_5")); }
+		 */
+		for (Item item : ReforgedRegistry.registrationList) {
+			mesher.register(item, 0, new ModelResourceLocation(
+					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
+		}
+
+		for (Block item : ReforgedRegistry.registrationListBlocks) {
+			mesher.register(Item.getItemFromBlock(item), 0, new ModelResourceLocation(
+					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
+		}
+
+		if (GlobalValues.NEST_OF_BEES) {
+			mesher.register(ReforgedAdditions.NEST_OF_BEES, 1, new ModelResourceLocation(
+					ReforgedMod.ID + ":" + ReforgedAdditions.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_empty",
+					inventory));
+
+			mesher.register(ReforgedAdditions.NEST_OF_BEES, 2, new ModelResourceLocation(
+					ReforgedMod.ID + ":" + ReforgedAdditions.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_powder",
+					inventory));
+		}
+		/*
+		 * if(GlobalValues.CROSSBOW) { for(int i = 1; i <= 5; i++) {
+		 * mesher.register(ReforgedAdditions.CROSSBOW, i, new
+		 * ModelResourceLocation(ReforgedMod.ID + ":" + "crossbow_" + i)); } }
+		 */
 	}
 
 }
