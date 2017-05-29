@@ -6,9 +6,19 @@
     },
 	"display": {
 		"firstperson_righthand": {
-			"rotation": [ 12, 273, 357 ],
+            "rotation": [ 12, 273, 357 ],
             "translation": [ 15.25, 4.50, -15.25 ],
             "scale": [ 2.25, 2.25, 2.25 ]
-		}
+        },
+        "firstperson_lefthand": {
+            "rotation": [ 12, 87, 359 ],
+            "translation": [ 15.25, 4.50, -15.25 ],
+            "scale": [ 2.25, 2.25, 2.25 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 0, 180, 0 ],
+            "translation": [ 0, 0, 0 ],
+            "scale": [ 1.00, 1.00, 1.00 ]
+        }
 	}
 }

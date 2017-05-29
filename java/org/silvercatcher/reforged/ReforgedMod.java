@@ -32,7 +32,7 @@ public class ReforgedMod {
 
 	public static SimpleNetworkWrapper network;
 
-	public static final Logger LOG = LogManager.getLogger("Reforged");
+	public static final Logger LOG = LogManager.getLogger(NAME);
 
 	public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
 		@Override

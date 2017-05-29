@@ -57,7 +57,7 @@ public class ItemJavelin extends ExtendedItem {
 			}
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemOffhand());
+		return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
 	}
 
 	@Override

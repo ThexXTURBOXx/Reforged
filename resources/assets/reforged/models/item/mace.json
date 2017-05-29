@@ -10,6 +10,16 @@
             "rotation": [ -180, 85, 215 ],
             "translation": [ 14.00, 0.75, -7.75 ],
             "scale": [ 2.50, 2.50, 2.50 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 45, -90, 0 ],
+            "translation": [ 0.00, 7.75, -1.00 ],
+            "scale": [ 1.50, 1.50, 1.50 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ 180, -85, -215 ],
+            "translation": [ 14.00, 0.75, -7.75 ],
+            "scale": [ 2.50, 2.50, 2.50 ]
         }
 	}
 }

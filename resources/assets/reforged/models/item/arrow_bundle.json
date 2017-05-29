@@ -13,6 +13,16 @@
             "rotation": [ 18, 296, 0 ],
             "translation": [ 4.25, 0.00, 0.00 ],
             "scale": [ 1.00, 1.00, 1.00 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 0, 0, -316 ],
+            "translation": [ 0.00, 0.00, 0.00 ],
+            "scale": [ 1.00, 1.00, 1.00 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ 16, 270, 104 ],
+            "translation": [ 6.00, 0.00, 0.00 ],
+            "scale": [ 1.00, 1.00, 1.00 ]
         }
     }
 }

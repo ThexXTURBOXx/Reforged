@@ -35,8 +35,7 @@ public class ItemDart extends ExtendedItem {
 			break;
 
 		case "poison":
-			GameRegistry.addShapelessRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL,
-					new ItemStack(Blocks.CACTUS));
+			GameRegistry.addShapelessRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL, new ItemStack(Blocks.CACTUS));
 			break;
 
 		case "poison_strong":

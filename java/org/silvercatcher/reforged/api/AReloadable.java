@@ -139,7 +139,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemOffhand());
+		return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
 	}
 
 	@Override
@@ -201,7 +201,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-		return true;
+		return !slotChanged;
 	}
 
 }

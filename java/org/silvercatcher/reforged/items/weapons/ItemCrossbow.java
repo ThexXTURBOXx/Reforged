@@ -190,7 +190,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 			playerIn.setActiveHand(hand);
 			return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
-		return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItemOffhand());
+		return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
 	}
 
 	@Override
@@ -251,7 +251,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-		return true;
+		return !slotChanged;
 	}
 
 }
