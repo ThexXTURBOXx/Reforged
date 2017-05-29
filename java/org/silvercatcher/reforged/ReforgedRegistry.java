@@ -57,11 +57,16 @@ public class ReforgedRegistry {
 					.setCreativeTab(ReforgedMod.tabReforged));
 			registrationList.add(ReforgedAdditions.MUSKET = new ItemMusket());
 			if (GlobalValues.KNIFE) {
-				registrationList.add(ReforgedAdditions.WOODEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.WOOD));
-				registrationList.add(ReforgedAdditions.STONE_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.STONE));
-				registrationList.add(ReforgedAdditions.GOLDEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.GOLD));
-				registrationList.add(ReforgedAdditions.IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.IRON));
-				registrationList.add(ReforgedAdditions.DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.DIAMOND));
+				registrationList
+						.add(ReforgedAdditions.WOODEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.WOOD));
+				registrationList
+						.add(ReforgedAdditions.STONE_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.STONE));
+				registrationList
+						.add(ReforgedAdditions.GOLDEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.GOLD));
+				registrationList
+						.add(ReforgedAdditions.IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.IRON));
+				registrationList.add(
+						ReforgedAdditions.DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.DIAMOND));
 			}
 			registrationList.add(ReforgedAdditions.MUSKET_BULLET = new ItemBulletMusket());
 			registrationList.add(ReforgedAdditions.BLUNDERBUSS = new ItemBlunderbuss());
