@@ -31,7 +31,12 @@ public class Helpers {
 	}
 
 	public static boolean consumeInventoryItem(EntityPlayer player, Item itemIn) {
-		int i = getInventorySlotContainItem(player, itemIn);
+		int i;
+		if(player.getHeldItemMainhand().isItemEqualIgnoreDurability(new ItemStack(itemIn))) {
+			i = player.inventory.currentItem;
+		} else {
+			i = getInventorySlotContainItem(player, itemIn);
+		}
 		if (i < 0) {
 			return false;
 		} else {
@@ -85,8 +90,7 @@ public class Helpers {
 
 	public static int getInventorySlotContainItem(EntityPlayer player, Item itemIn) {
 		for (int i = 0; i < player.inventory.mainInventory.size(); ++i) {
-			if (player.inventory.mainInventory.get(i) != null && !player.inventory.mainInventory.get(i).isEmpty()
-					&& player.inventory.mainInventory.get(i).getItem() == itemIn) {
+			if (player.inventory.mainInventory.get(i).isItemEqualIgnoreDurability(new ItemStack(itemIn))) {
 				return i;
 			}
 		}
