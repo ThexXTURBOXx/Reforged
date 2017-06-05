@@ -77,7 +77,6 @@ public class EntityJavelin extends AReforgedThrowable {
 		}
 		if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 			if (!creativeUse()) {
-				System.out.println(getUniqueID());
 				entityDropItem(getItemStack(), 0.5f);
 			}
 		} else {
@@ -95,7 +94,6 @@ public class EntityJavelin extends AReforgedThrowable {
 		}
 		if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
 			if (!creativeUse()) {
-				System.out.println(getUniqueID());
 				entityDropItem(getItemStack(), 0.5f);
 			}
 		} else {
