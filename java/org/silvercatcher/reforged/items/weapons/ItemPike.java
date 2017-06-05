@@ -55,7 +55,7 @@ public class ItemPike extends ExtendedItem {
 			damage += getHitDamage() / 2;
 		}
 		target.attackEntityFrom(getDamage(attacker), damage);
-		if(stack.getItem().isDamageable())
+		if (stack.getItem().isDamageable())
 			stack.damageItem(1, attacker);
 		return true;
 	}

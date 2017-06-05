@@ -8,10 +8,13 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemDirk extends ItemSword implements ItemExtension, IZombieEquippable {
@@ -53,19 +56,26 @@ public class ItemDirk extends ItemSword implements ItemExtension, IZombieEquippa
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
 		if (attacker.isSneaking()) {
-			target.attackEntityFrom(getDamage(attacker), getHitDamage() + 2f);
-		} else {
-			target.attackEntityFrom(getDamage(attacker), getHitDamage());
+			target.attackEntityFrom(getDamage(attacker), 2f);
 		}
-		return false;
+		if (stack.getItem().isDamageable())
+			stack.damageItem(1, attacker);
+		return true;
 	}
 
 	@Override
 	public boolean isDamageable() {
 		return !unbreakable;
+	}
+
+	@Override
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos,
+			EntityLivingBase entityLiving) {
+		if (stack.getItem().isDamageable() && state.getBlockHardness(worldIn, pos) != 0.0D) {
+			stack.damageItem(2, entityLiving);
+		}
+		return true;
 	}
 
 	@Override

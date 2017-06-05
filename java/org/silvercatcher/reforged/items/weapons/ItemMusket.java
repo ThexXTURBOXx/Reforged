@@ -48,9 +48,9 @@ public class ItemMusket extends AReloadable {
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
+		if (stack.getItem().isDamageable())
 			stack.damageItem(1, attacker);
-		return false;
+		return true;
 	}
 
 	@Override

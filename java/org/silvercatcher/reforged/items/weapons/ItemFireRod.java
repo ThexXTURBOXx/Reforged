@@ -29,29 +29,34 @@ public class ItemFireRod extends ExtendedItem {
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
 		if (!target.isImmuneToFire()) {
 			target.setFire(FIRE_DURATION);
 		}
 		if (attacker instanceof EntityPlayer) {
 			if (!((EntityPlayer) attacker).capabilities.isCreativeMode) {
-				stack.setCount(stack.getCount() - 1);
+				stack.shrink(1);
 			}
+		} else {
+			stack.shrink(1);
 		}
-		return false;
+		if (stack.getItem().isDamageable())
+			stack.damageItem(1, attacker);
+		return true;
 	}
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side,
 			float hitX, float hitY, float hitZ) {
-		if (worldIn.getBlockState(pos).getBlock().isFlammable(worldIn, pos, side)) {
+		if (hand == EnumHand.MAIN_HAND) {
+			if (worldIn.getBlockState(pos).getBlock().isFlammable(worldIn, pos, side)) {
 
-			BlockPos target = pos.offset(side);
+				BlockPos target = pos.offset(side);
 
-			if (!(worldIn.canBlockSeeSky(pos) && worldIn.isRaining()) && worldIn.isAirBlock(target)) {
-				worldIn.setBlockState(target, Blocks.FIRE.getDefaultState());
-				player.getHeldItemMainhand().setCount(player.getHeldItemMainhand().getCount() - 1);
+				if (!(worldIn.canBlockSeeSky(pos) && worldIn.isRaining()) && worldIn.isAirBlock(target)) {
+					worldIn.setBlockState(target, Blocks.FIRE.getDefaultState());
+					if (!player.capabilities.isCreativeMode)
+						player.getHeldItemMainhand().shrink(1);
+				}
 			}
 		}
 		return EnumActionResult.SUCCESS;

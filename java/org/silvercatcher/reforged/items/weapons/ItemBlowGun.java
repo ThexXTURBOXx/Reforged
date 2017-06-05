@@ -37,13 +37,6 @@ public class ItemBlowGun extends ExtendedItem {
 	public boolean isWeapon() {
 		return false;
 	}
-	
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
-		return true;
-	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
@@ -96,7 +89,7 @@ public class ItemBlowGun extends ExtendedItem {
 				if (playerIn.capabilities.isCreativeMode
 						|| Helpers.consumeInventoryItem(playerIn, ReforgedAdditions.DART_NORMAL))
 					;
-			} else if(playerIn.capabilities.isCreativeMode) {
+			} else if (playerIn.capabilities.isCreativeMode) {
 				dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_WITHER));
 			} else {
 				dart = null;
@@ -104,7 +97,7 @@ public class ItemBlowGun extends ExtendedItem {
 			if (dart != null) {
 				worldIn.spawnEntity(dart);
 				if (!playerIn.capabilities.isCreativeMode)
-					if(stack.getItem().isDamageable())
+					if (stack.getItem().isDamageable())
 						stack.attemptDamageItem(1, itemRand);
 				if (stack.getItemDamage() >= 40) {
 					Helpers.consumeInventoryItem(playerIn, stack.getItem());

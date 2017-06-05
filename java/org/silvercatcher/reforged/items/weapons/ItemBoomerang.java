@@ -34,13 +34,6 @@ public class ItemBoomerang extends ExtendedItem {
 		setMaxDamage((int) (materialDefinition.getMaxUses() * 0.8f));
 		setUnlocalizedName(materialDefinition.getPrefixedName("boomerang"));
 	}
-	
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
-		return true;
-	}
 
 	/**
 	 * this is weak melee combat damage! for ranged combat damage, see
@@ -63,6 +56,13 @@ public class ItemBoomerang extends ExtendedItem {
 
 	public MaterialDefinition getMaterialDefinition() {
 		return materialDefinition;
+	}
+
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (stack.getItem().isDamageable())
+			stack.damageItem(1, attacker);
+		return true;
 	}
 
 	@Override

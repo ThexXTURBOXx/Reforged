@@ -43,13 +43,6 @@ public class ItemNestOfBees extends ExtendedItem {
 
 		return 0f;
 	}
-	
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
-		return true;
-	}
 
 	@Override
 	public EnumAction getItemUseAction(ItemStack stack) {
@@ -120,7 +113,7 @@ public class ItemNestOfBees extends ExtendedItem {
 
 				if (compound.getBoolean(CompoundTags.ACTIVATED)) {
 					shoot(worldIn, player);
-					if(stack.getItem().isDamageable())
+					if (stack.getItem().isDamageable())
 						stack.damageItem(1, player);
 					arrows--;
 				}

@@ -79,13 +79,6 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 						: (loadState == loaded ? I18n.format("item.musket.loadstate.loaded")
 								: I18n.format("item.musket.loadstate.loading"))));
 	}
-	
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
-		return true;
-	}
 
 	private ItemStack findAmmo(EntityPlayer player) {
 		if (this.isArrow(player.getHeldItem(EnumHand.OFF_HAND))) {

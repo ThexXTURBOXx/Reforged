@@ -4,7 +4,6 @@ import org.silvercatcher.reforged.ReforgedMod;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -50,11 +49,6 @@ public abstract class ExtendedItem extends Item implements ItemExtension {
 		}
 
 		return multimap;
-	}
-
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		return false;
 	}
 
 	public boolean isWeapon() {

@@ -5,7 +5,6 @@ import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
 
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -30,13 +29,6 @@ public class ItemMusketWithBayonet extends ItemMusket {
 	public float getHitDamage() {
 
 		return super.getHitDamage() + getKnife().getHitDamage();
-	}
-	
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
-		return true;
 	}
 
 	public ItemExtension getKnife() {

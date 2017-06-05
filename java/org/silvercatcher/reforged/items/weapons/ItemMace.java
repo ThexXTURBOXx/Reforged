@@ -56,8 +56,6 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
 		if (itemRand.nextInt(25) < (8 - zombieSpawnChance())) {
 			IStunProperty prop = target.getCapability(ReforgedMod.STUN_PROP, null);
 			if (prop != null) {
@@ -68,7 +66,7 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 				target.addPotionEffect(new PotionEffect(getPotion("weakness"), 3, 10, false, false));
 			}
 		}
-		if(stack.getItem().isDamageable())
+		if (stack.getItem().isDamageable())
 			stack.damageItem(1, attacker);
 		return false;
 	}

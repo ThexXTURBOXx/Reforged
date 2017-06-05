@@ -40,13 +40,6 @@ public class ItemBlunderbuss extends AReloadable {
 	public int getItemEnchantability(ItemStack stack) {
 		return ToolMaterial.IRON.getEnchantability();
 	}
-	
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
-		return true;
-	}
 
 	@Override
 	public int getReloadTotal() {

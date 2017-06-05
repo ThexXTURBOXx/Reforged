@@ -8,10 +8,13 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquippable {
@@ -57,33 +60,33 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
-		
+
 		int armorvalue = 0;
 
-			for (int i = 3; i < 6; i++) {
+		for (int i = 3; i < 6; i++) {
 
-				ItemStack armorStack = target.getItemStackFromSlot(EntityEquipmentSlot.values()[i]);
-				if (armorStack != null && !armorStack.isEmpty() && armorStack.getItem() instanceof ItemArmor) {
-					armorvalue += ((ItemArmor) armorStack.getItem()).damageReduceAmount;
-				}
+			ItemStack armorStack = target.getItemStackFromSlot(EntityEquipmentSlot.values()[i]);
+			if (armorStack != null && !armorStack.isEmpty() && armorStack.getItem() instanceof ItemArmor) {
+				armorvalue += ((ItemArmor) armorStack.getItem()).damageReduceAmount;
 			}
+		}
 
-			float damage = getHitDamage();
+		float damage = getHitDamage();
 
-			if (armorvalue < 12) {
+		if (armorvalue < 12) {
 
-				damage *= 0.5f;
-				target.hurtResistantTime = 0;
-			}
-
-			if (armorvalue > 6) {
-				if(stack.getItem().isDamageable())
-					stack.damageItem(1, target);
-			}
-
+			damage *= 0.25f;
+			target.hurtResistantTime = 0;
 			target.attackEntityFrom(getDamage(attacker), damage);
+		}
+
+		if (armorvalue > 6) {
+			if (stack.getItem().isDamageable())
+				stack.damageItem(2, target);
+		}
+
+		if (stack.getCount() >= 1 && stack.getItem().isDamageable())
+			stack.damageItem(1, attacker);
 
 		return true;
 	}
@@ -91,6 +94,15 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 	@Override
 	public boolean isDamageable() {
 		return !unbreakable;
+	}
+
+	@Override
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos,
+			EntityLivingBase entityLiving) {
+		if (stack.getItem().isDamageable() && state.getBlockHardness(worldIn, pos) != 0.0D) {
+			stack.damageItem(2, entityLiving);
+		}
+		return true;
 	}
 
 	@Override

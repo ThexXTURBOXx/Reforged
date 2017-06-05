@@ -8,11 +8,14 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquippable {
@@ -54,30 +57,39 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
 
-			Vec3d look = target.getLookVec();
-			Vec3d attackervec = new Vec3d(attacker.posX - target.posX,
-					(attacker.getEntityBoundingBox().minY + attacker.height / 2) - target.posY + target.getEyeHeight(),
-					attacker.posZ - target.posZ);
-			double d0 = attackervec.lengthVector();
+		Vec3d look = target.getLookVec();
+		Vec3d attackervec = new Vec3d(attacker.posX - target.posX,
+				(attacker.getEntityBoundingBox().minY + attacker.height / 2) - target.posY + target.getEyeHeight(),
+				attacker.posZ - target.posZ);
+		double d0 = attackervec.lengthVector();
 
-			double d1 = look.dotProduct(attackervec);
+		double d1 = look.dotProduct(attackervec);
 
-			boolean seen = d1 > 1 - 0.25 / d0;
+		boolean seen = d1 > 1 - 0.25 / d0;
 
-			if (!seen && target.canEntityBeSeen(attacker)) {
-				target.attackEntityFrom(getDamage(attacker), getHitDamage() + 2f);
-			} else {
-				target.attackEntityFrom(getDamage(attacker), getHitDamage());
-			}
+		if (!seen && target.canEntityBeSeen(attacker)) {
+			target.attackEntityFrom(getDamage(attacker), getHitDamage() + 2f);
+		} else {
+			target.attackEntityFrom(getDamage(attacker), getHitDamage());
+		}
+		if (stack.getItem().isDamageable())
+			stack.damageItem(1, attacker);
 		return false;
 	}
 
 	@Override
 	public boolean isDamageable() {
 		return !unbreakable;
+	}
+
+	@Override
+	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos,
+			EntityLivingBase entityLiving) {
+		if (stack.getItem().isDamageable() && state.getBlockHardness(worldIn, pos) != 0.0D) {
+			stack.damageItem(2, entityLiving);
+		}
+		return true;
 	}
 
 	@Override

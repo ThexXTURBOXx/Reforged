@@ -50,8 +50,6 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
 		if (target.getHealth() <= getHitDamage() && !(attacker instanceof EntityPlayer)) {
 			World w = target.getEntityWorld();
 			if (!w.isRemote) {
@@ -64,7 +62,9 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 				}
 			}
 		}
-		return false;
+		if (stack.getItem().isDamageable())
+			stack.damageItem(1, attacker);
+		return true;
 	}
 
 	@Override

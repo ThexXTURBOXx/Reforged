@@ -38,13 +38,6 @@ public class ItemJavelin extends ExtendedItem {
 	public EnumAction getItemUseAction(ItemStack stack) {
 		return EnumAction.BOW;
 	}
-	
-	@Override
-	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if(stack.getItem().isDamageable())
-			stack.damageItem(2, attacker);
-		return true;
-	}
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack) {
