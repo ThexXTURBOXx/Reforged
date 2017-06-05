@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.*;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
 public class EntityJavelin extends AReforgedThrowable {
@@ -76,6 +75,14 @@ public class EntityJavelin extends AReforgedThrowable {
 		if (!stack.attemptDamageItem(1, rand)) {
 			setItemStack(stack);
 		}
+		if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+			if (!creativeUse()) {
+				System.out.println(getUniqueID());
+				entityDropItem(getItemStack(), 0.5f);
+			}
+		} else {
+			Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
+		}
 		return true;
 	}
 
@@ -86,24 +93,21 @@ public class EntityJavelin extends AReforgedThrowable {
 		if (!stack.attemptDamageItem(1, rand)) {
 			setItemStack(stack);
 		}
-		return true;
-	}
-
-	@Override
-	protected void onImpact(RayTraceResult target) {
-		super.onImpact(target);
 		if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-			if (!world.isRemote && !creativeUse()) {
+			if (!creativeUse()) {
+				System.out.println(getUniqueID());
 				entityDropItem(getItemStack(), 0.5f);
 			}
 		} else {
 			Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 		}
+		return true;
 	}
 
 	@Override
 	public void onUpdate() {
-		super.onUpdate();
+		if (!isDead)
+			super.onUpdate();
 	}
 
 	@Override
