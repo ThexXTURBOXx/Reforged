@@ -4,6 +4,7 @@ import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.entities.EntityDynamite;
 import org.silvercatcher.reforged.util.Helpers;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -39,6 +40,13 @@ public class ItemDynamite extends ExtendedItem {
 	public void registerRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(this, 2), " s ", " g ", " g ", 's', new ItemStack(Items.STRING), 'g',
 				new ItemStack(Items.GUNPOWDER));
+	}
+	
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if(stack.getItem().isDamageable())
+			stack.damageItem(2, attacker);
+		return true;
 	}
 
 }

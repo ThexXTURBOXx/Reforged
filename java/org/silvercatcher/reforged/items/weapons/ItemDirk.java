@@ -53,12 +53,12 @@ public class ItemDirk extends ItemSword implements ItemExtension, IZombieEquippa
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if (!super.hitEntity(stack, target, attacker)) {
-			if (attacker.isSneaking()) {
-				target.attackEntityFrom(getDamage(attacker), getHitDamage() + 2f);
-			} else {
-				target.attackEntityFrom(getDamage(attacker), getHitDamage());
-			}
+		if(stack.getItem().isDamageable())
+			stack.damageItem(2, attacker);
+		if (attacker.isSneaking()) {
+			target.attackEntityFrom(getDamage(attacker), getHitDamage() + 2f);
+		} else {
+			target.attackEntityFrom(getDamage(attacker), getHitDamage());
 		}
 		return false;
 	}

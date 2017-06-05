@@ -8,6 +8,7 @@ import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
 import org.silvercatcher.reforged.util.Helpers;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -32,6 +33,13 @@ public class ItemBoomerang extends ExtendedItem {
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setMaxDamage((int) (materialDefinition.getMaxUses() * 0.8f));
 		setUnlocalizedName(materialDefinition.getPrefixedName("boomerang"));
+	}
+	
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if(stack.getItem().isDamageable())
+			stack.damageItem(2, attacker);
+		return true;
 	}
 
 	/**
@@ -59,10 +67,7 @@ public class ItemBoomerang extends ExtendedItem {
 
 	@Override
 	public boolean isDamageable() {
-		if (unbreakable)
-			return false;
-		else
-			return true;
+		return !unbreakable;
 	}
 
 	@Override

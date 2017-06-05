@@ -48,7 +48,6 @@ public class ItemPike extends ExtendedItem {
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		super.hitEntity(stack, target, attacker);
 		float damage = getHitDamage();
 		if (attacker instanceof EntityPlayer)
 			damage = damage + getEnchantmentBonus(stack, (EntityPlayer) attacker, target);
@@ -56,16 +55,14 @@ public class ItemPike extends ExtendedItem {
 			damage += getHitDamage() / 2;
 		}
 		target.attackEntityFrom(getDamage(attacker), damage);
-		stack.damageItem(1, attacker);
+		if(stack.getItem().isDamageable())
+			stack.damageItem(1, attacker);
 		return true;
 	}
 
 	@Override
 	public boolean isDamageable() {
-		if (unbreakable)
-			return false;
-		else
-			return true;
+		return !unbreakable;
 	}
 
 	@Override

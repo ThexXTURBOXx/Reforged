@@ -49,6 +49,13 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
 	}
+	
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if(stack.getItem().isDamageable())
+			stack.damageItem(2, attacker);
+		return true;
+	}
 
 	@Override
 	public float getHitDamage() {
@@ -69,17 +76,15 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 
 	@Override
 	public boolean isDamageable() {
-		if (unbreakable)
-			return false;
-		else
-			return true;
+		return !unbreakable;
 	}
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState blockIn, BlockPos pos,
 			EntityLivingBase playerIn) {
 
-		stack.damageItem(effectiveAgainst(blockIn) ? 2 : 3, playerIn);
+		if(stack.getItem().isDamageable())
+			stack.damageItem(effectiveAgainst(blockIn) ? 2 : 3, playerIn);
 		return true;
 	}
 

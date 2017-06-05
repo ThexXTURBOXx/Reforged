@@ -54,8 +54,8 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-
-		if (!super.hitEntity(stack, target, attacker)) {
+		if(stack.getItem().isDamageable())
+			stack.damageItem(2, attacker);
 
 			Vec3d look = target.getLookVec();
 			Vec3d attackervec = new Vec3d(attacker.posX - target.posX,
@@ -72,16 +72,12 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 			} else {
 				target.attackEntityFrom(getDamage(attacker), getHitDamage());
 			}
-		}
 		return false;
 	}
 
 	@Override
 	public boolean isDamageable() {
-		if (unbreakable)
-			return false;
-		else
-			return true;
+		return !unbreakable;
 	}
 
 	@Override

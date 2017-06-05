@@ -9,7 +9,6 @@ import org.silvercatcher.reforged.material.MaterialManager;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
@@ -58,10 +57,10 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-
-		if (!super.hitEntity(stack, target, attacker)) {
-
-			int armorvalue = 0;
+		if(stack.getItem().isDamageable())
+			stack.damageItem(2, attacker);
+		
+		int armorvalue = 0;
 
 			for (int i = 3; i < 6; i++) {
 
@@ -73,32 +72,25 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 
 			float damage = getHitDamage();
 
-			if (attacker instanceof EntityPlayer)
-				damage = damage + getEnchantmentBonus(stack, (EntityPlayer) attacker, target);
-
 			if (armorvalue < 12) {
 
-				damage *= 1.5f;
+				damage *= 0.5f;
 				target.hurtResistantTime = 0;
 			}
 
 			if (armorvalue > 6) {
-
-				stack.damageItem(1, target);
+				if(stack.getItem().isDamageable())
+					stack.damageItem(1, target);
 			}
 
 			target.attackEntityFrom(getDamage(attacker), damage);
-		}
 
 		return true;
 	}
 
 	@Override
 	public boolean isDamageable() {
-		if (unbreakable)
-			return false;
-		else
-			return true;
+		return !unbreakable;
 	}
 
 	@Override

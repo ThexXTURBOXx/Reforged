@@ -55,8 +55,8 @@ public class ItemSaber extends ItemSword implements ItemExtension, IZombieEquipp
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-
-		super.hitEntity(stack, target, attacker);
+		if(stack.getItem().isDamageable())
+			stack.damageItem(2, attacker);
 
 		float damage = getHitDamage();
 
@@ -75,10 +75,7 @@ public class ItemSaber extends ItemSword implements ItemExtension, IZombieEquipp
 
 	@Override
 	public boolean isDamageable() {
-		if (unbreakable)
-			return false;
-		else
-			return true;
+		return !unbreakable;
 	}
 
 	@Override
