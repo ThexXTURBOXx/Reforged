@@ -15,6 +15,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class AReloadable extends ItemBow implements ItemExtension {
@@ -135,13 +136,21 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 
 			compound.setByte(CompoundTags.AMMUNITION, loadState);
 
-			playerIn.setActiveHand(hand);
+			if(compound.getInteger(CompoundTags.TIME) <= 0 || !worldIn.isRemote || (worldIn.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
+				playerIn.setActiveHand(hand);
+			}
 
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
+			return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItemMainhand());
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
 	}
 
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+			EnumFacing facing, float hitX, float hitY, float hitZ) {
+		return EnumActionResult.PASS;
+	}
+	
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
 
@@ -158,22 +167,16 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase playerInl, int timeLeft) {
 		if (!worldIn.isRemote && playerInl instanceof EntityPlayer) {
 			EntityPlayer playerIn = (EntityPlayer) playerInl;
-
 			NBTTagCompound compound = giveCompound(stack);
-
 			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
-
 			if (loadState == loaded) {
-
 				Helpers.playSound(worldIn, playerIn, shootsound, 1f, 1f);
-
 				shoot(worldIn, playerIn, stack);
-				if (playerIn instanceof EntityPlayer && (!playerIn.capabilities.isCreativeMode
-						&& stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand))) {
+				if (!playerIn.capabilities.isCreativeMode &&
+						stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand)) {
 					playerIn.renderBrokenItemStack(stack);
 					Helpers.destroyCurrentEquippedItem(playerIn);
 				}
-
 				compound.setByte(CompoundTags.AMMUNITION, empty);
 				compound.setBoolean(CompoundTags.STARTED, false);
 			}
@@ -201,7 +204,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-		return !slotChanged;
+		return slotChanged;
 	}
 
 }

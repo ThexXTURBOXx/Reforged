@@ -3,7 +3,6 @@ package org.silvercatcher.reforged.proxy;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.*;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
 import org.silvercatcher.reforged.render.*;
@@ -97,7 +96,7 @@ public class ClientProxy extends CommonProxy {
 				}
 			});
 		if (GlobalValues.CALTROP)
-			ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCaltropEntity.class, new RenderTileEntityCaltrop());
+			ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCaltrop.class, new RenderTileEntityCaltrop());
 		if (GlobalValues.DYNAMITE)
 			RenderingRegistry.registerEntityRenderingHandler(EntityDynamite.class,
 					new IRenderFactory<EntityDynamite>() {
@@ -121,16 +120,7 @@ public class ClientProxy extends CommonProxy {
 		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 
 		String inventory = "inventory";
-		/*
-		 * if(GlobalValues.CROSSBOW) {
-		 * ModelBakery.registerItemVariants(ReforgedAdditions.CROSSBOW, new
-		 * ResourceLocation(ReforgedMod.ID + ":crossbow"), new
-		 * ResourceLocation(ReforgedMod.ID + ":crossbow_1"), new
-		 * ResourceLocation(ReforgedMod.ID + ":crossbow_2"), new
-		 * ResourceLocation(ReforgedMod.ID + ":crossbow_3"), new
-		 * ResourceLocation(ReforgedMod.ID + ":crossbow_4"), new
-		 * ResourceLocation(ReforgedMod.ID + ":crossbow_5")); }
-		 */
+		
 		for (Item item : ReforgedRegistry.registrationList) {
 			mesher.register(item, 0, new ModelResourceLocation(
 					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
@@ -140,21 +130,7 @@ public class ClientProxy extends CommonProxy {
 			mesher.register(Item.getItemFromBlock(item), 0, new ModelResourceLocation(
 					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
 		}
-
-		if (GlobalValues.NEST_OF_BEES) {
-			mesher.register(ReforgedAdditions.NEST_OF_BEES, 1, new ModelResourceLocation(
-					ReforgedMod.ID + ":" + ReforgedAdditions.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_empty",
-					inventory));
-
-			mesher.register(ReforgedAdditions.NEST_OF_BEES, 2, new ModelResourceLocation(
-					ReforgedMod.ID + ":" + ReforgedAdditions.NEST_OF_BEES.getUnlocalizedName().substring(5) + "_powder",
-					inventory));
-		}
-		/*
-		 * if(GlobalValues.CROSSBOW) { for(int i = 1; i <= 5; i++) {
-		 * mesher.register(ReforgedAdditions.CROSSBOW, i, new
-		 * ModelResourceLocation(ReforgedMod.ID + ":" + "crossbow_" + i)); } }
-		 */
+		
 	}
 
 }

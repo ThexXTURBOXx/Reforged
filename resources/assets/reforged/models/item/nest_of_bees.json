@@ -24,5 +24,13 @@
             "translation": [ 7.75, 3.75, 2.00 ],
             "scale": [ 2.80, 2.80, 2.80 ]
         }
-    }
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "empty": 1
+            },
+            "model": "reforged:item/nest_of_bees_empty"
+        }
+    ]
 }

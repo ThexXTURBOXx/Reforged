@@ -38,7 +38,7 @@ public class CommonProxy {
 
 	public void init(FMLInitializationEvent event) {
 		ReforgedRegistry.registerRecipes();
-		GameRegistry.registerTileEntity(TileEntityCaltropEntity.class, "caltrop");
+		GameRegistry.registerTileEntity(TileEntityCaltrop.class, "caltrop");
 	}
 
 	private void loadConfig(FMLPreInitializationEvent e) {
@@ -117,7 +117,7 @@ public class CommonProxy {
 		if (GlobalValues.BLOWGUN)
 			ReforgedRegistry.registerEntity(EntityDart.class, "Dart");
 		if (GlobalValues.CALTROP)
-			GameRegistry.registerTileEntity(TileEntityCaltropEntity.class, "Caltrop");
+			GameRegistry.registerTileEntity(TileEntityCaltrop.class, "Caltrop");
 		if (GlobalValues.DYNAMITE)
 			ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
 	}

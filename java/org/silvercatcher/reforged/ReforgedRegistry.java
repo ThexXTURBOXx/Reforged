@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.api.*;
-import org.silvercatcher.reforged.blocks.TileEntityCaltropBlock;
+import org.silvercatcher.reforged.blocks.BlockCaltrop;
 import org.silvercatcher.reforged.items.others.*;
 import org.silvercatcher.reforged.items.weapons.*;
 import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
@@ -135,7 +135,7 @@ public class ReforgedRegistry {
 		}
 
 		if (GlobalValues.CALTROP) {
-			registrationListBlocks.add(ReforgedAdditions.CALTROP = new TileEntityCaltropBlock());
+			registrationListBlocks.add(ReforgedAdditions.CALTROP = new BlockCaltrop());
 		}
 
 		if (GlobalValues.DYNAMITE) {

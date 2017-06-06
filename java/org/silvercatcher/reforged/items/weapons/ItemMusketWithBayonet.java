@@ -5,6 +5,7 @@ import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -51,6 +52,13 @@ public class ItemMusketWithBayonet extends ItemMusket {
 						"The ToolMaterial called " + materialDefinition.getPrefix() + " couldn't be found");
 			}
 		}
+	}
+
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (stack.getItem().isDamageable())
+			stack.damageItem(1, attacker);
+		return true;
 	}
 
 	@Override

@@ -22,6 +22,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -50,13 +51,13 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 					if (stack.getItem() instanceof ItemCrossbow && player.getActiveHand() == EnumHand.MAIN_HAND) {
 						if (getLoadState(stack) == loading) {
 							int left = getReloadLeft(stack, player);
-							if (left > 15) {
+							if (left > 14) {
 								mrl = 1;
-							} else if (left > 5) {
+							} else if (left > 9) {
 								mrl = 2;
-							} else if (left > -5) {
+							} else if (left > 4) {
 								mrl = 4;
-							} else {
+							} else if(left >= 0) {
 								mrl = 5;
 							}
 						} else if (getLoadState(stack) == loaded) {
@@ -132,7 +133,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 
 		if (loadState == loading)
-			return 40;
+			return getReloadTotal();
 
 		return super.getMaxItemUseDuration(stack);
 	}
@@ -187,7 +188,10 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 
 			compound.setByte(CompoundTags.AMMUNITION, loadState);
 
-			playerIn.setActiveHand(hand);
+			if(compound.getInteger(CompoundTags.TIME) <= 0 || !worldIn.isRemote || (worldIn.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
+				playerIn.setActiveHand(hand);
+			}
+			
 			return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
@@ -202,17 +206,22 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		giveCompound(stack).setByte(CompoundTags.AMMUNITION, loadState);
 		return stack;
 	}
+	
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+			EnumFacing facing, float hitX, float hitY, float hitZ) {
+		return EnumActionResult.PASS;
+	}
 
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase playerInl, int timeLeft) {
-		if (playerInl instanceof EntityPlayer) {
+		if (!worldIn.isRemote && playerInl instanceof EntityPlayer) {
 			EntityPlayer playerIn = (EntityPlayer) playerInl;
 			NBTTagCompound compound = giveCompound(stack);
 			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 			if (loadState == loaded) {
 				Helpers.playSound(worldIn, playerIn, "crossbow_shoot", 1f, 1f);
-				if (!worldIn.isRemote)
-					shoot(worldIn, playerIn, new ItemStack(ReforgedAdditions.CROSSBOW_BOLT));
+				shoot(worldIn, playerIn, new ItemStack(ReforgedAdditions.CROSSBOW_BOLT));
 				if (!playerIn.capabilities.isCreativeMode
 						&& (stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand))) {
 					playerIn.renderBrokenItemStack(stack);
@@ -220,19 +229,17 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 				}
 				compound.setByte(CompoundTags.AMMUNITION, empty);
 				compound.setBoolean(CompoundTags.STARTED, false);
-				compound.setInteger(CompoundTags.TIME, -1);
 			}
+			compound.setInteger(CompoundTags.TIME, -1);
 		}
 	}
 
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-		if (!worldIn.isRemote) {
 			if (giveCompound(stack).getBoolean(CompoundTags.STARTED) && getLoadState(stack) == loading) {
 				giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
 			}
-		}
 	}
 
 	@Override

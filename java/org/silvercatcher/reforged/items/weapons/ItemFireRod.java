@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.items.weapons;
 import org.silvercatcher.reforged.api.ExtendedItem;
 
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -30,7 +31,11 @@ public class ItemFireRod extends ExtendedItem {
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
 		if (!target.isImmuneToFire()) {
-			target.setFire(FIRE_DURATION);
+			if (target instanceof EntityCreeper) {
+				((EntityCreeper) target).ignite();
+			} else {
+				target.setFire(FIRE_DURATION);
+			}
 		}
 		if (attacker instanceof EntityPlayer) {
 			if (!((EntityPlayer) attacker).capabilities.isCreativeMode) {
@@ -39,8 +44,6 @@ public class ItemFireRod extends ExtendedItem {
 		} else {
 			stack.shrink(1);
 		}
-		if (stack.getItem().isDamageable())
-			stack.damageItem(1, attacker);
 		return true;
 	}
 

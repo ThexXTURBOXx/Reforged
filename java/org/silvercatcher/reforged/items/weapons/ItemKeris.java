@@ -36,6 +36,11 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
 	}
+	
+	@Override
+	public float getDamageVsEntity() {
+		return getHitDamage();
+	}
 
 	@Override
 	public float getHitDamage() {
@@ -50,7 +55,7 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if (target.getHealth() <= getHitDamage() && !(attacker instanceof EntityPlayer)) {
+		if (target.getHealth() <= getHitDamage()) {
 			World w = target.getEntityWorld();
 			if (!w.isRemote) {
 				int amount = ((EntityPlayer) attacker).experienceLevel / 2;

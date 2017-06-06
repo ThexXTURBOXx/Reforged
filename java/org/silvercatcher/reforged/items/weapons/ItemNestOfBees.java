@@ -2,6 +2,8 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.*;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
@@ -17,6 +19,8 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ItemNestOfBees extends ExtendedItem {
@@ -29,6 +33,17 @@ public class ItemNestOfBees extends ExtendedItem {
 		setUnlocalizedName("nest_of_bees");
 		setMaxDamage(80);
 		setMaxStackSize(1);
+		addPropertyOverride(new ResourceLocation("empty"), new IItemPropertyGetter() {
+			@Override
+			@SideOnly(Side.CLIENT)
+			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+				float mrl = 1;
+				if(stack.getItem() instanceof ItemNestOfBees && CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION) > 0) {
+					mrl = 0;
+				}
+				return mrl;
+			}
+		});
 	}
 
 	@Override

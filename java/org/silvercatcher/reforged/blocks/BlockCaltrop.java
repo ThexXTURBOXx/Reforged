@@ -6,7 +6,7 @@ import java.util.List;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.BlockExtension;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.entities.TileEntityCaltropEntity;
+import org.silvercatcher.reforged.entities.TileEntityCaltrop;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -23,11 +23,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class TileEntityCaltropBlock extends BlockContainer implements BlockExtension {
+public class BlockCaltrop extends BlockContainer implements BlockExtension {
 
-	private EntityLivingBase owner;
-
-	public TileEntityCaltropBlock() {
+	public BlockCaltrop() {
 		super(Material.GRASS);
 		setUnlocalizedName("caltrop");
 		setCreativeTab(ReforgedMod.tabReforged);
@@ -36,7 +34,7 @@ public class TileEntityCaltropBlock extends BlockContainer implements BlockExten
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityCaltropEntity();
+		return new TileEntityCaltrop();
 	}
 
 	@Override
@@ -77,21 +75,13 @@ public class TileEntityCaltropBlock extends BlockContainer implements BlockExten
 	}
 
 	@Override
-	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer,
-			ItemStack stack) {
-		owner = placer;
-	}
-
-	@Override
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		if (entityIn instanceof EntityLivingBase) {
 			EntityLivingBase e = (EntityLivingBase) entityIn;
-			if (e != owner) {
 				e.attackEntityFrom(new DamageSource("caltrop").setDamageBypassesArmor(), 8);
 				if (!worldIn.isRemote)
 					worldIn.setBlockToAir(pos);
 			}
-		}
 	}
 
 	@Override
