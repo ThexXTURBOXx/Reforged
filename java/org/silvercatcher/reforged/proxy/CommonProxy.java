@@ -38,7 +38,6 @@ public class CommonProxy {
 
 	public void init(FMLInitializationEvent event) {
 		ReforgedRegistry.registerRecipes();
-		GameRegistry.registerTileEntity(TileEntityCaltropEntity.class, "caltrop");
 	}
 
 	private void loadConfig(FMLPreInitializationEvent e) {
