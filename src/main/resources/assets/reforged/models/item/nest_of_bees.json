@@ -1,0 +1,36 @@
+{
+    "parent": "reforged:builtin/generated",
+    "textures": {
+        "layer0": "reforged:items/nob_filled"
+    },
+    "display": {
+        "thirdperson_righthand": {
+            "rotation": [ 0, 90, -50 ],
+            "translation": [ 0.00, 0.75, -2.75 ],
+            "scale": [ 1.00, 1.00, 2.00 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 202, 260, 237 ],
+            "translation": [ 7.75, 3.75, 2.00 ],
+            "scale": [ 2.80, 2.80, 2.80 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 0, -90, 50 ],
+            "translation": [ 0.00, 0.75, -2.75 ],
+            "scale": [ 1.00, 1.00, 2.00 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ 20, 80, -57 ],
+            "translation": [ 7.75, 3.75, 2.00 ],
+            "scale": [ 2.80, 2.80, 2.80 ]
+        }
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "empty": 1
+            },
+            "model": "reforged:item/nest_of_bees_empty"
+        }
+    ]
+}

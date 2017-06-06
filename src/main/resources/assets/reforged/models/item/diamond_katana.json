@@ -1,0 +1,7 @@
+{
+    "parent": "reforged:item/katana",
+
+    "textures": {
+        "layer0": "reforged:items/katana_diamond"
+    }
+}

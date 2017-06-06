@@ -1,0 +1,28 @@
+{
+    "parent": "reforged:builtin/generated",
+    "textures": {
+        "layer0": "reforged:items/crossbow_bolt"
+    },
+    "display": {
+        "thirdperson_righthand": {
+            "rotation": [ 0, 0, 314 ],
+            "translation": [ 0.00, 0.00, 0.00 ],
+            "scale": [ 1.00, 1.00, 1.00 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 22, 274, 0 ],
+            "translation": [ 5.25, 1.75, 0.00 ],
+            "scale": [ 1.00, 1.00, 1.00 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 0, 0, -314 ],
+            "translation": [ 0.00, 0.00, 0.00 ],
+            "scale": [ 1.00, 1.00, 1.00 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ 22, -274, 0 ],
+            "translation": [ 5.25, 1.75, 0.00 ],
+            "scale": [ 1.00, 1.00, 1.00 ]
+        }
+    }
+}

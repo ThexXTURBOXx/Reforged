@@ -1,0 +1,60 @@
+{
+    "parent": "reforged:builtin/generated",
+    "textures": {
+        "layer0": "reforged:items/crossbow"
+    },
+    "display": {
+        "thirdperson_righthand": {
+            "rotation": [ 270, 0, 314 ],
+            "translation": [ 0.00, 0.50, -1.50 ],
+            "scale": [ 0.85, 0.85, 0.85 ]
+        },
+        "firstperson_righthand": {
+            "rotation": [ 88, 7, 134 ],
+            "translation": [ 6.75, 12.00, 2.00 ],
+            "scale": [ 1.80, 1.80, 1.80 ]
+        },
+        "thirdperson_lefthand": {
+            "rotation": [ 90, 0, 224 ],
+            "translation": [ 0.00, 0.50, -1.50 ],
+            "scale": [ 0.85, 0.85, 0.85 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ -88, -7, 46 ],
+            "translation": [ 6.75, 12.00, 2.00 ],
+            "scale": [ 1.80, 1.80, 1.80 ]
+        }
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "pull": 1
+            },
+            "model": "reforged:item/crossbow_1"
+        },
+        {
+            "predicate": {
+                "pull": 2
+            },
+            "model": "reforged:item/crossbow_2"
+        },
+        {
+            "predicate": {
+                "pull": 3
+            },
+            "model": "reforged:item/crossbow_3"
+        },
+        {
+            "predicate": {
+                "pull": 4
+            },
+            "model": "reforged:item/crossbow_4"
+        },
+        {
+            "predicate": {
+                "pull": 5
+            },
+            "model": "reforged:item/crossbow_5"
+        }
+    ]
+}

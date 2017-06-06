@@ -1,0 +1,29 @@
+{
+    "parent": "reforged:item/musket",
+
+    "textures": {
+        "layer0": "reforged:items/blowgun"
+    },
+	"display": {
+		"thirdperson_righthand": {
+			"rotation": [ 275, 90, 0 ],
+            "translation": [ 0.00, 0.75, -0.75 ],
+            "scale": [ 0.50, 0.50, 0.50 ]
+		},
+		"firstperson_righthand": {
+			"rotation": [ 180, 291, 243 ],
+            "translation": [ 6.25, 2.75, 0.00 ],
+            "scale": [ 2.25, 2.25, 2.25 ]
+		},
+		"thirdperson_lefthand": {
+            "rotation": [ 0, 90, 0 ],
+            "translation": [ 0.00, 0.75, -0.75 ],
+            "scale": [ 0.50, 0.50, 0.50 ]
+        },
+        "firstperson_lefthand": {
+            "rotation": [ -180, 113, -243 ],
+            "translation": [ 6.25, 2.75, 0.00 ],
+            "scale": [ 2.25, 2.25, 2.25 ]
+        }
+	}
+}

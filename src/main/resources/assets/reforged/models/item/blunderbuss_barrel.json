@@ -1,0 +1,7 @@
+{
+    "parent": "reforged:item/musket_barrel",
+
+    "textures": {
+        "layer0": "reforged:items/blunderbuss_barrel"
+    }
+}

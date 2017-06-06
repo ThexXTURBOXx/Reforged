@@ -1,0 +1,6 @@
+{
+    "parent": "reforged:item/pike",
+    "textures": {
+        "layer0": "reforged:items/pike_iron"
+    }
+}
