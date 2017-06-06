@@ -156,11 +156,18 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 
 		compound.setByte(CompoundTags.AMMUNITION, loadState);
 
-		if(compound.getInteger(CompoundTags.TIME) <= 0 || !world.isRemote || (world.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
+		if (compound.getInteger(CompoundTags.TIME) <= 0 || !world.isRemote
+				|| (world.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
 			player.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
 		}
 
 		return itemStack;
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side,
+			float hitX, float hitY, float hitZ) {
+		return false;
 	}
 
 	@Override
@@ -194,13 +201,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 			}
 		}
 	}
-	
-	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side,
-			float hitX, float hitY, float hitZ) {
-		return false;
-	}
-	
+
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);

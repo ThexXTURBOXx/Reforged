@@ -73,15 +73,14 @@ public class ClientProxy extends CommonProxy {
 		String inventory = "inventory";
 
 		if (GlobalValues.CROSSBOW) {
-			ModelBakery.addVariantName(ReforgedAdditions.CROSSBOW,
-					ReforgedMod.ID + ":crossbow", ReforgedMod.ID + ":crossbow_1",
-					ReforgedMod.ID + ":crossbow_2", ReforgedMod.ID + ":crossbow_3",
+			ModelBakery.addVariantName(ReforgedAdditions.CROSSBOW, ReforgedMod.ID + ":crossbow",
+					ReforgedMod.ID + ":crossbow_1", ReforgedMod.ID + ":crossbow_2", ReforgedMod.ID + ":crossbow_3",
 					ReforgedMod.ID + ":crossbow_4", ReforgedMod.ID + ":crossbow_5");
 		}
 
 		if (GlobalValues.NEST_OF_BEES) {
-			ModelBakery.addVariantName(ReforgedAdditions.NEST_OF_BEES,
-					ReforgedMod.ID + ":nest_of_bees", ReforgedMod.ID + ":nest_of_bees_empty");
+			ModelBakery.addVariantName(ReforgedAdditions.NEST_OF_BEES, ReforgedMod.ID + ":nest_of_bees",
+					ReforgedMod.ID + ":nest_of_bees_empty");
 		}
 
 		for (Item item : ReforgedRegistry.registrationList) {

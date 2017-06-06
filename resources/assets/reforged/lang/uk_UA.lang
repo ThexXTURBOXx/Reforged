@@ -60,7 +60,7 @@ item.blunderbuss.name=Мушкетон
 item.javelin.name=Метальний Спис
 item.musket_bullet.name=Мушкетна Куля
 item.musket.name=Мушкет
-item.musket.loadstate=Зарядженість зброї
+item.musket.loadstate=Стан зброї
 item.musket.loadstate.empty=Пустий
 item.musket.loadstate.loading=Перезаряджається
 item.musket.loadstate.loaded=Заряджений
@@ -73,6 +73,24 @@ item.dynamite.name=Динамітна Шашка
 
 item.crossbow.name=Арбалет
 item.crossbow_bolt.name=Стріла для Арбалета
+
+item.wooden_pike.name=Wooden Pike
+item.stone_pike.name=Stone Pike
+item.golden_pike.name=Golden Pike
+item.iron_pike.name=Iron Pike
+item.diamond_pike.name=Diamond Pike
+
+item.wooden_mace.name=Wooden Mace
+item.stone_mace.name=Stone Mace
+item.golden_mace.name=Golden Mace
+item.iron_mace.name=Iron Mace
+item.diamond_mace.name=Diamond Mace
+
+item.wooden_dirk.name=Wooden Dirk
+item.stone_dirk.name=Stone Dirk
+item.golden_dirk.name=Golden Dirk
+item.iron_dirk.name=Iron Dirk
+item.diamond_dirk.name=Diamond Dirk
 
 death.attack.boomerang=Голову %1$s рознесло на друзки за допомогою Бумерангу.
 death.attack.boomerang.player=Голову %1$s рознесло на друзки за допомогою Бумерангу під час битви з %2$s.
@@ -91,6 +109,11 @@ death.attack.crossbow.player=%1$s був розрубаний арбалетно
 
 enchantment.goalseeker=Шукач цілі
 
-versionchecker.ingame.outdated=Доступна нова версія
-versionchecker.ingame.downloadclick=Натисніть тут, аби завантажити
-versionchecker.ingame.download=Завантажити
+reforged.subtitle.boomerang_break=Boomerang breaks
+reforged.subtitle.boomerang_hit=Boomerang hits
+reforged.subtitle.boomerang_throw=Throw Boomerang
+reforged.subtitle.crossbow_reload=Crossbow reloads
+reforged.subtitle.crossbow_shoot=Crossbow shoots
+reforged.subtitle.musket_shoot=Gun shoots
+reforged.subtitle.shotgun_reload=Gun reloads
+reforged.subtitle.shotgun_shoot=Gun shoots

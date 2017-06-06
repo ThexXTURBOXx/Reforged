@@ -64,6 +64,15 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 
 	@Override
+	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining) {
+		ModelResourceLocation mrl = new ModelResourceLocation(ReforgedMod.ID + ":nest_of_bees", "inventory");
+		if (stack.getItem() == this && CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION) <= 0) {
+			mrl = new ModelResourceLocation(ReforgedMod.ID + ":nest_of_bees_empty", "inventory");
+		}
+		return mrl;
+	}
+
+	@Override
 	public boolean isWeapon() {
 		return false;
 	}
@@ -86,15 +95,6 @@ public class ItemNestOfBees extends ExtendedItem {
 			world.playSoundAtEntity(player, "item.fireCharge.use", 1.0f, 1.0f);
 		}
 		return stack;
-	}
-	
-	@Override
-	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining) {
-		ModelResourceLocation mrl = new ModelResourceLocation(ReforgedMod.ID + ":nest_of_bees", "inventory");
-		if(stack.getItem() == this && CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION) <= 0) {
-			mrl = new ModelResourceLocation(ReforgedMod.ID + ":nest_of_bees_empty", "inventory");
-		}
-		return mrl;
 	}
 
 	@Override

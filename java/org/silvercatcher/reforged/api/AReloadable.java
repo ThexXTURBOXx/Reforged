@@ -124,11 +124,18 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 
 		compound.setByte(CompoundTags.AMMUNITION, loadState);
 
-		if(compound.getInteger(CompoundTags.TIME) <= 0 || !world.isRemote || (world.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
+		if (compound.getInteger(CompoundTags.TIME) <= 0 || !world.isRemote
+				|| (world.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
 			playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 		}
 
 		return itemStackIn;
+	}
+
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side,
+			float hitX, float hitY, float hitZ) {
+		return false;
 	}
 
 	@Override
@@ -175,12 +182,6 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				&& giveCompound(stack).getByte(CompoundTags.AMMUNITION) == loading) {
 			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
 		}
-	}
-	
-	@Override
-	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side,
-			float hitX, float hitY, float hitZ) {
-		return false;
 	}
 
 	protected void setAmmo(Item ammo) {
