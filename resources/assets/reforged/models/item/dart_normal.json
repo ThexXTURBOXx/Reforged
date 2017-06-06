@@ -1,7 +1,0 @@
-{
-    "parent": "reforged:item/dart",
-
-    "textures": {
-        "layer0": "reforged:items/dart_normal"
-    }
-}

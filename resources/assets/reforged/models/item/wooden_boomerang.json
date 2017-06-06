@@ -1,6 +1,0 @@
-{
-    "parent": "reforged:item/boomerang",
-    "textures": {
-        "layer0": "reforged:items/boomerang_wood"
-    }
-}

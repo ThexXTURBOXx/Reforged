@@ -1,6 +1,0 @@
-{
-    "parent": "reforged:item/musket_bullet",
-    "textures": {
-        "layer0": "reforged:items/blunderbuss_shot"
-    }
-}

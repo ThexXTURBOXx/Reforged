@@ -1,7 +1,0 @@
-{
-    "parent": "reforged:item/musket",
-
-    "textures": {
-        "layer0": "reforged:items/blunderbuss"
-    }
-}

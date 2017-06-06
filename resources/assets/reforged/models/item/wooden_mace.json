@@ -1,6 +1,0 @@
-{
-    "parent": "reforged:item/mace",
-    "textures": {
-        "layer0": "reforged:items/mace_wood"
-    }
-}
