@@ -57,7 +57,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 								mrl = 2;
 							} else if (left > 4) {
 								mrl = 4;
-							} else if(left >= 0) {
+							} else if (left >= 0) {
 								mrl = 5;
 							}
 						} else if (getLoadState(stack) == loaded) {
@@ -188,13 +188,20 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 
 			compound.setByte(CompoundTags.AMMUNITION, loadState);
 
-			if(compound.getInteger(CompoundTags.TIME) <= 0 || !worldIn.isRemote || (worldIn.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
+			if (compound.getInteger(CompoundTags.TIME) <= 0 || !worldIn.isRemote
+					|| (worldIn.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
 				playerIn.setActiveHand(hand);
 			}
-			
+
 			return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
+	}
+
+	@Override
+	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+			EnumFacing facing, float hitX, float hitY, float hitZ) {
+		return EnumActionResult.PASS;
 	}
 
 	@Override
@@ -205,12 +212,6 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		}
 		giveCompound(stack).setByte(CompoundTags.AMMUNITION, loadState);
 		return stack;
-	}
-	
-	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
-			EnumFacing facing, float hitX, float hitY, float hitZ) {
-		return EnumActionResult.PASS;
 	}
 
 	@Override
@@ -237,9 +238,9 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	@Override
 	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-			if (giveCompound(stack).getBoolean(CompoundTags.STARTED) && getLoadState(stack) == loading) {
-				giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
-			}
+		if (giveCompound(stack).getBoolean(CompoundTags.STARTED) && getLoadState(stack) == loading) {
+			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
+		}
 	}
 
 	@Override

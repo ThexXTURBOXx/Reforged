@@ -36,7 +36,7 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 	public Multimap getAttributeModifiers(ItemStack stack) {
 		return ItemExtension.super.getAttributeModifiers(stack);
 	}
-	
+
 	@Override
 	public float getDamageVsEntity() {
 		return getHitDamage();

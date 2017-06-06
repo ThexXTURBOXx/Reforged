@@ -120,7 +120,7 @@ public class ClientProxy extends CommonProxy {
 		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
 
 		String inventory = "inventory";
-		
+
 		for (Item item : ReforgedRegistry.registrationList) {
 			mesher.register(item, 0, new ModelResourceLocation(
 					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
@@ -130,7 +130,7 @@ public class ClientProxy extends CommonProxy {
 			mesher.register(Item.getItemFromBlock(item), 0, new ModelResourceLocation(
 					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
 		}
-		
+
 	}
 
 }

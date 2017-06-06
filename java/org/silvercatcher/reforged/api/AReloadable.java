@@ -136,7 +136,8 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 
 			compound.setByte(CompoundTags.AMMUNITION, loadState);
 
-			if(compound.getInteger(CompoundTags.TIME) <= 0 || !worldIn.isRemote || (worldIn.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
+			if (compound.getInteger(CompoundTags.TIME) <= 0 || !worldIn.isRemote
+					|| (worldIn.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
 				playerIn.setActiveHand(hand);
 			}
 
@@ -150,7 +151,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 			EnumFacing facing, float hitX, float hitY, float hitZ) {
 		return EnumActionResult.PASS;
 	}
-	
+
 	@Override
 	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
 
@@ -172,8 +173,8 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 			if (loadState == loaded) {
 				Helpers.playSound(worldIn, playerIn, shootsound, 1f, 1f);
 				shoot(worldIn, playerIn, stack);
-				if (!playerIn.capabilities.isCreativeMode &&
-						stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand)) {
+				if (!playerIn.capabilities.isCreativeMode && stack.getItem().isDamageable()
+						&& stack.attemptDamageItem(5, itemRand)) {
 					playerIn.renderBrokenItemStack(stack);
 					Helpers.destroyCurrentEquippedItem(playerIn);
 				}

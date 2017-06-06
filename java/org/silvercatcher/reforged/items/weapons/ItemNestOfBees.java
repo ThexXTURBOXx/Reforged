@@ -38,7 +38,8 @@ public class ItemNestOfBees extends ExtendedItem {
 			@SideOnly(Side.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
 				float mrl = 1;
-				if(stack.getItem() instanceof ItemNestOfBees && CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION) > 0) {
+				if (stack.getItem() instanceof ItemNestOfBees
+						&& CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION) > 0) {
 					mrl = 0;
 				}
 				return mrl;

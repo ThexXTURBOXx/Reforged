@@ -10,8 +10,8 @@
             "scale": [ 1.10, 1.10, 1.10 ]
         },
         "firstperson_righthand": {
-            "rotation": [ -180, 267, 199 ],
-            "translation": [ 7.00, 11.50, -15.25 ],
+            "rotation": [ 344, 273, 25 ],
+            "translation": [ 7.00, 2.25, -15.25 ],
             "scale": [ 2.25, 2.25, 2.25 ]
         },
         "thirdperson_lefthand": {
@@ -20,8 +20,8 @@
             "scale": [ 1.10, 1.10, 1.10 ]
         },
         "firstperson_lefthand": {
-            "rotation": [ 0, 93, -19 ],
-            "translation": [ 7.00, 11.50, -15.25 ],
+            "rotation": [ 154, 87, 165 ],
+            "translation": [ 7.00, 2.25, -15.25 ],
             "scale": [ 2.25, 2.25, 2.25 ]
         }
 	}

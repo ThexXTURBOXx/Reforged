@@ -179,7 +179,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 				}
 			}
 		}
-		this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
+		rotationYaw = prevRotationYaw + (rotationYaw - prevRotationYaw) * 0.2F;
 		rotationYaw += 20;
 	}
 

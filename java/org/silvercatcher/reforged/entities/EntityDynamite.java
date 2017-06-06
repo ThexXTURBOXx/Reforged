@@ -27,29 +27,6 @@ public class EntityDynamite extends AReforgedThrowable {
 		setInited();
 	}
 
-	@Override
-	protected float getGravityVelocity() {
-		return 0.05F;
-	}
-
-	@Override
-	protected float getImpactDamage(Entity target) {
-
-		return 0f;
-	}
-
-	@Override
-	protected boolean onBlockHit(BlockPos blockPos) {
-		world.createExplosion(this, posX, posY, posZ, 2, true);
-		return true;
-	}
-
-	@Override
-	protected boolean onEntityHit(Entity entity) {
-		world.createExplosion(this, posX, posY, posZ, 2, true);
-		return true;
-	}
-
 	public void explodeDamage(Explosion e, Entity exploder, int size, double x, double y, double z) {
 		float f3 = size * 2.0F;
 		int j = MathHelper.floor(x - f3 - 1.0D);
@@ -78,6 +55,29 @@ public class EntityDynamite extends AReforgedThrowable {
 				}
 			}
 		}
+	}
+
+	@Override
+	protected float getGravityVelocity() {
+		return 0.05F;
+	}
+
+	@Override
+	protected float getImpactDamage(Entity target) {
+
+		return 0f;
+	}
+
+	@Override
+	protected boolean onBlockHit(BlockPos blockPos) {
+		world.createExplosion(this, posX, posY, posZ, 2, true);
+		return true;
+	}
+
+	@Override
+	protected boolean onEntityHit(Entity entity) {
+		world.createExplosion(this, posX, posY, posZ, 2, true);
+		return true;
 	}
 
 	public DamageSource setExplosionSource(Explosion explosionIn) {
