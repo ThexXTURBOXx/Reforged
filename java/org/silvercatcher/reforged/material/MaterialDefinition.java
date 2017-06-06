@@ -36,6 +36,35 @@ public class MaterialDefinition {
 		this.materialBasedItems = new LinkedList<>();
 	}
 
+	public void addItem(Item item) {
+
+		materialBasedItems.add(item);
+	}
+
+	public float getDamageVsEntity() {
+		return material.getDamageVsEntity();
+	}
+
+	public float getEfficiencyOnProperMaterial() {
+		return material.getEfficiencyOnProperMaterial();
+	}
+
+	public int getEnchantability() {
+		return material.getEnchantability();
+	}
+
+	public ToolMaterial getMaterial() {
+		return material;
+	}
+
+	public final List<Item> getMaterialBasedItems() {
+		return materialBasedItems;
+	}
+
+	public int getMaxUses() {
+		return material.getMaxUses();
+	}
+
 	public final String getPrefix() {
 		return prefix;
 	}
@@ -45,24 +74,8 @@ public class MaterialDefinition {
 		return prefix + "_" + baseName;
 	}
 
-	public ToolMaterial getMaterial() {
-		return material;
-	}
-
 	public ItemStack getRepairMaterial() {
 		return repairMaterial;
-	}
-
-	public int getMaxUses() {
-		return material.getMaxUses();
-	}
-
-	public float getDamageVsEntity() {
-		return material.getDamageVsEntity();
-	}
-
-	public int getEnchantability() {
-		return material.getEnchantability();
 	}
 
 	/**
@@ -72,18 +85,5 @@ public class MaterialDefinition {
 	 * @return
 	 */
 	public void onEntityHit(Entity target) {
-	}
-
-	public float getEfficiencyOnProperMaterial() {
-		return material.getEfficiencyOnProperMaterial();
-	}
-
-	public final List<Item> getMaterialBasedItems() {
-		return materialBasedItems;
-	}
-
-	public void addItem(Item item) {
-
-		materialBasedItems.add(item);
 	}
 }

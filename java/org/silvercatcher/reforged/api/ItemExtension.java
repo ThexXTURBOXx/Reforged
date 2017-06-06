@@ -11,6 +11,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.DamageSource;
 
 /**
  * Attempt to use Java 8 features against lack of foresight.
@@ -22,7 +23,6 @@ public interface ItemExtension {
 
 	public static final int USE_DURATON = 72000;
 
-	@SuppressWarnings("rawtypes")
 	default Multimap getAttributeModifiers(ItemStack stack) {
 
 		Multimap modifiers = HashMultimap.create();
@@ -32,33 +32,11 @@ public interface ItemExtension {
 		return modifiers;
 	}
 
-	default void registerRecipes() {
+	default DamageSource getDamage(EntityLivingBase p) {
+		if (p instanceof EntityPlayer)
+			return DamageSource.causePlayerDamage((EntityPlayer) p);
+		return DamageSource.causeMobDamage(p);
 	}
-
-	default float getHitDamage(ItemStack stack) {
-
-		float enchantDamage = 0f;
-
-		for (Object o : EnchantmentHelper.getEnchantments(stack).entrySet()) {
-
-			Entry<Integer, Integer> entry = (Entry<Integer, Integer>) o;
-
-			Enchantment e = Enchantment.getEnchantmentById(entry.getKey());
-
-			if (e instanceof EnchantmentDamage) {
-
-				EnchantmentDamage ed = (EnchantmentDamage) e;
-
-				if (ed.damageType == 0) {
-
-					enchantDamage += ed.calcDamageByCreature(entry.getValue(), null);
-				}
-			}
-		}
-		return getHitDamage() + enchantDamage;
-	}
-
-	float getHitDamage();
 
 	default float getEnchantmentBonus(ItemStack stack, EntityPlayer player, Entity entity) {
 
@@ -87,5 +65,33 @@ public interface ItemExtension {
 			}
 		}
 		return extraDamage;
+	}
+
+	float getHitDamage();
+
+	default float getHitDamage(ItemStack stack) {
+
+		float enchantDamage = 0f;
+
+		for (Object o : EnchantmentHelper.getEnchantments(stack).entrySet()) {
+
+			Entry<Integer, Integer> entry = (Entry<Integer, Integer>) o;
+
+			Enchantment e = Enchantment.getEnchantmentById(entry.getKey());
+
+			if (e instanceof EnchantmentDamage) {
+
+				EnchantmentDamage ed = (EnchantmentDamage) e;
+
+				if (ed.damageType == 0) {
+
+					enchantDamage += ed.calcDamageByCreature(entry.getValue(), null);
+				}
+			}
+		}
+		return getHitDamage() + enchantDamage;
+	}
+
+	default void registerRecipes() {
 	}
 }

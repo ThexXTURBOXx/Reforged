@@ -52,6 +52,30 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 		this.setPosition(x, y, z);
 	}
 
+	public EntityCrossbowBolt(World world, EntityLivingBase shooter) {
+		super(world);
+		this.renderDistanceWeight = 10.0D;
+		this.shootingEntity = shooter;
+
+		if (shooter instanceof EntityPlayer) {
+			this.canBePickedUp = 1;
+		}
+
+		this.setSize(0.5F, 0.5F);
+		this.setLocationAndAngles(shooter.posX, shooter.posY + shooter.getEyeHeight(), shooter.posZ,
+				shooter.rotationYaw, shooter.rotationPitch);
+		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
+		this.posY -= 0.10000000149011612D;
+		this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
+		this.setPosition(this.posX, this.posY, this.posZ);
+		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI)
+				* MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
+		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI)
+				* MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
+		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
+		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 3.15F, 1.0F);
+	}
+
 	public EntityCrossbowBolt(World world, EntityLivingBase shooter, EntityLivingBase p_i1755_3_, float p_i1755_4_,
 			float p_i1755_5_) {
 		super(world);
@@ -79,28 +103,21 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 		}
 	}
 
-	public EntityCrossbowBolt(World world, EntityLivingBase shooter) {
-		super(world);
-		this.renderDistanceWeight = 10.0D;
-		this.shootingEntity = shooter;
+	/**
+	 * If returns false, the item will not inflict any damage against entities.
+	 */
+	@Override
+	public boolean canAttackWithItem() {
+		return false;
+	}
 
-		if (shooter instanceof EntityPlayer) {
-			this.canBePickedUp = 1;
-		}
-
-		this.setSize(0.5F, 0.5F);
-		this.setLocationAndAngles(shooter.posX, shooter.posY + shooter.getEyeHeight(), shooter.posZ,
-				shooter.rotationYaw, shooter.rotationPitch);
-		this.posX -= MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
-		this.posY -= 0.10000000149011612D;
-		this.posZ -= MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI) * 0.16F;
-		this.setPosition(this.posX, this.posY, this.posZ);
-		this.motionX = -MathHelper.sin(this.rotationYaw / 180.0F * (float) Math.PI)
-				* MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
-		this.motionZ = MathHelper.cos(this.rotationYaw / 180.0F * (float) Math.PI)
-				* MathHelper.cos(this.rotationPitch / 180.0F * (float) Math.PI);
-		this.motionY = (-MathHelper.sin(this.rotationPitch / 180.0F * (float) Math.PI));
-		this.setThrowableHeading(this.motionX, this.motionY, this.motionZ, 3.15F, 1.0F);
+	/**
+	 * returns if this entity triggers Block.onEntityWalking on the blocks they walk
+	 * on. used for spiders and wolves to prevent them from trampling crops
+	 */
+	@Override
+	protected boolean canTriggerWalking() {
+		return false;
 	}
 
 	@Override
@@ -108,60 +125,37 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 		this.dataWatcher.addObject(16, Byte.valueOf((byte) 0));
 	}
 
-	/**
-	 * Similar to setArrowHeading, it's point the throwable entity to a x, y, z
-	 * direction.
-	 * 
-	 * @param inaccuracy
-	 *            Higher means more error.
-	 */
-	@Override
-	public void setThrowableHeading(double x, double y, double z, float velocity, float inaccuracy) {
-		float f2 = MathHelper.sqrt_double(x * x + y * y + z * z);
-		x /= f2;
-		y /= f2;
-		z /= f2;
-		x += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * inaccuracy;
-		y += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * inaccuracy;
-		z += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * inaccuracy;
-		x *= velocity;
-		y *= velocity;
-		z *= velocity;
-		this.motionX = x;
-		this.motionY = y;
-		this.motionZ = z;
-		float f3 = MathHelper.sqrt_double(x * x + z * z);
-		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(x, z) * 180.0D / Math.PI);
-		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(y, f3) * 180.0D / Math.PI);
-		this.ticksInGround = 0;
-	}
-
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int posRotationIncrements,
-			boolean p_180426_10_) {
-		this.setPosition(x, y, z);
-		this.setRotation(yaw, pitch);
+	public double getDamage() {
+		return this.damage;
 	}
 
 	/**
-	 * Sets the velocity to the args. Args: x, y, z
+	 * Whether the arrow has a stream of critical hit particles flying behind it.
+	 */
+	public boolean getIsCritical() {
+		byte b0 = this.dataWatcher.getWatchableObjectByte(16);
+		return (b0 & 1) != 0;
+	}
+
+	/**
+	 * Called by a player entity when they collide with an entity
 	 */
 	@Override
-	@SideOnly(Side.CLIENT)
-	public void setVelocity(double x, double y, double z) {
-		this.motionX = x;
-		this.motionY = y;
-		this.motionZ = z;
+	public void onCollideWithPlayer(EntityPlayer entity) {
+		if (!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0) {
+			boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && entity.capabilities.isCreativeMode;
 
-		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
-			float f = MathHelper.sqrt_double(x * x + z * z);
-			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(x, z) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(y, f) * 180.0D / Math.PI);
-			this.prevRotationPitch = this.rotationPitch;
-			this.prevRotationYaw = this.rotationYaw;
-			this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-			this.ticksInGround = 0;
+			if (this.canBePickedUp == 1
+					&& !entity.inventory.addItemStackToInventory(new ItemStack(ReforgedAdditions.CROSSBOW_BOLT, 1))) {
+				flag = false;
+			}
+
+			if (flag) {
+				this.playSound("random.pop", 0.2F,
+						((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
+				entity.onItemPickup(this, 1);
+				this.setDead();
+			}
 		}
 	}
 
@@ -427,24 +421,6 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 	}
 
 	/**
-	 * (abstract) Protected helper method to write subclass entity data to NBT.
-	 */
-	@Override
-	public void writeEntityToNBT(NBTTagCompound tagCompound) {
-		tagCompound.setShort("xTile", (short) this.xTile);
-		tagCompound.setShort("yTile", (short) this.yTile);
-		tagCompound.setShort("zTile", (short) this.zTile);
-		tagCompound.setShort("life", (short) this.ticksInGround);
-		ResourceLocation resourcelocation = (ResourceLocation) Block.blockRegistry.getNameForObject(this.inTile);
-		tagCompound.setString("inTile", resourcelocation == null ? "" : resourcelocation.toString());
-		tagCompound.setByte("inData", (byte) this.inData);
-		tagCompound.setByte("shake", (byte) this.arrowShake);
-		tagCompound.setByte("inGround", (byte) (this.inGround ? 1 : 0));
-		tagCompound.setByte("pickup", (byte) this.canBePickedUp);
-		tagCompound.setDouble("damage", this.damage);
-	}
-
-	/**
 	 * (abstract) Protected helper method to read subclass entity data from NBT.
 	 */
 	@Override
@@ -475,63 +451,12 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 		}
 	}
 
-	/**
-	 * Called by a player entity when they collide with an entity
-	 */
-	@Override
-	public void onCollideWithPlayer(EntityPlayer entity) {
-		if (!this.worldObj.isRemote && this.inGround && this.arrowShake <= 0) {
-			boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2 && entity.capabilities.isCreativeMode;
-
-			if (this.canBePickedUp == 1
-					&& !entity.inventory.addItemStackToInventory(new ItemStack(ReforgedAdditions.CROSSBOW_BOLT, 1))) {
-				flag = false;
-			}
-
-			if (flag) {
-				this.playSound("random.pop", 0.2F,
-						((this.rand.nextFloat() - this.rand.nextFloat()) * 0.7F + 1.0F) * 2.0F);
-				entity.onItemPickup(this, 1);
-				this.setDead();
-			}
-		}
-	}
-
-	/**
-	 * returns if this entity triggers Block.onEntityWalking on the blocks they
-	 * walk on. used for spiders and wolves to prevent them from trampling crops
-	 */
-	@Override
-	protected boolean canTriggerWalking() {
-		return false;
-	}
-
 	public void setDamage(double damageIn) {
 		this.damage = damageIn;
 	}
 
-	public double getDamage() {
-		return this.damage;
-	}
-
 	/**
-	 * Sets the amount of knockback the arrow applies when it hits a mob.
-	 */
-	public void setKnockbackStrength(int knockbackStrengthIn) {
-		this.knockbackStrength = knockbackStrengthIn;
-	}
-
-	/**
-	 * If returns false, the item will not inflict any damage against entities.
-	 */
-	@Override
-	public boolean canAttackWithItem() {
-		return false;
-	}
-
-	/**
-	 * Whether the arrow has a stream of critical hit particles flying behind
-	 * it.
+	 * Whether the arrow has a stream of critical hit particles flying behind it.
 	 */
 	public void setIsCritical(boolean critical) {
 		byte b0 = this.dataWatcher.getWatchableObjectByte(16);
@@ -544,11 +469,84 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 	}
 
 	/**
-	 * Whether the arrow has a stream of critical hit particles flying behind
-	 * it.
+	 * Sets the amount of knockback the arrow applies when it hits a mob.
 	 */
-	public boolean getIsCritical() {
-		byte b0 = this.dataWatcher.getWatchableObjectByte(16);
-		return (b0 & 1) != 0;
+	public void setKnockbackStrength(int knockbackStrengthIn) {
+		this.knockbackStrength = knockbackStrengthIn;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void setPositionAndRotation2(double x, double y, double z, float yaw, float pitch, int posRotationIncrements,
+			boolean p_180426_10_) {
+		this.setPosition(x, y, z);
+		this.setRotation(yaw, pitch);
+	}
+
+	/**
+	 * Similar to setArrowHeading, it's point the throwable entity to a x, y, z
+	 * direction.
+	 * 
+	 * @param inaccuracy
+	 *            Higher means more error.
+	 */
+	@Override
+	public void setThrowableHeading(double x, double y, double z, float velocity, float inaccuracy) {
+		float f2 = MathHelper.sqrt_double(x * x + y * y + z * z);
+		x /= f2;
+		y /= f2;
+		z /= f2;
+		x += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * inaccuracy;
+		y += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * inaccuracy;
+		z += this.rand.nextGaussian() * (this.rand.nextBoolean() ? -1 : 1) * 0.007499999832361937D * inaccuracy;
+		x *= velocity;
+		y *= velocity;
+		z *= velocity;
+		this.motionX = x;
+		this.motionY = y;
+		this.motionZ = z;
+		float f3 = MathHelper.sqrt_double(x * x + z * z);
+		this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(x, z) * 180.0D / Math.PI);
+		this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(y, f3) * 180.0D / Math.PI);
+		this.ticksInGround = 0;
+	}
+
+	/**
+	 * Sets the velocity to the args. Args: x, y, z
+	 */
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void setVelocity(double x, double y, double z) {
+		this.motionX = x;
+		this.motionY = y;
+		this.motionZ = z;
+
+		if (this.prevRotationPitch == 0.0F && this.prevRotationYaw == 0.0F) {
+			float f = MathHelper.sqrt_double(x * x + z * z);
+			this.prevRotationYaw = this.rotationYaw = (float) (Math.atan2(x, z) * 180.0D / Math.PI);
+			this.prevRotationPitch = this.rotationPitch = (float) (Math.atan2(y, f) * 180.0D / Math.PI);
+			this.prevRotationPitch = this.rotationPitch;
+			this.prevRotationYaw = this.rotationYaw;
+			this.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+			this.ticksInGround = 0;
+		}
+	}
+
+	/**
+	 * (abstract) Protected helper method to write subclass entity data to NBT.
+	 */
+	@Override
+	public void writeEntityToNBT(NBTTagCompound tagCompound) {
+		tagCompound.setShort("xTile", (short) this.xTile);
+		tagCompound.setShort("yTile", (short) this.yTile);
+		tagCompound.setShort("zTile", (short) this.zTile);
+		tagCompound.setShort("life", (short) this.ticksInGround);
+		ResourceLocation resourcelocation = (ResourceLocation) Block.blockRegistry.getNameForObject(this.inTile);
+		tagCompound.setString("inTile", resourcelocation == null ? "" : resourcelocation.toString());
+		tagCompound.setByte("inData", (byte) this.inData);
+		tagCompound.setByte("shake", (byte) this.arrowShake);
+		tagCompound.setByte("inGround", (byte) (this.inGround ? 1 : 0));
+		tagCompound.setByte("pickup", (byte) this.canBePickedUp);
+		tagCompound.setDouble("damage", this.damage);
 	}
 }

@@ -13,10 +13,6 @@ import net.minecraftforge.common.ForgeHooks;
 
 public class NestOfBeesLoadRecipe implements IRecipe {
 
-	private ItemStack output = null;
-	private int aB;
-	private int NoB;
-
 	private static void printInventory(String name, InventoryCrafting inventory) {
 
 		if (Minecraft.getMinecraft().theWorld != null) {
@@ -28,6 +24,38 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			System.out.append("]");
 			System.out.println();
 		}
+	}
+
+	private ItemStack output = null;
+	private int aB;
+
+	private int NoB;
+
+	@Override
+	public ItemStack getCraftingResult(InventoryCrafting inventory) {
+		NBTTagCompound compound = CompoundTags.giveCompound(output);
+		int arrows = compound.getInteger(CompoundTags.AMMUNITION);
+		arrows = arrows + 8;
+		compound.setInteger(CompoundTags.AMMUNITION, arrows);
+		return output;
+	}
+
+	@Override
+	public ItemStack getRecipeOutput() {
+		ItemStack output = new ItemStack(ReforgedAdditions.NEST_OF_BEES);
+		NBTTagCompound compound = CompoundTags.giveCompound(output);
+		compound.setInteger(CompoundTags.AMMUNITION, 8);
+		return this.output != null ? this.output : output;
+	}
+
+	@Override
+	public int getRecipeSize() {
+		return 9;
+	}
+
+	@Override
+	public ItemStack[] getRemainingItems(InventoryCrafting inventory) {
+		return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
 	}
 
 	@Override
@@ -52,32 +80,5 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			return false;
 		}
 		return true;
-	}
-
-	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventory) {
-		NBTTagCompound compound = CompoundTags.giveCompound(output);
-		int arrows = compound.getInteger(CompoundTags.AMMUNITION);
-		arrows = arrows + 8;
-		compound.setInteger(CompoundTags.AMMUNITION, arrows);
-		return output;
-	}
-
-	@Override
-	public int getRecipeSize() {
-		return 9;
-	}
-
-	@Override
-	public ItemStack getRecipeOutput() {
-		ItemStack output = new ItemStack(ReforgedAdditions.NEST_OF_BEES);
-		NBTTagCompound compound = CompoundTags.giveCompound(output);
-		compound.setInteger(CompoundTags.AMMUNITION, 8);
-		return this.output != null ? this.output : output;
-	}
-
-	@Override
-	public ItemStack[] getRemainingItems(InventoryCrafting inventory) {
-		return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
 	}
 }

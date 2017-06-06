@@ -18,9 +18,8 @@ public class ItemDynamite extends ExtendedItem {
 	}
 
 	@Override
-	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this, 2), " s ", " g ", " g ", 's', new ItemStack(Items.string), 'g',
-				new ItemStack(Items.gunpowder));
+	public boolean isWeapon() {
+		return false;
 	}
 
 	@Override
@@ -32,6 +31,12 @@ public class ItemDynamite extends ExtendedItem {
 			}
 		}
 		return stack;
+	}
+
+	@Override
+	public void registerRecipes() {
+		GameRegistry.addShapedRecipe(new ItemStack(this, 2), " s ", " g ", " g ", 's', new ItemStack(Items.string), 'g',
+				new ItemStack(Items.gunpowder));
 	}
 
 }

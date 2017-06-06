@@ -13,13 +13,29 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class RenderBoltCrossbow extends Render {
+public class RenderCrossbowBolt extends Render {
 
 	private static final ResourceLocation arrowTextures = new ResourceLocation("textures/entity/arrow.png");
 	private static final String __OBFID = "CL_00000978";
 
-	public RenderBoltCrossbow(RenderManager renderManagerIn) {
+	public RenderCrossbowBolt(RenderManager renderManagerIn) {
 		super(renderManagerIn);
+	}
+
+	/**
+	 * Actually renders the given argument. This is a synthetic bridge method,
+	 * always casting down its argument and then handing it off to a worker function
+	 * which does the actual work. In all probabilty, the class Render is generic
+	 * (Render<T extends Entity>) and this method has signature public void
+	 * func_76986_a(T entity, double d, double d1, double d2, float f, float f1).
+	 * But JAD is pre 1.5 so doe
+	 * 
+	 * @param entityYaw
+	 *            The yaw rotation of the passed entity
+	 */
+	@Override
+	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks) {
+		this.doRender((EntityCrossbowBolt) entity, x, y, z, entityYaw, partialTicks);
 	}
 
 	public void doRender(EntityCrossbowBolt arrow, double x, double y, double z, float p_180551_8_, float p_180551_9_) {
@@ -85,32 +101,16 @@ public class RenderBoltCrossbow extends Render {
 		super.doRender(arrow, x, y, z, p_180551_8_, p_180551_9_);
 	}
 
-	protected ResourceLocation getEntityTexture(EntityCrossbowBolt p_180550_1_) {
-		return arrowTextures;
-	}
-
 	/**
-	 * Returns the location of an entity's texture. Doesn't seem to be called
-	 * unless you call Render.bindEntityTexture.
+	 * Returns the location of an entity's texture. Doesn't seem to be called unless
+	 * you call Render.bindEntityTexture.
 	 */
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
 		return this.getEntityTexture((EntityCrossbowBolt) entity);
 	}
 
-	/**
-	 * Actually renders the given argument. This is a synthetic bridge method,
-	 * always casting down its argument and then handing it off to a worker
-	 * function which does the actual work. In all probabilty, the class Render
-	 * is generic (Render<T extends Entity>) and this method has signature
-	 * public void func_76986_a(T entity, double d, double d1, double d2, float
-	 * f, float f1). But JAD is pre 1.5 so doe
-	 * 
-	 * @param entityYaw
-	 *            The yaw rotation of the passed entity
-	 */
-	@Override
-	public void doRender(Entity entity, double x, double y, double z, float entityYaw, float partialTicks) {
-		this.doRender((EntityCrossbowBolt) entity, x, y, z, entityYaw, partialTicks);
+	protected ResourceLocation getEntityTexture(EntityCrossbowBolt p_180550_1_) {
+		return arrowTextures;
 	}
 }

@@ -11,12 +11,20 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.LanguageRegistry;
 
 public abstract class AReloadable extends ItemBow implements ItemExtension {
 
+	public static final byte empty = 0;
+	public static final byte loading = 1;
+
+	public static final byte loaded = 2;
+
 	private Item ammo;
+
 	private String shootsound;
 
 	public AReloadable(String name, String shootsound) {
@@ -28,28 +36,6 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-		if (!(entityIn instanceof EntityPlayer))
-			return;
-		if (giveCompound(stack).getBoolean(CompoundTags.STARTED)
-				&& giveCompound(stack).getByte(CompoundTags.AMMUNITION) == loading
-				&& ItemStack.areItemStacksEqual(stack, ((EntityPlayer) entityIn).getItemInUse())) {
-			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
-		}
-	}
-
-	@Override
-	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
-		return false;
-	}
-
-	public static final byte empty = 0;
-	public static final byte loading = 1;
-	public static final byte loaded = 2;
-
-	@SuppressWarnings("rawtypes")
-	@Override
 	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
 
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
@@ -60,6 +46,15 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 				+ (loadState == empty ? lr.getStringLocalization("item.musket.loadstate.empty")
 						: (loadState == loaded ? lr.getStringLocalization("item.musket.loadstate.loaded")
 								: lr.getStringLocalization("item.musket.loadstate.loading"))));
+	}
+
+	private Item getAmmo() {
+		return ammo;
+	}
+
+	@Override
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		return ItemExtension.super.getAttributeModifiers(stack);
 	}
 
 	@Override
@@ -89,12 +84,21 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		return super.getMaxItemUseDuration(stack);
 	}
 
-	protected void setAmmo(Item ammo) {
-		this.ammo = ammo;
+	public int getReloadTime(ItemStack stack) {
+		return giveCompound(stack).getInteger(CompoundTags.TIME);
 	}
 
-	private Item getAmmo() {
-		return ammo;
+	public abstract int getReloadTotal();
+
+	public NBTTagCompound giveCompound(ItemStack stack) {
+
+		NBTTagCompound compound = CompoundTags.giveCompound(stack);
+
+		if (!compound.hasKey(CompoundTags.AMMUNITION)) {
+
+			compound.setByte(CompoundTags.AMMUNITION, empty);
+		}
+		return compound;
 	}
 
 	@Override
@@ -120,9 +124,25 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 
 		compound.setByte(CompoundTags.AMMUNITION, loadState);
 
-		playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
+		System.out.println(compound.getInteger(CompoundTags.TIME));
+		System.out.println(getReloadTotal());
+		if(compound.getInteger(CompoundTags.TIME) <= 0 || !world.isRemote || (world.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
+			playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
+		}
 
 		return itemStackIn;
+	}
+
+	@Override
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer playerIn) {
+
+		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
+
+		if (loadState == loading) {
+			loadState = loaded;
+		}
+		giveCompound(stack).setByte(CompoundTags.AMMUNITION, loadState);
+		return stack;
 	}
 
 	@Override
@@ -150,41 +170,30 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		}
 	}
 
-	public int getReloadTime(ItemStack stack) {
-		return giveCompound(stack).getInteger(CompoundTags.TIME);
+	@Override
+	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+		if (giveCompound(stack).getBoolean(CompoundTags.STARTED)
+				&& giveCompound(stack).getByte(CompoundTags.AMMUNITION) == loading) {
+			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
+		}
+	}
+	
+	@Override
+	public boolean onItemUse(ItemStack stack, EntityPlayer playerIn, World worldIn, BlockPos pos, EnumFacing side,
+			float hitX, float hitY, float hitZ) {
+		return false;
+	}
+
+	protected void setAmmo(Item ammo) {
+		this.ammo = ammo;
 	}
 
 	public abstract void shoot(World world, EntityLivingBase playerIn, ItemStack stack);
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer playerIn) {
-
-		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
-
-		if (loadState == loading) {
-			loadState = loaded;
-		}
-		giveCompound(stack).setByte(CompoundTags.AMMUNITION, loadState);
-		return stack;
-	}
-
-	public abstract int getReloadTotal();
-
-	public NBTTagCompound giveCompound(ItemStack stack) {
-
-		NBTTagCompound compound = CompoundTags.giveCompound(stack);
-
-		if (!compound.hasKey(CompoundTags.AMMUNITION)) {
-
-			compound.setByte(CompoundTags.AMMUNITION, empty);
-		}
-		return compound;
-	}
-
-	@SuppressWarnings("rawtypes")
-	@Override
-	public Multimap getAttributeModifiers(ItemStack stack) {
-		return ItemExtension.super.getAttributeModifiers(stack);
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return slotChanged;
 	}
 
 }

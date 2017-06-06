@@ -1,6 +1,5 @@
 package org.silvercatcher.reforged.gui;
 
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.silvercatcher.reforged.api.AReloadable;
 import org.silvercatcher.reforged.api.CompoundTags;
@@ -55,30 +54,17 @@ public class ReloadOverlay extends Gui {
 
 				AReloadable reloadable = (AReloadable) equipped.getItem();
 
-				if (ticksBefore == -1) {
-					ticksBefore = minecraft.theWorld.getTotalWorldTime();
-				}
-
-				if (Mouse.isCreated() && Mouse.isButtonDown(1)) {
-					amount += minecraft.theWorld.getTotalWorldTime() - ticksBefore;
-					amountUnchecked += minecraft.theWorld.getTotalWorldTime() - ticksBefore;
-					ticksBefore = minecraft.theWorld.getTotalWorldTime();
-				} else {
-					amount = 0;
-					amountUnchecked = 0;
-					ticksBefore = -1;
-					return;
-				}
-
 				if (reloadable.giveCompound(equipped).getByte(CompoundTags.AMMUNITION) != AReloadable.loading) {
 					return;
 				}
 
+				int amountUnchecked = CompoundTags.giveCompound(equipped).getInteger(CompoundTags.TIME);
+
 				if (amountUnchecked > reloadable.getReloadTotal()) {
-					amount = 0;
+					amountUnchecked = 0;
 				}
 
-				float done = amount / reloadable.getReloadTotal();
+				float done = (float) amountUnchecked / (float) reloadable.getReloadTotal();
 
 				GL11.glColor4f(1F, 1F, 1F, 1F);
 				GL11.glDisable(GL11.GL_LIGHTING);

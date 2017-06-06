@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 public class ModelDart extends ReforgedModel {
-
 	public ModelRenderer shapefront;
 	public ModelRenderer shapebehind;
 	public ModelRenderer shapering;
@@ -70,5 +69,4 @@ public class ModelDart extends ReforgedModel {
 		shapebehind2.render(f5);
 		GlStateManager.popMatrix();
 	}
-
 }

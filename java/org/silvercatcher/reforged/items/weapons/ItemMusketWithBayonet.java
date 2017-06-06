@@ -5,6 +5,7 @@ import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
 
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -26,11 +27,9 @@ public class ItemMusketWithBayonet extends ItemMusket {
 	}
 
 	@Override
-	public boolean isDamageable() {
-		if (unbreakable)
-			return false;
-		else
-			return true;
+	public float getHitDamage() {
+
+		return super.getHitDamage() + getKnife().getHitDamage();
 	}
 
 	public ItemExtension getKnife() {
@@ -56,13 +55,19 @@ public class ItemMusketWithBayonet extends ItemMusket {
 	}
 
 	@Override
-	public void registerRecipes() {
-		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(ReforgedAdditions.MUSKET), getKnife());
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+		if (stack.getItem().isDamageable())
+			stack.damageItem(1, attacker);
+		return true;
 	}
 
 	@Override
-	public float getHitDamage() {
+	public boolean isDamageable() {
+		return !unbreakable;
+	}
 
-		return super.getHitDamage() + getKnife().getHitDamage();
+	@Override
+	public void registerRecipes() {
+		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(ReforgedAdditions.MUSKET), getKnife());
 	}
 }

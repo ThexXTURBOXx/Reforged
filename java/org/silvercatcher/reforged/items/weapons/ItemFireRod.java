@@ -2,7 +2,8 @@ package org.silvercatcher.reforged.items.weapons;
 
 import org.silvercatcher.reforged.api.ExtendedItem;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -23,13 +24,23 @@ public class ItemFireRod extends ExtendedItem {
 	}
 
 	@Override
-	public void registerRecipes() {
+	public float getHitDamage() {
+		return 1.5f;
+	}
 
-		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.coal, 1, 0), 's',
-				Items.stick);
-
-		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.coal, 1, 1), 's',
-				Items.stick);
+	@Override
+	public boolean hitEntity(ItemStack stack, EntityLivingBase entity, EntityLivingBase player) {
+		if (!entity.isImmuneToFire()) {
+			if (entity instanceof EntityCreeper) {
+				((EntityCreeper) entity).ignite();
+			} else {
+				entity.setFire(FIRE_DURATION);
+			}
+		}
+		if (!(player instanceof EntityPlayer) || !((EntityPlayer) player).capabilities.isCreativeMode) {
+			--stack.stackSize;
+		}
+		return true;
 	}
 
 	@Override
@@ -49,19 +60,12 @@ public class ItemFireRod extends ExtendedItem {
 	}
 
 	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
+	public void registerRecipes() {
 
-		if (!entity.isImmuneToFire()) {
-			entity.setFire(FIRE_DURATION);
-		}
-		if (!player.capabilities.isCreativeMode) {
-			--stack.stackSize;
-		}
-		return false;
-	}
+		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.coal, 1, 0), 's',
+				Items.stick);
 
-	@Override
-	public float getHitDamage() {
-		return 1.5f;
+		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.coal, 1, 1), 's',
+				Items.stick);
 	}
 }

@@ -18,15 +18,8 @@ public class ItemMusket extends AReloadable {
 	}
 
 	@Override
-	public void shoot(World world, EntityLivingBase player, ItemStack stack) {
-		world.spawnEntityInWorld(new EntityBulletMusket(world, player, stack));
-	}
-
-	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-
-		setAmmo(ReforgedAdditions.MUSKET_BULLET);
-		return super.onItemRightClick(stack, world, player);
+	public float getHitDamage() {
+		return 2f;
 	}
 
 	@Override
@@ -42,18 +35,6 @@ public class ItemMusket extends AReloadable {
 	}
 
 	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(ReforgedAdditions.MUSKET_BARREL),
-				new ItemStack(ReforgedAdditions.GUN_STOCK));
-	}
-
-	@Override
-	public float getHitDamage() {
-		return 2f;
-	}
-
-	@Override
 	public int getItemEnchantability(ItemStack stack) {
 		return ToolMaterial.IRON.getEnchantability();
 	}
@@ -61,5 +42,24 @@ public class ItemMusket extends AReloadable {
 	@Override
 	public int getReloadTotal() {
 		return 45;
+	}
+
+	@Override
+	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+
+		setAmmo(ReforgedAdditions.MUSKET_BULLET);
+		return super.onItemRightClick(stack, world, player);
+	}
+
+	@Override
+	public void registerRecipes() {
+
+		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(ReforgedAdditions.MUSKET_BARREL),
+				new ItemStack(ReforgedAdditions.GUN_STOCK));
+	}
+
+	@Override
+	public void shoot(World world, EntityLivingBase player, ItemStack stack) {
+		world.spawnEntityInWorld(new EntityBulletMusket(world, player, stack));
 	}
 }

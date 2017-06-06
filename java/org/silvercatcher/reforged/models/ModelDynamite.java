@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;
 
 public class ModelDynamite extends ReforgedModel {
-
 	public ModelRenderer Dynamite;
 	public ModelRenderer Fire;
 
@@ -43,5 +42,4 @@ public class ModelDynamite extends ReforgedModel {
 		this.Dynamite.render(f5);
 		GlStateManager.popMatrix();
 	}
-
 }

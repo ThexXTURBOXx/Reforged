@@ -19,7 +19,7 @@ public class ReforgedMod {
 
 	public static final String NAME = "Reforged";
 	public static final String ID = "reforged";
-	public static final String VERSION = "0.7.1";
+	public static final String VERSION = "0.7.4";
 	public static final String UPDATE_JSON = "https://raw.githubusercontent.com/ThexXTURBOXx/UpdateJSONs/master/reforged.json";
 
 	public static boolean battlegearDetected;
@@ -42,11 +42,6 @@ public class ReforgedMod {
 	public static CommonProxy proxy;
 
 	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		proxy.preInit(event);
-	}
-
-	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
 	}
@@ -54,6 +49,11 @@ public class ReforgedMod {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit(event);
+	}
+
+	@EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		proxy.preInit(event);
 	}
 
 }

@@ -32,14 +32,14 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 		this.motionX += randomNumX / 100;
 		this.motionY += randomNumY / 100;
 		this.motionZ += randomNumZ / 100;
+		motionX *= 5;
+		motionY *= 5;
+		motionZ *= 5;
 	}
 
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (ticksExisted >= 30) {
-			setDead();
-		}
+	protected float getImpactDamage(Entity target) {
+		return (((30 - ticksExisted) / 4) + 4f);
 	}
 
 	@Override
@@ -49,7 +49,10 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 	}
 
 	@Override
-	protected float getImpactDamage(Entity target) {
-		return (((30 - ticksExisted) / 4) + 4f);
+	public void onUpdate() {
+		super.onUpdate();
+		if (ticksExisted >= 30) {
+			setDead();
+		}
 	}
 }

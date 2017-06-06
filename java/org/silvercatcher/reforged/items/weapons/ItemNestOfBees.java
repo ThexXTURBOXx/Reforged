@@ -2,10 +2,12 @@ package org.silvercatcher.reforged.items.weapons;
 
 import java.util.List;
 
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.*;
 import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
 
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
@@ -30,7 +32,6 @@ public class ItemNestOfBees extends ExtendedItem {
 		setMaxStackSize(1);
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List tooltip, boolean advanced) {
 
@@ -39,18 +40,32 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 
 	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), "lwl", "lsl", "lll", 'l', Items.leather, 's', Items.string, 'w',
-				Item.getItemFromBlock(Blocks.planks));
-		ReforgedRegistry.registerIRecipe("ReloadNoB", new NestOfBeesLoadRecipe(), NestOfBeesLoadRecipe.class,
-				Category.SHAPELESS);
-	}
-
-	@Override
 	public float getHitDamage() {
 
 		return 0f;
+	}
+
+	@Override
+	public EnumAction getItemUseAction(ItemStack stack) {
+
+		NBTTagCompound compound = CompoundTags.giveCompound(stack);
+
+		if (compound.getBoolean(CompoundTags.ACTIVATED)) {
+			return EnumAction.BOW;
+		}
+		return EnumAction.NONE;
+	}
+
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+
+		return CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ACTIVATED) ? ItemExtension.USE_DURATON
+				: buildup;
+	}
+
+	@Override
+	public boolean isWeapon() {
+		return false;
 	}
 
 	@Override
@@ -62,10 +77,24 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
+	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
 
-		return CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ACTIVATED) ? ItemExtension.USE_DURATON
-				: buildup;
+		NBTTagCompound compound = CompoundTags.giveCompound(stack);
+
+		if (compound.getInteger(CompoundTags.AMMUNITION) > 0) {
+			compound.setBoolean(CompoundTags.ACTIVATED, true);
+			world.playSoundAtEntity(player, "item.fireCharge.use", 1.0f, 1.0f);
+		}
+		return stack;
+	}
+	
+	@Override
+	public ModelResourceLocation getModel(ItemStack stack, EntityPlayer player, int useRemaining) {
+		ModelResourceLocation mrl = new ModelResourceLocation(ReforgedMod.ID + ":nest_of_bees", "inventory");
+		if(stack.getItem() == this && CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION) <= 0) {
+			mrl = new ModelResourceLocation(ReforgedMod.ID + ":nest_of_bees_empty", "inventory");
+		}
+		return mrl;
 	}
 
 	@Override
@@ -90,7 +119,8 @@ public class ItemNestOfBees extends ExtendedItem {
 
 				if (compound.getBoolean(CompoundTags.ACTIVATED)) {
 					shoot(world, player);
-					stack.damageItem(1, player);
+					if (stack.getItem().isDamageable())
+						stack.damageItem(1, player);
 					arrows--;
 				}
 
@@ -105,15 +135,12 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 
 	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World world, EntityPlayer player) {
+	public void registerRecipes() {
 
-		NBTTagCompound compound = CompoundTags.giveCompound(stack);
-
-		if (compound.getInteger(CompoundTags.AMMUNITION) > 0) {
-			compound.setBoolean(CompoundTags.ACTIVATED, true);
-			world.playSoundAtEntity(player, "item.fireCharge.use", 1.0f, 1.0f);
-		}
-		return stack;
+		GameRegistry.addRecipe(new ItemStack(this), "lwl", "lsl", "lll", 'l', Items.leather, 's', Items.string, 'w',
+				Item.getItemFromBlock(Blocks.planks));
+		ReforgedRegistry.registerIRecipe("ReloadNoB", new NestOfBeesLoadRecipe(), NestOfBeesLoadRecipe.class,
+				Category.SHAPELESS);
 	}
 
 	protected void shoot(World world, EntityPlayer shooter) {
@@ -125,16 +152,5 @@ public class ItemNestOfBees extends ExtendedItem {
 			world.spawnEntityInWorld(arrow);
 		}
 		world.playSoundAtEntity(shooter, "fireworks.launch", 3.0f, 1.0f);
-	}
-
-	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-
-		NBTTagCompound compound = CompoundTags.giveCompound(stack);
-
-		if (compound.getBoolean(CompoundTags.ACTIVATED)) {
-			return EnumAction.BOW;
-		}
-		return EnumAction.NONE;
 	}
 }

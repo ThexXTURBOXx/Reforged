@@ -4,7 +4,6 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelCaltrop extends ReforgedModel {
-
 	public ModelRenderer spike1;
 	public ModelRenderer spike2;
 	public ModelRenderer spike3;
@@ -36,5 +35,4 @@ public class ModelCaltrop extends ReforgedModel {
 		spike_up.render(f5);
 		spike1.render(f5);
 	}
-
 }

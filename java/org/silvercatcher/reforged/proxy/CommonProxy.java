@@ -14,24 +14,6 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class CommonProxy {
 
-	public void preInit(FMLPreInitializationEvent e) {
-		loadConfig(e);
-		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
-		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
-		ReforgedRegistry.createItems();
-		ReforgedRegistry.registerItems();
-		ReforgedRegistry.registerPackets();
-		registerEntities();
-	}
-
-	public void init(FMLInitializationEvent e) {
-		ReforgedRegistry.registerRecipes();
-	}
-
-	public void postInit(FMLPostInitializationEvent e) {
-		ReforgedMod.battlegearDetected = Loader.isModLoaded("battlegear2");
-	}
-
 	// Items for Config
 	public static boolean battleaxe, blowgun, boomerang, firerod, javelin, katana, knife, musket, nest_of_bees, sabre,
 			keris, caltrop, dynamite, crossbow, pike, mace, dirk;
@@ -40,6 +22,10 @@ public class CommonProxy {
 	public static int goalseekerid;
 
 	public static final String items = "Items";
+
+	public void init(FMLInitializationEvent e) {
+		ReforgedRegistry.registerRecipes();
+	}
 
 	private void loadConfig(FMLPreInitializationEvent e) {
 		File configdir = new File(e.getModConfigurationDirectory(), ReforgedMod.NAME);
@@ -79,10 +65,18 @@ public class CommonProxy {
 		config.save();
 	}
 
-	protected void registerItemRenderers() {
+	public void postInit(FMLPostInitializationEvent e) {
+		ReforgedMod.battlegearDetected = Loader.isModLoaded("battlegear2");
 	}
 
-	protected void registerEntityRenderers(RenderManager manager) {
+	public void preInit(FMLPreInitializationEvent e) {
+		loadConfig(e);
+		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
+		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
+		ReforgedRegistry.createItems();
+		ReforgedRegistry.registerItems();
+		ReforgedRegistry.registerPackets();
+		registerEntities();
 	}
 
 	private void registerEntities() {
@@ -100,10 +94,16 @@ public class CommonProxy {
 		if (GlobalValues.BLOWGUN)
 			ReforgedRegistry.registerEntity(EntityDart.class, "Dart");
 		if (GlobalValues.CALTROP)
-			GameRegistry.registerTileEntity(TileEntityCaltropEntity.class, "Caltrop");
+			GameRegistry.registerTileEntity(TileEntityCaltrop.class, "Caltrop");
 		if (GlobalValues.DYNAMITE)
 			ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
 		if (GlobalValues.CROSSBOW)
 			ReforgedRegistry.registerEntity(EntityCrossbowBolt.class, "BoltCrossbow");
+	}
+
+	protected void registerEntityRenderers(RenderManager manager) {
+	}
+
+	protected void registerItemRenderers() {
 	}
 }

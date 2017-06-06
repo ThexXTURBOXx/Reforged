@@ -12,6 +12,14 @@ public class StunProperty implements IExtendedEntityProperties {
 
 	public final static String EXT_PROP_NAME = "ReforgedPlayer";
 
+	public static final StunProperty get(EntityLivingBase player) {
+		return (StunProperty) player.getExtendedProperties(EXT_PROP_NAME);
+	}
+
+	public static final void register(EntityLivingBase player) {
+		player.registerExtendedProperties(StunProperty.EXT_PROP_NAME, new StunProperty(player));
+	}
+
 	private final EntityLivingBase player;
 
 	private boolean stunned;
@@ -21,20 +29,23 @@ public class StunProperty implements IExtendedEntityProperties {
 		this.player = player;
 	}
 
-	public static final void register(EntityLivingBase player) {
-		player.registerExtendedProperties(StunProperty.EXT_PROP_NAME, new StunProperty(player));
-	}
-
-	public static final StunProperty get(EntityLivingBase player) {
-		return (StunProperty) player.getExtendedProperties(EXT_PROP_NAME);
+	@Override
+	public void init(Entity entity, World world) {
 	}
 
 	public boolean isStunned() {
 		return stunned;
 	}
 
-	public void setStunned(boolean whether) {
-		stunned = whether;
+	@Override
+	public void loadNBTData(NBTTagCompound compound) {
+		if (!compound.hasKey(EXT_PROP_NAME)) {
+			NBTTagCompound properties = new NBTTagCompound();
+			properties.setBoolean(CompoundTags.STUNNED, stunned);
+			compound.setTag(EXT_PROP_NAME, properties);
+		}
+		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
+		stunned = properties.getBoolean(CompoundTags.STUNNED);
 	}
 
 	@Override
@@ -45,14 +56,8 @@ public class StunProperty implements IExtendedEntityProperties {
 
 	}
 
-	@Override
-	public void loadNBTData(NBTTagCompound compound) {
-		NBTTagCompound properties = (NBTTagCompound) compound.getTag(EXT_PROP_NAME);
-		stunned = properties.getBoolean(CompoundTags.STUNNED);
-	}
-
-	@Override
-	public void init(Entity entity, World world) {
+	public void setStunned(boolean whether) {
+		stunned = whether;
 	}
 
 }

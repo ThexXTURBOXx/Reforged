@@ -15,6 +15,11 @@ public class ItemBulletMusket extends ExtendedItem {
 	}
 
 	@Override
+	public boolean isWeapon() {
+		return false;
+	}
+
+	@Override
 	public void registerRecipes() {
 
 		GameRegistry.addShapedRecipe(new ItemStack(this, 8), " i ", " g ", " p ", 'i', Items.iron_ingot, 'g',

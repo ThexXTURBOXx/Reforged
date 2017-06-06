@@ -15,8 +15,6 @@ import net.minecraftforge.common.ForgeHooks;
 
 public class BoomerangEnchRecipe implements IRecipe {
 
-	private ItemStack output = null;
-
 	private static void printInventory(String name, InventoryCrafting inventory) {
 
 		if (Minecraft.getMinecraft().theWorld != null) {
@@ -29,6 +27,43 @@ public class BoomerangEnchRecipe implements IRecipe {
 			System.out.append("]");
 			System.out.println();
 		}
+	}
+
+	private ItemStack output = null;
+
+	@Override
+	public ItemStack getCraftingResult(InventoryCrafting inventory) {
+
+		// printInventory("result", inventory);
+
+		int size = inventory.getSizeInventory();
+
+		NBTTagCompound compound = CompoundTags.giveCompound(output);
+
+		output.addEnchantment(ReforgedAdditions.goalseeker, 1);
+		compound.setBoolean(CompoundTags.ENCHANTED, true);
+		return output;
+	}
+
+	@Override
+	public ItemStack getRecipeOutput() {
+		ItemStack output = new ItemStack(ReforgedAdditions.DIAMOND_BOOMERANG);
+		NBTTagCompound compound = CompoundTags.giveCompound(output);
+		output.addEnchantment(ReforgedAdditions.goalseeker, 1);
+		compound.setBoolean(CompoundTags.ENCHANTED, true);
+		return this.output != null ? this.output : output;
+	}
+
+	@Override
+	public int getRecipeSize() {
+
+		return 9;
+	}
+
+	@Override
+	public ItemStack[] getRemainingItems(InventoryCrafting inventory) {
+		// printInventory("remain", inventory);
+		return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
 	}
 
 	@Override
@@ -61,40 +96,5 @@ public class BoomerangEnchRecipe implements IRecipe {
 		}
 
 		return boomerangs == 1 && gold == 6 && diamonds == 2;
-	}
-
-	@Override
-	public ItemStack getCraftingResult(InventoryCrafting inventory) {
-
-		// printInventory("result", inventory);
-
-		int size = inventory.getSizeInventory();
-
-		NBTTagCompound compound = CompoundTags.giveCompound(output);
-
-		output.addEnchantment(ReforgedAdditions.goalseeker, 1);
-		compound.setBoolean(CompoundTags.ENCHANTED, true);
-		return output;
-	}
-
-	@Override
-	public int getRecipeSize() {
-
-		return 9;
-	}
-
-	@Override
-	public ItemStack getRecipeOutput() {
-		ItemStack output = new ItemStack(ReforgedAdditions.DIAMOND_BOOMERANG);
-		NBTTagCompound compound = CompoundTags.giveCompound(output);
-		output.addEnchantment(ReforgedAdditions.goalseeker, 1);
-		compound.setBoolean(CompoundTags.ENCHANTED, true);
-		return this.output != null ? this.output : output;
-	}
-
-	@Override
-	public ItemStack[] getRemainingItems(InventoryCrafting inventory) {
-		// printInventory("remain", inventory);
-		return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
 	}
 }

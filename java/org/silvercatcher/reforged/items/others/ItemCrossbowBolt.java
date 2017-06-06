@@ -15,6 +15,11 @@ public class ItemCrossbowBolt extends ExtendedItem {
 	}
 
 	@Override
+	public boolean isWeapon() {
+		return false;
+	}
+
+	@Override
 	public void registerRecipes() {
 		GameRegistry.addShapedRecipe(new ItemStack(this, 4), "i ", "f ", 'i', Items.iron_ingot, 'f', Items.feather);
 	}

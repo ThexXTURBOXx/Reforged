@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.api.*;
-import org.silvercatcher.reforged.blocks.TileEntityCaltropBlock;
+import org.silvercatcher.reforged.blocks.BlockCaltrop;
 import org.silvercatcher.reforged.items.others.*;
 import org.silvercatcher.reforged.items.weapons.*;
 import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
@@ -134,7 +134,7 @@ public class ReforgedRegistry {
 		}
 
 		if (GlobalValues.CALTROP) {
-			registrationListBlocks.add(ReforgedAdditions.CALTROP = new TileEntityCaltropBlock());
+			registrationListBlocks.add(ReforgedAdditions.CALTROP = new BlockCaltrop());
 		}
 
 		if (GlobalValues.DYNAMITE) {
@@ -169,73 +169,6 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.IRON_DIRK = new ItemDirk(ToolMaterial.IRON));
 			registrationList.add(ReforgedAdditions.DIAMOND_DIRK = new ItemDirk(ToolMaterial.EMERALD));
 		}
-	}
-
-	/** Registers all items out of the registrationList */
-	public static void registerItems() {
-		// Register all Items
-		for (Item item : registrationList) {
-			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
-		}
-
-		// Register all Blocks
-		for (Block block : registrationListBlocks) {
-			GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
-		}
-	}
-
-	/** Registers all recipes of the registered items */
-	public static void registerRecipes() {
-
-		for (Item item : registrationList) {
-			if (item instanceof ItemExtension) {
-				((ItemExtension) (item)).registerRecipes();
-			}
-		}
-
-		for (Block block : registrationListBlocks) {
-			if (block instanceof BlockExtension) {
-				((BlockExtension) (block)).registerRecipes();
-			}
-		}
-
-		if (GlobalValues.MUSKET) {
-
-			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.GUN_STOCK), "   ", "ssp", "   ", 's', Items.stick,
-					'p', Blocks.planks);
-
-			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.MUSKET_BARREL), "   ", "iif", "  i", 'i',
-					Items.iron_ingot, 'f', Items.flint_and_steel);
-
-			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL), "i  ", " if", "i i", 'i',
-					Items.iron_ingot, 'f', Items.flint_and_steel);
-		}
-	}
-
-	/**
-	 * Helper method for registering an Custom IRecipe
-	 * 
-	 * @param name
-	 *            The name for the Recipe
-	 * @param recipe
-	 *            The instance of the Recipe
-	 * @param recipeclass
-	 *            The class of the Recipe
-	 * @param category
-	 *            {@link Category#SHAPED} or {@link Category#SHAPELESS}?
-	 */
-	public static void registerIRecipe(String name, IRecipe recipe, Class<?> recipeclass, Category category) {
-		String catString;
-		if (category == Category.SHAPELESS) {
-			catString = "after:minecraft:shapeless";
-		} else if (category == Category.SHAPED) {
-			catString = "after:minecraft:shaped";
-		} else {
-			throw new IllegalArgumentException("The Category called " + category.name() + " couldn't be found!");
-		}
-		GameRegistry.addRecipe(recipe);
-		RecipeSorter.register(name, recipeclass, category, catString);
-		// NEI and JEI IRecipe Registry [todo]
 	}
 
 	/**
@@ -273,12 +206,79 @@ public class ReforgedRegistry {
 		MinecraftForge.EVENT_BUS.register(event);
 	}
 
+	/**
+	 * Helper method for registering an Custom IRecipe
+	 * 
+	 * @param name
+	 *            The name for the Recipe
+	 * @param recipe
+	 *            The instance of the Recipe
+	 * @param recipeclass
+	 *            The class of the Recipe
+	 * @param category
+	 *            {@link Category#SHAPED} or {@link Category#SHAPELESS}?
+	 */
+	public static void registerIRecipe(String name, IRecipe recipe, Class<?> recipeclass, Category category) {
+		String catString;
+		if (category == Category.SHAPELESS) {
+			catString = "after:minecraft:shapeless";
+		} else if (category == Category.SHAPED) {
+			catString = "after:minecraft:shaped";
+		} else {
+			throw new IllegalArgumentException("The Category called " + category.name() + " couldn't be found!");
+		}
+		GameRegistry.addRecipe(recipe);
+		RecipeSorter.register(name, recipeclass, category, catString);
+		// NEI and JEI IRecipe Registry [todo]
+	}
+
+	/** Registers all items out of the registrationList */
+	public static void registerItems() {
+		// Register all Items
+		for (Item item : registrationList) {
+			GameRegistry.registerItem(item, item.getUnlocalizedName().substring(5));
+		}
+
+		// Register all Blocks
+		for (Block block : registrationListBlocks) {
+			GameRegistry.registerBlock(block, block.getUnlocalizedName().substring(5));
+		}
+	}
+
 	/** Registers all our Packets */
 	public static void registerPackets() {
 		ReforgedMod.network = NetworkRegistry.INSTANCE.newSimpleChannel(ReforgedMod.ID);
 		int packetId = 0;
 		ReforgedMod.network.registerMessage(MessageCustomReachAttack.Handler.class, MessageCustomReachAttack.class,
 				packetId++, Side.SERVER);
+	}
+
+	/** Registers all recipes of the registered items */
+	public static void registerRecipes() {
+
+		for (Item item : registrationList) {
+			if (item instanceof ItemExtension) {
+				((ItemExtension) (item)).registerRecipes();
+			}
+		}
+
+		for (Block block : registrationListBlocks) {
+			if (block instanceof BlockExtension) {
+				((BlockExtension) (block)).registerRecipes();
+			}
+		}
+
+		if (GlobalValues.MUSKET) {
+
+			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.GUN_STOCK), "   ", "ssp", "   ", 's', Items.stick,
+					'p', Blocks.planks);
+
+			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.MUSKET_BARREL), "   ", "iif", "  i", 'i',
+					Items.iron_ingot, 'f', Items.flint_and_steel);
+
+			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL), "i  ", " if", "i i", 'i',
+					Items.iron_ingot, 'f', Items.flint_and_steel);
+		}
 	}
 
 }

@@ -16,10 +16,34 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class ReforgedMonsterArmourer {
 
 	private static final UUID itemModifierUUID = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
-	private Random random = new Random();
-
 	/** DON'T CHANGE IT HERE! NULLPOINTERS WOULD OCCUR!!! */
 	private static Item[] zombieWeapons;
+
+	private Random random = new Random();
+
+	private void equipZombie(EntityZombie zombie) {
+
+		if (zombie.getCurrentArmor(0) == null && random.nextInt(10) == 0) {
+
+			Item item = randomFrom(zombieWeapons);
+
+			zombie.setCurrentItemOrArmor(0, new ItemStack(item));
+
+			zombie.getEntityAttribute(SharedMonsterAttributes.attackDamage)
+					.applyModifier(new AttributeModifier(itemModifierUUID, "Weapon Damage", 99f, 0));
+
+		}
+	}
+
+	@SubscribeEvent
+	public void onSpawn(EntityJoinWorldEvent e) {
+
+		if (e.isCanceled() || e.entity == null || e.world.isRemote || !(e.entity instanceof EntityZombie)
+				|| zombieWeapons == null)
+			return;
+
+		equipZombie((EntityZombie) e.entity);
+	}
 
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load e) {
@@ -38,31 +62,7 @@ public class ReforgedMonsterArmourer {
 			zombieWeapons = list.toArray(new Item[list.size()]);
 	}
 
-	@SubscribeEvent
-	public void onSpawn(EntityJoinWorldEvent e) {
-
-		if (e.isCanceled() || e.entity == null || e.world.isRemote || !(e.entity instanceof EntityZombie)
-				|| zombieWeapons == null)
-			return;
-
-		equipZombie((EntityZombie) e.entity);
-	}
-
 	private Item randomFrom(Item[] selection) {
 		return selection[random.nextInt(selection.length)];
-	}
-
-	private void equipZombie(EntityZombie zombie) {
-
-		if (zombie.getCurrentArmor(0) == null && random.nextInt(10) == 0) {
-
-			Item item = randomFrom(zombieWeapons);
-
-			zombie.setCurrentItemOrArmor(0, new ItemStack(item));
-
-			zombie.getEntityAttribute(SharedMonsterAttributes.attackDamage)
-					.applyModifier(new AttributeModifier(itemModifierUUID, "Weapon Damage", 99f, 0));
-
-		}
 	}
 }

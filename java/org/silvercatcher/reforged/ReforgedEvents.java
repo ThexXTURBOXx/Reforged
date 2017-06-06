@@ -24,6 +24,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ReforgedEvents {
 
+	public static boolean notified = false;
+
+	public static Map<UUID, Integer> map;
+	static {
+		map = new HashMap<UUID, Integer>();
+	}
+
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public void customReach(MouseEvent e) {
@@ -42,11 +49,10 @@ public class ReforgedEvents {
 		}
 	}
 
-	public static boolean notified = false;
-	public static Map<UUID, Integer> map;
-
-	static {
-		map = new HashMap<UUID, Integer>();
+	@SubscribeEvent
+	public void onEntityConstructing(EntityConstructing event) {
+		if (event.entity instanceof EntityLivingBase && StunProperty.get((EntityLivingBase) event.entity) == null)
+			StunProperty.register((EntityLivingBase) event.entity);
 	}
 
 	@SubscribeEvent
@@ -92,12 +98,6 @@ public class ReforgedEvents {
 				}
 			}
 		}
-	}
-
-	@SubscribeEvent
-	public void onEntityConstructing(EntityConstructing event) {
-		if (event.entity instanceof EntityLivingBase && StunProperty.get((EntityLivingBase) event.entity) == null)
-			StunProperty.register((EntityLivingBase) event.entity);
 	}
 
 }

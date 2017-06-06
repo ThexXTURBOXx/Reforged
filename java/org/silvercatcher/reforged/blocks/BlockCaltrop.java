@@ -6,7 +6,7 @@ import java.util.List;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.BlockExtension;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.entities.TileEntityCaltropEntity;
+import org.silvercatcher.reforged.entities.TileEntityCaltrop;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -22,11 +22,9 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
-public class TileEntityCaltropBlock extends BlockContainer implements BlockExtension {
+public class BlockCaltrop extends BlockContainer implements BlockExtension {
 
-	private EntityLivingBase owner;
-
-	public TileEntityCaltropBlock() {
+	public BlockCaltrop() {
 		super(Material.grass);
 		setUnlocalizedName("caltrop");
 		setCreativeTab(ReforgedMod.tabReforged);
@@ -36,35 +34,7 @@ public class TileEntityCaltropBlock extends BlockContainer implements BlockExten
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityCaltropEntity();
-	}
-
-	@Override
-	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this, 4), " i ", " i ", "i i", 'i', new ItemStack(Blocks.iron_bars));
-	}
-
-	@Override
-	public void onBlockPlacedBy(World world, BlockPos pos, IBlockState state, EntityLivingBase placer,
-			ItemStack stack) {
-		owner = placer;
-	}
-
-	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
-		onEntityCollidedWithBlock(world, pos, entity);
-	}
-
-	@Override
-	public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
-		if (entity instanceof EntityLivingBase) {
-			EntityLivingBase e = (EntityLivingBase) entity;
-			if (e != owner) {
-				e.attackEntityFrom(new DamageSource("caltrop").setDamageBypassesArmor(), 8);
-				if (!world.isRemote)
-					world.setBlockToAir(pos);
-			}
-		}
+		return new TileEntityCaltrop();
 	}
 
 	@Override
@@ -75,12 +45,42 @@ public class TileEntityCaltropBlock extends BlockContainer implements BlockExten
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
+	public boolean isBlockNormalCube() {
+		return false;
+	}
+
+	@Override
+	public boolean isNormalCube() {
 		return false;
 	}
 
 	@Override
 	public boolean isNormalCube(IBlockAccess world, BlockPos pos) {
 		return false;
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, Entity entity) {
+		if (entity instanceof EntityLivingBase) {
+			EntityLivingBase e = (EntityLivingBase) entity;
+			e.attackEntityFrom(new DamageSource("caltrop").setDamageBypassesArmor(), 8);
+			if (!world.isRemote)
+				world.setBlockToAir(pos);
+		}
+	}
+
+	@Override
+	public void onEntityCollidedWithBlock(World world, BlockPos pos, IBlockState state, Entity entity) {
+		onEntityCollidedWithBlock(world, pos, entity);
+	}
+
+	@Override
+	public void registerRecipes() {
+		GameRegistry.addShapedRecipe(new ItemStack(this, 4), " i ", " i ", "i i", 'i', new ItemStack(Blocks.iron_bars));
 	}
 }

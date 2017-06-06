@@ -11,26 +11,6 @@ import net.minecraftforge.fml.common.network.simpleimpl.*;
 /** Thanks to Jabelar!!! */
 public class MessageCustomReachAttack implements IMessage {
 
-	private int entityId;
-
-	public MessageCustomReachAttack() {
-
-	}
-
-	public MessageCustomReachAttack(int entityId) {
-		this.entityId = entityId;
-	}
-
-	@Override
-	public void fromBytes(ByteBuf buf) {
-		entityId = ByteBufUtils.readVarInt(buf, 4);
-	}
-
-	@Override
-	public void toBytes(ByteBuf buf) {
-		ByteBufUtils.writeVarInt(buf, entityId, 4);
-	}
-
 	public static class Handler implements IMessageHandler<MessageCustomReachAttack, IMessage> {
 
 		@Override
@@ -57,6 +37,26 @@ public class MessageCustomReachAttack implements IMessage {
 			});
 			return null;
 		}
+	}
+
+	private int entityId;
+
+	public MessageCustomReachAttack() {
+
+	}
+
+	public MessageCustomReachAttack(int entityId) {
+		this.entityId = entityId;
+	}
+
+	@Override
+	public void fromBytes(ByteBuf buf) {
+		entityId = ByteBufUtils.readVarInt(buf, 4);
+	}
+
+	@Override
+	public void toBytes(ByteBuf buf) {
+		ByteBufUtils.writeVarInt(buf, entityId, 4);
 	}
 
 }

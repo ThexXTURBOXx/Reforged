@@ -17,6 +17,11 @@ public class ItemDart extends ExtendedItem {
 	}
 
 	@Override
+	public float getHitDamage() {
+		return 1f;
+	}
+
+	@Override
 	public void registerRecipes() {
 		switch (getUnlocalizedName().substring(10)) {
 
@@ -51,10 +56,5 @@ public class ItemDart extends ExtendedItem {
 			throw new IllegalArgumentException("Could not register recipe of the item: " + getUnlocalizedName());
 
 		}
-	}
-
-	@Override
-	public float getHitDamage() {
-		return 1f;
 	}
 }

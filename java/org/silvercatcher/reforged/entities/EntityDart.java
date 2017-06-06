@@ -34,21 +34,24 @@ public class EntityDart extends AReforgedThrowable {
 		dataWatcher.addObjectByDataType(5, 5);
 	}
 
+	public String getEffect() {
+		return ((ItemDart) getItemStack().getItem()).getUnlocalizedName().substring(10);
+	}
+
+	@Override
+	protected float getGravityVelocity() {
+		return 0.03F;
+	}
+
+	@Override
+	protected float getImpactDamage(Entity target) {
+
+		return 5f;
+	}
+
 	public ItemStack getItemStack() {
 
 		return dataWatcher.getWatchableObjectItemStack(5);
-	}
-
-	public void setItemStack(ItemStack stack) {
-
-		if (stack == null || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
-			throw new IllegalArgumentException("Invalid Itemstack!");
-		}
-		dataWatcher.updateObject(5, stack);
-	}
-
-	public String getEffect() {
-		return ((ItemDart) getItemStack().getItem()).getUnlocalizedName().substring(10);
 	}
 
 	@Override
@@ -100,23 +103,7 @@ public class EntityDart extends AReforgedThrowable {
 				}
 			}
 		}
-		worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
 		return true;
-	}
-
-	@Override
-	protected float getGravityVelocity() {
-		return 0.03F;
-	}
-
-	@Override
-	public void writeEntityToNBT(NBTTagCompound tagCompound) {
-
-		super.writeEntityToNBT(tagCompound);
-
-		if (getItemStack() != null) {
-			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
-		}
 	}
 
 	@Override
@@ -127,9 +114,21 @@ public class EntityDart extends AReforgedThrowable {
 		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
 	}
 
-	@Override
-	protected float getImpactDamage(Entity target) {
+	public void setItemStack(ItemStack stack) {
 
-		return 5f;
+		if (stack == null || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
+			throw new IllegalArgumentException("Invalid Itemstack!");
+		}
+		dataWatcher.updateObject(5, stack);
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound tagCompound) {
+
+		super.writeEntityToNBT(tagCompound);
+
+		if (getItemStack() != null) {
+			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
+		}
 	}
 }

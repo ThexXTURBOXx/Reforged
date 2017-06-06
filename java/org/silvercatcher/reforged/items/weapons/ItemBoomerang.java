@@ -32,12 +32,34 @@ public class ItemBoomerang extends ExtendedItem {
 		setUnlocalizedName(materialDefinition.getPrefixedName("boomerang"));
 	}
 
+	/**
+	 * this is weak melee combat damage! for ranged combat damage, see
+	 * {@link EntityBoomerang#getImpactDamage}
+	 */
+	@Override
+	public float getHitDamage() {
+
+		return Math.max(1f, (0.5f + materialDefinition.getDamageVsEntity() * 0.5f));
+	}
+
+	@Override
+	public int getItemEnchantability(ItemStack stack) {
+		return materialDefinition.getEnchantability();
+	}
+
+	public ToolMaterial getMaterial() {
+
+		return materialDefinition.getMaterial();
+	}
+
+	public MaterialDefinition getMaterialDefinition() {
+
+		return materialDefinition;
+	}
+
 	@Override
 	public boolean isDamageable() {
-		if (unbreakable)
-			return false;
-		else
-			return true;
+		return !unbreakable;
 	}
 
 	@Override
@@ -66,30 +88,5 @@ public class ItemBoomerang extends ExtendedItem {
 				'w', Items.stick);
 		ReforgedRegistry.registerIRecipe("EnchantBoomerang", new BoomerangEnchRecipe(), BoomerangEnchRecipe.class,
 				Category.SHAPELESS);
-	}
-
-	/**
-	 * this is weak melee combat damage! for ranged combat damage, see
-	 * {@link EntityBoomerang#getImpactDamage}
-	 */
-	@Override
-	public float getHitDamage() {
-
-		return Math.max(1f, (0.5f + materialDefinition.getDamageVsEntity() * 0.5f));
-	}
-
-	public ToolMaterial getMaterial() {
-
-		return materialDefinition.getMaterial();
-	}
-
-	public MaterialDefinition getMaterialDefinition() {
-
-		return materialDefinition;
-	}
-
-	@Override
-	public int getItemEnchantability(ItemStack stack) {
-		return materialDefinition.getEnchantability();
 	}
 }

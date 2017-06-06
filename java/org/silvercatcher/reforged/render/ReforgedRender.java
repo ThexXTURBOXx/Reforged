@@ -15,27 +15,32 @@ public abstract class ReforgedRender extends Render {
 
 	ReforgedModel model;
 	float scale = 1;
-
-	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, int rotationModifier) {
-		super(renderManager);
-		this.model = model;
-	}
+	int modifier = 0;
 
 	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, float scale, int rotationModifier) {
 		this(renderManager, model, rotationModifier);
 		this.scale = scale;
 	}
 
-	@Override
-	public void doRender(Entity Bullet, double x, double y, double z, float yaw, float partialTick) {
-		renderEntityModel(Bullet, x, y, z, yaw, partialTick);
+	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, int rotationModifier) {
+		super(renderManager);
+		this.model = model;
+		modifier = rotationModifier;
 	}
 
+	@Override
+	public void doRender(Entity bullet, double x, double y, double z, float yaw, float partialTicks) {
+		super.doRender(bullet, x, y, z, yaw, partialTicks);
+		renderEntityModel(bullet, x, y, z, yaw, partialTicks);
+	}
+
+	@Override
+	protected abstract ResourceLocation getEntityTexture(Entity entity);
+
 	/**
-	 * If you find any little issues while flying, just change partialTick in
-	 * the render-method to 0. Could fix it... I am not sure if I should let it
-	 * like this, but for now it works ^^ I will change it, when needed -
-	 * ThexXTURBOXx
+	 * If you find any little issues while flying, just change partialTick in the
+	 * render-method to 0. Could fix it... I am not sure if I should let it like
+	 * this, but for now it works ^^ I will change it, when needed - ThexXTURBOXx
 	 */
 	public void renderEntityModel(Entity theEntity, double x, double y, double z, float yaw, float partialTick) {
 		GL11.glPushMatrix();
@@ -51,7 +56,4 @@ public abstract class ReforgedRender extends Render {
 		model.render(theEntity, (float) x, (float) y, (float) z, yaw, partialTick, 0.0475F);
 		GL11.glPopMatrix();
 	}
-
-	@Override
-	protected abstract ResourceLocation getEntityTexture(Entity entity);
 }

@@ -8,7 +8,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
 public class EntityJavelin extends AReforgedThrowable {
@@ -46,16 +45,23 @@ public class EntityJavelin extends AReforgedThrowable {
 		dataWatcher.addObjectByDataType(6, 2);
 	}
 
-	public ItemStack getItemStack() {
-		return dataWatcher.getWatchableObjectItemStack(5);
+	public int getDurLoaded() {
+		return dataWatcher.getWatchableObjectInt(6);
 	}
 
-	public void setItemStack(ItemStack stack) {
+	@Override
+	protected float getGravityVelocity() {
+		return 0.03F;
+	}
 
-		if (stack == null || !(stack.getItem() instanceof ItemJavelin)) {
-			throw new IllegalArgumentException("Invalid Itemstack!");
-		}
-		dataWatcher.updateObject(5, stack);
+	@Override
+	protected float getImpactDamage(Entity target) {
+
+		return 5 + getDurLoaded() / 10;
+	}
+
+	public ItemStack getItemStack() {
+		return dataWatcher.getWatchableObjectItemStack(5);
 	}
 
 	@Override
@@ -63,6 +69,13 @@ public class EntityJavelin extends AReforgedThrowable {
 		ItemStack stack = getItemStack();
 		if (!stack.attemptDamageItem(1, rand)) {
 			setItemStack(stack);
+		}
+		if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+			if (!creativeUse()) {
+				entityDropItem(getItemStack(), 0.5f);
+			}
+		} else {
+			worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
 		}
 		return true;
 	}
@@ -74,24 +87,28 @@ public class EntityJavelin extends AReforgedThrowable {
 		if (!stack.attemptDamageItem(1, rand)) {
 			setItemStack(stack);
 		}
+		if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
+			if (!creativeUse()) {
+				entityDropItem(getItemStack(), 0.5f);
+			}
+		} else {
+			worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
+		}
 		return true;
 	}
 
 	@Override
-	protected void onImpact(MovingObjectPosition target) {
-		super.onImpact(target);
-		if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
-			if (!worldObj.isRemote && !creativeUse()) {
-				entityDropItem(getItemStack(), 0.5f);
-			}
-			worldObj.playSoundAtEntity(this, "reforged:boomerang_hit", 1.0F, 1.0F);
-		} else {
-			worldObj.playSoundAtEntity(this, "reforged:boomerang_break", 1.0F, 1.0F);
-		}
+	public void onUpdate() {
+		if (!isDead)
+			super.onUpdate();
 	}
 
-	public int getDurLoaded() {
-		return dataWatcher.getWatchableObjectInt(6);
+	@Override
+	public void readEntityFromNBT(NBTTagCompound tagCompund) {
+
+		super.readEntityFromNBT(tagCompund);
+		setDurLoaded(tagCompund.getInteger("durloaded"));
+		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
 	}
 
 	public void setDurLoaded(int durloaded) {
@@ -99,9 +116,12 @@ public class EntityJavelin extends AReforgedThrowable {
 		dataWatcher.updateObject(6, durloaded);
 	}
 
-	@Override
-	protected float getGravityVelocity() {
-		return 0.03F;
+	public void setItemStack(ItemStack stack) {
+
+		if (stack == null || !(stack.getItem() instanceof ItemJavelin)) {
+			throw new IllegalArgumentException("Invalid Itemstack!");
+		}
+		dataWatcher.updateObject(5, stack);
 	}
 
 	@Override
@@ -114,19 +134,5 @@ public class EntityJavelin extends AReforgedThrowable {
 		if (getItemStack() != null) {
 			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
 		}
-	}
-
-	@Override
-	public void readEntityFromNBT(NBTTagCompound tagCompund) {
-
-		super.readEntityFromNBT(tagCompund);
-		setDurLoaded(tagCompund.getInteger("durloaded"));
-		setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
-	}
-
-	@Override
-	protected float getImpactDamage(Entity target) {
-
-		return 5 + getDurLoaded() / 10;
 	}
 }

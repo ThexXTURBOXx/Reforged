@@ -8,12 +8,9 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import com.google.common.collect.Multimap;
 
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
-import net.minecraft.util.DamageSource;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquippable {
@@ -38,57 +35,8 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 	}
 
 	@Override
-	public boolean isDamageable() {
-		if (unbreakable)
-			return false;
-		else
-			return true;
-	}
-
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity) {
-
-		if (!super.onLeftClickEntity(stack, player, entity)) {
-
-			if (entity instanceof EntityLivingBase) {
-
-				EntityLivingBase target = (EntityLivingBase) entity;
-
-				int armorvalue = 0;
-
-				for (int i = 1; i < 4; i++) {
-
-					ItemStack armorStack = target.getEquipmentInSlot(i);
-					if (armorStack != null && armorStack.getItem() instanceof ItemArmor) {
-						armorvalue += ((ItemArmor) armorStack.getItem()).damageReduceAmount;
-					}
-				}
-
-				float damage = getHitDamage() + getEnchantmentBonus(stack, player, entity);
-
-				if (armorvalue < 12) {
-
-					damage *= 1.5f;
-					target.hurtResistantTime = 0;
-				}
-
-				if (armorvalue > 6) {
-
-					stack.damageItem(1, target);
-				}
-
-				target.attackEntityFrom(DamageSource.causePlayerDamage(player), damage);
-			}
-		}
-
-		return true;
-	}
-
-	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), "  m", " m ", "s  ", 'm', materialDefinition.getRepairMaterial(),
-				's', Items.stick);
+	public Multimap getAttributeModifiers(ItemStack stack) {
+		return ItemExtension.super.getAttributeModifiers(stack);
 	}
 
 	@Override
@@ -97,8 +45,8 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 	}
 
 	@Override
-	public Multimap getAttributeModifiers(ItemStack stack) {
-		return ItemExtension.super.getAttributeModifiers(stack);
+	public int getItemEnchantability(ItemStack stack) {
+		return materialDefinition.getEnchantability();
 	}
 
 	public ToolMaterial getMaterial() {
@@ -107,8 +55,46 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 	}
 
 	@Override
-	public int getItemEnchantability(ItemStack stack) {
-		return materialDefinition.getEnchantability();
+	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
+
+		int armorvalue = 0;
+
+		for (int i = 1; i < 4; i++) {
+
+			ItemStack armorStack = target.getEquipmentInSlot(i);
+			if (armorStack != null && armorStack.getItem() instanceof ItemArmor) {
+				armorvalue += ((ItemArmor) armorStack.getItem()).damageReduceAmount;
+			}
+		}
+
+		float damage = getHitDamage();
+
+		if (armorvalue < 12) {
+
+			damage *= 0.25f;
+			target.hurtResistantTime = 0;
+			target.attackEntityFrom(getDamage(attacker), damage);
+		}
+
+		if (armorvalue > 6) {
+			if (stack.getItem().isDamageable())
+				stack.damageItem(2, target);
+		}
+		if (stack.getItem().isDamageable())
+			stack.damageItem(1, attacker);
+		return true;
+	}
+
+	@Override
+	public boolean isDamageable() {
+		return !unbreakable;
+	}
+
+	@Override
+	public void registerRecipes() {
+
+		GameRegistry.addRecipe(new ItemStack(this), "  m", " m ", "s  ", 'm', materialDefinition.getRepairMaterial(),
+				's', Items.stick);
 	}
 
 	@Override
