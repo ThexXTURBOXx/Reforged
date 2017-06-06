@@ -35,7 +35,7 @@ public class EntityDynamite extends AReforgedThrowable {
 		int i1 = MathHelper.floor_double(z + f3 + 1.0D);
 		Vec3 vec3 = new Vec3(x, y, z);
 		Entity entity = exploder;
-		if (!entity.isImmuneToExplosions()) {
+		if (entity != null && !entity.isImmuneToExplosions()) {
 			double d12 = entity.getDistance(x, y, z) / f3;
 			if (d12 <= 1.0D) {
 				double d5 = entity.posX - x;

@@ -124,8 +124,6 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 
 		compound.setByte(CompoundTags.AMMUNITION, loadState);
 
-		System.out.println(compound.getInteger(CompoundTags.TIME));
-		System.out.println(getReloadTotal());
 		if(compound.getInteger(CompoundTags.TIME) <= 0 || !world.isRemote || (world.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
 			playerIn.setItemInUse(itemStackIn, getMaxItemUseDuration(itemStackIn));
 		}
