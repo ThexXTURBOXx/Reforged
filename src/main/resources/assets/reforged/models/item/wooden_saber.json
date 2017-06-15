@@ -1,7 +1,6 @@
 {
-    "parent": "reforged:item/saber",
-
-    "textures": {
-        "layer0": "reforged:items/saber_wood"
-    }
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "reforged:items/saber_wood"
+  }
 }
