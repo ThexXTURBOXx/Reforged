@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "diamond_battleaxe"
+    "item": "reforged:diamond_battleaxe"
   },
   "pattern": [
     "xxx",
@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     },
     "x": {
-      "item": "diamond",
+      "item": "minecraft:diamond",
       "data": 32767
     }
   }

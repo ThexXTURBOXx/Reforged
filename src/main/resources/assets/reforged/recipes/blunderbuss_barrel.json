@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "blunderbuss_barrel"
+    "item": "reforged:blunderbuss_barrel"
   },
   "pattern": [
     "i  ",
@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "f": {
-      "item": "flintAndSteel"
+      "item": "minecraft:flint_and_steel"
     },
     "i": {
-      "item": "ingotIron"
+      "item": "minecraft:iron_ingot"
     }
   }
 }

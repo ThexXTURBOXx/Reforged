@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "golden_pike"
+    "item": "reforged:golden_pike"
   },
   "pattern": [
     "  m",
@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     },
     "m": {
-      "item": "ingotGold",
+      "item": "minecraft:gold_ingot",
       "data": 32767
     }
   }

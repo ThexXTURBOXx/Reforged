@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "diamond_saber"
+    "item": "reforged:diamond_saber"
   },
   "pattern": [
     " b ",
@@ -10,11 +10,11 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "b": {
-      "item": "diamond",
+      "item": "minecraft:diamond",
       "data": 32767
     },
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     }
   }
 }

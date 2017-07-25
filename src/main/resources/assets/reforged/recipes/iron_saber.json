@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "iron_saber"
+    "item": "reforged:iron_saber"
   },
   "pattern": [
     " b ",
@@ -10,11 +10,11 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "b": {
-      "item": "ingotIron",
+      "item": "minecraft:iron_ingot",
       "data": 32767
     },
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     }
   }
 }

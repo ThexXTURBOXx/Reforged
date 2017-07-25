@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "dart_normal"
+    "item": "reforged:dart_normal"
   },
   "pattern": [
     " f ",
@@ -10,13 +10,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     },
     "f": {
-      "item": "flint"
+      "item": "minecraft:flint"
     },
     "v": {
-      "item": "feather"
+      "item": "minecraft:feather"
     }
   }
 }

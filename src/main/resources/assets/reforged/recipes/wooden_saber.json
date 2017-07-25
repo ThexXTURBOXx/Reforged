@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "wooden_saber"
+    "item": "reforged:wooden_saber"
   },
   "pattern": [
     " b ",
@@ -10,11 +10,11 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "b": {
-      "item": "wood",
+      "item": "minecraft:log",
       "data": 32767
     },
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     }
   }
 }

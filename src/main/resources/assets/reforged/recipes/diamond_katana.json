@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "diamond_katana"
+    "item": "reforged:diamond_katana"
   },
   "pattern": [
     "  m",
@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     },
     "m": {
-      "item": "diamond",
+      "item": "minecraft:diamond",
       "data": 32767
     }
   }

@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "stone_saber"
+    "item": "reforged:stone_saber"
   },
   "pattern": [
     " b ",
@@ -10,11 +10,11 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "b": {
-      "item": "stonebrick",
+      "item": "minecraft:stonebrick",
       "data": 32767
     },
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     }
   }
 }

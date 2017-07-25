@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "stone_mace"
+    "item": "reforged:stone_mace"
   },
   "pattern": [
     " mm",
@@ -10,11 +10,11 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "w": {
-      "item": "wood",
+      "item": "minecraft:log",
       "data": 0
     },
     "m": {
-      "item": "stonebrick",
+      "item": "minecraft:stonebrick",
       "data": 32767
     }
   }

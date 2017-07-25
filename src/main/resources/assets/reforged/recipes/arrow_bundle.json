@@ -4,31 +4,31 @@
   },
   "ingredients": [
     {
-      "item": "string"
+      "item": "minecraft:string"
     },
     {
-      "item": "arrow"
+      "item": "minecraft:arrow"
     },
     {
-      "item": "arrow"
+      "item": "minecraft:arrow"
     },
     {
-      "item": "arrow"
+      "item": "minecraft:arrow"
     },
     {
-      "item": "arrow"
+      "item": "minecraft:arrow"
     },
     {
-      "item": "arrow"
+      "item": "minecraft:arrow"
     },
     {
-      "item": "arrow"
+      "item": "minecraft:arrow"
     },
     {
-      "item": "arrow"
+      "item": "minecraft:arrow"
     },
     {
-      "item": "arrow"
+      "item": "minecraft:arrow"
     }
   ],
   "type": "minecraft:crafting_shapeless"

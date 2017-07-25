@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "golden_mace"
+    "item": "reforged:golden_mace"
   },
   "pattern": [
     " mm",
@@ -10,11 +10,11 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "w": {
-      "item": "wood",
+      "item": "minecraft:log",
       "data": 0
     },
     "m": {
-      "item": "ingotGold",
+      "item": "minecraft:gold_ingot",
       "data": 32767
     }
   }

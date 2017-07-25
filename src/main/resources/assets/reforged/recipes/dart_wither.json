@@ -1,16 +1,16 @@
 {
   "result": {
-    "item": "dart_wither"
+    "item": "reforged:dart_wither"
   },
   "ingredients": [
     {
-      "item": "dart_normal"
+      "item": "reforged:dart_normal"
     },
     {
-      "item": "spiderEye"
+      "item": "minecraft:spider_eye"
     },
     {
-      "item": "bone"
+      "item": "minecraft:bone"
     }
   ],
   "type": "minecraft:crafting_shapeless"

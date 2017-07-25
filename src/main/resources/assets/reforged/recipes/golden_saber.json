@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "golden_saber"
+    "item": "reforged:golden_saber"
   },
   "pattern": [
     " b ",
@@ -10,11 +10,11 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "b": {
-      "item": "ingotGold",
+      "item": "minecraft:gold_ingot",
       "data": 32767
     },
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     }
   }
 }

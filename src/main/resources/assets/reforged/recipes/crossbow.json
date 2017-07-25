@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "crossbow"
+    "item": "reforged:crossbow"
   },
   "pattern": [
     "bii",
@@ -10,14 +10,14 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "b": {
-      "item": "bow"
+      "item": "minecraft:bow"
     },
     "w": {
-      "item": "wood",
+      "item": "minecraft:log",
       "data": 0
     },
     "i": {
-      "item": "ingotIron"
+      "item": "minecraft:iron_ingot"
     }
   }
 }

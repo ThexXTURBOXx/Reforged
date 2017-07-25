@@ -1,13 +1,13 @@
 {
   "result": {
-    "item": "dart_poison_strong"
+    "item": "reforged:dart_poison_strong"
   },
   "ingredients": [
     {
-      "item": "dart_normal"
+      "item": "reforged:dart_normal"
     },
     {
-      "item": "spiderEye"
+      "item": "minecraft:spider_eye"
     }
   ],
   "type": "minecraft:crafting_shapeless"

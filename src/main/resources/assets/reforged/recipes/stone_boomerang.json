@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "stone_boomerang"
+    "item": "reforged:stone_boomerang"
   },
   "pattern": [
     "xww",
@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "w": {
-      "item": "stick"
+      "item": "minecraft:stick"
     },
     "x": {
-      "item": "stonebrick",
+      "item": "minecraft:stonebrick",
       "data": 32767
     }
   }

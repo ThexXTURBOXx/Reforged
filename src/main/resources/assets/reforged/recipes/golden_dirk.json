@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "golden_dirk"
+    "item": "reforged:golden_dirk"
   },
   "pattern": [
     "m ",
@@ -9,10 +9,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     },
     "m": {
-      "item": "ingotGold",
+      "item": "minecraft:gold_ingot",
       "data": 32767
     }
   }

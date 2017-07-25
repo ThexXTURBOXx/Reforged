@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "stone_pike"
+    "item": "reforged:stone_pike"
   },
   "pattern": [
     "  m",
@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     },
     "m": {
-      "item": "stonebrick",
+      "item": "minecraft:stonebrick",
       "data": 32767
     }
   }

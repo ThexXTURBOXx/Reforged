@@ -1,13 +1,13 @@
 {
   "result": {
-    "item": "golden_musket"
+    "item": "reforged:golden_musket"
   },
   "ingredients": [
     {
-      "item": "musket"
+      "item": "reforged:musket"
     },
     {
-      "item": "golden_knife"
+      "item": "reforged:golden_knife"
     }
   ],
   "type": "minecraft:crafting_shapeless"

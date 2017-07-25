@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "wooden_battleaxe"
+    "item": "reforged:wooden_battleaxe"
   },
   "pattern": [
     "xxx",
@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     },
     "x": {
-      "item": "wood",
+      "item": "minecraft:log",
       "data": 32767
     }
   }

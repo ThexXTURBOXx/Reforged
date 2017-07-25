@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "nest_of_bees"
+    "item": "reforged:nest_of_bees"
   },
   "pattern": [
     "lwl",
@@ -10,14 +10,14 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "string"
+      "item": "minecraft:string"
     },
     "w": {
-      "item": "wood",
+      "item": "minecraft:log",
       "data": 0
     },
     "l": {
-      "item": "leather"
+      "item": "minecraft:leather"
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "wooden_katana"
+    "item": "reforged:wooden_katana"
   },
   "pattern": [
     "  m",
@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "stick"
+      "item": "minecraft:stick"
     },
     "m": {
-      "item": "wood",
+      "item": "minecraft:log",
       "data": 32767
     }
   }

@@ -1,13 +1,13 @@
 {
   "result": {
-    "item": "dart_hunger"
+    "item": "reforged:dart_hunger"
   },
   "ingredients": [
     {
-      "item": "dart_normal"
+      "item": "reforged:dart_normal"
     },
     {
-      "item": "rottenFlesh"
+      "item": "minecraft:rotten_flesh"
     }
   ],
   "type": "minecraft:crafting_shapeless"

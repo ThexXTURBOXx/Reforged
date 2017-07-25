@@ -1,13 +1,13 @@
 {
   "result": {
-    "item": "blunderbuss"
+    "item": "reforged:blunderbuss"
   },
   "ingredients": [
     {
-      "item": "blunderbuss_barrel"
+      "item": "reforged:blunderbuss_barrel"
     },
     {
-      "item": "gun_stock"
+      "item": "reforged:gun_stock"
     }
   ],
   "type": "minecraft:crafting_shapeless"

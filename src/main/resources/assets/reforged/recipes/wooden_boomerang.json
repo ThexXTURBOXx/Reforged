@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "wooden_boomerang"
+    "item": "reforged:wooden_boomerang"
   },
   "pattern": [
     "xww",
@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "w": {
-      "item": "stick"
+      "item": "minecraft:stick"
     },
     "x": {
-      "item": "wood",
+      "item": "minecraft:log",
       "data": 32767
     }
   }

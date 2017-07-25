@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "blunderbuss_bullet",
+    "item": "reforged:blunderbuss_bullet",
     "count": 8
   },
   "pattern": [
@@ -11,13 +11,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "p": {
-      "item": "paper"
+      "item": "minecraft:paper"
     },
     "g": {
-      "item": "sulphur"
+      "item": "minecraft:gunpowder"
     },
     "h": {
-      "item": "gravel"
+      "item": "minecraft:gravel"
     }
   }
 }

@@ -1,13 +1,13 @@
 {
   "result": {
-    "item": "dart_slowness"
+    "item": "reforged:dart_slowness"
   },
   "ingredients": [
     {
-      "item": "dart_normal"
+      "item": "reforged:dart_normal"
     },
     {
-      "item": "slimeball"
+      "item": "minecraft:slime_ball"
     }
   ],
   "type": "minecraft:crafting_shapeless"

@@ -1,6 +1,6 @@
 {
   "result": {
-    "item": "musket_barrel"
+    "item": "reforged:musket_barrel"
   },
   "pattern": [
     "   ",
@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "f": {
-      "item": "flintAndSteel"
+      "item": "minecraft:flint_and_steel"
     },
     "i": {
-      "item": "ingotIron"
+      "item": "minecraft:iron_ingot"
     }
   }
 }
