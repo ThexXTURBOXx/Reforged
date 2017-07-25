@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "dart_wither"
+  },
+  "ingredients": [
+    {
+      "item": "dart_normal"
+    },
+    {
+      "item": "spiderEye"
+    },
+    {
+      "item": "bone"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

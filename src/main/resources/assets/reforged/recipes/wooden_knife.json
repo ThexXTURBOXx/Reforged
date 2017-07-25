@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "wooden_knife"
+  },
+  "pattern": [
+    "sm",
+    "  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "stick"
+    },
+    "m": {
+      "item": "wood",
+      "data": 32767
+    }
+  }
+}

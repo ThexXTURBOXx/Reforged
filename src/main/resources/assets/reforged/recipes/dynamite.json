@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "dynamite",
+    "count": 2
+  },
+  "pattern": [
+    " s ",
+    " g ",
+    " g "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "string"
+    },
+    "g": {
+      "item": "sulphur"
+    }
+  }
+}

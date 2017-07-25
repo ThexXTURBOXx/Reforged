@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "stone_saber"
+  },
+  "pattern": [
+    " b ",
+    "b  ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "b": {
+      "item": "stonebrick",
+      "data": 32767
+    },
+    "s": {
+      "item": "stick"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "musket_bullet",
+    "count": 8
+  },
+  "pattern": [
+    " i ",
+    " g ",
+    " p "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "p": {
+      "item": "paper"
+    },
+    "g": {
+      "item": "sulphur"
+    },
+    "i": {
+      "item": "ingotIron"
+    }
+  }
+}

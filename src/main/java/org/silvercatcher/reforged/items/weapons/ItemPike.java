@@ -6,9 +6,7 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemPike extends ExtendedItem {
 
@@ -63,13 +61,6 @@ public class ItemPike extends ExtendedItem {
 	@Override
 	public boolean isDamageable() {
 		return !unbreakable;
-	}
-
-	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), "  m", " s ", "s  ", 'm', materialDefinition.getRepairMaterial(),
-				's', Items.STICK);
 	}
 
 }

@@ -11,12 +11,10 @@ import com.google.common.collect.Multimap;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEquippable {
 
@@ -86,13 +84,6 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 		if (stack.getItem().isDamageable())
 			stack.damageItem(effectiveAgainst(blockIn) ? 2 : 3, playerIn);
 		return true;
-	}
-
-	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), "xxx", "xsx", " s ", 'x', materialDefinition.getRepairMaterial(),
-				's', Items.STICK);
 	}
 
 	@Override

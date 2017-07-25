@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class EntityDart extends AReforgedThrowable {
 
 	public static final DataParameter<ItemStack> STACK = EntityDataManager.<ItemStack>createKey(EntityDart.class,
-			DataSerializers.OPTIONAL_ITEM_STACK);
+			DataSerializers.ITEM_STACK);
 
 	public EntityDart(World worldIn) {
 

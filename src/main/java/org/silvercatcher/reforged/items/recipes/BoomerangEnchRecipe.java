@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
@@ -56,12 +57,6 @@ public class BoomerangEnchRecipe implements IRecipe {
 	}
 
 	@Override
-	public int getRecipeSize() {
-
-		return 9;
-	}
-
-	@Override
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inventory) {
 		// printInventory("remain", inventory);
 		return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
@@ -97,5 +92,28 @@ public class BoomerangEnchRecipe implements IRecipe {
 		}
 
 		return boomerangs == 1 && gold == 6 && diamonds == 2;
+	}
+
+	@Override
+	public IRecipe setRegistryName(ResourceLocation name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResourceLocation getRegistryName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Class<IRecipe> getRegistryType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canFit(int width, int height) {
+		return width >= 3 && height >= 3;
 	}
 }

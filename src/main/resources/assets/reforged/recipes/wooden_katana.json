@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "wooden_katana"
+  },
+  "pattern": [
+    "  m",
+    " m ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "stick"
+    },
+    "m": {
+      "item": "wood",
+      "data": 32767
+    }
+  }
+}

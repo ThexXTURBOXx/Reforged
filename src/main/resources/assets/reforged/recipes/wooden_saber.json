@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "wooden_saber"
+  },
+  "pattern": [
+    " b ",
+    "b  ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "b": {
+      "item": "wood",
+      "data": 32767
+    },
+    "s": {
+      "item": "stick"
+    }
+  }
+}

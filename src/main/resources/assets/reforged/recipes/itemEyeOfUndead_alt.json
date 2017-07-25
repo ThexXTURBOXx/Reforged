@@ -1,0 +1,26 @@
+{
+  "result": {
+    "item": "dissolution:itemEyeOfUndead"
+  },
+  "pattern": [
+    "IGI",
+    "IEI",
+    "ISI"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "S": {
+      "item": "dissolution:itemResource",
+      "data": 1
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  }
+}

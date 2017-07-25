@@ -8,13 +8,23 @@ import org.silvercatcher.reforged.util.Helpers;
 import com.google.common.collect.Multimap;
 
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.*;
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.*;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -37,7 +47,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
 
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 
@@ -167,14 +177,14 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase playerInl, int timeLeft) {
 		if (!worldIn.isRemote && playerInl instanceof EntityPlayer) {
-			EntityPlayer playerIn = (EntityPlayer) playerInl;
+			EntityPlayerMP playerIn = (EntityPlayerMP) playerInl;
 			NBTTagCompound compound = giveCompound(stack);
 			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 			if (loadState == loaded) {
 				Helpers.playSound(worldIn, playerIn, shootsound, 1f, 1f);
 				shoot(worldIn, playerIn, stack);
 				if (!playerIn.capabilities.isCreativeMode && stack.getItem().isDamageable()
-						&& stack.attemptDamageItem(5, itemRand)) {
+						&& stack.attemptDamageItem(5, itemRand, playerIn)) {
 					playerIn.renderBrokenItemStack(stack);
 					Helpers.destroyCurrentEquippedItem(playerIn);
 				}

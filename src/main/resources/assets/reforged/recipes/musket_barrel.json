@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "musket_barrel"
+  },
+  "pattern": [
+    "   ",
+    "iif",
+    "  i"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "f": {
+      "item": "flintAndSteel"
+    },
+    "i": {
+      "item": "ingotIron"
+    }
+  }
+}

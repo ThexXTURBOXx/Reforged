@@ -1,0 +1,21 @@
+{
+  "result": {
+    "item": "iron_mace"
+  },
+  "pattern": [
+    " mm",
+    " wm",
+    "w  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "w": {
+      "item": "wood",
+      "data": 0
+    },
+    "m": {
+      "item": "ingotIron",
+      "data": 32767
+    }
+  }
+}

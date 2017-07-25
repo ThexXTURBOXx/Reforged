@@ -18,7 +18,7 @@ public class RenderTileEntityCaltrop extends TileEntitySpecialRenderer<TileEntit
 	}
 
 	@Override
-	public void renderTileEntityAt(TileEntityCaltrop te, double x, double y, double z, float scale, int i) {
+	public void render(TileEntityCaltrop te, double x, double y, double z, float scale, int i, float partialTicks) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef((float) x + 0.5F, (float) y + 1.5F, (float) z + 0.5F);
 		Minecraft.getMinecraft().renderEngine.bindTexture(Textures.CALTROP);

@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "diamond_musket"
+  },
+  "ingredients": [
+    {
+      "item": "musket"
+    },
+    {
+      "item": "diamond_knife"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

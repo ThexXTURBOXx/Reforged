@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "stone_pike"
+  },
+  "pattern": [
+    "  m",
+    " s ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "stick"
+    },
+    "m": {
+      "item": "stonebrick",
+      "data": 32767
+    }
+  }
+}

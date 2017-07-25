@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "iron_saber"
+  },
+  "pattern": [
+    " b ",
+    "b  ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "b": {
+      "item": "ingotIron",
+      "data": 32767
+    },
+    "s": {
+      "item": "stick"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "dart_slowness"
+  },
+  "ingredients": [
+    {
+      "item": "dart_normal"
+    },
+    {
+      "item": "slimeball"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

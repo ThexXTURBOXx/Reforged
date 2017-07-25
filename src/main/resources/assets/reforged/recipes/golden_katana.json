@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "golden_katana"
+  },
+  "pattern": [
+    "  m",
+    " m ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "stick"
+    },
+    "m": {
+      "item": "ingotGold",
+      "data": 32767
+    }
+  }
+}

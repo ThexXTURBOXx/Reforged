@@ -10,11 +10,9 @@ import com.google.common.collect.Multimap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemKeris extends ItemSword implements ItemExtension {
 
@@ -70,11 +68,5 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 		if (stack.getItem().isDamageable())
 			stack.damageItem(1, attacker);
 		return true;
-	}
-
-	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), " m ", " m ", " s ", 'm', Items.IRON_INGOT, 's', Items.GOLD_INGOT);
 	}
 }

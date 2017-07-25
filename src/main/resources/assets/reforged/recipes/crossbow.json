@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "crossbow"
+  },
+  "pattern": [
+    "bii",
+    "iw ",
+    "i w"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "b": {
+      "item": "bow"
+    },
+    "w": {
+      "item": "wood",
+      "data": 0
+    },
+    "i": {
+      "item": "ingotIron"
+    }
+  }
+}

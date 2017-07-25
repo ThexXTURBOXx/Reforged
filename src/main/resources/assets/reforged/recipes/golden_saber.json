@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "golden_saber"
+  },
+  "pattern": [
+    " b ",
+    "b  ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "b": {
+      "item": "ingotGold",
+      "data": 32767
+    },
+    "s": {
+      "item": "stick"
+    }
+  }
+}

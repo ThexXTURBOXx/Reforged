@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "iron_pike"
+  },
+  "pattern": [
+    "  m",
+    " s ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "stick"
+    },
+    "m": {
+      "item": "ingotIron",
+      "data": 32767
+    }
+  }
+}

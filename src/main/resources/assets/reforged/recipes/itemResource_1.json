@@ -1,0 +1,13 @@
+{
+  "result": {
+    "item": "dissolution:itemResource",
+    "data": 1,
+    "count": 9
+  },
+  "ingredients": [
+    {
+      "item": "dissolution:blockEctoplasma"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

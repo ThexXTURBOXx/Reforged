@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "wooden_dirk"
+  },
+  "pattern": [
+    "m ",
+    "s "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "stick"
+    },
+    "m": {
+      "item": "wood",
+      "data": 32767
+    }
+  }
+}

@@ -4,28 +4,55 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
-import org.silvercatcher.reforged.api.*;
+import org.silvercatcher.reforged.api.BlockExtension;
+import org.silvercatcher.reforged.api.ItemExtension;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.blocks.BlockCaltrop;
-import org.silvercatcher.reforged.items.others.*;
-import org.silvercatcher.reforged.items.weapons.*;
+import org.silvercatcher.reforged.items.others.ItemArrowBundle;
+import org.silvercatcher.reforged.items.others.ItemBulletBlunderbuss;
+import org.silvercatcher.reforged.items.others.ItemBulletMusket;
+import org.silvercatcher.reforged.items.others.ItemCrossbowBolt;
+import org.silvercatcher.reforged.items.others.ItemDart;
+import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
+import org.silvercatcher.reforged.items.weapons.ItemBlowGun;
+import org.silvercatcher.reforged.items.weapons.ItemBlunderbuss;
+import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
+import org.silvercatcher.reforged.items.weapons.ItemCrossbow;
+import org.silvercatcher.reforged.items.weapons.ItemDirk;
+import org.silvercatcher.reforged.items.weapons.ItemDynamite;
+import org.silvercatcher.reforged.items.weapons.ItemFireRod;
+import org.silvercatcher.reforged.items.weapons.ItemJavelin;
+import org.silvercatcher.reforged.items.weapons.ItemKatana;
+import org.silvercatcher.reforged.items.weapons.ItemKeris;
+import org.silvercatcher.reforged.items.weapons.ItemKnife;
+import org.silvercatcher.reforged.items.weapons.ItemMace;
+import org.silvercatcher.reforged.items.weapons.ItemMusket;
+import org.silvercatcher.reforged.items.weapons.ItemMusketWithBayonet;
+import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
+import org.silvercatcher.reforged.items.weapons.ItemPike;
+import org.silvercatcher.reforged.items.weapons.ItemSaber;
 import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class ReforgedRegistry {
 
@@ -217,25 +244,34 @@ public class ReforgedRegistry {
 		} else {
 			throw new IllegalArgumentException("The Category called " + category.name() + " couldn't be found!");
 		}
-		GameRegistry.addRecipe(recipe);
+		//GameRegistry.addRecipe(recipe);
 		RecipeSorter.register(ReforgedMod.ID + ":" + name, recipeclass, category, catString);
 	}
-
-	/** Registers all items out of the registrationList */
-	public static void registerItems() {
-		// Register all Items
-		for (Item item : registrationList) {
-			GameRegistry.register(item, new ResourceLocation(ReforgedMod.ID, item.getUnlocalizedName().substring(5)));
-		}
-
-		// Register all Blocks
+	
+	@SubscribeEvent
+	/**Registers all blocks out of the registrationListBlocks*/
+	public void registerBlocks(RegistryEvent.Register<Block> event) {
+		IForgeRegistry<Block> reg = event.getRegistry();
 		for (Block block : registrationListBlocks) {
-			GameRegistry.register(block, new ResourceLocation(ReforgedMod.ID, block.getUnlocalizedName().substring(5)));
+			reg.register(block.setRegistryName(new ResourceLocation(ReforgedMod.ID, block.getUnlocalizedName().substring(5))));
 			ItemBlock itemBlock = new ItemBlock(block);
 			itemBlock.setRegistryName(block.getRegistryName());
-			GameRegistry.register(itemBlock);
 			ReforgedMod.proxy.registerItemRenderer(itemBlock, 0, block.getUnlocalizedName().substring(5));
+		}		
+	}
+
+	@SubscribeEvent
+	/** Registers all items out of the registrationList */
+	public void registerItems(RegistryEvent.Register<Item> event) {
+		IForgeRegistry<Item> reg = event.getRegistry();
+		// Register all Items
+		for (Item item : registrationList) {
+			reg.register(item.setRegistryName(new ResourceLocation(ReforgedMod.ID, item.getUnlocalizedName().substring(5))));
 		}
+		for (Block block : registrationListBlocks) {
+			reg.register(Item.getItemFromBlock(block));
+		}
+
 	}
 
 	/** Registers all our Packets */
@@ -244,34 +280,6 @@ public class ReforgedRegistry {
 		int packetId = 0;
 		ReforgedMod.network.registerMessage(MessageCustomReachAttack.Handler.class, MessageCustomReachAttack.class,
 				packetId++, Side.SERVER);
-	}
-
-	/** Registers all recipes of the registered items */
-	public static void registerRecipes() {
-
-		for (Item item : registrationList) {
-			if (item instanceof ItemExtension) {
-				((ItemExtension) (item)).registerRecipes();
-			}
-		}
-
-		for (Block block : registrationListBlocks) {
-			if (block instanceof BlockExtension) {
-				((BlockExtension) (block)).registerRecipes();
-			}
-		}
-
-		if (GlobalValues.MUSKET) {
-
-			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.GUN_STOCK), "   ", "ssp", "   ", 's', Items.STICK,
-					'p', Blocks.PLANKS);
-
-			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.MUSKET_BARREL), "   ", "iif", "  i", 'i',
-					Items.IRON_INGOT, 'f', Items.FLINT_AND_STEEL);
-
-			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL), "i  ", " if", "i i", 'i',
-					Items.IRON_INGOT, 'f', Items.FLINT_AND_STEEL);
-		}
 	}
 
 }

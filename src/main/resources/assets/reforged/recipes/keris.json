@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "keris"
+  },
+  "pattern": [
+    " m ",
+    " m ",
+    " s "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "ingotGold"
+    },
+    "m": {
+      "item": "ingotIron"
+    }
+  }
+}

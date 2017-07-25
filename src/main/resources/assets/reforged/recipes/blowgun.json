@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "blowgun"
+  },
+  "pattern": [
+    "r  ",
+    " r ",
+    "  r"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "r": {
+      "item": "reeds"
+    }
+  }
+}

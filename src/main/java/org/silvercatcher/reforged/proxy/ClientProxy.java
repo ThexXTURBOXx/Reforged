@@ -3,9 +3,23 @@ package org.silvercatcher.reforged.proxy;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.entities.*;
+import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
+import org.silvercatcher.reforged.entities.EntityBulletMusket;
+import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
+import org.silvercatcher.reforged.entities.EntityDart;
+import org.silvercatcher.reforged.entities.EntityDynamite;
+import org.silvercatcher.reforged.entities.EntityJavelin;
+import org.silvercatcher.reforged.entities.TileEntityCaltrop;
 import org.silvercatcher.reforged.gui.ReloadOverlay;
-import org.silvercatcher.reforged.render.*;
+import org.silvercatcher.reforged.render.RenderBoomerang;
+import org.silvercatcher.reforged.render.RenderBulletBlunderbuss;
+import org.silvercatcher.reforged.render.RenderBulletMusket;
+import org.silvercatcher.reforged.render.RenderCrossbowBolt;
+import org.silvercatcher.reforged.render.RenderDart;
+import org.silvercatcher.reforged.render.RenderDynamite;
+import org.silvercatcher.reforged.render.RenderJavelin;
+import org.silvercatcher.reforged.render.RenderTileEntityCaltrop;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -14,18 +28,22 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.fml.client.registry.*;
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraftforge.fml.client.registry.IRenderFactory;
+import net.minecraftforge.fml.client.registry.RenderingRegistry;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void init(FMLInitializationEvent event) {
-
 		super.init(event);
-		registerItemRenderers();
 	}
 
 	@Override
@@ -115,19 +133,18 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
-	protected void registerItemRenderers() {
-
-		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
+	@SubscribeEvent
+	protected void registerItemRenderers(ModelRegistryEvent event) {
 
 		String inventory = "inventory";
 
 		for (Item item : ReforgedRegistry.registrationList) {
-			mesher.register(item, 0, new ModelResourceLocation(
+			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(
 					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
 		}
 
 		for (Block item : ReforgedRegistry.registrationListBlocks) {
-			mesher.register(Item.getItemFromBlock(item), 0, new ModelResourceLocation(
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(item), 0, new ModelResourceLocation(
 					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
 		}
 

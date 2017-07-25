@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "javelin"
+  },
+  "pattern": [
+    "  f",
+    " s ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "stick"
+    },
+    "f": {
+      "item": "flint"
+    }
+  }
+}

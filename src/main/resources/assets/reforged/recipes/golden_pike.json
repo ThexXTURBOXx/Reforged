@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "golden_pike"
+  },
+  "pattern": [
+    "  m",
+    " s ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "stick"
+    },
+    "m": {
+      "item": "ingotGold",
+      "data": 32767
+    }
+  }
+}

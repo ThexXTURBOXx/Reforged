@@ -1,17 +1,19 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.api.*;
+import org.silvercatcher.reforged.api.ExtendedItem;
+import org.silvercatcher.reforged.api.ItemExtension;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBlowGun extends ExtendedItem {
 
@@ -98,7 +100,7 @@ public class ItemBlowGun extends ExtendedItem {
 				worldIn.spawnEntity(dart);
 				if (!playerIn.capabilities.isCreativeMode)
 					if (stack.getItem().isDamageable())
-						stack.attemptDamageItem(1, itemRand);
+						stack.attemptDamageItem(1, itemRand, null);
 				if (stack.getItemDamage() >= 40) {
 					Helpers.consumeInventoryItem(playerIn, stack.getItem());
 				}
@@ -106,8 +108,4 @@ public class ItemBlowGun extends ExtendedItem {
 		}
 	}
 
-	@Override
-	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this), "r  ", " r ", "  r", 'r', Items.REEDS);
-	}
 }

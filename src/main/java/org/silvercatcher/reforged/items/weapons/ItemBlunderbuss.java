@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemBlunderbuss extends AReloadable {
 
@@ -51,13 +50,6 @@ public class ItemBlunderbuss extends AReloadable {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		setAmmo(ReforgedAdditions.BLUNDERBUSS_SHOT);
 		return super.onItemRightClick(worldIn, playerIn, hand);
-	}
-
-	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL),
-				new ItemStack(ReforgedAdditions.GUN_STOCK));
 	}
 
 	@Override

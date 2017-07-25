@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "blunderbuss"
+  },
+  "ingredients": [
+    {
+      "item": "blunderbuss_barrel"
+    },
+    {
+      "item": "gun_stock"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

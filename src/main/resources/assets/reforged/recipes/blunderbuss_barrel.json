@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "blunderbuss_barrel"
+  },
+  "pattern": [
+    "i  ",
+    " if",
+    "i i"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "f": {
+      "item": "flintAndSteel"
+    },
+    "i": {
+      "item": "ingotIron"
+    }
+  }
+}

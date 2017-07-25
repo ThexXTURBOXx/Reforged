@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "golden_musket"
+  },
+  "ingredients": [
+    {
+      "item": "musket"
+    },
+    {
+      "item": "golden_knife"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

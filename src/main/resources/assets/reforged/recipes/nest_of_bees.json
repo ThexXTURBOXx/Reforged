@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "nest_of_bees"
+  },
+  "pattern": [
+    "lwl",
+    "lsl",
+    "lll"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "string"
+    },
+    "w": {
+      "item": "wood",
+      "data": 0
+    },
+    "l": {
+      "item": "leather"
+    }
+  }
+}

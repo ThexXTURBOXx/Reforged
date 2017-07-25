@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "stone_knife"
+  },
+  "pattern": [
+    "sm",
+    "  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "stick"
+    },
+    "m": {
+      "item": "stonebrick",
+      "data": 32767
+    }
+  }
+}

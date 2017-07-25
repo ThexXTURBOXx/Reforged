@@ -6,12 +6,12 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemFireRod extends ExtendedItem {
 
@@ -65,13 +65,4 @@ public class ItemFireRod extends ExtendedItem {
 		return EnumActionResult.SUCCESS;
 	}
 
-	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 0), 's',
-				Items.STICK);
-
-		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 1), 's',
-				Items.STICK);
-	}
 }

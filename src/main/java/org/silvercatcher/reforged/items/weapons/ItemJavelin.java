@@ -7,13 +7,14 @@ import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemJavelin extends ExtendedItem {
 
@@ -89,10 +90,4 @@ public class ItemJavelin extends ExtendedItem {
 		}
 	}
 
-	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), "  f", " s ", "s  ", 'f', new ItemStack(Items.FLINT), 's',
-				new ItemStack(Items.STICK));
-	}
 }

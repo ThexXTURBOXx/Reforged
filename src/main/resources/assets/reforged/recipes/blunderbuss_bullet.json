@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "blunderbuss_bullet",
+    "count": 8
+  },
+  "pattern": [
+    " h ",
+    " g ",
+    " p "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "p": {
+      "item": "paper"
+    },
+    "g": {
+      "item": "sulphur"
+    },
+    "h": {
+      "item": "gravel"
+    }
+  }
+}

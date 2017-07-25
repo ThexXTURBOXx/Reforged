@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "dissolution:blockEctoplasm"
+  },
+  "pattern": [
+    "EEE",
+    "EEE",
+    "EEE"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "E": {
+      "item": "dissolution:itemResource",
+      "data": 0
+    }
+  }
+}

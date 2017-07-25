@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "wooden_battleaxe"
+  },
+  "pattern": [
+    "xxx",
+    "xsx",
+    " s "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "stick"
+    },
+    "x": {
+      "item": "wood",
+      "data": 32767
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "gun_stock"
+  },
+  "pattern": [
+    "   ",
+    "ssp",
+    "   "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "p": {
+      "item": "wood",
+      "data": 0
+    },
+    "s": {
+      "item": "stick"
+    }
+  }
+}

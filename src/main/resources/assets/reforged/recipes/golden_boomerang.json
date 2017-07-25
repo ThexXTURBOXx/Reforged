@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "golden_boomerang"
+  },
+  "pattern": [
+    "xww",
+    "  w",
+    "  x"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "w": {
+      "item": "stick"
+    },
+    "x": {
+      "item": "ingotGold",
+      "data": 32767
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "diamond_knife"
+  },
+  "pattern": [
+    "sm",
+    "  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "stick"
+    },
+    "m": {
+      "item": "diamond",
+      "data": 32767
+    }
+  }
+}

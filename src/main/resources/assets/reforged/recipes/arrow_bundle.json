@@ -1,0 +1,35 @@
+{
+  "result": {
+    "item": "reforged:arrow_bundle"
+  },
+  "ingredients": [
+    {
+      "item": "string"
+    },
+    {
+      "item": "arrow"
+    },
+    {
+      "item": "arrow"
+    },
+    {
+      "item": "arrow"
+    },
+    {
+      "item": "arrow"
+    },
+    {
+      "item": "arrow"
+    },
+    {
+      "item": "arrow"
+    },
+    {
+      "item": "arrow"
+    },
+    {
+      "item": "arrow"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

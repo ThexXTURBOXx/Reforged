@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "dart_poison_strong"
+  },
+  "ingredients": [
+    {
+      "item": "dart_normal"
+    },
+    {
+      "item": "spiderEye"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}
