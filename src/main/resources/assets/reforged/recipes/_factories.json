@@ -1,0 +1,6 @@
+{
+  "recipes": {
+    "boomench": "org.silvercatcher.reforged.items.recipes.BoomerangEnchRecipeFactory",
+    "nobload": "org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipeFactory"
+  }
+}

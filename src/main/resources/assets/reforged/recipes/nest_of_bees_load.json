@@ -1,0 +1,15 @@
+{
+  "result": {
+    "item": "reforged:nest_of_bees"
+  },
+  "group": "nob_load",
+  "ingredients": [
+    {
+      "item": "reforged:nest_of_bees"
+    },
+    {
+      "item": "reforged:arrow_bundle"
+    }
+  ],
+  "type": "reforged:nobload"
+}

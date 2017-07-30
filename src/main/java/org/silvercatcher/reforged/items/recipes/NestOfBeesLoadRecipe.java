@@ -6,15 +6,19 @@ import org.silvercatcher.reforged.api.ReforgedAdditions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
-public class NestOfBeesLoadRecipe implements IRecipe {
-
+public class NestOfBeesLoadRecipe extends ShapelessRecipes {
+	
+	public NestOfBeesLoadRecipe(String group, ItemStack result, NonNullList<Ingredient> ingredients) {
+        super(group, result, ingredients);
+    }
+	
 	private static void printInventory(String name, InventoryCrafting inventory) {
 
 		if (Minecraft.getMinecraft().world != null) {
@@ -30,8 +34,12 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 
 	private ItemStack output = ItemStack.EMPTY;
 	private int aB;
-
 	private int NoB;
+
+	@Override
+	public boolean canFit(int width, int height) {
+		return width >= 3 && height >= 3;
+	}
 
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inventory) {
@@ -78,27 +86,5 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 		}
 		return true;
 	}
-
-	@Override
-	public IRecipe setRegistryName(ResourceLocation name) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ResourceLocation getRegistryName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Class<IRecipe> getRegistryType() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean canFit(int width, int height) {
-		return width >= 3 && height >= 3;
-	}
+	
 }

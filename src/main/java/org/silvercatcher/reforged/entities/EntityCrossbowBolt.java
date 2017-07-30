@@ -159,8 +159,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 	protected Entity findEntityOnPath(Vec3d start, Vec3d end) {
 		Entity entity = null;
 		List<Entity> list = this.world.getEntitiesInAABBexcluding(this,
-				this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).grow(1.0D),
-				ARROW_TARGETS);
+				this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).grow(1.0D), ARROW_TARGETS);
 		double d0 = 0.0D;
 
 		for (int i = 0; i < list.size(); ++i) {
@@ -462,8 +461,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 			vec3d = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
 			if (raytraceresult != null) {
-				vec3d = new Vec3d(raytraceresult.hitVec.x, raytraceresult.hitVec.y,
-						raytraceresult.hitVec.z);
+				vec3d = new Vec3d(raytraceresult.hitVec.x, raytraceresult.hitVec.y, raytraceresult.hitVec.z);
 			}
 
 			Entity entity = this.findEntityOnPath(vec3d1, vec3d);

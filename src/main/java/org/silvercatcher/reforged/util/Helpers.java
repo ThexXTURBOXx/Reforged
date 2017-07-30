@@ -118,9 +118,8 @@ public class Helpers {
 			Vec3d var8 = pos.addVector(lookvec.x * var2, lookvec.y * var2, lookvec.z * var2);
 			Entity pointedEntity = null;
 			float var9 = 1.0F;
-			List<Entity> list = mc.world.getEntitiesWithinAABBExcludingEntity(theRenderViewEntity,
-					theViewBoundingBox.expand(lookvec.x * var2, lookvec.y * var2, lookvec.z * var2)
-							.expand(var9, var9, var9));
+			List<Entity> list = mc.world.getEntitiesWithinAABBExcludingEntity(theRenderViewEntity, theViewBoundingBox
+					.expand(lookvec.x * var2, lookvec.y * var2, lookvec.z * var2).expand(var9, var9, var9));
 			double d = calcdist;
 			for (Entity entity : list) {
 				if (entity.canBeCollidedWith()) {

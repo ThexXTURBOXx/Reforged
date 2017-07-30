@@ -1,0 +1,36 @@
+{
+  "result": {
+    "item": "reforged:wooden_boomerang"
+  },
+  "group":"boomerang_ench",
+  "ingredients": [
+    {
+      "item": "reforged:wooden_boomerang"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:gold_ingot"
+    },
+    {
+      "item": "minecraft:diamond"
+    },
+    {
+      "item": "minecraft:diamond"
+    }
+  ],
+  "type": "reforged:boomench"
+}
