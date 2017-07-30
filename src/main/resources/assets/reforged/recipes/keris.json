@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "reforged:keris"
+  },
+  "pattern": [
+    " m ",
+    " m ",
+    " s "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:gold_ingot"
+    },
+    "m": {
+      "item": "minecraft:iron_ingot"
+    }
+  }
+}

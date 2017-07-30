@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "reforged:wooden_musket"
+  },
+  "ingredients": [
+    {
+      "item": "reforged:musket"
+    },
+    {
+      "item": "reforged:wooden_knife"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

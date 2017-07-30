@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "reforged:stone_pike"
+  },
+  "pattern": [
+    "  m",
+    " s ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "m": {
+      "item": "minecraft:stonebrick",
+      "data": 32767
+    }
+  }
+}

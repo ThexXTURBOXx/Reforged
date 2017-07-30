@@ -1,21 +1,18 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
-import org.silvercatcher.reforged.items.recipes.BoomerangEnchRecipe;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
 import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ItemBoomerang extends ExtendedItem {
 
@@ -85,15 +82,6 @@ public class ItemBoomerang extends ExtendedItem {
 			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
-	}
-
-	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), "xww", "  w", "  x", 'x', materialDefinition.getRepairMaterial(),
-				'w', Items.STICK);
-		ReforgedRegistry.registerIRecipe("EnchantBoomerang", new BoomerangEnchRecipe(), BoomerangEnchRecipe.class,
-				Category.SHAPELESS);
 	}
 
 }

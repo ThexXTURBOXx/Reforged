@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "reforged:wooden_pike"
+  },
+  "pattern": [
+    "  m",
+    " s ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "m": {
+      "item": "minecraft:log",
+      "data": 32767
+    }
+  }
+}

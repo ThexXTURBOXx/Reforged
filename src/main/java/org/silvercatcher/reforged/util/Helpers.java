@@ -71,7 +71,7 @@ public class Helpers {
 		}
 
 		Tessellator tessellator = Tessellator.getInstance();
-		VertexBuffer worldrenderer = tessellator.getBuffer();
+		BufferBuilder worldrenderer = tessellator.getBuffer();
 		GlStateManager.enableBlend();
 		GlStateManager.disableTexture2D();
 		GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
@@ -115,11 +115,11 @@ public class Helpers {
 				calcdist = returnMOP.hitVec.distanceTo(pos);
 			}
 			Vec3d lookvec = theRenderViewEntity.getLook(0);
-			Vec3d var8 = pos.addVector(lookvec.xCoord * var2, lookvec.yCoord * var2, lookvec.zCoord * var2);
+			Vec3d var8 = pos.addVector(lookvec.x * var2, lookvec.y * var2, lookvec.z * var2);
 			Entity pointedEntity = null;
 			float var9 = 1.0F;
 			List<Entity> list = mc.world.getEntitiesWithinAABBExcludingEntity(theRenderViewEntity,
-					theViewBoundingBox.addCoord(lookvec.xCoord * var2, lookvec.yCoord * var2, lookvec.zCoord * var2)
+					theViewBoundingBox.expand(lookvec.x * var2, lookvec.y * var2, lookvec.z * var2)
 							.expand(var9, var9, var9));
 			double d = calcdist;
 			for (Entity entity : list) {
@@ -130,7 +130,7 @@ public class Helpers {
 							entity.posZ + entity.width / 2);
 					aabb.expand(bordersize, bordersize, bordersize);
 					RayTraceResult mop0 = aabb.calculateIntercept(pos, var8);
-					if (aabb.isVecInside(pos)) {
+					if (aabb.contains(pos)) {
 						if (0.0D < d || d == 0.0D) {
 							pointedEntity = entity;
 							d = 0.0D;

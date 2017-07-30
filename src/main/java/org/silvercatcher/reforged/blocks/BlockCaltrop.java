@@ -13,7 +13,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
@@ -21,7 +20,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class BlockCaltrop extends BlockContainer implements BlockExtension {
 
@@ -82,10 +80,5 @@ public class BlockCaltrop extends BlockContainer implements BlockExtension {
 			if (!worldIn.isRemote)
 				worldIn.setBlockToAir(pos);
 		}
-	}
-
-	@Override
-	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this, 4), " i ", " i ", "i i", 'i', new ItemStack(Blocks.IRON_BARS));
 	}
 }

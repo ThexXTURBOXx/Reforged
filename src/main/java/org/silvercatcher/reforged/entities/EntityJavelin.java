@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class EntityJavelin extends AReforgedThrowable {
 
 	public static final DataParameter<ItemStack> STACK = EntityDataManager.<ItemStack>createKey(EntityJavelin.class,
-			DataSerializers.OPTIONAL_ITEM_STACK);
+			DataSerializers.ITEM_STACK);
 	public static final DataParameter<Integer> DURATION = EntityDataManager.<Integer>createKey(EntityJavelin.class,
 			DataSerializers.VARINT);
 
@@ -72,7 +72,7 @@ public class EntityJavelin extends AReforgedThrowable {
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
 		ItemStack stack = getItemStack();
-		if (!stack.attemptDamageItem(1, rand)) {
+		if (!stack.attemptDamageItem(1, rand, null)) {
 			setItemStack(stack);
 		}
 		if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {
@@ -89,7 +89,7 @@ public class EntityJavelin extends AReforgedThrowable {
 	protected boolean onEntityHit(Entity entity) {
 		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity));
 		ItemStack stack = getItemStack();
-		if (!stack.attemptDamageItem(1, rand)) {
+		if (!stack.attemptDamageItem(1, rand, null)) {
 			setItemStack(stack);
 		}
 		if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0) {

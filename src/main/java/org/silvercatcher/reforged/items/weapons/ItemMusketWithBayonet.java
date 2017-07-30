@@ -7,7 +7,6 @@ import org.silvercatcher.reforged.material.MaterialManager;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemMusketWithBayonet extends ItemMusket {
 
@@ -66,8 +65,4 @@ public class ItemMusketWithBayonet extends ItemMusket {
 		return !unbreakable;
 	}
 
-	@Override
-	public void registerRecipes() {
-		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(ReforgedAdditions.MUSKET), getKnife());
-	}
 }

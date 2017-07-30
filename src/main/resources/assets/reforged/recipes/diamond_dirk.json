@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "reforged:diamond_dirk"
+  },
+  "pattern": [
+    "m ",
+    "s "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "m": {
+      "item": "minecraft:diamond",
+      "data": 32767
+    }
+  }
+}

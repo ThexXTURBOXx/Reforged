@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "reforged:musket"
+  },
+  "ingredients": [
+    {
+      "item": "reforged:musket_barrel"
+    },
+    {
+      "item": "reforged:gun_stock"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

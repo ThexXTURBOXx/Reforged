@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemMusket extends AReloadable {
 
@@ -59,13 +58,6 @@ public class ItemMusket extends AReloadable {
 			setAmmo(ReforgedAdditions.MUSKET_BULLET);
 		}
 		return super.onItemRightClick(worldIn, playerIn, hand);
-	}
-
-	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(ReforgedAdditions.MUSKET_BARREL),
-				new ItemStack(ReforgedAdditions.GUN_STOCK));
 	}
 
 	@Override

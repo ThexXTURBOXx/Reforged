@@ -1,0 +1,22 @@
+{
+  "result": {
+    "item": "reforged:dart_normal"
+  },
+  "pattern": [
+    " f ",
+    " s ",
+    "vsv"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "f": {
+      "item": "minecraft:flint"
+    },
+    "v": {
+      "item": "minecraft:feather"
+    }
+  }
+}

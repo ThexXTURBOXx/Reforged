@@ -5,11 +5,11 @@ import org.silvercatcher.reforged.entities.EntityDynamite;
 import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemDynamite extends ExtendedItem {
 
@@ -33,12 +33,6 @@ public class ItemDynamite extends ExtendedItem {
 			}
 		}
 		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(hand));
-	}
-
-	@Override
-	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this, 2), " s ", " g ", " g ", 's', new ItemStack(Items.STRING), 'g',
-				new ItemStack(Items.GUNPOWDER));
 	}
 
 }

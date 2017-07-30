@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "reforged:golden_knife"
+  },
+  "pattern": [
+    "sm",
+    "  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "m": {
+      "item": "minecraft:gold_ingot",
+      "data": 32767
+    }
+  }
+}

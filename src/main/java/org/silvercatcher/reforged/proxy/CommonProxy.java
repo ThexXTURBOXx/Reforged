@@ -2,21 +2,39 @@ package org.silvercatcher.reforged.proxy;
 
 import java.io.File;
 
-import org.silvercatcher.reforged.*;
+import org.silvercatcher.reforged.ReforgedEvents;
+import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.ReforgedMonsterArmourer;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.entities.*;
-import org.silvercatcher.reforged.props.*;
+import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
+import org.silvercatcher.reforged.entities.EntityBulletMusket;
+import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
+import org.silvercatcher.reforged.entities.EntityDart;
+import org.silvercatcher.reforged.entities.EntityDynamite;
+import org.silvercatcher.reforged.entities.EntityJavelin;
+import org.silvercatcher.reforged.entities.TileEntityCaltrop;
+import org.silvercatcher.reforged.props.DefaultStunImpl;
+import org.silvercatcher.reforged.props.IStunProperty;
+import org.silvercatcher.reforged.props.StorageStun;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.registries.IForgeRegistry;
 
 public class CommonProxy {
 
@@ -36,9 +54,7 @@ public class CommonProxy {
 		return SoundEvent.REGISTRY.getObject(new ResourceLocation(ReforgedMod.ID, name));
 	}
 
-	public void init(FMLInitializationEvent event) {
-		ReforgedRegistry.registerRecipes();
-	}
+	public void init(FMLInitializationEvent event) {}
 
 	private void loadConfig(FMLPreInitializationEvent e) {
 		File configdir = new File(e.getModConfigurationDirectory(), ReforgedMod.NAME);
@@ -84,18 +100,13 @@ public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		loadConfig(event);
+		ReforgedRegistry.registerEventHandler(this);
+		ReforgedRegistry.registerEventHandler(new ReforgedRegistry());
 		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
 		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
 		ReforgedRegistry.createItems();
-		ReforgedRegistry.registerItems();
 		ReforgedRegistry.registerPackets();
-		Enchantment.REGISTRY.register(goalseekerid, new ResourceLocation(ReforgedMod.ID, "goalseeker"),
-				ReforgedAdditions.goalseeker);
 		CapabilityManager.INSTANCE.register(IStunProperty.class, new StorageStun(), DefaultStunImpl.class);
-		for (String s : sounds) {
-			ResourceLocation loc = new ResourceLocation(ReforgedMod.ID, s);
-			GameRegistry.register(new SoundEvent(loc), loc);
-		}
 		registerEntities();
 	}
 
@@ -120,6 +131,20 @@ public class CommonProxy {
 		if (GlobalValues.DYNAMITE)
 			ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
 	}
+	
+	@SubscribeEvent
+	public void registerSounds(RegistryEvent.Register<SoundEvent> event) {
+		IForgeRegistry<SoundEvent> reg = event.getRegistry();
+		for (String s : sounds) {
+			ResourceLocation loc = new ResourceLocation(ReforgedMod.ID, s);
+			reg.register(new SoundEvent(loc).setRegistryName(loc));
+		}
+	}
+	
+	@SubscribeEvent
+	public void registerEnchantments(RegistryEvent.Register<Enchantment> event) {
+		event.getRegistry().register(ReforgedAdditions.goalseeker.setRegistryName(new ResourceLocation(ReforgedMod.ID, "goalseeker")));
+	}
 
 	protected void registerEntityRenderers() {
 	}
@@ -127,7 +152,7 @@ public class CommonProxy {
 	public void registerItemRenderer(Item item, int meta, String id) {
 	}
 
-	protected void registerItemRenderers() {
+	protected void registerItemRenderers(ModelRegistryEvent event) {
 	}
 
 }

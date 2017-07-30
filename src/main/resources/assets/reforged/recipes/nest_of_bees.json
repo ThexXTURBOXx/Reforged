@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "reforged:nest_of_bees"
+  },
+  "pattern": [
+    "lwl",
+    "lsl",
+    "lll"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "w": {
+      "item": "minecraft:log",
+      "data": 0
+    },
+    "l": {
+      "item": "minecraft:leather"
+    }
+  }
+}

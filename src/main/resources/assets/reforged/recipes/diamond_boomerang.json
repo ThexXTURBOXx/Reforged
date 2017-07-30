@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "reforged:diamond_boomerang"
+  },
+  "pattern": [
+    "xww",
+    "  w",
+    "  x"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "w": {
+      "item": "minecraft:stick"
+    },
+    "x": {
+      "item": "minecraft:diamond",
+      "data": 32767
+    }
+  }
+}

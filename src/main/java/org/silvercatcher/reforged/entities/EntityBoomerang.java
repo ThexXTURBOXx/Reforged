@@ -28,7 +28,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 	public static final DataParameter<Float> YAW = EntityDataManager.<Float>createKey(EntityBoomerang.class,
 			DataSerializers.FLOAT);
 	public static final DataParameter<ItemStack> STACK = EntityDataManager.<ItemStack>createKey(EntityBoomerang.class,
-			DataSerializers.OPTIONAL_ITEM_STACK);
+			DataSerializers.ITEM_STACK);
 
 	public EntityBoomerang(World worldIn) {
 		super(worldIn, "boomerang");
@@ -121,7 +121,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 			// It's an hit entity
 			hitEntity.attackEntityFrom(causeImpactDamage(hitEntity, getThrower()), getImpactDamage(hitEntity));
 			ItemStack stack = getItemStack();
-			if (stack.getItem().isDamageable() && stack.attemptDamageItem(1, rand)) {
+			if (stack.getItem().isDamageable() && stack.attemptDamageItem(1, rand, null)) {
 				Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 				return true;
 			} else {

@@ -10,12 +10,10 @@ import com.google.common.collect.Multimap;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemDirk extends ItemSword implements ItemExtension, IZombieEquippable {
 
@@ -76,12 +74,6 @@ public class ItemDirk extends ItemSword implements ItemExtension, IZombieEquippa
 			stack.damageItem(2, entityLiving);
 		}
 		return true;
-	}
-
-	@Override
-	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this), "m ", "s ", 's', new ItemStack(Items.STICK), 'm',
-				materialDefinition.getRepairMaterial());
 	}
 
 	@Override

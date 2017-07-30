@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
@@ -50,11 +51,6 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 	}
 
 	@Override
-	public int getRecipeSize() {
-		return 9;
-	}
-
-	@Override
 	public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inventory) {
 		return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
 	}
@@ -81,5 +77,28 @@ public class NestOfBeesLoadRecipe implements IRecipe {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public IRecipe setRegistryName(ResourceLocation name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResourceLocation getRegistryName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Class<IRecipe> getRegistryType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canFit(int width, int height) {
+		return width >= 3 && height >= 3;
 	}
 }

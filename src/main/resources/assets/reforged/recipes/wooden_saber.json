@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "reforged:wooden_saber"
+  },
+  "pattern": [
+    " b ",
+    "b  ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "b": {
+      "item": "minecraft:log",
+      "data": 32767
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  }
+}

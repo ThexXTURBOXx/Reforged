@@ -2,7 +2,7 @@ itemGroup.reforged=Reforged
 
 item.firerod.name=Bâton de feu
 
-item.arrow_bundle.name=Paquet des flèches
+item.arrow_bundle.name=Paquet de flèches
 
 item.nest_of_bees.name=Nest of Bees
 item.nestofbees.arrows=Arrows
@@ -32,11 +32,11 @@ item.golden_musket.name=Mousquet avec baïonnette en or
 item.iron_musket.name=Mousquet avec baïonnette en fer
 item.diamond_musket.name=Mousquet avec baïonnette en diamant
 
-item.wooden_knife.name=Coteau en bois
-item.stone_knife.name=Coteau en pierre
-item.golden_knife.name=Coteau en or
-item.iron_knife.name=Coteau en fer
-item.diamond_knife.name=Coteau en diamant
+item.wooden_knife.name=Couteau en bois
+item.stone_knife.name=Couteau en pierre
+item.golden_knife.name=Couteau en or
+item.iron_knife.name=Couteau en fer
+item.diamond_knife.name=Couteau en diamant
 
 item.wooden_katana.name=Katana en bois
 item.stone_katana.name=Katana en pierre
@@ -46,38 +46,74 @@ item.diamond_katana.name=Katana en diamant
 
 item.dart_normal.name=Flèche normale
 item.dart_poison.name=Flèche empoisonnée
-item.dart_poison_strong.name=Flèche empoisonnée puissante
+item.dart_poison_strong.name=Flèche fortement empoisonnée
 item.dart_slowness.name=Flèche de lenteur
 item.dart_hunger.name=Flèche de faim
 item.dart_wither.name=Flèche de Wither
 item.blowgun.name=Sarbacane
 
-item.musket_barrel.name=Cross du mousquet
-item.gun_stock.name=Cross des carabines
-item.blunderbuss_barrel.name=Crosse de la bombarde
+item.musket_barrel.name=Baril de mousquet
+item.gun_stock.name=Crosse
+item.blunderbuss_barrel.name=Baril de bombarde
 item.blunderbuss_bullet.name=Plombs
 item.blunderbuss.name=Bombarde
 item.javelin.name=Javelot
 item.musket_bullet.name=Boulet de mousquet
 item.musket.name=Mousquet
-item.musket.loadstate=Statut de charger
+item.musket.loadstate=Statut de chargement
 item.musket.loadstate.empty=Vide
 item.musket.loadstate.loading=Recharger
 item.musket.loadstate.loaded=Chargé
 
-death.attack.boomerang=%1$s's head was splittered by a Boomerang.
-death.attack.boomerang.player=%1$s's head was splittered by a Boomerang while fighting %2$s.
-death.attack.javelin=%1$s got impaled.
-death.attack.javelin.player=%1$s got impaled while fighting %2$s.
-death.attack.musket=%1$s got headshooted.
-death.attack.musket.player=%1$s got headshooted while fighting %2$s.
-death.attack.blunderbuss=%1$s got shredded by bullets.
-death.attack.blunderbuss.player=%1$s got shredded by bullets while fighting %2$s.
-death.attack.dart=%1$s served as a target.
-death.attack.dart.player=%1$s served as a target while fighting %2$s.
-death.attack.crossbow=%1$s got sliced by a bolt.
-death.attack.crossbow.player=%1$s got sliced by a bolt while fighting %2$s.
+item.keris.name=Kris
 
-versionchecker.ingame.outdated=Il y a une version plus nouvelles!
+tile.caltrop.name=Chausse-trape
+
+item.dynamite.name=Dynamite
+
+item.crossbow.name=Arbalète
+item.crossbow_bolt.name=Carreau d'arbalète
+
+item.wooden_Pique.name=Pique en bois
+item.stone_Pique.name=Pique en pierre
+item.golden_Pique.name=Pique en or
+item.iron_Pique.name=Pique en fer
+item.diamond_Pique.name=Pique en diamant
+
+item.wooden_mace.name=Masse en bois
+item.stone_mace.name=Masse en pierre
+item.golden_mace.name=Masse en or
+item.iron_mace.name=Masse en fer
+item.diamond_mace.name=Masse en diamant
+
+item.wooden_dirk.name=Dague en bois
+item.stone_dirk.name=Dague en pierre
+item.golden_dirk.name=Dague en or
+item.iron_dirk.name=Dague en fer
+item.diamond_dirk.name=Dague en diamant
+
+death.attack.boomerang=La tête de %1$s a été découpée par un boomerang.
+death.attack.boomerang.player=La tête de %1$s a été découpée par le boomerang de %2$s.
+death.attack.javelin=%1$s s'est fait empaler.
+death.attack.javelin.player=%1$s s'est fait empaler en combattant %2$s.
+death.attack.musket=%1$s s'est pris un headshot.
+death.attack.musket.player=%1$s s'est pris un headshot en combattant %2$s.
+death.attack.blunderbuss=%1$s a été changé en passoire.
+death.attack.blunderbuss.player=%1$s a été changé en passoire par %2$s.
+death.attack.dart=%1$s a servi de cible.
+death.attack.dart.player=%1$s a servi de cible pour %2$s.
+death.attack.crossbow=%1$s a été transpercé par un carreau.
+death.attack.crossbow.player=%1$s a été transpercé par le carreau de %2$s.
+
+versionchecker.ingame.outdated=Une nouvelle version est disponible!
 versionchecker.ingame.downloadclick=Cliques ici pour télécharger.
 versionchecker.ingame.download=Télécharger
+
+reforged.subtitle.boomerang_break=Bris de Boomerang
+reforged.subtitle.boomerang_hit=Boomerang hits
+reforged.subtitle.boomerang_throw=Lancer de Boomerang
+reforged.subtitle.crossbow_reload=Rechargement d'arbalète
+reforged.subtitle.crossbow_shoot=Tir d'arbalète
+reforged.subtitle.musket_shoot=Tir de mousquet
+reforged.subtitle.shotgun_reload=Rechargement de fusil
+reforged.subtitle.shotgun_shoot=Tir de fusil

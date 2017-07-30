@@ -2,10 +2,6 @@ package org.silvercatcher.reforged.items.others;
 
 import org.silvercatcher.reforged.api.ExtendedItem;
 
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 public class ItemCrossbowBolt extends ExtendedItem {
 
 	public ItemCrossbowBolt() {
@@ -17,11 +13,6 @@ public class ItemCrossbowBolt extends ExtendedItem {
 	@Override
 	public boolean isWeapon() {
 		return false;
-	}
-
-	@Override
-	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this, 4), "i ", "f ", 'i', Items.IRON_INGOT, 'f', Items.FEATHER);
 	}
 
 }

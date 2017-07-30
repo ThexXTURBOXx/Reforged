@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "reforged:iron_battleaxe"
+  },
+  "pattern": [
+    "xxx",
+    "xsx",
+    " s "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "x": {
+      "item": "minecraft:iron_ingot",
+      "data": 32767
+    }
+  }
+}

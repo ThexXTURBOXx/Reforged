@@ -2,10 +2,6 @@ package org.silvercatcher.reforged.items.others;
 
 import org.silvercatcher.reforged.api.ExtendedItem;
 
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 public class ItemArrowBundle extends ExtendedItem {
 
 	public ItemArrowBundle() {
@@ -19,12 +15,4 @@ public class ItemArrowBundle extends ExtendedItem {
 		return false;
 	}
 
-	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(Items.STRING), new ItemStack(Items.ARROW),
-				new ItemStack(Items.ARROW), new ItemStack(Items.ARROW), new ItemStack(Items.ARROW),
-				new ItemStack(Items.ARROW), new ItemStack(Items.ARROW), new ItemStack(Items.ARROW),
-				new ItemStack(Items.ARROW));
-	}
 }

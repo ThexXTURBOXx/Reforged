@@ -8,11 +8,9 @@ import org.silvercatcher.reforged.material.MaterialManager;
 import org.silvercatcher.reforged.props.IStunProperty;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 
 public class ItemMace extends ExtendedItem implements IZombieEquippable {
 
@@ -74,13 +72,6 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 	@Override
 	public boolean isDamageable() {
 		return !unbreakable;
-	}
-
-	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), " mm", " wm", "w  ", 'm', materialDefinition.getRepairMaterial(),
-				'w', new ItemStack(Blocks.PLANKS));
 	}
 
 	@Override

@@ -94,7 +94,4 @@ public interface ItemExtension {
 		}
 		return getHitDamage() + enchantDamage;
 	}
-
-	default void registerRecipes() {
-	}
 }

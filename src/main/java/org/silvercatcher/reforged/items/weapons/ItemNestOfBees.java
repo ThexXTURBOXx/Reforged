@@ -4,24 +4,32 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import org.silvercatcher.reforged.ReforgedRegistry;
-import org.silvercatcher.reforged.api.*;
-import org.silvercatcher.reforged.items.recipes.NestOfBeesLoadRecipe;
+import org.silvercatcher.reforged.api.CompoundTags;
+import org.silvercatcher.reforged.api.ExtendedItem;
+import org.silvercatcher.reforged.api.ItemExtension;
 
 import net.minecraft.client.resources.I18n;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.*;
-import net.minecraft.item.*;
+import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.ItemArrow;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ItemNestOfBees extends ExtendedItem {
 
@@ -48,7 +56,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, EntityPlayer playerIn, List tooltip, boolean advanced) {
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
 
 		tooltip.add(I18n.format("item.nestofbees.arrows") + ": "
 				+ CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
@@ -142,15 +150,6 @@ public class ItemNestOfBees extends ExtendedItem {
 				compound.setInteger(CompoundTags.DELAY, Math.max(0, delay - 1));
 			}
 		}
-	}
-
-	@Override
-	public void registerRecipes() {
-
-		GameRegistry.addRecipe(new ItemStack(this), "lwl", "lsl", "lll", 'l', Items.LEATHER, 's', Items.STRING, 'w',
-				Item.getItemFromBlock(Blocks.PLANKS));
-		ReforgedRegistry.registerIRecipe("ReloadNoB", new NestOfBeesLoadRecipe(), NestOfBeesLoadRecipe.class,
-				Category.SHAPELESS);
 	}
 
 	protected void shoot(World world, EntityPlayer shooter) {

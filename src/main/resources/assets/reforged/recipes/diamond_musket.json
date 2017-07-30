@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "reforged:diamond_musket"
+  },
+  "ingredients": [
+    {
+      "item": "reforged:musket"
+    },
+    {
+      "item": "reforged:diamond_knife"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}
