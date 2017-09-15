@@ -72,6 +72,8 @@ public class EntityBoomerang extends AReforgedThrowable {
 			md = ((ItemBoomerang) getItemStack().getItem()).getMaterialDefinition();
 		} catch (NullPointerException e) {
 			md = null;
+		} catch (ClassCastException e) {
+			md = null;
 		}
 		return md;
 	}
