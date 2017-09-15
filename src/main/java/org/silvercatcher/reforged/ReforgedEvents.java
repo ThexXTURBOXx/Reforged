@@ -107,7 +107,9 @@ public class ReforgedEvents {
 
 	@SubscribeEvent
 	public void onWorldTick(WorldTickEvent e) {
-		for (Entity en : (e.world.loadedEntityList)) {
+		Iterator<Entity> iter = e.world.loadedEntityList.iterator();
+		while (iter.hasNext()) {
+			Entity en = iter.next();
 			if (en instanceof EntityLivingBase) {
 				EntityLivingBase player = (EntityLivingBase) en;
 				IStunProperty prop = player.getCapability(ReforgedMod.STUN_PROP, null);
