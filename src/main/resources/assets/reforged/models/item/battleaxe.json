@@ -1,25 +1,3 @@
 {
-    "parent": "reforged:builtin/generated",
-    "display": {
-        "thirdperson_righthand": {
-            "rotation": [ 0, 90, 45 ],
-            "translation": [ 0.25, 6.25, -0.75 ],
-            "scale": [ 1.20, 1.20, 1.20 ]
-        },
-        "firstperson_righthand": {
-            "rotation": [ 200, 97, 188 ],
-            "translation": [ 7.00, 3.00, -3.50 ],
-            "scale": [ 1.75, 1.75, 1.75 ]
-        },
-        "thirdperson_lefthand": {
-            "rotation": [ 0, -90, -45 ],
-            "translation": [ 0.25, 6.25, -0.75 ],
-            "scale": [ 1.20, 1.20, 1.20 ]
-        },
-        "firstperson_lefthand": {
-            "rotation": [ 24, 277, -8 ],
-            "translation": [ 7.00, 3.00, -3.50 ],
-            "scale": [ 1.75, 1.75, 1.75 ]
-        }
-    }
+    "parent": "item/handheld"
 }
