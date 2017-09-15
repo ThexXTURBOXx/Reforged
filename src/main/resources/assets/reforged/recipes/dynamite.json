@@ -4,17 +4,17 @@
     "count": 2
   },
   "pattern": [
-    " s ",
-    " g ",
-    " g "
+    "s",
+    "g",
+    "g"
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "minecraft:string"
+      "item": "#STRING"
     },
     "g": {
-      "item": "minecraft:gunpowder"
+      "item": "#GUNPOWDER"
     }
   }
 }

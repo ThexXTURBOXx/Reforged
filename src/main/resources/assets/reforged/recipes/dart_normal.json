@@ -10,13 +10,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "minecraft:stick"
+      "item": "#STICK"
     },
     "f": {
       "item": "minecraft:flint"
     },
     "v": {
-      "item": "minecraft:feather"
+      "item": "#FEATHER"
     }
   }
 }

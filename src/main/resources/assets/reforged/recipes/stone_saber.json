@@ -3,18 +3,17 @@
     "item": "reforged:stone_saber"
   },
   "pattern": [
-    " b ",
-    "b  ",
-    "s  "
+    " b",
+    "b ",
+    "s "
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
     "b": {
-      "item": "minecraft:stonebrick",
-      "data": 32767
+      "item": "#COBBLESTONE"
     },
     "s": {
-      "item": "minecraft:stick"
+      "item": "#STICK"
     }
   }
 }

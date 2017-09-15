@@ -4,20 +4,20 @@
     "count": 8
   },
   "pattern": [
-    " i ",
-    " g ",
-    " p "
+    "i",
+    "g",
+    "p"
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
     "p": {
-      "item": "minecraft:paper"
+      "item": "#PAPER"
     },
     "g": {
-      "item": "minecraft:gunpowder"
+      "item": "#GUNPOWDER"
     },
     "i": {
-      "item": "minecraft:iron_ingot"
+      "item": "#IRONINGOT"
     }
   }
 }

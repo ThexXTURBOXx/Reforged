@@ -10,7 +10,7 @@
       "item": "minecraft:spider_eye"
     },
     {
-      "item": "minecraft:bone"
+      "item": "#BONE"
     }
   ],
   "type": "minecraft:crafting_shapeless"

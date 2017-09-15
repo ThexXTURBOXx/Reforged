@@ -7,7 +7,7 @@
       "item": "reforged:dart_normal"
     },
     {
-      "item": "minecraft:cactus"
+      "item": "#CACTUS"
     }
   ],
   "type": "minecraft:crafting_shapeless"

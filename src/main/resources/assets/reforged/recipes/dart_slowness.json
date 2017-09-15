@@ -7,7 +7,7 @@
       "item": "reforged:dart_normal"
     },
     {
-      "item": "minecraft:slime_ball"
+      "item": "#SLIMEBALL"
     }
   ],
   "type": "minecraft:crafting_shapeless"

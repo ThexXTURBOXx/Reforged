@@ -4,16 +4,16 @@
     "count": 4
   },
   "pattern": [
-    "i ",
-    "f "
+    "i",
+    "f"
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
     "f": {
-      "item": "minecraft:feather"
+      "item": "#FEATHER"
     },
     "i": {
-      "item": "minecraft:iron_ingot"
+      "item": "#IRONINGOT"
     }
   }
 }

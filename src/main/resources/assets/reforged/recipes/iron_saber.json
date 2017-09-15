@@ -3,18 +3,17 @@
     "item": "reforged:iron_saber"
   },
   "pattern": [
-    " b ",
-    "b  ",
-    "s  "
+    " b",
+    "b ",
+    "s "
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
     "b": {
-      "item": "minecraft:iron_ingot",
-      "data": 32767
+      "item": "#IRONINGOT"
     },
     "s": {
-      "item": "minecraft:stick"
+      "item": "#STICK"
     }
   }
 }

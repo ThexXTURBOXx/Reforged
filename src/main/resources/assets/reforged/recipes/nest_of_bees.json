@@ -10,14 +10,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "minecraft:string"
+      "item": "#STRING"
     },
     "w": {
-      "item": "minecraft:log",
-      "data": 0
+      "item": "#PLANKS"
     },
     "l": {
-      "item": "minecraft:leather"
+      "item": "#LEATHER"
     }
   }
 }

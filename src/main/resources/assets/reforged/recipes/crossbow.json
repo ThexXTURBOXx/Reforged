@@ -13,11 +13,10 @@
       "item": "minecraft:bow"
     },
     "w": {
-      "item": "minecraft:log",
-      "data": 0
+      "item": "#PLANKS"
     },
     "i": {
-      "item": "minecraft:iron_ingot"
+      "item": "#IRONINGOT"
     }
   }
 }

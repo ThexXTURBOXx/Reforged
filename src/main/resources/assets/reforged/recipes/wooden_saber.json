@@ -3,18 +3,17 @@
     "item": "reforged:wooden_saber"
   },
   "pattern": [
-    " b ",
-    "b  ",
-    "s  "
+    " b",
+    "b ",
+    "s "
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
     "b": {
-      "item": "minecraft:log",
-      "data": 32767
+      "item": "#PLANKS"
     },
     "s": {
-      "item": "minecraft:stick"
+      "item": "#STICK"
     }
   }
 }

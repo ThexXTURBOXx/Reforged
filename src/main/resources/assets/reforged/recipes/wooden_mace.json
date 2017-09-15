@@ -3,19 +3,14 @@
     "item": "reforged:wooden_mace"
   },
   "pattern": [
-    " mm",
-    " wm",
+    " ww",
+    " ww",
     "w  "
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
     "w": {
-      "item": "minecraft:log",
-      "data": 0
-    },
-    "m": {
-      "item": "minecraft:log",
-      "data": 32767
+      "item": "#PLANKS"
     }
   }
 }

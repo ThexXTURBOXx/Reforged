@@ -3,17 +3,17 @@
     "item": "reforged:keris"
   },
   "pattern": [
-    " m ",
-    " m ",
-    " s "
+    "m",
+    "m",
+    "s"
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "minecraft:gold_ingot"
+      "item": "#GOLDINGOT"
     },
     "m": {
-      "item": "minecraft:iron_ingot"
+      "item": "#IRONINGOT"
     }
   }
 }

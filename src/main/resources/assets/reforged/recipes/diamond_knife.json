@@ -3,17 +3,15 @@
     "item": "reforged:diamond_knife"
   },
   "pattern": [
-    "sm",
-    "  "
+    "sm"
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "minecraft:stick"
+      "item": "#STICK"
     },
     "m": {
-      "item": "minecraft:diamond",
-      "data": 32767
+      "item": "#DIAMOND"
     }
   }
 }

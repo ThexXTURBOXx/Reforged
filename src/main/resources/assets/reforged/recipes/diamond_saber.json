@@ -3,18 +3,17 @@
     "item": "reforged:diamond_saber"
   },
   "pattern": [
-    " b ",
-    "b  ",
-    "s  "
+    " b",
+    "b ",
+    "s "
   ],
   "type": "minecraft:crafting_shaped",
   "key": {
     "b": {
-      "item": "minecraft:diamond",
-      "data": 32767
+      "item": "#DIAMOND"
     },
     "s": {
-      "item": "minecraft:stick"
+      "item": "#STICK"
     }
   }
 }

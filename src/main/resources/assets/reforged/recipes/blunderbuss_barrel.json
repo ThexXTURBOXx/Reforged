@@ -13,7 +13,7 @@
       "item": "minecraft:flint_and_steel"
     },
     "i": {
-      "item": "minecraft:iron_ingot"
+      "item": "#IRONINGOT"
     }
   }
 }
