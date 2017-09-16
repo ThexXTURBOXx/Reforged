@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "reforged:caltrop"
+  },
+  "pattern": [
+    " b ",
+    " b ",
+    "b b"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "b": {
+      "item": "minecraft:iron_bars"
+    }
+  }
+}
