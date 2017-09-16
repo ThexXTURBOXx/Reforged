@@ -59,12 +59,11 @@ public class EntityDynamite extends AReforgedThrowable {
 
 	@Override
 	protected float getGravityVelocity() {
-		return 0.05F;
+		return 0.03F;
 	}
 
 	@Override
 	protected float getImpactDamage(Entity target) {
-
 		return 0f;
 	}
 
