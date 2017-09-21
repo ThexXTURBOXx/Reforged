@@ -14,11 +14,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 
 public class BoomerangEnchRecipe extends ShapelessRecipes {
-	
-	public BoomerangEnchRecipe(String group, ItemStack result, NonNullList<Ingredient> ingredients) {
-        super(group, result, ingredients);
-    }
-	
+
 	private static void printInventory(String name, InventoryCrafting inventory) {
 
 		if (Minecraft.getMinecraft().world != null) {
@@ -34,6 +30,10 @@ public class BoomerangEnchRecipe extends ShapelessRecipes {
 	}
 
 	private ItemStack output = ItemStack.EMPTY;
+
+	public BoomerangEnchRecipe(String group, ItemStack result, NonNullList<Ingredient> ingredients) {
+		super(group, result, ingredients);
+	}
 
 	@Override
 	public boolean canFit(int width, int height) {
@@ -79,5 +79,5 @@ public class BoomerangEnchRecipe extends ShapelessRecipes {
 		}
 		return boomerangs == 1 && super.matches(inventory, world);
 	}
-	
+
 }

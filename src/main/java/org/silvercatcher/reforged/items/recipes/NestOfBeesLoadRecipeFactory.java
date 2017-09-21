@@ -10,11 +10,12 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 
 public class NestOfBeesLoadRecipeFactory implements IRecipeFactory {
-	
-    @Override
-    public IRecipe parse(JsonContext context, JsonObject json) {
-        ShapelessRecipes recipe = ShapelessRecipes.deserialize(json);
-        return new NestOfBeesLoadRecipe(ReforgedMod.ID + ":nob_load", recipe.getRecipeOutput(), recipe.getIngredients());
-    }
-    
+
+	@Override
+	public IRecipe parse(JsonContext context, JsonObject json) {
+		ShapelessRecipes recipe = ShapelessRecipes.deserialize(json);
+		return new NestOfBeesLoadRecipe(ReforgedMod.ID + ":nob_load", recipe.getRecipeOutput(),
+				recipe.getIngredients());
+	}
+
 }

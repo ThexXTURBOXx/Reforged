@@ -107,7 +107,7 @@ public class ReforgedEvents {
 
 	@SubscribeEvent
 	public void onWorldTick(WorldTickEvent e) {
-		if(!e.world.isRemote) {
+		if (!e.world.isRemote) {
 			Iterator<Entity> iter = e.world.loadedEntityList.iterator();
 			while (iter.hasNext()) {
 				Entity en = iter.next();

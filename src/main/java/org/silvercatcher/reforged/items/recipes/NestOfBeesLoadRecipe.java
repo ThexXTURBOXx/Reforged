@@ -14,11 +14,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 
 public class NestOfBeesLoadRecipe extends ShapelessRecipes {
-	
-	public NestOfBeesLoadRecipe(String group, ItemStack result, NonNullList<Ingredient> ingredients) {
-        super(group, result, ingredients);
-    }
-	
+
 	private static void printInventory(String name, InventoryCrafting inventory) {
 
 		if (Minecraft.getMinecraft().world != null) {
@@ -33,8 +29,12 @@ public class NestOfBeesLoadRecipe extends ShapelessRecipes {
 	}
 
 	private ItemStack output = ItemStack.EMPTY;
+
 	private int aB;
 	private int NoB;
+	public NestOfBeesLoadRecipe(String group, ItemStack result, NonNullList<Ingredient> ingredients) {
+		super(group, result, ingredients);
+	}
 
 	@Override
 	public boolean canFit(int width, int height) {
@@ -86,5 +86,5 @@ public class NestOfBeesLoadRecipe extends ShapelessRecipes {
 		}
 		return true;
 	}
-	
+
 }

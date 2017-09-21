@@ -30,8 +30,8 @@ public class CommonProxy {
 	// Items for Config
 	public static boolean battleaxe, blowgun, boomerang, firerod, javelin, katana, knife, musket, nest_of_bees, sabre,
 			keris, caltrop, dynamite, crossbow, pike, mace, dirk;
-	
-	//Floats for Config
+
+	// Floats for Config
 	public static float damage_musket, damage_caltrop;
 
 	// IDs
@@ -75,8 +75,8 @@ public class CommonProxy {
 		pike = config.getBoolean("Pike", items, true, "Enable the Pike");
 		mace = config.getBoolean("Mace", items, true, "Enable the Mace");
 		dirk = config.getBoolean("Dirk", items, true, "Enable the Dirk");
-		
-		//Floats
+
+		// Floats
 		damage_musket = config.getFloat("Musket Damage", floats, 10, 1, 50, "Damage of the Musket");
 		damage_caltrop = config.getFloat("Caltrop Damage", floats, 8, 1, 50, "Damage of the Caltrop");
 
