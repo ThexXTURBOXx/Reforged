@@ -13,6 +13,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class BoomerangEnchRecipe implements IRecipe {
 
@@ -85,9 +86,9 @@ public class BoomerangEnchRecipe implements IRecipe {
 						&& !CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ENCHANTED)) {
 					boomerangs++;
 					output = stack.copy();
-				} else if (stack.getItem() == Items.GOLD_INGOT) {
+				} else if (OreDictionary.containsMatch(false, OreDictionary.getOres("ingotGold"), stack)) {
 					gold++;
-				} else if (stack.getItem() == Items.DIAMOND) {
+				} else if (OreDictionary.containsMatch(false, OreDictionary.getOres("gemDiamond"), stack)) {
 					diamonds++;
 				} else {
 					// we don't want any other stuff!

@@ -12,6 +12,7 @@ import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemFireRod extends ExtendedItem {
 
@@ -68,10 +69,10 @@ public class ItemFireRod extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 0), 's',
-				Items.STICK);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 0), 's',
+				"stickWood"));
 
-		GameRegistry.addRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 1), 's',
-				Items.STICK);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 1), 's',
+				"stickWood"));
 	}
 }

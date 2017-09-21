@@ -21,6 +21,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ItemNestOfBees extends ExtendedItem {
@@ -147,8 +148,8 @@ public class ItemNestOfBees extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ItemStack(this), "lwl", "lsl", "lll", 'l', Items.LEATHER, 's', Items.STRING, 'w',
-				Item.getItemFromBlock(Blocks.PLANKS));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "lwl", "lsl", "lll", 'l', "leather", 's', "string", 'w',
+				"plankWood"));
 		ReforgedRegistry.registerIRecipe("ReloadNoB", new NestOfBeesLoadRecipe(), NestOfBeesLoadRecipe.class,
 				Category.SHAPELESS);
 	}

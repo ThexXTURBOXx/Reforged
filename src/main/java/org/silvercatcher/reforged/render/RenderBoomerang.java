@@ -20,7 +20,7 @@ public class RenderBoomerang extends ReforgedRender<EntityBoomerang> {
 
 	@Override
 	protected ResourceLocation getEntityTexture(EntityBoomerang entity) {
-
+		if(entity == null || entity.getMaterialDefinition() == null) return Textures.WOODEN_BOOMERANG;
 		switch (entity.getMaterialDefinition().getPrefix()) {
 		case "diamond":
 			return Textures.DIAMOND_BOOMERANG;
@@ -36,7 +36,7 @@ public class RenderBoomerang extends ReforgedRender<EntityBoomerang> {
 			if (MaterialManager.isFullyAdded(entity.getMaterialDefinition().getMaterial())) {
 				return MaterialManager.getTextures(entity.getMaterialDefinition().getMaterial())[0];
 			} else {
-				return null;
+				return Textures.WOODEN_BOOMERANG;
 			}
 		}
 	}

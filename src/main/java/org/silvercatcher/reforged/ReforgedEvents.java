@@ -107,25 +107,26 @@ public class ReforgedEvents {
 
 	@SubscribeEvent
 	public void onWorldTick(WorldTickEvent e) {
-		for (Entity en : (e.world.loadedEntityList)) {
-			if (en instanceof EntityLivingBase) {
-				EntityLivingBase player = (EntityLivingBase) en;
-				IStunProperty prop = player.getCapability(ReforgedMod.STUN_PROP, null);
-				if (prop != null && prop.isStunned()) {
-					if (!map.containsKey(player.getUniqueID()))
-						map.put(player.getUniqueID(), 0);
-					int i = map.get(player.getUniqueID());
-					i++;
-					if (player.lastTickPosX != player.posX)
-						player.posX = player.lastTickPosX;
-					if (player.lastTickPosY != player.posY)
-						player.posY = player.lastTickPosY;
-					if (player.lastTickPosZ != player.posZ)
-						player.posZ = player.lastTickPosZ;
-					map.put(player.getUniqueID(), i);
-					if (map.get(player.getUniqueID()) >= 60) {
-						prop.setStunned(false);
-						map.put(player.getUniqueID(), 0);
+		if (!e.world.isRemote) {
+			Iterator<Entity> iter = e.world.loadedEntityList.iterator();
+			while (iter.hasNext()) {
+				Entity en = iter.next();
+				if (en instanceof EntityLivingBase) {
+					EntityLivingBase player = (EntityLivingBase) en;
+					IStunProperty prop = player.getCapability(ReforgedMod.STUN_PROP, null);
+					if (prop != null && prop.isStunned()) {
+						if (!map.containsKey(player.getUniqueID()))
+							map.put(player.getUniqueID(), 0);
+						int i = map.get(player.getUniqueID());
+						i++;
+						player.motionX = 0;
+						player.motionY = 0;
+						player.motionZ = 0;
+						map.put(player.getUniqueID(), i);
+						if (map.get(player.getUniqueID()) >= 60) {
+							prop.setStunned(false);
+							map.put(player.getUniqueID(), 0);
+						}
 					}
 				}
 			}

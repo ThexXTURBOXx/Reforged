@@ -19,6 +19,7 @@ import net.minecraft.item.ItemStack;
 public class MaterialDefinition {
 
 	private final String prefix;
+	private final String oredict;
 	private final ItemStack repairMaterial;
 	private final ToolMaterial material;
 	private final List<Item> materialBasedItems;
@@ -27,10 +28,21 @@ public class MaterialDefinition {
 
 		this(prefix, material, material.getRepairItemStack());
 	}
-
+	
 	public MaterialDefinition(String prefix, ToolMaterial material, ItemStack repairMaterial) {
 
+		this(prefix, material, repairMaterial, null);
+	}
+	
+	public MaterialDefinition(String prefix, ToolMaterial material, String oredict) {
+
+		this(prefix, material, material.getRepairItemStack(), oredict);
+	}
+
+	public MaterialDefinition(String prefix, ToolMaterial material, ItemStack repairMaterial, String oredict) {
+
 		this.prefix = prefix;
+		this.oredict = oredict;
 		this.material = material;
 		this.repairMaterial = repairMaterial;
 		this.materialBasedItems = new LinkedList<>();
@@ -76,6 +88,10 @@ public class MaterialDefinition {
 
 	public ItemStack getRepairMaterial() {
 		return repairMaterial;
+	}
+	
+	public Object getOreDictRepairMaterial() {
+		return oredict == null ? repairMaterial : oredict;
 	}
 
 	/**

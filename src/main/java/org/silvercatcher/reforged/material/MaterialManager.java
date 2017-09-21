@@ -18,11 +18,11 @@ public class MaterialManager {
 	private static final HashMap<ToolMaterial, ResourceLocation[]> textureMap = new HashMap<ToolMaterial, ResourceLocation[]>();
 
 	static {
-		definitionMap.put(ToolMaterial.WOOD, new MaterialDefinition("wooden", ToolMaterial.WOOD));
-		definitionMap.put(ToolMaterial.STONE, new MaterialDefinition("stone", ToolMaterial.STONE));
-		definitionMap.put(ToolMaterial.IRON, new MaterialDefinition("iron", ToolMaterial.IRON));
-		definitionMap.put(ToolMaterial.GOLD, new MaterialDefinition("golden", ToolMaterial.GOLD));
-		definitionMap.put(ToolMaterial.DIAMOND, new MaterialDefinition("diamond", ToolMaterial.DIAMOND));
+		definitionMap.put(ToolMaterial.WOOD, new MaterialDefinition("wooden", ToolMaterial.WOOD, "plankWood"));
+		definitionMap.put(ToolMaterial.STONE, new MaterialDefinition("stone", ToolMaterial.STONE, "cobblestone"));
+		definitionMap.put(ToolMaterial.IRON, new MaterialDefinition("iron", ToolMaterial.IRON, "ingotIron"));
+		definitionMap.put(ToolMaterial.GOLD, new MaterialDefinition("golden", ToolMaterial.GOLD, "ingotGold"));
+		definitionMap.put(ToolMaterial.DIAMOND, new MaterialDefinition("diamond", ToolMaterial.DIAMOND, "gemDiamond"));
 	}
 
 	public static void addMaterialDefinition(ToolMaterial material, MaterialDefinition definition) {

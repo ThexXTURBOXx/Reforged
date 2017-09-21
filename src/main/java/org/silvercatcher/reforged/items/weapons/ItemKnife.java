@@ -17,6 +17,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquippable {
 
@@ -94,8 +95,8 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 
 	@Override
 	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this), "sm", "  ", 's', new ItemStack(Items.STICK), 'm',
-				materialDefinition.getRepairMaterial());
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "sm", 's', "stickWood", 'm',
+				materialDefinition.getOreDictRepairMaterial()));
 	}
 
 	@Override

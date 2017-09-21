@@ -16,6 +16,7 @@ import net.minecraft.item.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquippable {
 
@@ -108,8 +109,8 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ItemStack(this), "  m", " m ", "s  ", 'm', materialDefinition.getRepairMaterial(),
-				's', Items.STICK);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  m", " m ", "s  ", 'm', materialDefinition.getOreDictRepairMaterial(),
+				's', "stickWood"));
 	}
 
 	@Override

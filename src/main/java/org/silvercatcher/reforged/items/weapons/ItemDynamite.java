@@ -10,6 +10,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemDynamite extends ExtendedItem {
 
@@ -37,8 +38,8 @@ public class ItemDynamite extends ExtendedItem {
 
 	@Override
 	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this, 2), " s ", " g ", " g ", 's', new ItemStack(Items.STRING), 'g',
-				new ItemStack(Items.GUNPOWDER));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this, 2), "s", "g", "g", 's', "string", 'g',
+				"gunpowder"));
 	}
 
 }

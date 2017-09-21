@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.entities;
 
 import org.silvercatcher.reforged.api.AReforgedThrowable;
+import org.silvercatcher.reforged.proxy.CommonProxy;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,7 +26,7 @@ public class EntityBulletMusket extends AReforgedThrowable {
 
 	@Override
 	protected float getImpactDamage(Entity target) {
-		return 10f;
+		return CommonProxy.damage_musket;
 	}
 
 	@Override

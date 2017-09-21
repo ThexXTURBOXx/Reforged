@@ -25,6 +25,7 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.RecipeSorter;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 
 public class ReforgedRegistry {
@@ -263,14 +264,14 @@ public class ReforgedRegistry {
 
 		if (GlobalValues.MUSKET) {
 
-			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.GUN_STOCK), "   ", "ssp", "   ", 's', Items.STICK,
-					'p', Blocks.PLANKS);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ReforgedAdditions.GUN_STOCK), "ssp", 's', "stickWood",
+					'p', "plankWood"));
 
-			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.MUSKET_BARREL), "   ", "iif", "  i", 'i',
-					Items.IRON_INGOT, 'f', Items.FLINT_AND_STEEL);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ReforgedAdditions.MUSKET_BARREL), "iif", "  i", 'i',
+					"ingotIron", 'f', Items.FLINT_AND_STEEL));
 
-			GameRegistry.addRecipe(new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL), "i  ", " if", "i i", 'i',
-					Items.IRON_INGOT, 'f', Items.FLINT_AND_STEEL);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL), "i  ", " if", "i i", 'i',
+					"ingotIron", 'f', Items.FLINT_AND_STEEL));
 		}
 	}
 

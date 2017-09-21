@@ -5,6 +5,7 @@ import org.silvercatcher.reforged.api.ExtendedItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ItemArrowBundle extends ExtendedItem {
 
@@ -22,9 +23,9 @@ public class ItemArrowBundle extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addShapelessRecipe(new ItemStack(this), new ItemStack(Items.STRING), new ItemStack(Items.ARROW),
+		GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(this), "string", new ItemStack(Items.ARROW),
 				new ItemStack(Items.ARROW), new ItemStack(Items.ARROW), new ItemStack(Items.ARROW),
 				new ItemStack(Items.ARROW), new ItemStack(Items.ARROW), new ItemStack(Items.ARROW),
-				new ItemStack(Items.ARROW));
+				new ItemStack(Items.ARROW)));
 	}
 }

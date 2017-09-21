@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemBlowGun extends ExtendedItem {
 
@@ -108,6 +109,6 @@ public class ItemBlowGun extends ExtendedItem {
 
 	@Override
 	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this), "r  ", " r ", "  r", 'r', Items.REEDS);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "r  ", " r ", "  r", 'r', "sugarcane"));
 	}
 }

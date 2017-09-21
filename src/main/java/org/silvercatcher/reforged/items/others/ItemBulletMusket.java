@@ -5,6 +5,7 @@ import org.silvercatcher.reforged.api.ExtendedItem;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemBulletMusket extends ExtendedItem {
 
@@ -22,7 +23,7 @@ public class ItemBulletMusket extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addShapedRecipe(new ItemStack(this, 8), " i ", " g ", " p ", 'i', Items.IRON_INGOT, 'g',
-				Items.GUNPOWDER, 'p', Items.PAPER);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this, 8), "i", "g", "p", 'i', "ingotIron", 'g',
+				"gunpowder", 'p', "paper"));
 	}
 }

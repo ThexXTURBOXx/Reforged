@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemCrossbow extends ItemBow implements ItemExtension {
 
@@ -245,8 +246,8 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 
 	@Override
 	public void registerRecipes() {
-		GameRegistry.addShapedRecipe(new ItemStack(this), "bii", "iw ", "i w", 'b', Items.BOW, 'i', Items.IRON_INGOT,
-				'w', new ItemStack(Blocks.PLANKS));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "bii", "iw ", "i w", 'b', Items.BOW, 'i', "ingotIron",
+				'w', "plankWood"));
 	}
 
 	public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {

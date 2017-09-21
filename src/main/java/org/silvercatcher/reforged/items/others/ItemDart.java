@@ -3,10 +3,11 @@ package org.silvercatcher.reforged.items.others;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class ItemDart extends ExtendedItem {
 
@@ -26,8 +27,8 @@ public class ItemDart extends ExtendedItem {
 		switch (getUnlocalizedName().substring(10)) {
 
 		case "normal":
-			GameRegistry.addShapedRecipe(new ItemStack(this), " f ", " s ", "vsv", 'f', Items.FLINT, 's', Items.STICK,
-					'v', Items.FEATHER);
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), " f ", " s ", "vsv", 'f', Items.FLINT, 's', "stickWood",
+					'v', "feather"));
 			break;
 
 		case "hunger":
@@ -35,8 +36,8 @@ public class ItemDart extends ExtendedItem {
 			break;
 
 		case "poison":
-			GameRegistry.addShapelessRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL,
-					new ItemStack(Blocks.CACTUS));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL,
+					"blockCactus"));
 			break;
 
 		case "poison_strong":
@@ -44,12 +45,12 @@ public class ItemDart extends ExtendedItem {
 			break;
 
 		case "slowness":
-			GameRegistry.addShapelessRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL, Items.SLIME_BALL);
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL, "slimeball"));
 			break;
 
 		case "wither":
-			GameRegistry.addShapelessRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL, Items.SPIDER_EYE,
-					Items.BONE);
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL, Items.SPIDER_EYE,
+					"bone"));
 			break;
 
 		default:

@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemJavelin extends ExtendedItem {
 
@@ -92,7 +93,7 @@ public class ItemJavelin extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ItemStack(this), "  f", " s ", "s  ", 'f', new ItemStack(Items.FLINT), 's',
-				new ItemStack(Items.STICK));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  f", " s ", "s  ", 'f', new ItemStack(Items.FLINT), 's',
+				"stickWood"));
 	}
 }

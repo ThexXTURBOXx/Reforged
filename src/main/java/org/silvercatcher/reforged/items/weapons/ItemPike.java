@@ -9,6 +9,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemPike extends ExtendedItem {
 
@@ -68,8 +69,8 @@ public class ItemPike extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ItemStack(this), "  m", " s ", "s  ", 'm', materialDefinition.getRepairMaterial(),
-				's', Items.STICK);
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  m", " s ", "s  ", 'm', materialDefinition.getOreDictRepairMaterial(),
+				's', "stickWood"));
 	}
 
 }
