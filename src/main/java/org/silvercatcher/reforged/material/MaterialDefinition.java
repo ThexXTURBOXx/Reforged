@@ -28,15 +28,10 @@ public class MaterialDefinition {
 
 		this(prefix, material, material.getRepairItemStack());
 	}
-	
+
 	public MaterialDefinition(String prefix, ToolMaterial material, ItemStack repairMaterial) {
 
 		this(prefix, material, repairMaterial, null);
-	}
-	
-	public MaterialDefinition(String prefix, ToolMaterial material, String oredict) {
-
-		this(prefix, material, material.getRepairItemStack(), oredict);
 	}
 
 	public MaterialDefinition(String prefix, ToolMaterial material, ItemStack repairMaterial, String oredict) {
@@ -46,6 +41,11 @@ public class MaterialDefinition {
 		this.material = material;
 		this.repairMaterial = repairMaterial;
 		this.materialBasedItems = new LinkedList<>();
+	}
+
+	public MaterialDefinition(String prefix, ToolMaterial material, String oredict) {
+
+		this(prefix, material, material.getRepairItemStack(), oredict);
 	}
 
 	public void addItem(Item item) {
@@ -77,6 +77,10 @@ public class MaterialDefinition {
 		return material.getMaxUses();
 	}
 
+	public Object getOreDictRepairMaterial() {
+		return oredict == null ? repairMaterial : oredict;
+	}
+
 	public final String getPrefix() {
 		return prefix;
 	}
@@ -88,10 +92,6 @@ public class MaterialDefinition {
 
 	public ItemStack getRepairMaterial() {
 		return repairMaterial;
-	}
-	
-	public Object getOreDictRepairMaterial() {
-		return oredict == null ? repairMaterial : oredict;
 	}
 
 	/**

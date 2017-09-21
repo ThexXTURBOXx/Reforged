@@ -27,8 +27,8 @@ public class ItemDart extends ExtendedItem {
 		switch (getUnlocalizedName().substring(10)) {
 
 		case "normal":
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), " f ", " s ", "vsv", 'f', Items.FLINT, 's', "stickWood",
-					'v', "feather"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), " f ", " s ", "vsv", 'f', Items.FLINT, 's',
+					"stickWood", 'v', "feather"));
 			break;
 
 		case "hunger":
@@ -36,8 +36,8 @@ public class ItemDart extends ExtendedItem {
 			break;
 
 		case "poison":
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL,
-					"blockCactus"));
+			GameRegistry.addRecipe(
+					new ShapelessOreRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL, "blockCactus"));
 			break;
 
 		case "poison_strong":
@@ -45,12 +45,13 @@ public class ItemDart extends ExtendedItem {
 			break;
 
 		case "slowness":
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL, "slimeball"));
+			GameRegistry
+					.addRecipe(new ShapelessOreRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL, "slimeball"));
 			break;
 
 		case "wither":
-			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL, Items.SPIDER_EYE,
-					"bone"));
+			GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(this), ReforgedAdditions.DART_NORMAL,
+					Items.SPIDER_EYE, "bone"));
 			break;
 
 		default:

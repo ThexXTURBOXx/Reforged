@@ -93,7 +93,7 @@ public class ItemJavelin extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  f", " s ", "s  ", 'f', new ItemStack(Items.FLINT), 's',
-				"stickWood"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  f", " s ", "s  ", 'f',
+				new ItemStack(Items.FLINT), 's', "stickWood"));
 	}
 }

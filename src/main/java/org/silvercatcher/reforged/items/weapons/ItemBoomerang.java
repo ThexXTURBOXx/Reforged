@@ -10,13 +10,12 @@ import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.RecipeSorter.Category;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemBoomerang extends ExtendedItem {
 
@@ -91,8 +90,8 @@ public class ItemBoomerang extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "xww", "  w", "  x", 'x', materialDefinition.getOreDictRepairMaterial(),
-				'w', "stickWood"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "xww", "  w", "  x", 'x',
+				materialDefinition.getOreDictRepairMaterial(), 'w', "stickWood"));
 		ReforgedRegistry.registerIRecipe("EnchantBoomerang", new BoomerangEnchRecipe(), BoomerangEnchRecipe.class,
 				Category.SHAPELESS);
 	}

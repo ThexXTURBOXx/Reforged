@@ -92,8 +92,8 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "xxx", "xsx", " s ", 'x', materialDefinition.getOreDictRepairMaterial(),
-				's', Items.STICK));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "xxx", "xsx", " s ", 'x',
+				materialDefinition.getOreDictRepairMaterial(), 's', Items.STICK));
 	}
 
 	@Override

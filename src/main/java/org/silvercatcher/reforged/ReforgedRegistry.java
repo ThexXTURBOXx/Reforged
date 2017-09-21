@@ -12,7 +12,6 @@ import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.item.Item.ToolMaterial;
@@ -25,8 +24,8 @@ import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.RecipeSorter;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.RecipeSorter.Category;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ReforgedRegistry {
 
@@ -264,14 +263,14 @@ public class ReforgedRegistry {
 
 		if (GlobalValues.MUSKET) {
 
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ReforgedAdditions.GUN_STOCK), "ssp", 's', "stickWood",
-					'p', "plankWood"));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ReforgedAdditions.GUN_STOCK), "ssp", 's',
+					"stickWood", 'p', "plankWood"));
 
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ReforgedAdditions.MUSKET_BARREL), "iif", "  i", 'i',
-					"ingotIron", 'f', Items.FLINT_AND_STEEL));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ReforgedAdditions.MUSKET_BARREL), "iif", "  i",
+					'i', "ingotIron", 'f', Items.FLINT_AND_STEEL));
 
-			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL), "i  ", " if", "i i", 'i',
-					"ingotIron", 'f', Items.FLINT_AND_STEEL));
+			GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(ReforgedAdditions.BLUNDERBUSS_BARREL), "i  ",
+					" if", "i i", 'i', "ingotIron", 'f', Items.FLINT_AND_STEEL));
 		}
 	}
 

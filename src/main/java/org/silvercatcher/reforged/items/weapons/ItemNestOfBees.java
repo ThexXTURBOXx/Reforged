@@ -13,7 +13,8 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
-import net.minecraft.init.*;
+import net.minecraft.init.Items;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
@@ -21,8 +22,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.RecipeSorter.Category;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
 public class ItemNestOfBees extends ExtendedItem {
 
@@ -148,8 +149,8 @@ public class ItemNestOfBees extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "lwl", "lsl", "lll", 'l', "leather", 's', "string", 'w',
-				"plankWood"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "lwl", "lsl", "lll", 'l', "leather", 's',
+				"string", 'w', "plankWood"));
 		ReforgedRegistry.registerIRecipe("ReloadNoB", new NestOfBeesLoadRecipe(), NestOfBeesLoadRecipe.class,
 				Category.SHAPELESS);
 	}

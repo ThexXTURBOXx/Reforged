@@ -5,7 +5,6 @@ import org.silvercatcher.reforged.entities.EntityDynamite;
 import org.silvercatcher.reforged.util.Helpers;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
@@ -38,8 +37,8 @@ public class ItemDynamite extends ExtendedItem {
 
 	@Override
 	public void registerRecipes() {
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this, 2), "s", "g", "g", 's', "string", 'g',
-				"gunpowder"));
+		GameRegistry
+				.addRecipe(new ShapedOreRecipe(new ItemStack(this, 2), "s", "g", "g", 's', "string", 'g', "gunpowder"));
 	}
 
 }

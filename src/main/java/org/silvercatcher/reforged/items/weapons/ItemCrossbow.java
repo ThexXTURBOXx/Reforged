@@ -17,7 +17,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
@@ -246,8 +245,8 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 
 	@Override
 	public void registerRecipes() {
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "bii", "iw ", "i w", 'b', Items.BOW, 'i', "ingotIron",
-				'w', "plankWood"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "bii", "iw ", "i w", 'b', Items.BOW, 'i',
+				"ingotIron", 'w', "plankWood"));
 	}
 
 	public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {

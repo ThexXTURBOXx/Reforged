@@ -79,8 +79,8 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), " mm", " wm", "w  ", 'm', materialDefinition.getOreDictRepairMaterial(),
-				'w', "plankWood"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), " mm", " wm", "w  ", 'm',
+				materialDefinition.getOreDictRepairMaterial(), 'w', "plankWood"));
 	}
 
 	@Override

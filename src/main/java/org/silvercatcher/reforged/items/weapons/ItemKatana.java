@@ -10,7 +10,6 @@ import com.google.common.collect.Multimap;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.util.math.BlockPos;
@@ -109,8 +108,8 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  m", " m ", "s  ", 'm', materialDefinition.getOreDictRepairMaterial(),
-				's', "stickWood"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  m", " m ", "s  ", 'm',
+				materialDefinition.getOreDictRepairMaterial(), 's', "stickWood"));
 	}
 
 	@Override

@@ -10,7 +10,6 @@ import com.google.common.collect.Multimap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
@@ -76,6 +75,7 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "m", "m", "s", 'm', "ingotIron", 's', "ingotGold"));
+		GameRegistry
+				.addRecipe(new ShapedOreRecipe(new ItemStack(this), "m", "m", "s", 'm', "ingotIron", 's', "ingotGold"));
 	}
 }

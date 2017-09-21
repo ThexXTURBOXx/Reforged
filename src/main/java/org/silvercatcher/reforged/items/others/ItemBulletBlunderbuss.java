@@ -22,7 +22,7 @@ public class ItemBulletBlunderbuss extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this, 8), "h", "g", "p", 'h', "gravel",
-				'g', "gunpowder", 'p', "paper"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this, 8), "h", "g", "p", 'h', "gravel", 'g',
+				"gunpowder", 'p', "paper"));
 	}
 }

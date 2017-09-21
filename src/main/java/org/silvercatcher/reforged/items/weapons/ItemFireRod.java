@@ -69,10 +69,10 @@ public class ItemFireRod extends ExtendedItem {
 	@Override
 	public void registerRecipes() {
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 0), 's',
-				"stickWood"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c',
+				new ItemStack(Items.COAL, 1, 0), 's', "stickWood"));
 
-		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c', new ItemStack(Items.COAL, 1, 1), 's',
-				"stickWood"));
+		GameRegistry.addRecipe(new ShapedOreRecipe(new ItemStack(this), "  c", " s ", "s  ", 'c',
+				new ItemStack(Items.COAL, 1, 1), 's', "stickWood"));
 	}
 }
