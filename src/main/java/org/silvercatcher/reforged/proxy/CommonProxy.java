@@ -30,11 +30,14 @@ public class CommonProxy {
 	// Items for Config
 	public static boolean battleaxe, blowgun, boomerang, firerod, javelin, katana, knife, musket, nest_of_bees, sabre,
 			keris, caltrop, dynamite, crossbow, pike, mace, dirk;
+	
+	//Floats for Config
+	public static float damage_musket, damage_caltrop;
 
 	// IDs
 	public static int goalseekerid;
 
-	public static final String items = "Items";
+	public static final String items = "Items", ids = "IDs", floats = "General";
 
 	public static SoundEvent getSound(String name) {
 		return SoundEvent.REGISTRY.getObject(new ResourceLocation(ReforgedMod.ID, name));
@@ -72,9 +75,13 @@ public class CommonProxy {
 		pike = config.getBoolean("Pike", items, true, "Enable the Pike");
 		mace = config.getBoolean("Mace", items, true, "Enable the Mace");
 		dirk = config.getBoolean("Dirk", items, true, "Enable the Dirk");
+		
+		//Floats
+		damage_musket = config.getFloat("Musket Damage", floats, 10, 1, 50, "Damage of the Musket");
+		damage_caltrop = config.getFloat("Caltrop Damage", floats, 8, 1, 50, "Damage of the Caltrop");
 
 		// IDs
-		goalseekerid = config.getInt("Goalseeker", "IDs", 100, 0, 256,
+		goalseekerid = config.getInt("Goalseeker", ids, 100, 0, 256,
 				"This specifies the Enchantment ID of the Goalseeker-Enchantment");
 
 		// Save config

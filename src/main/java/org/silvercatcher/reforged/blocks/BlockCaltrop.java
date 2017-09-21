@@ -7,6 +7,7 @@ import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.BlockExtension;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.TileEntityCaltrop;
+import org.silvercatcher.reforged.proxy.CommonProxy;
 
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -76,7 +77,7 @@ public class BlockCaltrop extends BlockContainer implements BlockExtension {
 	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		if (entityIn instanceof EntityLivingBase) {
 			EntityLivingBase e = (EntityLivingBase) entityIn;
-			e.attackEntityFrom(new DamageSource("caltrop").setDamageBypassesArmor(), 8);
+			e.attackEntityFrom(new DamageSource("caltrop").setDamageBypassesArmor(), CommonProxy.damage_caltrop);
 			if (!worldIn.isRemote)
 				worldIn.setBlockToAir(pos);
 		}
