@@ -183,6 +183,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 		}
 		rotationYaw = prevRotationYaw + (rotationYaw - prevRotationYaw) * 0.2F;
 		rotationYaw += 20;
+		setRotation(rotationYaw, rotationPitch);
 	}
 
 	@Override
