@@ -171,6 +171,13 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.IRON_DIRK = new ItemDirk(ToolMaterial.IRON));
 			registrationList.add(ReforgedAdditions.DIAMOND_DIRK = new ItemDirk(ToolMaterial.DIAMOND));
 		}
+
+		if (GlobalValues.CANNON) {
+			registrationList.add(ReforgedAdditions.CANNON = new ItemCannon().setUnlocalizedName("cannon")
+					.setCreativeTab(ReforgedMod.tabReforged));
+			registrationList.add(ReforgedAdditions.CANNON_BALL = new Item().setUnlocalizedName("cannon_ball")
+					.setCreativeTab(ReforgedMod.tabReforged));
+		}
 	}
 
 	/**

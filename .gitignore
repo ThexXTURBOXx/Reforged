@@ -23,3 +23,5 @@ run
 hs_err_pid*
 Thumbs.db
 libs/
+.class
+classes/

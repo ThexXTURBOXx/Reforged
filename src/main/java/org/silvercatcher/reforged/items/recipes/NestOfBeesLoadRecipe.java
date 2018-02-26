@@ -32,6 +32,7 @@ public class NestOfBeesLoadRecipe extends ShapelessRecipes {
 
 	private int aB;
 	private int NoB;
+
 	public NestOfBeesLoadRecipe(String group, ItemStack result, NonNullList<Ingredient> ingredients) {
 		super(group, result, ingredients);
 	}

@@ -6,7 +6,6 @@ import org.silvercatcher.reforged.models.ReforgedModel;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -33,9 +32,6 @@ public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 		super.doRender(bullet, x, y, z, yaw, partialTicks);
 		renderEntityModel(bullet, x, y, z, yaw, partialTicks);
 	}
-
-	@Override
-	protected abstract ResourceLocation getEntityTexture(T entity);
 
 	/**
 	 * If you find any little issues while flying, just change partialTick in the

@@ -29,7 +29,7 @@ public class CommonProxy {
 
 	// Items for Config
 	public static boolean battleaxe, blowgun, boomerang, firerod, javelin, katana, knife, musket, nest_of_bees, sabre,
-			keris, caltrop, dynamite, crossbow, pike, mace, dirk;
+			keris, caltrop, dynamite, crossbow, pike, mace, dirk, cannon;
 
 	// Floats for Config
 	public static float damage_musket, damage_caltrop;
@@ -75,6 +75,7 @@ public class CommonProxy {
 		pike = config.getBoolean("Pike", items, true, "Enable the Pike");
 		mace = config.getBoolean("Mace", items, true, "Enable the Mace");
 		dirk = config.getBoolean("Dirk", items, true, "Enable the Dirk");
+		cannon = config.getBoolean("Cannon", items, true, "Enable the Cannon");
 
 		// Floats
 		damage_musket = config.getFloat("Musket Damage", floats, 10, 1, 50, "Damage of the Musket");
@@ -130,6 +131,10 @@ public class CommonProxy {
 			GameRegistry.registerTileEntity(TileEntityCaltrop.class, "Caltrop");
 		if (GlobalValues.DYNAMITE)
 			ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
+		if (GlobalValues.DYNAMITE) {
+			ReforgedRegistry.registerEntity(EntityCannon.class, "Cannon");
+			ReforgedRegistry.registerEntity(EntityCannonBall.class, "CannonBall");
+		}
 	}
 
 	protected void registerEntityRenderers() {

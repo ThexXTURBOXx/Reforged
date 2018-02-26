@@ -103,6 +103,22 @@ public class ClientProxy extends CommonProxy {
 							return new RenderDynamite(manager);
 						}
 					});
+
+		if (GlobalValues.CANNON) {
+			RenderingRegistry.registerEntityRenderingHandler(EntityCannon.class, new IRenderFactory<EntityCannon>() {
+				@Override
+				public Render<? super EntityCannon> createRenderFor(RenderManager manager) {
+					return new RenderCannon(manager);
+				}
+			});
+			RenderingRegistry.registerEntityRenderingHandler(EntityCannonBall.class,
+					new IRenderFactory<EntityCannonBall>() {
+						@Override
+						public Render<? super EntityCannonBall> createRenderFor(RenderManager manager) {
+							return new RenderCannonBall(manager);
+						}
+					});
+		}
 	}
 
 	@Override
