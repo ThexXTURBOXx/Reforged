@@ -103,7 +103,7 @@ death.attack.blunderbuss.player=%1$s 在与 %2$s 搏斗时被霰弹打成了筛�
 death.attack.dart=%1$s 被飞镖射杀。
 death.attack.dart.player=%1$s 在与 %2$s 搏斗时被飞镖射杀。
 death.attack.caltrop=%1$s 不慎踩中了铁蒺藜。
-death.attack.caltrop.player=%1$s 在在与 %2$s 搏斗时不慎踩中了铁蒺藜。
+death.attack.caltrop.player=%1$s 在与 %2$s 搏斗时不慎踩中了铁蒺藜。
 death.attack.crossbow=%1$s 被弩箭射杀。
 death.attack.crossbow.player=%1$s 在与 %2$s 搏斗时被弩箭射杀。
 
