@@ -1,15 +1,14 @@
 package org.silvercatcher.reforged.render;
 
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.silvercatcher.reforged.ReforgedReferences.Textures;
 import org.silvercatcher.reforged.entities.EntityDynamite;
 import org.silvercatcher.reforged.models.ModelDynamite;
 
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class RenderDynamite extends ReforgedRender<EntityDynamite> {
 
 	public RenderDynamite(RenderManager renderManager) {

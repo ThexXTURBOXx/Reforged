@@ -1,13 +1,15 @@
 package org.silvercatcher.reforged.items.others;
 
+import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.ExtendedItem;
 
 public class ItemBulletBlunderbuss extends ExtendedItem {
 
 	public ItemBulletBlunderbuss() {
-		super();
-		setMaxStackSize(64);
-		setUnlocalizedName("blunderbuss_bullet");
+		super(new Item.Builder());
+		setRegistryName(new ResourceLocation(ReforgedMod.ID, "blunderbuss_bullet"));
 	}
 
 	@Override

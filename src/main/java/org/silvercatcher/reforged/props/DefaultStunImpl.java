@@ -1,17 +1,21 @@
 package org.silvercatcher.reforged.props;
 
-public class DefaultStunImpl implements IStunProperty {
+import java.util.concurrent.Callable;
+
+public class DefaultStunImpl implements Callable<DefaultStunImpl>, IStunProperty {
 
 	private boolean isStunned = false;
 
-	@Override
 	public boolean isStunned() {
 		return isStunned;
 	}
 
-	@Override
 	public void setStunned(boolean value) {
 		this.isStunned = value;
 	}
 
+	@Override
+	public DefaultStunImpl call() throws Exception {
+		return null;
+	}
 }

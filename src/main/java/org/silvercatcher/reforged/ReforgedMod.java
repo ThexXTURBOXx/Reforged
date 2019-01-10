@@ -1,65 +1,64 @@
 package org.silvercatcher.reforged;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.props.IStunProperty;
-import org.silvercatcher.reforged.proxy.CommonProxy;
-
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.Mod.Instance;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.javafmlmod.FMLModLoadingContext;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
+import org.silvercatcher.reforged.props.DefaultStunImpl;
+import org.silvercatcher.reforged.props.IStunProperty;
+import org.silvercatcher.reforged.props.StorageStun;
+import org.silvercatcher.reforged.proxy.ClientProxy;
+import org.silvercatcher.reforged.proxy.CommonProxy;
+import org.silvercatcher.reforged.proxy.ServerProxy;
 
-@Mod(modid = ReforgedMod.ID, version = ReforgedMod.VERSION, name = ReforgedMod.NAME, updateJSON = ReforgedMod.UPDATE_JSON, acceptedMinecraftVersions = "[1.12,1.13)")
+@Mod(ReforgedMod.ID)
 public class ReforgedMod {
 
 	public static final String NAME = "Reforged";
 	public static final String ID = "reforged";
 	public static final String VERSION = "0.7.5";
-	public static final String UPDATE_JSON = "https://raw.githubusercontent.com/ThexXTURBOXx/UpdateJSONs/master/reforged.json";
-
-	@CapabilityInject(IStunProperty.class)
-	public static final Capability<IStunProperty> STUN_PROP = null;
-
-	public static boolean battlegearDetected;
-
-	public static SimpleNetworkWrapper network;
-
 	public static final Logger LOG = LogManager.getLogger(NAME);
-
-	public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
+	public static final ItemGroup tabReforged = new ItemGroup(ID) {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(ReforgedAdditions.IRON_BATTLE_AXE);
 		}
 	};
+	private static final Logger LOGGER = LogManager.getLogger();
+	@CapabilityInject(IStunProperty.class)
+	public static Capability<IStunProperty> STUN_PROP = null;
+	public static boolean battlegearDetected;
+	public static SimpleChannel network;
+	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
-	@Instance(ID)
-	public static ReforgedMod instance;
+	public ReforgedMod() {
+		CapabilityManager.INSTANCE.register(IStunProperty.class, new StorageStun(), new DefaultStunImpl());
+		FMLModLoadingContext.get().getModEventBus().addListener(this::preInit);
+		FMLModLoadingContext.get().getModEventBus().addListener(this::init);
+		FMLModLoadingContext.get().getModEventBus().addListener(this::postInit);
+	}
 
-	@SidedProxy(modId = ID, clientSide = "org.silvercatcher.reforged.proxy.ClientProxy", serverSide = "org.silvercatcher.reforged.proxy.CommonProxy")
-	public static CommonProxy proxy;
+	public void preInit(final FMLPreInitializationEvent event) {
+		proxy.preInit(event);
+	}
 
-	@EventHandler
-	public void init(FMLInitializationEvent event) {
+	public void init(final FMLInitializationEvent event) {
 		proxy.init(event);
 	}
 
-	@EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
+	public void postInit(final FMLPostInitializationEvent event) {
 		proxy.postInit(event);
-	}
-
-	@EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		proxy.preInit(event);
 	}
 
 }

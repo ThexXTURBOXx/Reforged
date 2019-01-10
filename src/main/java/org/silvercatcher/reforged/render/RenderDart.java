@@ -1,15 +1,14 @@
 package org.silvercatcher.reforged.render;
 
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.silvercatcher.reforged.ReforgedReferences.Textures;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.models.ModelDart;
 
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class RenderDart extends ReforgedRender<EntityDart> {
 
 	public RenderDart(RenderManager renderManager) {
@@ -21,26 +20,26 @@ public class RenderDart extends ReforgedRender<EntityDart> {
 
 		switch (entity.getEffect()) {
 
-		case "normal":
-			return Textures.NORMAL_DART;
+			case "normal":
+				return Textures.NORMAL_DART;
 
-		case "hunger":
-			return Textures.HUNGER_DART;
+			case "hunger":
+				return Textures.HUNGER_DART;
 
-		case "poison":
-			return Textures.POISON_DART;
+			case "poison":
+				return Textures.POISON_DART;
 
-		case "poison_strong":
-			return Textures.POISON_2_DART;
+			case "poison_strong":
+				return Textures.POISON_2_DART;
 
-		case "slowness":
-			return Textures.SLOW_DART;
+			case "slowness":
+				return Textures.SLOW_DART;
 
-		case "wither":
-			return Textures.WITHER_DART;
+			case "wither":
+				return Textures.WITHER_DART;
 
-		default:
-			throw new IllegalArgumentException("No Item called " + entity.getEffect() + " found!");
+			default:
+				throw new IllegalArgumentException("No Item called " + entity.getEffect() + " found!");
 
 		}
 	}

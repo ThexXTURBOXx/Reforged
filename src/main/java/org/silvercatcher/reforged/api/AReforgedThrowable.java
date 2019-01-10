@@ -2,25 +2,30 @@ package org.silvercatcher.reforged.api;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.datasync.*;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 
-public abstract class AReforgedThrowable extends EntityThrowable {
+public abstract class AReforgedThrowable<T extends AReforgedThrowable> extends EntityThrowable {
 
 	public static final DataParameter<Boolean> INITIATED = EntityDataManager
-			.<Boolean>createKey(AReforgedThrowable.class, DataSerializers.BOOLEAN);
+			.createKey(AReforgedThrowable.class, DataSerializers.BOOLEAN);
 
 	private final String damageName;
 
-	public AReforgedThrowable(World worldIn, EntityLivingBase thrower, ItemStack stack, String damageName) {
-		super(worldIn, thrower);
+	public AReforgedThrowable(EntityType<T> type, World worldIn, EntityLivingBase thrower, ItemStack stack, String damageName) {
+		super(type, thrower, worldIn);
 		this.damageName = damageName;
 		setLocationAndAngles(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ, thrower.rotationYaw,
 				thrower.rotationPitch);
@@ -33,21 +38,19 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		motionZ = MathHelper.cos(rotationYaw / 180.0F * (float) Math.PI)
 				* MathHelper.cos(rotationPitch / 180.0F * (float) Math.PI);
 		motionY = -MathHelper.sin(rotationPitch / 180.0F * (float) Math.PI);
-		setThrowableHeading(motionX, motionY, motionZ, 1.5F, 1.0F);
+		shoot(motionX, motionY, motionZ, 1.5F, 1.0F);
 	}
 
-	public AReforgedThrowable(World worldIn, String damageName) {
-		super(worldIn);
+	public AReforgedThrowable(EntityType<T> type, World worldIn, String damageName) {
+		super(type, worldIn);
 		this.damageName = damageName;
 	}
 
 	/**
 	 * Causes the damage, which is set in the constructor
-	 * 
-	 * @param target
-	 *            the entity which got hit
-	 * @param shooter
-	 *            the mob which shot
+	 *
+	 * @param target  the entity which got hit
+	 * @param shooter the mob which shot
 	 * @return the specified DamageSource
 	 */
 	protected DamageSource causeImpactDamage(Entity target, EntityLivingBase shooter) {
@@ -56,7 +59,7 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 
 	/**
 	 * @return True, if the thrower is a player in Creative Mode. False, if the
-	 *         player is in Survival Mode or the thrower is an Entity
+	 * player is in Survival Mode or the thrower is an Entity
 	 */
 	public boolean creativeUse() {
 		return creativeUse(getThrower());
@@ -64,16 +67,15 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 
 	/**
 	 * @return True, if the given Entity is a player in Creative Mode. False, if the
-	 *         player is in Survival Mode or the entity is a normal Entity
+	 * player is in Survival Mode or the entity is a normal Entity
 	 */
 	public boolean creativeUse(Entity e) {
-		return (e instanceof EntityPlayer && ((EntityPlayer) e).capabilities.isCreativeMode)
-				|| !(e instanceof EntityPlayer);
+		return !(e instanceof EntityPlayer) || ((EntityPlayer) e).isCreative();
 	}
 
 	@Override
-	protected void entityInit() {
-		super.entityInit();
+	protected void registerData() {
+		super.registerData();
 		dataManager.register(INITIATED, false);
 	}
 
@@ -84,9 +86,8 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 
 	/**
 	 * Sets the damage which should be caused. It is set in half-lives.
-	 * 
-	 * @param target
-	 *            The mob which gets hit
+	 *
+	 * @param target The mob which gets hit
 	 * @return the amount of damage
 	 */
 	protected abstract float getImpactDamage(Entity target);
@@ -97,9 +98,8 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 
 	/**
 	 * Called when the entity hits a block
-	 * 
-	 * @param blockPos
-	 *            The position where the entity landed
+	 *
+	 * @param blockPos The position where the entity landed
 	 * @return should the entity get setDead() ?
 	 */
 	protected boolean onBlockHit(BlockPos blockPos) {
@@ -108,9 +108,8 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 
 	/**
 	 * Called when the entity hits an other entity
-	 * 
-	 * @param entity
-	 *            The entity which got hit
+	 *
+	 * @param entity The entity which got hit
 	 * @return should the entity get setDead() ?
 	 */
 	protected boolean onEntityHit(Entity entity) {
@@ -119,9 +118,8 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 
 	/**
 	 * Called when the entity hits a living entity
-	 * 
-	 * @param living
-	 *            The mob which got hit
+	 *
+	 * @param living The mob which got hit
 	 * @return should the entity get setDead() ?
 	 */
 	protected boolean onEntityHit(EntityLivingBase living) {
@@ -132,26 +130,25 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 	protected void onImpact(RayTraceResult target) {
 		if (!world.isRemote) {
 			boolean broken;
-			if (target.entityHit == null) {
-				broken = world.getBlockState(target.getBlockPos()).getCollisionBoundingBox(world,
-						target.getBlockPos()) != null ? onBlockHit(target.getBlockPos()) : false;
+			if (target.entity == null) {
+				broken = onBlockHit(target.getBlockPos());
 			} else {
-				if (target.entityHit instanceof EntityLivingBase && target.entityHit.equals(getThrower())
+				if (target.entity instanceof EntityLivingBase && target.entity.equals(getThrower())
 						&& ticksExisted < 5) {
 					return;
 				}
-				broken = onEntityHit(target.entityHit instanceof EntityLivingBase ? (EntityLivingBase) target.entityHit
-						: target.entityHit);
+				broken = onEntityHit(target.entity instanceof EntityLivingBase ? (EntityLivingBase) target.entity
+						: target.entity);
 			}
 			if (broken)
-				setDead();
+				remove();
 		}
 	}
 
 	@Override
-	public void onUpdate() {
+	public void tick() {
 		if (isInited()) {
-			super.onUpdate();
+			super.tick();
 			onUpdated();
 		}
 	}
@@ -160,21 +157,19 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound tagCompund) {
+	public void readAdditional(NBTTagCompound compound) {
+		super.readAdditional(compound);
+		dataManager.set(INITIATED, compound.getBoolean("initiated"));
+	}
 
-		super.readEntityFromNBT(tagCompund);
-		dataManager.set(INITIATED, tagCompund.getBoolean("initiated"));
+	@Override
+	public void writeAdditional(NBTTagCompound compound) {
+		super.writeAdditional(compound);
+		compound.setBoolean("initiated", dataManager.get(INITIATED));
 	}
 
 	public void setInited() {
 		dataManager.set(INITIATED, true);
-	}
-
-	@Override
-	public void writeEntityToNBT(NBTTagCompound tagCompound) {
-
-		super.writeEntityToNBT(tagCompound);
-		tagCompound.setBoolean("initiated", dataManager.get(INITIATED));
 	}
 
 }

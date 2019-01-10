@@ -1,7 +1,7 @@
 package org.silvercatcher.reforged.models;
 
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelBoomerang extends ReforgedModel {
@@ -41,19 +41,19 @@ public class ModelBoomerang extends ReforgedModel {
 		tile2.render(f5);
 		tile1.render(f5);
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(tile4.offsetX, tile4.offsetY, tile4.offsetZ);
-		GlStateManager.translate(tile4.rotationPointX * f5, tile4.rotationPointY * f5, tile4.rotationPointZ * f5);
-		GlStateManager.scale(1.0D, 0.1D, 1.0D);
-		GlStateManager.translate(-tile4.offsetX, -tile4.offsetY, -tile4.offsetZ);
-		GlStateManager.translate(-tile4.rotationPointX * f5, -tile4.rotationPointY * f5, -tile4.rotationPointZ * f5);
+		GlStateManager.translatef(tile4.offsetX, tile4.offsetY, tile4.offsetZ);
+		GlStateManager.translatef(tile4.rotationPointX * f5, tile4.rotationPointY * f5, tile4.rotationPointZ * f5);
+		GlStateManager.scaled(1.0D, 0.1D, 1.0D);
+		GlStateManager.translatef(-tile4.offsetX, -tile4.offsetY, -tile4.offsetZ);
+		GlStateManager.translatef(-tile4.rotationPointX * f5, -tile4.rotationPointY * f5, -tile4.rotationPointZ * f5);
 		tile4.render(f5);
 		GlStateManager.popMatrix();
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(tile3.offsetX, tile3.offsetY, tile3.offsetZ);
-		GlStateManager.translate(tile3.rotationPointX * f5, tile3.rotationPointY * f5, tile3.rotationPointZ * f5);
-		GlStateManager.scale(1.0D, 0.1D, 1.0D);
-		GlStateManager.translate(-tile3.offsetX, -tile3.offsetY, -tile3.offsetZ);
-		GlStateManager.translate(-tile3.rotationPointX * f5, -tile3.rotationPointY * f5, -tile3.rotationPointZ * f5);
+		GlStateManager.translatef(tile3.offsetX, tile3.offsetY, tile3.offsetZ);
+		GlStateManager.translatef(tile3.rotationPointX * f5, tile3.rotationPointY * f5, tile3.rotationPointZ * f5);
+		GlStateManager.scaled(1.0D, 0.1D, 1.0D);
+		GlStateManager.translatef(-tile3.offsetX, -tile3.offsetY, -tile3.offsetZ);
+		GlStateManager.translatef(-tile3.rotationPointX * f5, -tile3.rotationPointY * f5, -tile3.rotationPointZ * f5);
 		tile3.render(f5);
 		GlStateManager.popMatrix();
 		tile5.render(f5);

@@ -1,23 +1,23 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemStack;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
-
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 
 public class ItemPike extends ExtendedItem {
 
 	protected final MaterialDefinition materialDefinition;
 	protected final boolean unbreakable;
 
-	public ItemPike(ToolMaterial material) {
+	public ItemPike(IItemTier material) {
 		this(material, false);
 	}
 
-	public ItemPike(ToolMaterial material, boolean unbreakable) {
+	public ItemPike(IItemTier material, boolean unbreakable) {
 		super();
 		this.unbreakable = unbreakable;
 		setMaxStackSize(1);
@@ -36,7 +36,7 @@ public class ItemPike extends ExtendedItem {
 		return materialDefinition.getEnchantability();
 	}
 
-	public ToolMaterial getMaterial() {
+	public IItemTier getMaterial() {
 		return materialDefinition.getMaterial();
 	}
 

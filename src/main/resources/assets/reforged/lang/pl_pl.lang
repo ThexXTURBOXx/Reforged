@@ -1,123 +1,85 @@
-itemGroup.reforged=Reforged
+{
+    "itemGroup.reforged": "Reforged",
 
-item.firerod.name=Ognista Laska
+    "item.firerod": "Ognista Laska",
 
-item.arrow_bundle.name=Pęk Strzał
+    "item.arrow_bundle": "Pęk Strzał",
 
-item.nest_of_bees.name=Gniazdo Pszczół
-item.nestofbees.arrows=Strzały
+    "item.nest_of_bees": "Gniazdo Pszczół",
+    "item.nestofbees.arrows": "Strzały",
 
-item.wooden_battleaxe.name=Drewniany Topór Bitewny
-item.stone_battleaxe.name=Kamienny Topór Bitewny
-item.iron_battleaxe.name=Żelazny Topór Bitewny
-item.golden_battleaxe.name=Złoty Topór Bitewny
-item.diamond_battleaxe.name=Diamentowy Topór Bitewny
+    "item.wooden_battleaxe": "Drewniany Topór Bitewny",
+    "item.stone_battleaxe": "Kamienny Topór Bitewny",
+    "item.iron_battleaxe": "Żelazny Topór Bitewny",
+    "item.golden_battleaxe": "Złoty Topór Bitewny",
+    "item.diamond_battleaxe": "Diamentowy Topór Bitewny",
 
-item.wooden_boomerang.name=Drewniany Bumerang
-item.stone_boomerang.name=Kamienny Bumerang
-item.golden_boomerang.name=Złoty Bumerang
-item.iron_boomerang.name=Żelazny Bumerang
-item.diamond_boomerang.name=Diamentowy Bumerang
-item.boomerang.langBreak=%1$s złamał się w twoich rękach.
+    "item.wooden_boomerang": "Drewniany Bumerang",
+    "item.stone_boomerang": "Kamienny Bumerang",
+    "item.golden_boomerang": "Złoty Bumerang",
+    "item.iron_boomerang": "Żelazny Bumerang",
+    "item.diamond_boomerang": "Diamentowy Bumerang",
+    "item.boomerang.langBreak": "%1$s złamał się w twoich rękach.",
 
-item.wooden_saber.name=Drewniana Szabla
-item.stone_saber.name=Kamienna Szabla
-item.golden_saber.name=Złota Szabla
-item.iron_saber.name=Żelazna Szabla
-item.diamond_saber.name=Diamentowa Szabla
+    "item.wooden_saber": "Drewniana Szabla",
+    "item.stone_saber": "Kamienna Szabla",
+    "item.golden_saber": "Złota Szabla",
+    "item.iron_saber": "Żelazna Szabla",
+    "item.diamond_saber": "Diamentowa Szabla",
 
-item.wooden_musket.name=Muszkiet z drewnianym bagnetem
-item.stone_musket.name=Muszkiet z kamiennym bagnetem
-item.golden_musket.name=Muszkiet ze złotym bagnetem
-item.iron_musket.name=Muszkiet z żelaznym bagnetem
-item.diamond_musket.name=Muszkiet z diamentowym bagnetem
+    "item.wooden_musket": "Muszkiet z drewnianym bagnetem",
+    "item.stone_musket": "Muszkiet z kamiennym bagnetem",
+    "item.golden_musket": "Muszkiet ze złotym bagnetem",
+    "item.iron_musket": "Muszkiet z żelaznym bagnetem",
+    "item.diamond_musket": "Muszkiet z diamentowym bagnetem",
 
-item.wooden_knife.name=Drewniany Nóż
-item.stone_knife.name=Żelazny Nóż
-item.golden_knife.name=Złoty Nóż
-item.iron_knife.name=Żelazny Nóż
-item.diamond_knife.name=Diamentowy Nóż
+    "item.wooden_knife": "Drewniany Nóż",
+    "item.stone_knife": "Żelazny Nóż",
+    "item.golden_knife": "Złoty Nóż",
+    "item.iron_knife": "Żelazny Nóż",
+    "item.diamond_knife": "Diamentowy Nóż",
 
-item.wooden_katana.name=Drewniana Katana
-item.stone_katana.name=Kamienna Katana
-item.golden_katana.name=Złota Katana
-item.iron_katana.name=Żelazna Katana
-item.diamond_katana.name=Diamentowa Katana
+    "item.wooden_katana": "Drewniana Katana",
+    "item.stone_katana": "Kamienna Katana",
+    "item.golden_katana": "Złota Katana",
+    "item.iron_katana": "Żelazna Katana",
+    "item.diamond_katana": "Diamentowa Katana",
 
-item.dart_normal.name=Strzałka
-item.dart_poison.name=Zatruta Strzałka
-item.dart_poison_strong.name=Mocno Zatruta Strzałka
-item.dart_slowness.name=Spowalniająca Strzałka
-item.dart_hunger.name=Strzałka Głodu
-item.dart_wither.name=Strzałka Obumierania
-item.blowgun.name=Dmuchawka
+    "item.dart_normal": "Strzałka",
+    "item.dart_poison": "Zatruta Strzałka",
+    "item.dart_poison_strong": "Bardzo Zatruta Strzałka",
+    "item.dart_slowness": "Spowalniająca Strzałka",
+    "item.dart_hunger": "Strzałka Głodu",
+    "item.dart_wither": "Strzałka Obumierania",
+    "item.blowgun": "Dmuchawka",
 
-item.musket_barrel.name=Lufa Muszkietu
-item.gun_stock.name=Rdzeń Pistoletu
-item.blunderbuss_barrel.name=Lufa Garłacza
-item.blunderbuss_bullet.name=Nabój Garłacza
-item.blunderbuss.name=Garłacz
-item.javelin.name=Oszczep
-item.musket_bullet.name=Nabój Muszkietu
-item.musket.name=Muszkiet
-item.musket.loadstate=Stan Przeładowania
-item.musket.loadstate.empty=Pusty
-item.musket.loadstate.loading=Przeładowywanie
-item.musket.loadstate.loaded=Przeładowany
+    "item.musket_barrel": "Lufa Muszkietu",
+    "item.gun_stock": "Rdzeń Pistoletu",
+    "item.blunderbuss_barrel": "Lufa Garłacza",
+    "item.blunderbuss_bullet": "Nabój Garłacza",
+    "item.blunderbuss": "Garłacz",
+    "item.javelin": "Oszczep",
+    "item.musket_bullet": "Nabój Muszkietu",
+    "item.musket": "Muszkiet",
+    "item.musket.loadstate": "Stan Przeładowania",
+    "item.musket.loadstate.empty": "Pusty",
+    "item.musket.loadstate.loading": "Przeładowywanie",
+    "item.musket.loadstate.loaded": "Przeładowany",
 
-item.keris.name=Kris
+    "death.attack.boomerang": "Głowa gracza %1$s została zmiażdżona przez bumerang.",
+    "death.attack.boomerang.player": "Głowa gracza %1$s została zmiażdżona przez bumerang podczas walki z %2$s.",
+    "death.attack.javelin": "%1$s został przebity.",
+    "death.attack.javelin.player": "%1$s został przebity podczas walki z %2$s.",
+    "death.attack.musket": "%1$s został postrzelony w głowę.",
+    "death.attack.musket.player": "%1$s został postrzelony w głowę podczas walki z %2$s.",
+    "death.attack.blunderbuss": "%1$s został rozdarty przez kule.",
+    "death.attack.blunderbuss.player": "%1$s został rozdarty przez kule podczas walki z %2$s.",
+    "death.attack.dart": "%1$s posłużył jako ruchomy cel.",
+    "death.attack.dart.player": "%1$s posłużył jako ruchomy cel podczas walki z %2$s.",
+    "death.attack.crossbow": "%1$s got sliced by a bolt.",
+    "death.attack.crossbow.player": "%1$s got sliced by a bolt while fighting %2$s.",
 
-tile.caltrop.name=Kolczatka
-
-item.dynamite.name=Dynamit
-
-item.crossbow.name=Kusza
-item.crossbow_bolt.name=Bełt
-
-item.wooden_pike.name=Drewniana Pika
-item.stone_pike.name=Kamienna Pika
-item.golden_pike.name=Złota Pika
-item.iron_pike.name=Żelazna Pika
-item.diamond_pike.name=Diamentowa Pika
-
-item.wooden_mace.name=Drewniana Maczuga
-item.stone_mace.name=Kamienna Maczuga
-item.golden_mace.name=Złota Maczuga
-item.iron_mace.name=Żelazna Maczuga
-item.diamond_mace.name=Diamentowa Maczuga
-
-item.wooden_dirk.name=Drewniany Dirk
-item.stone_dirk.name=Kamienny Dirk
-item.golden_dirk.name=Złoty Dirk
-item.iron_dirk.name=Żelazny Dirk
-item.diamond_dirk.name=Diamentowy Dirk
-
-death.attack.boomerang=Głowa gracza %1$s została zmiażdżona przez bumerang.
-death.attack.boomerang.player=Głowa gracza %1$s została zmiażdżona przez bumerang podczas walki z %2$s.
-death.attack.javelin=%1$s został przebity.
-death.attack.javelin.player=%1$s został przebity podczas walki z %2$s.
-death.attack.musket=%1$s został postrzelony w głowę.
-death.attack.musket.player=%1$s został postrzelony w głowę podczas walki z %2$s.
-death.attack.blunderbuss=%1$s został rozdarty przez kule.
-death.attack.blunderbuss.player=%1$s został rozdarty przez kule podczas walki z %2$s.
-death.attack.dart=%1$s posłużył jako ruchomy cel.
-death.attack.dart.player=%1$s posłużył jako ruchomy cel podczas walki z %2$s.
-death.attack.caltrop=%1$s nie patrzył pod nogi.
-death.attack.caltrop.player=%1$s nie patrzył pod nogi podczas walki z %2$s.
-death.attack.crossbow=%1$s został poćwiartowany przez bełt.
-death.attack.crossbow.player=%1$s został poćwiartowany przez bełt podczaz walki z %2$s.
-
-enchantment.goalseeker=Celownik
-
-reforged.subtitle.boomerang_break=Bumerang łamie się
-reforged.subtitle.boomerang_hit=Bumerang uderza
-reforged.subtitle.boomerang_throw=Rzuć Bumerangiem
-reforged.subtitle.crossbow_reload=Kusza przeładowuje się
-reforged.subtitle.crossbow_shoot=Kusza strzela
-reforged.subtitle.musket_shoot=Muszkiet strzela
-reforged.subtitle.shotgun_reload=Strzelba przeładowuje się
-reforged.subtitle.shotgun_shoot=Strzelba strzela
-
-versionchecker.ingame.outdated=Dostępna nowa wersja
-versionchecker.ingame.downloadclick=Kliknij tutaj, aby pobrać
-versionchecker.ingame.download=Pobierz
+    "versionchecker.ingame.outdated": "Dostępna nowa wersja",
+    "versionchecker.ingame.downloadclick": "Kliknij tutaj, aby pobrać",
+    "versionchecker.ingame.download": "Pobierz"
+}

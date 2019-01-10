@@ -3,9 +3,9 @@ package org.silvercatcher.reforged.material;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
-
+import net.minecraft.item.IItemTier;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
+import net.minecraft.item.ItemTier;
 import net.minecraft.util.ResourceLocation;
 
 /**
@@ -13,44 +13,44 @@ import net.minecraft.util.ResourceLocation;
  */
 public class MaterialManager {
 
-	private static final HashMap<ToolMaterial, MaterialDefinition> definitionMap = new HashMap<ToolMaterial, MaterialDefinition>();
-	private static final HashMap<ToolMaterial, Item[]> itemMap = new HashMap<ToolMaterial, Item[]>();
-	private static final HashMap<ToolMaterial, ResourceLocation[]> textureMap = new HashMap<ToolMaterial, ResourceLocation[]>();
+	private static final HashMap<IItemTier, MaterialDefinition> definitionMap = new HashMap<>();
+	private static final HashMap<IItemTier, Item[]> itemMap = new HashMap<>();
+	private static final HashMap<IItemTier, ResourceLocation[]> textureMap = new HashMap<>();
 
 	static {
-		definitionMap.put(ToolMaterial.WOOD, new MaterialDefinition("wooden", ToolMaterial.WOOD));
-		definitionMap.put(ToolMaterial.STONE, new MaterialDefinition("stone", ToolMaterial.STONE));
-		definitionMap.put(ToolMaterial.IRON, new MaterialDefinition("iron", ToolMaterial.IRON));
-		definitionMap.put(ToolMaterial.GOLD, new MaterialDefinition("golden", ToolMaterial.GOLD));
-		definitionMap.put(ToolMaterial.DIAMOND, new MaterialDefinition("diamond", ToolMaterial.DIAMOND));
+		definitionMap.put(ItemTier.WOOD, new MaterialDefinition("wooden", ItemTier.WOOD));
+		definitionMap.put(ItemTier.STONE, new MaterialDefinition("stone", ItemTier.STONE));
+		definitionMap.put(ItemTier.IRON, new MaterialDefinition("iron", ItemTier.IRON));
+		definitionMap.put(ItemTier.GOLD, new MaterialDefinition("golden", ItemTier.GOLD));
+		definitionMap.put(ItemTier.DIAMOND, new MaterialDefinition("diamond", ItemTier.DIAMOND));
 	}
 
-	public static void addMaterialDefinition(ToolMaterial material, MaterialDefinition definition) {
+	public static void addMaterialDefinition(IItemTier material, MaterialDefinition definition) {
 		definitionMap.put(material, definition);
 	}
 
-	public static void addOthers(ToolMaterial material, ResourceLocation textures[], Item items[]) {
+	public static void addOthers(IItemTier material, ResourceLocation[] textures, Item[] items) {
 		textureMap.put(material, textures);
 		itemMap.put(material, items);
 	}
 
-	public static Set<Entry<ToolMaterial, MaterialDefinition>> getEntries() {
+	public static Set<Entry<IItemTier, MaterialDefinition>> getEntries() {
 		return definitionMap.entrySet();
 	}
 
-	public static Item[] getItems(ToolMaterial material) {
+	public static Item[] getItems(IItemTier material) {
 		return itemMap.get(material);
 	}
 
-	public static MaterialDefinition getMaterialDefinition(ToolMaterial material) {
+	public static MaterialDefinition getMaterialDefinition(IItemTier material) {
 		return definitionMap.get(material);
 	}
 
-	public static ResourceLocation[] getTextures(ToolMaterial material) {
+	public static ResourceLocation[] getTextures(IItemTier material) {
 		return textureMap.get(material);
 	}
 
-	public static boolean isFullyAdded(ToolMaterial tm) {
+	public static boolean isFullyAdded(IItemTier tm) {
 		return (definitionMap.containsKey(tm) && textureMap.containsKey(tm) && itemMap.containsKey(tm));
 	}
 }

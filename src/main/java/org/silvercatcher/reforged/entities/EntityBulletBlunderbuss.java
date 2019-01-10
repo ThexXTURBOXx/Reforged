@@ -1,22 +1,24 @@
 package org.silvercatcher.reforged.entities;
 
-import org.silvercatcher.reforged.api.AReforgedThrowable;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.api.AReforgedThrowable;
 
 public class EntityBulletBlunderbuss extends AReforgedThrowable {
 
-	public EntityBulletBlunderbuss(World worldIn) {
+	public static final String NAME = "blunderbuss";
+	public static final EntityType<EntityBulletBlunderbuss> TYPE =
+			EntityType.Builder.create(EntityBulletBlunderbuss.class, EntityBulletBlunderbuss::new).build(NAME);
 
-		super(worldIn, "blunderbuss");
+	public EntityBulletBlunderbuss(World worldIn) {
+		super(TYPE, worldIn, NAME);
 	}
 
 	public EntityBulletBlunderbuss(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
-
-		super(worldIn, throwerIn, stack, "blunderbuss");
+		super(TYPE, worldIn, throwerIn, stack, NAME);
 		float randomNumX = rand.nextInt(21);
 		float randomNumY = rand.nextInt(21);
 		float randomNumZ = rand.nextInt(21);
@@ -40,7 +42,7 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 
 	@Override
 	protected float getImpactDamage(Entity target) {
-		return (((30 - ticksExisted) / 4) + 4f);
+		return (((30 - ticksExisted) / 4f) + 4f);
 	}
 
 	@Override
@@ -52,7 +54,7 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 	@Override
 	public void onUpdated() {
 		if (ticksExisted >= 30) {
-			setDead();
+			remove();
 		}
 	}
 }

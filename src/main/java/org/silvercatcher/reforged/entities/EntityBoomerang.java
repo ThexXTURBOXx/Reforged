@@ -1,49 +1,55 @@
 package org.silvercatcher.reforged.entities;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.datasync.DataParameter;
+import net.minecraft.network.datasync.DataSerializers;
+import net.minecraft.network.datasync.EntityDataManager;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.api.CompoundTags;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.util.Helpers;
 
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.datasync.*;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
 public class EntityBoomerang extends AReforgedThrowable {
 
-	public static final DataParameter<Float> THROWER_X = EntityDataManager.<Float>createKey(EntityBoomerang.class,
+	public static final String NAME = "boomerang";
+	public static final EntityType<EntityBoomerang> TYPE =
+			EntityType.Builder.create(EntityBoomerang.class, EntityBoomerang::new).build(NAME);
+
+	public static final DataParameter<Float> THROWER_X = EntityDataManager.createKey(EntityBoomerang.class,
 			DataSerializers.FLOAT);
-	public static final DataParameter<Float> THROWER_Y = EntityDataManager.<Float>createKey(EntityBoomerang.class,
+	public static final DataParameter<Float> THROWER_Y = EntityDataManager.createKey(EntityBoomerang.class,
 			DataSerializers.FLOAT);
-	public static final DataParameter<Float> THROWER_Z = EntityDataManager.<Float>createKey(EntityBoomerang.class,
+	public static final DataParameter<Float> THROWER_Z = EntityDataManager.createKey(EntityBoomerang.class,
 			DataSerializers.FLOAT);
-	public static final DataParameter<Float> YAW = EntityDataManager.<Float>createKey(EntityBoomerang.class,
+	public static final DataParameter<Float> YAW = EntityDataManager.createKey(EntityBoomerang.class,
 			DataSerializers.FLOAT);
-	public static final DataParameter<ItemStack> STACK = EntityDataManager.<ItemStack>createKey(EntityBoomerang.class,
+	public static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(EntityBoomerang.class,
 			DataSerializers.ITEM_STACK);
 
 	public EntityBoomerang(World worldIn) {
-		super(worldIn, "boomerang");
+		super(TYPE, worldIn, NAME);
 	}
 
 	public EntityBoomerang(World worldIn, EntityLivingBase thrower, ItemStack stack) {
-		super(worldIn, thrower, stack, "boomerang");
+		super(TYPE, worldIn, thrower, stack, NAME);
 		setItemStack(stack);
 		setCoords(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ);
 		setInited();
 	}
 
 	@Override
-	protected void entityInit() {
-		super.entityInit();
+	protected void registerData() {
+		super.registerData();
 		dataManager.register(STACK, ItemStack.EMPTY);
 		dataManager.register(YAW, 0F);
 		dataManager.register(THROWER_X, 0F);
@@ -66,13 +72,18 @@ public class EntityBoomerang extends AReforgedThrowable {
 		return dataManager.get(STACK);
 	}
 
+	public void setItemStack(ItemStack stack) {
+		if (stack == null || stack.isEmpty() || !(stack.getItem() instanceof ItemBoomerang)) {
+			throw new IllegalArgumentException("Invalid Itemstack!");
+		}
+		dataManager.set(STACK, stack);
+	}
+
 	public MaterialDefinition getMaterialDefinition() {
 		MaterialDefinition md;
 		try {
 			md = ((ItemBoomerang) getItemStack().getItem()).getMaterialDefinition();
-		} catch (NullPointerException e) {
-			md = null;
-		} catch (ClassCastException e) {
+		} catch (NullPointerException | ClassCastException e) {
 			md = null;
 		}
 		return md;
@@ -93,10 +104,10 @@ public class EntityBoomerang extends AReforgedThrowable {
 	@Override
 	protected boolean onBlockHit(BlockPos blockPos) {
 		if (!world.isRemote) {
-			if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
+			if (getItemStack().getMaxDamage() - getItemStack().getDamage() > 0 && !creativeUse()) {
 				entityDropItem(getItemStack(), 0.5f);
 				Helpers.playSound(world, this, "boomerang_hit", 2.0F, 1.0F);
-			} else if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
+			} else if (getItemStack().getMaxDamage() - getItemStack().getDamage() <= 0) {
 				Helpers.playSound(world, this, "boomerang_break", 2.0F, 1.0F);
 			} else if (creativeUse()) {
 				Helpers.playSound(world, this, "boomerang_hit", 2.0F, 1.0F);
@@ -111,11 +122,11 @@ public class EntityBoomerang extends AReforgedThrowable {
 			// It's the thrower himself
 			ItemStack stack = getItemStack();
 			EntityPlayer p = (EntityPlayer) hitEntity;
-			if (stack.getMaxDamage() - stack.getItemDamage() > 0 && !creativeUse()) {
+			if (stack.getMaxDamage() - stack.getDamage() > 0 && !creativeUse()) {
 				p.inventory.addItemStackToInventory(stack);
 				world.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.MASTER, 0.5F,
 						0.7F);
-			} else if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
+			} else if (getItemStack().getMaxDamage() - getItemStack().getDamage() <= 0) {
 				Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 			}
 			return true;
@@ -156,12 +167,12 @@ public class EntityBoomerang extends AReforgedThrowable {
 
 		if (isInWater()) {
 			if (!world.isRemote) {
-				if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
+				if (getItemStack().getMaxDamage() - getItemStack().getDamage() > 0 && !creativeUse()) {
 					entityDropItem(getItemStack(), 0.5f);
-				} else if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
+				} else if (getItemStack().getMaxDamage() - getItemStack().getDamage() <= 0) {
 					Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 				}
-				setDead();
+				remove();
 			}
 		}
 
@@ -169,15 +180,15 @@ public class EntityBoomerang extends AReforgedThrowable {
 		if (ticksExisted >= 103) {
 			if (CompoundTags.giveCompound(getItemStack()).getBoolean(CompoundTags.ENCHANTED)) {
 				if (onEntityHit(getThrower()))
-					setDead();
+					remove();
 			} else {
 				if (!world.isRemote) {
-					if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
+					if (getItemStack().getMaxDamage() - getItemStack().getDamage() > 0 && !creativeUse()) {
 						entityDropItem(getItemStack(), 0.5f);
-					} else if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
+					} else if (getItemStack().getMaxDamage() - getItemStack().getDamage() <= 0) {
 						Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
 					}
-					setDead();
+					remove();
 				}
 			}
 		}
@@ -187,11 +198,11 @@ public class EntityBoomerang extends AReforgedThrowable {
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound tagCompund) {
-		super.readEntityFromNBT(tagCompund);
-		setItemStack(new ItemStack(tagCompund.getCompoundTag("item")));
-		setCoords(tagCompund.getDouble("playerX"), tagCompund.getDouble("playerY"), tagCompund.getDouble("playerZ"));
-		dataManager.set(YAW, tagCompund.getFloat("yawreforged"));
+	public void readAdditional(NBTTagCompound compound) {
+		super.readAdditional(compound);
+		setItemStack(ItemStack.read(compound.getCompound("item")));
+		setCoords(compound.getDouble("playerX"), compound.getDouble("playerY"), compound.getDouble("playerZ"));
+		dataManager.set(YAW, compound.getFloat("yawreforged"));
 	}
 
 	public void setCoords(double playerX, double playerY, double playerZ) {
@@ -200,26 +211,17 @@ public class EntityBoomerang extends AReforgedThrowable {
 		dataManager.set(THROWER_Z, (float) playerZ);
 	}
 
-	public void setItemStack(ItemStack stack) {
-		if (stack == null || stack.isEmpty() || !(stack.getItem() instanceof ItemBoomerang)) {
-			throw new IllegalArgumentException("Invalid Itemstack!");
-		}
-		dataManager.set(STACK, stack);
-	}
-
 	@Override
-	public void writeEntityToNBT(NBTTagCompound tagCompound) {
+	public void writeAdditional(NBTTagCompound compound) {
+		super.writeAdditional(compound);
 
-		super.writeEntityToNBT(tagCompound);
+		compound.setDouble("playerX", getPosX());
+		compound.setDouble("playerY", getPosY());
+		compound.setDouble("playerZ", getPosZ());
+		compound.setDouble("yawreforged", dataManager.get(YAW));
 
-		tagCompound.setDouble("playerX", getPosX());
-		tagCompound.setDouble("playerY", getPosY());
-		tagCompound.setDouble("playerZ", getPosZ());
-		tagCompound.setDouble("yawreforged", dataManager.get(YAW));
-
-		if (getItemStack() != null && !getItemStack().isEmpty()) {
-			tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
-		}
+		if (getItemStack() != null && !getItemStack().isEmpty())
+			compound.setTag("item", getItemStack().write(new NBTTagCompound()));
 	}
 
 }

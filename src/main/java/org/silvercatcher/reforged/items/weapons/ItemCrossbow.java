@@ -1,30 +1,36 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import com.google.common.collect.Multimap;
 import java.util.List;
 import java.util.Random;
-
 import javax.annotation.Nullable;
-
-import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.api.*;
-import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
-import org.silvercatcher.reforged.util.Helpers;
-
-import com.google.common.collect.Multimap;
-
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
-import net.minecraft.item.*;
+import net.minecraft.item.EnumAction;
+import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.ItemArrow;
+import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.*;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.api.CompoundTags;
+import org.silvercatcher.reforged.api.ItemExtension;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
+import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
+import org.silvercatcher.reforged.util.Helpers;
 
 public class ItemCrossbow extends ItemBow implements ItemExtension {
 
@@ -41,7 +47,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		setCreativeTab(ReforgedMod.tabReforged);
 		addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
 			@Override
-			@SideOnly(Side.CLIENT)
+			@OnlyIn(Dist.CLIENT)
 			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
 				float mrl = 0;
 				if (entityIn != null && entityIn instanceof EntityPlayer) {
@@ -75,8 +81,8 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 
 		tooltip.add(I18n.format("item.musket.loadstate") + ": "
 				+ (loadState == empty ? I18n.format("item.musket.loadstate.empty")
-						: (loadState == loaded ? I18n.format("item.musket.loadstate.loaded")
-								: I18n.format("item.musket.loadstate.loading"))));
+				: (loadState == loaded ? I18n.format("item.musket.loadstate.loaded")
+				: I18n.format("item.musket.loadstate.loading"))));
 	}
 
 	private ItemStack findAmmo(EntityPlayer player) {
@@ -172,7 +178,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
 
 			if (loadState == empty) {
-				if (playerIn.capabilities.isCreativeMode
+				if (playerIn.isCreative()
 						|| Helpers.consumeInventoryItem(playerIn, ReforgedAdditions.CROSSBOW_BOLT)) {
 					loadState = loading;
 					if (compound.getByte(CompoundTags.AMMUNITION) == empty) {
@@ -198,7 +204,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
-			EnumFacing facing, float hitX, float hitY, float hitZ) {
+									  EnumFacing facing, float hitX, float hitY, float hitZ) {
 		return EnumActionResult.PASS;
 	}
 
@@ -221,7 +227,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 			if (loadState == loaded) {
 				Helpers.playSound(worldIn, playerIn, "crossbow_shoot", 1f, 1f);
 				shoot(worldIn, playerIn, new ItemStack(ReforgedAdditions.CROSSBOW_BOLT));
-				if (!playerIn.capabilities.isCreativeMode
+				if (!playerIn.isCreative()
 						&& (stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand, null))) {
 					playerIn.renderBrokenItemStack(stack);
 					Helpers.destroyCurrentEquippedItem(playerIn);

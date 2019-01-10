@@ -1,5 +1,10 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.IZombieEquippable;
@@ -7,21 +12,16 @@ import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
 import org.silvercatcher.reforged.props.IStunProperty;
 
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
-import net.minecraft.potion.Potion;
-import net.minecraft.potion.PotionEffect;
-
 public class ItemMace extends ExtendedItem implements IZombieEquippable {
 
 	protected final MaterialDefinition materialDefinition;
 	protected final boolean unbreakable;
 
-	public ItemMace(ToolMaterial material) {
+	public ItemMace(IItemTier material) {
 		this(material, false);
 	}
 
-	public ItemMace(ToolMaterial material, boolean unbreakable) {
+	public ItemMace(IItemTier material, boolean unbreakable) {
 		super();
 		this.unbreakable = unbreakable;
 		setMaxStackSize(1);
@@ -40,7 +40,7 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 		return materialDefinition.getEnchantability();
 	}
 
-	public ToolMaterial getMaterial() {
+	public IItemTier getMaterial() {
 		return materialDefinition.getMaterial();
 	}
 
@@ -77,16 +77,16 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 	@Override
 	public float zombieSpawnChance() {
 		switch (materialDefinition.getMaterial()) {
-		case GOLD:
-			return 1;
-		case IRON:
-			return 2;
-		case STONE:
-			return 3;
-		case WOOD:
-			return 4;
-		default:
-			return 0;
+			case GOLD:
+				return 1;
+			case IRON:
+				return 2;
+			case STONE:
+				return 3;
+			case WOOD:
+				return 4;
+			default:
+				return 0;
 		}
 	}
 

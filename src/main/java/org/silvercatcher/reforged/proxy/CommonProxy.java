@@ -1,46 +1,52 @@
 package org.silvercatcher.reforged.proxy;
 
 import java.io.File;
-
-import org.silvercatcher.reforged.*;
-import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
-import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.entities.*;
-import org.silvercatcher.reforged.props.*;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.event.*;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.silvercatcher.reforged.ReforgedEvents;
+import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.ReforgedMonsterArmourer;
+import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+import org.silvercatcher.reforged.ReforgedRegistry;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
+import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
+import org.silvercatcher.reforged.entities.EntityBulletMusket;
+import org.silvercatcher.reforged.entities.EntityCannon;
+import org.silvercatcher.reforged.entities.EntityCannonBall;
+import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
+import org.silvercatcher.reforged.entities.EntityDart;
+import org.silvercatcher.reforged.entities.EntityDynamite;
+import org.silvercatcher.reforged.entities.EntityJavelin;
+import org.silvercatcher.reforged.entities.TileEntityCaltrop;
 
 public class CommonProxy {
 
-	public static final String[] sounds = new String[] { "boomerang_break", "boomerang_hit", "boomerang_throw",
-			"crossbow_reload", "crossbow_shoot", "musket_shoot", "shotgun_reload", "shotgun_shoot" };
-
+	public static final String[] sounds = new String[]{"boomerang_break", "boomerang_hit", "boomerang_throw",
+			"crossbow_reload", "crossbow_shoot", "musket_shoot", "shotgun_reload", "shotgun_shoot"};
+	public static final String items = "Items", ids = "IDs", floats = "General";
 	// Items for Config
 	public static boolean battleaxe, blowgun, boomerang, firerod, javelin, katana, knife, musket, nest_of_bees, sabre,
 			keris, caltrop, dynamite, crossbow, pike, mace, dirk, cannon;
-
 	// Floats for Config
 	public static float damage_musket, damage_caltrop;
-
 	// IDs
 	public static int goalseekerid;
 
-	public static final String items = "Items", ids = "IDs", floats = "General";
-
 	public static SoundEvent getSound(String name) {
-		return SoundEvent.REGISTRY.getObject(new ResourceLocation(ReforgedMod.ID, name));
+		return SoundEvent.REGISTRY.get(new ResourceLocation(ReforgedMod.ID, name));
 	}
 
 	public void init(FMLInitializationEvent event) {
@@ -90,7 +96,7 @@ public class CommonProxy {
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-		ReforgedMod.battlegearDetected = Loader.isModLoaded("battlegear2");
+		ReforgedMod.battlegearDetected = ModList.get().isLoaded("battlegear2");
 	}
 
 	public void preInit(FMLPreInitializationEvent event) {
@@ -101,7 +107,6 @@ public class CommonProxy {
 		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
 		ReforgedRegistry.createItems();
 		ReforgedRegistry.registerPackets();
-		CapabilityManager.INSTANCE.register(IStunProperty.class, new StorageStun(), DefaultStunImpl.class);
 		registerEntities();
 	}
 

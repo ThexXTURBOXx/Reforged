@@ -1,11 +1,10 @@
 package org.silvercatcher.reforged.util;
 
 import java.util.List;
-
-import org.silvercatcher.reforged.proxy.CommonProxy;
-
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,13 +12,19 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.*;
+import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceFluidMode;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.client.FMLClientHandler;
+import org.silvercatcher.reforged.proxy.CommonProxy;
 
 public class Helpers {
 
-	/** Checks if the 2 given BlockPositions are equal */
+	/**
+	 * Checks if the 2 given BlockPositions are equal
+	 */
 	public static boolean blockPosEqual(BlockPos pos1, BlockPos pos2) {
 		int x1 = pos1.getX();
 		int x2 = pos2.getX();
@@ -55,7 +60,9 @@ public class Helpers {
 		net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(player, orig, EnumHand.MAIN_HAND);
 	}
 
-	/** Helper method for creating a Rectangle */
+	/**
+	 * Helper method for creating a Rectangle
+	 */
 	public static void drawRectangle(int left, int top, int right, int bottom, float[] color) {
 
 		if (left < right) {
@@ -74,8 +81,8 @@ public class Helpers {
 		BufferBuilder worldrenderer = tessellator.getBuffer();
 		GlStateManager.enableBlend();
 		GlStateManager.disableTexture2D();
-		GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-		GlStateManager.color(color[0], color[1], color[2], color[3]);
+		GlStateManager.blendFuncSeparate(770, 771, 1, 0);
+		GlStateManager.color4f(color[0], color[1], color[2], color[3]);
 
 		worldrenderer.begin(7, DefaultVertexFormats.POSITION);
 		worldrenderer.pos(left, bottom, 0.0D).endVertex();
@@ -97,7 +104,9 @@ public class Helpers {
 		return -1;
 	}
 
-	/** Thanks to Jabelar!!! */
+	/**
+	 * Thanks to Jabelar!!!
+	 */
 	public static RayTraceResult getMouseOverExtended(float distance) {
 		Minecraft mc = FMLClientHandler.instance().getClient();
 		Entity theRenderViewEntity = mc.getRenderViewEntity();
@@ -107,15 +116,15 @@ public class Helpers {
 		RayTraceResult returnMOP = null;
 		if (mc.world != null) {
 			double var2 = distance;
-			returnMOP = theRenderViewEntity.rayTrace(var2, 0);
+			returnMOP = theRenderViewEntity.rayTrace(var2, 0, RayTraceFluidMode.ALWAYS);
 			double calcdist = var2;
-			Vec3d pos = theRenderViewEntity.getPositionEyes(0);
+			Vec3d pos = theRenderViewEntity.getEyePosition(0);
 			var2 = calcdist;
 			if (returnMOP != null) {
 				calcdist = returnMOP.hitVec.distanceTo(pos);
 			}
 			Vec3d lookvec = theRenderViewEntity.getLook(0);
-			Vec3d var8 = pos.addVector(lookvec.x * var2, lookvec.y * var2, lookvec.z * var2);
+			Vec3d var8 = pos.add(lookvec.x * var2, lookvec.y * var2, lookvec.z * var2);
 			Entity pointedEntity = null;
 			float var9 = 1.0F;
 			List<Entity> list = mc.world.getEntitiesWithinAABBExcludingEntity(theRenderViewEntity, theViewBoundingBox

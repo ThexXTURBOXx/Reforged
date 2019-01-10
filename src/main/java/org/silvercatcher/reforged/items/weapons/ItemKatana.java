@@ -1,30 +1,31 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import com.google.common.collect.Multimap;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.IZombieEquippable;
 import org.silvercatcher.reforged.api.ItemExtension;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
 
-import com.google.common.collect.Multimap;
-
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
-
 public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquippable {
 
 	protected final MaterialDefinition materialDefinition;
 	protected final boolean unbreakable;
 
-	public ItemKatana(ToolMaterial material) {
+	public ItemKatana(IItemTier material) {
 		this(material, false);
 	}
 
-	public ItemKatana(ToolMaterial material, boolean unbreakable) {
+	public ItemKatana(IItemTier material, boolean unbreakable) {
 		super(material);
 
 		this.unbreakable = unbreakable;
@@ -51,7 +52,7 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 		return materialDefinition.getEnchantability();
 	}
 
-	public ToolMaterial getMaterial() {
+	public IItemTier getMaterial() {
 
 		return materialDefinition.getMaterial();
 	}
@@ -96,7 +97,7 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 
 	@Override
 	public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState state, BlockPos pos,
-			EntityLivingBase entityLiving) {
+									EntityLivingBase entityLiving) {
 		if (stack.getItem().isDamageable() && state.getBlockHardness(worldIn, pos) != 0.0D) {
 			stack.damageItem(2, entityLiving);
 		}
@@ -106,16 +107,16 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 	@Override
 	public float zombieSpawnChance() {
 		switch (materialDefinition.getMaterial()) {
-		case GOLD:
-			return 1;
-		case IRON:
-			return 2;
-		case STONE:
-			return 3;
-		case WOOD:
-			return 4;
-		default:
-			return 0;
+			case GOLD:
+				return 1;
+			case IRON:
+				return 2;
+			case STONE:
+				return 3;
+			case WOOD:
+				return 4;
+			default:
+				return 0;
 		}
 	}
 }

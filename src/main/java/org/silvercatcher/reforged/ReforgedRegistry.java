@@ -2,43 +2,67 @@ package org.silvercatcher.reforged;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
-import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.blocks.BlockCaltrop;
-import org.silvercatcher.reforged.items.others.*;
-import org.silvercatcher.reforged.items.weapons.*;
-import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemTier;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.oredict.RecipeSorter;
 import net.minecraftforge.oredict.RecipeSorter.Category;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
+import org.silvercatcher.reforged.blocks.BlockCaltrop;
+import org.silvercatcher.reforged.items.others.ItemArrowBundle;
+import org.silvercatcher.reforged.items.others.ItemBulletBlunderbuss;
+import org.silvercatcher.reforged.items.others.ItemBulletMusket;
+import org.silvercatcher.reforged.items.others.ItemCrossbowBolt;
+import org.silvercatcher.reforged.items.others.ItemDart;
+import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
+import org.silvercatcher.reforged.items.weapons.ItemBlowGun;
+import org.silvercatcher.reforged.items.weapons.ItemBlunderbuss;
+import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
+import org.silvercatcher.reforged.items.weapons.ItemCannon;
+import org.silvercatcher.reforged.items.weapons.ItemCrossbow;
+import org.silvercatcher.reforged.items.weapons.ItemDirk;
+import org.silvercatcher.reforged.items.weapons.ItemDynamite;
+import org.silvercatcher.reforged.items.weapons.ItemFireRod;
+import org.silvercatcher.reforged.items.weapons.ItemJavelin;
+import org.silvercatcher.reforged.items.weapons.ItemKatana;
+import org.silvercatcher.reforged.items.weapons.ItemKeris;
+import org.silvercatcher.reforged.items.weapons.ItemKnife;
+import org.silvercatcher.reforged.items.weapons.ItemMace;
+import org.silvercatcher.reforged.items.weapons.ItemMusket;
+import org.silvercatcher.reforged.items.weapons.ItemMusketWithBayonet;
+import org.silvercatcher.reforged.items.weapons.ItemNestOfBees;
+import org.silvercatcher.reforged.items.weapons.ItemPike;
+import org.silvercatcher.reforged.items.weapons.ItemSaber;
+import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
 
 public class ReforgedRegistry {
 
 	// Counters
 	public static int counterEntities = 0;
 
-	/** Every item on that list gets registered */
+	/**
+	 * Every item on that list gets registered
+	 */
 	public static List<Item> registrationList = new ArrayList<Item>();
 	public static List<Block> registrationListBlocks = new ArrayList<Block>();
 
 	// Registry
-	/** Adds all items to the registrationList */
+
+	/**
+	 * Adds all items to the registrationList
+	 */
 	public static void createItems() {
 		if (GlobalValues.NEST_OF_BEES) {
 			registrationList.add(ReforgedAdditions.ARROW_BUNDLE = new ItemArrowBundle());
@@ -59,15 +83,15 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.MUSKET = new ItemMusket());
 			if (GlobalValues.KNIFE) {
 				registrationList
-						.add(ReforgedAdditions.WOODEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.WOOD));
+						.add(ReforgedAdditions.WOODEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ItemTier.WOOD));
 				registrationList
-						.add(ReforgedAdditions.STONE_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.STONE));
+						.add(ReforgedAdditions.STONE_BAYONET_MUSKET = new ItemMusketWithBayonet(ItemTier.STONE));
 				registrationList
-						.add(ReforgedAdditions.GOLDEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.GOLD));
+						.add(ReforgedAdditions.GOLDEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ItemTier.GOLD));
 				registrationList
-						.add(ReforgedAdditions.IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.IRON));
+						.add(ReforgedAdditions.IRON_BAYONET_MUSKET = new ItemMusketWithBayonet(ItemTier.IRON));
 				registrationList.add(
-						ReforgedAdditions.DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ToolMaterial.DIAMOND));
+						ReforgedAdditions.DIAMOND_BAYONET_MUSKET = new ItemMusketWithBayonet(ItemTier.DIAMOND));
 			}
 			registrationList.add(ReforgedAdditions.MUSKET_BULLET = new ItemBulletMusket());
 			registrationList.add(ReforgedAdditions.BLUNDERBUSS = new ItemBlunderbuss());
@@ -75,46 +99,46 @@ public class ReforgedRegistry {
 		}
 
 		if (GlobalValues.BATTLEAXE) {
-			registrationList.add(ReforgedAdditions.WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
-			registrationList.add(ReforgedAdditions.STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));
+			registrationList.add(ReforgedAdditions.WOODEN_BATTLE_AXE = new ItemBattleAxe(ItemTier.WOOD));
+			registrationList.add(ReforgedAdditions.STONE_BATTLE_AXE = new ItemBattleAxe(ItemTier.STONE));
 		}
 		// This has to be registered! Else, the Creative Tab would be broken!
-		registrationList.add(ReforgedAdditions.GOLDEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.GOLD));
-		registrationList.add(ReforgedAdditions.IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
+		registrationList.add(ReforgedAdditions.GOLDEN_BATTLE_AXE = new ItemBattleAxe(ItemTier.GOLD));
+		registrationList.add(ReforgedAdditions.IRON_BATTLE_AXE = new ItemBattleAxe(ItemTier.IRON));
 		if (GlobalValues.BATTLEAXE) {
-			registrationList.add(ReforgedAdditions.DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.DIAMOND));
+			registrationList.add(ReforgedAdditions.DIAMOND_BATTLE_AXE = new ItemBattleAxe(ItemTier.DIAMOND));
 		}
 
 		if (GlobalValues.BOOMERANG) {
-			registrationList.add(ReforgedAdditions.WOODEN_BOOMERANG = new ItemBoomerang(ToolMaterial.WOOD));
-			registrationList.add(ReforgedAdditions.STONE_BOOMERANG = new ItemBoomerang(ToolMaterial.STONE));
-			registrationList.add(ReforgedAdditions.GOLDEN_BOOMERANG = new ItemBoomerang(ToolMaterial.GOLD));
-			registrationList.add(ReforgedAdditions.IRON_BOOMERANG = new ItemBoomerang(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_BOOMERANG = new ItemBoomerang(ToolMaterial.DIAMOND));
+			registrationList.add(ReforgedAdditions.WOODEN_BOOMERANG = new ItemBoomerang(ItemTier.WOOD));
+			registrationList.add(ReforgedAdditions.STONE_BOOMERANG = new ItemBoomerang(ItemTier.STONE));
+			registrationList.add(ReforgedAdditions.GOLDEN_BOOMERANG = new ItemBoomerang(ItemTier.GOLD));
+			registrationList.add(ReforgedAdditions.IRON_BOOMERANG = new ItemBoomerang(ItemTier.IRON));
+			registrationList.add(ReforgedAdditions.DIAMOND_BOOMERANG = new ItemBoomerang(ItemTier.DIAMOND));
 		}
 
 		if (GlobalValues.SABRE) {
-			registrationList.add(ReforgedAdditions.WOODEN_SABER = new ItemSaber(ToolMaterial.WOOD));
-			registrationList.add(ReforgedAdditions.STONE_SABER = new ItemSaber(ToolMaterial.STONE));
-			registrationList.add(ReforgedAdditions.GOLDEN_SABER = new ItemSaber(ToolMaterial.GOLD));
-			registrationList.add(ReforgedAdditions.IRON_SABER = new ItemSaber(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_SABER = new ItemSaber(ToolMaterial.DIAMOND));
+			registrationList.add(ReforgedAdditions.WOODEN_SABER = new ItemSaber(ItemTier.WOOD));
+			registrationList.add(ReforgedAdditions.STONE_SABER = new ItemSaber(ItemTier.STONE));
+			registrationList.add(ReforgedAdditions.GOLDEN_SABER = new ItemSaber(ItemTier.GOLD));
+			registrationList.add(ReforgedAdditions.IRON_SABER = new ItemSaber(ItemTier.IRON));
+			registrationList.add(ReforgedAdditions.DIAMOND_SABER = new ItemSaber(ItemTier.DIAMOND));
 		}
 
 		if (GlobalValues.KNIFE) {
-			registrationList.add(ReforgedAdditions.WOODEN_KNIFE = new ItemKnife(ToolMaterial.WOOD));
-			registrationList.add(ReforgedAdditions.STONE_KNIFE = new ItemKnife(ToolMaterial.STONE));
-			registrationList.add(ReforgedAdditions.GOLDEN_KNIFE = new ItemKnife(ToolMaterial.GOLD));
-			registrationList.add(ReforgedAdditions.IRON_KNIFE = new ItemKnife(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_KNIFE = new ItemKnife(ToolMaterial.DIAMOND));
+			registrationList.add(ReforgedAdditions.WOODEN_KNIFE = new ItemKnife(ItemTier.WOOD));
+			registrationList.add(ReforgedAdditions.STONE_KNIFE = new ItemKnife(ItemTier.STONE));
+			registrationList.add(ReforgedAdditions.GOLDEN_KNIFE = new ItemKnife(ItemTier.GOLD));
+			registrationList.add(ReforgedAdditions.IRON_KNIFE = new ItemKnife(ItemTier.IRON));
+			registrationList.add(ReforgedAdditions.DIAMOND_KNIFE = new ItemKnife(ItemTier.DIAMOND));
 		}
 
 		if (GlobalValues.KATANA) {
-			registrationList.add(ReforgedAdditions.WOODEN_KATANA = new ItemKatana(ToolMaterial.WOOD));
-			registrationList.add(ReforgedAdditions.STONE_KATANA = new ItemKatana(ToolMaterial.STONE));
-			registrationList.add(ReforgedAdditions.GOLDEN_KATANA = new ItemKatana(ToolMaterial.GOLD));
-			registrationList.add(ReforgedAdditions.IRON_KATANA = new ItemKatana(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_KATANA = new ItemKatana(ToolMaterial.DIAMOND));
+			registrationList.add(ReforgedAdditions.WOODEN_KATANA = new ItemKatana(ItemTier.WOOD));
+			registrationList.add(ReforgedAdditions.STONE_KATANA = new ItemKatana(ItemTier.STONE));
+			registrationList.add(ReforgedAdditions.GOLDEN_KATANA = new ItemKatana(ItemTier.GOLD));
+			registrationList.add(ReforgedAdditions.IRON_KATANA = new ItemKatana(ItemTier.IRON));
+			registrationList.add(ReforgedAdditions.DIAMOND_KATANA = new ItemKatana(ItemTier.DIAMOND));
 		}
 
 		if (GlobalValues.JAVELIN) {
@@ -149,27 +173,27 @@ public class ReforgedRegistry {
 		}
 
 		if (GlobalValues.PIKE) {
-			registrationList.add(ReforgedAdditions.WOODEN_PIKE = new ItemPike(ToolMaterial.WOOD));
-			registrationList.add(ReforgedAdditions.STONE_PIKE = new ItemPike(ToolMaterial.STONE));
-			registrationList.add(ReforgedAdditions.GOLDEN_PIKE = new ItemPike(ToolMaterial.GOLD));
-			registrationList.add(ReforgedAdditions.IRON_PIKE = new ItemPike(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_PIKE = new ItemPike(ToolMaterial.DIAMOND));
+			registrationList.add(ReforgedAdditions.WOODEN_PIKE = new ItemPike(ItemTier.WOOD));
+			registrationList.add(ReforgedAdditions.STONE_PIKE = new ItemPike(ItemTier.STONE));
+			registrationList.add(ReforgedAdditions.GOLDEN_PIKE = new ItemPike(ItemTier.GOLD));
+			registrationList.add(ReforgedAdditions.IRON_PIKE = new ItemPike(ItemTier.IRON));
+			registrationList.add(ReforgedAdditions.DIAMOND_PIKE = new ItemPike(ItemTier.DIAMOND));
 		}
 
 		if (GlobalValues.MACE) {
-			registrationList.add(ReforgedAdditions.WOODEN_MACE = new ItemMace(ToolMaterial.WOOD));
-			registrationList.add(ReforgedAdditions.STONE_MACE = new ItemMace(ToolMaterial.STONE));
-			registrationList.add(ReforgedAdditions.GOLDEN_MACE = new ItemMace(ToolMaterial.GOLD));
-			registrationList.add(ReforgedAdditions.IRON_MACE = new ItemMace(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_MACE = new ItemMace(ToolMaterial.DIAMOND));
+			registrationList.add(ReforgedAdditions.WOODEN_MACE = new ItemMace(ItemTier.WOOD));
+			registrationList.add(ReforgedAdditions.STONE_MACE = new ItemMace(ItemTier.STONE));
+			registrationList.add(ReforgedAdditions.GOLDEN_MACE = new ItemMace(ItemTier.GOLD));
+			registrationList.add(ReforgedAdditions.IRON_MACE = new ItemMace(ItemTier.IRON));
+			registrationList.add(ReforgedAdditions.DIAMOND_MACE = new ItemMace(ItemTier.DIAMOND));
 		}
 
 		if (GlobalValues.DIRK) {
-			registrationList.add(ReforgedAdditions.WOODEN_DIRK = new ItemDirk(ToolMaterial.WOOD));
-			registrationList.add(ReforgedAdditions.STONE_DIRK = new ItemDirk(ToolMaterial.STONE));
-			registrationList.add(ReforgedAdditions.GOLDEN_DIRK = new ItemDirk(ToolMaterial.GOLD));
-			registrationList.add(ReforgedAdditions.IRON_DIRK = new ItemDirk(ToolMaterial.IRON));
-			registrationList.add(ReforgedAdditions.DIAMOND_DIRK = new ItemDirk(ToolMaterial.DIAMOND));
+			registrationList.add(ReforgedAdditions.WOODEN_DIRK = new ItemDirk(ItemTier.WOOD));
+			registrationList.add(ReforgedAdditions.STONE_DIRK = new ItemDirk(ItemTier.STONE));
+			registrationList.add(ReforgedAdditions.GOLDEN_DIRK = new ItemDirk(ItemTier.GOLD));
+			registrationList.add(ReforgedAdditions.IRON_DIRK = new ItemDirk(ItemTier.IRON));
+			registrationList.add(ReforgedAdditions.DIAMOND_DIRK = new ItemDirk(ItemTier.DIAMOND));
 		}
 
 		if (GlobalValues.CANNON) {
@@ -182,22 +206,19 @@ public class ReforgedRegistry {
 
 	/**
 	 * Helper method for registering an Entity
-	 * 
-	 * @param c
-	 *            The class of the Entity
-	 * @param name
-	 *            The name for the Entity
+	 *
+	 * @param c    The class of the Entity
+	 * @param name The name for the Entity
 	 */
-	public static void registerEntity(Class<? extends Entity> c, String name) {
+	public static <T extends Entity> void registerEntity(Class<T> c, String name) {
 		EntityRegistry.registerModEntity(new ResourceLocation(ReforgedMod.ID, name), c, name, ++counterEntities,
 				ReforgedMod.instance, 120, 1, true);
 	}
 
 	/**
 	 * Helper method for registering our EventHandler
-	 * 
-	 * @param ReforgedEvents
-	 *            The instance of our EventHandler
+	 *
+	 * @param ReforgedEvents The instance of our EventHandler
 	 */
 	public static void registerEventHandler(Object event) {
 		FMLCommonHandler.instance().bus().register(event);
@@ -206,15 +227,11 @@ public class ReforgedRegistry {
 
 	/**
 	 * Helper method for registering an Custom IRecipe
-	 * 
-	 * @param name
-	 *            The name for the Recipe
-	 * @param recipe
-	 *            The instance of the Recipe
-	 * @param recipeclass
-	 *            The class of the Recipe
-	 * @param category
-	 *            {@link Category#SHAPED} or {@link Category#SHAPELESS}?
+	 *
+	 * @param name        The name for the Recipe
+	 * @param recipe      The instance of the Recipe
+	 * @param recipeclass The class of the Recipe
+	 * @param category    {@link Category#SHAPED} or {@link Category#SHAPELESS}?
 	 */
 	public static void registerIRecipe(String name, IRecipe recipe, Class<?> recipeclass, Category category) {
 		String catString;
@@ -229,7 +246,9 @@ public class ReforgedRegistry {
 		RecipeSorter.register(ReforgedMod.ID + ":" + name, recipeclass, category, catString);
 	}
 
-	/** Registers all our Packets */
+	/**
+	 * Registers all our Packets
+	 */
 	public static void registerPackets() {
 		ReforgedMod.network = NetworkRegistry.INSTANCE.newSimpleChannel(ReforgedMod.ID);
 		int packetId = 0;

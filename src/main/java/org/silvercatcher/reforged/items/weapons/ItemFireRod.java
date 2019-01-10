@@ -1,15 +1,16 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.api.ExtendedItem;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityCreeper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.*;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.api.ExtendedItem;
 
 public class ItemFireRod extends ExtendedItem {
 
@@ -36,7 +37,7 @@ public class ItemFireRod extends ExtendedItem {
 			}
 		}
 		if (attacker instanceof EntityPlayer) {
-			if (!((EntityPlayer) attacker).capabilities.isCreativeMode) {
+			if (!((EntityPlayer) attacker).isCreative()) {
 				stack.shrink(1);
 			}
 		} else {
@@ -47,7 +48,7 @@ public class ItemFireRod extends ExtendedItem {
 
 	@Override
 	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side,
-			float hitX, float hitY, float hitZ) {
+									  float hitX, float hitY, float hitZ) {
 		if (hand == EnumHand.MAIN_HAND) {
 			if (worldIn.getBlockState(pos).getBlock().isFlammable(worldIn, pos, side)) {
 
@@ -55,7 +56,7 @@ public class ItemFireRod extends ExtendedItem {
 
 				if (!(worldIn.canBlockSeeSky(pos) && worldIn.isRaining()) && worldIn.isAirBlock(target)) {
 					worldIn.setBlockState(target, Blocks.FIRE.getDefaultState());
-					if (!player.capabilities.isCreativeMode)
+					if (!player.isCreative())
 						player.getHeldItemMainhand().shrink(1);
 				}
 			}

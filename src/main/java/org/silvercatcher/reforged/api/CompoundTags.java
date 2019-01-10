@@ -5,13 +5,19 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class CompoundTags {
 
-	/** saves the delay in ticks until an action should be called */
+	/**
+	 * saves the delay in ticks until an action should be called
+	 */
 	public static final String DELAY = "delay";
 
-	/** saves the amount of ammunition */
+	/**
+	 * saves the amount of ammunition
+	 */
 	public static final String AMMUNITION = "ammo";
 
-	/** saves a catalyst / amount of secondary ammunition */
+	/**
+	 * saves a catalyst / amount of secondary ammunition
+	 */
 	public static final String CATALYST = "catalyst";
 
 	/**
@@ -27,40 +33,54 @@ public class CompoundTags {
 	 */
 	public static final String ITEM_DAMAGE = "item_damage";
 
-	/** saves the material of an item that is currently an entity */
+	/**
+	 * saves the material of an item that is currently an entity
+	 */
 	public static final String ITEM_MATERIAL = "item_material";
 
-	/** saves whether the item is activated via right click */
+	/**
+	 * saves whether the item is activated via right click
+	 */
 	public static final String ACTIVATED = "activated";
 
-	/** saves whether the item is enchanted */
+	/**
+	 * saves whether the item is enchanted
+	 */
 	public static final String ENCHANTED = "enchanted";
 
-	/** saves whether reloading got cancelled */
+	/**
+	 * saves whether reloading got cancelled
+	 */
 	public static final String CANCELLED = "cancelled";
 
-	/** saves whether the weapon got started reloading */
+	/**
+	 * saves whether the weapon got started reloading
+	 */
 	public static final String STARTED = "started";
 
-	/** saves whether a player is stunned */
+	/**
+	 * saves whether a player is stunned
+	 */
 	public static final String STUNNED = "stunned";
 
-	/** saves how long the weapon was relaoding */
+	/**
+	 * saves how long the weapon was relaoding
+	 */
 	public static final String TIME = "time";
 
 	/**
-	 * make sure we get no NPEs by using this method! if anyone knows a less stupid
+	 * Make sure we get no NPEs by using this method! if anyone knows a less stupid
 	 * way, tell me!
-	 * 
-	 * @param stack
-	 * @return
+	 *
+	 * @param stack Stack to init its array
+	 * @return A new {@link NBTTagCompound}
 	 */
 	public static NBTTagCompound giveCompound(ItemStack stack) {
 
-		NBTTagCompound compound = stack.getTagCompound();
+		NBTTagCompound compound = stack.getTag();
 		if (compound == null) {
 			compound = new NBTTagCompound();
-			stack.setTagCompound(compound);
+			stack.setTag(compound);
 		}
 		return compound;
 	}

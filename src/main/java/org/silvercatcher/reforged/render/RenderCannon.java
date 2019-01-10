@@ -1,17 +1,18 @@
 package org.silvercatcher.reforged.render;
 
-import org.lwjgl.opengl.GL11;
-import org.silvercatcher.reforged.ReforgedReferences.Textures;
-import org.silvercatcher.reforged.entities.EntityCannon;
-import org.silvercatcher.reforged.models.*;
-
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import org.lwjgl.opengl.GL11;
+import org.silvercatcher.reforged.ReforgedReferences.Textures;
+import org.silvercatcher.reforged.entities.EntityCannon;
+import org.silvercatcher.reforged.models.ModelCannonBase;
+import org.silvercatcher.reforged.models.ModelCannonChannel;
+import org.silvercatcher.reforged.models.ModelCannonHolder;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class RenderCannon extends Render<EntityCannon> {
 
 	public RenderCannon(RenderManager renderManager) {

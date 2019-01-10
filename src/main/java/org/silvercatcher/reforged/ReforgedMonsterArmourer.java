@@ -1,9 +1,9 @@
 package org.silvercatcher.reforged;
 
-import java.util.*;
-
-import org.silvercatcher.reforged.api.IZombieEquippable;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.monster.EntityZombie;
@@ -12,12 +12,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import org.silvercatcher.reforged.api.IZombieEquippable;
 
 public class ReforgedMonsterArmourer {
 
 	private static final UUID itemModifierUUID = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
-	/** DON'T CHANGE IT HERE! NULLPOINTERS WOULD OCCUR!!! */
+	/**
+	 * DON'T CHANGE IT HERE! NULLPOINTERS WOULD OCCUR!!!
+	 */
 	private static Item[] zombieWeapons;
 
 	private Random random = new Random();

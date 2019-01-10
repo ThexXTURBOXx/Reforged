@@ -1,20 +1,19 @@
 package org.silvercatcher.reforged.render;
 
-import org.lwjgl.opengl.GL11;
-import org.silvercatcher.reforged.models.ReforgedModel;
-
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import org.lwjgl.opengl.GL11;
+import org.silvercatcher.reforged.models.ReforgedModel;
 
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 
 	ReforgedModel model;
 	float scale = 1;
-	int modifier = 0;
+	int modifier;
 
 	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, float scale, int rotationModifier) {
 		this(renderManager, model, rotationModifier);

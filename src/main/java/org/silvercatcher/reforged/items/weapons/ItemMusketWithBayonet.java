@@ -1,23 +1,23 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.IItemTier;
+import net.minecraft.item.ItemStack;
 import org.silvercatcher.reforged.api.ItemExtension;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
-
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 
 public class ItemMusketWithBayonet extends ItemMusket {
 
 	protected final MaterialDefinition materialDefinition;
 	protected final boolean unbreakable;
 
-	public ItemMusketWithBayonet(ToolMaterial material) {
+	public ItemMusketWithBayonet(IItemTier material) {
 		this(material, false);
 	}
 
-	public ItemMusketWithBayonet(ToolMaterial material, boolean unbreakable) {
+	public ItemMusketWithBayonet(IItemTier material, boolean unbreakable) {
 		super();
 
 		this.unbreakable = unbreakable;
@@ -33,23 +33,23 @@ public class ItemMusketWithBayonet extends ItemMusket {
 
 	public ItemExtension getKnife() {
 		switch (materialDefinition.getPrefix()) {
-		case "wooden":
-			return (ItemExtension) ReforgedAdditions.WOODEN_KNIFE;
-		case "stone":
-			return (ItemExtension) ReforgedAdditions.STONE_KNIFE;
-		case "golden":
-			return (ItemExtension) ReforgedAdditions.GOLDEN_KNIFE;
-		case "iron":
-			return (ItemExtension) ReforgedAdditions.IRON_KNIFE;
-		case "diamond":
-			return (ItemExtension) ReforgedAdditions.DIAMOND_KNIFE;
-		default:
-			if (MaterialManager.isFullyAdded(materialDefinition.getMaterial())) {
-				return (ItemExtension) MaterialManager.getItems(materialDefinition.getMaterial())[0];
-			} else {
-				throw new IllegalArgumentException(
-						"The ToolMaterial called " + materialDefinition.getPrefix() + " couldn't be found");
-			}
+			case "wooden":
+				return (ItemExtension) ReforgedAdditions.WOODEN_KNIFE;
+			case "stone":
+				return (ItemExtension) ReforgedAdditions.STONE_KNIFE;
+			case "golden":
+				return (ItemExtension) ReforgedAdditions.GOLDEN_KNIFE;
+			case "iron":
+				return (ItemExtension) ReforgedAdditions.IRON_KNIFE;
+			case "diamond":
+				return (ItemExtension) ReforgedAdditions.DIAMOND_KNIFE;
+			default:
+				if (MaterialManager.isFullyAdded(materialDefinition.getMaterial())) {
+					return (ItemExtension) MaterialManager.getItems(materialDefinition.getMaterial())[0];
+				} else {
+					throw new IllegalArgumentException(
+							"The IItemTier called " + materialDefinition.getPrefix() + " couldn't be found");
+				}
 		}
 	}
 

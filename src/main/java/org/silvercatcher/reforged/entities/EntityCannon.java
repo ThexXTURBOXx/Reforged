@@ -1,13 +1,12 @@
 package org.silvercatcher.reforged.entities;
 
-import org.silvercatcher.reforged.api.ReforgedAdditions;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 
 public class EntityCannon extends EntityBoat {
 
@@ -27,8 +26,8 @@ public class EntityCannon extends EntityBoat {
 	}
 
 	@Override
-	public void onUpdate() {
-		super.onUpdate();
+	public void tick() {
+		super.tick();
 		if (getControllingPassenger() != null) {
 			float yaw = getControllingPassenger().rotationYaw;
 			float pitch = getControllingPassenger().rotationPitch;
@@ -50,7 +49,7 @@ public class EntityCannon extends EntityBoat {
 
 	@Override
 	public AxisAlignedBB getCollisionBox(Entity entity) {
-		return entity.getEntityBoundingBox();
+		return entity.getBoundingBox();
 	}
 
 	@Override

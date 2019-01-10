@@ -1,18 +1,16 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.api.ItemExtension;
-import org.silvercatcher.reforged.material.MaterialDefinition;
-import org.silvercatcher.reforged.material.MaterialManager;
-
 import com.google.common.collect.Multimap;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.api.ItemExtension;
+import org.silvercatcher.reforged.material.MaterialDefinition;
+import org.silvercatcher.reforged.material.MaterialManager;
 
 public class ItemKeris extends ItemSword implements ItemExtension {
 
@@ -20,9 +18,9 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 
 	public ItemKeris() {
 
-		super(ToolMaterial.GOLD);
+		super(ItemTier.GOLD);
 
-		materialDefinition = MaterialManager.getMaterialDefinition(ToolMaterial.GOLD);
+		materialDefinition = MaterialManager.getMaterialDefinition(ItemTier.GOLD);
 
 		setUnlocalizedName("keris");
 		setMaxDamage(materialDefinition.getMaxUses());

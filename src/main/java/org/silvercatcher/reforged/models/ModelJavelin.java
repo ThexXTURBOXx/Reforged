@@ -1,10 +1,11 @@
 package org.silvercatcher.reforged.models;
 
-import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.entity.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelJavelin extends ReforgedModel {
+
 	public ModelRenderer stick;
 	public ModelRenderer front1;
 	public ModelRenderer front2;
@@ -28,27 +29,27 @@ public class ModelJavelin extends ReforgedModel {
 	@Override
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(front2.offsetX, front2.offsetY, front2.offsetZ);
-		GlStateManager.translate(front2.rotationPointX * f5, front2.rotationPointY * f5, front2.rotationPointZ * f5);
-		GlStateManager.scale(2.0D, 1.0D, 1.0D);
-		GlStateManager.translate(-front2.offsetX, -front2.offsetY, -front2.offsetZ);
-		GlStateManager.translate(-front2.rotationPointX * f5, -front2.rotationPointY * f5, -front2.rotationPointZ * f5);
+		GlStateManager.translatef(front2.offsetX, front2.offsetY, front2.offsetZ);
+		GlStateManager.translatef(front2.rotationPointX * f5, front2.rotationPointY * f5, front2.rotationPointZ * f5);
+		GlStateManager.scaled(2.0D, 1.0D, 1.0D);
+		GlStateManager.translatef(-front2.offsetX, -front2.offsetY, -front2.offsetZ);
+		GlStateManager.translatef(-front2.rotationPointX * f5, -front2.rotationPointY * f5, -front2.rotationPointZ * f5);
 		front2.render(f5);
 		GlStateManager.popMatrix();
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(front1.offsetX, front1.offsetY, front1.offsetZ);
-		GlStateManager.translate(front1.rotationPointX * f5, front1.rotationPointY * f5, front1.rotationPointZ * f5);
-		GlStateManager.scale(1.0D, 2.0D, 2.0D);
-		GlStateManager.translate(-front1.offsetX, -front1.offsetY, -front1.offsetZ);
-		GlStateManager.translate(-front1.rotationPointX * f5, -front1.rotationPointY * f5, -front1.rotationPointZ * f5);
+		GlStateManager.translatef(front1.offsetX, front1.offsetY, front1.offsetZ);
+		GlStateManager.translatef(front1.rotationPointX * f5, front1.rotationPointY * f5, front1.rotationPointZ * f5);
+		GlStateManager.scaled(1.0D, 2.0D, 2.0D);
+		GlStateManager.translatef(-front1.offsetX, -front1.offsetY, -front1.offsetZ);
+		GlStateManager.translatef(-front1.rotationPointX * f5, -front1.rotationPointY * f5, -front1.rotationPointZ * f5);
 		front1.render(f5);
 		GlStateManager.popMatrix();
 		GlStateManager.pushMatrix();
-		GlStateManager.translate(stick.offsetX, stick.offsetY, stick.offsetZ);
-		GlStateManager.translate(stick.rotationPointX * f5, stick.rotationPointY * f5, stick.rotationPointZ * f5);
-		GlStateManager.scale(30.0D, 1.0D, 1.0D);
-		GlStateManager.translate(-stick.offsetX, -stick.offsetY, -stick.offsetZ);
-		GlStateManager.translate(-stick.rotationPointX * f5, -stick.rotationPointY * f5, -stick.rotationPointZ * f5);
+		GlStateManager.translatef(stick.offsetX, stick.offsetY, stick.offsetZ);
+		GlStateManager.translatef(stick.rotationPointX * f5, stick.rotationPointY * f5, stick.rotationPointZ * f5);
+		GlStateManager.scaled(30.0D, 1.0D, 1.0D);
+		GlStateManager.translatef(-stick.offsetX, -stick.offsetY, -stick.offsetZ);
+		GlStateManager.translatef(-stick.rotationPointX * f5, -stick.rotationPointY * f5, -stick.rotationPointZ * f5);
 		stick.render(f5);
 		GlStateManager.popMatrix();
 	}

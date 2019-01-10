@@ -1,15 +1,16 @@
 package org.silvercatcher.reforged;
 
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 public class ReforgedReferences {
-	/** Other Values needed */
+	/**
+	 * Other Values needed
+	 */
 	public static class GlobalValues {
 		// IDs
 		public static final int GOALSEEKERID = CommonProxy.goalseekerid;
@@ -38,8 +39,10 @@ public class ReforgedReferences {
 		public static final boolean CANNON = CommonProxy.cannon;
 	}
 
-	/** All needed {@link ResourceLocation}s */
-	@SideOnly(Side.CLIENT)
+	/**
+	 * All needed {@link ResourceLocation}s
+	 */
+	@OnlyIn(Dist.CLIENT)
 	public static class Textures {
 		public static final ResourceLocation WOODEN_BOOMERANG = new ResourceLocation(ReforgedMod.ID,
 				"textures/entity/wooden_boomerang.png");

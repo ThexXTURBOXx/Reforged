@@ -1,13 +1,11 @@
 package org.silvercatcher.reforged.items.recipes;
 
-import org.silvercatcher.reforged.ReforgedMod;
-
 import com.google.gson.JsonObject;
-
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
+import org.silvercatcher.reforged.ReforgedMod;
 
 public class BoomerangEnchRecipeFactory implements IRecipeFactory {
 

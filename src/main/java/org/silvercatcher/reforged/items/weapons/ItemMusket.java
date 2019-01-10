@@ -1,9 +1,5 @@
 package org.silvercatcher.reforged.items.weapons;
 
-import org.silvercatcher.reforged.api.AReloadable;
-import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.entities.EntityBulletMusket;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -11,6 +7,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.api.AReloadable;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
+import org.silvercatcher.reforged.entities.EntityBulletMusket;
 
 public class ItemMusket extends AReloadable {
 
@@ -32,12 +31,12 @@ public class ItemMusket extends AReloadable {
 	@Override
 	public int getItemEnchantability() {
 
-		return ToolMaterial.IRON.getEnchantability();
+		return ItemTier.IRON.getEnchantability();
 	}
 
 	@Override
 	public int getItemEnchantability(ItemStack stack) {
-		return ToolMaterial.IRON.getEnchantability();
+		return ItemTier.IRON.getEnchantability();
 	}
 
 	@Override

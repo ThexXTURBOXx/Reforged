@@ -1,9 +1,10 @@
 package org.silvercatcher.reforged.models;
 
-import net.minecraft.client.model.ModelRenderer;
+import net.minecraft.client.renderer.entity.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelCaltrop extends ReforgedModel {
+
 	public ModelRenderer spike1;
 	public ModelRenderer spike2;
 	public ModelRenderer spike3;

@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 public class EnchantmentGoalseeker extends Enchantment {
 
 	public EnchantmentGoalseeker() {
-		super(Rarity.VERY_RARE, EnumEnchantmentType.BOW, new EntityEquipmentSlot[] { EntityEquipmentSlot.MAINHAND });
+		super(Rarity.VERY_RARE, EnumEnchantmentType.BOW, new EntityEquipmentSlot[]{EntityEquipmentSlot.MAINHAND});
 	}
 
 	@Override
