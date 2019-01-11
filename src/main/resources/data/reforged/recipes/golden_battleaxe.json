@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "reforged:golden_battleaxe"
+  },
+  "pattern": [
+    "xxx",
+    "xsx",
+    " s "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "x": {
+      "item": "minecraft:gold_ingot"
+    }
+  }
+}

@@ -32,7 +32,7 @@ public class ReforgedMod {
 	public static final ItemGroup tabReforged = new ItemGroup(ID) {
 		@Override
 		public ItemStack createIcon() {
-			return new ItemStack(ReforgedAdditions.IRON_BATTLE_AXE);
+			return new ItemStack(ReforgedAdditions.TAB_ICON);
 		}
 	};
 	private static final Logger LOGGER = LogManager.getLogger();
@@ -47,6 +47,11 @@ public class ReforgedMod {
 		FMLModLoadingContext.get().getModEventBus().addListener(this::preInit);
 		FMLModLoadingContext.get().getModEventBus().addListener(this::init);
 		FMLModLoadingContext.get().getModEventBus().addListener(this::postInit);
+		proxy.loadConfig();
+		ReforgedRegistry.registerEventHandler(proxy);
+		ReforgedRegistry.registerEventHandler(new ReforgedRegistry());
+		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
+		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
 	}
 
 	public void preInit(final FMLPreInitializationEvent event) {

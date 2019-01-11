@@ -5,7 +5,7 @@ import org.silvercatcher.reforged.ReforgedMod;
 
 public interface IStunProperty {
 
-	ResourceLocation EXT_PROP_NAME = new ResourceLocation(ReforgedMod.ID, "ReforgedPlayer");
+	ResourceLocation EXT_PROP_NAME = new ResourceLocation(ReforgedMod.ID, "reforged_player");
 
 	boolean isStunned();
 

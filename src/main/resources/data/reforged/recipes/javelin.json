@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "reforged:javelin"
+  },
+  "pattern": [
+    "  f",
+    " s ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "f": {
+      "item": "minecraft:flint"
+    }
+  }
+}

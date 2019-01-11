@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "reforged:firerod"
+  },
+  "pattern": [
+    "  c",
+    " s ",
+    "s  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "c": {
+      "item": "minecraft:coal",
+      "data": 0
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  }
+}

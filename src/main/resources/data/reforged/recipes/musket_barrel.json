@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "reforged:musket_barrel"
+  },
+  "pattern": [
+    "iif",
+    "  i"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "f": {
+      "item": "minecraft:flint_and_steel"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  }
+}

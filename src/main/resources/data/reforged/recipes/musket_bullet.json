@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "reforged:musket_bullet",
+    "count": 8
+  },
+  "pattern": [
+    "i",
+    "g",
+    "p"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "p": {
+      "item": "minecraft:paper"
+    },
+    "g": {
+      "item": "minecraft:gunpowder"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  }
+}

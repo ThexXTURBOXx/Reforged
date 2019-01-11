@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "reforged:crossbow_bolt",
+    "count": 4
+  },
+  "pattern": [
+    "i",
+    "f"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "f": {
+      "item": "minecraft:feather"
+    },
+    "i": {
+      "item": "minecraft:iron_ingot"
+    }
+  }
+}

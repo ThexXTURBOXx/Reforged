@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "reforged:stone_battleaxe"
+  },
+  "pattern": [
+    "xxx",
+    "xsx",
+    " s "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "x": {
+      "item": "minecraft:cobblestone"
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "result": {
+    "item": "reforged:blunderbuss_bullet",
+    "count": 8
+  },
+  "pattern": [
+    "h",
+    "g",
+    "p"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "p": {
+      "item": "minecraft:paper"
+    },
+    "g": {
+      "item": "minecraft:gunpowder"
+    },
+    "h": {
+      "item": "minecraft:gravel"
+    }
+  }
+}

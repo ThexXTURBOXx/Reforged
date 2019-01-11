@@ -47,10 +47,10 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
-		tooltip.add(new TextComponentString(I18n.format("item.musket.loadstate") + ": "
-				+ (loadState == empty ? I18n.format("item.musket.loadstate.empty")
-				: (loadState == loaded ? I18n.format("item.musket.loadstate.loaded")
-				: I18n.format("item.musket.loadstate.loading")))));
+		tooltip.add(new TextComponentString(I18n.format("item.reforged.musket.loadstate") + ": "
+				+ (loadState == empty ? I18n.format("item.reforged.musket.loadstate.empty")
+				: (loadState == loaded ? I18n.format("item.reforged.musket.loadstate.loaded")
+				: I18n.format("item.reforged.musket.loadstate.loading")))));
 	}
 
 	private Item getAmmo() {

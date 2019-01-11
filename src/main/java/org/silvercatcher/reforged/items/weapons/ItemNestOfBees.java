@@ -49,7 +49,7 @@ public class ItemNestOfBees extends ExtendedItem {
 
 	@Override
 	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-		tooltip.add(new TextComponentString(I18n.format("item.nestofbees.arrows") + ": "
+		tooltip.add(new TextComponentString(I18n.format("item.reforged.nestofbees.arrows") + ": "
 				+ CompoundTags.giveCompound(stack).getInt(CompoundTags.AMMUNITION)));
 	}
 

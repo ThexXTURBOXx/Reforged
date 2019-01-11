@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "reforged:golden_mace"
+  },
+  "pattern": [
+    " mm",
+    " wm",
+    "w  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "w": {
+      "tag": "minecraft:planks"
+    },
+    "m": {
+      "item": "minecraft:gold_ingot"
+    }
+  }
+}

@@ -13,4 +13,9 @@ public class TileEntityCaltrop extends TileEntity {
 		super(TYPE);
 	}
 
+	@Override
+	public TileEntityType<?> getType() {
+		return TYPE;
+	}
+
 }

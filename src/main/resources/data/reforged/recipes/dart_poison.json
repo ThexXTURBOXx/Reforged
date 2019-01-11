@@ -1,0 +1,14 @@
+{
+  "result": {
+    "item": "reforged:dart_poison"
+  },
+  "ingredients": [
+    {
+      "item": "reforged:dart_normal"
+    },
+    {
+      "item": "minecraft:cactus"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless"
+}

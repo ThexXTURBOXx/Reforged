@@ -50,9 +50,6 @@ import org.silvercatcher.reforged.packet.MessageCustomReachAttack;
 
 public class ReforgedRegistry {
 
-	// Counters
-	public static int counterEntities = 0;
-
 	/**
 	 * Every item on that list gets registered
 	 */
@@ -61,12 +58,18 @@ public class ReforgedRegistry {
 	public static List<EntityType<?>> registrationListEntities = new ArrayList<>();
 	public static List<TileEntityType<?>> registrationListTileEntities = new ArrayList<>();
 
+	private static boolean blocksCreated = false,
+			itemsCreated = false;
+
 	// Registry
 
 	/**
 	 * Adds all items to the registrationList
 	 */
 	public static void createItems() {
+		registrationList.add(ReforgedAdditions.TAB_ICON = new Item(new Item.Builder())
+				.setRegistryName(new ResourceLocation(ReforgedMod.ID, "tab_icon")));
+
 		if (GlobalValues.NEST_OF_BEES) {
 			registrationList.add(ReforgedAdditions.ARROW_BUNDLE = new ItemArrowBundle());
 			registrationList.add(ReforgedAdditions.NEST_OF_BEES = new ItemNestOfBees());
@@ -104,11 +107,8 @@ public class ReforgedRegistry {
 		if (GlobalValues.BATTLEAXE) {
 			registrationList.add(ReforgedAdditions.WOODEN_BATTLE_AXE = new ItemBattleAxe(ItemTier.WOOD));
 			registrationList.add(ReforgedAdditions.STONE_BATTLE_AXE = new ItemBattleAxe(ItemTier.STONE));
-		}
-		// This has to be registered! Else, the Creative Tab would be broken!
-		registrationList.add(ReforgedAdditions.GOLDEN_BATTLE_AXE = new ItemBattleAxe(ItemTier.GOLD));
-		registrationList.add(ReforgedAdditions.IRON_BATTLE_AXE = new ItemBattleAxe(ItemTier.IRON));
-		if (GlobalValues.BATTLEAXE) {
+			registrationList.add(ReforgedAdditions.GOLDEN_BATTLE_AXE = new ItemBattleAxe(ItemTier.GOLD));
+			registrationList.add(ReforgedAdditions.IRON_BATTLE_AXE = new ItemBattleAxe(ItemTier.IRON));
 			registrationList.add(ReforgedAdditions.DIAMOND_BATTLE_AXE = new ItemBattleAxe(ItemTier.DIAMOND));
 		}
 
@@ -162,10 +162,6 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.BLOWGUN = new ItemBlowGun());
 		}
 
-		if (GlobalValues.CALTROP) {
-			registrationListBlocks.add(ReforgedAdditions.CALTROP = new BlockCaltrop());
-		}
-
 		if (GlobalValues.DYNAMITE) {
 			registrationList.add(ReforgedAdditions.DYNAMITE = new ItemDynamite());
 		}
@@ -204,6 +200,19 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.CANNON_BALL = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
 					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "cannon_ball")));
 		}
+
+		itemsCreated = true;
+	}
+
+	/**
+	 * Adds all blocks to the registrationListBlocks
+	 */
+	public static void createBlocks() {
+		if (GlobalValues.CALTROP) {
+			registrationListBlocks.add(ReforgedAdditions.CALTROP = new BlockCaltrop());
+		}
+
+		blocksCreated = true;
 	}
 
 	/**
@@ -307,29 +316,32 @@ public class ReforgedRegistry {
 	@SubscribeEvent
 	/** Registers all blocks out of the registrationListBlocks */
 	public void registerBlocks(RegistryEvent.Register<Block> event) {
+		if (!blocksCreated)
+			createBlocks();
 		IForgeRegistry<Block> reg = event.getRegistry();
 		for (Block block : registrationListBlocks) {
-			reg.register(block
-					.setRegistryName(new ResourceLocation(ReforgedMod.ID, block.getRegistryName().getPath().substring(5))));
+			reg.register(block);
 		}
 	}
 
 	@SubscribeEvent
 	/** Registers all items out of the registrationList */
 	public void registerItems(RegistryEvent.Register<Item> event) {
+		if (!itemsCreated)
+			createItems();
+		if (!blocksCreated)
+			createBlocks();
 		IForgeRegistry<Item> reg = event.getRegistry();
 		// Register all Items
 		for (Item item : registrationList) {
-			reg.register(
-					item.setRegistryName(new ResourceLocation(ReforgedMod.ID, item.getRegistryName().getPath().substring(5))));
+			reg.register(item);
 		}
 		for (Block block : registrationListBlocks) {
-			ItemBlock itemBlock = new ItemBlock(block, new Item.Builder());
+			ItemBlock itemBlock = new ItemBlock(block, new Item.Builder().group(ReforgedMod.tabReforged));
 			itemBlock.setRegistryName(block.getRegistryName());
-			ReforgedMod.proxy.registerItemRenderer(itemBlock, 0, block.getRegistryName().getPath().substring(5));
+			ReforgedMod.proxy.registerItemRenderer(itemBlock, 0, block.getRegistryName().getNamespace() + ":" + block.getRegistryName().getPath());
 			reg.register(itemBlock);
 		}
-
 	}
 
 }

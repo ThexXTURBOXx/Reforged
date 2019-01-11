@@ -15,7 +15,9 @@ public abstract class ReforgedAdditions {
 	public static final Enchantment goalseeker = new EnchantmentGoalseeker();
 
 	// Items
-	public static Item ARROW_BUNDLE,
+	public static Item TAB_ICON,
+
+	ARROW_BUNDLE,
 
 	GUN_STOCK, BLUNDERBUSS_BARREL, MUSKET_BARREL,
 

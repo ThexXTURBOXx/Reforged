@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "reforged:diamond_mace"
+  },
+  "pattern": [
+    " mm",
+    " wm",
+    "w  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "w": {
+      "tag": "minecraft:planks"
+    },
+    "m": {
+      "item": "minecraft:diamond"
+    }
+  }
+}

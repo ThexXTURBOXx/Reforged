@@ -65,36 +65,34 @@ public class ReforgedEvents {
 	}
 
 	@SubscribeEvent
-	public void onEntityConstructing(AttachCapabilitiesEvent e) {
-		if (e.getObject() instanceof EntityLivingBase) {
-			e.addCapability(IStunProperty.EXT_PROP_NAME, new ICapabilitySerializable<NBTPrimitive>() {
+	public void onEntityConstructing(AttachCapabilitiesEvent<EntityLivingBase> e) {
+		e.addCapability(IStunProperty.EXT_PROP_NAME, new ICapabilitySerializable<NBTPrimitive>() {
 
-				IStunProperty inst = ReforgedMod.STUN_PROP.getDefaultInstance();
+			IStunProperty inst = ReforgedMod.STUN_PROP.getDefaultInstance();
 
-				@Override
-				public void deserializeNBT(NBTPrimitive nbt) {
-					ReforgedMod.STUN_PROP.getStorage().readNBT(ReforgedMod.STUN_PROP, inst, null, nbt);
-				}
+			@Override
+			public void deserializeNBT(NBTPrimitive nbt) {
+				ReforgedMod.STUN_PROP.getStorage().readNBT(ReforgedMod.STUN_PROP, inst, null, nbt);
+			}
 
-				@Nonnull
-				@Override
-				public <T> OptionalCapabilityInstance<T> getCapability(@Nonnull Capability<T> cap) {
-					return cap == ReforgedMod.STUN_PROP ? OptionalCapabilityInstance.<T>of(() -> (T) inst) : OptionalCapabilityInstance.empty();
-				}
+			@Nonnull
+			@Override
+			public <T> OptionalCapabilityInstance<T> getCapability(@Nonnull Capability<T> cap) {
+				return cap == ReforgedMod.STUN_PROP ? OptionalCapabilityInstance.<T>of(() -> (T) inst) : OptionalCapabilityInstance.empty();
+			}
 
-				@Nonnull
-				@Override
-				public <T> OptionalCapabilityInstance<T> getCapability(@Nonnull Capability<T> cap, @Nullable EnumFacing side) {
-					return getCapability(cap);
-				}
+			@Nonnull
+			@Override
+			public <T> OptionalCapabilityInstance<T> getCapability(@Nonnull Capability<T> cap, @Nullable EnumFacing side) {
+				return getCapability(cap);
+			}
 
-				@Override
-				public NBTPrimitive serializeNBT() {
-					return (NBTPrimitive) ReforgedMod.STUN_PROP.getStorage().writeNBT(ReforgedMod.STUN_PROP, inst, null);
-				}
+			@Override
+			public NBTPrimitive serializeNBT() {
+				return (NBTPrimitive) ReforgedMod.STUN_PROP.getStorage().writeNBT(ReforgedMod.STUN_PROP, inst, null);
+			}
 
-			});
-		}
+		});
 	}
 
 	// TODO TRANSLATION!!

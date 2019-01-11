@@ -41,7 +41,7 @@ public class CommonProxy {
 	public void init(FMLInitializationEvent event) {
 	}
 
-	private void loadConfig() {
+	public void loadConfig() {
 		File configDir = new File("./config/" + ReforgedMod.ID);
 		File configfile = new File(configDir, "/" + ReforgedMod.ID + ".cfg");
 		if (!configDir.exists())
@@ -98,12 +98,6 @@ public class CommonProxy {
 	}
 
 	public void preInit(FMLPreInitializationEvent event) {
-		loadConfig();
-		ReforgedRegistry.registerEventHandler(this);
-		ReforgedRegistry.registerEventHandler(new ReforgedRegistry());
-		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
-		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
-		ReforgedRegistry.createItems();
 		ReforgedRegistry.registerPackets();
 	}
 

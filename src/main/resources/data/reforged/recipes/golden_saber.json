@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "reforged:golden_saber"
+  },
+  "pattern": [
+    " b",
+    "b ",
+    "s "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "b": {
+      "item": "minecraft:gold_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  }
+}

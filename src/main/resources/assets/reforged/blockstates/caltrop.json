@@ -1,16 +1,7 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-        "textures": {
-            "all": "reforged:others/caltrop"
-        }
-    },
-    "variants": {
-        "normal": {
-            "model": "reforged:caltrop"
-        },
-        "inventory": {
-            "model": "reforged:caltrop"
-        }
+  "variants": {
+    "": {
+      "model": "reforged:block/caltrop"
     }
+  }
 }

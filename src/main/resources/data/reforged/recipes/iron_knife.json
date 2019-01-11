@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "reforged:iron_knife"
+  },
+  "pattern": [
+    "sm"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "m": {
+      "item": "minecraft:iron_ingot"
+    }
+  }
+}

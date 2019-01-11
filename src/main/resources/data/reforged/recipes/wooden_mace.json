@@ -1,0 +1,16 @@
+{
+  "result": {
+    "item": "reforged:wooden_mace"
+  },
+  "pattern": [
+    " ww",
+    " ww",
+    "w  "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "w": {
+      "tag": "minecraft:planks"
+    }
+  }
+}

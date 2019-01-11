@@ -1,0 +1,18 @@
+{
+  "result": {
+    "item": "reforged:stone_dirk"
+  },
+  "pattern": [
+    "m",
+    "s"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:stick"
+    },
+    "m": {
+      "item": "minecraft:cobblestone"
+    }
+  }
+}

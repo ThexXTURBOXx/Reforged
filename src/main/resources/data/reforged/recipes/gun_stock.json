@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "reforged:gun_stock"
+  },
+  "pattern": [
+    "ssp"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "p": {
+      "tag": "minecraft:planks"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  }
+}

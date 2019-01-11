@@ -1,0 +1,20 @@
+{
+  "result": {
+    "item": "reforged:dynamite",
+    "count": 2
+  },
+  "pattern": [
+    "s",
+    "g",
+    "g"
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "s": {
+      "item": "minecraft:string"
+    },
+    "g": {
+      "item": "minecraft:gunpowder"
+    }
+  }
+}

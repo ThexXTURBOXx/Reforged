@@ -1,0 +1,19 @@
+{
+  "result": {
+    "item": "reforged:iron_saber"
+  },
+  "pattern": [
+    " b",
+    "b ",
+    "s "
+  ],
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "b": {
+      "item": "minecraft:iron_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  }
+}
