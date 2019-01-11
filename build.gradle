@@ -34,11 +34,29 @@ minecraft {
     // these can be tweaked, removed, or duplicated as needed.
     runs {
         client = {
+            main "net.minecraftforge.userdev.UserdevLauncher"
+            ideaModule "${project.name}_main"
             workingDirectory project.file('run').canonicalPath
             source sourceSets.main
+            environment "target", "fmluserdevclient"
+            environment "assetDirectory", downloadAssets.output.absolutePath
+            environment "FORGE_VERSION", "24.0.64-1.13-pre"
+            environment "FORGE_GROUP", "net.minecraftforge.test"
+            environment "MCP_VERSION", "20180921-1.13"
+            environment "MC_VERSION", "1.13"
+            environment "MOD_CLASSES", "${sourceSets.main.output.resourcesDir}${File.pathSeparator}${sourceSets.main.output.classesDirs.join(File.pathSeparator)}"
         }
         server = {
+            main "net.minecraftforge.userdev.UserdevLauncher"
+            ideaModule "${project.name}_main"
             workingDirectory project.file('run').canonicalPath
+            environment "target", "fmluserdevserver"
+            environment "assetDirectory", downloadAssets.output.absolutePath
+            environment "FORGE_VERSION", "24.0.64-1.13-pre"
+            environment "FORGE_GROUP", "net.minecraftforge.test"
+            environment "MCP_VERSION", "20180921-1.13"
+            environment "MC_VERSION", "1.13"
+            environment "MOD_CLASSES", "${sourceSets.main.output.resourcesDir}${File.pathSeparator}${sourceSets.main.output.classesDirs.join(File.pathSeparator)}"
         }
     }
 }
