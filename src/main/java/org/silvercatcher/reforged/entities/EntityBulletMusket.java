@@ -4,7 +4,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.INBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
@@ -12,7 +15,7 @@ public class EntityBulletMusket extends AReforgedThrowable {
 
 	public static final String NAME = "musket";
 	public static final EntityType<EntityBulletMusket> TYPE =
-			EntityType.Builder.create(EntityBulletMusket.class, EntityBulletMusket::new).build(NAME);
+			ReforgedRegistry.registerEntity(EntityType.Builder.create(EntityBulletMusket.class, EntityBulletMusket::new).build(NAME));
 
 	public EntityBulletMusket(World worldIn) {
 		super(TYPE, worldIn, NAME);
@@ -37,6 +40,14 @@ public class EntityBulletMusket extends AReforgedThrowable {
 	protected boolean onEntityHit(Entity entity) {
 		entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity));
 		return true;
+	}
+
+	@Override
+	public void deserializeNBT(INBTBase nbt) {
+	}
+
+	@Override
+	public void deserializeNBT(NBTTagCompound nbt) {
 	}
 
 }

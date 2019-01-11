@@ -18,11 +18,9 @@ public class ItemMusketWithBayonet extends ItemMusket {
 	}
 
 	public ItemMusketWithBayonet(IItemTier material, boolean unbreakable) {
-		super();
-
+		super(MaterialManager.getMaterialDefinition(material).getPrefixedName("musket"));
 		this.unbreakable = unbreakable;
 		this.materialDefinition = MaterialManager.getMaterialDefinition(material);
-		setUnlocalizedName(materialDefinition.getPrefixedName("musket"));
 	}
 
 	@Override

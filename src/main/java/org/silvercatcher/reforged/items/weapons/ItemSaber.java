@@ -4,8 +4,10 @@ import com.google.common.collect.Multimap;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.silvercatcher.reforged.ReforgedMod;
@@ -24,16 +26,11 @@ public class ItemSaber extends ItemSword implements ItemExtension, IZombieEquipp
 	}
 
 	public ItemSaber(IItemTier material, boolean unbreakable) {
-		super(material);
-
+		super(material, (int) (material.getAttackDamage() + 3.5f), -2.4F,
+				new Item.Builder().group(ReforgedMod.tabReforged).defaultMaxDamage(material.getMaxUses()));
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
-
-		setUnlocalizedName(materialDefinition.getPrefixedName("saber"));
-
-		setCreativeTab(ReforgedMod.tabReforged);
-		setMaxStackSize(1);
-		setMaxDamage(materialDefinition.getMaxUses());
+		setRegistryName(new ResourceLocation(ReforgedMod.ID, materialDefinition.getPrefixedName("saber")));
 	}
 
 	@Override
@@ -55,7 +52,7 @@ public class ItemSaber extends ItemSword implements ItemExtension, IZombieEquipp
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
 
-		if (attacker.isRiding()) {
+		if (attacker.getRidingEntity() != null) {
 			float damage = getHitDamage() / 2;
 			target.attackEntityFrom(getDamage(attacker), damage);
 		}

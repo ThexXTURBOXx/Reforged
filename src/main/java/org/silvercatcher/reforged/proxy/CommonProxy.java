@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.proxy;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -13,24 +14,12 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.silvercatcher.reforged.ReforgedEvents;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedMonsterArmourer;
-import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.entities.EntityBoomerang;
-import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
-import org.silvercatcher.reforged.entities.EntityBulletMusket;
-import org.silvercatcher.reforged.entities.EntityCannon;
-import org.silvercatcher.reforged.entities.EntityCannonBall;
-import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
-import org.silvercatcher.reforged.entities.EntityDart;
-import org.silvercatcher.reforged.entities.EntityDynamite;
-import org.silvercatcher.reforged.entities.EntityJavelin;
-import org.silvercatcher.reforged.entities.TileEntityCaltrop;
 
 public class CommonProxy {
 
@@ -52,13 +41,22 @@ public class CommonProxy {
 	public void init(FMLInitializationEvent event) {
 	}
 
-	private void loadConfig(FMLPreInitializationEvent e) {
-		File configdir = new File(e.getModConfigurationDirectory(), ReforgedMod.NAME);
-		File configfile = new File(configdir, "reforged.cfg");
-		if (!configfile.exists())
-			configdir.mkdirs();
+	private void loadConfig() {
+		File configDir = new File("./config/" + ReforgedMod.ID);
+		File configfile = new File(configDir, "/" + ReforgedMod.ID + ".cfg");
+		if (!configDir.exists())
+			configDir.mkdirs();
 		// Get an instance of Config
 		Configuration config = new Configuration(configfile);
+
+		//TODO Constructors not working yet, set field via dirty reflection
+		try {
+			Field f = config.getClass().getDeclaredField("file");
+			f.setAccessible(true);
+			f.set(config, configfile);
+		} catch (NoSuchFieldException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
 
 		// Load Config
 		config.load();
@@ -100,46 +98,19 @@ public class CommonProxy {
 	}
 
 	public void preInit(FMLPreInitializationEvent event) {
-		loadConfig(event);
+		loadConfig();
 		ReforgedRegistry.registerEventHandler(this);
 		ReforgedRegistry.registerEventHandler(new ReforgedRegistry());
 		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
 		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
 		ReforgedRegistry.createItems();
 		ReforgedRegistry.registerPackets();
-		registerEntities();
 	}
 
 	@SubscribeEvent
 	public void registerEnchantments(RegistryEvent.Register<Enchantment> event) {
 		event.getRegistry().register(
 				ReforgedAdditions.goalseeker.setRegistryName(new ResourceLocation(ReforgedMod.ID, "goalseeker")));
-	}
-
-	private void registerEntities() {
-
-		if (GlobalValues.BOOMERANG)
-			ReforgedRegistry.registerEntity(EntityBoomerang.class, "Boomerang");
-		if (GlobalValues.JAVELIN)
-			ReforgedRegistry.registerEntity(EntityJavelin.class, "Javelin");
-
-		if (GlobalValues.MUSKET) {
-			ReforgedRegistry.registerEntity(EntityBulletMusket.class, "BulletMusket");
-			ReforgedRegistry.registerEntity(EntityBulletBlunderbuss.class, "BulletBlunderbuss");
-		}
-
-		if (GlobalValues.CROSSBOW)
-			ReforgedRegistry.registerEntity(EntityCrossbowBolt.class, "CrossbowBolt");
-		if (GlobalValues.BLOWGUN)
-			ReforgedRegistry.registerEntity(EntityDart.class, "Dart");
-		if (GlobalValues.CALTROP)
-			GameRegistry.registerTileEntity(TileEntityCaltrop.class, "Caltrop");
-		if (GlobalValues.DYNAMITE)
-			ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
-		if (GlobalValues.DYNAMITE) {
-			ReforgedRegistry.registerEntity(EntityCannon.class, "Cannon");
-			ReforgedRegistry.registerEntity(EntityCannonBall.class, "CannonBall");
-		}
 	}
 
 	protected void registerEntityRenderers() {

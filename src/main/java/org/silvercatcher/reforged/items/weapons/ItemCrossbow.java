@@ -11,20 +11,19 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemUseContext;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.CompoundTags;
 import org.silvercatcher.reforged.api.ItemExtension;
@@ -41,48 +40,41 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	public static final byte loaded = 2;
 
 	public ItemCrossbow() {
-		setMaxStackSize(1);
-		setMaxDamage(100);
-		setUnlocalizedName("crossbow");
-		setCreativeTab(ReforgedMod.tabReforged);
-		addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
-			@Override
-			@OnlyIn(Dist.CLIENT)
-			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
-				float mrl = 0;
-				if (entityIn != null && entityIn instanceof EntityPlayer) {
-					EntityPlayer player = (EntityPlayer) entityIn;
-					if (stack.getItem() instanceof ItemCrossbow && player.getActiveHand() == EnumHand.MAIN_HAND) {
-						if (getLoadState(stack) == loading) {
-							int left = getReloadLeft(stack, player);
-							if (left > 14) {
-								mrl = 1;
-							} else if (left > 9) {
-								mrl = 2;
-							} else if (left > 4) {
-								mrl = 4;
-							} else if (left >= 0) {
-								mrl = 5;
-							}
-						} else if (getLoadState(stack) == loaded) {
-							mrl = 3;
+		super(new Item.Builder().defaultMaxDamage(100).group(ReforgedMod.tabReforged));
+		setRegistryName(new ResourceLocation(ReforgedMod.ID, "crossbow"));
+		addPropertyOverride(new ResourceLocation("pull"), (stack, worldIn, entityIn) -> {
+			float mrl = 0;
+			if (entityIn instanceof EntityPlayer) {
+				EntityPlayer player = (EntityPlayer) entityIn;
+				if (stack.getItem() instanceof ItemCrossbow && player.getActiveHand() == EnumHand.MAIN_HAND) {
+					if (getLoadState(stack) == loading) {
+						int left = getReloadLeft(stack);
+						if (left > 14) {
+							mrl = 1;
+						} else if (left > 9) {
+							mrl = 2;
+						} else if (left > 4) {
+							mrl = 4;
+						} else if (left >= 0) {
+							mrl = 5;
 						}
+					} else if (getLoadState(stack) == loaded) {
+						mrl = 3;
 					}
 				}
-				return mrl;
 			}
+			return mrl;
 		});
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
-
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 
-		tooltip.add(I18n.format("item.musket.loadstate") + ": "
+		tooltip.add(new TextComponentString(I18n.format("item.musket.loadstate") + ": "
 				+ (loadState == empty ? I18n.format("item.musket.loadstate.empty")
 				: (loadState == loaded ? I18n.format("item.musket.loadstate.loaded")
-				: I18n.format("item.musket.loadstate.loading"))));
+				: I18n.format("item.musket.loadstate.loading")))));
 	}
 
 	private ItemStack findAmmo(EntityPlayer player) {
@@ -112,8 +104,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-
+	public EnumAction getUseAction(ItemStack stack) {
 		byte loadState = getLoadState(stack);
 
 		if (loadState == loading) {
@@ -132,22 +123,20 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
-
+	public int getUseDuration(ItemStack stack) {
 		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
 
 		if (loadState == loading)
 			return getReloadTotal();
-
-		return super.getMaxItemUseDuration(stack);
+		return super.getUseDuration(stack);
 	}
 
-	public int getReloadLeft(ItemStack stack, EntityPlayer player) {
+	public int getReloadLeft(ItemStack stack) {
 		return (getReloadTotal() - getReloadTime(stack));
 	}
 
 	public int getReloadTime(ItemStack stack) {
-		return giveCompound(stack).getInteger(CompoundTags.TIME);
+		return giveCompound(stack).getInt(CompoundTags.TIME);
 	}
 
 	public int getReloadTotal() {
@@ -183,7 +172,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 					loadState = loading;
 					if (compound.getByte(CompoundTags.AMMUNITION) == empty) {
 						compound.setBoolean(CompoundTags.STARTED, true);
-						compound.setInteger(CompoundTags.TIME, 0);
+						compound.setInt(CompoundTags.TIME, 0);
 					}
 				} else {
 					Helpers.playSound(worldIn, playerIn, "crossbow_reload", 1.0f, 0.7f);
@@ -192,19 +181,18 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 
 			compound.setByte(CompoundTags.AMMUNITION, loadState);
 
-			if (compound.getInteger(CompoundTags.TIME) <= 0 || !worldIn.isRemote
-					|| (worldIn.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
+			if (compound.getInt(CompoundTags.TIME) <= 0 || !worldIn.isRemote
+					|| compound.getInt(CompoundTags.TIME) >= getReloadTotal() - 1) {
 				playerIn.setActiveHand(hand);
 			}
 
-			return new ActionResult(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
+			return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
+		return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
 	}
 
 	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
-									  EnumFacing facing, float hitX, float hitY, float hitZ) {
+	public EnumActionResult onItemUse(ItemUseContext p_195939_1_) {
 		return EnumActionResult.PASS;
 	}
 
@@ -228,28 +216,28 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 				Helpers.playSound(worldIn, playerIn, "crossbow_shoot", 1f, 1f);
 				shoot(worldIn, playerIn, new ItemStack(ReforgedAdditions.CROSSBOW_BOLT));
 				if (!playerIn.isCreative()
-						&& (stack.getItem().isDamageable() && stack.attemptDamageItem(5, itemRand, null))) {
+						&& (stack.getItem().isDamageable() && stack.attemptDamageItem(5, random, null))) {
 					playerIn.renderBrokenItemStack(stack);
 					Helpers.destroyCurrentEquippedItem(playerIn);
 				}
 				compound.setByte(CompoundTags.AMMUNITION, empty);
 				compound.setBoolean(CompoundTags.STARTED, false);
 			}
-			compound.setInteger(CompoundTags.TIME, -1);
+			compound.setInt(CompoundTags.TIME, -1);
 		}
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
+	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
+		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
 		if (giveCompound(stack).getBoolean(CompoundTags.STARTED) && getLoadState(stack) == loading) {
-			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
+			giveCompound(stack).setInt(CompoundTags.TIME, getReloadTime(stack) + 1);
 		}
 	}
 
 	public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
-		EntityCrossbowBolt a = new EntityCrossbowBolt(worldIn, playerIn);
-		a.setAim(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, getArrowVelocity(40) * 3.0F, 1.0F);
+		EntityCrossbowBolt a = new EntityCrossbowBolt(playerIn, worldIn);
+		a.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, getArrowVelocity(40) * 3.0F, 1.0F);
 		a.pickupStatus = PickupStatus.getByOrdinal(new Random().nextInt(2));
 		a.setDamage(8.0D);
 		worldIn.spawnEntity(a);

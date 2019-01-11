@@ -3,7 +3,10 @@ package org.silvercatcher.reforged.items.weapons;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
@@ -18,12 +21,10 @@ public class ItemPike extends ExtendedItem {
 	}
 
 	public ItemPike(IItemTier material, boolean unbreakable) {
-		super();
+		super(new Item.Builder().defaultMaxDamage((int) (material.getMaxUses() * 0.5f)));
 		this.unbreakable = unbreakable;
-		setMaxStackSize(1);
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
-		setMaxDamage((int) (materialDefinition.getMaxUses() * 0.5f));
-		setUnlocalizedName(materialDefinition.getPrefixedName("pike"));
+		setRegistryName(new ResourceLocation(ReforgedMod.ID, materialDefinition.getPrefixedName("pike")));
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public class ItemPike extends ExtendedItem {
 		float damage = getHitDamage();
 		if (attacker instanceof EntityPlayer)
 			damage = damage + getEnchantmentBonus(stack, (EntityPlayer) attacker, target);
-		if (attacker.isRiding()) {
+		if (attacker.getRidingEntity() != null) {
 			damage += getHitDamage() / 2;
 		}
 		target.attackEntityFrom(getDamage(attacker), damage);

@@ -3,7 +3,7 @@ loaderVersion="[24,)"
 updateJSONURL="https://raw.githubusercontent.com/ThexXTURBOXx/UpdateJSONs/master/reforged.json"
 issueTrackerURL="https://github.com/ThexXTURBOXx/Reforged/issues"
 displayURL="http://minecraft.curseforge.com/projects/reforged"
-logoFile="/assets/reforged/textures/others/logo.png"
+logoFile="logo.png"
 credits="Snow_Yoshi98, baddaspig and Sunconure11 for textures. DenTheUA for translation."
 authors="ThexXTURBOXx, Silvercatcher"
 [[mods]]

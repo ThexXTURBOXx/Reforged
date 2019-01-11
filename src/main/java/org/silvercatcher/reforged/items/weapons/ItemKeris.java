@@ -4,8 +4,11 @@ import com.google.common.collect.Multimap;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.item.ItemTier;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.ItemExtension;
@@ -17,15 +20,10 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 	protected final MaterialDefinition materialDefinition;
 
 	public ItemKeris() {
-
-		super(ItemTier.GOLD);
-
+		super(ItemTier.GOLD, 2 + (int) ItemTier.GOLD.getAttackDamage(), -2.4F,
+				new Item.Builder().defaultMaxDamage(ItemTier.GOLD.getMaxUses()).group(ReforgedMod.tabReforged));
 		materialDefinition = MaterialManager.getMaterialDefinition(ItemTier.GOLD);
-
-		setUnlocalizedName("keris");
-		setMaxDamage(materialDefinition.getMaxUses());
-		setMaxStackSize(1);
-		setCreativeTab(ReforgedMod.tabReforged);
+		setRegistryName(new ResourceLocation(ReforgedMod.ID, "keris"));
 	}
 
 	@Override
@@ -34,7 +32,7 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 	}
 
 	@Override
-	public float getDamageVsEntity() {
+	public float getAttackDamage() {
 		return getHitDamage();
 	}
 

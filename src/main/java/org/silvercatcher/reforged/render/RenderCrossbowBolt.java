@@ -1,18 +1,22 @@
 package org.silvercatcher.reforged.render;
 
+import javax.annotation.Nullable;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
 
 @OnlyIn(Dist.CLIENT)
-public abstract class RenderCrossbowBolt<T extends EntityCrossbowBolt> extends Render<T> {
+public class RenderCrossbowBolt<T extends EntityCrossbowBolt> extends Render<T> {
+
+	public static final ResourceLocation RES_ARROW = new ResourceLocation("textures/entity/projectiles/arrow.png");
 
 	public RenderCrossbowBolt(RenderManager renderManagerIn) {
 		super(renderManagerIn);
@@ -81,6 +85,12 @@ public abstract class RenderCrossbowBolt<T extends EntityCrossbowBolt> extends R
 		GlStateManager.enableLighting();
 		GlStateManager.popMatrix();
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
+	}
+
+	@Nullable
+	@Override
+	protected ResourceLocation getEntityTexture(T entity) {
+		return RES_ARROW;
 	}
 
 }

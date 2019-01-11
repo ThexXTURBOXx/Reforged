@@ -13,6 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTPrimitive;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -47,13 +48,16 @@ public class ReforgedEvents {
 	public void customReach(GuiScreenEvent.MouseClickedEvent e) {
 		if (e.getButton() == 0) {
 			Minecraft mc = Minecraft.getInstance();
-			if (mc.player.inventory.getCurrentItem() != null && !mc.player.inventory.getCurrentItem().isEmpty()) {
+			if (!mc.player.inventory.getCurrentItem().isEmpty()) {
 				Item i = mc.player.inventory.getCurrentItem().getItem();
 				if (i instanceof ICustomReach && i instanceof ItemExtension) {
 					ICustomReach icr = (ICustomReach) i;
-					Entity hit = Helpers.getMouseOverExtended(icr.reach()).entity;
-					if (hit != null && mc.objectMouseOver.entity == null && hit != mc.player) {
-						ReforgedMod.network.sendToServer(new MessageCustomReachAttack(hit.getEntityId()));
+					RayTraceResult rtr = Helpers.getMouseOverExtended(icr.reach());
+					if (rtr != null) {
+						Entity hit = rtr.entity;
+						if (hit != null && mc.objectMouseOver.entity == null && hit != mc.player) {
+							ReforgedMod.network.sendToServer(new MessageCustomReachAttack(hit.getEntityId()));
+						}
 					}
 				}
 			}
@@ -75,7 +79,7 @@ public class ReforgedEvents {
 				@Nonnull
 				@Override
 				public <T> OptionalCapabilityInstance<T> getCapability(@Nonnull Capability<T> cap) {
-					return cap == ReforgedMod.STUN_PROP ? ReforgedMod.STUN_PROP.<T>cast(inst) : null;
+					return cap == ReforgedMod.STUN_PROP ? OptionalCapabilityInstance.<T>of(() -> (T) inst) : OptionalCapabilityInstance.empty();
 				}
 
 				@Nonnull

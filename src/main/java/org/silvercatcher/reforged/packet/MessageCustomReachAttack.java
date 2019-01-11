@@ -1,16 +1,9 @@
 package org.silvercatcher.reforged.packet;
 
-import io.netty.buffer.ByteBuf;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.*;
-import org.silvercatcher.reforged.api.ICustomReach;
-
 /**
  * Thanks to Jabelar!!!
  */
-public class MessageCustomReachAttack implements IMessage {
+public class MessageCustomReachAttack {
 
 	private int entityId;
 
@@ -22,41 +15,12 @@ public class MessageCustomReachAttack implements IMessage {
 		this.entityId = entityId;
 	}
 
-	@Override
-	public void fromBytes(ByteBuf buf) {
-		entityId = ByteBufUtils.readVarInt(buf, 4);
+	public int getEntityId() {
+		return entityId;
 	}
 
-	@Override
-	public void toBytes(ByteBuf buf) {
-		ByteBufUtils.writeVarInt(buf, entityId, 4);
+	public void setEntityId(int entityId) {
+		this.entityId = entityId;
 	}
 
-	public static class Handler implements IMessageHandler<MessageCustomReachAttack, IMessage> {
-
-		@Override
-		public IMessage onMessage(final MessageCustomReachAttack message, MessageContext ctx) {
-			final EntityPlayerMP player = ctx.getServerHandler().player;
-			player.getServer().addScheduledTask(new Runnable() {
-				@Override
-				public void run() {
-					Entity theEntity = player.world.getEntityByID(message.entityId);
-					if (player.inventory.getCurrentItem() == null || player.inventory.getCurrentItem().isEmpty()) {
-						return;
-					}
-					if (player.inventory.getCurrentItem().getItem() instanceof ICustomReach) {
-						ICustomReach theExtendedReachWeapon = (ICustomReach) player.inventory.getCurrentItem()
-								.getItem();
-						double distanceSq = player.getDistanceSqToEntity(theEntity);
-						double reachSq = theExtendedReachWeapon.reach() * theExtendedReachWeapon.reach();
-						if (reachSq >= distanceSq) {
-							player.attackTargetEntityWithCurrentItem(theEntity);
-						}
-					}
-					return;
-				}
-			});
-			return null;
-		}
-	}
 }

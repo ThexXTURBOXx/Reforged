@@ -28,7 +28,7 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 
 	public ItemBattleAxe(IItemTier material, boolean unbreakable) {
 		super(material, material.getAttackDamage() * 1.5f + 4f, -3.0F,
-				new Item.Builder().maxStackSize(1).defaultMaxDamage(MaterialManager.getMaterialDefinition(material).getMaxUses())
+				new Item.Builder().defaultMaxDamage(material.getMaxUses())
 						.group(ReforgedMod.tabReforged));
 
 		this.unbreakable = unbreakable;

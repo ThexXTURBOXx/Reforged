@@ -6,6 +6,7 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.INBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -13,6 +14,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.api.CompoundTags;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
@@ -23,7 +25,7 @@ public class EntityBoomerang extends AReforgedThrowable {
 
 	public static final String NAME = "boomerang";
 	public static final EntityType<EntityBoomerang> TYPE =
-			EntityType.Builder.create(EntityBoomerang.class, EntityBoomerang::new).build(NAME);
+			ReforgedRegistry.registerEntity(EntityType.Builder.create(EntityBoomerang.class, EntityBoomerang::new).build(NAME));
 
 	public static final DataParameter<Float> THROWER_X = EntityDataManager.createKey(EntityBoomerang.class,
 			DataSerializers.FLOAT);
@@ -222,6 +224,14 @@ public class EntityBoomerang extends AReforgedThrowable {
 
 		if (getItemStack() != null && !getItemStack().isEmpty())
 			compound.setTag("item", getItemStack().write(new NBTTagCompound()));
+	}
+
+	@Override
+	public void deserializeNBT(INBTBase nbt) {
+	}
+
+	@Override
+	public void deserializeNBT(NBTTagCompound nbt) {
 	}
 
 }

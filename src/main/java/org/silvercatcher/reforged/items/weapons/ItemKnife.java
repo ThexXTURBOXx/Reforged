@@ -4,8 +4,10 @@ import com.google.common.collect.Multimap;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
@@ -25,16 +27,11 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 	}
 
 	public ItemKnife(IItemTier material, boolean unbreakable) {
-		super(material);
-
-		setCreativeTab(ReforgedMod.tabReforged);
-
+		super(material, (int) material.getAttackDamage() + 2, -2.4F,
+				new Item.Builder().group(ReforgedMod.tabReforged).defaultMaxDamage(material.getMaxUses()));
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
-
-		setUnlocalizedName(materialDefinition.getPrefixedName("knife"));
-		setMaxDamage(materialDefinition.getMaxUses());
-		setMaxStackSize(1);
+		setRegistryName(new ResourceLocation(ReforgedMod.ID, materialDefinition.getPrefixedName("knife")));
 	}
 
 	@Override
@@ -57,9 +54,9 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 
 		Vec3d look = target.getLookVec();
 		Vec3d attackervec = new Vec3d(attacker.posX - target.posX,
-				(attacker.getEntityBoundingBox().minY + attacker.height / 2) - target.posY + target.getEyeHeight(),
+				(attacker.getBoundingBox().minY + attacker.height / 2) - target.posY + target.getEyeHeight(),
 				attacker.posZ - target.posZ);
-		double d0 = attackervec.lengthVector();
+		double d0 = attackervec.length();
 
 		double d1 = look.dotProduct(attackervec);
 

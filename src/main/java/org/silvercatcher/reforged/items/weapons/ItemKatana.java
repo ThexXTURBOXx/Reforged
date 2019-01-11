@@ -5,9 +5,11 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.silvercatcher.reforged.ReforgedMod;
@@ -26,15 +28,12 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 	}
 
 	public ItemKatana(IItemTier material, boolean unbreakable) {
-		super(material);
+		super(material, 1, -2.4F,
+				new Item.Builder().defaultMaxDamage(material.getMaxUses()).group(ReforgedMod.tabReforged));
 
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
-
-		setUnlocalizedName(materialDefinition.getPrefixedName("katana"));
-		setMaxDamage(materialDefinition.getMaxUses());
-		setMaxStackSize(1);
-		setCreativeTab(ReforgedMod.tabReforged);
+		setRegistryName(new ResourceLocation(ReforgedMod.ID, materialDefinition.getPrefixedName("katana")));
 	}
 
 	@Override
@@ -65,8 +64,8 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 		for (int i = 3; i < 6; i++) {
 
 			ItemStack armorStack = target.getItemStackFromSlot(EntityEquipmentSlot.values()[i]);
-			if (armorStack != null && !armorStack.isEmpty() && armorStack.getItem() instanceof ItemArmor) {
-				armorvalue += ((ItemArmor) armorStack.getItem()).damageReduceAmount;
+			if (!armorStack.isEmpty() && armorStack.getItem() instanceof ItemArmor) {
+				armorvalue += ((ItemArmor) armorStack.getItem()).getDamageReduceAmount();
 			}
 		}
 

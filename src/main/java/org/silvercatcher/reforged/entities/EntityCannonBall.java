@@ -4,14 +4,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.INBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 
 public class EntityCannonBall extends AReforgedThrowable {
 
 	public static final String NAME = "cannon";
 	public static final EntityType<EntityCannonBall> TYPE =
-			EntityType.Builder.create(EntityCannonBall.class, EntityCannonBall::new).build(NAME);
+			ReforgedRegistry.registerEntity(EntityType.Builder.create(EntityCannonBall.class, EntityCannonBall::new).build(NAME));
 
 	public EntityCannonBall(World worldIn) {
 		super(TYPE, worldIn, NAME);
@@ -25,6 +28,14 @@ public class EntityCannonBall extends AReforgedThrowable {
 	@Override
 	protected float getImpactDamage(Entity target) {
 		return 0;
+	}
+
+	@Override
+	public void deserializeNBT(INBTBase nbt) {
+	}
+
+	@Override
+	public void deserializeNBT(NBTTagCompound nbt) {
 	}
 
 }

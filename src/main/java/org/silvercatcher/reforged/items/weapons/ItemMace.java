@@ -2,14 +2,17 @@ package org.silvercatcher.reforged.items.weapons;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.IItemTier;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.IZombieEquippable;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.material.MaterialManager;
+import org.silvercatcher.reforged.props.DefaultStunImpl;
 import org.silvercatcher.reforged.props.IStunProperty;
 
 public class ItemMace extends ExtendedItem implements IZombieEquippable {
@@ -22,12 +25,10 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 	}
 
 	public ItemMace(IItemTier material, boolean unbreakable) {
-		super();
+		super(new Item.Builder().defaultMaxDamage((int) (material.getMaxUses() * 0.5f)));
 		this.unbreakable = unbreakable;
-		setMaxStackSize(1);
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
-		setMaxDamage((int) (materialDefinition.getMaxUses() * 0.5f));
-		setUnlocalizedName(materialDefinition.getPrefixedName("mace"));
+		setRegistryName(new ResourceLocation(ReforgedMod.ID, materialDefinition.getPrefixedName("mace")));
 	}
 
 	@Override
@@ -49,20 +50,18 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 	}
 
 	private Potion getPotion(String name) {
-		return Potion.getPotionFromResourceLocation(name);
+		return Potion.REGISTRY.get(new ResourceLocation(name));
 	}
 
 	@Override
 	public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
-		if (itemRand.nextInt(25) < (8 - zombieSpawnChance())) {
-			IStunProperty prop = target.getCapability(ReforgedMod.STUN_PROP, null);
-			if (prop != null) {
-				prop.setStunned(true);
-				target.addPotionEffect(new PotionEffect(getPotion("slowness"), 3, 10, false, false));
-				target.addPotionEffect(new PotionEffect(getPotion("mining_fatigue"), 3, 10, false, false));
-				target.addPotionEffect(new PotionEffect(getPotion("blindness"), 3, 10, false, false));
-				target.addPotionEffect(new PotionEffect(getPotion("weakness"), 3, 10, false, false));
-			}
+		if (random.nextInt(25) < (8 - zombieSpawnChance())) {
+			IStunProperty prop = target.getCapability(ReforgedMod.STUN_PROP, null).orElse(new DefaultStunImpl());
+			prop.setStunned(true);
+			target.addPotionEffect(new PotionEffect(getPotion("slowness"), 3, 10, false, false));
+			target.addPotionEffect(new PotionEffect(getPotion("mining_fatigue"), 3, 10, false, false));
+			target.addPotionEffect(new PotionEffect(getPotion("blindness"), 3, 10, false, false));
+			target.addPotionEffect(new PotionEffect(getPotion("weakness"), 3, 10, false, false));
 		}
 		if (stack.getItem().isDamageable())
 			stack.damageItem(1, attacker);

@@ -11,7 +11,7 @@ import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
-import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
@@ -21,9 +21,10 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.CompoundTags;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.ItemExtension;
@@ -34,29 +35,22 @@ public class ItemNestOfBees extends ExtendedItem {
 	private static int buildup = 25;
 
 	public ItemNestOfBees() {
-		super();
-		setUnlocalizedName("nest_of_bees");
-		setMaxDamage(80);
-		setMaxStackSize(1);
-		addPropertyOverride(new ResourceLocation("empty"), new IItemPropertyGetter() {
-			@Override
-			@OnlyIn(Dist.CLIENT)
-			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
-				float mrl = 1;
-				if (stack.getItem() instanceof ItemNestOfBees
-						&& CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION) > 0) {
-					mrl = 0;
-				}
-				return mrl;
+		super(new Item.Builder().defaultMaxDamage(80));
+		setRegistryName(new ResourceLocation(ReforgedMod.ID, "nest_of_bees"));
+		addPropertyOverride(new ResourceLocation("empty"), (stack, world, entity) -> {
+			float mrl = 1;
+			if (stack.getItem() instanceof ItemNestOfBees
+					&& CompoundTags.giveCompound(stack).getInt(CompoundTags.AMMUNITION) > 0) {
+				mrl = 0;
 			}
+			return mrl;
 		});
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
-
-		tooltip.add(I18n.format("item.nestofbees.arrows") + ": "
-				+ CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION));
+	public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
+		tooltip.add(new TextComponentString(I18n.format("item.nestofbees.arrows") + ": "
+				+ CompoundTags.giveCompound(stack).getInt(CompoundTags.AMMUNITION)));
 	}
 
 	@Override
@@ -66,8 +60,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-
+	public EnumAction getUseAction(ItemStack stack) {
 		NBTTagCompound compound = CompoundTags.giveCompound(stack);
 
 		if (compound.getBoolean(CompoundTags.ACTIVATED)) {
@@ -77,8 +70,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
-
+	public int getUseDuration(ItemStack stack) {
 		return CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ACTIVATED) ? ItemExtension.USE_DURATON
 				: buildup;
 	}
@@ -92,10 +84,10 @@ public class ItemNestOfBees extends ExtendedItem {
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (hand == EnumHand.MAIN_HAND) {
 			playerIn.setActiveHand(hand);
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
+			return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
 		// System.out.println(playerIn.getItemInUseDuration());
-		return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
+		return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
 	}
 
 	@Override
@@ -103,7 +95,7 @@ public class ItemNestOfBees extends ExtendedItem {
 
 		NBTTagCompound compound = CompoundTags.giveCompound(stack);
 
-		if (compound.getInteger(CompoundTags.AMMUNITION) > 0) {
+		if (compound.getInt(CompoundTags.AMMUNITION) > 0) {
 			compound.setBoolean(CompoundTags.ACTIVATED, true);
 
 			worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ITEM_FIRECHARGE_USE,
@@ -113,8 +105,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	}
 
 	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-
+	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		if (entityIn instanceof EntityPlayer && isSelected) {
 
 			EntityPlayer player = (EntityPlayer) entityIn;
@@ -123,11 +114,11 @@ public class ItemNestOfBees extends ExtendedItem {
 
 			// System.out.println(compound.getBoolean(CompoundTags.ACTIVATED));
 
-			int delay = compound.getInteger(CompoundTags.DELAY);
+			int delay = compound.getInt(CompoundTags.DELAY);
 
 			if (delay == 0) {
 
-				int arrows = compound.getInteger(CompoundTags.AMMUNITION);
+				int arrows = compound.getInt(CompoundTags.AMMUNITION);
 
 				if (arrows == 0)
 					compound.setBoolean(CompoundTags.ACTIVATED, false);
@@ -139,12 +130,12 @@ public class ItemNestOfBees extends ExtendedItem {
 					arrows--;
 				}
 
-				compound.setInteger(CompoundTags.AMMUNITION, arrows);
-				compound.setInteger(CompoundTags.DELAY, shot_delay);
+				compound.setInt(CompoundTags.AMMUNITION, arrows);
+				compound.setInt(CompoundTags.DELAY, shot_delay);
 
 			} else if (compound.getBoolean(CompoundTags.ACTIVATED)) {
 
-				compound.setInteger(CompoundTags.DELAY, Math.max(0, delay - 1));
+				compound.setInt(CompoundTags.DELAY, Math.max(0, delay - 1));
 			}
 		}
 	}
@@ -152,14 +143,14 @@ public class ItemNestOfBees extends ExtendedItem {
 	protected void shoot(World world, EntityPlayer shooter) {
 
 		if (!world.isRemote) {
-			EntityArrow arrow = new ItemArrow().createArrow(world, new ItemStack(Items.ARROW), shooter);
-			arrow.setAim(shooter, shooter.rotationPitch, shooter.rotationYaw, 0.0F, ItemBow.getArrowVelocity(40) * 3.0F,
+			EntityArrow arrow = new ItemArrow(new Item.Builder()).createArrow(world, new ItemStack(Items.ARROW), shooter);
+			arrow.shoot(shooter, shooter.rotationPitch, shooter.rotationYaw, 0.0F, ItemBow.getArrowVelocity(40) * 3.0F,
 					1.0F);
 			arrow.setDamage(2);
-			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ, 3 + itemRand.nextFloat() / 2f, 1.5f);
+			arrow.shoot(arrow.motionX, arrow.motionY, arrow.motionZ, 3 + random.nextFloat() / 2f, 1.5f);
 			world.spawnEntity(arrow);
 		}
-		world.playSound(null, shooter.posX, shooter.posY, shooter.posZ, SoundEvents.ENTITY_FIREWORK_LAUNCH,
+		world.playSound(null, shooter.posX, shooter.posY, shooter.posZ, SoundEvents.ENTITY_FIREWORK_ROCKET_LAUNCH,
 				SoundCategory.MASTER, 3.0f, 1.0f);
 	}
 }

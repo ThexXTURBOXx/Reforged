@@ -3,7 +3,9 @@ package org.silvercatcher.reforged.items.weapons;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTier;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
@@ -14,7 +16,7 @@ import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 public class ItemBlunderbuss extends AReloadable {
 
 	public ItemBlunderbuss() {
-		super("blunderbuss", "shotgun_shoot");
+		super(new Item.Builder(), "blunderbuss", "shotgun_shoot");
 	}
 
 	@Override

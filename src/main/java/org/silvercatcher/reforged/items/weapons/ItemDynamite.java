@@ -1,11 +1,14 @@
 package org.silvercatcher.reforged.items.weapons;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.entities.EntityDynamite;
 import org.silvercatcher.reforged.util.Helpers;
@@ -13,9 +16,8 @@ import org.silvercatcher.reforged.util.Helpers;
 public class ItemDynamite extends ExtendedItem {
 
 	public ItemDynamite() {
-		super();
-		setUnlocalizedName("dynamite");
-		setMaxStackSize(64);
+		super(new Item.Builder());
+		setRegistryName(new ResourceLocation(ReforgedMod.ID, "dynamite"));
 	}
 
 	@Override
@@ -31,7 +33,7 @@ public class ItemDynamite extends ExtendedItem {
 				worldIn.spawnEntity(new EntityDynamite(worldIn, playerIn, playerIn.getHeldItem(hand)));
 			}
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItem(hand));
+		return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(hand));
 	}
 
 }

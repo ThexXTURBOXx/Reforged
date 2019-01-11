@@ -38,13 +38,14 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 
 public class EntityCrossbowBolt extends Entity implements IProjectile {
 
 	public static final String NAME = "crossbow";
 	public static final EntityType<EntityCrossbowBolt> TYPE =
-			EntityType.Builder.create(EntityCrossbowBolt.class, EntityCrossbowBolt::new).build(NAME);
+			ReforgedRegistry.registerEntity(EntityType.Builder.create(EntityCrossbowBolt.class, EntityCrossbowBolt::new).build(NAME));
 
 	private static final Predicate<Entity> ARROW_TARGETS = EntitySelectors.NOT_SPECTATING.and(EntitySelectors.IS_ALIVE.and(Entity::canBeCollidedWith));
 	private static final DataParameter<Byte> CRITICAL = EntityDataManager.createKey(net.minecraft.entity.projectile.EntityArrow.class, DataSerializers.BYTE);
@@ -75,7 +76,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 	 */
 	private int knockbackStrength;
 
-	protected EntityCrossbowBolt(World world) {
+	public EntityCrossbowBolt(World world) {
 		super(TYPE, world);
 		this.xTile = -1;
 		this.yTile = -1;
@@ -85,12 +86,12 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 		this.setSize(0.5F, 0.5F);
 	}
 
-	protected EntityCrossbowBolt(double x, double y, double z, World world) {
+	public EntityCrossbowBolt(double x, double y, double z, World world) {
 		this(world);
 		this.setPosition(x, y, z);
 	}
 
-	protected EntityCrossbowBolt(EntityLivingBase shooter, World world) {
+	public EntityCrossbowBolt(EntityLivingBase shooter, World world) {
 		this(shooter.posX, shooter.posY + (double) shooter.getEyeHeight() - (double) 0.1F, shooter.posZ, world);
 		this.shootingEntity = shooter;
 		if (shooter instanceof EntityPlayer) {
@@ -116,7 +117,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 		this.dataManager.register(CRITICAL, (byte) 0);
 	}
 
-	public void shoot(Entity shooter, float pitch, float yaw, float p_184547_4_, float velocity, float inaccuracy) {
+	public void shoot(Entity shooter, float pitch, float yaw, float velocity, float inaccuracy) {
 		float f = -MathHelper.sin(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
 		float f1 = -MathHelper.sin(pitch * ((float) Math.PI / 180F));
 		float f2 = MathHelper.cos(yaw * ((float) Math.PI / 180F)) * MathHelper.cos(pitch * ((float) Math.PI / 180F));
@@ -644,4 +645,5 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 			return values()[ordinal];
 		}
 	}
+
 }

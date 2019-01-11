@@ -4,21 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemTier;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-import net.minecraftforge.oredict.RecipeSorter;
-import net.minecraftforge.oredict.RecipeSorter.Category;
+import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
+import org.silvercatcher.reforged.api.ICustomReach;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.blocks.BlockCaltrop;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
@@ -55,8 +56,10 @@ public class ReforgedRegistry {
 	/**
 	 * Every item on that list gets registered
 	 */
-	public static List<Item> registrationList = new ArrayList<Item>();
-	public static List<Block> registrationListBlocks = new ArrayList<Block>();
+	public static List<Item> registrationList = new ArrayList<>();
+	public static List<Block> registrationListBlocks = new ArrayList<>();
+	public static List<EntityType<?>> registrationListEntities = new ArrayList<>();
+	public static List<TileEntityType<?>> registrationListTileEntities = new ArrayList<>();
 
 	// Registry
 
@@ -74,12 +77,12 @@ public class ReforgedRegistry {
 		}
 
 		if (GlobalValues.MUSKET) {
-			registrationList.add(ReforgedAdditions.MUSKET_BARREL = new Item().setUnlocalizedName("musket_barrel")
-					.setCreativeTab(ReforgedMod.tabReforged));
-			registrationList.add(ReforgedAdditions.BLUNDERBUSS_BARREL = new Item()
-					.setUnlocalizedName("blunderbuss_barrel").setCreativeTab(ReforgedMod.tabReforged));
-			registrationList.add(ReforgedAdditions.GUN_STOCK = new Item().setUnlocalizedName("gun_stock")
-					.setCreativeTab(ReforgedMod.tabReforged));
+			registrationList.add(ReforgedAdditions.MUSKET_BARREL = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
+					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "musket_barrel")));
+			registrationList.add(ReforgedAdditions.BLUNDERBUSS_BARREL = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
+					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "blunderbuss_barrel")));
+			registrationList.add(ReforgedAdditions.GUN_STOCK = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
+					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "gun_stock")));
 			registrationList.add(ReforgedAdditions.MUSKET = new ItemMusket());
 			if (GlobalValues.KNIFE) {
 				registrationList
@@ -197,31 +200,38 @@ public class ReforgedRegistry {
 		}
 
 		if (GlobalValues.CANNON) {
-			registrationList.add(ReforgedAdditions.CANNON = new ItemCannon().setUnlocalizedName("cannon")
-					.setCreativeTab(ReforgedMod.tabReforged));
-			registrationList.add(ReforgedAdditions.CANNON_BALL = new Item().setUnlocalizedName("cannon_ball")
-					.setCreativeTab(ReforgedMod.tabReforged));
+			registrationList.add(ReforgedAdditions.CANNON = new ItemCannon());
+			registrationList.add(ReforgedAdditions.CANNON_BALL = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
+					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "cannon_ball")));
 		}
 	}
 
 	/**
 	 * Helper method for registering an Entity
 	 *
-	 * @param c    The class of the Entity
-	 * @param name The name for the Entity
+	 * @param entityType The type to register
 	 */
-	public static <T extends Entity> void registerEntity(Class<T> c, String name) {
-		EntityRegistry.registerModEntity(new ResourceLocation(ReforgedMod.ID, name), c, name, ++counterEntities,
-				ReforgedMod.instance, 120, 1, true);
+	public static <T extends Entity> EntityType<T> registerEntity(EntityType<T> entityType) {
+		registrationListEntities.add(entityType);
+		return entityType;
+	}
+
+	/**
+	 * Helper method for registering an Entity
+	 *
+	 * @param entityType The type to register
+	 */
+	public static <T extends TileEntity> TileEntityType<T> registerTileEntity(TileEntityType<T> entityType) {
+		registrationListTileEntities.add(entityType);
+		return entityType;
 	}
 
 	/**
 	 * Helper method for registering our EventHandler
 	 *
-	 * @param ReforgedEvents The instance of our EventHandler
+	 * @param event The instance of our EventHandler
 	 */
 	public static void registerEventHandler(Object event) {
-		FMLCommonHandler.instance().bus().register(event);
 		MinecraftForge.EVENT_BUS.register(event);
 	}
 
@@ -231,10 +241,9 @@ public class ReforgedRegistry {
 	 * @param name        The name for the Recipe
 	 * @param recipe      The instance of the Recipe
 	 * @param recipeclass The class of the Recipe
-	 * @param category    {@link Category#SHAPED} or {@link Category#SHAPELESS}?
 	 */
-	public static void registerIRecipe(String name, IRecipe recipe, Class<?> recipeclass, Category category) {
-		String catString;
+	public static void registerIRecipe(String name, IRecipe recipe, Class<?> recipeclass) {
+		/*String catString;
 		if (category == Category.SHAPELESS) {
 			catString = "after:minecraft:shapeless";
 		} else if (category == Category.SHAPED) {
@@ -243,17 +252,56 @@ public class ReforgedRegistry {
 			throw new IllegalArgumentException("The Category called " + category.name() + " couldn't be found!");
 		}
 		// GameRegistry.addRecipe(recipe);
-		RecipeSorter.register(ReforgedMod.ID + ":" + name, recipeclass, category, catString);
+		RecipeSorter.register(ReforgedMod.ID + ":" + name, recipeclass, category, catString);*/
 	}
 
 	/**
 	 * Registers all our Packets
 	 */
 	public static void registerPackets() {
-		ReforgedMod.network = NetworkRegistry.INSTANCE.newSimpleChannel(ReforgedMod.ID);
+		ReforgedMod.network = NetworkRegistry.newSimpleChannel(new ResourceLocation(ReforgedMod.ID, "reforged_channel"),
+				() -> "1.13", (hallo) -> true, (hallo) -> true);
 		int packetId = 0;
-		ReforgedMod.network.registerMessage(MessageCustomReachAttack.Handler.class, MessageCustomReachAttack.class,
-				packetId++, Side.SERVER);
+		ReforgedMod.network.registerMessage(packetId++, MessageCustomReachAttack.class,
+				(message, buffer) -> buffer.writeVarInt(message.getEntityId()),
+				(buffer) -> new MessageCustomReachAttack(buffer.readVarInt()),
+				(message, supplier) -> {
+					final EntityPlayerMP player = supplier.get().getSender();
+					if (player == null || player.getServer() == null)
+						return;
+					player.getServer().addScheduledTask(() -> {
+						Entity theEntity = player.world.getEntityByID(message.getEntityId());
+						if (player.inventory.getCurrentItem().isEmpty() || theEntity == null)
+							return;
+						if (player.inventory.getCurrentItem().getItem() instanceof ICustomReach) {
+							ICustomReach theExtendedReachWeapon = (ICustomReach) player.inventory.getCurrentItem()
+									.getItem();
+							double distanceSq = player.getDistanceSq(theEntity);
+							double reachSq = theExtendedReachWeapon.reach() * theExtendedReachWeapon.reach();
+							if (reachSq >= distanceSq) {
+								player.attackTargetEntityWithCurrentItem(theEntity);
+							}
+						}
+					});
+				});
+	}
+
+	@SubscribeEvent
+	/** Registers all entities out of the registrationListEntities */
+	public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
+		IForgeRegistry<EntityType<?>> reg = event.getRegistry();
+		for (EntityType<?> entityType : registrationListEntities) {
+			reg.register(entityType);
+		}
+	}
+
+	@SubscribeEvent
+	/** Registers all entities out of the registrationListTileEntities */
+	public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
+		IForgeRegistry<TileEntityType<?>> reg = event.getRegistry();
+		for (TileEntityType<?> entityType : registrationListTileEntities) {
+			reg.register(entityType);
+		}
 	}
 
 	@SubscribeEvent
@@ -262,7 +310,7 @@ public class ReforgedRegistry {
 		IForgeRegistry<Block> reg = event.getRegistry();
 		for (Block block : registrationListBlocks) {
 			reg.register(block
-					.setRegistryName(new ResourceLocation(ReforgedMod.ID, block.getUnlocalizedName().substring(5))));
+					.setRegistryName(new ResourceLocation(ReforgedMod.ID, block.getRegistryName().getPath().substring(5))));
 		}
 	}
 
@@ -273,12 +321,12 @@ public class ReforgedRegistry {
 		// Register all Items
 		for (Item item : registrationList) {
 			reg.register(
-					item.setRegistryName(new ResourceLocation(ReforgedMod.ID, item.getUnlocalizedName().substring(5))));
+					item.setRegistryName(new ResourceLocation(ReforgedMod.ID, item.getRegistryName().getPath().substring(5))));
 		}
 		for (Block block : registrationListBlocks) {
-			ItemBlock itemBlock = new ItemBlock(block);
+			ItemBlock itemBlock = new ItemBlock(block, new Item.Builder());
 			itemBlock.setRegistryName(block.getRegistryName());
-			ReforgedMod.proxy.registerItemRenderer(itemBlock, 0, block.getUnlocalizedName().substring(5));
+			ReforgedMod.proxy.registerItemRenderer(itemBlock, 0, block.getRegistryName().getPath().substring(5));
 			reg.register(itemBlock);
 		}
 

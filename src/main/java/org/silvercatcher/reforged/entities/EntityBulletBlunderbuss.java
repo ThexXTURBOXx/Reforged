@@ -4,14 +4,17 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.INBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 
 public class EntityBulletBlunderbuss extends AReforgedThrowable {
 
 	public static final String NAME = "blunderbuss";
 	public static final EntityType<EntityBulletBlunderbuss> TYPE =
-			EntityType.Builder.create(EntityBulletBlunderbuss.class, EntityBulletBlunderbuss::new).build(NAME);
+			ReforgedRegistry.registerEntity(EntityType.Builder.create(EntityBulletBlunderbuss.class, EntityBulletBlunderbuss::new).build(NAME));
 
 	public EntityBulletBlunderbuss(World worldIn) {
 		super(TYPE, worldIn, NAME);
@@ -57,4 +60,13 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 			remove();
 		}
 	}
+
+	@Override
+	public void deserializeNBT(INBTBase nbt) {
+	}
+
+	@Override
+	public void deserializeNBT(NBTTagCompound nbt) {
+	}
+
 }

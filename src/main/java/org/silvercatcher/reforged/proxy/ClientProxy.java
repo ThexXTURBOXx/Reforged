@@ -1,10 +1,7 @@
 package org.silvercatcher.reforged.proxy;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -12,9 +9,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
@@ -91,8 +86,8 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void registerItemRenderer(Item item, int meta, String id) {
 		super.registerItemRenderer(item, meta, id);
-		ModelLoader.setCustomModelResourceLocation(item, meta,
-				new ModelResourceLocation(ReforgedMod.ID + ":" + id, "inventory"));
+		/*ModelLoader.setCustomModelResourceLocation(item, meta,
+				new ModelResourceLocation(ReforgedMod.ID + ":" + id, "inventory"));*/
 	}
 
 	@Override
@@ -101,7 +96,7 @@ public class ClientProxy extends CommonProxy {
 
 		String inventory = "inventory";
 
-		for (Item item : ReforgedRegistry.registrationList) {
+		/*for (Item item : ReforgedRegistry.registrationList) {
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(
 					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
 		}
@@ -109,7 +104,7 @@ public class ClientProxy extends CommonProxy {
 		for (Block item : ReforgedRegistry.registrationListBlocks) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(item), 0, new ModelResourceLocation(
 					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
-		}
+		}*/
 
 	}
 

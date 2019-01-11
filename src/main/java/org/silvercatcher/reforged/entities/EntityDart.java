@@ -5,6 +5,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EntityType;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.INBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -14,6 +15,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 
@@ -21,7 +23,7 @@ public class EntityDart extends AReforgedThrowable {
 
 	public static final String NAME = "dart";
 	public static final EntityType<EntityDart> TYPE =
-			EntityType.Builder.create(EntityDart.class, EntityDart::new).build(NAME);
+			ReforgedRegistry.registerEntity(EntityType.Builder.create(EntityDart.class, EntityDart::new).build(NAME));
 
 	public static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(EntityDart.class,
 			DataSerializers.ITEM_STACK);
@@ -138,6 +140,14 @@ public class EntityDart extends AReforgedThrowable {
 		if (getItemStack() != null && !getItemStack().isEmpty()) {
 			compound.setTag("item", getItemStack().write(new NBTTagCompound()));
 		}
+	}
+
+	@Override
+	public void deserializeNBT(INBTBase nbt) {
+	}
+
+	@Override
+	public void deserializeNBT(NBTTagCompound nbt) {
 	}
 
 }

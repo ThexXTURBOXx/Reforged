@@ -3,7 +3,9 @@ package org.silvercatcher.reforged.items.weapons;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTier;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
@@ -14,7 +16,11 @@ import org.silvercatcher.reforged.entities.EntityBulletMusket;
 public class ItemMusket extends AReloadable {
 
 	public ItemMusket() {
-		super("musket", "musket_shoot");
+		this("musket");
+	}
+
+	public ItemMusket(String name) {
+		super(new Item.Builder(), name, "musket_shoot");
 	}
 
 	@Override
@@ -24,13 +30,11 @@ public class ItemMusket extends AReloadable {
 
 	@Override
 	public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-
 		return (repair.getItem() == Items.IRON_INGOT);
 	}
 
 	@Override
 	public int getItemEnchantability() {
-
 		return ItemTier.IRON.getEnchantability();
 	}
 

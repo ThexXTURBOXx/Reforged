@@ -18,6 +18,8 @@ import net.minecraft.util.math.RayTraceFluidMode;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
 public class Helpers {
@@ -107,9 +109,12 @@ public class Helpers {
 	/**
 	 * Thanks to Jabelar!!!
 	 */
+	@OnlyIn(Dist.CLIENT)
 	public static RayTraceResult getMouseOverExtended(float distance) {
-		Minecraft mc = FMLClientHandler.instance().getClient();
+		Minecraft mc = Minecraft.getInstance();
 		Entity theRenderViewEntity = mc.getRenderViewEntity();
+		if (theRenderViewEntity == null)
+			return null;
 		AxisAlignedBB theViewBoundingBox = new AxisAlignedBB(theRenderViewEntity.posX - 0.5D,
 				theRenderViewEntity.posY - 0.0D, theRenderViewEntity.posZ - 0.5D, theRenderViewEntity.posX + 0.5D,
 				theRenderViewEntity.posY + 1.5D, theRenderViewEntity.posZ + 0.5D);

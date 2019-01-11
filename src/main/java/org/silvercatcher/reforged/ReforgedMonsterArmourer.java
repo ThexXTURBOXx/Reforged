@@ -26,12 +26,11 @@ public class ReforgedMonsterArmourer {
 	private Random random = new Random();
 
 	private void equipZombie(EntityZombie zombie) {
-		if ((zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND) == null
-				|| zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).isEmpty()) && random.nextInt(10) == 0) {
+		if (zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).isEmpty() && random.nextInt(10) == 0) {
 			Item item = randomFrom(zombieWeapons);
 			zombie.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(item));
 
-			zombie.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)
+			zombie.getAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)
 					.applyModifier(new AttributeModifier(itemModifierUUID, "Weapon Damage", 99f, 0));
 
 		}
@@ -47,9 +46,9 @@ public class ReforgedMonsterArmourer {
 
 	@SubscribeEvent
 	public void onWorldLoad(WorldEvent.Load e) {
-		if (e.isCanceled() || e.getWorld().isRemote)
+		if (e.isCanceled() || e.getWorld().isRemote())
 			return;
-		List<Item> list = new ArrayList<Item>();
+		List<Item> list = new ArrayList<>();
 		for (Item i : ReforgedRegistry.registrationList) {
 			if (i instanceof IZombieEquippable) {
 				for (int c = 0; c < ((IZombieEquippable) i).zombieSpawnChance(); c++)
@@ -59,7 +58,7 @@ public class ReforgedMonsterArmourer {
 		if (list.isEmpty())
 			zombieWeapons = null;
 		else
-			zombieWeapons = list.toArray(new Item[list.size()]);
+			zombieWeapons = list.toArray(new Item[0]);
 	}
 
 	private Item randomFrom(Item[] selection) {

@@ -38,9 +38,9 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	private Item ammo;
 	private String shootsound;
 
-	public AReloadable(Item.Builder builder, ResourceLocation name, String shootsound) {
-		super(builder.maxStackSize(1).defaultMaxDamage(100).group(ReforgedMod.tabReforged));
-		setRegistryName(name);
+	public AReloadable(Item.Builder builder, String name, String shootsound) {
+		super(builder.defaultMaxDamage(100).group(ReforgedMod.tabReforged));
+		setRegistryName(new ResourceLocation(ReforgedMod.ID, name));
 		this.shootsound = shootsound;
 	}
 

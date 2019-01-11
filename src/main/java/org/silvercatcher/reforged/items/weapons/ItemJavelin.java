@@ -4,12 +4,16 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTier;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.ItemExtension;
 import org.silvercatcher.reforged.entities.EntityJavelin;
@@ -18,10 +22,8 @@ import org.silvercatcher.reforged.util.Helpers;
 public class ItemJavelin extends ExtendedItem {
 
 	public ItemJavelin() {
-		super();
-		setUnlocalizedName("javelin");
-		setMaxStackSize(8);
-		setMaxDamage(32);
+		super(new Item.Builder().defaultMaxDamage(32));
+		setRegistryName(new ResourceLocation(ReforgedMod.ID, "javelin"));
 	}
 
 	@Override
@@ -35,12 +37,12 @@ public class ItemJavelin extends ExtendedItem {
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
+	public EnumAction getUseAction(ItemStack stack) {
 		return EnumAction.BOW;
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
+	public int getUseDuration(ItemStack stack) {
 		return ItemExtension.USE_DURATON;
 	}
 
@@ -55,9 +57,9 @@ public class ItemJavelin extends ExtendedItem {
 			if (playerIn.isCreative() || Helpers.getInventorySlotContainItem(playerIn, this) >= 0) {
 				playerIn.setActiveHand(hand);
 			}
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
+			return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
+		return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
 	}
 
 	@Override
@@ -73,17 +75,17 @@ public class ItemJavelin extends ExtendedItem {
 
 			ItemStack throwStack = stack.copy();
 
-			if (timeLeft <= getMaxItemUseDuration(stack) - 7
+			if (timeLeft <= getUseDuration(stack) - 7
 					&& (playerIn.isCreative() || Helpers.consumeInventoryItem(playerIn, this))) {
 
 				worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_ARROW_SHOOT,
-						SoundCategory.MASTER, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+						SoundCategory.MASTER, 0.5F, 0.4F / (random.nextFloat() * 0.4F + 0.8F));
 				if (!worldIn.isRemote) {
 					if (throwStack.getCount() > 1) {
-						throwStack = throwStack.splitStack(1);
+						throwStack = throwStack.split(1);
 					}
 					worldIn.spawnEntity(
-							new EntityJavelin(worldIn, playerIn, throwStack, stack.getMaxItemUseDuration() - timeLeft));
+							new EntityJavelin(worldIn, playerIn, throwStack, stack.getUseDuration() - timeLeft));
 				}
 			}
 		}

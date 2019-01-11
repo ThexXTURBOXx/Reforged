@@ -51,7 +51,7 @@ public class ReloadOverlay extends Gui {
 
 			ItemStack equipped = player.inventory.getCurrentItem();
 
-			if (equipped != null && !equipped.isEmpty() && equipped.getItem() instanceof AReloadable) {
+			if (!equipped.isEmpty() && equipped.getItem() instanceof AReloadable) {
 
 				AReloadable reloadable = (AReloadable) equipped.getItem();
 
@@ -93,8 +93,8 @@ public class ReloadOverlay extends Gui {
 					}
 				}
 
-				int x0 = event.getResolution().getScaledWidth() / 2 - 88 + i * 20;
-				int y0 = event.getResolution().getScaledHeight() - 3;
+				int x0 = minecraft.mainWindow.getScaledWidth() / 2 - 88 + i * 20;
+				int y0 = minecraft.mainWindow.getScaledHeight() - 3;
 
 				Helpers.drawRectangle(x0, y0 - (int) (done * 16), x0 + 16, y0, color);
 			}
