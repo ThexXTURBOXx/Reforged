@@ -76,9 +76,9 @@ public class ItemBoomerang extends ExtendedItem {
 					worldIn.spawnEntity(boomerang);
 				}
 			}
-			return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
+			return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
+		return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
 	}
 
 }

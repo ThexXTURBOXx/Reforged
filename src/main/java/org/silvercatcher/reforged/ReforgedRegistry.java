@@ -10,7 +10,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemTier;
 import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -22,6 +21,16 @@ import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.api.ICustomReach;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.blocks.BlockCaltrop;
+import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
+import org.silvercatcher.reforged.entities.EntityBulletMusket;
+import org.silvercatcher.reforged.entities.EntityCannon;
+import org.silvercatcher.reforged.entities.EntityCannonBall;
+import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
+import org.silvercatcher.reforged.entities.EntityDart;
+import org.silvercatcher.reforged.entities.EntityDynamite;
+import org.silvercatcher.reforged.entities.EntityJavelin;
+import org.silvercatcher.reforged.entities.TileEntityCaltrop;
 import org.silvercatcher.reforged.items.others.ItemArrowBundle;
 import org.silvercatcher.reforged.items.others.ItemBulletBlunderbuss;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;
@@ -57,9 +66,6 @@ public class ReforgedRegistry {
 	public static List<Block> registrationListBlocks = new ArrayList<>();
 	public static List<EntityType<?>> registrationListEntities = new ArrayList<>();
 	public static List<TileEntityType<?>> registrationListTileEntities = new ArrayList<>();
-
-	private static boolean blocksCreated = false,
-			itemsCreated = false;
 
 	// Registry
 
@@ -200,8 +206,6 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.CANNON_BALL = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
 					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "cannon_ball")));
 		}
-
-		itemsCreated = true;
 	}
 
 	/**
@@ -211,28 +215,60 @@ public class ReforgedRegistry {
 		if (GlobalValues.CALTROP) {
 			registrationListBlocks.add(ReforgedAdditions.CALTROP = new BlockCaltrop());
 		}
-
-		blocksCreated = true;
 	}
 
 	/**
-	 * Helper method for registering an Entity
-	 *
-	 * @param entityType The type to register
+	 * Adds all entity types to the registrationListEntities
 	 */
-	public static <T extends Entity> EntityType<T> registerEntity(EntityType<T> entityType) {
-		registrationListEntities.add(entityType);
-		return entityType;
+	public static void createEntities() {
+		if (GlobalValues.BOOMERANG) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_BOOMERANG =
+					EntityType.Builder.create(EntityBoomerang.class, EntityBoomerang::new).build(EntityBoomerang.NAME));
+		}
+
+		if (GlobalValues.MUSKET) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_BLUNDERBUSS =
+					EntityType.Builder.create(EntityBulletBlunderbuss.class, EntityBulletBlunderbuss::new).build(EntityBulletBlunderbuss.NAME));
+			registrationListEntities.add(ReforgedAdditions.ENTITY_MUSKET =
+					EntityType.Builder.create(EntityBulletMusket.class, EntityBulletMusket::new).build(EntityBulletMusket.NAME));
+		}
+
+		if (GlobalValues.CANNON) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_CANNON =
+					EntityType.Builder.create(EntityCannon.class, EntityCannon::new).build(EntityCannon.NAME));
+			registrationListEntities.add(ReforgedAdditions.ENTITY_CANNON_BALL =
+					EntityType.Builder.create(EntityCannonBall.class, EntityCannonBall::new).build(EntityCannonBall.NAME));
+		}
+
+		if (GlobalValues.CROSSBOW) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_CROSSBOW =
+					EntityType.Builder.create(EntityCrossbowBolt.class, EntityCrossbowBolt::new).build(EntityCrossbowBolt.NAME));
+		}
+
+		if (GlobalValues.BLOWGUN) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_DART =
+					EntityType.Builder.create(EntityDart.class, EntityDart::new).build(EntityDart.NAME));
+		}
+
+		if (GlobalValues.DYNAMITE) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_DYNAMITE =
+					EntityType.Builder.create(EntityDynamite.class, EntityDynamite::new).build(EntityDynamite.NAME));
+		}
+
+		if (GlobalValues.JAVELIN) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_JAVELIN =
+					EntityType.Builder.create(EntityJavelin.class, EntityJavelin::new).build(EntityJavelin.NAME));
+		}
 	}
 
 	/**
-	 * Helper method for registering an Entity
-	 *
-	 * @param entityType The type to register
+	 * Adds all entity types to the registrationListTileEntities
 	 */
-	public static <T extends TileEntity> TileEntityType<T> registerTileEntity(TileEntityType<T> entityType) {
-		registrationListTileEntities.add(entityType);
-		return entityType;
+	public static void createTileEntities() {
+		if (GlobalValues.CALTROP) {
+			registrationListTileEntities.add(ReforgedAdditions.TILE_ENTITY_CALTROP =
+					TileEntityType.Builder.create(TileEntityCaltrop::new).build(null));
+		}
 	}
 
 	/**
@@ -298,47 +334,58 @@ public class ReforgedRegistry {
 	@SubscribeEvent
 	/** Registers all entities out of the registrationListEntities */
 	public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-		IForgeRegistry<EntityType<?>> reg = event.getRegistry();
-		for (EntityType<?> entityType : registrationListEntities) {
-			reg.register(entityType);
+		System.out.println("REGENTITIRIIR");
+		if (registrationListEntities.isEmpty()) {
+			createEntities();
+			IForgeRegistry<EntityType<?>> reg = event.getRegistry();
+			for (EntityType<?> entityType : registrationListEntities) {
+				reg.register(entityType);
+				System.out.println(entityType.getTranslationKey());
+			}
 		}
 	}
 
 	@SubscribeEvent
 	/** Registers all entities out of the registrationListTileEntities */
 	public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-		IForgeRegistry<TileEntityType<?>> reg = event.getRegistry();
-		for (TileEntityType<?> entityType : registrationListTileEntities) {
-			reg.register(entityType);
+		System.out.println("REGENTIDASDSDSATIRIIR");
+		if (registrationListTileEntities.isEmpty()) {
+			createTileEntities();
+			IForgeRegistry<TileEntityType<?>> reg = event.getRegistry();
+			for (TileEntityType<?> entityType : registrationListTileEntities) {
+				reg.register(entityType);
+			}
 		}
 	}
 
 	@SubscribeEvent
 	/** Registers all blocks out of the registrationListBlocks */
 	public void registerBlocks(RegistryEvent.Register<Block> event) {
-		if (!blocksCreated)
+		if (registrationListBlocks.isEmpty()) {
 			createBlocks();
-		IForgeRegistry<Block> reg = event.getRegistry();
-		for (Block block : registrationListBlocks) {
-			reg.register(block);
+			IForgeRegistry<Block> reg = event.getRegistry();
+			for (Block block : registrationListBlocks) {
+				reg.register(block);
+			}
 		}
 	}
 
 	@SubscribeEvent
 	/** Registers all items out of the registrationList */
 	public void registerItems(RegistryEvent.Register<Item> event) {
-		if (!itemsCreated)
-			createItems();
-		if (!blocksCreated)
-			createBlocks();
 		IForgeRegistry<Item> reg = event.getRegistry();
-		// Register all Items
-		for (Item item : registrationList) {
-			reg.register(item);
+		if (registrationList.isEmpty()) {
+			createItems();
+			for (Item item : registrationList) {
+				reg.register(item);
+			}
 		}
+		if (registrationListBlocks.isEmpty())
+			createBlocks();
 		for (Block block : registrationListBlocks) {
 			ItemBlock itemBlock = new ItemBlock(block, new Item.Builder().group(ReforgedMod.tabReforged));
-			itemBlock.setRegistryName(block.getRegistryName());
+			ResourceLocation rs = block.getRegistryName() == null ? new ResourceLocation(ReforgedMod.ID, "broken_name") : block.getRegistryName();
+			itemBlock.setRegistryName(rs);
 			ReforgedMod.proxy.registerItemRenderer(itemBlock, 0, block.getRegistryName().getNamespace() + ":" + block.getRegistryName().getPath());
 			reg.register(itemBlock);
 		}

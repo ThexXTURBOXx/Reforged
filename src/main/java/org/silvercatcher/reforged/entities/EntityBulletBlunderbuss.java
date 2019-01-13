@@ -2,26 +2,23 @@ package org.silvercatcher.reforged.entities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.INBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 
 public class EntityBulletBlunderbuss extends AReforgedThrowable {
 
 	public static final String NAME = "blunderbuss";
-	public static final EntityType<EntityBulletBlunderbuss> TYPE =
-			ReforgedRegistry.registerEntity(EntityType.Builder.create(EntityBulletBlunderbuss.class, EntityBulletBlunderbuss::new).build(NAME));
 
 	public EntityBulletBlunderbuss(World worldIn) {
-		super(TYPE, worldIn, NAME);
+		super(ReforgedAdditions.ENTITY_BLUNDERBUSS, worldIn, NAME);
 	}
 
 	public EntityBulletBlunderbuss(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
-		super(TYPE, worldIn, throwerIn, stack, NAME);
+		super(ReforgedAdditions.ENTITY_BLUNDERBUSS, worldIn, throwerIn, stack, NAME);
 		float randomNumX = rand.nextInt(21);
 		float randomNumY = rand.nextInt(21);
 		float randomNumZ = rand.nextInt(21);

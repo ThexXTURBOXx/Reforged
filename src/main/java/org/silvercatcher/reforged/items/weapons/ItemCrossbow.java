@@ -147,9 +147,9 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 
 		NBTTagCompound compound = CompoundTags.giveCompound(stack);
 
-		if (!compound.hasKey(CompoundTags.AMMUNITION)) {
+		if (!compound.hasUniqueId(CompoundTags.AMMUNITION)) {
 
-			compound.setByte(CompoundTags.AMMUNITION, empty);
+			compound.putByte(CompoundTags.AMMUNITION, empty);
 		}
 		return compound;
 	}
@@ -171,15 +171,15 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 						|| Helpers.consumeInventoryItem(playerIn, ReforgedAdditions.CROSSBOW_BOLT)) {
 					loadState = loading;
 					if (compound.getByte(CompoundTags.AMMUNITION) == empty) {
-						compound.setBoolean(CompoundTags.STARTED, true);
-						compound.setInt(CompoundTags.TIME, 0);
+						compound.putBoolean(CompoundTags.STARTED, true);
+						compound.putInt(CompoundTags.TIME, 0);
 					}
 				} else {
 					Helpers.playSound(worldIn, playerIn, "crossbow_reload", 1.0f, 0.7f);
 				}
 			}
 
-			compound.setByte(CompoundTags.AMMUNITION, loadState);
+			compound.putByte(CompoundTags.AMMUNITION, loadState);
 
 			if (compound.getInt(CompoundTags.TIME) <= 0 || !worldIn.isRemote
 					|| compound.getInt(CompoundTags.TIME) >= getReloadTotal() - 1) {
@@ -202,7 +202,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 		if (loadState == loading) {
 			loadState = loaded;
 		}
-		giveCompound(stack).setByte(CompoundTags.AMMUNITION, loadState);
+		giveCompound(stack).putByte(CompoundTags.AMMUNITION, loadState);
 		return stack;
 	}
 
@@ -220,10 +220,10 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 					playerIn.renderBrokenItemStack(stack);
 					Helpers.destroyCurrentEquippedItem(playerIn);
 				}
-				compound.setByte(CompoundTags.AMMUNITION, empty);
-				compound.setBoolean(CompoundTags.STARTED, false);
+				compound.putByte(CompoundTags.AMMUNITION, empty);
+				compound.putBoolean(CompoundTags.STARTED, false);
 			}
-			compound.setInt(CompoundTags.TIME, -1);
+			compound.putInt(CompoundTags.TIME, -1);
 		}
 	}
 
@@ -231,7 +231,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	public void inventoryTick(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
 		super.inventoryTick(stack, worldIn, entityIn, itemSlot, isSelected);
 		if (giveCompound(stack).getBoolean(CompoundTags.STARTED) && getLoadState(stack) == loading) {
-			giveCompound(stack).setInt(CompoundTags.TIME, getReloadTime(stack) + 1);
+			giveCompound(stack).putInt(CompoundTags.TIME, getReloadTime(stack) + 1);
 		}
 	}
 

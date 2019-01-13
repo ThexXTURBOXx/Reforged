@@ -17,13 +17,13 @@ import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.capabilities.OptionalCapabilityInstance;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.WorldTickEvent;
 import org.silvercatcher.reforged.api.ICustomReach;
@@ -45,9 +45,9 @@ public class ReforgedEvents {
 
 	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
-	public void customReach(GuiScreenEvent.MouseClickedEvent e) {
-		if (e.getButton() == 0) {
-			Minecraft mc = Minecraft.getInstance();
+	public void customReach(InputEvent.MouseInputEvent e) {
+		Minecraft mc = Minecraft.getInstance();
+		if (mc.mouseHelper.isLeftDown()) {
 			if (!mc.player.inventory.getCurrentItem().isEmpty()) {
 				Item i = mc.player.inventory.getCurrentItem().getItem();
 				if (i instanceof ICustomReach && i instanceof ItemExtension) {

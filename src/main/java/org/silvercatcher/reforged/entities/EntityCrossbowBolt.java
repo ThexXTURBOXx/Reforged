@@ -8,7 +8,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -38,14 +37,11 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 
 public class EntityCrossbowBolt extends Entity implements IProjectile {
 
 	public static final String NAME = "crossbow";
-	public static final EntityType<EntityCrossbowBolt> TYPE =
-			ReforgedRegistry.registerEntity(EntityType.Builder.create(EntityCrossbowBolt.class, EntityCrossbowBolt::new).build(NAME));
 
 	private static final Predicate<Entity> ARROW_TARGETS = EntitySelectors.NOT_SPECTATING.and(EntitySelectors.IS_ALIVE.and(Entity::canBeCollidedWith));
 	private static final DataParameter<Byte> CRITICAL = EntityDataManager.createKey(net.minecraft.entity.projectile.EntityArrow.class, DataSerializers.BYTE);
@@ -77,7 +73,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 	private int knockbackStrength;
 
 	public EntityCrossbowBolt(World world) {
-		super(TYPE, world);
+		super(ReforgedAdditions.ENTITY_CROSSBOW, world);
 		this.xTile = -1;
 		this.yTile = -1;
 		this.zTile = -1;
@@ -474,19 +470,19 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 	 * use {@link #writeUnlessPassenger} or {@link #writeWithoutTypeId} instead.
 	 */
 	public void writeAdditional(NBTTagCompound compound) {
-		compound.setInt("xTile", this.xTile);
-		compound.setInt("yTile", this.yTile);
-		compound.setInt("zTile", this.zTile);
-		compound.setShort("life", (short) this.ticksInGround);
+		compound.putInt("xTile", this.xTile);
+		compound.putInt("yTile", this.yTile);
+		compound.putInt("zTile", this.zTile);
+		compound.putShort("life", (short) this.ticksInGround);
 		if (this.inBlockState != null) {
-			compound.setTag("inBlockState", NBTUtil.writeBlockState(this.inBlockState));
+			compound.put("inBlockState", NBTUtil.writeBlockState(this.inBlockState));
 		}
 
-		compound.setByte("shake", (byte) this.arrowShake);
-		compound.setByte("inGround", (byte) (this.inGround ? 1 : 0));
-		compound.setByte("pickup", (byte) this.pickupStatus.ordinal());
-		compound.setDouble("damage", this.damage);
-		compound.setBoolean("crit", this.getIsCritical());
+		compound.putByte("shake", (byte) this.arrowShake);
+		compound.putByte("inGround", (byte) (this.inGround ? 1 : 0));
+		compound.putByte("pickup", (byte) this.pickupStatus.ordinal());
+		compound.putDouble("damage", this.damage);
+		compound.putBoolean("crit", this.getIsCritical());
 	}
 
 	/**

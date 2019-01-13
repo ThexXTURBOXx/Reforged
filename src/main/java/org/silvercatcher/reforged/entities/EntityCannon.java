@@ -1,20 +1,16 @@
 package org.silvercatcher.reforged.entities;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.item.Item;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 
 public class EntityCannon extends EntityBoat {
 
 	public static final String NAME = "cannon_stand";
-	public static final EntityType<EntityCannon> TYPE =
-			ReforgedRegistry.registerEntity(EntityType.Builder.create(EntityCannon.class, EntityCannon::new).build(NAME));
 
 	public EntityCannon(World worldIn) {
 		super(worldIn);

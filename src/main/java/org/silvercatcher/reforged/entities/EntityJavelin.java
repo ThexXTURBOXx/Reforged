@@ -2,7 +2,6 @@ package org.silvercatcher.reforged.entities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.INBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,7 +10,6 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.weapons.ItemJavelin;
@@ -20,8 +18,6 @@ import org.silvercatcher.reforged.util.Helpers;
 public class EntityJavelin extends AReforgedThrowable {
 
 	public static final String NAME = "javelin";
-	public static final EntityType<EntityJavelin> TYPE =
-			ReforgedRegistry.registerEntity(EntityType.Builder.create(EntityJavelin.class, EntityJavelin::new).build(NAME));
 
 	public static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(EntityJavelin.class,
 			DataSerializers.ITEM_STACK);
@@ -29,11 +25,11 @@ public class EntityJavelin extends AReforgedThrowable {
 			DataSerializers.VARINT);
 
 	public EntityJavelin(World worldIn) {
-		super(TYPE, worldIn, NAME);
+		super(ReforgedAdditions.ENTITY_JAVELIN, worldIn, NAME);
 	}
 
 	public EntityJavelin(World worldIn, EntityLivingBase throwerIn, ItemStack stack, int durationLoaded) {
-		super(TYPE, worldIn, throwerIn, stack, NAME);
+		super(ReforgedAdditions.ENTITY_JAVELIN, worldIn, throwerIn, stack, NAME);
 
 		setItemStack(stack);
 		setDurLoaded(durationLoaded);
@@ -137,10 +133,10 @@ public class EntityJavelin extends AReforgedThrowable {
 	@Override
 	public void writeAdditional(NBTTagCompound compound) {
 		super.writeAdditional(compound);
-		compound.setInt("durloaded", getDurLoaded());
+		compound.putInt("durloaded", getDurLoaded());
 
 		if (getItemStack() != null && !getItemStack().isEmpty()) {
-			compound.setTag("item", getItemStack().write(new NBTTagCompound()));
+			compound.put("item", getItemStack().write(new NBTTagCompound()));
 		}
 	}
 

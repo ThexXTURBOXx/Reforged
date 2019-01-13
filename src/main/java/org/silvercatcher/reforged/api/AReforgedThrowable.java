@@ -165,7 +165,7 @@ public abstract class AReforgedThrowable<T extends AReforgedThrowable> extends E
 	@Override
 	public void writeAdditional(NBTTagCompound compound) {
 		super.writeAdditional(compound);
-		compound.setBoolean("initiated", dataManager.get(INITIATED));
+		compound.putBoolean("initiated", dataManager.get(INITIATED));
 	}
 
 	public void setInited() {

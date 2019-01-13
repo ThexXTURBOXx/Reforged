@@ -1,13 +1,18 @@
 package org.silvercatcher.reforged.proxy;
 
+import com.electronwill.nightconfig.core.file.CommentedFileConfig;
+import com.electronwill.nightconfig.core.io.WritingMode;
 import java.io.File;
-import java.lang.reflect.Field;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.common.config.Configuration;
+import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
@@ -15,9 +20,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.registries.IForgeRegistry;
-import org.silvercatcher.reforged.ReforgedEvents;
 import org.silvercatcher.reforged.ReforgedMod;
-import org.silvercatcher.reforged.ReforgedMonsterArmourer;
 import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 
@@ -42,55 +45,129 @@ public class CommonProxy {
 	}
 
 	public void loadConfig() {
-		File configDir = new File("./config/" + ReforgedMod.ID);
-		File configfile = new File(configDir, "/" + ReforgedMod.ID + ".cfg");
-		if (!configDir.exists())
-			configDir.mkdirs();
-		// Get an instance of Config
-		Configuration config = new Configuration(configfile);
-
-		//TODO Constructors not working yet, set field via dirty reflection
+		Path configFile = Paths.get("config").resolve(ReforgedMod.ID).resolve("reforged.toml");
+		File cfgFile = configFile.toFile();
 		try {
-			Field f = config.getClass().getDeclaredField("file");
-			f.setAccessible(true);
-			f.set(config, configfile);
-		} catch (NoSuchFieldException | IllegalAccessException e) {
+			if (!cfgFile.getParentFile().exists())
+				cfgFile.getParentFile().mkdirs();
+			if (!cfgFile.exists())
+				cfgFile.createNewFile();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
-		// Load Config
+		System.out.println(configFile);
+		CommentedFileConfig config = CommentedFileConfig.builder(configFile).sync()
+				.autosave()
+				.writingMode(WritingMode.REPLACE)
+				.build();
 		config.load();
 
+		ForgeConfigSpec spec = new ForgeConfigSpec.Builder()
+				.push(items)
+				.comment("Enable the Battleaxe")
+				.translation("reforged.config.battleaxe")
+				.define("Battleaxe", true)
+				.comment("Enable the Blowgun plus Darts")
+				.translation("reforged.config.blowgun")
+				.define("Blowgun", true)
+				.comment("Enable the Boomerang")
+				.translation("reforged.config.boomerang")
+				.define("Boomerang", true)
+				.comment("Enable the Firerod")
+				.translation("reforged.config.firerod")
+				.define("Firerod", true)
+				.comment("Enable the Javelin")
+				.translation("reforged.config.javelin")
+				.define("Javelin", true)
+				.comment("Enable the Katana")
+				.translation("reforged.config.katana")
+				.define("Katana", true)
+				.comment("Enable the Knife")
+				.translation("reforged.config.knife")
+				.define("Knife", true)
+				.comment("Enable the Musket and Blunderbuss")
+				.translation("reforged.config.musket")
+				.define("Musket", true)
+				.comment("Enable the Nest Of Bees")
+				.translation("reforged.config.nestofbees")
+				.define("Nest Of Bees", true)
+				.comment("Enable the Sabre")
+				.translation("reforged.config.sabre")
+				.define("Sabre", true)
+				.comment("Enable the Kris")
+				.translation("reforged.config.kris")
+				.define("Kris", true)
+				.comment("Enable the Caltrop")
+				.translation("reforged.config.caltrop")
+				.define("Caltrop", true)
+				.comment("Enable the Dynamite")
+				.translation("reforged.config.dynamite")
+				.define("Dynamite", true)
+				.comment("Enable the Crossbow plus Bolt")
+				.translation("reforged.config.crossbow")
+				.define("Crossbow", true)
+				.comment("Enable the Pike")
+				.translation("reforged.config.pike")
+				.define("Pike", true)
+				.comment("Enable the Mace")
+				.translation("reforged.config.mace")
+				.define("Mace", true)
+				.comment("Enable the Dirk")
+				.translation("reforged.config.dirk")
+				.define("Dirk", true)
+				.comment("Enable the Cannon")
+				.translation("reforged.config.cannon")
+				.define("Cannon", true)
+				.pop()
+				.push(floats)
+				.comment("Damage of the Musket")
+				.translation("reforged.config.musket_damage")
+				.defineInRange("Musket Damage", 10f, 1f, 50f)
+				.comment("Damage of the Caltrop")
+				.translation("reforged.config.caltrop_damage")
+				.defineInRange("Caltrop Damage", 8f, 1f, 50f)
+				.pop()
+				.push(ids)
+				.comment("This specifies the Enchantment ID of the Goalseeker-Enchantment")
+				.translation("reforged.config.goalseeker_id")
+				.defineInRange("Goalseeker", 100, 0, 256)
+				.pop()
+				.build();
+
+		if (!spec.isCorrect(config)) {
+			ReforgedMod.LOG.warn("Configuration file {} is not correct. Correcting", configFile);
+			spec.correct(config, (action, path, incorrectValue, correctedValue) ->
+					ReforgedMod.LOG.warn("Incorrect key {} was corrected from {} to {}", path, incorrectValue, correctedValue));
+			config.save();
+		}
+		ReforgedMod.LOG.debug("Loaded Forge config from {}", configFile);
+
 		// Items
-		battleaxe = config.getBoolean("Battleaxe", items, true, "Enable the Battleaxe");
-		blowgun = config.getBoolean("Blowgun", items, true, "Enable the Blowgun plus Darts");
-		boomerang = config.getBoolean("Boomerang", items, true, "Enable the Boomerang");
-		firerod = config.getBoolean("Firerod", items, true, "Enable the Firerod");
-		javelin = config.getBoolean("Javelin", items, true, "Enable the Javelin");
-		katana = config.getBoolean("Katana", items, true, "Enable the Katana");
-		knife = config.getBoolean("Knife", items, true, "Enable the Knife");
-		musket = config.getBoolean("Musket", items, true, "Enable the Musket and Blunderbuss");
-		nest_of_bees = config.getBoolean("Nest Of Bees", items, true, "Enable the Nest Of Bees");
-		sabre = config.getBoolean("Sabre", items, true, "Enable the Sabre");
-		keris = config.getBoolean("Kris", items, true, "Enable the Kris");
-		caltrop = config.getBoolean("Caltrop", items, true, "Enable the Caltrop");
-		dynamite = config.getBoolean("Dynamite", items, true, "Enable the Dynamite");
-		crossbow = config.getBoolean("Crossbow", items, true, "Enable the Crossbow plus Bolt");
-		pike = config.getBoolean("Pike", items, true, "Enable the Pike");
-		mace = config.getBoolean("Mace", items, true, "Enable the Mace");
-		dirk = config.getBoolean("Dirk", items, true, "Enable the Dirk");
-		cannon = config.getBoolean("Cannon", items, true, "Enable the Cannon");
+		battleaxe = config.<Boolean>getOrElse(Arrays.asList(items, "Battleaxe"), true);
+		blowgun = config.<Boolean>getOrElse(Arrays.asList(items, "Blowgun"), true);
+		boomerang = config.<Boolean>getOrElse(Arrays.asList(items, "Boomerang"), true);
+		firerod = config.<Boolean>getOrElse(Arrays.asList(items, "Firerod"), true);
+		javelin = config.<Boolean>getOrElse(Arrays.asList(items, "Javelin"), true);
+		katana = config.<Boolean>getOrElse(Arrays.asList(items, "Katana"), true);
+		knife = config.<Boolean>getOrElse(Arrays.asList(items, "Knife"), true);
+		musket = config.<Boolean>getOrElse(Arrays.asList(items, "Musket"), true);
+		nest_of_bees = config.<Boolean>getOrElse(Arrays.asList(items, "Nest Of Bees"), true);
+		sabre = config.<Boolean>getOrElse(Arrays.asList(items, "Sabre"), true);
+		keris = config.<Boolean>getOrElse(Arrays.asList(items, "Kris"), true);
+		caltrop = config.<Boolean>getOrElse(Arrays.asList(items, "Caltrop"), true);
+		dynamite = config.<Boolean>getOrElse(Arrays.asList(items, "Dynamite"), true);
+		crossbow = config.<Boolean>getOrElse(Arrays.asList(items, "Crossbow"), true);
+		pike = config.<Boolean>getOrElse(Arrays.asList(items, "Pike"), true);
+		mace = config.<Boolean>getOrElse(Arrays.asList(items, "Mace"), true);
+		dirk = config.<Boolean>getOrElse(Arrays.asList(items, "Dirk"), true);
+		cannon = config.<Boolean>getOrElse(Arrays.asList(items, "Cannon"), true);
 
 		// Floats
-		damage_musket = config.getFloat("Musket Damage", floats, 10, 1, 50, "Damage of the Musket");
-		damage_caltrop = config.getFloat("Caltrop Damage", floats, 8, 1, 50, "Damage of the Caltrop");
+		damage_musket = (float) (double) config.<Double>getOrElse(Arrays.asList(floats, "Musket Damage"), 10d);
+		damage_caltrop = (float) (double) config.<Double>getOrElse(Arrays.asList(floats, "Caltrop Damage"), 8d);
 
 		// IDs
-		goalseekerid = config.getInt("Goalseeker", ids, 100, 0, 256,
-				"This specifies the Enchantment ID of the Goalseeker-Enchantment");
-
-		// Save config
-		config.save();
+		goalseekerid = config.getIntOrElse(Arrays.asList(ids, "Goalseeker"), 100);
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {

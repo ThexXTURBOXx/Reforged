@@ -2,8 +2,20 @@ package org.silvercatcher.reforged.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
 import org.silvercatcher.reforged.enchantments.EnchantmentGoalseeker;
+import org.silvercatcher.reforged.entities.EntityBoomerang;
+import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
+import org.silvercatcher.reforged.entities.EntityBulletMusket;
+import org.silvercatcher.reforged.entities.EntityCannon;
+import org.silvercatcher.reforged.entities.EntityCannonBall;
+import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
+import org.silvercatcher.reforged.entities.EntityDart;
+import org.silvercatcher.reforged.entities.EntityDynamite;
+import org.silvercatcher.reforged.entities.EntityJavelin;
+import org.silvercatcher.reforged.entities.TileEntityCaltrop;
 
 /**
  * WARNING: If an Item is turned off in Config, it could cause a
@@ -60,4 +72,18 @@ public abstract class ReforgedAdditions {
 
 	// Blocks
 	public static Block CALTROP;
+
+	//Entities
+	public static EntityType<EntityBoomerang> ENTITY_BOOMERANG;
+	public static EntityType<EntityBulletBlunderbuss> ENTITY_BLUNDERBUSS;
+	public static EntityType<EntityBulletMusket> ENTITY_MUSKET;
+	public static EntityType<EntityCannon> ENTITY_CANNON;
+	public static EntityType<EntityCannonBall> ENTITY_CANNON_BALL;
+	public static EntityType<EntityCrossbowBolt> ENTITY_CROSSBOW;
+	public static EntityType<EntityDart> ENTITY_DART;
+	public static EntityType<EntityDynamite> ENTITY_DYNAMITE;
+	public static EntityType<EntityJavelin> ENTITY_JAVELIN;
+
+	//Tile Entities
+	public static TileEntityType<TileEntityCaltrop> TILE_ENTITY_CALTROP;
 }

@@ -51,7 +51,7 @@ public class BoomerangEnchRecipe extends ShapelessRecipe {
 		NBTTagCompound compound = CompoundTags.giveCompound(output);
 
 		output.addEnchantment(ReforgedAdditions.goalseeker, 1);
-		compound.setBoolean(CompoundTags.ENCHANTED, true);
+		compound.putBoolean(CompoundTags.ENCHANTED, true);
 		return output;
 	}
 
@@ -60,7 +60,7 @@ public class BoomerangEnchRecipe extends ShapelessRecipe {
 		ItemStack output = new ItemStack(ReforgedAdditions.DIAMOND_BOOMERANG);
 		NBTTagCompound compound = CompoundTags.giveCompound(output);
 		output.addEnchantment(ReforgedAdditions.goalseeker, 1);
-		compound.setBoolean(CompoundTags.ENCHANTED, true);
+		compound.putBoolean(CompoundTags.ENCHANTED, true);
 		return !this.output.isEmpty() ? this.output : output;
 	}
 

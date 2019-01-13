@@ -15,7 +15,7 @@ public interface IStunProperty {
 	 * @Override public void saveNBTData(NBTTagCompound compound) { NBTTagCompound
 	 * properties = new NBTTagCompound();
 	 * properties.setBoolean(CompoundTags.STUNNED, stunned);
-	 * compound.setTag(EXT_PROP_NAME, properties);
+	 * compound.putTag(EXT_PROP_NAME, properties);
 	 *
 	 * }
 	 *

@@ -2,7 +2,6 @@ package org.silvercatcher.reforged.entities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityType;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -14,9 +13,9 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.api.CompoundTags;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.util.Helpers;
@@ -24,8 +23,6 @@ import org.silvercatcher.reforged.util.Helpers;
 public class EntityBoomerang extends AReforgedThrowable {
 
 	public static final String NAME = "boomerang";
-	public static final EntityType<EntityBoomerang> TYPE =
-			ReforgedRegistry.registerEntity(EntityType.Builder.create(EntityBoomerang.class, EntityBoomerang::new).build(NAME));
 
 	public static final DataParameter<Float> THROWER_X = EntityDataManager.createKey(EntityBoomerang.class,
 			DataSerializers.FLOAT);
@@ -39,11 +36,11 @@ public class EntityBoomerang extends AReforgedThrowable {
 			DataSerializers.ITEM_STACK);
 
 	public EntityBoomerang(World worldIn) {
-		super(TYPE, worldIn, NAME);
+		super(ReforgedAdditions.ENTITY_BOOMERANG, worldIn, NAME);
 	}
 
 	public EntityBoomerang(World worldIn, EntityLivingBase thrower, ItemStack stack) {
-		super(TYPE, worldIn, thrower, stack, NAME);
+		super(ReforgedAdditions.ENTITY_BOOMERANG, worldIn, thrower, stack, NAME);
 		setItemStack(stack);
 		setCoords(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ);
 		setInited();
@@ -217,13 +214,13 @@ public class EntityBoomerang extends AReforgedThrowable {
 	public void writeAdditional(NBTTagCompound compound) {
 		super.writeAdditional(compound);
 
-		compound.setDouble("playerX", getPosX());
-		compound.setDouble("playerY", getPosY());
-		compound.setDouble("playerZ", getPosZ());
-		compound.setDouble("yawreforged", dataManager.get(YAW));
+		compound.putDouble("playerX", getPosX());
+		compound.putDouble("playerY", getPosY());
+		compound.putDouble("playerZ", getPosZ());
+		compound.putDouble("yawreforged", dataManager.get(YAW));
 
 		if (getItemStack() != null && !getItemStack().isEmpty())
-			compound.setTag("item", getItemStack().write(new NBTTagCompound()));
+			compound.put("item", getItemStack().write(new NBTTagCompound()));
 	}
 
 	@Override

@@ -96,7 +96,7 @@ public class ItemNestOfBees extends ExtendedItem {
 		NBTTagCompound compound = CompoundTags.giveCompound(stack);
 
 		if (compound.getInt(CompoundTags.AMMUNITION) > 0) {
-			compound.setBoolean(CompoundTags.ACTIVATED, true);
+			compound.putBoolean(CompoundTags.ACTIVATED, true);
 
 			worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ITEM_FIRECHARGE_USE,
 					SoundCategory.MASTER, 1.0f, 1.0f);
@@ -121,7 +121,7 @@ public class ItemNestOfBees extends ExtendedItem {
 				int arrows = compound.getInt(CompoundTags.AMMUNITION);
 
 				if (arrows == 0)
-					compound.setBoolean(CompoundTags.ACTIVATED, false);
+					compound.putBoolean(CompoundTags.ACTIVATED, false);
 
 				if (compound.getBoolean(CompoundTags.ACTIVATED)) {
 					shoot(worldIn, player);
@@ -130,12 +130,12 @@ public class ItemNestOfBees extends ExtendedItem {
 					arrows--;
 				}
 
-				compound.setInt(CompoundTags.AMMUNITION, arrows);
-				compound.setInt(CompoundTags.DELAY, shot_delay);
+				compound.putInt(CompoundTags.AMMUNITION, arrows);
+				compound.putInt(CompoundTags.DELAY, shot_delay);
 
 			} else if (compound.getBoolean(CompoundTags.ACTIVATED)) {
 
-				compound.setInt(CompoundTags.DELAY, Math.max(0, delay - 1));
+				compound.putInt(CompoundTags.DELAY, Math.max(0, delay - 1));
 			}
 		}
 	}

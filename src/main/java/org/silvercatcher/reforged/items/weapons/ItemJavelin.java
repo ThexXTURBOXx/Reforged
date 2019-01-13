@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.ItemExtension;
-import org.silvercatcher.reforged.entities.EntityJavelin;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.util.Helpers;
 
 public class ItemJavelin extends ExtendedItem {
@@ -84,8 +84,8 @@ public class ItemJavelin extends ExtendedItem {
 					if (throwStack.getCount() > 1) {
 						throwStack = throwStack.split(1);
 					}
-					worldIn.spawnEntity(
-							new EntityJavelin(worldIn, playerIn, throwStack, stack.getUseDuration() - timeLeft));
+					worldIn.spawnEntity(ReforgedAdditions.ENTITY_JAVELIN.create(worldIn));
+					//new EntityJavelin(worldIn, playerIn, throwStack, stack.getUseDuration() - timeLeft)
 				}
 			}
 		}

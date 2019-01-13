@@ -2,7 +2,6 @@ package org.silvercatcher.reforged.entities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.INBTBase;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,24 +12,22 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 
 public class EntityDynamite extends AReforgedThrowable {
 
 	public static final String NAME = "dynamite";
-	public static final EntityType<EntityDynamite> TYPE =
-			ReforgedRegistry.registerEntity(EntityType.Builder.create(EntityDynamite.class, EntityDynamite::new).build(NAME));
 
 	// In the lang-files we don't need the "dynamite-damage"-String,
 	// because the dynamite can't kill anyone as it does 0 damage...
 
 	public EntityDynamite(World worldIn) {
-		super(TYPE, worldIn, NAME);
+		super(ReforgedAdditions.ENTITY_DYNAMITE, worldIn, NAME);
 	}
 
 	public EntityDynamite(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
-		super(TYPE, worldIn, throwerIn, stack, NAME);
+		super(ReforgedAdditions.ENTITY_DYNAMITE, worldIn, throwerIn, stack, NAME);
 		setInited();
 	}
 

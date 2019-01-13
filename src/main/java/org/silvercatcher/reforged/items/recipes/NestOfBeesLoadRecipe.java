@@ -48,7 +48,7 @@ public class NestOfBeesLoadRecipe extends ShapelessRecipe {
 		NBTTagCompound compound = CompoundTags.giveCompound(output);
 		int arrows = compound.getInt(CompoundTags.AMMUNITION);
 		arrows = arrows + 8;
-		compound.setInt(CompoundTags.AMMUNITION, arrows);
+		compound.putInt(CompoundTags.AMMUNITION, arrows);
 		return output;
 	}
 
@@ -56,7 +56,7 @@ public class NestOfBeesLoadRecipe extends ShapelessRecipe {
 	public ItemStack getRecipeOutput() {
 		ItemStack output = new ItemStack(ReforgedAdditions.NEST_OF_BEES);
 		NBTTagCompound compound = CompoundTags.giveCompound(output);
-		compound.setInt(CompoundTags.AMMUNITION, 8);
+		compound.putInt(CompoundTags.AMMUNITION, 8);
 		return !this.output.isEmpty() ? this.output : output;
 	}
 
