@@ -5,6 +5,8 @@ import org.silvercatcher.reforged.api.ReforgedAdditions;
 
 public class TileEntityCaltrop extends TileEntity {
 
+	public static String NAME = "caltrop";
+
 	public TileEntityCaltrop() {
 		super(ReforgedAdditions.TILE_ENTITY_CALTROP);
 	}

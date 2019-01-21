@@ -13,8 +13,7 @@ import org.silvercatcher.reforged.api.AReloadable;
 import org.silvercatcher.reforged.api.CompoundTags;
 import org.silvercatcher.reforged.util.Helpers;
 
-//import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-
+@OnlyIn(Dist.CLIENT)
 public class ReloadOverlay extends Gui {
 
 	// My way to setup colors >:D
@@ -36,7 +35,6 @@ public class ReloadOverlay extends Gui {
 		minecraft = Minecraft.getInstance();
 	}
 
-	@OnlyIn(Dist.CLIENT)
 	@SubscribeEvent
 	public void renderReload(RenderGameOverlayEvent event) {
 

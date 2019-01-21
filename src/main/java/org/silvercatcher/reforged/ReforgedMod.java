@@ -1,20 +1,29 @@
 package org.silvercatcher.reforged;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.javafmlmod.FMLModLoadingContext;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.network.simple.SimpleChannel;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
+import org.silvercatcher.reforged.gui.ReloadOverlay;
 import org.silvercatcher.reforged.props.DefaultStunImpl;
 import org.silvercatcher.reforged.props.IStunProperty;
 import org.silvercatcher.reforged.props.StorageStun;
@@ -44,26 +53,46 @@ public class ReforgedMod {
 
 	public ReforgedMod() {
 		CapabilityManager.INSTANCE.register(IStunProperty.class, new StorageStun(), new DefaultStunImpl());
-		FMLModLoadingContext.get().getModEventBus().addListener(this::preInit);
-		FMLModLoadingContext.get().getModEventBus().addListener(this::init);
-		FMLModLoadingContext.get().getModEventBus().addListener(this::postInit);
+		FMLModLoadingContext.get().getModEventBus().addListener(this::setup);
+		FMLModLoadingContext.get().getModEventBus().addListener(this::setupClient);
+		FMLModLoadingContext.get().getModEventBus().addListener(this::setupServer);
+		FMLModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+		FMLModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+		ReforgedRegistry reg = new ReforgedRegistry();
+		FMLModLoadingContext.get().getModEventBus().addGenericListener(Item.class, reg::registerItems);
+		FMLModLoadingContext.get().getModEventBus().addGenericListener(Block.class, reg::registerBlocks);
+		FMLModLoadingContext.get().getModEventBus().addGenericListener(EntityType.class, reg::registerEntities);
+		FMLModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, reg::registerTileEntities);
 		proxy.loadConfig();
+		ReforgedRegistry.registerEventHandler(this);
 		ReforgedRegistry.registerEventHandler(proxy);
-		ReforgedRegistry.registerEventHandler(new ReforgedRegistry());
+		ReforgedRegistry.registerEventHandler(reg);
 		ReforgedRegistry.registerEventHandler(new ReforgedEvents());
 		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
+		if (FMLEnvironment.dist == Dist.CLIENT) {
+			ReforgedRegistry.registerEventHandler(new ReloadOverlay());
+			proxy.registerEntityRenderers();
+		}
 	}
 
-	public void preInit(final FMLPreInitializationEvent event) {
-		proxy.preInit(event);
+	private void setup(final FMLCommonSetupEvent event) {
+		proxy.setup(event);
 	}
 
-	public void init(final FMLInitializationEvent event) {
-		proxy.init(event);
+	private void setupClient(final FMLClientSetupEvent event) {
+		proxy.setupClient(event);
 	}
 
-	public void postInit(final FMLPostInitializationEvent event) {
-		proxy.postInit(event);
+	private void setupServer(final FMLDedicatedServerSetupEvent event) {
+		proxy.setupServer(event);
+	}
+
+	private void enqueueIMC(final InterModEnqueueEvent event) {
+		proxy.enqueueIMC(event);
+	}
+
+	private void processIMC(final InterModProcessEvent event) {
+		proxy.processIMC(event);
 	}
 
 }

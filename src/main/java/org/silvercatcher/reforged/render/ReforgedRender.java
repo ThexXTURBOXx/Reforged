@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.render;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -13,7 +14,7 @@ public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 
 	ReforgedModel model;
 	float scale = 1;
-	int modifier;
+	private int modifier;
 
 	protected ReforgedRender(RenderManager renderManager, ReforgedModel model, float scale, int rotationModifier) {
 		this(renderManager, model, rotationModifier);
@@ -27,6 +28,7 @@ public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 	}
 
 	@Override
+	@ParametersAreNonnullByDefault
 	public void doRender(T bullet, double x, double y, double z, float yaw, float partialTicks) {
 		super.doRender(bullet, x, y, z, yaw, partialTicks);
 		renderEntityModel(bullet, x, y, z, yaw, partialTicks);
@@ -39,7 +41,7 @@ public abstract class ReforgedRender<T extends Entity> extends Render<T> {
 	 */
 	public void renderEntityModel(T theEntity, double x, double y, double z, float yaw, float partialTicks) {
 		GL11.glPushMatrix();
-		bindTexture(getEntityTexture(theEntity));
+		bindEntityTexture(theEntity);
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
 		GL11.glRotated(

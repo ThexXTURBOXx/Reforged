@@ -20,10 +20,10 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import org.silvercatcher.reforged.ReforgedMod;
+import org.silvercatcher.reforged.ReforgedReferences;
 import org.silvercatcher.reforged.api.BlockExtension;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.TileEntityCaltrop;
-import org.silvercatcher.reforged.proxy.CommonProxy;
 
 public class BlockCaltrop extends BlockContainer implements BlockExtension {
 
@@ -88,7 +88,8 @@ public class BlockCaltrop extends BlockContainer implements BlockExtension {
 	public void onEntityCollision(IBlockState state, World worldIn, BlockPos pos, Entity entityIn) {
 		if (entityIn instanceof EntityLivingBase) {
 			EntityLivingBase e = (EntityLivingBase) entityIn;
-			e.attackEntityFrom(new DamageSource("caltrop").setDamageBypassesArmor(), CommonProxy.damage_caltrop);
+			e.attackEntityFrom(new DamageSource("caltrop").setDamageBypassesArmor(),
+					ReforgedReferences.GlobalValues.CALTROP_DAMAGE.get().floatValue());
 			if (!worldIn.isRemote)
 				worldIn.setBlockState(pos, Blocks.AIR.getDefaultState());
 		}

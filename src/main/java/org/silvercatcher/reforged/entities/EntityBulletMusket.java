@@ -6,9 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.INBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import org.silvercatcher.reforged.ReforgedReferences;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.proxy.CommonProxy;
 
 public class EntityBulletMusket extends AReforgedThrowable {
 
@@ -30,7 +30,7 @@ public class EntityBulletMusket extends AReforgedThrowable {
 
 	@Override
 	protected float getImpactDamage(Entity target) {
-		return CommonProxy.damage_musket;
+		return ReforgedReferences.GlobalValues.MUSKET_DAMAGE.get().floatValue();
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package org.silvercatcher.reforged.render;
 
+import javax.annotation.Nonnull;
+import javax.annotation.ParametersAreNonnullByDefault;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
@@ -15,11 +17,14 @@ public class RenderBoomerang extends ReforgedRender<EntityBoomerang> {
 
 	public RenderBoomerang(RenderManager renderManager) {
 		super(renderManager, new ModelBoomerang(), 90);
+		System.out.println("ALLAHUADDDD");
 	}
 
+	@Nonnull
+	@ParametersAreNonnullByDefault
 	@Override
 	protected ResourceLocation getEntityTexture(EntityBoomerang entity) {
-		if (entity == null || entity.getMaterialDefinition() == null)
+		if (entity.getMaterialDefinition() == null)
 			return Textures.WOODEN_BOOMERANG;
 		switch (entity.getMaterialDefinition().getPrefix()) {
 			case "diamond":
@@ -45,7 +50,7 @@ public class RenderBoomerang extends ReforgedRender<EntityBoomerang> {
 	public void renderEntityModel(EntityBoomerang theEntity, double x, double y, double z, float yaw,
 								  float partialTick) {
 		GL11.glPushMatrix();
-		bindTexture(getEntityTexture(theEntity));
+		bindEntityTexture(theEntity);
 		GL11.glTranslated(x, y, z);
 		GL11.glScalef(scale, scale, scale);
 		GL11.glRotatef(
@@ -54,4 +59,5 @@ public class RenderBoomerang extends ReforgedRender<EntityBoomerang> {
 		model.render(theEntity, (float) x, (float) y, (float) z, yaw, partialTick, 0.0475F);
 		GL11.glPopMatrix();
 	}
+
 }

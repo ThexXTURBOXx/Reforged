@@ -2,13 +2,10 @@ package org.silvercatcher.reforged.proxy;
 
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
@@ -20,7 +17,6 @@ import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.entities.EntityDynamite;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.entities.TileEntityCaltrop;
-import org.silvercatcher.reforged.gui.ReloadOverlay;
 import org.silvercatcher.reforged.render.RenderBoomerang;
 import org.silvercatcher.reforged.render.RenderBulletBlunderbuss;
 import org.silvercatcher.reforged.render.RenderBulletMusket;
@@ -35,49 +31,36 @@ import org.silvercatcher.reforged.render.RenderTileEntityCaltrop;
 public class ClientProxy extends CommonProxy {
 
 	@Override
-	public void init(FMLInitializationEvent event) {
-		super.init(event);
+	public void setup(FMLCommonSetupEvent event) {
+		super.setup(event);
+		//registerEntityRenderers();
 	}
 
 	@Override
-	public void postInit(FMLPostInitializationEvent event) {
-		super.postInit(event);
-	}
-
-	@Override
-	public void preInit(FMLPreInitializationEvent event) {
-
-		super.preInit(event);
-		MinecraftForge.EVENT_BUS.register(new ReloadOverlay());
-		registerEntityRenderers();
-	}
-
-	@Override
-	protected void registerEntityRenderers() {
-
-		if (GlobalValues.BOOMERANG) {
+	public void registerEntityRenderers() {
+		if (GlobalValues.BOOMERANG.get()) {
 			RenderingRegistry.registerEntityRenderingHandler(EntityBoomerang.class, RenderBoomerang::new);
 		}
 
-		if (GlobalValues.CROSSBOW) {
+		if (GlobalValues.CROSSBOW.get()) {
 			RenderingRegistry.registerEntityRenderingHandler(EntityCrossbowBolt.class, RenderCrossbowBolt::new);
 		}
 
-		if (GlobalValues.MUSKET) {
+		if (GlobalValues.MUSKET.get()) {
 			RenderingRegistry.registerEntityRenderingHandler(EntityBulletMusket.class, RenderBulletMusket::new);
 			RenderingRegistry.registerEntityRenderingHandler(EntityBulletBlunderbuss.class, RenderBulletBlunderbuss::new);
 		}
 
-		if (GlobalValues.JAVELIN)
+		if (GlobalValues.JAVELIN.get())
 			RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, RenderJavelin::new);
-		if (GlobalValues.BLOWGUN)
+		if (GlobalValues.BLOWGUN.get())
 			RenderingRegistry.registerEntityRenderingHandler(EntityDart.class, RenderDart::new);
-		if (GlobalValues.CALTROP)
+		if (GlobalValues.CALTROP.get())
 			ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCaltrop.class, new RenderTileEntityCaltrop());
-		if (GlobalValues.DYNAMITE)
+		if (GlobalValues.DYNAMITE.get())
 			RenderingRegistry.registerEntityRenderingHandler(EntityDynamite.class, RenderDynamite::new);
 
-		if (GlobalValues.CANNON) {
+		if (GlobalValues.CANNON.get()) {
 			RenderingRegistry.registerEntityRenderingHandler(EntityCannon.class, RenderCannon::new);
 			RenderingRegistry.registerEntityRenderingHandler(EntityCannonBall.class, RenderCannonBall::new);
 		}

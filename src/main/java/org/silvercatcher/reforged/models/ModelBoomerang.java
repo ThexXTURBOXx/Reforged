@@ -6,12 +6,12 @@ import net.minecraft.entity.Entity;
 
 public class ModelBoomerang extends ReforgedModel {
 
-	public ModelRenderer tile1;
-	public ModelRenderer tile2;
-	public ModelRenderer tile3;
-	public ModelRenderer tile4;
-	public ModelRenderer tile5;
-	public ModelRenderer tile6;
+	private ModelRenderer tile1;
+	private ModelRenderer tile2;
+	private ModelRenderer tile3;
+	private ModelRenderer tile4;
+	private ModelRenderer tile5;
+	private ModelRenderer tile6;
 
 	public ModelBoomerang() {
 		super();
@@ -58,4 +58,5 @@ public class ModelBoomerang extends ReforgedModel {
 		GlStateManager.popMatrix();
 		tile5.render(f5);
 	}
+
 }

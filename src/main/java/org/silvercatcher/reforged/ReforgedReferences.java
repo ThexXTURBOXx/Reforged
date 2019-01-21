@@ -3,9 +3,7 @@ package org.silvercatcher.reforged;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.silvercatcher.reforged.proxy.CommonProxy;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 public class ReforgedReferences {
 	/**
@@ -13,30 +11,34 @@ public class ReforgedReferences {
 	 */
 	public static class GlobalValues {
 		// IDs
-		public static final int GOALSEEKERID = CommonProxy.goalseekerid;
-
-		// Logger
-		public static final Logger LOG = LogManager.getLogger(ReforgedMod.NAME);
+		public static ForgeConfigSpec.IntValue
+				GOALSEEKERID;
 
 		// Items
-		public static final boolean BATTLEAXE = CommonProxy.battleaxe;
-		public static final boolean BLOWGUN = CommonProxy.blowgun;
-		public static final boolean BOOMERANG = CommonProxy.boomerang;
-		public static final boolean FIREROD = CommonProxy.firerod;
-		public static final boolean JAVELIN = CommonProxy.javelin;
-		public static final boolean KATANA = CommonProxy.katana;
-		public static final boolean KNIFE = CommonProxy.knife;
-		public static final boolean MUSKET = CommonProxy.musket;
-		public static final boolean NEST_OF_BEES = CommonProxy.nest_of_bees;
-		public static final boolean SABRE = CommonProxy.sabre;
-		public static final boolean KERIS = CommonProxy.keris;
-		public static final boolean CALTROP = CommonProxy.caltrop;
-		public static final boolean DYNAMITE = CommonProxy.dynamite;
-		public static final boolean CROSSBOW = CommonProxy.crossbow;
-		public static final boolean PIKE = CommonProxy.pike;
-		public static final boolean MACE = CommonProxy.mace;
-		public static final boolean DIRK = CommonProxy.dirk;
-		public static final boolean CANNON = CommonProxy.cannon;
+		public static ForgeConfigSpec.BooleanValue
+				BATTLEAXE,
+				BLOWGUN,
+				BOOMERANG,
+				FIREROD,
+				JAVELIN,
+				KATANA,
+				KNIFE,
+				MUSKET,
+				NEST_OF_BEES,
+				SABRE,
+				KERIS,
+				CALTROP,
+				DYNAMITE,
+				CROSSBOW,
+				PIKE,
+				MACE,
+				DIRK,
+				CANNON;
+
+		//Floats
+		public static ForgeConfigSpec.DoubleValue
+				MUSKET_DAMAGE,
+				CALTROP_DAMAGE;
 	}
 
 	/**

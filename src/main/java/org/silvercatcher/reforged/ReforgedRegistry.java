@@ -14,7 +14,7 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.network.NetworkRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
@@ -76,16 +76,16 @@ public class ReforgedRegistry {
 		registrationList.add(ReforgedAdditions.TAB_ICON = new Item(new Item.Builder())
 				.setRegistryName(new ResourceLocation(ReforgedMod.ID, "tab_icon")));
 
-		if (GlobalValues.NEST_OF_BEES) {
+		if (GlobalValues.NEST_OF_BEES.get()) {
 			registrationList.add(ReforgedAdditions.ARROW_BUNDLE = new ItemArrowBundle());
 			registrationList.add(ReforgedAdditions.NEST_OF_BEES = new ItemNestOfBees());
 		}
 
-		if (GlobalValues.FIREROD) {
+		if (GlobalValues.FIREROD.get()) {
 			registrationList.add(ReforgedAdditions.FIREROD = new ItemFireRod());
 		}
 
-		if (GlobalValues.MUSKET) {
+		if (GlobalValues.MUSKET.get()) {
 			registrationList.add(ReforgedAdditions.MUSKET_BARREL = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
 					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "musket_barrel")));
 			registrationList.add(ReforgedAdditions.BLUNDERBUSS_BARREL = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
@@ -93,7 +93,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.GUN_STOCK = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
 					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "gun_stock")));
 			registrationList.add(ReforgedAdditions.MUSKET = new ItemMusket());
-			if (GlobalValues.KNIFE) {
+			if (GlobalValues.KNIFE.get()) {
 				registrationList
 						.add(ReforgedAdditions.WOODEN_BAYONET_MUSKET = new ItemMusketWithBayonet(ItemTier.WOOD));
 				registrationList
@@ -110,7 +110,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.BLUNDERBUSS_SHOT = new ItemBulletBlunderbuss());
 		}
 
-		if (GlobalValues.BATTLEAXE) {
+		if (GlobalValues.BATTLEAXE.get()) {
 			registrationList.add(ReforgedAdditions.WOODEN_BATTLE_AXE = new ItemBattleAxe(ItemTier.WOOD));
 			registrationList.add(ReforgedAdditions.STONE_BATTLE_AXE = new ItemBattleAxe(ItemTier.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_BATTLE_AXE = new ItemBattleAxe(ItemTier.GOLD));
@@ -118,7 +118,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.DIAMOND_BATTLE_AXE = new ItemBattleAxe(ItemTier.DIAMOND));
 		}
 
-		if (GlobalValues.BOOMERANG) {
+		if (GlobalValues.BOOMERANG.get()) {
 			registrationList.add(ReforgedAdditions.WOODEN_BOOMERANG = new ItemBoomerang(ItemTier.WOOD));
 			registrationList.add(ReforgedAdditions.STONE_BOOMERANG = new ItemBoomerang(ItemTier.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_BOOMERANG = new ItemBoomerang(ItemTier.GOLD));
@@ -126,7 +126,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.DIAMOND_BOOMERANG = new ItemBoomerang(ItemTier.DIAMOND));
 		}
 
-		if (GlobalValues.SABRE) {
+		if (GlobalValues.SABRE.get()) {
 			registrationList.add(ReforgedAdditions.WOODEN_SABER = new ItemSaber(ItemTier.WOOD));
 			registrationList.add(ReforgedAdditions.STONE_SABER = new ItemSaber(ItemTier.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_SABER = new ItemSaber(ItemTier.GOLD));
@@ -134,7 +134,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.DIAMOND_SABER = new ItemSaber(ItemTier.DIAMOND));
 		}
 
-		if (GlobalValues.KNIFE) {
+		if (GlobalValues.KNIFE.get()) {
 			registrationList.add(ReforgedAdditions.WOODEN_KNIFE = new ItemKnife(ItemTier.WOOD));
 			registrationList.add(ReforgedAdditions.STONE_KNIFE = new ItemKnife(ItemTier.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_KNIFE = new ItemKnife(ItemTier.GOLD));
@@ -142,7 +142,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.DIAMOND_KNIFE = new ItemKnife(ItemTier.DIAMOND));
 		}
 
-		if (GlobalValues.KATANA) {
+		if (GlobalValues.KATANA.get()) {
 			registrationList.add(ReforgedAdditions.WOODEN_KATANA = new ItemKatana(ItemTier.WOOD));
 			registrationList.add(ReforgedAdditions.STONE_KATANA = new ItemKatana(ItemTier.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_KATANA = new ItemKatana(ItemTier.GOLD));
@@ -150,15 +150,15 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.DIAMOND_KATANA = new ItemKatana(ItemTier.DIAMOND));
 		}
 
-		if (GlobalValues.JAVELIN) {
+		if (GlobalValues.JAVELIN.get()) {
 			registrationList.add(ReforgedAdditions.JAVELIN = new ItemJavelin());
 		}
 
-		if (GlobalValues.KERIS) {
+		if (GlobalValues.KERIS.get()) {
 			registrationList.add(ReforgedAdditions.KERIS = new ItemKeris());
 		}
 
-		if (GlobalValues.BLOWGUN) {
+		if (GlobalValues.BLOWGUN.get()) {
 			registrationList.add(ReforgedAdditions.DART_NORMAL = new ItemDart("normal"));
 			registrationList.add(ReforgedAdditions.DART_HUNGER = new ItemDart("hunger"));
 			registrationList.add(ReforgedAdditions.DART_POISON = new ItemDart("poison"));
@@ -168,16 +168,16 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.BLOWGUN = new ItemBlowGun());
 		}
 
-		if (GlobalValues.DYNAMITE) {
+		if (GlobalValues.DYNAMITE.get()) {
 			registrationList.add(ReforgedAdditions.DYNAMITE = new ItemDynamite());
 		}
 
-		if (GlobalValues.CROSSBOW) {
+		if (GlobalValues.CROSSBOW.get()) {
 			registrationList.add(ReforgedAdditions.CROSSBOW = new ItemCrossbow());
 			registrationList.add(ReforgedAdditions.CROSSBOW_BOLT = new ItemCrossbowBolt());
 		}
 
-		if (GlobalValues.PIKE) {
+		if (GlobalValues.PIKE.get()) {
 			registrationList.add(ReforgedAdditions.WOODEN_PIKE = new ItemPike(ItemTier.WOOD));
 			registrationList.add(ReforgedAdditions.STONE_PIKE = new ItemPike(ItemTier.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_PIKE = new ItemPike(ItemTier.GOLD));
@@ -185,7 +185,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.DIAMOND_PIKE = new ItemPike(ItemTier.DIAMOND));
 		}
 
-		if (GlobalValues.MACE) {
+		if (GlobalValues.MACE.get()) {
 			registrationList.add(ReforgedAdditions.WOODEN_MACE = new ItemMace(ItemTier.WOOD));
 			registrationList.add(ReforgedAdditions.STONE_MACE = new ItemMace(ItemTier.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_MACE = new ItemMace(ItemTier.GOLD));
@@ -193,7 +193,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.DIAMOND_MACE = new ItemMace(ItemTier.DIAMOND));
 		}
 
-		if (GlobalValues.DIRK) {
+		if (GlobalValues.DIRK.get()) {
 			registrationList.add(ReforgedAdditions.WOODEN_DIRK = new ItemDirk(ItemTier.WOOD));
 			registrationList.add(ReforgedAdditions.STONE_DIRK = new ItemDirk(ItemTier.STONE));
 			registrationList.add(ReforgedAdditions.GOLDEN_DIRK = new ItemDirk(ItemTier.GOLD));
@@ -201,7 +201,7 @@ public class ReforgedRegistry {
 			registrationList.add(ReforgedAdditions.DIAMOND_DIRK = new ItemDirk(ItemTier.DIAMOND));
 		}
 
-		if (GlobalValues.CANNON) {
+		if (GlobalValues.CANNON.get()) {
 			registrationList.add(ReforgedAdditions.CANNON = new ItemCannon());
 			registrationList.add(ReforgedAdditions.CANNON_BALL = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
 					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "cannon_ball")));
@@ -212,62 +212,74 @@ public class ReforgedRegistry {
 	 * Adds all blocks to the registrationListBlocks
 	 */
 	public static void createBlocks() {
-		if (GlobalValues.CALTROP) {
+		if (GlobalValues.CALTROP.get()) {
 			registrationListBlocks.add(ReforgedAdditions.CALTROP = new BlockCaltrop());
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	/**
 	 * Adds all entity types to the registrationListEntities
 	 */
 	public static void createEntities() {
-		if (GlobalValues.BOOMERANG) {
-			registrationListEntities.add(ReforgedAdditions.ENTITY_BOOMERANG =
-					EntityType.Builder.create(EntityBoomerang.class, EntityBoomerang::new).build(EntityBoomerang.NAME));
+		if (GlobalValues.BOOMERANG.get()) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_BOOMERANG = (EntityType<EntityBoomerang>)
+					EntityType.Builder.create(EntityBoomerang.class, EntityBoomerang::new).build(EntityBoomerang.NAME)
+							.setRegistryName(new ResourceLocation(ReforgedMod.ID, EntityBoomerang.NAME)));
 		}
 
-		if (GlobalValues.MUSKET) {
-			registrationListEntities.add(ReforgedAdditions.ENTITY_BLUNDERBUSS =
-					EntityType.Builder.create(EntityBulletBlunderbuss.class, EntityBulletBlunderbuss::new).build(EntityBulletBlunderbuss.NAME));
-			registrationListEntities.add(ReforgedAdditions.ENTITY_MUSKET =
-					EntityType.Builder.create(EntityBulletMusket.class, EntityBulletMusket::new).build(EntityBulletMusket.NAME));
+		if (GlobalValues.MUSKET.get()) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_BLUNDERBUSS = (EntityType<EntityBulletBlunderbuss>)
+					EntityType.Builder.create(EntityBulletBlunderbuss.class, EntityBulletBlunderbuss::new).build(EntityBulletBlunderbuss.NAME)
+							.setRegistryName(new ResourceLocation(ReforgedMod.ID, EntityBulletBlunderbuss.NAME)));
+			registrationListEntities.add(ReforgedAdditions.ENTITY_MUSKET = (EntityType<EntityBulletMusket>)
+					EntityType.Builder.create(EntityBulletMusket.class, EntityBulletMusket::new).build(EntityBulletMusket.NAME)
+							.setRegistryName(new ResourceLocation(ReforgedMod.ID, EntityBulletMusket.NAME)));
 		}
 
-		if (GlobalValues.CANNON) {
-			registrationListEntities.add(ReforgedAdditions.ENTITY_CANNON =
-					EntityType.Builder.create(EntityCannon.class, EntityCannon::new).build(EntityCannon.NAME));
-			registrationListEntities.add(ReforgedAdditions.ENTITY_CANNON_BALL =
-					EntityType.Builder.create(EntityCannonBall.class, EntityCannonBall::new).build(EntityCannonBall.NAME));
+		if (GlobalValues.CANNON.get()) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_CANNON = (EntityType<EntityCannon>)
+					EntityType.Builder.create(EntityCannon.class, EntityCannon::new).build(EntityCannon.NAME)
+							.setRegistryName(new ResourceLocation(ReforgedMod.ID, EntityCannon.NAME)));
+			registrationListEntities.add(ReforgedAdditions.ENTITY_CANNON_BALL = (EntityType<EntityCannonBall>)
+					EntityType.Builder.create(EntityCannonBall.class, EntityCannonBall::new).build(EntityCannonBall.NAME)
+							.setRegistryName(new ResourceLocation(ReforgedMod.ID, EntityCannonBall.NAME)));
 		}
 
-		if (GlobalValues.CROSSBOW) {
-			registrationListEntities.add(ReforgedAdditions.ENTITY_CROSSBOW =
-					EntityType.Builder.create(EntityCrossbowBolt.class, EntityCrossbowBolt::new).build(EntityCrossbowBolt.NAME));
+		if (GlobalValues.CROSSBOW.get()) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_CROSSBOW = (EntityType<EntityCrossbowBolt>)
+					EntityType.Builder.create(EntityCrossbowBolt.class, EntityCrossbowBolt::new).build(EntityCrossbowBolt.NAME)
+							.setRegistryName(new ResourceLocation(ReforgedMod.ID, EntityCrossbowBolt.NAME)));
 		}
 
-		if (GlobalValues.BLOWGUN) {
-			registrationListEntities.add(ReforgedAdditions.ENTITY_DART =
-					EntityType.Builder.create(EntityDart.class, EntityDart::new).build(EntityDart.NAME));
+		if (GlobalValues.BLOWGUN.get()) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_DART = (EntityType<EntityDart>)
+					EntityType.Builder.create(EntityDart.class, EntityDart::new).build(EntityDart.NAME)
+							.setRegistryName(new ResourceLocation(ReforgedMod.ID, EntityDart.NAME)));
 		}
 
-		if (GlobalValues.DYNAMITE) {
-			registrationListEntities.add(ReforgedAdditions.ENTITY_DYNAMITE =
-					EntityType.Builder.create(EntityDynamite.class, EntityDynamite::new).build(EntityDynamite.NAME));
+		if (GlobalValues.DYNAMITE.get()) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_DYNAMITE = (EntityType<EntityDynamite>)
+					EntityType.Builder.create(EntityDynamite.class, EntityDynamite::new).build(EntityDynamite.NAME)
+							.setRegistryName(new ResourceLocation(ReforgedMod.ID, EntityDynamite.NAME)));
 		}
 
-		if (GlobalValues.JAVELIN) {
-			registrationListEntities.add(ReforgedAdditions.ENTITY_JAVELIN =
-					EntityType.Builder.create(EntityJavelin.class, EntityJavelin::new).build(EntityJavelin.NAME));
+		if (GlobalValues.JAVELIN.get()) {
+			registrationListEntities.add(ReforgedAdditions.ENTITY_JAVELIN = (EntityType<EntityJavelin>)
+					EntityType.Builder.create(EntityJavelin.class, EntityJavelin::new).build(EntityJavelin.NAME)
+							.setRegistryName(new ResourceLocation(ReforgedMod.ID, EntityJavelin.NAME)));
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	/**
 	 * Adds all entity types to the registrationListTileEntities
 	 */
 	public static void createTileEntities() {
-		if (GlobalValues.CALTROP) {
-			registrationListTileEntities.add(ReforgedAdditions.TILE_ENTITY_CALTROP =
-					TileEntityType.Builder.create(TileEntityCaltrop::new).build(null));
+		if (GlobalValues.CALTROP.get()) {
+			registrationListTileEntities.add(ReforgedAdditions.TILE_ENTITY_CALTROP = (TileEntityType<TileEntityCaltrop>)
+					TileEntityType.Builder.create(TileEntityCaltrop::new).build(null)
+							.setRegistryName(new ResourceLocation(ReforgedMod.ID, TileEntityCaltrop.NAME)));
 		}
 	}
 
@@ -331,24 +343,23 @@ public class ReforgedRegistry {
 				});
 	}
 
-	@SubscribeEvent
-	/** Registers all entities out of the registrationListEntities */
-	public void registerEntities(RegistryEvent.Register<EntityType<?>> event) {
-		System.out.println("REGENTITIRIIR");
+	/**
+	 * Registers all entities out of the registrationListEntities
+	 */
+	public void registerEntities(final RegistryEvent.Register<EntityType<?>> event) {
 		if (registrationListEntities.isEmpty()) {
 			createEntities();
 			IForgeRegistry<EntityType<?>> reg = event.getRegistry();
 			for (EntityType<?> entityType : registrationListEntities) {
 				reg.register(entityType);
-				System.out.println(entityType.getTranslationKey());
 			}
 		}
 	}
 
-	@SubscribeEvent
-	/** Registers all entities out of the registrationListTileEntities */
-	public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-		System.out.println("REGENTIDASDSDSATIRIIR");
+	/**
+	 * Registers all entities out of the registrationListTileEntities
+	 */
+	public void registerTileEntities(final RegistryEvent.Register<TileEntityType<?>> event) {
 		if (registrationListTileEntities.isEmpty()) {
 			createTileEntities();
 			IForgeRegistry<TileEntityType<?>> reg = event.getRegistry();
@@ -358,9 +369,10 @@ public class ReforgedRegistry {
 		}
 	}
 
-	@SubscribeEvent
-	/** Registers all blocks out of the registrationListBlocks */
-	public void registerBlocks(RegistryEvent.Register<Block> event) {
+	/**
+	 * Registers all blocks out of the registrationListBlocks
+	 */
+	public void registerBlocks(final RegistryEvent.Register<Block> event) {
 		if (registrationListBlocks.isEmpty()) {
 			createBlocks();
 			IForgeRegistry<Block> reg = event.getRegistry();
@@ -370,9 +382,10 @@ public class ReforgedRegistry {
 		}
 	}
 
-	@SubscribeEvent
-	/** Registers all items out of the registrationList */
-	public void registerItems(RegistryEvent.Register<Item> event) {
+	/**
+	 * Registers all items out of the registrationList
+	 */
+	public void registerItems(final RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> reg = event.getRegistry();
 		if (registrationList.isEmpty()) {
 			createItems();
