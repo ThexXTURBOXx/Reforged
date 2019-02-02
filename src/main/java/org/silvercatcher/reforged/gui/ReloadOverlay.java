@@ -30,53 +30,38 @@ public class ReloadOverlay extends Gui {
 	private float ticksBefore = -1;
 
 	public ReloadOverlay() {
-
 		super();
 		minecraft = Minecraft.getInstance();
 	}
 
 	@SubscribeEvent
 	public void renderReload(RenderGameOverlayEvent event) {
-
 		if (event instanceof RenderGameOverlayEvent.Post
 				|| event.getType() != RenderGameOverlayEvent.ElementType.HOTBAR) {
 			return;
 		}
-
 		EntityPlayer player = minecraft.player;
-
 		if (player != null && player.world != null) {
-
 			ItemStack equipped = player.inventory.getCurrentItem();
-
 			if (!equipped.isEmpty() && equipped.getItem() instanceof AReloadable) {
-
 				AReloadable reloadable = (AReloadable) equipped.getItem();
-
 				if (reloadable.giveCompound(equipped).getByte(CompoundTags.AMMUNITION) != AReloadable.loading) {
 					return;
 				}
-
 				int amountUnchecked = CompoundTags.giveCompound(equipped).getInt(CompoundTags.TIME);
-
 				if (amountUnchecked > reloadable.getReloadTotal()) {
 					amountUnchecked = 0;
 				}
-
 				float done = (float) amountUnchecked / (float) reloadable.getReloadTotal();
-
 				GL11.glColor4f(1F, 1F, 1F, 1F);
 				GL11.glDisable(GL11.GL_LIGHTING);
-
 				int i;
 				for (i = 0; i < 9; i++) {
 					if (player.inventory.getStackInSlot(i) == equipped) {
 						break;
 					}
 				}
-
 				float[] color;
-
 				if (done > 0.5f) {
 					if (done > 0.75f) {
 						color = green;
@@ -90,12 +75,11 @@ public class ReloadOverlay extends Gui {
 						color = red;
 					}
 				}
-
 				int x0 = minecraft.mainWindow.getScaledWidth() / 2 - 88 + i * 20;
 				int y0 = minecraft.mainWindow.getScaledHeight() - 3;
-
 				Helpers.drawRectangle(x0, y0 - (int) (done * 16), x0 + 16, y0, color);
 			}
 		}
 	}
+
 }

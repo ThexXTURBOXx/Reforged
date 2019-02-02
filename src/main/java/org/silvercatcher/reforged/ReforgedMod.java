@@ -52,7 +52,7 @@ public class ReforgedMod {
 	public static CommonProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
 	public ReforgedMod() {
-		CapabilityManager.INSTANCE.register(IStunProperty.class, new StorageStun(), new DefaultStunImpl());
+		//CapabilityManager.INSTANCE.register(IStunProperty.class, new StorageStun(), new DefaultStunImpl());
 		FMLModLoadingContext.get().getModEventBus().addListener(this::setup);
 		FMLModLoadingContext.get().getModEventBus().addListener(this::setupClient);
 		FMLModLoadingContext.get().getModEventBus().addListener(this::setupServer);
@@ -71,7 +71,6 @@ public class ReforgedMod {
 		ReforgedRegistry.registerEventHandler(new ReforgedMonsterArmourer());
 		if (FMLEnvironment.dist == Dist.CLIENT) {
 			ReforgedRegistry.registerEventHandler(new ReloadOverlay());
-			proxy.registerEntityRenderers();
 		}
 	}
 

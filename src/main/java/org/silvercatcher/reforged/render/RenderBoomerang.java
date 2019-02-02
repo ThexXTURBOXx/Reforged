@@ -17,7 +17,6 @@ public class RenderBoomerang extends ReforgedRender<EntityBoomerang> {
 
 	public RenderBoomerang(RenderManager renderManager) {
 		super(renderManager, new ModelBoomerang(), 90);
-		System.out.println("ALLAHUADDDD");
 	}
 
 	@Nonnull

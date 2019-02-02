@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.proxy;
 
+import com.electronwill.nightconfig.core.file.CommentedFileConfig;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -146,7 +147,7 @@ public class CommonProxy {
 
 		ForgeConfigSpec spec = builder.pop().build();
 
-		spec.setConfigFile(configFile);
+		spec.setConfig(CommentedFileConfig.of(cfgFile));
 		ReforgedMod.LOG.debug("Loaded {} config from {}", ReforgedMod.NAME, configFile);
 	}
 

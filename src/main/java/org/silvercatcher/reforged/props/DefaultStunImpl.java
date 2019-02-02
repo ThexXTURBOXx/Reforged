@@ -16,6 +16,7 @@ public class DefaultStunImpl implements Callable<DefaultStunImpl>, IStunProperty
 
 	@Override
 	public DefaultStunImpl call() {
-		return null;
+		return new DefaultStunImpl();
 	}
+
 }

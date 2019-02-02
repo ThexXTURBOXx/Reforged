@@ -12,6 +12,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTPrimitive;
+import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
@@ -19,7 +20,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import net.minecraftforge.common.capabilities.OptionalCapabilityInstance;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
@@ -75,21 +76,18 @@ public class ReforgedEvents {
 				ReforgedMod.STUN_PROP.getStorage().readNBT(ReforgedMod.STUN_PROP, inst, null, nbt);
 			}
 
+			@SuppressWarnings("unchecked")
 			@Nonnull
 			@Override
-			public <T> OptionalCapabilityInstance<T> getCapability(@Nonnull Capability<T> cap) {
-				return cap == ReforgedMod.STUN_PROP ? OptionalCapabilityInstance.<T>of(() -> (T) inst) : OptionalCapabilityInstance.empty();
-			}
-
-			@Nonnull
-			@Override
-			public <T> OptionalCapabilityInstance<T> getCapability(@Nonnull Capability<T> cap, @Nullable EnumFacing side) {
-				return getCapability(cap);
+			public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable EnumFacing side) {
+				return cap == ReforgedMod.STUN_PROP ? LazyOptional.<T>of(() -> (T) inst) : LazyOptional.empty();
 			}
 
 			@Override
 			public NBTPrimitive serializeNBT() {
-				return (NBTPrimitive) ReforgedMod.STUN_PROP.getStorage().writeNBT(ReforgedMod.STUN_PROP, inst, null);
+				NBTPrimitive nbt = new NBTTagInt(0);
+				ReforgedMod.STUN_PROP.getStorage().readNBT(ReforgedMod.STUN_PROP, inst, null, nbt);
+				return nbt;
 			}
 
 		});

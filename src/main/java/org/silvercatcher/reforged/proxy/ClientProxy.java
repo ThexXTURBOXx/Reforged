@@ -5,7 +5,7 @@ import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import org.silvercatcher.reforged.ReforgedReferences.GlobalValues;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
@@ -31,9 +31,10 @@ import org.silvercatcher.reforged.render.RenderTileEntityCaltrop;
 public class ClientProxy extends CommonProxy {
 
 	@Override
-	public void setup(FMLCommonSetupEvent event) {
-		super.setup(event);
-		//registerEntityRenderers();
+	public void setupClient(FMLClientSetupEvent event) {
+		super.setupClient(event);
+		System.out.println("CLIENT SETUP");
+		registerEntityRenderers();
 	}
 
 	@Override

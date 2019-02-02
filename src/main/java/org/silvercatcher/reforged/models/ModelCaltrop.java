@@ -36,4 +36,5 @@ public class ModelCaltrop extends ReforgedModel {
 		spike_up.render(f5);
 		spike1.render(f5);
 	}
+
 }
