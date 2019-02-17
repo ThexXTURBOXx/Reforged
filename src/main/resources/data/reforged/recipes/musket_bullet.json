@@ -11,13 +11,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "p": {
-      "item": "minecraft:paper"
+      "item": "reforged:paper"
     },
     "g": {
-      "item": "minecraft:gunpowder"
+      "item": "reforged:gunpowder"
     },
     "i": {
-      "item": "minecraft:iron_ingot"
+      "item": "reforged:ironingot"
     }
   }
 }

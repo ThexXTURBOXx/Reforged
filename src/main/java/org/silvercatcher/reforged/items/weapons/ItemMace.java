@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.IZombieEquippable;
@@ -25,7 +26,7 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 	}
 
 	public ItemMace(IItemTier material, boolean unbreakable) {
-		super(new Item.Builder().defaultMaxDamage((int) (material.getMaxUses() * 0.5f)));
+		super(new Item.Properties().defaultMaxDamage((int) (material.getMaxUses() * 0.5f)));
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, materialDefinition.getPrefixedName("mace")));
@@ -50,7 +51,7 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 	}
 
 	private Potion getPotion(String name) {
-		return Potion.REGISTRY.get(new ResourceLocation(name));
+		return ForgeRegistries.POTIONS.getValue(new ResourceLocation(name));
 	}
 
 	@Override

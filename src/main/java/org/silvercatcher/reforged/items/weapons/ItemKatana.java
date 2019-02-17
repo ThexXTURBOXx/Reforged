@@ -29,7 +29,7 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 
 	public ItemKatana(IItemTier material, boolean unbreakable) {
 		super(material, 1, -2.4F,
-				new Item.Builder().defaultMaxDamage(material.getMaxUses()).group(ReforgedMod.tabReforged));
+				new Item.Properties().defaultMaxDamage(material.getMaxUses()).group(ReforgedMod.tabReforged));
 
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);

@@ -8,7 +8,7 @@ import org.silvercatcher.reforged.api.ExtendedItem;
 public class ItemDart extends ExtendedItem {
 
 	public ItemDart(String effect) {
-		super(new Item.Builder());
+		super(new Item.Properties());
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "dart_" + effect));
 	}
 

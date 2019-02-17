@@ -10,7 +10,7 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "r": {
-      "item": "minecraft:sugar_cane"
+      "item": "reforged:reeds"
     }
   }
 }

@@ -21,7 +21,7 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 
 	public ItemKeris() {
 		super(ItemTier.GOLD, 2 + (int) ItemTier.GOLD.getAttackDamage(), -2.4F,
-				new Item.Builder().defaultMaxDamage(ItemTier.GOLD.getMaxUses()).group(ReforgedMod.tabReforged));
+				new Item.Properties().defaultMaxDamage(ItemTier.GOLD.getMaxUses()).group(ReforgedMod.tabReforged));
 		materialDefinition = MaterialManager.getMaterialDefinition(ItemTier.GOLD);
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "keris"));
 	}

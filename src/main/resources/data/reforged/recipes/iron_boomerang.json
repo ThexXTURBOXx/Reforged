@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "w": {
-      "item": "minecraft:stick"
+      "item": "reforged:stick"
     },
     "x": {
-      "item": "minecraft:iron_ingot"
+      "item": "reforged:ironingot"
     }
   }
 }

@@ -15,7 +15,7 @@ import org.silvercatcher.reforged.ReforgedMod;
  */
 public abstract class ExtendedItem extends Item implements ItemExtension {
 
-	public ExtendedItem(Item.Builder builder) {
+	public ExtendedItem(Item.Properties builder) {
 		super(builder.group(ReforgedMod.tabReforged));
 	}
 

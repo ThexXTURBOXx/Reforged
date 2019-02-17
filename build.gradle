@@ -43,35 +43,16 @@ minecraft {
     // these can be tweaked, removed, or duplicated as needed.
     runs {
         client = {
-            main "net.minecraftforge.userdev.UserdevLauncher"
-            ideaModule "${project.name}_main"
             properties 'forge.logging.markers': 'SCAN,REGISTRIES,REGISTRYDUMP'
             properties 'forge.logging.console.level': 'debug'
             workingDirectory project.file('run').canonicalPath
             source sourceSets.main
-            environment "target", "fmluserdevclient"
-            environment "assetDirectory", downloadAssets.output.absolutePath
-            environment "FORGE_VERSION", config.forgeVersion
-            environment "FORGE_GROUP", "net.minecraftforge.test"
-            environment "MCP_VERSION", config.mcpMappings + "-" + config.mcpVersion
-            environment "MCP_MAPPINGS", config.mcpMappings + "_" + config.mcpVersion
-            environment "MC_VERSION", config.minecraftVersion
-            environment "MOD_CLASSES", "${sourceSets.main.output.resourcesDir}${File.pathSeparator}${sourceSets.main.output.classesDirs.join(File.pathSeparator)}"
         }
         server = {
-            main "net.minecraftforge.userdev.UserdevLauncher"
-            ideaModule "${project.name}_main"
             properties 'forge.logging.markers': 'SCAN,REGISTRIES,REGISTRYDUMP'
             properties 'forge.logging.console.level': 'debug'
             workingDirectory project.file('run').canonicalPath
-            environment "target", "fmluserdevserver"
-            environment "assetDirectory", downloadAssets.output.absolutePath
-            environment "FORGE_VERSION", config.forgeVersion
-            environment "FORGE_GROUP", "net.minecraftforge.test"
-            environment "MCP_VERSION", config.mcpMappings + "-" + config.mcpVersion
-            environment "MCP_MAPPINGS", config.mcpMappings + "_" + config.mcpVersion
-            environment "MC_VERSION", config.minecraftVersion
-            environment "MOD_CLASSES", "${sourceSets.main.output.resourcesDir}${File.pathSeparator}${sourceSets.main.output.classesDirs.join(File.pathSeparator)}"
+            source sourceSets.main
         }
     }
 }
@@ -80,7 +61,7 @@ dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft "net.minecraftforge.test:forge:" + config.minecraftVersion + '-' + config.forgeVersion
+    minecraft "net.minecraftforge:forge:" + config.minecraftVersion + '-' + config.forgeVersion
 
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..

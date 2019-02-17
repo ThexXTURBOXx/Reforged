@@ -40,7 +40,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	public static final byte loaded = 2;
 
 	public ItemCrossbow() {
-		super(new Item.Builder().defaultMaxDamage(100).group(ReforgedMod.tabReforged));
+		super(new Item.Properties().defaultMaxDamage(100).group(ReforgedMod.tabReforged));
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "crossbow"));
 		addPropertyOverride(new ResourceLocation("pull"), (stack, worldIn, entityIn) -> {
 			float mrl = 0;

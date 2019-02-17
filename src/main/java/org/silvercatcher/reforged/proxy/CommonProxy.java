@@ -19,6 +19,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLDedicatedServerSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.ReforgedReferences;
@@ -32,7 +33,7 @@ public class CommonProxy {
 	public static final String items = "Items", ids = "IDs", floats = "General";
 
 	public static SoundEvent getSound(String name) {
-		return SoundEvent.REGISTRY.get(new ResourceLocation(ReforgedMod.ID, name));
+		return ForgeRegistries.SOUND_EVENTS.getValue(new ResourceLocation(ReforgedMod.ID, name));
 	}
 
 	public void loadConfig() {

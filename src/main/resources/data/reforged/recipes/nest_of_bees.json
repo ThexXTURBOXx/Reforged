@@ -10,13 +10,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "minecraft:string"
+      "item": "reforged:string"
     },
     "w": {
-      "tag": "minecraft:planks"
+      "item": "reforged:planks"
     },
     "l": {
-      "item": "minecraft:leather"
+      "item": "reforged:leather"
     }
   }
 }

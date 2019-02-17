@@ -28,7 +28,7 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 
 	public ItemKnife(IItemTier material, boolean unbreakable) {
 		super(material, (int) material.getAttackDamage() + 2, -2.4F,
-				new Item.Builder().group(ReforgedMod.tabReforged).defaultMaxDamage(material.getMaxUses()));
+				new Item.Properties().group(ReforgedMod.tabReforged).defaultMaxDamage(material.getMaxUses()));
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, materialDefinition.getPrefixedName("knife")));

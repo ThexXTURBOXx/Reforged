@@ -10,10 +10,10 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "minecraft:stick"
+      "item": "reforged:stick"
     },
     "m": {
-      "item": "minecraft:diamond"
+      "item": "reforged:diamond"
     }
   }
 }

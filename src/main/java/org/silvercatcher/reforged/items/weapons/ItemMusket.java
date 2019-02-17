@@ -20,7 +20,7 @@ public class ItemMusket extends AReloadable {
 	}
 
 	public ItemMusket(String name) {
-		super(new Item.Builder(), name, "musket_shoot");
+		super(new Item.Properties(), name, "musket_shoot");
 	}
 
 	@Override

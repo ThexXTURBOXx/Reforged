@@ -27,7 +27,7 @@ public class ItemBoomerang extends ExtendedItem {
 	}
 
 	public ItemBoomerang(IItemTier material, boolean unbreakable) {
-		super(new Item.Builder().defaultMaxDamage((int) (material.getMaxUses() * 0.8f)));
+		super(new Item.Properties().defaultMaxDamage((int) (material.getMaxUses() * 0.8f)));
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, materialDefinition.getPrefixedName("boomerang")));

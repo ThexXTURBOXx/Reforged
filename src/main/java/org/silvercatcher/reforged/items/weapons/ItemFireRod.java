@@ -21,7 +21,7 @@ public class ItemFireRod extends ExtendedItem {
 	public static final int FIRE_DURATION = 10;
 
 	public ItemFireRod() {
-		super(new Item.Builder().maxStackSize(32));
+		super(new Item.Properties().maxStackSize(32));
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "firerod"));
 	}
 

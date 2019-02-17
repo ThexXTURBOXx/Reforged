@@ -8,7 +8,7 @@ import org.silvercatcher.reforged.api.ExtendedItem;
 public class ItemArrowBundle extends ExtendedItem {
 
 	public ItemArrowBundle() {
-		super(new Item.Builder().maxStackSize(16));
+		super(new Item.Properties().maxStackSize(16));
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "arrow_bundle"));
 	}
 

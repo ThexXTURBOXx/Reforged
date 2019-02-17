@@ -27,7 +27,7 @@ public class ItemDirk extends ItemSword implements ItemExtension, IZombieEquippa
 
 	public ItemDirk(IItemTier material, boolean unbreakable) {
 		super(material, (int) material.getAttackDamage(), -2.4F,
-				new Item.Builder().group(ReforgedMod.tabReforged).defaultMaxDamage(material.getMaxUses()));
+				new Item.Properties().group(ReforgedMod.tabReforged).defaultMaxDamage(material.getMaxUses()));
 
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);

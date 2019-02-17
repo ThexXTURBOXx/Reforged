@@ -14,6 +14,7 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 
@@ -69,7 +70,7 @@ public class EntityDart extends AReforgedThrowable {
 	}
 
 	private Potion getPotion(String name) {
-		return Potion.REGISTRY.get(new ResourceLocation(name));
+		return ForgeRegistries.POTIONS.getValue(new ResourceLocation(name));
 	}
 
 	@Override

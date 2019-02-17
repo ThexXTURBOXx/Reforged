@@ -13,10 +13,10 @@
       "item": "minecraft:bow"
     },
     "w": {
-      "tag": "minecraft:planks"
+      "item": "reforged:planks"
     },
     "i": {
-      "item": "minecraft:iron_ingot"
+      "item": "reforged:ironingot"
     }
   }
 }

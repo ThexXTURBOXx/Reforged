@@ -1,0 +1,66 @@
+[
+  {
+    "name": "diamond",
+    "tag": "forge:items.gems.diamond"
+  },
+  {
+    "name": "cobblestone",
+    "tag": "forge:cobblestone"
+  },
+  {
+    "name": "paper",
+    "item": "minecraft:paper"
+  },
+  {
+    "name": "ironingot",
+    "tag": "forge:ingots.iron"
+  },
+  {
+    "name": "string",
+    "item": "minecraft:string"
+  },
+  {
+    "name": "reeds",
+    "item": "minecraft:reeds"
+  },
+  {
+    "name": "gunpowder",
+    "item": "minecraft:gunpowder"
+  },
+  {
+    "name": "gravel",
+    "item": "minecraft:gravel"
+  },
+  {
+    "name": "feather",
+    "item": "minecraft:feather"
+  },
+  {
+    "name": "goldingot",
+    "tag": "forge:ingots.gold"
+  },
+  {
+    "name": "stick",
+    "tag": "forge:rods.wooden"
+  },
+  {
+    "name": "cactus",
+    "item": "minecraft:cactus"
+  },
+  {
+    "name": "slimeball",
+    "item": "minecraft:slimeball"
+  },
+  {
+    "name": "bone",
+    "item": "minecraft:bone"
+  },
+  {
+    "name": "planks",
+    "tag": "minecraft:planks"
+  },
+  {
+    "name": "leather",
+    "item": "minecraft:leather"
+  }
+]

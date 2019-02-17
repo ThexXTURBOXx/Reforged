@@ -15,7 +15,7 @@ import org.silvercatcher.reforged.util.Helpers;
 public class ItemCannon extends ExtendedItem {
 
 	public ItemCannon() {
-		super(new Item.Builder().maxStackSize(1));
+		super(new Item.Properties().maxStackSize(1));
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "cannon"));
 	}
 

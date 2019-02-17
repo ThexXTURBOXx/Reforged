@@ -35,7 +35,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	private static int buildup = 25;
 
 	public ItemNestOfBees() {
-		super(new Item.Builder().defaultMaxDamage(80));
+		super(new Item.Properties().defaultMaxDamage(80));
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "nest_of_bees"));
 		addPropertyOverride(new ResourceLocation("empty"), (stack, world, entity) -> {
 			float mrl = 1;
@@ -143,7 +143,7 @@ public class ItemNestOfBees extends ExtendedItem {
 	protected void shoot(World world, EntityPlayer shooter) {
 
 		if (!world.isRemote) {
-			EntityArrow arrow = new ItemArrow(new Item.Builder()).createArrow(world, new ItemStack(Items.ARROW), shooter);
+			EntityArrow arrow = new ItemArrow(new Item.Properties()).createArrow(world, new ItemStack(Items.ARROW), shooter);
 			arrow.shoot(shooter, shooter.rotationPitch, shooter.rotationYaw, 0.0F, ItemBow.getArrowVelocity(40) * 3.0F,
 					1.0F);
 			arrow.setDamage(2);

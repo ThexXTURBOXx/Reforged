@@ -8,7 +8,7 @@ import org.silvercatcher.reforged.api.ExtendedItem;
 public class ItemCrossbowBolt extends ExtendedItem {
 
 	public ItemCrossbowBolt() {
-		super(new Item.Builder());
+		super(new Item.Properties());
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "crossbow_bolt"));
 	}
 

@@ -21,7 +21,7 @@ import org.silvercatcher.reforged.util.Helpers;
 public class ItemBlowGun extends ExtendedItem {
 
 	public ItemBlowGun() {
-		super(new Item.Builder().defaultMaxDamage(40));
+		super(new Item.Properties().defaultMaxDamage(40));
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "blowgun"));
 	}
 

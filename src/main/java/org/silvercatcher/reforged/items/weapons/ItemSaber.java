@@ -27,7 +27,7 @@ public class ItemSaber extends ItemSword implements ItemExtension, IZombieEquipp
 
 	public ItemSaber(IItemTier material, boolean unbreakable) {
 		super(material, (int) (material.getAttackDamage() + 3.5f), -2.4F,
-				new Item.Builder().group(ReforgedMod.tabReforged).defaultMaxDamage(material.getMaxUses()));
+				new Item.Properties().group(ReforgedMod.tabReforged).defaultMaxDamage(material.getMaxUses()));
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, materialDefinition.getPrefixedName("saber")));

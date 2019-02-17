@@ -8,7 +8,7 @@ import org.silvercatcher.reforged.api.ExtendedItem;
 public class ItemBulletMusket extends ExtendedItem {
 
 	public ItemBulletMusket() {
-		super(new Item.Builder());
+		super(new Item.Properties());
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "musket_bullet"));
 	}
 

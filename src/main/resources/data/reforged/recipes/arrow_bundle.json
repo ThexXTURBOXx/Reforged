@@ -4,7 +4,7 @@
   },
   "ingredients": [
     {
-      "item": "minecraft:string"
+      "item": "reforged:string"
     },
     {
       "item": "minecraft:arrow"

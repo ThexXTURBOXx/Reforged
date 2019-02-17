@@ -22,7 +22,7 @@ import org.silvercatcher.reforged.util.Helpers;
 public class ItemJavelin extends ExtendedItem {
 
 	public ItemJavelin() {
-		super(new Item.Builder().defaultMaxDamage(32));
+		super(new Item.Properties().defaultMaxDamage(32));
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "javelin"));
 	}
 

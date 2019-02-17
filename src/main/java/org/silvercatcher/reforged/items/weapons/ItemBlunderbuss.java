@@ -16,7 +16,7 @@ import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 public class ItemBlunderbuss extends AReloadable {
 
 	public ItemBlunderbuss() {
-		super(new Item.Builder(), "blunderbuss", "shotgun_shoot");
+		super(new Item.Properties(), "blunderbuss", "shotgun_shoot");
 	}
 
 	@Override

@@ -10,13 +10,13 @@
   "type": "minecraft:crafting_shaped",
   "key": {
     "s": {
-      "item": "minecraft:stick"
+      "item": "reforged:stick"
     },
     "f": {
       "item": "minecraft:flint"
     },
     "v": {
-      "item": "minecraft:feather"
+      "item": "reforged:feather"
     }
   }
 }

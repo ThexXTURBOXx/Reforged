@@ -73,7 +73,7 @@ public class ReforgedRegistry {
 	 * Adds all items to the registrationList
 	 */
 	public static void createItems() {
-		registrationList.add(ReforgedAdditions.TAB_ICON = new Item(new Item.Builder())
+		registrationList.add(ReforgedAdditions.TAB_ICON = new Item(new Item.Properties())
 				.setRegistryName(new ResourceLocation(ReforgedMod.ID, "tab_icon")));
 
 		if (GlobalValues.NEST_OF_BEES.get()) {
@@ -86,11 +86,11 @@ public class ReforgedRegistry {
 		}
 
 		if (GlobalValues.MUSKET.get()) {
-			registrationList.add(ReforgedAdditions.MUSKET_BARREL = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
+			registrationList.add(ReforgedAdditions.MUSKET_BARREL = new Item(new Item.Properties().group(ReforgedMod.tabReforged))
 					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "musket_barrel")));
-			registrationList.add(ReforgedAdditions.BLUNDERBUSS_BARREL = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
+			registrationList.add(ReforgedAdditions.BLUNDERBUSS_BARREL = new Item(new Item.Properties().group(ReforgedMod.tabReforged))
 					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "blunderbuss_barrel")));
-			registrationList.add(ReforgedAdditions.GUN_STOCK = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
+			registrationList.add(ReforgedAdditions.GUN_STOCK = new Item(new Item.Properties().group(ReforgedMod.tabReforged))
 					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "gun_stock")));
 			registrationList.add(ReforgedAdditions.MUSKET = new ItemMusket());
 			if (GlobalValues.KNIFE.get()) {
@@ -203,7 +203,7 @@ public class ReforgedRegistry {
 
 		if (GlobalValues.CANNON.get()) {
 			registrationList.add(ReforgedAdditions.CANNON = new ItemCannon());
-			registrationList.add(ReforgedAdditions.CANNON_BALL = new Item(new Item.Builder().group(ReforgedMod.tabReforged))
+			registrationList.add(ReforgedAdditions.CANNON_BALL = new Item(new Item.Properties().group(ReforgedMod.tabReforged))
 					.setRegistryName(new ResourceLocation(ReforgedMod.ID, "cannon_ball")));
 		}
 	}
@@ -396,7 +396,7 @@ public class ReforgedRegistry {
 		if (registrationListBlocks.isEmpty())
 			createBlocks();
 		for (Block block : registrationListBlocks) {
-			ItemBlock itemBlock = new ItemBlock(block, new Item.Builder().group(ReforgedMod.tabReforged));
+			ItemBlock itemBlock = new ItemBlock(block, new Item.Properties().group(ReforgedMod.tabReforged));
 			ResourceLocation rs = block.getRegistryName() == null ? new ResourceLocation(ReforgedMod.ID, "broken_name") : block.getRegistryName();
 			itemBlock.setRegistryName(rs);
 			ReforgedMod.proxy.registerItemRenderer(itemBlock, 0, block.getRegistryName().getNamespace() + ":" + block.getRegistryName().getPath());

@@ -21,7 +21,7 @@ public class ItemPike extends ExtendedItem {
 	}
 
 	public ItemPike(IItemTier material, boolean unbreakable) {
-		super(new Item.Builder().defaultMaxDamage((int) (material.getMaxUses() * 0.5f)));
+		super(new Item.Properties().defaultMaxDamage((int) (material.getMaxUses() * 0.5f)));
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, materialDefinition.getPrefixedName("pike")));

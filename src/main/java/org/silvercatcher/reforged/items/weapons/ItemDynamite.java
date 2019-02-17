@@ -16,7 +16,7 @@ import org.silvercatcher.reforged.util.Helpers;
 public class ItemDynamite extends ExtendedItem {
 
 	public ItemDynamite() {
-		super(new Item.Builder());
+		super(new Item.Properties());
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "dynamite"));
 	}
 

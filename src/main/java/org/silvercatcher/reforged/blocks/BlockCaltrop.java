@@ -3,8 +3,8 @@ package org.silvercatcher.reforged.blocks;
 import javax.annotation.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialColor;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,8 +15,8 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.shapes.ShapeUtils;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import org.silvercatcher.reforged.ReforgedMod;
@@ -28,7 +28,7 @@ import org.silvercatcher.reforged.entities.TileEntityCaltrop;
 public class BlockCaltrop extends BlockContainer implements BlockExtension {
 
 	public BlockCaltrop() {
-		super(Block.Builder.create(Material.GRASS, MapColor.GRAY).hardnessAndResistance(0, 30));
+		super(Block.Properties.create(Material.GRASS, MaterialColor.GRAY).hardnessAndResistance(0, 30));
 		setRegistryName(new ResourceLocation(ReforgedMod.ID, "caltrop"));
 	}
 
@@ -46,17 +46,17 @@ public class BlockCaltrop extends BlockContainer implements BlockExtension {
 
 	@Override
 	public VoxelShape getRenderShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
-		return ShapeUtils.create(0.35F, 0.0F, 0.35F, 0.65F, 0.5F, 0.65F);
+		return VoxelShapes.create(0.35F, 0.0F, 0.35F, 0.65F, 0.5F, 0.65F);
 	}
 
 	@Override
 	public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
-		return ShapeUtils.create(0.35F, 0.0F, 0.35F, 0.65F, 0.5F, 0.65F);
+		return VoxelShapes.create(0.35F, 0.0F, 0.35F, 0.65F, 0.5F, 0.65F);
 	}
 
 	@Override
 	public VoxelShape getCollisionShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
-		return ShapeUtils.empty();
+		return VoxelShapes.empty();
 	}
 
 	@Override
