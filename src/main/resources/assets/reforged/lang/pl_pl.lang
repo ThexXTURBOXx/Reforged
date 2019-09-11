@@ -1,30 +1,30 @@
 itemGroup.reforged=Reforged
 
-item.firerod.name=Ognista Laska
+item.firerod.name=Ognisty pręt
 
-item.arrow_bundle.name=Pęk Strzał
+item.arrow_bundle.name=Pęk strzał
 
 item.nest_of_bees.name=Gniazdo Pszczół
 item.nestofbees.arrows=Strzały
 
-item.wooden_battleaxe.name=Drewniany Topór Bitewny
-item.stone_battleaxe.name=Kamienny Topór Bitewny
-item.iron_battleaxe.name=Żelazny Topór Bitewny
-item.golden_battleaxe.name=Złoty Topór Bitewny
-item.diamond_battleaxe.name=Diamentowy Topór Bitewny
+item.wooden_battleaxe.name=Drewniany topór bitewny
+item.stone_battleaxe.name=Kamienny topór bitewny
+item.iron_battleaxe.name=Żelazny topór bitewny
+item.golden_battleaxe.name=Złoty topór bitewny
+item.diamond_battleaxe.name=Diamentowy topór bitewny
 
-item.wooden_boomerang.name=Drewniany Bumerang
-item.stone_boomerang.name=Kamienny Bumerang
-item.golden_boomerang.name=Złoty Bumerang
-item.iron_boomerang.name=Żelazny Bumerang
-item.diamond_boomerang.name=Diamentowy Bumerang
+item.wooden_boomerang.name=Drewniany bumerang
+item.stone_boomerang.name=Kamienny bumerang
+item.golden_boomerang.name=Złoty bumerang
+item.iron_boomerang.name=Żelazny bumerang
+item.diamond_boomerang.name=Diamentowy bumerang
 item.boomerang.langBreak=%1$s złamał się w twoich rękach.
 
-item.wooden_saber.name=Drewniana Szabla
-item.stone_saber.name=Kamienna Szabla
-item.golden_saber.name=Złota Szabla
-item.iron_saber.name=Żelazna Szabla
-item.diamond_saber.name=Diamentowa Szabla
+item.wooden_saber.name=Drewniana szabla
+item.stone_saber.name=Kamienna szabla
+item.golden_saber.name=Złota szabla
+item.iron_saber.name=Żelazna szabla
+item.diamond_saber.name=Diamentowa szabla
 
 item.wooden_musket.name=Muszkiet z drewnianym bagnetem
 item.stone_musket.name=Muszkiet z kamiennym bagnetem
@@ -32,65 +32,38 @@ item.golden_musket.name=Muszkiet ze złotym bagnetem
 item.iron_musket.name=Muszkiet z żelaznym bagnetem
 item.diamond_musket.name=Muszkiet z diamentowym bagnetem
 
-item.wooden_knife.name=Drewniany Nóż
-item.stone_knife.name=Żelazny Nóż
-item.golden_knife.name=Złoty Nóż
-item.iron_knife.name=Żelazny Nóż
-item.diamond_knife.name=Diamentowy Nóż
+item.wooden_knife.name=Drewniany nóż
+item.stone_knife.name=Żelazny nóż
+item.golden_knife.name=Złoty nóż
+item.iron_knife.name=Żelazny nóż
+item.diamond_knife.name=Diamentowy nóż
 
-item.wooden_katana.name=Drewniana Katana
-item.stone_katana.name=Kamienna Katana
-item.golden_katana.name=Złota Katana
-item.iron_katana.name=Żelazna Katana
-item.diamond_katana.name=Diamentowa Katana
+item.wooden_katana.name=Drewniana katana
+item.stone_katana.name=Kamienna katana
+item.golden_katana.name=Złota katana
+item.iron_katana.name=Żelazna katana
+item.diamond_katana.name=Diamentowa katana
 
 item.dart_normal.name=Strzałka
-item.dart_poison.name=Zatruta Strzałka
-item.dart_poison_strong.name=Mocno Zatruta Strzałka
-item.dart_slowness.name=Spowalniająca Strzałka
-item.dart_hunger.name=Strzałka Głodu
-item.dart_wither.name=Strzałka Obumierania
+item.dart_poison.name=Zatruta strzałka
+item.dart_poison_strong.name=Bardzo zatruta strzałka
+item.dart_slowness.name=Spowalniająca strzałka
+item.dart_hunger.name=Strzałka głodu
+item.dart_wither.name=Strzałka obumierania
 item.blowgun.name=Dmuchawka
 
-item.musket_barrel.name=Lufa Muszkietu
-item.gun_stock.name=Rdzeń Pistoletu
-item.blunderbuss_barrel.name=Lufa Garłacza
-item.blunderbuss_bullet.name=Nabój Garłacza
+item.musket_barrel.name=Lufa muszkietu
+item.gun_stock.name=Rdzeń pistoletu
+item.blunderbuss_barrel.name=Lufa garłacza
+item.blunderbuss_bullet.name=Nabój garłacza
 item.blunderbuss.name=Garłacz
 item.javelin.name=Oszczep
-item.musket_bullet.name=Nabój Muszkietu
+item.musket_bullet.name=Nabój muszkietu
 item.musket.name=Muszkiet
-item.musket.loadstate=Stan Przeładowania
+item.musket.loadstate=Stan przeładowania
 item.musket.loadstate.empty=Pusty
 item.musket.loadstate.loading=Przeładowywanie
 item.musket.loadstate.loaded=Przeładowany
-
-item.keris.name=Kris
-
-tile.caltrop.name=Kolczatka
-
-item.dynamite.name=Dynamit
-
-item.crossbow.name=Kusza
-item.crossbow_bolt.name=Bełt
-
-item.wooden_pike.name=Drewniana Pika
-item.stone_pike.name=Kamienna Pika
-item.golden_pike.name=Złota Pika
-item.iron_pike.name=Żelazna Pika
-item.diamond_pike.name=Diamentowa Pika
-
-item.wooden_mace.name=Drewniana Maczuga
-item.stone_mace.name=Kamienna Maczuga
-item.golden_mace.name=Złota Maczuga
-item.iron_mace.name=Żelazna Maczuga
-item.diamond_mace.name=Diamentowa Maczuga
-
-item.wooden_dirk.name=Drewniany Dirk
-item.stone_dirk.name=Kamienny Dirk
-item.golden_dirk.name=Złoty Dirk
-item.iron_dirk.name=Żelazny Dirk
-item.diamond_dirk.name=Diamentowy Dirk
 
 death.attack.boomerang=Głowa gracza %1$s została zmiażdżona przez bumerang.
 death.attack.boomerang.player=Głowa gracza %1$s została zmiażdżona przez bumerang podczas walki z %2$s.
@@ -102,21 +75,8 @@ death.attack.blunderbuss=%1$s został rozdarty przez kule.
 death.attack.blunderbuss.player=%1$s został rozdarty przez kule podczas walki z %2$s.
 death.attack.dart=%1$s posłużył jako ruchomy cel.
 death.attack.dart.player=%1$s posłużył jako ruchomy cel podczas walki z %2$s.
-death.attack.caltrop=%1$s nie patrzył pod nogi.
-death.attack.caltrop.player=%1$s nie patrzył pod nogi podczas walki z %2$s.
-death.attack.crossbow=%1$s został poćwiartowany przez bełt.
-death.attack.crossbow.player=%1$s został poćwiartowany przez bełt podczaz walki z %2$s.
-
-enchantment.goalseeker=Celownik
-
-reforged.subtitle.boomerang_break=Bumerang łamie się
-reforged.subtitle.boomerang_hit=Bumerang uderza
-reforged.subtitle.boomerang_throw=Rzuć Bumerangiem
-reforged.subtitle.crossbow_reload=Kusza przeładowuje się
-reforged.subtitle.crossbow_shoot=Kusza strzela
-reforged.subtitle.musket_shoot=Muszkiet strzela
-reforged.subtitle.shotgun_reload=Strzelba przeładowuje się
-reforged.subtitle.shotgun_shoot=Strzelba strzela
+death.attack.crossbow=%1$s został przecięty przez bełt.
+death.attack.crossbow.player=%1$s został przecięty przez bełt podcasz walki z %2$s.
 
 versionchecker.ingame.outdated=Dostępna nowa wersja
 versionchecker.ingame.downloadclick=Kliknij tutaj, aby pobrać
