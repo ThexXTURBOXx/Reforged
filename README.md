@@ -1,4 +1,9 @@
+# On Hold
+This project is on hold for now.<br>
+@ Everyone, who wants to contribute: **I won't help you in learning Java/Minecraft modding. If you want to contribute, learn it by _yourself_ as I did. If you aren't willing to do that, don't ask me if you may contribute. Only ask me, if you _really_ want to do this _completely_ on your own and already know the basics of how modding works**
+
 # Reforged
+
 [![Available](http://cf.way2muchnoise.eu/versions/reforged.svg)](https://minecraft.curseforge.com/projects/reforged) [![Downloads](http://cf.way2muchnoise.eu/full_241392_downloads.svg)](https://minecraft.curseforge.com/projects/reforged)<br>
 A successor (not port) of Balkon's Weapon Mod, will add primitive, medieval and some gunpowder weapons. <br>
 This successor has been created by Silvercatcher and ThexXTURBOXx. <br>
