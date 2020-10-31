@@ -74,23 +74,23 @@ item.dynamite.name=Динамітна Шашка
 item.crossbow.name=Арбалет
 item.crossbow_bolt.name=Стріла для Арбалета
 
-item.wooden_pike.name=Wooden Pike
-item.stone_pike.name=Stone Pike
-item.golden_pike.name=Golden Pike
-item.iron_pike.name=Iron Pike
-item.diamond_pike.name=Diamond Pike
+item.wooden_pike.name=Дерев'яний Спис
+item.stone_pike.name=Кам'яний Спис
+item.golden_pike.name=Золотий Спис
+item.iron_pike.name=Залізний Спис
+item.diamond_pike.name=Діамантовий Спис
 
-item.wooden_mace.name=Wooden Mace
-item.stone_mace.name=Stone Mace
-item.golden_mace.name=Golden Mace
-item.iron_mace.name=Iron Mace
-item.diamond_mace.name=Diamond Mace
+item.wooden_mace.name=Дерев'яний Пернач
+item.stone_mace.name=Кам'яний Пернач
+item.golden_mace.name=Золотий Пернач
+item.iron_mace.name=Залізний Пернач
+item.diamond_mace.name=Діамантовий Пернач
 
-item.wooden_dirk.name=Wooden Dirk
-item.stone_dirk.name=Stone Dirk
-item.golden_dirk.name=Golden Dirk
-item.iron_dirk.name=Iron Dirk
-item.diamond_dirk.name=Diamond Dirk
+item.wooden_dirk.name=Дерев'яний Кинджал
+item.stone_dirk.name=Кам'яний Кинджал
+item.golden_dirk.name=Золотий Кинджал
+item.iron_dirk.name=Залізний Кинджал
+item.diamond_dirk.name=Діамантовий Кинджал
 
 death.attack.boomerang=Голову %1$s рознесло на друзки за допомогою Бумерангу.
 death.attack.boomerang.player=Голову %1$s рознесло на друзки за допомогою Бумерангу під час битви з %2$s.
@@ -109,11 +109,11 @@ death.attack.crossbow.player=%1$s був розрубаний арбалетно
 
 enchantment.goalseeker=Шукач цілі
 
-reforged.subtitle.boomerang_break=Boomerang breaks
-reforged.subtitle.boomerang_hit=Boomerang hits
-reforged.subtitle.boomerang_throw=Throw Boomerang
-reforged.subtitle.crossbow_reload=Crossbow reloads
-reforged.subtitle.crossbow_shoot=Crossbow shoots
-reforged.subtitle.musket_shoot=Gun shoots
-reforged.subtitle.shotgun_reload=Gun reloads
-reforged.subtitle.shotgun_shoot=Gun shoots
+reforged.subtitle.boomerang_break=Бумеранг ламається
+reforged.subtitle.boomerang_hit=Бумеранг потрапив в ціль
+reforged.subtitle.boomerang_throw=Бумеранг кинуто
+reforged.subtitle.crossbow_reload=Арбалет перезаряджається
+reforged.subtitle.crossbow_shoot=Вистріл з арбалету
+reforged.subtitle.musket_shoot=Вистріл з мушкету
+reforged.subtitle.shotgun_reload=Зброя перезаряджається
+reforged.subtitle.shotgun_shoot=Вистріл з рушниці
