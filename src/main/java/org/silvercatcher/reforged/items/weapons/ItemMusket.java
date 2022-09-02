@@ -1,21 +1,24 @@
 package org.silvercatcher.reforged.items.weapons;
 
+import net.minecraft.item.Item;
 import org.silvercatcher.reforged.api.AReloadable;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 
 public class ItemMusket extends AReloadable {
 
 	public ItemMusket() {
 		super("musket", "musket_shoot");
+	}
+
+	@Override
+	public Item getAmmo() {
+		return ReforgedAdditions.MUSKET_BULLET;
 	}
 
 	@Override
@@ -50,14 +53,6 @@ public class ItemMusket extends AReloadable {
 		if (stack.getItem().isDamageable())
 			stack.damageItem(1, attacker);
 		return true;
-	}
-
-	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		if (hand == EnumHand.MAIN_HAND) {
-			setAmmo(ReforgedAdditions.MUSKET_BULLET);
-		}
-		return super.onItemRightClick(worldIn, playerIn, hand);
 	}
 
 	@Override

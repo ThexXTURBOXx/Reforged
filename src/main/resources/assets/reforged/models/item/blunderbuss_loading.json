@@ -1,0 +1,6 @@
+{
+    "parent": "reforged:item/musket_loading",
+    "textures": {
+        "layer0": "reforged:items/blunderbuss"
+    }
+}

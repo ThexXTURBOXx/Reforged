@@ -1,8 +1,10 @@
 package org.silvercatcher.reforged.gui;
 
-import org.lwjgl.opengl.GL11;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.item.Item;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.client.event.FOVUpdateEvent;
 import org.silvercatcher.reforged.api.AReloadable;
-import org.silvercatcher.reforged.api.CompoundTags;
 import org.silvercatcher.reforged.util.Helpers;
 
 //import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
@@ -17,87 +19,69 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ReloadOverlay extends Gui {
 
-	// My way to setup colors >:D
-	// The values are {Red, Green, Blue}
-	// 1 means f (full color)
-	private static final float[] red = new float[] { 1, 0, 0, 1 };
-	private static final float[] orange = new float[] { 1, 0.66F, 0, 1 };
-	private static final float[] yellow = new float[] { 1, 1, 0, 1 };
-	private static final float[] green = new float[] { 0, 1, 0, 1 };
-
 	private final Minecraft minecraft;
-	private float amount = 0;
-	private float amountUnchecked = 0;
-	private float ticksBefore = -1;
 
 	public ReloadOverlay() {
-
 		super();
 		minecraft = Minecraft.getMinecraft();
 	}
 
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
-	public void renderReload(RenderGameOverlayEvent event) {
-
-		if (event instanceof RenderGameOverlayEvent.Post
-				|| event.getType() != RenderGameOverlayEvent.ElementType.HOTBAR) {
+	public void renderReload(RenderGameOverlayEvent.Pre event) {
+		if (event.getType() != RenderGameOverlayEvent.ElementType.HOTBAR) {
 			return;
 		}
 
 		EntityPlayer player = minecraft.player;
-
 		if (player != null && player.world != null) {
-
 			ItemStack equipped = player.inventory.getCurrentItem();
+			Item equippedItem = equipped.getItem();
 
-			if (equipped != null && !equipped.isEmpty() && equipped.getItem() instanceof AReloadable) {
+			if (equippedItem instanceof AReloadable) {
+				AReloadable reloadable = (AReloadable) equippedItem;
 
-				AReloadable reloadable = (AReloadable) equipped.getItem();
-
-				if (reloadable.giveCompound(equipped).getByte(CompoundTags.AMMUNITION) != AReloadable.loading) {
+				int reloadTime = reloadable.getReloadTime(equipped);
+				if (reloadTime <= 0 || reloadTime >= reloadable.getReloadTotal()) {
 					return;
 				}
 
-				int amountUnchecked = CompoundTags.giveCompound(equipped).getInteger(CompoundTags.TIME);
-
-				if (amountUnchecked > reloadable.getReloadTotal()) {
-					amountUnchecked = 0;
-				}
-
-				float done = (float) amountUnchecked / (float) reloadable.getReloadTotal();
-
-				GL11.glColor4f(1F, 1F, 1F, 1F);
-				GL11.glDisable(GL11.GL_LIGHTING);
-
-				int i;
-				for (i = 0; i < 9; i++) {
-					if (player.inventory.getStackInSlot(i) == equipped) {
-						break;
-					}
-				}
-
-				float[] color;
-
-				if (done > 0.5f) {
-					if (done > 0.75f) {
-						color = green;
-					} else {
-						color = yellow;
-					}
-				} else {
-					if (done > 0.25f) {
-						color = orange;
-					} else {
-						color = red;
-					}
-				}
-
-				int x0 = event.getResolution().getScaledWidth() / 2 - 88 + i * 20;
+				float done = Math.min(reloadTime / (float) reloadable.getReloadTotal(), 1.0f);
+				int x0 = event.getResolution().getScaledWidth() / 2 - 88 + player.inventory.currentItem * 20;
 				int y0 = event.getResolution().getScaledHeight() - 3;
+				int color = MathHelper.hsvToRGB(done / 3.0f, 1.0f, 1.0f);
 
-				Helpers.drawRectangle(x0, y0 - (int) (done * 16), x0 + 16, y0, color);
+				Helpers.drawRectangle(x0, y0 - (int) (done * 16), x0 + 16, y0, new float[] {
+						(color >> 16 & 0xFF) / 255.0f, (color >> 8 & 0xFF) / 255.0f, (color & 0xFF) / 255.0f, 1.0f });
+
+				GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+				GlStateManager.enableBlend();
 			}
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	@SubscribeEvent
+	public void modifyFov(FOVUpdateEvent event) {
+		EntityPlayer player = event.getEntity();
+		if (!player.isHandActive())
+			return;
+
+		ItemStack activeStack = player.getActiveItemStack();
+		Item activeItem = activeStack.getItem();
+		if (!(activeItem instanceof AReloadable))
+			return;
+
+		AReloadable reloadable = (AReloadable) activeItem;
+		if (reloadable.getReloadTime(activeStack) < reloadable.getReloadTotal())
+			return;
+
+		int useTicks = player.getItemInUseMaxCount();
+		if (useTicks >= 20) {
+			event.setNewfov(event.getNewfov() * 0.8f);
+		} else {
+			float mod = useTicks / 20.0f;
+			event.setNewfov(event.getNewfov() * (1.0f - mod * mod * 0.2f));
 		}
 	}
 }

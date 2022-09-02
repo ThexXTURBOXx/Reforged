@@ -2,6 +2,8 @@ package org.silvercatcher.reforged.api;
 
 import java.util.List;
 
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.silvercatcher.reforged.ReforgedMod;
 import org.silvercatcher.reforged.util.Helpers;
 
@@ -17,18 +19,13 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.*;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class AReloadable extends ItemBow implements ItemExtension {
+import javax.annotation.Nullable;
 
-	public static final byte empty = 0;
-	public static final byte loading = 1;
+public abstract class AReloadable extends Item implements ItemExtension {
 
-	public static final byte loaded = 2;
-
-	private Item ammo;
-	private String shootsound;
+	private final String shootsound;
 
 	public AReloadable(String name, String shootsound) {
 		setMaxStackSize(1);
@@ -36,22 +33,28 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 		setTranslationKey(name);
 		setCreativeTab(ReforgedMod.tabReforged);
 		this.shootsound = shootsound;
+
+		addPropertyOverride(new ResourceLocation("loading"), new IItemPropertyGetter() {
+			@SideOnly(Side.CLIENT)
+			public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
+				return entityIn != null && entityIn.isHandActive()
+						&& entityIn.getActiveItemStack() == stack && stack.hasTagCompound()
+						&& stack.getTagCompound().getInteger(CompoundTags.TIME) < getReloadTotal()
+						? 1.0F : 0.0F;
+			}
+		});
 	}
 
 	@Override
 	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag advanced) {
-
-		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
-
+		int reloadTime = getReloadTime(stack);
 		tooltip.add(I18n.format("item.musket.loadstate") + ": "
-				+ (loadState == empty ? I18n.format("item.musket.loadstate.empty")
-						: (loadState == loaded ? I18n.format("item.musket.loadstate.loaded")
+				+ (reloadTime <= 0 ? I18n.format("item.musket.loadstate.empty")
+						: (reloadTime >= getReloadTotal() ? I18n.format("item.musket.loadstate.loaded")
 								: I18n.format("item.musket.loadstate.loading"))));
 	}
 
-	private Item getAmmo() {
-		return ammo;
-	}
+	public abstract Item getAmmo();
 
 	@Override
 	public Multimap getAttributeModifiers(ItemStack stack) {
@@ -73,30 +76,18 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	}
 
 	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-
-		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
-
-		if (loadState == loading) {
-			if (ReforgedMod.battlegearDetected)
-				return EnumAction.BOW;
-			else
-				return EnumAction.BLOCK;
-		}
-		if (loadState == loaded)
-			return EnumAction.BOW;
-		return EnumAction.NONE;
+	public int getMaxItemUseDuration(ItemStack stack) {
+		return 72000;
 	}
 
 	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
-
-		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
-
-		if (loadState == loading)
-			return getReloadTotal();
-
-		return super.getMaxItemUseDuration(stack);
+	public EnumAction getItemUseAction(ItemStack stack) {
+		int reloadTime = getReloadTime(stack);
+		if (reloadTime <= 0)
+			return EnumAction.NONE;
+		if (reloadTime >= getReloadTotal())
+			return EnumAction.BOW;
+		return ReforgedMod.battlegearDetected ? EnumAction.BOW : EnumAction.BLOCK; // still reloading
 	}
 
 	public int getReloadTime(ItemStack stack) {
@@ -106,104 +97,102 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	public abstract int getReloadTotal();
 
 	public NBTTagCompound giveCompound(ItemStack stack) {
-
-		NBTTagCompound compound = CompoundTags.giveCompound(stack);
-
-		if (!compound.hasKey(CompoundTags.AMMUNITION)) {
-
-			compound.setByte(CompoundTags.AMMUNITION, empty);
-		}
-		return compound;
+		return CompoundTags.giveCompound(stack);
 	}
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
-		if (hand == EnumHand.MAIN_HAND) {
-			NBTTagCompound compound = giveCompound(playerIn.getHeldItemMainhand());
+		ItemStack heldStack = playerIn.getHeldItem(hand);
+		if (hand != EnumHand.MAIN_HAND)
+			return new ActionResult<>(EnumActionResult.FAIL, heldStack);
 
-			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
+		NBTTagCompound compound = giveCompound(heldStack);
 
-			if (loadState == empty) {
-				if (playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, getAmmo())) {
+		if (compound.getInteger(CompoundTags.TIME) <= 0) {
+			if (playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, getAmmo())) {
+				Helpers.playSound(worldIn, playerIn, "shotgun_reload", 1.0f, 1.5f);
+				compound.setInteger(CompoundTags.TIME, 1);
+			} else {
+				Helpers.playSound(worldIn, playerIn, "shotgun_reload", 1.0f, 0.7f);
+				return new ActionResult<>(EnumActionResult.FAIL, heldStack);
+			}
+		}
 
-					loadState = loading;
-					if (compound.getByte(CompoundTags.AMMUNITION) == empty) {
-						compound.setBoolean(CompoundTags.STARTED, true);
-						compound.setInteger(CompoundTags.TIME, 0);
-					}
-				} else {
-					Helpers.playSound(worldIn, playerIn, "shotgun_reload", 1.0f, 0.7f);
+		playerIn.setActiveHand(hand);
+		return new ActionResult<>(EnumActionResult.PASS, heldStack);
+	}
+
+	@Override
+	public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
+		if (player.world.isRemote)
+			return;
+
+		NBTTagCompound compound = giveCompound(stack);
+		int reloadTime = compound.getInteger(CompoundTags.TIME);
+
+		if (reloadTime < getReloadTotal()) {
+			if (reloadTime == getReloadTotal() - 1) {
+				if (!player.world.isRemote) {
+					compound.setInteger(CompoundTags.TIME, getReloadTotal());
+					player.resetActiveHand();
+					Helpers.playSound(player.world, player, "shotgun_reload", 1.0f, 1.0f);
+
+					// prevent players from accidentally shooting immediately after reloading
+					if (player instanceof EntityPlayer)
+						((EntityPlayer) player).getCooldownTracker().setCooldown(this, 10);
 				}
+			} else {
+				compound.setInteger(CompoundTags.TIME, reloadTime + 1);
 			}
-
-			compound.setByte(CompoundTags.AMMUNITION, loadState);
-
-			if (compound.getInteger(CompoundTags.TIME) <= 0 || !worldIn.isRemote
-					|| (worldIn.isRemote && compound.getInteger(CompoundTags.TIME) >= getReloadTotal() - 1)) {
-				playerIn.setActiveHand(hand);
-			}
-
-			return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItemMainhand());
 		}
-		return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
 	}
 
-	@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
-			EnumFacing facing, float hitX, float hitY, float hitZ) {
-		return EnumActionResult.PASS;
-	}
-
-	@Override
-	public ItemStack onItemUseFinish(ItemStack stack, World worldIn, EntityLivingBase playerIn) {
-
-		byte loadState = giveCompound(stack).getByte(CompoundTags.AMMUNITION);
-
-		if (loadState == loading) {
-			loadState = loaded;
-		}
-		giveCompound(stack).setByte(CompoundTags.AMMUNITION, loadState);
-		return stack;
-	}
-
+	// this method isn't called if the player switches items before releasing right click
+	// see ReforgedEvents#onLivingTick for the code that handles that case
 	@Override
 	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase playerInl, int timeLeft) {
-		if (!worldIn.isRemote && playerInl instanceof EntityPlayer) {
-			EntityPlayerMP playerIn = (EntityPlayerMP) playerInl;
-			NBTTagCompound compound = giveCompound(stack);
-			byte loadState = compound.getByte(CompoundTags.AMMUNITION);
-			if (loadState == loaded) {
-				Helpers.playSound(worldIn, playerIn, shootsound, 1f, 1f);
+		if (!(playerInl instanceof EntityPlayer))
+			return;
+
+		EntityPlayer playerIn = (EntityPlayer) playerInl;
+		NBTTagCompound compound = giveCompound(stack);
+
+		if (compound.getInteger(CompoundTags.TIME) >= getReloadTotal()) {
+			if (!worldIn.isRemote) {
 				shoot(worldIn, playerIn, stack);
+
 				if (!playerIn.capabilities.isCreativeMode && stack.getItem().isDamageable()
-						&& stack.attemptDamageItem(5, itemRand, playerIn)) {
+						&& stack.attemptDamageItem(5, itemRand,
+						playerIn instanceof EntityPlayerMP ? (EntityPlayerMP) playerIn : null)) {
 					playerIn.renderBrokenItemStack(stack);
 					Helpers.destroyCurrentEquippedItem(playerIn);
 				}
-				compound.setByte(CompoundTags.AMMUNITION, empty);
-				compound.setBoolean(CompoundTags.STARTED, false);
 			}
-			compound.setInteger(CompoundTags.TIME, -1);
-		}
-	}
 
-	@Override
-	public void onUpdate(ItemStack stack, World worldIn, Entity entityIn, int itemSlot, boolean isSelected) {
-		super.onUpdate(stack, worldIn, entityIn, itemSlot, isSelected);
-		if (!(entityIn instanceof EntityLivingBase))
-			return;
-		if (giveCompound(stack).getBoolean(CompoundTags.STARTED)
-				&& giveCompound(stack).getByte(CompoundTags.AMMUNITION) == loading
-				&& ItemStack.areItemStacksEqual(stack, ((EntityLivingBase) entityIn).getActiveItemStack())) {
-			giveCompound(stack).setInteger(CompoundTags.TIME, getReloadTime(stack) + 1);
+			compound.setInteger(CompoundTags.TIME, 0);
+			Helpers.playSound(worldIn, playerIn, shootsound, 1f, 1f);
 		}
-	}
-
-	protected void setAmmo(Item ammo) {
-		this.ammo = ammo;
 	}
 
 	public abstract void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack);
+
+	@Override
+	public boolean canContinueUsing(ItemStack oldStack, ItemStack newStack) {
+		if (super.canContinueUsing(oldStack, newStack))
+			return true;
+
+		if (oldStack.getItem() != newStack.getItem() || !oldStack.hasTagCompound() || !newStack.hasTagCompound()) {
+			return false;
+		}
+
+		int oldReloadTime = oldStack.getTagCompound().getInteger(CompoundTags.TIME);
+		int newReloadTime = newStack.getTagCompound().getInteger(CompoundTags.TIME);
+		if (oldReloadTime == 0 || newReloadTime == 0) // if either stack is unloaded, abort
+			return false;
+		if (oldReloadTime < getReloadTotal()) // if both stacks are reloading, we can continue
+			return newReloadTime < getReloadTotal();
+		return newReloadTime >= getReloadTotal(); // otherwise, if both stacks are loaded, we can continue
+	}
 
 	@Override
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
