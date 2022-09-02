@@ -26,12 +26,12 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 	}
 
 	public ItemBattleAxe(ToolMaterial material, boolean unbreakable) {
-		super(material, material.getDamageVsEntity() * 1.5f + 4f, -3.0F);
+		super(material, material.getAttackDamage() * 1.5f + 4f, -3.0F);
 		setMaxStackSize(1);
 
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
-		setUnlocalizedName(materialDefinition.getPrefixedName("battleaxe"));
+		setTranslationKey(materialDefinition.getPrefixedName("battleaxe"));
 		setMaxDamage(materialDefinition.getMaxUses());
 
 		setCreativeTab(ReforgedMod.tabReforged);
@@ -60,7 +60,7 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 	}
 
 	@Override
-	public float getStrVsBlock(ItemStack stack, IBlockState block) {
+	public float getDestroySpeed(ItemStack stack, IBlockState block) {
 
 		return effectiveAgainst(block) ? materialDefinition.getEfficiencyOnProperMaterial() + 0.5f : 1f;
 	}

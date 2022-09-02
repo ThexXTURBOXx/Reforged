@@ -27,7 +27,7 @@ public class ItemMace extends ExtendedItem implements IZombieEquippable {
 		setMaxStackSize(1);
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setMaxDamage((int) (materialDefinition.getMaxUses() * 0.5f));
-		setUnlocalizedName(materialDefinition.getPrefixedName("mace"));
+		setTranslationKey(materialDefinition.getPrefixedName("mace"));
 	}
 
 	@Override

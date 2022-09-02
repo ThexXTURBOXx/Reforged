@@ -23,7 +23,7 @@ public class ItemPike extends ExtendedItem {
 		setMaxStackSize(1);
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 		setMaxDamage((int) (materialDefinition.getMaxUses() * 0.5f));
-		setUnlocalizedName(materialDefinition.getPrefixedName("pike"));
+		setTranslationKey(materialDefinition.getPrefixedName("pike"));
 	}
 
 	@Override

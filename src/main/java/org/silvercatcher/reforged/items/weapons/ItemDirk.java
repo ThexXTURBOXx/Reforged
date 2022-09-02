@@ -32,7 +32,7 @@ public class ItemDirk extends ItemSword implements ItemExtension, IZombieEquippa
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 
-		setUnlocalizedName(materialDefinition.getPrefixedName("dirk"));
+		setTranslationKey(materialDefinition.getPrefixedName("dirk"));
 		setMaxDamage(materialDefinition.getMaxUses());
 		setMaxStackSize(1);
 	}

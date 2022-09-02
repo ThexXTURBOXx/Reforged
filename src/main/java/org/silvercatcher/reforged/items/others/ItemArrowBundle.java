@@ -7,7 +7,7 @@ public class ItemArrowBundle extends ExtendedItem {
 	public ItemArrowBundle() {
 		super();
 		setMaxStackSize(16);
-		setUnlocalizedName("arrow_bundle");
+		setTranslationKey("arrow_bundle");
 	}
 
 	@Override

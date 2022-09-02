@@ -136,12 +136,12 @@ public class ClientProxy extends CommonProxy {
 
 		for (Item item : ReforgedRegistry.registrationList) {
 			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(
-					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
+					ReforgedMod.ID + ":" + item.getTranslationKey().substring(5), inventory));
 		}
 
 		for (Block item : ReforgedRegistry.registrationListBlocks) {
 			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(item), 0, new ModelResourceLocation(
-					ReforgedMod.ID + ":" + item.getUnlocalizedName().substring(5), inventory));
+					ReforgedMod.ID + ":" + item.getTranslationKey().substring(5), inventory));
 		}
 
 	}

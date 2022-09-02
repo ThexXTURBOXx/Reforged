@@ -30,7 +30,7 @@ public class ItemSaber extends ItemSword implements ItemExtension, IZombieEquipp
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 
-		setUnlocalizedName(materialDefinition.getPrefixedName("saber"));
+		setTranslationKey(materialDefinition.getPrefixedName("saber"));
 
 		setCreativeTab(ReforgedMod.tabReforged);
 		setMaxStackSize(1);

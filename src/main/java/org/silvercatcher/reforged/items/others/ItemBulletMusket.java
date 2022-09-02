@@ -7,7 +7,7 @@ public class ItemBulletMusket extends ExtendedItem {
 	public ItemBulletMusket() {
 		super();
 		setMaxStackSize(64);
-		setUnlocalizedName("musket_bullet");
+		setTranslationKey("musket_bullet");
 	}
 
 	@Override

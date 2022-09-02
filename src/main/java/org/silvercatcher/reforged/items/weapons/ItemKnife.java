@@ -33,7 +33,7 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 
-		setUnlocalizedName(materialDefinition.getPrefixedName("knife"));
+		setTranslationKey(materialDefinition.getPrefixedName("knife"));
 		setMaxDamage(materialDefinition.getMaxUses());
 		setMaxStackSize(1);
 	}
@@ -60,7 +60,7 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
 		Vec3d attackervec = new Vec3d(attacker.posX - target.posX,
 				(attacker.getEntityBoundingBox().minY + attacker.height / 2) - target.posY + target.getEyeHeight(),
 				attacker.posZ - target.posZ);
-		double d0 = attackervec.lengthVector();
+		double d0 = attackervec.length();
 
 		double d1 = look.dotProduct(attackervec);
 

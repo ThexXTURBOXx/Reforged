@@ -33,7 +33,7 @@ public abstract class AReloadable extends ItemBow implements ItemExtension {
 	public AReloadable(String name, String shootsound) {
 		setMaxStackSize(1);
 		setMaxDamage(100);
-		setUnlocalizedName(name);
+		setTranslationKey(name);
 		setCreativeTab(ReforgedMod.tabReforged);
 		this.shootsound = shootsound;
 	}

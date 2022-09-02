@@ -13,7 +13,7 @@ public class ItemDynamite extends ExtendedItem {
 
 	public ItemDynamite() {
 		super();
-		setUnlocalizedName("dynamite");
+		setTranslationKey("dynamite");
 		setMaxStackSize(64);
 	}
 

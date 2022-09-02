@@ -7,7 +7,7 @@ public class ItemCrossbowBolt extends ExtendedItem {
 	public ItemCrossbowBolt() {
 		super();
 		setMaxStackSize(64);
-		setUnlocalizedName("crossbow_bolt");
+		setTranslationKey("crossbow_bolt");
 	}
 
 	@Override

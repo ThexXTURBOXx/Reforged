@@ -17,7 +17,7 @@ public class ItemJavelin extends ExtendedItem {
 
 	public ItemJavelin() {
 		super();
-		setUnlocalizedName("javelin");
+		setTranslationKey("javelin");
 		setMaxStackSize(8);
 		setMaxDamage(32);
 	}

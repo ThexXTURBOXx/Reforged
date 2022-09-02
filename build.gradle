@@ -1,14 +1,13 @@
 buildscript {
     repositories {
-        jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        mavenLocal()
+        maven { url = "https://files.minecraftforge.net/maven" }
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle.forge'
-
 
 version = "0.7.5"
 group = "org.silvercatcher.reforged"
@@ -20,9 +19,9 @@ compileJava {
 }
 
 minecraft {
-    version = "1.12.2-14.23.1.2606"
+    version = "1.12.2-14.23.5.2847"
     runDir = "run"
-    mappings = "snapshot_20180129"
+    mappings = "stable_39"
 }
 
 dependencies {}

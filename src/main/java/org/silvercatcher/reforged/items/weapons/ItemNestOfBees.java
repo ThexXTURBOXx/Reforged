@@ -28,7 +28,7 @@ public class ItemNestOfBees extends ExtendedItem {
 
 	public ItemNestOfBees() {
 		super();
-		setUnlocalizedName("nest_of_bees");
+		setTranslationKey("nest_of_bees");
 		setMaxDamage(80);
 		setMaxStackSize(1);
 		addPropertyOverride(new ResourceLocation("empty"), new IItemPropertyGetter() {
@@ -146,10 +146,10 @@ public class ItemNestOfBees extends ExtendedItem {
 
 		if (!world.isRemote) {
 			EntityArrow arrow = new ItemArrow().createArrow(world, new ItemStack(Items.ARROW), shooter);
-			arrow.setAim(shooter, shooter.rotationPitch, shooter.rotationYaw, 0.0F, ItemBow.getArrowVelocity(40) * 3.0F,
+			arrow.shoot(shooter, shooter.rotationPitch, shooter.rotationYaw, 0.0F, ItemBow.getArrowVelocity(40) * 3.0F,
 					1.0F);
 			arrow.setDamage(2);
-			arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ, 3 + itemRand.nextFloat() / 2f, 1.5f);
+			arrow.shoot(arrow.motionX, arrow.motionY, arrow.motionZ, 3 + itemRand.nextFloat() / 2f, 1.5f);
 			world.spawnEntity(arrow);
 		}
 		world.playSound(null, shooter.posX, shooter.posY, shooter.posZ, SoundEvents.ENTITY_FIREWORK_LAUNCH,

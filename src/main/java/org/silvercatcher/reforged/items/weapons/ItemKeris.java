@@ -24,7 +24,7 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 
 		materialDefinition = MaterialManager.getMaterialDefinition(ToolMaterial.GOLD);
 
-		setUnlocalizedName("keris");
+		setTranslationKey("keris");
 		setMaxDamage(materialDefinition.getMaxUses());
 		setMaxStackSize(1);
 		setCreativeTab(ReforgedMod.tabReforged);
@@ -36,7 +36,7 @@ public class ItemKeris extends ItemSword implements ItemExtension {
 	}
 
 	@Override
-	public float getDamageVsEntity() {
+	public float getAttackDamage() {
 		return getHitDamage();
 	}
 

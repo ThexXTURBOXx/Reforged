@@ -7,7 +7,7 @@ public class ItemBulletBlunderbuss extends ExtendedItem {
 	public ItemBulletBlunderbuss() {
 		super();
 		setMaxStackSize(64);
-		setUnlocalizedName("blunderbuss_bullet");
+		setTranslationKey("blunderbuss_bullet");
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public class ItemCannon extends ExtendedItem {
 
 	public ItemCannon() {
 		super();
-		setUnlocalizedName("cannon");
+		setTranslationKey("cannon");
 		setMaxStackSize(1);
 	}
 	

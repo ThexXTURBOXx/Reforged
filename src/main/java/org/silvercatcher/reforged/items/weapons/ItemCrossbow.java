@@ -37,7 +37,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 	public ItemCrossbow() {
 		setMaxStackSize(1);
 		setMaxDamage(100);
-		setUnlocalizedName("crossbow");
+		setTranslationKey("crossbow");
 		setCreativeTab(ReforgedMod.tabReforged);
 		addPropertyOverride(new ResourceLocation("pull"), new IItemPropertyGetter() {
 			@Override
@@ -79,7 +79,7 @@ public class ItemCrossbow extends ItemBow implements ItemExtension {
 								: I18n.format("item.musket.loadstate.loading"))));
 	}
 
-	private ItemStack findAmmo(EntityPlayer player) {
+	protected ItemStack findAmmo(EntityPlayer player) {
 		if (this.isArrow(player.getHeldItem(EnumHand.OFF_HAND))) {
 			return player.getHeldItem(EnumHand.OFF_HAND);
 		} else if (this.isArrow(player.getHeldItem(EnumHand.MAIN_HAND))) {

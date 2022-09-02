@@ -33,7 +33,7 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 		motionZ = MathHelper.cos(rotationYaw / 180.0F * (float) Math.PI)
 				* MathHelper.cos(rotationPitch / 180.0F * (float) Math.PI);
 		motionY = -MathHelper.sin(rotationPitch / 180.0F * (float) Math.PI);
-		setThrowableHeading(motionX, motionY, motionZ, 1.5F, 1.0F);
+		shoot(motionX, motionY, motionZ, 1.5F, 1.0F);
 	}
 
 	public AReforgedThrowable(World worldIn, String damageName) {

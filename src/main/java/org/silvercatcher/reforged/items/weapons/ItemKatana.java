@@ -30,7 +30,7 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 		this.unbreakable = unbreakable;
 		materialDefinition = MaterialManager.getMaterialDefinition(material);
 
-		setUnlocalizedName(materialDefinition.getPrefixedName("katana"));
+		setTranslationKey(materialDefinition.getPrefixedName("katana"));
 		setMaxDamage(materialDefinition.getMaxUses());
 		setMaxStackSize(1);
 		setCreativeTab(ReforgedMod.tabReforged);

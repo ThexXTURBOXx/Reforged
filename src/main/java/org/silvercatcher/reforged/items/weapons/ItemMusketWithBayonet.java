@@ -22,7 +22,7 @@ public class ItemMusketWithBayonet extends ItemMusket {
 
 		this.unbreakable = unbreakable;
 		this.materialDefinition = MaterialManager.getMaterialDefinition(material);
-		setUnlocalizedName(materialDefinition.getPrefixedName("musket"));
+		setTranslationKey(materialDefinition.getPrefixedName("musket"));
 	}
 
 	@Override

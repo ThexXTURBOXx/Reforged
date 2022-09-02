@@ -39,7 +39,7 @@ public class EntityDart extends AReforgedThrowable {
 	}
 
 	public String getEffect() {
-		return ((ItemDart) getItemStack().getItem()).getUnlocalizedName().substring(10);
+		return ((ItemDart) getItemStack().getItem()).getTranslationKey().substring(10);
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class EntityDart extends AReforgedThrowable {
 
 	public void setItemStack(ItemStack stack) {
 
-		if (stack == null || stack.isEmpty() || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
+		if (stack == null || stack.isEmpty() || !(stack.getItem().getTranslationKey().contains("dart"))) {
 			throw new IllegalArgumentException("Invalid Itemstack!");
 		}
 		dataManager.set(STACK, stack);

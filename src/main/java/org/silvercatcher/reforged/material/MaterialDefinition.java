@@ -42,11 +42,11 @@ public class MaterialDefinition {
 	}
 
 	public float getDamageVsEntity() {
-		return material.getDamageVsEntity();
+		return material.getAttackDamage();
 	}
 
 	public float getEfficiencyOnProperMaterial() {
-		return material.getEfficiencyOnProperMaterial();
+		return material.getEfficiency();
 	}
 
 	public int getEnchantability() {

@@ -50,11 +50,11 @@ public class ReforgedRegistry {
 		}
 
 		if (GlobalValues.MUSKET) {
-			registrationList.add(ReforgedAdditions.MUSKET_BARREL = new Item().setUnlocalizedName("musket_barrel")
+			registrationList.add(ReforgedAdditions.MUSKET_BARREL = new Item().setTranslationKey("musket_barrel")
 					.setCreativeTab(ReforgedMod.tabReforged));
 			registrationList.add(ReforgedAdditions.BLUNDERBUSS_BARREL = new Item()
-					.setUnlocalizedName("blunderbuss_barrel").setCreativeTab(ReforgedMod.tabReforged));
-			registrationList.add(ReforgedAdditions.GUN_STOCK = new Item().setUnlocalizedName("gun_stock")
+					.setTranslationKey("blunderbuss_barrel").setCreativeTab(ReforgedMod.tabReforged));
+			registrationList.add(ReforgedAdditions.GUN_STOCK = new Item().setTranslationKey("gun_stock")
 					.setCreativeTab(ReforgedMod.tabReforged));
 			registrationList.add(ReforgedAdditions.MUSKET = new ItemMusket());
 			if (GlobalValues.KNIFE) {
@@ -173,9 +173,9 @@ public class ReforgedRegistry {
 		}
 
 		if (GlobalValues.CANNON) {
-			registrationList.add(ReforgedAdditions.CANNON = new ItemCannon().setUnlocalizedName("cannon")
+			registrationList.add(ReforgedAdditions.CANNON = new ItemCannon().setTranslationKey("cannon")
 					.setCreativeTab(ReforgedMod.tabReforged));
-			registrationList.add(ReforgedAdditions.CANNON_BALL = new Item().setUnlocalizedName("cannon_ball")
+			registrationList.add(ReforgedAdditions.CANNON_BALL = new Item().setTranslationKey("cannon_ball")
 					.setCreativeTab(ReforgedMod.tabReforged));
 		}
 	}
@@ -243,7 +243,7 @@ public class ReforgedRegistry {
 		IForgeRegistry<Block> reg = event.getRegistry();
 		for (Block block : registrationListBlocks) {
 			reg.register(block
-					.setRegistryName(new ResourceLocation(ReforgedMod.ID, block.getUnlocalizedName().substring(5))));
+					.setRegistryName(new ResourceLocation(ReforgedMod.ID, block.getTranslationKey().substring(5))));
 		}
 	}
 
@@ -254,12 +254,12 @@ public class ReforgedRegistry {
 		// Register all Items
 		for (Item item : registrationList) {
 			reg.register(
-					item.setRegistryName(new ResourceLocation(ReforgedMod.ID, item.getUnlocalizedName().substring(5))));
+					item.setRegistryName(new ResourceLocation(ReforgedMod.ID, item.getTranslationKey().substring(5))));
 		}
 		for (Block block : registrationListBlocks) {
 			ItemBlock itemBlock = new ItemBlock(block);
 			itemBlock.setRegistryName(block.getRegistryName());
-			ReforgedMod.proxy.registerItemRenderer(itemBlock, 0, block.getUnlocalizedName().substring(5));
+			ReforgedMod.proxy.registerItemRenderer(itemBlock, 0, block.getTranslationKey().substring(5));
 			reg.register(itemBlock);
 		}
 

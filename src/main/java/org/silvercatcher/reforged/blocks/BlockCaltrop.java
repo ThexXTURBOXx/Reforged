@@ -26,7 +26,7 @@ public class BlockCaltrop extends BlockContainer implements BlockExtension {
 
 	public BlockCaltrop() {
 		super(Material.GRASS);
-		setUnlocalizedName("caltrop");
+		setTranslationKey("caltrop");
 		setCreativeTab(ReforgedMod.tabReforged);
 		setResistance(30);
 	}
@@ -74,7 +74,7 @@ public class BlockCaltrop extends BlockContainer implements BlockExtension {
 	}
 
 	@Override
-	public void onEntityCollidedWithBlock(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
+	public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
 		if (entityIn instanceof EntityLivingBase) {
 			EntityLivingBase e = (EntityLivingBase) entityIn;
 			e.attackEntityFrom(new DamageSource("caltrop").setDamageBypassesArmor(), CommonProxy.damage_caltrop);

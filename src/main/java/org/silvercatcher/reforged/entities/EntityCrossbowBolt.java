@@ -394,7 +394,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 			this.setIsCritical(false);
 
 			if (iblockstate.getMaterial() != Material.AIR) {
-				this.inTile.onEntityCollidedWithBlock(this.world, blockpos, iblockstate, this);
+				this.inTile.onEntityCollision(this.world, blockpos, iblockstate, this);
 			}
 		}
 	}
@@ -621,7 +621,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 		float f = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
 		float f1 = -MathHelper.sin(pitch * 0.017453292F);
 		float f2 = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
-		this.setThrowableHeading(f, f1, f2, velocity, inaccuracy);
+		this.shoot(f, f1, f2, velocity, inaccuracy);
 		this.motionX += shooter.motionX;
 		this.motionZ += shooter.motionZ;
 
@@ -638,7 +638,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 		int i = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.POWER, p_190547_1_);
 		int j = EnchantmentHelper.getMaxEnchantmentLevel(Enchantments.PUNCH, p_190547_1_);
 		this.setDamage(p_190547_2_ * 2.0F + this.rand.nextGaussian() * 0.25D
-				+ this.world.getDifficulty().getDifficultyId() * 0.11F);
+				+ this.world.getDifficulty().getId() * 0.11F);
 
 		if (i > 0) {
 			this.setDamage(this.getDamage() + i * 0.5D + 0.5D);
@@ -714,7 +714,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 	 * direction.
 	 */
 	@Override
-	public void setThrowableHeading(double x, double y, double z, float velocity, float inaccuracy) {
+	public void shoot(double x, double y, double z, float velocity, float inaccuracy) {
 		float f = MathHelper.sqrt(x * x + y * y + z * z);
 		x = x / f;
 		y = y / f;

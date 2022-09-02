@@ -36,7 +36,7 @@ public class ReforgedMod {
 
 	public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
 		@Override
-		public ItemStack getTabIconItem() {
+		public ItemStack createIcon() {
 			return new ItemStack(ReforgedAdditions.IRON_BATTLE_AXE);
 		}
 	};

@@ -16,7 +16,7 @@ public class ItemBlowGun extends ExtendedItem {
 	public ItemBlowGun() {
 
 		super();
-		setUnlocalizedName("blowgun");
+		setTranslationKey("blowgun");
 		setMaxStackSize(1);
 		setMaxDamage(40);
 	}

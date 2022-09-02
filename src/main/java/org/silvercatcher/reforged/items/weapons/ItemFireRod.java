@@ -17,7 +17,7 @@ public class ItemFireRod extends ExtendedItem {
 
 	public ItemFireRod() {
 		super();
-		setUnlocalizedName("firerod");
+		setTranslationKey("firerod");
 		setMaxStackSize(32);
 	}
 

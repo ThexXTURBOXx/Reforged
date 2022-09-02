@@ -26,7 +26,7 @@ public class MessageCustomReachAttack implements IMessage {
 					if (player.inventory.getCurrentItem().getItem() instanceof ICustomReach) {
 						ICustomReach theExtendedReachWeapon = (ICustomReach) player.inventory.getCurrentItem()
 								.getItem();
-						double distanceSq = player.getDistanceSqToEntity(theEntity);
+						double distanceSq = player.getDistanceSq(theEntity);
 						double reachSq = theExtendedReachWeapon.reach() * theExtendedReachWeapon.reach();
 						if (reachSq >= distanceSq) {
 							player.attackTargetEntityWithCurrentItem(theEntity);

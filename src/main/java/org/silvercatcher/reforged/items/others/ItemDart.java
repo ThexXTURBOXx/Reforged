@@ -6,7 +6,7 @@ public class ItemDart extends ExtendedItem {
 
 	public ItemDart(String effect) {
 		super();
-		setUnlocalizedName("dart_" + effect);
+		setTranslationKey("dart_" + effect);
 		setMaxStackSize(64);
 	}
 
