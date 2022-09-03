@@ -1,5 +1,5 @@
 {
-    "parent": "reforged:item/katana",
+    "parent": "item/handheld",
 
     "textures": {
         "layer0": "reforged:items/keris"
