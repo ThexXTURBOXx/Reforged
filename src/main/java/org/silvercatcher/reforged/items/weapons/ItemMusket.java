@@ -27,13 +27,11 @@ public class ItemMusket extends AReloadable {
 
     @Override
     public boolean getIsRepairable(ItemStack toRepair, ItemStack repair) {
-
         return (repair.getItem() == Items.IRON_INGOT);
     }
 
     @Override
     public int getItemEnchantability() {
-
         return ToolMaterial.IRON.getEnchantability();
     }
 

@@ -5,11 +5,13 @@ import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Enchantments;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.IItemPropertyGetter;
@@ -114,7 +116,10 @@ public abstract class AReloadable extends Item implements ItemExtension {
         NBTTagCompound compound = giveCompound(heldStack);
 
         if (compound.getInteger(CompoundTags.TIME) <= 0) {
-            if (playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, getAmmo())) {
+            Item ammo = getAmmo();
+            if (playerIn.capabilities.isCreativeMode
+                    || (EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, heldStack) > 0
+                    && Helpers.hasItem(playerIn, ammo)) || Helpers.consumeInventoryItem(playerIn, ammo)) {
                 Helpers.playSound(worldIn, playerIn, reloadSound, 1.0f, 1.5f);
                 compound.setInteger(CompoundTags.TIME, 1);
             } else {
