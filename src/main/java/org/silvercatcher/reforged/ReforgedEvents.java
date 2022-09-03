@@ -1,7 +1,6 @@
 package org.silvercatcher.reforged;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 import net.minecraft.client.Minecraft;
@@ -34,7 +33,7 @@ public class ReforgedEvents {
     public static Map<UUID, Integer> map;
 
     static {
-        map = new HashMap<UUID, Integer>();
+        map = new HashMap<>();
     }
 
     @SideOnly(Side.CLIENT)
@@ -42,7 +41,7 @@ public class ReforgedEvents {
     public void customReach(MouseEvent e) {
         if (e.getButton() == 0 && e.isButtonstate()) {
             Minecraft mc = Minecraft.getMinecraft();
-            if (mc.player.inventory.getCurrentItem() != null && !mc.player.inventory.getCurrentItem().isEmpty()) {
+            if (!mc.player.inventory.getCurrentItem().isEmpty()) {
                 Item i = mc.player.inventory.getCurrentItem().getItem();
                 if (i instanceof ICustomReach && i instanceof ItemExtension) {
                     ICustomReach icr = (ICustomReach) i;
@@ -109,29 +108,30 @@ public class ReforgedEvents {
 
     @SubscribeEvent
     public void onWorldTick(WorldTickEvent e) {
-        if (!e.world.isRemote) {
-            Iterator<Entity> iter = e.world.loadedEntityList.iterator();
-            while (iter.hasNext()) {
-                Entity en = iter.next();
-                if (en instanceof EntityLivingBase) {
-                    EntityLivingBase player = (EntityLivingBase) en;
-                    IStunProperty prop = player.getCapability(ReforgedMod.STUN_PROP, null);
-                    if (prop != null && prop.isStunned()) {
-                        if (!map.containsKey(player.getUniqueID()))
-                            map.put(player.getUniqueID(), 0);
-                        int i = map.get(player.getUniqueID());
-                        i++;
-                        player.motionX = 0;
-                        player.motionY = 0;
-                        player.motionZ = 0;
-                        map.put(player.getUniqueID(), i);
-                        if (map.get(player.getUniqueID()) >= 60) {
-                            prop.setStunned(false);
-                            map.put(player.getUniqueID(), 0);
+        try {
+            if (!e.world.isRemote) {
+                for (Entity en : e.world.loadedEntityList) {
+                    if (en instanceof EntityLivingBase) {
+                        EntityLivingBase player = (EntityLivingBase) en;
+                        IStunProperty prop = player.getCapability(ReforgedMod.STUN_PROP, null);
+                        if (prop != null && prop.isStunned()) {
+                            if (!map.containsKey(player.getUniqueID()))
+                                map.put(player.getUniqueID(), 0);
+                            int i = map.get(player.getUniqueID());
+                            i++;
+                            player.motionX = 0;
+                            player.motionY = 0;
+                            player.motionZ = 0;
+                            map.put(player.getUniqueID(), i);
+                            if (map.get(player.getUniqueID()) >= 60) {
+                                prop.setStunned(false);
+                                map.put(player.getUniqueID(), 0);
+                            }
                         }
                     }
                 }
             }
+        } catch (Throwable ignored) {
         }
     }
 

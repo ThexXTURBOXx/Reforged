@@ -36,7 +36,7 @@ public class EntityBoomerang extends AReforgedThrowable {
     }
 
     public EntityBoomerang(World worldIn, EntityLivingBase thrower, ItemStack stack) {
-        super(worldIn, thrower, stack, "boomerang");
+        super(worldIn, thrower, "boomerang");
         setItemStack(stack);
         setCoords(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ);
         setInited();
@@ -71,9 +71,7 @@ public class EntityBoomerang extends AReforgedThrowable {
         MaterialDefinition md;
         try {
             md = ((ItemBoomerang) getItemStack().getItem()).getMaterialDefinition();
-        } catch (NullPointerException e) {
-            md = null;
-        } catch (ClassCastException e) {
+        } catch (NullPointerException | ClassCastException e) {
             md = null;
         }
         return md;
@@ -155,15 +153,13 @@ public class EntityBoomerang extends AReforgedThrowable {
         motionY -= (0.05D * dy);
         motionZ -= (0.05D * dz);
 
-        if (isInWater()) {
-            if (!world.isRemote) {
-                if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
-                    entityDropItem(getItemStack(), 0.5f);
-                } else if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
-                    Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
-                }
-                setDead();
+        if (isInWater() && !world.isRemote) {
+            if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
+                entityDropItem(getItemStack(), 0.5f);
+            } else if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
+                Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
             }
+            setDead();
         }
 
         // After 103 ticks, the Boomerang drops exactly where the thrower stood

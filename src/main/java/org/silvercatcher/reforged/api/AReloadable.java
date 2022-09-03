@@ -44,7 +44,7 @@ public abstract class AReloadable extends Item implements ItemExtension {
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
                 return entityIn != null && entityIn.isHandActive()
                         && entityIn.getActiveItemStack() == stack && stack.hasTagCompound()
-                        && stack.getTagCompound().getInteger(CompoundTags.TIME) < getReloadTotal()
+                        && CompoundTags.giveCompound(stack).getInteger(CompoundTags.TIME) < getReloadTotal()
                         ? 1.0F : 0.0F;
             }
         });
@@ -62,7 +62,7 @@ public abstract class AReloadable extends Item implements ItemExtension {
     public abstract Item getAmmo();
 
     @Override
-    public Multimap getAttributeModifiers(ItemStack stack) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(ItemStack stack) {
         return ItemExtension.super.getAttributeModifiers(stack);
     }
 
@@ -190,8 +190,8 @@ public abstract class AReloadable extends Item implements ItemExtension {
             return false;
         }
 
-        int oldReloadTime = oldStack.getTagCompound().getInteger(CompoundTags.TIME);
-        int newReloadTime = newStack.getTagCompound().getInteger(CompoundTags.TIME);
+        int oldReloadTime = CompoundTags.giveCompound(oldStack).getInteger(CompoundTags.TIME);
+        int newReloadTime = CompoundTags.giveCompound(newStack).getInteger(CompoundTags.TIME);
         if (oldReloadTime == 0 || newReloadTime == 0) // if either stack is unloaded, abort
             return false;
         if (oldReloadTime < getReloadTotal()) // if both stacks are reloading, we can continue

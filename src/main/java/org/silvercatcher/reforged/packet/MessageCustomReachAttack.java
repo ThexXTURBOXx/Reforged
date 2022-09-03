@@ -19,21 +19,18 @@ public class MessageCustomReachAttack implements IMessage {
         @Override
         public IMessage onMessage(final MessageCustomReachAttack message, MessageContext ctx) {
             final EntityPlayerMP player = ctx.getServerHandler().player;
-            player.getServer().addScheduledTask(new Runnable() {
-                @Override
-                public void run() {
-                    Entity theEntity = player.world.getEntityByID(message.entityId);
-                    if (player.inventory.getCurrentItem() == null || player.inventory.getCurrentItem().isEmpty()) {
-                        return;
-                    }
-                    if (player.inventory.getCurrentItem().getItem() instanceof ICustomReach) {
-                        ICustomReach theExtendedReachWeapon = (ICustomReach) player.inventory.getCurrentItem()
-                                .getItem();
-                        double distanceSq = player.getDistanceSq(theEntity);
-                        double reachSq = theExtendedReachWeapon.reach() * theExtendedReachWeapon.reach();
-                        if (reachSq >= distanceSq) {
-                            player.attackTargetEntityWithCurrentItem(theEntity);
-                        }
+            player.getServer().addScheduledTask(() -> {
+                Entity theEntity = player.world.getEntityByID(message.entityId);
+                if (player.inventory.getCurrentItem().isEmpty() || theEntity == null) {
+                    return;
+                }
+                if (player.inventory.getCurrentItem().getItem() instanceof ICustomReach) {
+                    ICustomReach theExtendedReachWeapon = (ICustomReach) player.inventory.getCurrentItem()
+                            .getItem();
+                    double distanceSq = player.getDistanceSq(theEntity);
+                    double reachSq = theExtendedReachWeapon.reach() * theExtendedReachWeapon.reach();
+                    if (reachSq >= distanceSq) {
+                        player.attackTargetEntityWithCurrentItem(theEntity);
                     }
                 }
             });

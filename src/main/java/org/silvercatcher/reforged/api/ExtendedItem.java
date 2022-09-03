@@ -25,7 +25,7 @@ public abstract class ExtendedItem extends Item implements ItemExtension {
     }
 
     @Override
-    public Multimap getAttributeModifiers(ItemStack stack) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(ItemStack stack) {
         return ItemExtension.super.getAttributeModifiers(stack);
     }
 

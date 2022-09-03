@@ -29,9 +29,9 @@ public interface ItemExtension {
         return -2.4000000953674316D;
     }
 
-    default Multimap getAttributeModifiers(ItemStack stack) {
+    default Multimap<String, AttributeModifier> getAttributeModifiers(ItemStack stack) {
 
-        Multimap modifiers = HashMultimap.create();
+        Multimap<String, AttributeModifier> modifiers = HashMultimap.create();
 
         modifiers.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER_RF, "Weapon Damage", getHitDamage(stack), 0));
@@ -46,7 +46,7 @@ public interface ItemExtension {
         return DamageSource.causeMobDamage(p);
     }
 
-    default float getEnchantmentBonus(ItemStack stack, EntityPlayer player, Entity entity) {
+    default float getEnchantmentBonus(ItemStack stack, Entity entity) {
 
         float extraDamage = 0f;
 

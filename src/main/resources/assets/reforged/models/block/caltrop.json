@@ -1,6 +1,6 @@
 {
-    "parent": "block/cube_all",
-    "textures": {
-        "all": "reforged:others/caltrop"
-    }
+  "textures": {
+    "particle": "reforged:items/caltrop",
+    "texture": "reforged:items/caltrop"
+  }
 }

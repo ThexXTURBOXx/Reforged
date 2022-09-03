@@ -4,7 +4,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
 import net.minecraft.network.datasync.DataSerializers;
@@ -23,7 +22,7 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 
     private final String damageName;
 
-    public AReforgedThrowable(World worldIn, EntityLivingBase thrower, ItemStack stack, String damageName) {
+    public AReforgedThrowable(World worldIn, EntityLivingBase thrower, String damageName) {
         super(worldIn, thrower);
         this.damageName = damageName;
         setLocationAndAngles(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ, thrower.rotationYaw,
@@ -137,8 +136,7 @@ public abstract class AReforgedThrowable extends EntityThrowable {
                         && ticksExisted < 5) {
                     return;
                 }
-                broken = onEntityHit(target.entityHit instanceof EntityLivingBase ? target.entityHit
-                        : target.entityHit);
+                broken = onEntityHit(target.entityHit);
             }
             if (broken)
                 setDead();

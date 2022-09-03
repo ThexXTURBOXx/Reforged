@@ -78,17 +78,17 @@ public class Helpers {
         }
 
         Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder worldrenderer = tessellator.getBuffer();
+        BufferBuilder wr = tessellator.getBuffer();
         GlStateManager.enableBlend();
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.color(color[0], color[1], color[2], color[3]);
 
-        worldrenderer.begin(7, DefaultVertexFormats.POSITION);
-        worldrenderer.pos(left, bottom, 0.0D).endVertex();
-        worldrenderer.pos(right, bottom, 0.0D).endVertex();
-        worldrenderer.pos(right, top, 0.0D).endVertex();
-        worldrenderer.pos(left, top, 0.0D).endVertex();
+        wr.begin(7, DefaultVertexFormats.POSITION);
+        wr.pos(left, bottom, 0.0D).endVertex();
+        wr.pos(right, bottom, 0.0D).endVertex();
+        wr.pos(right, top, 0.0D).endVertex();
+        wr.pos(left, top, 0.0D).endVertex();
 
         tessellator.draw();
         GlStateManager.enableTexture2D();
@@ -109,34 +109,34 @@ public class Helpers {
      */
     public static RayTraceResult getMouseOverExtended(float distance) {
         Minecraft mc = FMLClientHandler.instance().getClient();
-        Entity theRenderViewEntity = mc.getRenderViewEntity();
-        AxisAlignedBB theViewBoundingBox = new AxisAlignedBB(theRenderViewEntity.posX - 0.5D,
-                theRenderViewEntity.posY - 0.0D, theRenderViewEntity.posZ - 0.5D, theRenderViewEntity.posX + 0.5D,
-                theRenderViewEntity.posY + 1.5D, theRenderViewEntity.posZ + 0.5D);
+        Entity e = mc.getRenderViewEntity();
+        AxisAlignedBB theViewBoundingBox = new AxisAlignedBB(
+                e.posX - 0.5D, e.posY - 0.0D, e.posZ - 0.5D,
+                e.posX + 0.5D, e.posY + 1.5D, e.posZ + 0.5D);
         RayTraceResult returnMOP = null;
         if (mc.world != null) {
             double var2 = distance;
-            returnMOP = theRenderViewEntity.rayTrace(var2, 0);
+            returnMOP = e.rayTrace(var2, 0);
             double calcdist = var2;
-            Vec3d pos = theRenderViewEntity.getPositionEyes(0);
+            Vec3d pos = e.getPositionEyes(0);
             var2 = calcdist;
             if (returnMOP != null) {
                 calcdist = returnMOP.hitVec.distanceTo(pos);
             }
-            Vec3d lookvec = theRenderViewEntity.getLook(0);
-            Vec3d var8 = pos.add(lookvec.x * var2, lookvec.y * var2, lookvec.z * var2);
+            Vec3d lookVec = e.getLook(0);
+            Vec3d var8 = pos.add(lookVec.x * var2, lookVec.y * var2, lookVec.z * var2);
             Entity pointedEntity = null;
             float var9 = 1.0F;
-            List<Entity> list = mc.world.getEntitiesWithinAABBExcludingEntity(theRenderViewEntity, theViewBoundingBox
-                    .expand(lookvec.x * var2, lookvec.y * var2, lookvec.z * var2).expand(var9, var9, var9));
+            List<Entity> list = mc.world.getEntitiesWithinAABBExcludingEntity(e, theViewBoundingBox
+                    .expand(lookVec.x * var2, lookVec.y * var2, lookVec.z * var2).expand(var9, var9, var9));
             double d = calcdist;
             for (Entity entity : list) {
                 if (entity.canBeCollidedWith()) {
-                    float bordersize = entity.getCollisionBorderSize();
+                    float borderSize = entity.getCollisionBorderSize();
                     AxisAlignedBB aabb = new AxisAlignedBB(entity.posX - entity.width / 2, entity.posY,
                             entity.posZ - entity.width / 2, entity.posX + entity.width / 2, entity.posY + entity.height,
                             entity.posZ + entity.width / 2);
-                    aabb.expand(bordersize, bordersize, bordersize);
+                    aabb.expand(borderSize, borderSize, borderSize);
                     RayTraceResult mop0 = aabb.calculateIntercept(pos, var8);
                     if (aabb.contains(pos)) {
                         if (0.0D < d || d == 0.0D) {

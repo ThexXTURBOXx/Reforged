@@ -4,6 +4,7 @@ import com.google.common.collect.Multimap;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -42,7 +43,7 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
     }
 
     @Override
-    public Multimap getAttributeModifiers(ItemStack stack) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(ItemStack stack) {
         return ItemExtension.super.getAttributeModifiers(stack);
     }
 

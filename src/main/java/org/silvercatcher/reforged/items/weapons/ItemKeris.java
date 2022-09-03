@@ -2,6 +2,7 @@ package org.silvercatcher.reforged.items.weapons;
 
 import com.google.common.collect.Multimap;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -29,7 +30,7 @@ public class ItemKeris extends ItemSword implements ItemExtension {
     }
 
     @Override
-    public Multimap getAttributeModifiers(ItemStack stack) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(ItemStack stack) {
         return ItemExtension.super.getAttributeModifiers(stack);
     }
 

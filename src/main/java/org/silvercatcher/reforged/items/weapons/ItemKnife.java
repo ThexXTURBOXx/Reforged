@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.items.weapons;
 import com.google.common.collect.Multimap;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.util.math.BlockPos;
@@ -37,7 +38,7 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
     }
 
     @Override
-    public Multimap getAttributeModifiers(ItemStack stack) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(ItemStack stack) {
         return ItemExtension.super.getAttributeModifiers(stack);
     }
 
@@ -55,12 +56,12 @@ public class ItemKnife extends ItemSword implements ItemExtension, IZombieEquipp
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
 
         Vec3d look = target.getLookVec();
-        Vec3d attackervec = new Vec3d(attacker.posX - target.posX,
+        Vec3d attackerVec = new Vec3d(attacker.posX - target.posX,
                 (attacker.getEntityBoundingBox().minY + attacker.height / 2) - target.posY + target.getEyeHeight(),
                 attacker.posZ - target.posZ);
-        double d0 = attackervec.length();
+        double d0 = attackerVec.length();
 
-        double d1 = look.dotProduct(attackervec);
+        double d1 = look.dotProduct(attackerVec);
 
         boolean seen = d1 > 1 - 0.25 / d0;
 

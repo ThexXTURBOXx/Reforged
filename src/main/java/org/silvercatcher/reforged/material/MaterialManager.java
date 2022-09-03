@@ -12,11 +12,9 @@ import net.minecraft.util.ResourceLocation;
  */
 public class MaterialManager {
 
-    private static final HashMap<ToolMaterial, MaterialDefinition> definitionMap = new HashMap<ToolMaterial,
-            MaterialDefinition>();
-    private static final HashMap<ToolMaterial, Item[]> itemMap = new HashMap<ToolMaterial, Item[]>();
-    private static final HashMap<ToolMaterial, ResourceLocation[]> textureMap = new HashMap<ToolMaterial,
-            ResourceLocation[]>();
+    private static final HashMap<ToolMaterial, MaterialDefinition> definitionMap = new HashMap<>();
+    private static final HashMap<ToolMaterial, Item[]> itemMap = new HashMap<>();
+    private static final HashMap<ToolMaterial, ResourceLocation[]> textureMap = new HashMap<>();
 
     static {
         definitionMap.put(ToolMaterial.WOOD, new MaterialDefinition("wooden", ToolMaterial.WOOD));

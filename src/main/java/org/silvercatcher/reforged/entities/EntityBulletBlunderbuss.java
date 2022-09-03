@@ -2,7 +2,6 @@ package org.silvercatcher.reforged.entities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 
@@ -13,9 +12,9 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
         super(worldIn, "blunderbuss");
     }
 
-    public EntityBulletBlunderbuss(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
+    public EntityBulletBlunderbuss(World worldIn, EntityLivingBase throwerIn) {
 
-        super(worldIn, throwerIn, stack, "blunderbuss");
+        super(worldIn, throwerIn, "blunderbuss");
         float randomNumX = rand.nextInt(21);
         float randomNumY = rand.nextInt(21);
         float randomNumZ = rand.nextInt(21);
@@ -39,7 +38,7 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 
     @Override
     protected float getImpactDamage(Entity target) {
-        return (((30 - ticksExisted) / 4) + 4f);
+        return (((30 - ticksExisted) / 4f) + 4f);
     }
 
     @Override

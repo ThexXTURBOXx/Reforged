@@ -14,7 +14,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
-import org.silvercatcher.reforged.items.others.ItemDart;
 
 public class EntityDart extends AReforgedThrowable {
 
@@ -28,7 +27,7 @@ public class EntityDart extends AReforgedThrowable {
 
     public EntityDart(World worldIn, EntityLivingBase getThrowerIn, ItemStack stack) {
 
-        super(worldIn, getThrowerIn, stack, "dart");
+        super(worldIn, getThrowerIn, "dart");
         setItemStack(stack);
         setInited();
     }

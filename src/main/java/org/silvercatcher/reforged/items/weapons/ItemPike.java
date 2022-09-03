@@ -47,7 +47,7 @@ public class ItemPike extends ExtendedItem {
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
         float damage = getHitDamage();
         if (attacker instanceof EntityPlayer)
-            damage = damage + getEnchantmentBonus(stack, (EntityPlayer) attacker, target);
+            damage = damage + getEnchantmentBonus(stack, target);
         if (attacker.isRiding()) {
             damage += getHitDamage() / 2;
         }

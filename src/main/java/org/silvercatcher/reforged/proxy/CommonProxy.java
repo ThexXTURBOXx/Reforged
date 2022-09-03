@@ -25,8 +25,6 @@ import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
-import org.silvercatcher.reforged.entities.EntityCannon;
-import org.silvercatcher.reforged.entities.EntityCannonBall;
 import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.entities.EntityDynamite;
@@ -43,7 +41,7 @@ public class CommonProxy {
 
     // Items for Config
     public static boolean battleaxe, blowgun, boomerang, firerod, javelin, katana, knife, musket, nest_of_bees, sabre,
-            keris, caltrop, dynamite, crossbow, pike, mace, dirk, cannon;
+            keris, caltrop, dynamite, crossbow, pike, mace, dirk/*, cannon*/;
 
     // Floats for Config
     public static float damage_musket, damage_caltrop;
@@ -61,12 +59,12 @@ public class CommonProxy {
     }
 
     private void loadConfig(FMLPreInitializationEvent e) {
-        File configdir = new File(e.getModConfigurationDirectory(), ReforgedMod.NAME);
-        File configfile = new File(configdir, "reforged.cfg");
-        if (!configfile.exists())
-            configdir.mkdirs();
+        File configDir = new File(e.getModConfigurationDirectory(), ReforgedMod.NAME);
+        File configFile = new File(configDir, "reforged.cfg");
+        if (!configFile.exists())
+            configDir.mkdirs();
         // Get an instance of Config
-        Configuration config = new Configuration(configfile);
+        Configuration config = new Configuration(configFile);
 
         // Load Config
         config.load();
@@ -89,11 +87,11 @@ public class CommonProxy {
         pike = config.getBoolean("Pike", items, true, "Enable the Pike");
         mace = config.getBoolean("Mace", items, true, "Enable the Mace");
         dirk = config.getBoolean("Dirk", items, true, "Enable the Dirk");
-        cannon = config.getBoolean("Cannon", items, true, "Enable the Cannon");
+        //cannon = config.getBoolean("Cannon", items, true, "Enable the Cannon");
 
         // Floats
-        damage_musket = config.getFloat("Musket Damage", floats, 10, 1, 50, "Damage of the Musket");
-        damage_caltrop = config.getFloat("Caltrop Damage", floats, 8, 1, 50, "Damage of the Caltrop");
+        damage_musket = config.getFloat("Musket Damage", floats, 10, 1, 5000, "Damage of the Musket");
+        damage_caltrop = config.getFloat("Caltrop Damage", floats, 8, 1, 5000, "Damage of the Caltrop");
 
         // IDs
         goalseekerid = config.getInt("Goalseeker", ids, 100, 0, 256,
@@ -145,10 +143,10 @@ public class CommonProxy {
             GameRegistry.registerTileEntity(TileEntityCaltrop.class, "Caltrop");
         if (GlobalValues.DYNAMITE)
             ReforgedRegistry.registerEntity(EntityDynamite.class, "Dynamite");
-        if (GlobalValues.DYNAMITE) {
+        /*if (GlobalValues.CANNON) {
             ReforgedRegistry.registerEntity(EntityCannon.class, "Cannon");
             ReforgedRegistry.registerEntity(EntityCannonBall.class, "CannonBall");
-        }
+        }*/
     }
 
     protected void registerEntityRenderers() {

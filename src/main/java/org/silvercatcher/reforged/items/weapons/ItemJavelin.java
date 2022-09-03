@@ -49,16 +49,16 @@ public class ItemJavelin extends ExtendedItem {
         if (hand == EnumHand.MAIN_HAND) {
             net.minecraftforge.event.entity.player.ArrowNockEvent event =
                     new net.minecraftforge.event.entity.player.ArrowNockEvent(
-                    playerIn, playerIn.getHeldItemMainhand(), EnumHand.MAIN_HAND, worldIn, true);
+                            playerIn, playerIn.getHeldItemMainhand(), EnumHand.MAIN_HAND, worldIn, true);
             if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event))
                 return event.getAction();
 
             if (playerIn.capabilities.isCreativeMode || Helpers.getInventorySlotContainItem(playerIn, this) >= 0) {
-                playerIn.setActiveHand(hand);
+                playerIn.setActiveHand(EnumHand.MAIN_HAND);
             }
-            return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
+            return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
         }
-        return new ActionResult<ItemStack>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
+        return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
     }
 
     @Override

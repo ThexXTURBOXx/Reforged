@@ -3,6 +3,7 @@ package org.silvercatcher.reforged.items.weapons;
 import com.google.common.collect.Multimap;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -37,7 +38,7 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
     }
 
     @Override
-    public Multimap getAttributeModifiers(ItemStack stack) {
+    public Multimap<String, AttributeModifier> getAttributeModifiers(ItemStack stack) {
         return ItemExtension.super.getAttributeModifiers(stack);
     }
 
@@ -64,7 +65,7 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
         for (int i = 3; i < 6; i++) {
 
             ItemStack armorStack = target.getItemStackFromSlot(EntityEquipmentSlot.values()[i]);
-            if (armorStack != null && !armorStack.isEmpty() && armorStack.getItem() instanceof ItemArmor) {
+            if (!armorStack.isEmpty() && armorStack.getItem() instanceof ItemArmor) {
                 armorvalue += ((ItemArmor) armorStack.getItem()).damageReduceAmount;
             }
         }

@@ -25,7 +25,7 @@ public class ItemCrossbow extends AReloadable {
             @Override
             @SideOnly(Side.CLIENT)
             public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn) {
-                int reloadTime = stack.getTagCompound().getInteger(CompoundTags.TIME);
+                int reloadTime = CompoundTags.giveCompound(stack).getInteger(CompoundTags.TIME);
                 if (reloadTime <= 0)
                     return 0f;
 
@@ -60,7 +60,7 @@ public class ItemCrossbow extends AReloadable {
 
     public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
         EntityCrossbowBolt a = new EntityCrossbowBolt(worldIn, playerIn);
-        a.setAim(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F,
+        a.setAim(playerIn, playerIn.rotationPitch, playerIn.rotationYaw,
                 ItemBow.getArrowVelocity(40) * 3.0F, 1.0F);
         a.pickupStatus = PickupStatus.getByOrdinal(new Random().nextInt(2));
         a.setDamage(8.0D);

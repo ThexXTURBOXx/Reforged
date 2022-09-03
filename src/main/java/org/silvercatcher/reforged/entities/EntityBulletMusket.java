@@ -2,7 +2,6 @@ package org.silvercatcher.reforged.entities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.proxy.CommonProxy;
@@ -14,8 +13,8 @@ public class EntityBulletMusket extends AReforgedThrowable {
         setNoGravity(true);
     }
 
-    public EntityBulletMusket(World worldIn, EntityLivingBase throwerIn, ItemStack stack) {
-        super(worldIn, throwerIn, stack, "musket");
+    public EntityBulletMusket(World worldIn, EntityLivingBase throwerIn) {
+        super(worldIn, throwerIn, "musket");
         setNoGravity(true);
         motionX *= 5;
         motionY *= 5;

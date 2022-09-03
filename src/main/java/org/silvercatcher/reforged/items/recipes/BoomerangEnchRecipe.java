@@ -21,7 +21,7 @@ public class BoomerangEnchRecipe extends ShapelessRecipes {
             System.out.append(name);
             System.out.append(":\t[");
             for (int i = 0; i < inventory.getSizeInventory(); i++) {
-                System.out.append(inventory.getStackInSlot(i) + ",");
+                System.out.append(String.valueOf(inventory.getStackInSlot(i))).append(",");
             }
             System.out.append("]");
             System.out.println();
@@ -43,8 +43,6 @@ public class BoomerangEnchRecipe extends ShapelessRecipes {
     public ItemStack getCraftingResult(InventoryCrafting inventory) {
 
         // printInventory("result", inventory);
-
-        int size = inventory.getSizeInventory();
 
         NBTTagCompound compound = CompoundTags.giveCompound(output);
 
@@ -68,7 +66,7 @@ public class BoomerangEnchRecipe extends ShapelessRecipes {
         int boomerangs = 0;
         for (int i = 0; i < inventory.getSizeInventory(); i++) {
             ItemStack stack = inventory.getStackInSlot(i);
-            if (stack != null && !stack.isEmpty()) {
+            if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof ItemBoomerang
                         && !CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ENCHANTED)) {
                     output = stack.copy();

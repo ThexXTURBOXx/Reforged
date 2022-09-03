@@ -18,7 +18,6 @@ import net.minecraft.entity.MoverType;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.entity.projectile.EntityArrow.PickupStatus;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.Items;
@@ -39,7 +38,6 @@ import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.datafix.DataFixer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -48,34 +46,23 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.silvercatcher.reforged.api.CompoundTags;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
 
 public class EntityCrossbowBolt extends Entity implements IProjectile {
 
     private static final Predicate<Entity> ARROW_TARGETS = Predicates
-            .and(EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, new Predicate<Entity>() {
-                @Override
-                public boolean apply(@Nullable Entity p_apply_1_) {
-                    return p_apply_1_.canBeCollidedWith();
-                }
-            });
+            .and(EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, Entity::canBeCollidedWith);
     private static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityCrossbowBolt.class,
             DataSerializers.VARINT);
     private static final DataParameter<Byte> CRITICAL = EntityDataManager.createKey(EntityCrossbowBolt.class,
             DataSerializers.BYTE);
 
     public static int func_191508_b(ItemStack p_191508_0_) {
-        NBTTagCompound nbttagcompound = p_191508_0_.getTagCompound();
-        return nbttagcompound != null && nbttagcompound.hasKey("CustomPotionColor", 99)
+        NBTTagCompound nbttagcompound = CompoundTags.giveCompound(p_191508_0_);
+        return nbttagcompound.hasKey("CustomPotionColor", 99)
                 ? nbttagcompound.getInteger("CustomPotionColor")
                 : -1;
-    }
-
-    public static void registerFixesArrow(DataFixer fixer, String name) {
-    }
-
-    public static void registerFixesTippedArrow(DataFixer fixer) {
-        EntityArrow.registerFixesArrow(fixer, "TippedArrow");
     }
 
     private PotionType potion = PotionTypes.EMPTY;
@@ -137,8 +124,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 
     public void addEffect(PotionEffect effect) {
         this.customPotionEffects.add(effect);
-        this.getDataManager().set(COLOR, Integer.valueOf(PotionUtils
-                .getPotionColorFromEffectList(PotionUtils.mergeEffects(this.potion, this.customPotionEffects))));
+        this.getDataManager().set(COLOR, PotionUtils
+                .getPotionColorFromEffectList(PotionUtils.mergeEffects(this.potion, this.customPotionEffects)));
     }
 
     protected void arrowHit(EntityLivingBase living) {
@@ -150,8 +137,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
         }
 
         if (!this.customPotionEffects.isEmpty()) {
-            for (PotionEffect potioneffect1 : this.customPotionEffects) {
-                living.addPotionEffect(potioneffect1);
+            for (PotionEffect potioneffect : this.customPotionEffects) {
+                living.addPotionEffect(potioneffect);
             }
         }
     }
@@ -175,8 +162,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 
     @Override
     protected void entityInit() {
-        this.dataManager.register(CRITICAL, Byte.valueOf((byte) 0));
-        this.dataManager.register(COLOR, Integer.valueOf(-1));
+        this.dataManager.register(CRITICAL, (byte) 0);
+        this.dataManager.register(COLOR, -1);
     }
 
     @Nullable
@@ -186,9 +173,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
                 this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).grow(1.0D), ARROW_TARGETS);
         double d0 = 0.0D;
 
-        for (int i = 0; i < list.size(); ++i) {
-            Entity entity1 = list.get(i);
-
+        for (Entity entity1 : list) {
             if (entity1 != this.shootingEntity || this.ticksInAir >= 5) {
                 AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow(0.30000001192092896D);
                 RayTraceResult raytraceresult = axisalignedbb.calculateIntercept(start, end);
@@ -209,7 +194,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 
     private void func_191507_d(int p_191507_1_) {
         this.field_191509_at = true;
-        this.dataManager.set(COLOR, Integer.valueOf(p_191507_1_));
+        this.dataManager.set(COLOR, p_191507_1_);
     }
 
     protected ItemStack getArrowStack() {
@@ -217,7 +202,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     }
 
     public int getColor() {
-        return this.dataManager.get(COLOR).intValue();
+        return this.dataManager.get(COLOR);
     }
 
     public double getDamage() {
@@ -233,7 +218,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
      * Whether the arrow has a stream of critical hit particles flying behind it.
      */
     public boolean getIsCritical() {
-        byte b0 = this.dataManager.get(CRITICAL).byteValue();
+        byte b0 = this.dataManager.get(CRITICAL);
         return (b0 & 1) != 0;
     }
 
@@ -246,7 +231,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
             if (i != -1) {
                 double d0 = (i >> 16 & 255) / 255.0D;
                 double d1 = (i >> 8 & 255) / 255.0D;
-                double d2 = (i >> 0 & 255) / 255.0D;
+                double d2 = (i & 255) / 255.0D;
 
                 for (int j = 0; j < 20; ++j) {
                     this.world.spawnParticle(EnumParticleTypes.SPELL_MOB,
@@ -541,11 +526,9 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
             this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
             this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
             float f1 = 0.99F;
-            float f2 = 0.05F;
 
             if (this.isInWater()) {
                 for (int i = 0; i < 4; ++i) {
-                    float f3 = 0.25F;
                     this.world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * 0.25D,
                             this.posY - this.motionY * 0.25D, this.posZ - this.motionZ * 0.25D, this.motionX,
                             this.motionY, this.motionZ);
@@ -583,7 +566,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
             this.world.setEntityState(this, (byte) 0);
             this.potion = PotionTypes.EMPTY;
             this.customPotionEffects.clear();
-            this.dataManager.set(COLOR, Integer.valueOf(-1));
+            this.dataManager.set(COLOR, -1);
         }
     }
 
@@ -636,11 +619,11 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
 
     private void refreshColor() {
         this.field_191509_at = false;
-        this.dataManager.set(COLOR, Integer.valueOf(PotionUtils
-                .getPotionColorFromEffectList(PotionUtils.mergeEffects(this.potion, this.customPotionEffects))));
+        this.dataManager.set(COLOR, PotionUtils
+                .getPotionColorFromEffectList(PotionUtils.mergeEffects(this.potion, this.customPotionEffects)));
     }
 
-    public void setAim(Entity shooter, float pitch, float yaw, float p_184547_4_, float velocity, float inaccuracy) {
+    public void setAim(Entity shooter, float pitch, float yaw, float velocity, float inaccuracy) {
         float f = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
         float f1 = -MathHelper.sin(pitch * 0.017453292F);
         float f2 = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
@@ -680,12 +663,12 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
      * Whether the arrow has a stream of critical hit particles flying behind it.
      */
     public void setIsCritical(boolean critical) {
-        byte b0 = this.dataManager.get(CRITICAL).byteValue();
+        byte b0 = this.dataManager.get(CRITICAL);
 
         if (critical) {
-            this.dataManager.set(CRITICAL, Byte.valueOf((byte) (b0 | 1)));
+            this.dataManager.set(CRITICAL, (byte) (b0 | 1));
         } else {
-            this.dataManager.set(CRITICAL, Byte.valueOf((byte) (b0 & -2)));
+            this.dataManager.set(CRITICAL, (byte) (b0 & -2));
         }
     }
 
@@ -728,7 +711,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
         } else if (stack.getItem() == Items.ARROW) {
             this.potion = PotionTypes.EMPTY;
             this.customPotionEffects.clear();
-            this.dataManager.set(COLOR, Integer.valueOf(-1));
+            this.dataManager.set(COLOR, -1);
         }
     }
 
@@ -786,7 +769,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
         if (i != -1 && particleCount > 0) {
             double d0 = (i >> 16 & 255) / 255.0D;
             double d1 = (i >> 8 & 255) / 255.0D;
-            double d2 = (i >> 0 & 255) / 255.0D;
+            double d2 = (i & 255) / 255.0D;
 
             for (int j = 0; j < particleCount; ++j) {
                 this.world.spawnParticle(EnumParticleTypes.SPELL_MOB,
@@ -807,7 +790,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
         compound.setInteger("zTile", this.zTile);
         compound.setShort("life", (short) this.ticksInGround);
         ResourceLocation resourcelocation = Block.REGISTRY.getNameForObject(this.inTile);
-        compound.setString("inTile", resourcelocation == null ? "" : resourcelocation.toString());
+        compound.setString("inTile", resourcelocation.toString());
         compound.setByte("inData", (byte) this.inData);
         compound.setByte("shake", (byte) this.arrowShake);
         compound.setByte("inGround", (byte) (this.inGround ? 1 : 0));

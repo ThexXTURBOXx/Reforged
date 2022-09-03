@@ -28,7 +28,7 @@ public class EntityJavelin extends AReforgedThrowable {
 
     public EntityJavelin(World worldIn, EntityLivingBase throwerIn, ItemStack stack, int durationLoaded) {
 
-        super(worldIn, throwerIn, stack, "javelin");
+        super(worldIn, throwerIn, "javelin");
 
         setItemStack(stack);
         setDurLoaded(durationLoaded);
@@ -38,9 +38,9 @@ public class EntityJavelin extends AReforgedThrowable {
         } else if (durationLoaded > 40) {
             durationLoaded = 40;
         }
-        this.motionX *= (durationLoaded / 20);
-        this.motionY *= (durationLoaded / 20);
-        this.motionZ *= (durationLoaded / 20);
+        this.motionX *= (durationLoaded / 20d);
+        this.motionY *= (durationLoaded / 20d);
+        this.motionZ *= (durationLoaded / 20d);
         setInited();
     }
 
@@ -63,7 +63,7 @@ public class EntityJavelin extends AReforgedThrowable {
     @Override
     protected float getImpactDamage(Entity target) {
 
-        return 5 + getDurLoaded() / 10;
+        return 5 + getDurLoaded() / 10f;
     }
 
     public ItemStack getItemStack() {

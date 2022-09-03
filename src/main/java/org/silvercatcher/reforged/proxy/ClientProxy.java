@@ -2,14 +2,11 @@ package org.silvercatcher.reforged.proxy;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.entity.Render;
-import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
-import net.minecraftforge.fml.client.registry.IRenderFactory;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -21,8 +18,6 @@ import org.silvercatcher.reforged.ReforgedRegistry;
 import org.silvercatcher.reforged.entities.EntityBoomerang;
 import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
-import org.silvercatcher.reforged.entities.EntityCannon;
-import org.silvercatcher.reforged.entities.EntityCannonBall;
 import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
 import org.silvercatcher.reforged.entities.EntityDart;
 import org.silvercatcher.reforged.entities.EntityDynamite;
@@ -32,8 +27,6 @@ import org.silvercatcher.reforged.gui.ReloadOverlay;
 import org.silvercatcher.reforged.render.RenderBoomerang;
 import org.silvercatcher.reforged.render.RenderBulletBlunderbuss;
 import org.silvercatcher.reforged.render.RenderBulletMusket;
-import org.silvercatcher.reforged.render.RenderCannon;
-import org.silvercatcher.reforged.render.RenderCannonBall;
 import org.silvercatcher.reforged.render.RenderCrossbowBolt;
 import org.silvercatcher.reforged.render.RenderDart;
 import org.silvercatcher.reforged.render.RenderDynamite;
@@ -65,81 +58,36 @@ public class ClientProxy extends CommonProxy {
 
         if (GlobalValues.BOOMERANG) {
             RenderingRegistry.registerEntityRenderingHandler(EntityBoomerang.class,
-                    new IRenderFactory<EntityBoomerang>() {
-                        @Override
-                        public Render<? super EntityBoomerang> createRenderFor(RenderManager manager) {
-                            return new RenderBoomerang(manager);
-                        }
-                    });
+                    RenderBoomerang::new);
         }
 
         if (GlobalValues.CROSSBOW) {
             RenderingRegistry.registerEntityRenderingHandler(EntityCrossbowBolt.class,
-                    new IRenderFactory<EntityCrossbowBolt>() {
-                        @Override
-                        public Render<? super EntityCrossbowBolt> createRenderFor(RenderManager manager) {
-                            return new RenderCrossbowBolt(manager);
-                        }
-                    });
+                    RenderCrossbowBolt::new);
         }
 
         if (GlobalValues.MUSKET) {
             RenderingRegistry.registerEntityRenderingHandler(EntityBulletMusket.class,
-                    new IRenderFactory<EntityBulletMusket>() {
-                        @Override
-                        public Render<? super EntityBulletMusket> createRenderFor(RenderManager manager) {
-                            return new RenderBulletMusket(manager);
-                        }
-                    });
+                    RenderBulletMusket::new);
             RenderingRegistry.registerEntityRenderingHandler(EntityBulletBlunderbuss.class,
-                    new IRenderFactory<EntityBulletBlunderbuss>() {
-                        @Override
-                        public Render<? super EntityBulletBlunderbuss> createRenderFor(RenderManager manager) {
-                            return new RenderBulletBlunderbuss(manager);
-                        }
-                    });
+                    RenderBulletBlunderbuss::new);
         }
 
         if (GlobalValues.JAVELIN)
-            RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, new IRenderFactory<EntityJavelin>() {
-                @Override
-                public Render<? super EntityJavelin> createRenderFor(RenderManager manager) {
-                    return new RenderJavelin(manager);
-                }
-            });
+            RenderingRegistry.registerEntityRenderingHandler(EntityJavelin.class, RenderJavelin::new);
         if (GlobalValues.BLOWGUN)
-            RenderingRegistry.registerEntityRenderingHandler(EntityDart.class, new IRenderFactory<EntityDart>() {
-                @Override
-                public Render<? super EntityDart> createRenderFor(RenderManager manager) {
-                    return new RenderDart(manager);
-                }
-            });
+            RenderingRegistry.registerEntityRenderingHandler(EntityDart.class, RenderDart::new);
         if (GlobalValues.CALTROP)
             ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCaltrop.class, new RenderTileEntityCaltrop());
         if (GlobalValues.DYNAMITE)
             RenderingRegistry.registerEntityRenderingHandler(EntityDynamite.class,
-                    new IRenderFactory<EntityDynamite>() {
-                        @Override
-                        public Render<? super EntityDynamite> createRenderFor(RenderManager manager) {
-                            return new RenderDynamite(manager);
-                        }
-                    });
+                    RenderDynamite::new);
 
-        if (GlobalValues.CANNON) {
-            RenderingRegistry.registerEntityRenderingHandler(EntityCannon.class, new IRenderFactory<EntityCannon>() {
-                @Override
-                public Render<? super EntityCannon> createRenderFor(RenderManager manager) {
-                    return new RenderCannon(manager);
-                }
-            });
+        /*if (GlobalValues.CANNON) {
+            RenderingRegistry.registerEntityRenderingHandler(EntityCannon.class, RenderCannon::new);
             RenderingRegistry.registerEntityRenderingHandler(EntityCannonBall.class,
-                    new IRenderFactory<EntityCannonBall>() {
-                        @Override
-                        public Render<? super EntityCannonBall> createRenderFor(RenderManager manager) {
-                            return new RenderCannonBall(manager);
-                        }
-                    });
-        }
+                    RenderCannonBall::new);
+        }*/
     }
 
     @Override

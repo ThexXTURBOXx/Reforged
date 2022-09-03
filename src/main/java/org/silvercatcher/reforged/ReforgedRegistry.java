@@ -7,11 +7,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
@@ -31,7 +29,6 @@ import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
 import org.silvercatcher.reforged.items.weapons.ItemBlowGun;
 import org.silvercatcher.reforged.items.weapons.ItemBlunderbuss;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
-import org.silvercatcher.reforged.items.weapons.ItemCannon;
 import org.silvercatcher.reforged.items.weapons.ItemCrossbow;
 import org.silvercatcher.reforged.items.weapons.ItemDirk;
 import org.silvercatcher.reforged.items.weapons.ItemDynamite;
@@ -56,8 +53,8 @@ public class ReforgedRegistry {
     /**
      * Every item on that list gets registered
      */
-    public static List<Item> registrationList = new ArrayList<Item>();
-    public static List<Block> registrationListBlocks = new ArrayList<Block>();
+    public static List<Item> registrationList = new ArrayList<>();
+    public static List<Block> registrationListBlocks = new ArrayList<>();
 
     // Registry
 
@@ -197,12 +194,12 @@ public class ReforgedRegistry {
             registrationList.add(ReforgedAdditions.DIAMOND_DIRK = new ItemDirk(ToolMaterial.DIAMOND));
         }
 
-        if (GlobalValues.CANNON) {
+        /*if (GlobalValues.CANNON) {
             registrationList.add(ReforgedAdditions.CANNON = new ItemCannon().setTranslationKey("cannon")
                     .setCreativeTab(ReforgedMod.tabReforged));
             registrationList.add(ReforgedAdditions.CANNON_BALL = new Item().setTranslationKey("cannon_ball")
                     .setCreativeTab(ReforgedMod.tabReforged));
-        }
+        }*/
     }
 
     /**
@@ -219,10 +216,9 @@ public class ReforgedRegistry {
     /**
      * Helper method for registering our EventHandler
      *
-     * @param ReforgedEvents The instance of our EventHandler
+     * @param event The instance of our EventHandler
      */
     public static void registerEventHandler(Object event) {
-        FMLCommonHandler.instance().bus().register(event);
         MinecraftForge.EVENT_BUS.register(event);
     }
 
@@ -230,11 +226,10 @@ public class ReforgedRegistry {
      * Helper method for registering an Custom IRecipe
      *
      * @param name        The name for the Recipe
-     * @param recipe      The instance of the Recipe
      * @param recipeclass The class of the Recipe
      * @param category    {@link Category#SHAPED} or {@link Category#SHAPELESS}?
      */
-    public static void registerIRecipe(String name, IRecipe recipe, Class<?> recipeclass, Category category) {
+    public static void registerIRecipe(String name, Class<?> recipeclass, Category category) {
         String catString;
         if (category == Category.SHAPELESS) {
             catString = "after:minecraft:shapeless";
@@ -257,8 +252,10 @@ public class ReforgedRegistry {
                 packetId++, Side.SERVER);
     }
 
+    /**
+     * Registers all blocks out of the registrationListBlocks
+     */
     @SubscribeEvent
-    /** Registers all blocks out of the registrationListBlocks */
     public void registerBlocks(RegistryEvent.Register<Block> event) {
         IForgeRegistry<Block> reg = event.getRegistry();
         for (Block block : registrationListBlocks) {
@@ -267,8 +264,10 @@ public class ReforgedRegistry {
         }
     }
 
+    /**
+     * Registers all items out of the registrationList
+     */
     @SubscribeEvent
-    /** Registers all items out of the registrationList */
     public void registerItems(RegistryEvent.Register<Item> event) {
         IForgeRegistry<Item> reg = event.getRegistry();
         // Register all Items

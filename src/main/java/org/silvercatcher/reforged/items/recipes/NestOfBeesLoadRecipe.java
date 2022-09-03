@@ -20,7 +20,7 @@ public class NestOfBeesLoadRecipe extends ShapelessRecipes {
             System.out.append(name);
             System.out.append(":\t[");
             for (int i = 0; i < inventory.getSizeInventory(); i++) {
-                System.out.append(inventory.getStackInSlot(i) + ",");
+                System.out.append(String.valueOf(inventory.getStackInSlot(i))).append(",");
             }
             System.out.append("]");
             System.out.println();
@@ -28,9 +28,6 @@ public class NestOfBeesLoadRecipe extends ShapelessRecipes {
     }
 
     private ItemStack output = ItemStack.EMPTY;
-
-    private int aB;
-    private int NoB;
 
     public NestOfBeesLoadRecipe(String group, ItemStack result, NonNullList<Ingredient> ingredients) {
         super(group, result, ingredients);
@@ -65,23 +62,23 @@ public class NestOfBeesLoadRecipe extends ShapelessRecipes {
 
     @Override
     public boolean matches(InventoryCrafting inventory, World world) {
-        NoB = -1;
-        aB = -1;
+        int noB = -1;
+        int aB = -1;
         for (int i = 0; i < inventory.getSizeInventory(); i++) {
             ItemStack stack = inventory.getStackInSlot(i);
-            if (stack != null && !stack.isEmpty()) {
+            if (!stack.isEmpty()) {
                 if (stack.getItem() == ReforgedAdditions.ARROW_BUNDLE && aB == -1) {
                     aB = i;
                 } else if (stack.getItem() == ReforgedAdditions.NEST_OF_BEES
-                        && stack.getTagCompound().getInteger(CompoundTags.AMMUNITION) + 8 <= 32 && NoB == -1) {
-                    NoB = i;
+                        && CompoundTags.giveCompound(stack).getInteger(CompoundTags.AMMUNITION) + 8 <= 32 && noB == -1) {
+                    noB = i;
                     output = stack.copy();
                 } else {
                     return false;
                 }
             }
         }
-        return NoB != -1 && aB != -1;
+        return noB != -1 && aB != -1;
     }
 
 }
