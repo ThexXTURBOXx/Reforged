@@ -54,6 +54,10 @@ public class ReforgedRegistry {
      * Every item on that list gets registered
      */
     public static List<Item> registrationList = new ArrayList<>();
+
+    /**
+     * Every block on that list gets registered
+     */
     public static List<Block> registrationListBlocks = new ArrayList<>();
 
     // Registry
@@ -62,6 +66,10 @@ public class ReforgedRegistry {
      * Adds all items to the registrationList
      */
     public static void createItems() {
+        registrationList.add(ReforgedAdditions.CREATIVE_TAB_ICON = new Item().setTranslationKey("tab_icon"));
+        registrationList.add(ReforgedAdditions.CREATIVE_TAB_ICON_INTEGRATION
+                = new Item().setTranslationKey("tab_icon_integration"));
+
         if (GlobalValues.NEST_OF_BEES) {
             registrationList.add(ReforgedAdditions.ARROW_BUNDLE = new ItemArrowBundle());
             registrationList.add(ReforgedAdditions.NEST_OF_BEES = new ItemNestOfBees());
@@ -99,11 +107,8 @@ public class ReforgedRegistry {
         if (GlobalValues.BATTLEAXE) {
             registrationList.add(ReforgedAdditions.WOODEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.WOOD));
             registrationList.add(ReforgedAdditions.STONE_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.STONE));
-        }
-        // This has to be registered! Else, the Creative Tab would be broken!
-        registrationList.add(ReforgedAdditions.GOLDEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.GOLD));
-        registrationList.add(ReforgedAdditions.IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
-        if (GlobalValues.BATTLEAXE) {
+            registrationList.add(ReforgedAdditions.GOLDEN_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.GOLD));
+            registrationList.add(ReforgedAdditions.IRON_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.IRON));
             registrationList.add(ReforgedAdditions.DIAMOND_BATTLE_AXE = new ItemBattleAxe(ToolMaterial.DIAMOND));
         }
 
@@ -275,6 +280,7 @@ public class ReforgedRegistry {
             reg.register(
                     item.setRegistryName(new ResourceLocation(ReforgedMod.ID, item.getTranslationKey().substring(5))));
         }
+        // Register all Block items
         for (Block block : registrationListBlocks) {
             ItemBlock itemBlock = new ItemBlock(block);
             itemBlock.setRegistryName(block.getRegistryName());

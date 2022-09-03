@@ -12,7 +12,9 @@ import org.silvercatcher.reforged.enchantments.EnchantmentGoalseeker;
 public abstract class ReforgedAdditions {
 
     // Items
-    public static Item ARROW_BUNDLE,
+    public static Item CREATIVE_TAB_ICON, CREATIVE_TAB_ICON_INTEGRATION,
+
+    ARROW_BUNDLE,
 
     GUN_STOCK, BLUNDERBUSS_BARREL, MUSKET_BARREL,
 
