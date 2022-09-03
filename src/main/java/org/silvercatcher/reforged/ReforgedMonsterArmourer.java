@@ -14,6 +14,8 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.silvercatcher.reforged.api.IZombieEquippable;
+import org.silvercatcher.reforged.proxy.CommonProxy;
+import org.silvercatcher.reforged.util.Helpers;
 
 public class ReforgedMonsterArmourer {
 
@@ -23,11 +25,12 @@ public class ReforgedMonsterArmourer {
      */
     private static Item[] zombieWeapons;
 
-    private final Random random = new Random();
-
     private void equipZombie(EntityZombie zombie) {
-        if (zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).isEmpty() && random.nextInt(10) == 0) {
-            Item item = randomFrom(zombieWeapons);
+        Random random = zombie.world.rand;
+        int chance = CommonProxy.zombieSpawn;
+        if (chance != 0 && zombie.getItemStackFromSlot(EntityEquipmentSlot.MAINHAND).isEmpty()
+                && random.nextInt(chance) == 0) {
+            Item item = Helpers.randomFrom(random, zombieWeapons);
             zombie.setItemStackToSlot(EntityEquipmentSlot.MAINHAND, new ItemStack(item));
 
             zombie.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE)
@@ -61,7 +64,4 @@ public class ReforgedMonsterArmourer {
             zombieWeapons = list.toArray(new Item[0]);
     }
 
-    private Item randomFrom(Item[] selection) {
-        return selection[random.nextInt(selection.length)];
-    }
 }

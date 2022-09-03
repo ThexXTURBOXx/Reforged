@@ -24,7 +24,7 @@ public class EntityBulletMusket extends AReforgedThrowable {
 
     @Override
     protected float getImpactDamage(Entity target) {
-        return CommonProxy.damage_musket;
+        return CommonProxy.damageMusket;
     }
 
     @Override

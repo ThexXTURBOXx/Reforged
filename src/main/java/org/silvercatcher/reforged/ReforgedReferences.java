@@ -24,7 +24,7 @@ public class ReforgedReferences {
         public static final boolean KATANA = CommonProxy.katana;
         public static final boolean KNIFE = CommonProxy.knife;
         public static final boolean MUSKET = CommonProxy.musket;
-        public static final boolean NEST_OF_BEES = CommonProxy.nest_of_bees;
+        public static final boolean NEST_OF_BEES = CommonProxy.nestOfBees;
         public static final boolean SABRE = CommonProxy.sabre;
         public static final boolean KERIS = CommonProxy.keris;
         public static final boolean CALTROP = CommonProxy.caltrop;

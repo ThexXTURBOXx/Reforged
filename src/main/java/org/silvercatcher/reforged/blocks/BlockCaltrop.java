@@ -75,7 +75,7 @@ public class BlockCaltrop extends BlockContainer implements BlockExtension {
     public void onEntityCollision(World worldIn, BlockPos pos, IBlockState state, Entity entityIn) {
         if (entityIn instanceof EntityLivingBase) {
             EntityLivingBase e = (EntityLivingBase) entityIn;
-            e.attackEntityFrom(new DamageSource("caltrop").setDamageBypassesArmor(), CommonProxy.damage_caltrop);
+            e.attackEntityFrom(new DamageSource("caltrop").setDamageBypassesArmor(), CommonProxy.damageCaltrop);
             if (!worldIn.isRemote)
                 worldIn.setBlockToAir(pos);
         }

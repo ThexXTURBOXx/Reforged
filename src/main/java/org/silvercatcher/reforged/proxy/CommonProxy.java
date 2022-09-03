@@ -41,13 +41,14 @@ public class CommonProxy {
             "crossbow_reload", "crossbow_shoot", "musket_shoot", "shotgun_reload", "shotgun_shoot"};
 
     // Items for Config
-    public static boolean battleaxe, blowgun, boomerang, firerod, javelin, katana, knife, musket, nest_of_bees, sabre,
+    public static boolean battleaxe, blowgun, boomerang, firerod, javelin, katana, knife, musket, nestOfBees, sabre,
             keris, caltrop, dynamite, crossbow, pike, mace, dirk/*, cannon*/;
 
-    // Floats for Config
-    public static float damage_musket, damage_caltrop;
+    // General stuff for Config
+    public static float damageMusket, damageCaltrop;
+    public static int zombieSpawn;
 
-    public static final String items = "Items", ids = "IDs", floats = "General";
+    public static final String items = "Items", ids = "IDs", general = "General";
 
     public static SoundEvent getSound(String name) {
         return SoundEvent.REGISTRY.getObject(new ResourceLocation(ReforgedMod.ID, name));
@@ -76,7 +77,7 @@ public class CommonProxy {
         katana = config.getBoolean("Katana", items, true, "Enable the Katana");
         knife = config.getBoolean("Knife", items, true, "Enable the Knife");
         musket = config.getBoolean("Musket", items, true, "Enable the Musket and Blunderbuss");
-        nest_of_bees = config.getBoolean("Nest Of Bees", items, true, "Enable the Nest Of Bees");
+        nestOfBees = config.getBoolean("Nest Of Bees", items, true, "Enable the Nest Of Bees");
         sabre = config.getBoolean("Sabre", items, true, "Enable the Sabre");
         keris = config.getBoolean("Kris", items, true, "Enable the Kris");
         caltrop = config.getBoolean("Caltrop", items, true, "Enable the Caltrop");
@@ -87,9 +88,12 @@ public class CommonProxy {
         dirk = config.getBoolean("Dirk", items, true, "Enable the Dirk");
         //cannon = config.getBoolean("Cannon", items, true, "Enable the Cannon");
 
-        // Floats
-        damage_musket = config.getFloat("Musket Damage", floats, 10, 1, 5000, "Damage of the Musket");
-        damage_caltrop = config.getFloat("Caltrop Damage", floats, 8, 1, 5000, "Damage of the Caltrop");
+        // General
+        damageMusket = config.getFloat("Musket Damage", general, 10, 1, 5000, "Damage of the Musket");
+        damageCaltrop = config.getFloat("Caltrop Damage", general, 8, 1, 5000, "Damage of the Caltrop");
+        zombieSpawn = config.getInt("Zombie Weapon Chance", general, 50, 0, 500000,
+                "Chance that a Zombie spawns with a Reforged weapon. Set to 0 to disable. A value of n means that a "
+                        + "Zombie has a chance of 1/n to hold a weapon.");
 
         // Save config
         config.save();

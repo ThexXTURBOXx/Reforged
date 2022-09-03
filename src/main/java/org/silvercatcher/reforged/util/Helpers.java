@@ -1,6 +1,7 @@
 package org.silvercatcher.reforged.util;
 
 import java.util.List;
+import java.util.Random;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -189,6 +190,10 @@ public class Helpers {
 
     public static void playSound(World w, Entity e, String name, float volume, float pitch) {
         w.playSound(null, e.posX, e.posY, e.posZ, CommonProxy.getSound(name), SoundCategory.MASTER, volume, pitch);
+    }
+
+    public static <T> T randomFrom(Random random, T[] selection) {
+        return selection[random.nextInt(selection.length)];
     }
 
 }
