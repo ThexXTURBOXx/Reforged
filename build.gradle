@@ -14,7 +14,7 @@ apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = "0.7.6"
+version = "0.7.7"
 group = "org.silvercatcher.reforged"
 archivesBaseName = "reforged"
 
