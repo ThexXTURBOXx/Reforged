@@ -38,7 +38,7 @@ public class ItemBoomerang extends ExtendedItem {
     @Override
     public float getHitDamage() {
 
-        return Math.max(1f, (0.5f + materialDefinition.getDamageVsEntity() * 0.5f));
+        return Math.max(1f, (0.5f + materialDefinition.getDamageVsEntity() / 2f));
     }
 
     @Override

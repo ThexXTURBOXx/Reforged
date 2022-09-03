@@ -56,8 +56,7 @@ public class ItemSaber extends ItemSword implements ItemExtension, IZombieEquipp
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase attacker) {
 
         if (attacker.isRiding()) {
-            float damage = getHitDamage() / 2;
-            target.attackEntityFrom(getDamage(attacker), damage);
+            target.attackEntityFrom(getDamage(attacker), getHitDamage() / 2f);
         }
         if (stack.getItem().isDamageable())
             stack.damageItem(1, attacker);

@@ -44,7 +44,7 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
 
     @Override
     public float getHitDamage() {
-        return materialDefinition.getDamageVsEntity() + 2f;
+        return materialDefinition.getDamageVsEntity() + 4f;
     }
 
     @Override
@@ -70,13 +70,9 @@ public class ItemKatana extends ItemSword implements ItemExtension, IZombieEquip
             }
         }
 
-        float damage = getHitDamage();
-
         if (armorvalue < 12) {
-
-            damage *= 0.25f;
             target.hurtResistantTime = 0;
-            target.attackEntityFrom(getDamage(attacker), damage);
+            target.attackEntityFrom(getDamage(attacker), getHitDamage() / 2f);
         }
 
         if (armorvalue > 6) {

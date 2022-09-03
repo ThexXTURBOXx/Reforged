@@ -76,19 +76,12 @@ public interface ItemExtension {
     float getHitDamage();
 
     default float getHitDamage(ItemStack stack) {
-
         float enchantDamage = 0f;
-
         for (Entry<Enchantment, Integer> o : EnchantmentHelper.getEnchantments(stack).entrySet()) {
-
             Enchantment e = o.getKey();
-
             if (e instanceof EnchantmentDamage) {
-
                 EnchantmentDamage ed = (EnchantmentDamage) e;
-
                 if (ed.damageType == 0) {
-
                     enchantDamage += ed.calcDamageByCreature(o.getValue(), null);
                 }
             }

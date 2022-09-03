@@ -37,7 +37,6 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
     }
 
     protected boolean effectiveAgainst(IBlockState target) {
-
         Material material = target.getMaterial();
         return (material == Material.WOOD || material == Material.PLANTS || material == Material.VINE);
     }
@@ -49,7 +48,6 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 
     @Override
     public float getHitDamage() {
-
         return materialDefinition.getDamageVsEntity() * 1.5f + 4f;
     }
 
@@ -60,7 +58,6 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
 
     @Override
     public float getDestroySpeed(ItemStack stack, IBlockState block) {
-
         return effectiveAgainst(block) ? materialDefinition.getEfficiencyOnProperMaterial() + 0.5f : 1f;
     }
 
@@ -79,7 +76,6 @@ public class ItemBattleAxe extends ItemAxe implements ItemExtension, IZombieEqui
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World worldIn, IBlockState blockIn, BlockPos pos,
                                     EntityLivingBase playerIn) {
-
         if (stack.getItem().isDamageable())
             stack.damageItem(effectiveAgainst(blockIn) ? 2 : 3, playerIn);
         return true;
