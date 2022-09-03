@@ -44,6 +44,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.silvercatcher.reforged.api.CompoundTags;
@@ -51,8 +52,8 @@ import org.silvercatcher.reforged.api.ReforgedAdditions;
 
 public class EntityCrossbowBolt extends Entity implements IProjectile {
 
-    private static final Predicate<Entity> ARROW_TARGETS = Predicates
-            .and(EntitySelectors.NOT_SPECTATING, EntitySelectors.IS_ALIVE, Entity::canBeCollidedWith);
+    private static final Predicate<Entity> ARROW_TARGETS = Predicates.and(EntitySelectors.NOT_SPECTATING,
+            EntitySelectors.IS_ALIVE, Entity::canBeCollidedWith);
     private static final DataParameter<Integer> COLOR = EntityDataManager.createKey(EntityCrossbowBolt.class,
             DataSerializers.VARINT);
     private static final DataParameter<Byte> CRITICAL = EntityDataManager.createKey(EntityCrossbowBolt.class,
@@ -314,10 +315,10 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
             DamageSource damagesource;
 
             if (this.shootingEntity == null) {
-                damagesource = new EntityDamageSourceIndirect("crossbow", raytraceResultIn.entityHit, this)
+                damagesource = new EntityDamageSourceIndirect("crossbow", this, this)
                         .setProjectile();
             } else {
-                damagesource = new EntityDamageSourceIndirect("crossbow", raytraceResultIn.entityHit, shootingEntity)
+                damagesource = new EntityDamageSourceIndirect("crossbow", this, shootingEntity)
                         .setProjectile();
             }
 
@@ -488,7 +489,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
                 }
             }
 
-            if (raytraceresult != null) {
+            if (raytraceresult != null && !ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
                 this.onHit(raytraceresult);
             }
 
