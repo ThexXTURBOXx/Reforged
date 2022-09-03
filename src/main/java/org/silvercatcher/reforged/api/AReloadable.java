@@ -25,14 +25,16 @@ import javax.annotation.Nullable;
 
 public abstract class AReloadable extends Item implements ItemExtension {
 
-	private final String shootsound;
+	private final String shootSound, reloadSound;
 
-	public AReloadable(String name, String shootsound) {
+	public AReloadable(String name, String shootSound, String reloadSound) {
 		setMaxStackSize(1);
 		setMaxDamage(100);
 		setTranslationKey(name);
 		setCreativeTab(ReforgedMod.tabReforged);
-		this.shootsound = shootsound;
+
+		this.shootSound = shootSound;
+		this.reloadSound = reloadSound;
 
 		addPropertyOverride(new ResourceLocation("loading"), new IItemPropertyGetter() {
 			@SideOnly(Side.CLIENT)
@@ -110,10 +112,10 @@ public abstract class AReloadable extends Item implements ItemExtension {
 
 		if (compound.getInteger(CompoundTags.TIME) <= 0) {
 			if (playerIn.capabilities.isCreativeMode || Helpers.consumeInventoryItem(playerIn, getAmmo())) {
-				Helpers.playSound(worldIn, playerIn, "shotgun_reload", 1.0f, 1.5f);
+				Helpers.playSound(worldIn, playerIn, reloadSound, 1.0f, 1.5f);
 				compound.setInteger(CompoundTags.TIME, 1);
 			} else {
-				Helpers.playSound(worldIn, playerIn, "shotgun_reload", 1.0f, 0.7f);
+				Helpers.playSound(worldIn, playerIn, reloadSound, 1.0f, 0.7f);
 				return new ActionResult<>(EnumActionResult.FAIL, heldStack);
 			}
 		}
@@ -135,7 +137,7 @@ public abstract class AReloadable extends Item implements ItemExtension {
 				if (!player.world.isRemote) {
 					compound.setInteger(CompoundTags.TIME, getReloadTotal());
 					player.resetActiveHand();
-					Helpers.playSound(player.world, player, "shotgun_reload", 1.0f, 1.0f);
+					Helpers.playSound(player.world, player, reloadSound, 1.0f, 1.0f);
 
 					// prevent players from accidentally shooting immediately after reloading
 					if (player instanceof EntityPlayer)
@@ -170,7 +172,7 @@ public abstract class AReloadable extends Item implements ItemExtension {
 			}
 
 			compound.setInteger(CompoundTags.TIME, 0);
-			Helpers.playSound(worldIn, playerIn, shootsound, 1f, 1f);
+			Helpers.playSound(worldIn, playerIn, shootSound, 1f, 1f);
 		}
 	}
 

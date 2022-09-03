@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class ItemMusket extends AReloadable {
 
 	public ItemMusket() {
-		super("musket", "musket_shoot");
+		super("musket", "musket_shoot", "shotgun_reload");
 	}
 
 	@Override

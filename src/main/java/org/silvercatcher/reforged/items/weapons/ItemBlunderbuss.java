@@ -13,7 +13,7 @@ import net.minecraft.world.World;
 public class ItemBlunderbuss extends AReloadable {
 
 	public ItemBlunderbuss() {
-		super("blunderbuss", "shotgun_shoot");
+		super("blunderbuss", "shotgun_shoot", "shotgun_reload");
 	}
 
 	@Override
