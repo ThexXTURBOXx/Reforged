@@ -108,8 +108,8 @@ public class ReforgedEvents {
 
     @SubscribeEvent
     public void onWorldTick(WorldTickEvent e) {
-        try {
-            if (!e.world.isRemote) {
+        if (!e.world.isRemote) {
+            try {
                 for (Entity en : e.world.loadedEntityList) {
                     if (en instanceof EntityLivingBase) {
                         EntityLivingBase player = (EntityLivingBase) en;
@@ -130,8 +130,8 @@ public class ReforgedEvents {
                         }
                     }
                 }
+            } catch (Throwable ignored) {
             }
-        } catch (Throwable ignored) {
         }
     }
 

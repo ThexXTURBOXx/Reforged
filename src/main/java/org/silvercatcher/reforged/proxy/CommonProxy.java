@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.silvercatcher.reforged.ReforgedEvents;
@@ -45,9 +46,6 @@ public class CommonProxy {
 
     // Floats for Config
     public static float damage_musket, damage_caltrop;
-
-    // IDs
-    public static int goalseekerid;
 
     public static final String items = "Items", ids = "IDs", floats = "General";
 
@@ -93,10 +91,6 @@ public class CommonProxy {
         damage_musket = config.getFloat("Musket Damage", floats, 10, 1, 5000, "Damage of the Musket");
         damage_caltrop = config.getFloat("Caltrop Damage", floats, 8, 1, 5000, "Damage of the Caltrop");
 
-        // IDs
-        goalseekerid = config.getInt("Goalseeker", ids, 100, 0, 256,
-                "This specifies the Enchantment ID of the Goalseeker-Enchantment");
-
         // Save config
         config.save();
     }
@@ -119,8 +113,10 @@ public class CommonProxy {
 
     @SubscribeEvent
     public void registerEnchantments(RegistryEvent.Register<Enchantment> event) {
-        event.getRegistry().register(
-                ReforgedAdditions.goalseeker.setRegistryName(new ResourceLocation(ReforgedMod.ID, "goalseeker")));
+        if (GlobalValues.BOOMERANG) {
+            ForgeRegistries.ENCHANTMENTS.register(ReforgedAdditions.goalseeker.setRegistryName(
+                    new ResourceLocation(ReforgedMod.ID, "goalseeker")));
+        }
     }
 
     private void registerEntities() {
