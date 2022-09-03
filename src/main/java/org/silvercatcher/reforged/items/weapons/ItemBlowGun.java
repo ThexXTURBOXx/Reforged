@@ -8,6 +8,8 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.ItemExtension;
 import org.silvercatcher.reforged.api.ReforgedAdditions;
@@ -42,15 +44,11 @@ public class ItemBlowGun extends ExtendedItem {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
         if (hand == EnumHand.MAIN_HAND) {
-            net.minecraftforge.event.entity.player.ArrowNockEvent event =
-                    new net.minecraftforge.event.entity.player.ArrowNockEvent(
-                            playerIn, playerIn.getHeldItemMainhand(), EnumHand.MAIN_HAND, worldIn, true);
-            if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event))
+            ArrowNockEvent event =
+                    new ArrowNockEvent(playerIn, playerIn.getHeldItemMainhand(), EnumHand.MAIN_HAND, worldIn, true);
+            if (MinecraftForge.EVENT_BUS.post(event))
                 return event.getAction();
-
-            if (playerIn.capabilities.isCreativeMode || Helpers.getInventorySlotContainItem(playerIn, this) != -1) {
-                playerIn.setActiveHand(EnumHand.MAIN_HAND);
-            }
+            playerIn.setActiveHand(EnumHand.MAIN_HAND);
             return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
         }
         return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());
@@ -59,7 +57,7 @@ public class ItemBlowGun extends ExtendedItem {
     @Override
     public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase playerInl, int timeLeft) {
         if (timeLeft <= getMaxItemUseDuration(stack) - 15 && !worldIn.isRemote && playerInl instanceof EntityPlayer) {
-            EntityDart dart;
+            EntityDart dart = null;
             EntityPlayer playerIn = (EntityPlayer) playerInl;
             if (playerIn.inventory.hasItemStack(new ItemStack(ReforgedAdditions.DART_WITHER))) {
                 dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_WITHER));
@@ -92,9 +90,7 @@ public class ItemBlowGun extends ExtendedItem {
                     Helpers.consumeInventoryItem(playerIn, ReforgedAdditions.DART_NORMAL);
                 }
             } else if (playerIn.capabilities.isCreativeMode) {
-                dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_WITHER));
-            } else {
-                dart = null;
+                dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_NORMAL));
             }
             if (dart != null) {
                 worldIn.spawnEntity(dart);

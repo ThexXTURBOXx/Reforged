@@ -10,6 +10,8 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.ArrowNockEvent;
 import org.silvercatcher.reforged.api.ExtendedItem;
 import org.silvercatcher.reforged.api.ItemExtension;
 import org.silvercatcher.reforged.entities.EntityJavelin;
@@ -47,15 +49,13 @@ public class ItemJavelin extends ExtendedItem {
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
         if (hand == EnumHand.MAIN_HAND) {
-            net.minecraftforge.event.entity.player.ArrowNockEvent event =
-                    new net.minecraftforge.event.entity.player.ArrowNockEvent(
-                            playerIn, playerIn.getHeldItemMainhand(), EnumHand.MAIN_HAND, worldIn, true);
-            if (net.minecraftforge.common.MinecraftForge.EVENT_BUS.post(event))
+            ArrowNockEvent event = new ArrowNockEvent(
+                    playerIn, playerIn.getHeldItemMainhand(), EnumHand.MAIN_HAND, worldIn, true);
+            if (MinecraftForge.EVENT_BUS.post(event))
                 return event.getAction();
 
-            if (playerIn.capabilities.isCreativeMode || Helpers.getInventorySlotContainItem(playerIn, this) >= 0) {
-                playerIn.setActiveHand(EnumHand.MAIN_HAND);
-            }
+            playerIn.setActiveHand(EnumHand.MAIN_HAND);
+
             return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());
         }
         return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItemOffhand());

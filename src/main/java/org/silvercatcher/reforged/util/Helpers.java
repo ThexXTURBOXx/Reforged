@@ -11,12 +11,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.client.FMLClientHandler;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
@@ -36,28 +38,41 @@ public class Helpers {
     }
 
     public static boolean consumeInventoryItem(EntityPlayer player, Item itemIn) {
-        int i;
         if (player.getHeldItemMainhand().isItemEqualIgnoreDurability(new ItemStack(itemIn))) {
-            i = player.inventory.currentItem;
-        } else {
-            i = getInventorySlotContainItem(player, itemIn);
+            int i = player.inventory.currentItem;
+            shrinkInventoryItem(player.inventory.mainInventory, i);
+            return true;
         }
+
+        boolean consumed = consumeInventoryItem(player.inventory.offHandInventory, itemIn);
+        if (!consumed) {
+            consumed = consumeInventoryItem(player.inventory.mainInventory, itemIn);
+        }
+
+        return consumed;
+    }
+
+    public static boolean consumeInventoryItem(NonNullList<ItemStack> inv, Item itemIn) {
+        int i = getInventorySlotContainItem(inv, itemIn);
         if (i < 0) {
             return false;
-        } else {
-            ItemStack item = player.inventory.mainInventory.get(i);
-            item.shrink(1);
-            if (item.getCount() <= 0) {
-                player.inventory.mainInventory.set(i, ItemStack.EMPTY);
-            }
-            return true;
+        }
+        shrinkInventoryItem(inv, i);
+        return true;
+    }
+
+    public static void shrinkInventoryItem(NonNullList<ItemStack> inv, int i) {
+        ItemStack item = inv.get(i);
+        item.shrink(1);
+        if (item.getCount() <= 0) {
+            inv.set(i, ItemStack.EMPTY);
         }
     }
 
     public static void destroyCurrentEquippedItem(EntityPlayer player) {
         ItemStack orig = player.inventory.getCurrentItem();
         player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
-        net.minecraftforge.event.ForgeEventFactory.onPlayerDestroyItem(player, orig, EnumHand.MAIN_HAND);
+        ForgeEventFactory.onPlayerDestroyItem(player, orig, EnumHand.MAIN_HAND);
     }
 
     /**
@@ -95,9 +110,18 @@ public class Helpers {
         GlStateManager.disableBlend();
     }
 
-    public static int getInventorySlotContainItem(EntityPlayer player, Item itemIn) {
-        for (int i = 0; i < player.inventory.mainInventory.size(); ++i) {
-            if (player.inventory.mainInventory.get(i).isItemEqualIgnoreDurability(new ItemStack(itemIn))) {
+    public static boolean hasItem(EntityPlayer p, Item itemIn) {
+        int i = getInventorySlotContainItem(p.inventory.offHandInventory, itemIn);
+        if (i < 0) {
+            i = getInventorySlotContainItem(p.inventory.mainInventory, itemIn);
+        }
+        return i >= 0;
+    }
+
+    public static int getInventorySlotContainItem(NonNullList<ItemStack> inv, Item itemIn) {
+        ItemStack stack = new ItemStack(itemIn);
+        for (int i = 0; i < inv.size(); ++i) {
+            if (inv.get(i).isItemEqualIgnoreDurability(stack)) {
                 return i;
             }
         }

@@ -4,6 +4,10 @@ import org.silvercatcher.reforged.api.ExtendedItem;
 
 public class ItemDart extends ExtendedItem {
 
+    public ItemDart() {
+        this("normal");
+    }
+
     public ItemDart(String effect) {
         super();
         setTranslationKey("dart_" + effect);
