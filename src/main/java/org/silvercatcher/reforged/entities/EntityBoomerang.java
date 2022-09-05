@@ -167,15 +167,13 @@ public class EntityBoomerang extends AReforgedThrowable {
             if (CompoundTags.giveCompound(getItemStack()).getBoolean(CompoundTags.ENCHANTED)) {
                 if (onEntityHit(getThrower()))
                     setDead();
-            } else {
-                if (!world.isRemote) {
-                    if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
-                        entityDropItem(getItemStack(), 0.5f);
-                    } else if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
-                        Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
-                    }
-                    setDead();
+            } else if (!world.isRemote) {
+                if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
+                    entityDropItem(getItemStack(), 0.5f);
+                } else if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
+                    Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
                 }
+                setDead();
             }
         }
         rotationYaw = prevRotationYaw + (rotationYaw - prevRotationYaw) * 0.2F;
