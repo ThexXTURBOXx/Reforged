@@ -1,103 +1,85 @@
 package org.silvercatcher.reforged.gui;
 
-import org.lwjgl.opengl.GL11;
-import org.silvercatcher.reforged.api.AReloadable;
-import org.silvercatcher.reforged.api.CompoundTags;
-import org.silvercatcher.reforged.util.Helpers;
-
-//import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.client.event.FOVUpdateEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.silvercatcher.reforged.api.AReloadable;
+import org.silvercatcher.reforged.util.Helpers;
 
 public class ReloadOverlay extends Gui {
 
-	// My way to setup colors >:D
-	// The values are {Red, Green, Blue}
-	// 1 means f (full color)
-	private static final float[] red = new float[] { 1, 0, 0, 1 };
-	private static final float[] orange = new float[] { 1, 0.66F, 0, 1 };
-	private static final float[] yellow = new float[] { 1, 1, 0, 1 };
-	private static final float[] green = new float[] { 0, 1, 0, 1 };
+    private final Minecraft minecraft;
 
-	private final Minecraft minecraft;
-	private float amount = 0;
-	private float amountUnchecked = 0;
-	private float ticksBefore = -1;
+    public ReloadOverlay() {
+        super();
+        minecraft = Minecraft.getMinecraft();
+    }
 
-	public ReloadOverlay() {
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void renderReload(RenderGameOverlayEvent.Pre event) {
+        if (event.getType() != RenderGameOverlayEvent.ElementType.HOTBAR) {
+            return;
+        }
 
-		super();
-		minecraft = Minecraft.getMinecraft();
-	}
+        EntityPlayer player = minecraft.player;
+        if (player != null && player.world != null) {
+            ItemStack equipped = player.inventory.getCurrentItem();
+            Item equippedItem = equipped.getItem();
 
-	@SideOnly(Side.CLIENT)
-	@SubscribeEvent
-	public void renderReload(RenderGameOverlayEvent event) {
+            if (equippedItem instanceof AReloadable) {
+                AReloadable reloadable = (AReloadable) equippedItem;
 
-		if (event instanceof RenderGameOverlayEvent.Post
-				|| event.getType() != RenderGameOverlayEvent.ElementType.HOTBAR) {
-			return;
-		}
+                int reloadTime = reloadable.getReloadTime(equipped);
+                if (reloadTime <= 0 || reloadTime >= reloadable.getReloadTotal()) {
+                    return;
+                }
 
-		EntityPlayer player = minecraft.player;
+                float done = Math.min(reloadTime / (float) reloadable.getReloadTotal(), 1.0f);
+                int x0 = event.getResolution().getScaledWidth() / 2 - 88 + player.inventory.currentItem * 20;
+                int y0 = event.getResolution().getScaledHeight() - 3;
+                int color = MathHelper.hsvToRGB(done / 3.0f, 1.0f, 1.0f);
 
-		if (player != null && player.world != null) {
+                Helpers.drawRectangle(x0, y0 - (int) (done * 16), x0 + 16, y0, new float[]{
+                        (color >> 16 & 0xFF) / 255.0f, (color >> 8 & 0xFF) / 255.0f, (color & 0xFF) / 255.0f, 1.0f});
 
-			ItemStack equipped = player.inventory.getCurrentItem();
+                GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+                GlStateManager.enableBlend();
+            }
+        }
+    }
 
-			if (equipped != null && !equipped.isEmpty() && equipped.getItem() instanceof AReloadable) {
+    @SideOnly(Side.CLIENT)
+    @SubscribeEvent
+    public void modifyFov(FOVUpdateEvent event) {
+        EntityPlayer player = event.getEntity();
+        if (!player.isHandActive())
+            return;
 
-				AReloadable reloadable = (AReloadable) equipped.getItem();
+        ItemStack activeStack = player.getActiveItemStack();
+        Item activeItem = activeStack.getItem();
+        if (!(activeItem instanceof AReloadable))
+            return;
 
-				if (reloadable.giveCompound(equipped).getByte(CompoundTags.AMMUNITION) != AReloadable.loading) {
-					return;
-				}
+        AReloadable reloadable = (AReloadable) activeItem;
+        if (reloadable.getReloadTime(activeStack) < reloadable.getReloadTotal())
+            return;
 
-				int amountUnchecked = CompoundTags.giveCompound(equipped).getInteger(CompoundTags.TIME);
-
-				if (amountUnchecked > reloadable.getReloadTotal()) {
-					amountUnchecked = 0;
-				}
-
-				float done = (float) amountUnchecked / (float) reloadable.getReloadTotal();
-
-				GL11.glColor4f(1F, 1F, 1F, 1F);
-				GL11.glDisable(GL11.GL_LIGHTING);
-
-				int i;
-				for (i = 0; i < 9; i++) {
-					if (player.inventory.getStackInSlot(i) == equipped) {
-						break;
-					}
-				}
-
-				float[] color;
-
-				if (done > 0.5f) {
-					if (done > 0.75f) {
-						color = green;
-					} else {
-						color = yellow;
-					}
-				} else {
-					if (done > 0.25f) {
-						color = orange;
-					} else {
-						color = red;
-					}
-				}
-
-				int x0 = event.getResolution().getScaledWidth() / 2 - 88 + i * 20;
-				int y0 = event.getResolution().getScaledHeight() - 3;
-
-				Helpers.drawRectangle(x0, y0 - (int) (done * 16), x0 + 16, y0, color);
-			}
-		}
-	}
+        int useTicks = player.getItemInUseMaxCount();
+        if (useTicks >= 20) {
+            event.setNewfov(event.getNewfov() * 0.8f);
+        } else {
+            float mod = useTicks / 20.0f;
+            event.setNewfov(event.getNewfov() * (1.0f - mod * mod * 0.2f));
+        }
+    }
 }

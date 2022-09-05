@@ -1,0 +1,15 @@
+{
+    "parent": "reforged:item/musket",
+    "display": {
+      "firstperson_righthand": {
+        "rotation": [ 344, 333, 25 ],
+        "translation": [ 0.00, -2.00, -10.25 ],
+        "scale": [ 2.25, 2.25, 2.25 ]
+      },
+      "firstperson_lefthand": {
+        "rotation": [ 154, 27, 165 ],
+        "translation": [ 0.00, -2.00, -10.25 ],
+        "scale": [ 2.25, 2.25, 2.25 ]
+      }
+    }
+}

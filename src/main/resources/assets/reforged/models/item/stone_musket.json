@@ -1,7 +1,14 @@
 {
     "parent": "reforged:item/musket",
-
     "textures": {
         "layer0": "reforged:items/musket_stone"
-    }
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "loading": 1
+            },
+            "model": "reforged:item/stone_musket_loading"
+        }
+    ]
 }

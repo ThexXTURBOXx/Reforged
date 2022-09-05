@@ -1,0 +1,119 @@
+itemGroup.reforged=Reforged
+
+item.firerod.name=Firerod
+
+item.arrow_bundle.name=Ok Kılıfı
+
+item.nest_of_bees.name=Arıların Yuvası
+item.nestofbees.arrows=Oklar
+
+item.wooden_battleaxe.name=Tahta Savaş Baltası
+item.stone_battleaxe.name=Taş Savaş Baltası
+item.iron_battleaxe.name=Demir Savaş Baltası
+item.golden_battleaxe.name=Altın Savaş Baltası
+item.diamond_battleaxe.name=Elmas Savaş Baltası
+
+item.wooden_boomerang.name=Tahta Bumerang
+item.stone_boomerang.name=Taş Bumerang
+item.golden_boomerang.name=Altın Bumerang
+item.iron_boomerang.name=Demir Bumerang
+item.diamond_boomerang.name=Elmas Bumerang
+item.boomerang.langBreak=%1$s Elinizde Kırıldı.
+
+item.wooden_saber.name=Tahta Süvari Kılıcı
+item.stone_saber.name=Taş Süvari Kılıcı
+item.golden_saber.name=Altın Süvari Kılıcı
+item.iron_saber.name=Demir Süvari Kılıcı
+item.diamond_saber.name=Elmas Süvari Kılıcı
+
+item.wooden_musket.name=Tahta süngülü Tüfek
+item.stone_musket.name=Taş Süngülü Tüfek
+item.golden_musket.name=Altın Süngülü Tüfek
+item.iron_musket.name=Demir Süngülü Tüfek
+item.diamond_musket.name=Elmas Süngülü Tüfek
+
+item.wooden_knife.name=Tahta Bıçak
+item.stone_knife.name=Taş Bıçak
+item.golden_knife.name=Altın Bıçak
+item.iron_knife.name=Demir Bıçak
+item.diamond_knife.name=Elmas Bıçak
+
+item.wooden_katana.name=Tahta Katana
+item.stone_katana.name=Taş Katana
+item.golden_katana.name=Altın Katana
+item.iron_katana.name=Demir Katana
+item.diamond_katana.name=Elmas Katana
+
+item.dart_normal.name=Normal Dart
+item.dart_poison.name=Zehirli Dart
+item.dart_poison_strong.name=Çok Zehirli Dart
+item.dart_slowness.name=Yavaşlık Dartı
+item.dart_hunger.name=Açlık Dartı
+item.dart_wither.name=Wither Dartı
+item.blowgun.name=Hava Tabancası
+
+item.musket_barrel.name=Tüfek Namlusu
+item.gun_stock.name=Silah Dipçiği
+item.blunderbuss_barrel.name=Blunderbuss Namlusu
+item.blunderbuss_bullet.name=Blunderbuss Mermisi
+item.blunderbuss.name=Blunderbuss
+item.javelin.name=Cirit
+item.musket_bullet.name=Tüfek Bilyesi
+item.musket.name=Misket Tüfeği
+item.musket.loadstate=Yük Durumu
+item.musket.loadstate.empty=Boş
+item.musket.loadstate.loading=Dolduruluyor
+item.musket.loadstate.loaded=Dolduruldu
+
+item.keris.name=Kris
+
+tile.caltrop.name=DemirDikeni
+
+item.dynamite.name=Dinamit
+
+item.crossbow.name=Kundaklı Yay
+item.crossbow_bolt.name=Kundaklı Yay Civatası
+
+item.wooden_pike.name=Tahta Mızrak
+item.stone_pike.name=Taş Mızrak
+item.golden_pike.name=Altın Mızrak
+item.iron_pike.name=Demir Mızrak
+item.diamond_pike.name=Elmas Mızrak
+
+item.wooden_mace.name=Tahta Gürz
+item.stone_mace.name=Taş Gürz
+item.golden_mace.name=Altın Gürz
+item.iron_mace.name=Demir Gürz
+item.diamond_mace.name=Elmas Gürz
+
+item.wooden_dirk.name=Tahta KısaKılıç
+item.stone_dirk.name=Taş KısaKılıç
+item.golden_dirk.name=Altın KısaKılıç
+item.iron_dirk.name=Demir KısaKılıç
+item.diamond_dirk.name=Elmas Kısakılıç
+
+death.attack.boomerang=%1$s'in Kafası Bumerang Tarafından Bölündü.
+death.attack.boomerang.player=%2$s ile Dövüşürken %1$s adlı oyuncunun Kafası Bumerang tarafından bölündü.
+death.attack.javelin=%1$s Mızrak darbesi aldı.
+death.attack.javelin.player=%1$s %2$s ile dövüşürken mızrak darbesi aldı.
+death.attack.musket=%1$s Kafa Darbesi Aldı.
+death.attack.musket.player=%1$s %2$s ile savaşırken kafa darbesi aldı.
+death.attack.blunderbuss=%1$s Vuruldu.
+death.attack.blunderbuss.player=%1$s %2$s ile dövüşürken vuruldu.
+death.attack.dart=%1$s dart darbesi aldı.
+death.attack.dart.player=%1$s %2$s ile dövüşürken dart darbesi aldı.
+death.attack.caltrop=%1$s Nereye adım attığına dikkat etmedi.
+death.attack.caltrop.player=%1$s %2$s ile dövüşürken nereye adım attığına dikkat etmedi.
+death.attack.crossbow=%1$s Kundaklı yay darbesi aldı.
+death.attack.crossbow.player=%1$s %2$s ile dövüşürken Kundaklı Yay darbesi aldı..
+
+enchantment.goalseeker=Kaleci
+
+reforged.subtitle.boomerang_break=Bumerang Kırıldı
+reforged.subtitle.boomerang_hit=Bumerang İsabet Etti
+reforged.subtitle.boomerang_throw=Bumerang Fırlatıldı
+reforged.subtitle.crossbow_reload=Kundaklı Yay Dolduruluyor
+reforged.subtitle.crossbow_shoot=Kundaklı Yay Atışı
+reforged.subtitle.musket_shoot=Tüfekle Ateş Edildi
+reforged.subtitle.shotgun_reload=Silah Dolduruluyor
+reforged.subtitle.shotgun_shoot=Silah Ateş Etti

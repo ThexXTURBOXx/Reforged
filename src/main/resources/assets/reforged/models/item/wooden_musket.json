@@ -1,7 +1,14 @@
 {
     "parent": "reforged:item/musket",
-
     "textures": {
         "layer0": "reforged:items/musket_wood"
-    }
+    },
+    "overrides": [
+        {
+            "predicate": {
+                "loading": 1
+            },
+            "model": "reforged:item/wooden_musket_loading"
+        }
+    ]
 }

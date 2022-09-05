@@ -1,5 +1,8 @@
 itemGroup.reforged=Reforged
 
+item.tab_icon.name=Ignore me!
+item.tab_icon_integration.name=Ignore me!
+
 item.firerod.name=Firerod
 
 item.arrow_bundle.name=Arrow Bundle
