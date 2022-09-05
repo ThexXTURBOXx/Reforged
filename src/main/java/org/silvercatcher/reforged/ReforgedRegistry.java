@@ -218,8 +218,7 @@ public class ReforgedRegistry {
      * @param name The name for the Entity
      */
     public static void registerEntity(Class<? extends Entity> c, String name) {
-        EntityRegistry.registerModEntity(new ResourceLocation(ReforgedMod.ID, name), c, name, ++counterEntities,
-                ReforgedMod.instance, 120, 1, true);
+        EntityRegistry.registerModEntity(c, name, ++counterEntities, ReforgedMod.instance, 120, 1, true);
     }
 
     /**

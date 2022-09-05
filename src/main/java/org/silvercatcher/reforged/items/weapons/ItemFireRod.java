@@ -41,17 +41,17 @@ public class ItemFireRod extends ExtendedItem {
         }
         if (attacker instanceof EntityPlayer) {
             if (!((EntityPlayer) attacker).capabilities.isCreativeMode) {
-                stack.shrink(1);
+                stack.stackSize--;
             }
         } else {
-            stack.shrink(1);
+            stack.stackSize--;
         }
         return true;
     }
 
     @Override
-    public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand, EnumFacing side,
-                                      float hitX, float hitY, float hitZ) {
+    public EnumActionResult onItemUse(ItemStack stack, EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
+                                      EnumFacing side, float hitX, float hitY, float hitZ) {
         if (hand == EnumHand.MAIN_HAND) {
             if (worldIn.getBlockState(pos).getBlock().isFlammable(worldIn, pos, side)) {
 
@@ -60,7 +60,7 @@ public class ItemFireRod extends ExtendedItem {
                 if (!(worldIn.canBlockSeeSky(pos) && worldIn.isRaining()) && worldIn.isAirBlock(target)) {
                     worldIn.setBlockState(target, Blocks.FIRE.getDefaultState());
                     if (!player.capabilities.isCreativeMode)
-                        player.getHeldItemMainhand().shrink(1);
+                        stack.stackSize--;
                 }
             }
         }

@@ -72,7 +72,8 @@ public class ItemBoomerang extends ExtendedItem {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn,
+                                                    EnumHand hand) {
         if (hand == EnumHand.MAIN_HAND) {
             // import, otherwise references will cause chaos!
             ItemStack throwStack = playerIn.getHeldItemMainhand().copy();

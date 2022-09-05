@@ -50,7 +50,8 @@ public class ItemJavelin extends ExtendedItem {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn,
+                                                    EnumHand hand) {
         if (hand == EnumHand.MAIN_HAND) {
             ArrowNockEvent event = new ArrowNockEvent(
                     playerIn, playerIn.getHeldItemMainhand(), EnumHand.MAIN_HAND, worldIn, true);
@@ -83,7 +84,7 @@ public class ItemJavelin extends ExtendedItem {
                 worldIn.playSound(null, playerIn.posX, playerIn.posY, playerIn.posZ, SoundEvents.ENTITY_ARROW_SHOOT,
                         SoundCategory.MASTER, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
                 if (!worldIn.isRemote) {
-                    if (throwStack.getCount() > 1) {
+                    if (throwStack.stackSize > 1) {
                         throwStack = throwStack.splitStack(1);
                     }
                     worldIn.spawnEntity(

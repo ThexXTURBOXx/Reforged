@@ -34,6 +34,9 @@ public class ReloadOverlay extends Gui {
         EntityPlayer player = minecraft.player;
         if (player != null && player.world != null) {
             ItemStack equipped = player.inventory.getCurrentItem();
+            if (equipped == null)
+                return;
+
             Item equippedItem = equipped.getItem();
 
             if (equippedItem instanceof AReloadable) {
@@ -66,6 +69,9 @@ public class ReloadOverlay extends Gui {
             return;
 
         ItemStack activeStack = player.getActiveItemStack();
+        if (activeStack == null)
+            return;
+
         Item activeItem = activeStack.getItem();
         if (!(activeItem instanceof AReloadable))
             return;

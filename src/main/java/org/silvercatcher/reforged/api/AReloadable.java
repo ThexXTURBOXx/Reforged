@@ -106,7 +106,8 @@ public abstract class AReloadable extends Item implements ItemExtension {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn,
+                                                    EnumHand hand) {
         ItemStack heldStack = playerIn.getHeldItem(hand);
         if (hand != EnumHand.MAIN_HAND)
             return new ActionResult<>(EnumActionResult.FAIL, heldStack);

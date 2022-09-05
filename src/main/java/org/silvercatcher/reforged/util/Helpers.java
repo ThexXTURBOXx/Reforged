@@ -12,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
@@ -39,40 +38,42 @@ public class Helpers {
     }
 
     public static boolean consumeInventoryItem(EntityPlayer player, Item itemIn) {
-        if (player.getHeldItemMainhand().isItemEqualIgnoreDurability(new ItemStack(itemIn))) {
+        ItemStack mainHand = player.getHeldItemMainhand();
+        if (mainHand != null && mainHand.isItemEqualIgnoreDurability(new ItemStack(itemIn))) {
             int i = player.inventory.currentItem;
-            shrinkInventoryItem(player.inventory.mainInventory, i);
+            shrinkInventoryItem(player.inventory.mainInventory, i, false);
             return true;
         }
 
-        boolean consumed = consumeInventoryItem(player.inventory.offHandInventory, itemIn);
+        boolean consumed = consumeInventoryItem(player.inventory.offHandInventory, itemIn, true);
         if (!consumed) {
-            consumed = consumeInventoryItem(player.inventory.mainInventory, itemIn);
+            consumed = consumeInventoryItem(player.inventory.mainInventory, itemIn, true);
         }
 
         return consumed;
     }
 
-    public static boolean consumeInventoryItem(NonNullList<ItemStack> inv, Item itemIn) {
+    public static boolean consumeInventoryItem(ItemStack[] inv, Item itemIn, boolean removeIfEmpty) {
         int i = getInventorySlotContainItem(inv, itemIn);
         if (i < 0) {
             return false;
         }
-        shrinkInventoryItem(inv, i);
+        shrinkInventoryItem(inv, i, removeIfEmpty);
         return true;
     }
 
-    public static void shrinkInventoryItem(NonNullList<ItemStack> inv, int i) {
-        ItemStack item = inv.get(i);
-        item.shrink(1);
-        if (item.getCount() <= 0) {
-            inv.set(i, ItemStack.EMPTY);
+    public static void shrinkInventoryItem(ItemStack[] inv, int i, boolean removeIfEmpty) {
+        ItemStack item = inv[i];
+        if (removeIfEmpty && item.stackSize <= 1) {
+            inv[i] = null;
+        } else {
+            item.stackSize--;
         }
     }
 
     public static void destroyCurrentEquippedItem(EntityPlayer player) {
         ItemStack orig = player.inventory.getCurrentItem();
-        player.inventory.setInventorySlotContents(player.inventory.currentItem, ItemStack.EMPTY);
+        player.inventory.setInventorySlotContents(player.inventory.currentItem, null);
         ForgeEventFactory.onPlayerDestroyItem(player, orig, EnumHand.MAIN_HAND);
     }
 
@@ -119,10 +120,10 @@ public class Helpers {
         return i >= 0;
     }
 
-    public static int getInventorySlotContainItem(NonNullList<ItemStack> inv, Item itemIn) {
+    public static int getInventorySlotContainItem(ItemStack[] inv, Item itemIn) {
         ItemStack stack = new ItemStack(itemIn);
-        for (int i = 0; i < inv.size(); ++i) {
-            if (inv.get(i).isItemEqualIgnoreDurability(stack)) {
+        for (int i = 0; i < inv.length; ++i) {
+            if (inv[i] != null && inv[i].isItemEqualIgnoreDurability(stack)) {
                 return i;
             }
         }
@@ -149,11 +150,12 @@ public class Helpers {
                 calcdist = returnMOP.hitVec.distanceTo(pos);
             }
             Vec3d lookVec = e.getLook(0);
-            Vec3d var8 = pos.addVector(lookVec.x * var2, lookVec.y * var2, lookVec.z * var2);
+            Vec3d var8 = pos.addVector(lookVec.xCoord * var2, lookVec.yCoord * var2, lookVec.zCoord * var2);
             Entity pointedEntity = null;
             float var9 = 1.0F;
             List<Entity> list = mc.world.getEntitiesWithinAABBExcludingEntity(e, theViewBoundingBox
-                    .expand(lookVec.x * var2, lookVec.y * var2, lookVec.z * var2).expand(var9, var9, var9));
+                    .expand(lookVec.xCoord * var2, lookVec.yCoord * var2, lookVec.zCoord * var2)
+                    .expand(var9, var9, var9));
             double d = calcdist;
             for (Entity entity : list) {
                 if (entity.canBeCollidedWith()) {
@@ -163,7 +165,7 @@ public class Helpers {
                             entity.posZ + entity.width / 2);
                     aabb.expand(borderSize, borderSize, borderSize);
                     RayTraceResult mop0 = aabb.calculateIntercept(pos, var8);
-                    if (aabb.contains(pos)) {
+                    if (aabb.isVecInside(pos)) {
                         if (0.0D < d || d == 0.0D) {
                             pointedEntity = entity;
                             d = 0.0D;

@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.entities;
 
+import com.google.common.base.Optional;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ import org.silvercatcher.reforged.util.Helpers;
 
 public class EntityJavelin extends AReforgedThrowable {
 
-    public static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(EntityJavelin.class,
+    public static final DataParameter<Optional<ItemStack>> STACK = EntityDataManager.createKey(EntityJavelin.class,
             DataSerializers.OPTIONAL_ITEM_STACK);
     public static final DataParameter<Integer> DURATION = EntityDataManager.createKey(EntityJavelin.class,
             DataSerializers.VARINT);
@@ -47,7 +48,7 @@ public class EntityJavelin extends AReforgedThrowable {
     @Override
     protected void entityInit() {
         super.entityInit();
-        dataManager.register(STACK, new ItemStack(ReforgedAdditions.JAVELIN));
+        dataManager.register(STACK, Optional.of(new ItemStack(ReforgedAdditions.JAVELIN)));
         dataManager.register(DURATION, 1);
     }
 
@@ -67,7 +68,7 @@ public class EntityJavelin extends AReforgedThrowable {
     }
 
     public ItemStack getItemStack() {
-        return dataManager.get(STACK);
+        return dataManager.get(STACK).or(new ItemStack(ReforgedAdditions.JAVELIN));
     }
 
     @Override
@@ -114,7 +115,7 @@ public class EntityJavelin extends AReforgedThrowable {
 
         super.readEntityFromNBT(tagCompund);
         setDurLoaded(tagCompund.getInteger("durloaded"));
-        setItemStack(new ItemStack(tagCompund.getCompoundTag("item")));
+        setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
     }
 
     public void setDurLoaded(int durloaded) {
@@ -124,10 +125,10 @@ public class EntityJavelin extends AReforgedThrowable {
 
     public void setItemStack(ItemStack stack) {
 
-        if (stack == null || stack.isEmpty() || !(stack.getItem() instanceof ItemJavelin)) {
+        if (stack == null || !(stack.getItem() instanceof ItemJavelin)) {
             throw new IllegalArgumentException("Invalid Itemstack!");
         }
-        dataManager.set(STACK, stack);
+        dataManager.set(STACK, Optional.of(stack));
     }
 
     @Override
@@ -137,7 +138,7 @@ public class EntityJavelin extends AReforgedThrowable {
 
         tagCompound.setInteger("durloaded", getDurLoaded());
 
-        if (getItemStack() != null && !getItemStack().isEmpty()) {
+        if (getItemStack() != null) {
             tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
         }
     }

@@ -5,7 +5,6 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.OreDictionary;
@@ -29,7 +28,7 @@ public class BoomerangEnchRecipe implements IRecipe {
         }
     }
 
-    private ItemStack output = ItemStack.EMPTY;
+    private ItemStack output = null;
 
     @Override
     public ItemStack getCraftingResult(InventoryCrafting inventory) {
@@ -49,7 +48,7 @@ public class BoomerangEnchRecipe implements IRecipe {
         NBTTagCompound compound = CompoundTags.giveCompound(output);
         output.addEnchantment(ReforgedAdditions.goalseeker, 1);
         compound.setBoolean(CompoundTags.ENCHANTED, true);
-        return !this.output.isEmpty() ? this.output : output;
+        return this.output != null ? this.output : output;
     }
 
     @Override
@@ -59,7 +58,7 @@ public class BoomerangEnchRecipe implements IRecipe {
     }
 
     @Override
-    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inventory) {
+    public ItemStack[] getRemainingItems(InventoryCrafting inventory) {
         // printInventory("remain", inventory);
         return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
     }
@@ -77,7 +76,7 @@ public class BoomerangEnchRecipe implements IRecipe {
 
             ItemStack stack = inventory.getStackInSlot(i);
 
-            if (!stack.isEmpty()) {
+            if (stack != null) {
                 if (stack.getItem() instanceof ItemBoomerang
                         && !CompoundTags.giveCompound(stack).getBoolean(CompoundTags.ENCHANTED)) {
                     output = stack.copy();

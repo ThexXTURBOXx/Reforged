@@ -44,7 +44,8 @@ public class ItemBlowGun extends ExtendedItem {
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+    public ActionResult<ItemStack> onItemRightClick(ItemStack stack, World worldIn, EntityPlayer playerIn,
+                                                    EnumHand hand) {
         if (hand == EnumHand.MAIN_HAND) {
             ArrowNockEvent event =
                     new ArrowNockEvent(playerIn, playerIn.getHeldItemMainhand(), EnumHand.MAIN_HAND, worldIn, true);

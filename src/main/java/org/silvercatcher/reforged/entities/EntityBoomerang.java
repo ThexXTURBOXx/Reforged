@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.entities;
 
+import com.google.common.base.Optional;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -14,6 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
 import org.silvercatcher.reforged.api.CompoundTags;
+import org.silvercatcher.reforged.api.ReforgedAdditions;
 import org.silvercatcher.reforged.items.weapons.ItemBoomerang;
 import org.silvercatcher.reforged.material.MaterialDefinition;
 import org.silvercatcher.reforged.util.Helpers;
@@ -28,7 +30,7 @@ public class EntityBoomerang extends AReforgedThrowable {
             DataSerializers.FLOAT);
     public static final DataParameter<Float> YAW = EntityDataManager.createKey(EntityBoomerang.class,
             DataSerializers.FLOAT);
-    public static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(EntityBoomerang.class,
+    public static final DataParameter<Optional<ItemStack>> STACK = EntityDataManager.createKey(EntityBoomerang.class,
             DataSerializers.OPTIONAL_ITEM_STACK);
 
     public EntityBoomerang(World worldIn) {
@@ -45,7 +47,7 @@ public class EntityBoomerang extends AReforgedThrowable {
     @Override
     protected void entityInit() {
         super.entityInit();
-        dataManager.register(STACK, ItemStack.EMPTY);
+        dataManager.register(STACK, Optional.of(new ItemStack(ReforgedAdditions.WOODEN_BOOMERANG)));
         dataManager.register(YAW, 0F);
         dataManager.register(THROWER_X, 0F);
         dataManager.register(THROWER_Y, 0F);
@@ -64,7 +66,7 @@ public class EntityBoomerang extends AReforgedThrowable {
     }
 
     public ItemStack getItemStack() {
-        return dataManager.get(STACK);
+        return dataManager.get(STACK).or(new ItemStack(ReforgedAdditions.WOODEN_BOOMERANG));
     }
 
     public MaterialDefinition getMaterialDefinition() {
@@ -184,7 +186,7 @@ public class EntityBoomerang extends AReforgedThrowable {
     @Override
     public void readEntityFromNBT(NBTTagCompound tagCompund) {
         super.readEntityFromNBT(tagCompund);
-        setItemStack(new ItemStack(tagCompund.getCompoundTag("item")));
+        setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
         setCoords(tagCompund.getDouble("playerX"), tagCompund.getDouble("playerY"), tagCompund.getDouble("playerZ"));
         dataManager.set(YAW, tagCompund.getFloat("yawreforged"));
     }
@@ -196,10 +198,10 @@ public class EntityBoomerang extends AReforgedThrowable {
     }
 
     public void setItemStack(ItemStack stack) {
-        if (stack == null || stack.isEmpty() || !(stack.getItem() instanceof ItemBoomerang)) {
+        if (stack == null || !(stack.getItem() instanceof ItemBoomerang)) {
             throw new IllegalArgumentException("Invalid Itemstack!");
         }
-        dataManager.set(STACK, stack);
+        dataManager.set(STACK, Optional.of(stack));
     }
 
     @Override
@@ -212,7 +214,7 @@ public class EntityBoomerang extends AReforgedThrowable {
         tagCompound.setDouble("playerZ", getPosZ());
         tagCompound.setDouble("yawreforged", dataManager.get(YAW));
 
-        if (getItemStack() != null && !getItemStack().isEmpty()) {
+        if (getItemStack() != null) {
             tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
         }
     }

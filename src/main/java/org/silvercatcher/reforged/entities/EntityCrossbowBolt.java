@@ -14,7 +14,6 @@ import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.IProjectile;
-import net.minecraft.entity.MoverType;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -170,12 +169,13 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
     protected Entity findEntityOnPath(Vec3d start, Vec3d end) {
         Entity entity = null;
         List<Entity> list = this.world.getEntitiesInAABBexcluding(this,
-                this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).grow(1.0D), ARROW_TARGETS);
+                this.getEntityBoundingBox().expand(this.motionX, this.motionY, this.motionZ).expandXyz(1.0D),
+                ARROW_TARGETS);
         double d0 = 0.0D;
 
         for (Entity entity1 : list) {
             if (entity1 != this.shootingEntity || this.ticksInAir >= 5) {
-                AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().grow(0.30000001192092896D);
+                AxisAlignedBB axisalignedbb = entity1.getEntityBoundingBox().expandXyz(0.30000001192092896D);
                 RayTraceResult raytraceresult = axisalignedbb.calculateIntercept(start, end);
 
                 if (raytraceresult != null) {
@@ -265,8 +265,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
      * Tries to move the entity towards the specified location.
      */
     @Override
-    public void move(MoverType type, double x, double y, double z) {
-        super.move(type, x, y, z);
+    public void move(double x, double y, double z) {
+        super.move(x, y, z);
 
         if (this.inGround) {
             this.xTile = MathHelper.floor(this.posX);
@@ -389,9 +389,9 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
             IBlockState iblockstate = this.world.getBlockState(blockpos);
             this.inTile = iblockstate.getBlock();
             this.inData = this.inTile.getMetaFromState(iblockstate);
-            this.motionX = ((float) (raytraceResultIn.hitVec.x - this.posX));
-            this.motionY = ((float) (raytraceResultIn.hitVec.y - this.posY));
-            this.motionZ = ((float) (raytraceResultIn.hitVec.z - this.posZ));
+            this.motionX = ((float) (raytraceResultIn.hitVec.xCoord - this.posX));
+            this.motionY = ((float) (raytraceResultIn.hitVec.yCoord - this.posY));
+            this.motionZ = ((float) (raytraceResultIn.hitVec.zCoord - this.posZ));
             float f2 = MathHelper
                     .sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
             this.posX -= this.motionX / f2 * 0.05000000074505806D;
@@ -431,7 +431,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
             AxisAlignedBB axisalignedbb = iblockstate.getCollisionBoundingBox(this.world, blockpos);
 
             if (axisalignedbb != Block.NULL_AABB
-                    && axisalignedbb.offset(blockpos).contains(new Vec3d(this.posX, this.posY, this.posZ))) {
+                    && axisalignedbb.offset(blockpos).isVecInside(new Vec3d(this.posX, this.posY, this.posZ))) {
                 this.inGround = true;
             }
         }
@@ -444,7 +444,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
             int j = block.getMetaFromState(iblockstate);
 
             if ((block != this.inTile || j != this.inData)
-                    && !this.world.collidesWithAnyBlock(this.getEntityBoundingBox().grow(0.05D))) {
+                    && !this.world.collidesWithAnyBlock(this.getEntityBoundingBox().expandXyz(0.05D))) {
                 this.inGround = false;
                 this.motionX *= this.rand.nextFloat() * 0.2F;
                 this.motionY *= this.rand.nextFloat() * 0.2F;
@@ -470,7 +470,8 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
             vec3d = new Vec3d(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
 
             if (raytraceresult != null) {
-                vec3d = new Vec3d(raytraceresult.hitVec.x, raytraceresult.hitVec.y, raytraceresult.hitVec.z);
+                vec3d = new Vec3d(raytraceresult.hitVec.xCoord, raytraceresult.hitVec.yCoord,
+                        raytraceresult.hitVec.zCoord);
             }
 
             Entity entity = this.findEntityOnPath(vec3d1, vec3d);
@@ -790,7 +791,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
         compound.setInteger("zTile", this.zTile);
         compound.setShort("life", (short) this.ticksInGround);
         ResourceLocation resourcelocation = Block.REGISTRY.getNameForObject(this.inTile);
-        compound.setString("inTile", resourcelocation.toString());
+        compound.setString("inTile", resourcelocation == null ? "" : resourcelocation.toString());
         compound.setByte("inData", (byte) this.inData);
         compound.setByte("shake", (byte) this.arrowShake);
         compound.setByte("inGround", (byte) (this.inGround ? 1 : 0));

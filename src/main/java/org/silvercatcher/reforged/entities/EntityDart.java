@@ -1,5 +1,6 @@
 package org.silvercatcher.reforged.entities;
 
+import com.google.common.base.Optional;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Items;
@@ -17,7 +18,7 @@ import org.silvercatcher.reforged.api.ReforgedAdditions;
 
 public class EntityDart extends AReforgedThrowable {
 
-    public static final DataParameter<ItemStack> STACK = EntityDataManager.createKey(EntityDart.class,
+    public static final DataParameter<Optional<ItemStack>> STACK = EntityDataManager.createKey(EntityDart.class,
             DataSerializers.OPTIONAL_ITEM_STACK);
 
     public EntityDart(World worldIn) {
@@ -35,7 +36,7 @@ public class EntityDart extends AReforgedThrowable {
     @Override
     protected void entityInit() {
         super.entityInit();
-        dataManager.register(STACK, new ItemStack(ReforgedAdditions.DART_NORMAL));
+        dataManager.register(STACK, Optional.of(new ItemStack(ReforgedAdditions.DART_NORMAL)));
     }
 
     public String getEffect() {
@@ -55,7 +56,7 @@ public class EntityDart extends AReforgedThrowable {
 
     public ItemStack getItemStack() {
 
-        return dataManager.get(STACK);
+        return dataManager.get(STACK).or(new ItemStack(ReforgedAdditions.DART_NORMAL));
     }
 
     private Potion getPotion(String name) {
@@ -119,15 +120,15 @@ public class EntityDart extends AReforgedThrowable {
 
         super.readEntityFromNBT(tagCompund);
 
-        setItemStack(new ItemStack(tagCompund.getCompoundTag("item")));
+        setItemStack(ItemStack.loadItemStackFromNBT(tagCompund.getCompoundTag("item")));
     }
 
     public void setItemStack(ItemStack stack) {
 
-        if (stack == null || stack.isEmpty() || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
+        if (stack == null || !(stack.getItem().getUnlocalizedName().contains("dart"))) {
             throw new IllegalArgumentException("Invalid Itemstack!");
         }
-        dataManager.set(STACK, stack);
+        dataManager.set(STACK, Optional.of(stack));
     }
 
     @Override
@@ -135,7 +136,7 @@ public class EntityDart extends AReforgedThrowable {
 
         super.writeEntityToNBT(tagCompound);
 
-        if (getItemStack() != null && !getItemStack().isEmpty()) {
+        if (getItemStack() != null) {
             tagCompound.setTag("item", getItemStack().writeToNBT(new NBTTagCompound()));
         }
     }

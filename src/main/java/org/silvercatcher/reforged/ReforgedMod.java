@@ -1,7 +1,7 @@
 package org.silvercatcher.reforged;
 
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 import net.minecraftforge.fml.common.Mod;
@@ -19,7 +19,7 @@ import org.silvercatcher.reforged.props.IStunProperty;
 import org.silvercatcher.reforged.proxy.CommonProxy;
 
 @Mod(modid = ReforgedMod.ID, version = ReforgedMod.VERSION, name = ReforgedMod.NAME, updateJSON =
-        ReforgedMod.UPDATE_JSON, acceptedMinecraftVersions = "[1.11,1.12)")
+        ReforgedMod.UPDATE_JSON, acceptedMinecraftVersions = "[1.10,1.11)")
 public class ReforgedMod {
 
     public static final String NAME = "Reforged";
@@ -39,8 +39,8 @@ public class ReforgedMod {
 
     public static final CreativeTabs tabReforged = new CreativeTabs(ID) {
         @Override
-        public ItemStack getTabIconItem() {
-            return new ItemStack(ReforgedAdditions.CREATIVE_TAB_ICON);
+        public Item getTabIconItem() {
+            return ReforgedAdditions.CREATIVE_TAB_ICON;
         }
     };
 

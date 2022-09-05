@@ -41,7 +41,7 @@ public class ReforgedEvents {
     public void customReach(MouseEvent e) {
         if (e.getButton() == 0 && e.isButtonstate()) {
             Minecraft mc = Minecraft.getMinecraft();
-            if (!mc.player.inventory.getCurrentItem().isEmpty()) {
+            if (mc.player.inventory.getCurrentItem() != null) {
                 Item i = mc.player.inventory.getCurrentItem().getItem();
                 if (i instanceof ICustomReach && i instanceof ItemExtension) {
                     ICustomReach icr = (ICustomReach) i;

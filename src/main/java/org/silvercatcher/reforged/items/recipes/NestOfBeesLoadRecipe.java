@@ -5,7 +5,6 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import org.silvercatcher.reforged.api.CompoundTags;
@@ -26,7 +25,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
         }
     }
 
-    private ItemStack output = ItemStack.EMPTY;
+    private ItemStack output = null;
 
     @Override
     public ItemStack getCraftingResult(InventoryCrafting inventory) {
@@ -42,7 +41,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
         ItemStack output = new ItemStack(ReforgedAdditions.NEST_OF_BEES);
         NBTTagCompound compound = CompoundTags.giveCompound(output);
         compound.setInteger(CompoundTags.AMMUNITION, 8);
-        return !this.output.isEmpty() ? this.output : output;
+        return this.output != null ? this.output : output;
     }
 
     @Override
@@ -51,7 +50,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
     }
 
     @Override
-    public NonNullList<ItemStack> getRemainingItems(InventoryCrafting inventory) {
+    public ItemStack[] getRemainingItems(InventoryCrafting inventory) {
         return ForgeHooks.defaultRecipeGetRemainingItems(inventory);
     }
 
@@ -61,7 +60,7 @@ public class NestOfBeesLoadRecipe implements IRecipe {
         int aB = -1;
         for (int i = 0; i < inventory.getSizeInventory(); i++) {
             ItemStack stack = inventory.getStackInSlot(i);
-            if (!stack.isEmpty()) {
+            if (stack != null) {
                 if (stack.getItem() == ReforgedAdditions.ARROW_BUNDLE && aB == -1) {
                     aB = i;
                 } else if (stack.getItem() == ReforgedAdditions.NEST_OF_BEES
