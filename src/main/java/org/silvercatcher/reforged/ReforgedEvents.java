@@ -8,7 +8,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.nbt.NBTPrimitive;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.client.event.MouseEvent;
@@ -41,12 +41,12 @@ public class ReforgedEvents {
     public void customReach(MouseEvent e) {
         if (e.getButton() == 0 && e.isButtonstate()) {
             Minecraft mc = Minecraft.getMinecraft();
-            if (mc.player.inventory.getCurrentItem() != null) {
-                Item i = mc.player.inventory.getCurrentItem().getItem();
+            if (mc.thePlayer.inventory.getCurrentItem() != null) {
+                Item i = mc.thePlayer.inventory.getCurrentItem().getItem();
                 if (i instanceof ICustomReach && i instanceof ItemExtension) {
                     ICustomReach icr = (ICustomReach) i;
                     Entity hit = Helpers.getMouseOverExtended(icr.reach()).entityHit;
-                    if (hit != null && mc.objectMouseOver.entityHit == null && hit != mc.player) {
+                    if (hit != null && mc.objectMouseOver.entityHit == null && hit != mc.thePlayer) {
                         ReforgedMod.network.sendToServer(new MessageCustomReachAttack(hit.getEntityId()));
                     }
                 }
@@ -57,12 +57,12 @@ public class ReforgedEvents {
     @SubscribeEvent
     public void onEntityConstructing(AttachCapabilitiesEvent e) {
         if (e.getObject() instanceof EntityLivingBase) {
-            e.addCapability(IStunProperty.EXT_PROP_NAME, new ICapabilitySerializable<NBTPrimitive>() {
+            e.addCapability(IStunProperty.EXT_PROP_NAME, new ICapabilitySerializable<NBTBase.NBTPrimitive>() {
 
                 final IStunProperty inst = ReforgedMod.STUN_PROP.getDefaultInstance();
 
                 @Override
-                public void deserializeNBT(NBTPrimitive nbt) {
+                public void deserializeNBT(NBTBase.NBTPrimitive nbt) {
                     ReforgedMod.STUN_PROP.getStorage().readNBT(ReforgedMod.STUN_PROP, inst, null, nbt);
                 }
 
@@ -77,8 +77,9 @@ public class ReforgedEvents {
                 }
 
                 @Override
-                public NBTPrimitive serializeNBT() {
-                    return (NBTPrimitive) ReforgedMod.STUN_PROP.getStorage().writeNBT(ReforgedMod.STUN_PROP, inst,
+                public NBTBase.NBTPrimitive serializeNBT() {
+                    return (NBTBase.NBTPrimitive) ReforgedMod.STUN_PROP.getStorage().writeNBT(ReforgedMod.STUN_PROP,
+                            inst,
                             null);
                 }
 
@@ -96,11 +97,11 @@ public class ReforgedEvents {
             EntityPlayer p = e.player;
             String par = "\u00A7";
             if (ReforgedMod.battlegearDetected) {
-                p.sendMessage(new TextComponentString(par + "7[" + par + "bReforged" + par + "7] " + par
+                p.addChatMessage(new TextComponentString(par + "7[" + par + "bReforged" + par + "7] " + par
                         + "cYou have \"Mine & Blade Battlegear 2 - Bullseye\" " + par + "cinstalled."));
-                p.sendMessage(new TextComponentString(
+                p.addChatMessage(new TextComponentString(
                         "" + par + "cPatch loaded, because it has incompatibility issues with Reforged."));
-                p.sendMessage(new TextComponentString(
+                p.addChatMessage(new TextComponentString(
                         "" + par + "cSome Weapons will act different (but they hopefully work)!"));
             }
         }

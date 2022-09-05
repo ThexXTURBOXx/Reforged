@@ -60,11 +60,11 @@ public class ItemCrossbow extends AReloadable {
 
     public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
         EntityCrossbowBolt a = new EntityCrossbowBolt(worldIn, playerIn);
-        a.setAim(playerIn, playerIn.rotationPitch, playerIn.rotationYaw,
+        a.setAim(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0,
                 ItemBow.getArrowVelocity(40) * 3.0F, 1.0F);
         a.pickupStatus = PickupStatus.getByOrdinal(new Random().nextInt(2));
         a.setDamage(8.0D);
-        worldIn.spawnEntity(a);
+        worldIn.spawnEntityInWorld(a);
     }
 
     @Override

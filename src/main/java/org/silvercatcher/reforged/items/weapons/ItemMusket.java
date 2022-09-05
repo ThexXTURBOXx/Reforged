@@ -62,6 +62,6 @@ public class ItemMusket extends AReloadable {
 
     @Override
     public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
-        worldIn.spawnEntity(new EntityBulletMusket(worldIn, playerIn));
+        worldIn.spawnEntityInWorld(new EntityBulletMusket(worldIn, playerIn));
     }
 }

@@ -65,7 +65,7 @@ public class EntityDart extends AReforgedThrowable {
 
     @Override
     protected boolean onBlockHit(BlockPos blockPos) {
-        if (!world.isRemote && rand.nextInt(4) == 0 && !creativeUse()) {
+        if (!worldObj.isRemote && rand.nextInt(4) == 0 && !creativeUse()) {
             entityDropItem(new ItemStack(Items.FEATHER), 1);
         }
         return true;

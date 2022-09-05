@@ -61,7 +61,7 @@ public class ItemKeris extends ItemSword implements ItemExtension {
                 while (amount > 0) {
                     int j = EntityXPOrb.getXPSplit(amount);
                     amount -= j;
-                    w.spawnEntity(
+                    w.spawnEntityInWorld(
                             new EntityXPOrb(w, attacker.posX + 0.5D, attacker.posY + 0.5D, attacker.posZ + 0.5D, j));
                 }
             }

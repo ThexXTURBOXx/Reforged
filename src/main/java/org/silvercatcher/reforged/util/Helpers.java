@@ -140,7 +140,7 @@ public class Helpers {
                 e.posX - 0.5D, e.posY - 0.0D, e.posZ - 0.5D,
                 e.posX + 0.5D, e.posY + 1.5D, e.posZ + 0.5D);
         RayTraceResult returnMOP = null;
-        if (mc.world != null) {
+        if (mc.theWorld != null) {
             double var2 = distance;
             returnMOP = e.rayTrace(var2, 0);
             double calcdist = var2;
@@ -153,7 +153,7 @@ public class Helpers {
             Vec3d var8 = pos.addVector(lookVec.xCoord * var2, lookVec.yCoord * var2, lookVec.zCoord * var2);
             Entity pointedEntity = null;
             float var9 = 1.0F;
-            List<Entity> list = mc.world.getEntitiesWithinAABBExcludingEntity(e, theViewBoundingBox
+            List<Entity> list = mc.theWorld.getEntitiesWithinAABBExcludingEntity(e, theViewBoundingBox
                     .expand(lookVec.xCoord * var2, lookVec.yCoord * var2, lookVec.zCoord * var2)
                     .expand(var9, var9, var9));
             double d = calcdist;

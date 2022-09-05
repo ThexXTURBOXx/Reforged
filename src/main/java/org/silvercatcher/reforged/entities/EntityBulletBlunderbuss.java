@@ -37,6 +37,11 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
     }
 
     @Override
+    protected float getGravityVelocity() {
+        return 0;
+    }
+
+    @Override
     protected float getImpactDamage(Entity target) {
         return (((30 - ticksExisted) / 4f) + 4f);
     }

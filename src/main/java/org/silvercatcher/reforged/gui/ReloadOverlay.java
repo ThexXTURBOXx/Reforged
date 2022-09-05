@@ -31,8 +31,8 @@ public class ReloadOverlay extends Gui {
             return;
         }
 
-        EntityPlayer player = minecraft.player;
-        if (player != null && player.world != null) {
+        EntityPlayer player = minecraft.thePlayer;
+        if (player != null && player.worldObj != null) {
             ItemStack equipped = player.inventory.getCurrentItem();
             if (equipped == null)
                 return;

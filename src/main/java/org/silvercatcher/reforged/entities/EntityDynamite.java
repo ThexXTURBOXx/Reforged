@@ -36,9 +36,9 @@ public class EntityDynamite extends AReforgedThrowable {
                 double d5 = exploder.posX - x;
                 double d7 = exploder.posY + exploder.getEyeHeight() - y;
                 double d9 = exploder.posZ - z;
-                double d13 = MathHelper.sqrt(d5 * d5 + d7 * d7 + d9 * d9);
+                double d13 = MathHelper.sqrt_double(d5 * d5 + d7 * d7 + d9 * d9);
                 if (d13 != 0.0D) {
-                    double d14 = this.world.getBlockDensity(vec3, exploder.getEntityBoundingBox());
+                    double d14 = this.worldObj.getBlockDensity(vec3, exploder.getEntityBoundingBox());
                     double d10 = (1.0D - d12) * d14;
                     exploder.attackEntityFrom(setExplosionSource(e),
                             ((int) ((d10 * d10 + d10) / 2.0D * 8.0D * f3 + 1.0D)));
@@ -59,13 +59,13 @@ public class EntityDynamite extends AReforgedThrowable {
 
     @Override
     protected boolean onBlockHit(BlockPos blockPos) {
-        world.createExplosion(this, posX, posY, posZ, 2, true);
+        worldObj.createExplosion(this, posX, posY, posZ, 2, true);
         return true;
     }
 
     @Override
     protected boolean onEntityHit(Entity entity) {
-        world.createExplosion(this, posX, posY, posZ, 2, true);
+        worldObj.createExplosion(this, posX, posY, posZ, 2, true);
         return true;
     }
 

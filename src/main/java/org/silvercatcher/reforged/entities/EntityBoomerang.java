@@ -93,14 +93,14 @@ public class EntityBoomerang extends AReforgedThrowable {
 
     @Override
     protected boolean onBlockHit(BlockPos blockPos) {
-        if (!world.isRemote) {
+        if (!worldObj.isRemote) {
             if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
                 entityDropItem(getItemStack(), 0.5f);
-                Helpers.playSound(world, this, "boomerang_hit", 2.0F, 1.0F);
+                Helpers.playSound(worldObj, this, "boomerang_hit", 2.0F, 1.0F);
             } else if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
-                Helpers.playSound(world, this, "boomerang_break", 2.0F, 1.0F);
+                Helpers.playSound(worldObj, this, "boomerang_break", 2.0F, 1.0F);
             } else if (creativeUse()) {
-                Helpers.playSound(world, this, "boomerang_hit", 2.0F, 1.0F);
+                Helpers.playSound(worldObj, this, "boomerang_hit", 2.0F, 1.0F);
             }
         }
         return true;
@@ -114,10 +114,10 @@ public class EntityBoomerang extends AReforgedThrowable {
             EntityPlayer p = (EntityPlayer) hitEntity;
             if (stack.getMaxDamage() - stack.getItemDamage() > 0 && !creativeUse()) {
                 p.inventory.addItemStackToInventory(stack);
-                world.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.MASTER, 0.5F,
+                worldObj.playSound(null, posX, posY, posZ, SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.MASTER, 0.5F,
                         0.7F);
             } else if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
-                Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
+                Helpers.playSound(worldObj, this, "boomerang_break", 1.0F, 1.0F);
             }
             return true;
         } else {
@@ -125,7 +125,7 @@ public class EntityBoomerang extends AReforgedThrowable {
             hitEntity.attackEntityFrom(causeImpactDamage(hitEntity, getThrower()), getImpactDamage(hitEntity));
             ItemStack stack = getItemStack();
             if (stack.getItem().isDamageable() && stack.attemptDamageItem(1, rand)) {
-                Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
+                Helpers.playSound(worldObj, this, "boomerang_break", 1.0F, 1.0F);
                 return true;
             } else {
                 setItemStack(stack);
@@ -155,11 +155,11 @@ public class EntityBoomerang extends AReforgedThrowable {
         motionY -= (0.05D * dy);
         motionZ -= (0.05D * dz);
 
-        if (isInWater() && !world.isRemote) {
+        if (isInWater() && !worldObj.isRemote) {
             if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
                 entityDropItem(getItemStack(), 0.5f);
             } else if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
-                Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
+                Helpers.playSound(worldObj, this, "boomerang_break", 1.0F, 1.0F);
             }
             setDead();
         }
@@ -169,11 +169,11 @@ public class EntityBoomerang extends AReforgedThrowable {
             if (CompoundTags.giveCompound(getItemStack()).getBoolean(CompoundTags.ENCHANTED)) {
                 if (onEntityHit(getThrower()))
                     setDead();
-            } else if (!world.isRemote) {
+            } else if (!worldObj.isRemote) {
                 if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() > 0 && !creativeUse()) {
                     entityDropItem(getItemStack(), 0.5f);
                 } else if (getItemStack().getMaxDamage() - getItemStack().getItemDamage() <= 0) {
-                    Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
+                    Helpers.playSound(worldObj, this, "boomerang_break", 1.0F, 1.0F);
                 }
                 setDead();
             }

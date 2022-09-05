@@ -20,7 +20,7 @@ public class MessageCustomReachAttack implements IMessage {
         public IMessage onMessage(final MessageCustomReachAttack message, MessageContext ctx) {
             final EntityPlayerMP player = ctx.getServerHandler().playerEntity;
             player.getServer().addScheduledTask(() -> {
-                Entity theEntity = player.world.getEntityByID(message.entityId);
+                Entity theEntity = player.worldObj.getEntityByID(message.entityId);
                 if (player.inventory.getCurrentItem() == null || theEntity == null) {
                     return;
                 }

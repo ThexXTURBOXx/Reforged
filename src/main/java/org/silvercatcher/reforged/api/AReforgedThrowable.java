@@ -126,10 +126,10 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 
     @Override
     protected void onImpact(RayTraceResult target) {
-        if (!world.isRemote) {
+        if (!worldObj.isRemote) {
             boolean broken;
             if (target.entityHit == null) {
-                broken = world.getBlockState(target.getBlockPos()).getCollisionBoundingBox(world,
+                broken = worldObj.getBlockState(target.getBlockPos()).getCollisionBoundingBox(worldObj,
                         target.getBlockPos()) != null && onBlockHit(target.getBlockPos());
             } else {
                 if (target.entityHit instanceof EntityLivingBase && target.entityHit.equals(getThrower())

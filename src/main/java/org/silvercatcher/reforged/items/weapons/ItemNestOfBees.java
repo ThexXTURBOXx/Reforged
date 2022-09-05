@@ -171,7 +171,7 @@ public class ItemNestOfBees extends ExtendedItem {
                     1.0F);
             arrow.setDamage(2);
             arrow.setThrowableHeading(arrow.motionX, arrow.motionY, arrow.motionZ, 3 + itemRand.nextFloat() / 2f, 1.5f);
-            world.spawnEntity(arrow);
+            world.spawnEntityInWorld(arrow);
         }
         world.playSound(null, shooter.posX, shooter.posY, shooter.posZ, SoundEvents.ENTITY_FIREWORK_LAUNCH,
                 SoundCategory.MASTER, 3.0f, 1.0f);

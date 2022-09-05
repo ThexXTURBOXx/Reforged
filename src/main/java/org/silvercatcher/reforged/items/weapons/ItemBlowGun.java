@@ -96,7 +96,7 @@ public class ItemBlowGun extends ExtendedItem {
                 dart = new EntityDart(worldIn, playerIn, new ItemStack(ReforgedAdditions.DART_NORMAL));
             }
             if (dart != null) {
-                worldIn.spawnEntity(dart);
+                worldIn.spawnEntityInWorld(dart);
                 if (!playerIn.capabilities.isCreativeMode)
                     if (stack.getItem().isDamageable())
                         stack.attemptDamageItem(1, itemRand);

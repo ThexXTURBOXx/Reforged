@@ -71,9 +71,9 @@ public abstract class AReloadable extends Item implements ItemExtension {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
 
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(),
                     new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getHitDamage(), 0));
-            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
+            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getAttributeUnlocalizedName(),
                     new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", getAttackSpeed(null), 0));
         }
 
@@ -133,7 +133,7 @@ public abstract class AReloadable extends Item implements ItemExtension {
 
     @Override
     public void onUsingTick(ItemStack stack, EntityLivingBase player, int count) {
-        if (player.world.isRemote)
+        if (player.worldObj.isRemote)
             return;
 
         NBTTagCompound compound = giveCompound(stack);
@@ -141,10 +141,10 @@ public abstract class AReloadable extends Item implements ItemExtension {
 
         if (reloadTime < getReloadTotal()) {
             if (reloadTime == getReloadTotal() - 1) {
-                if (!player.world.isRemote) {
+                if (!player.worldObj.isRemote) {
                     compound.setInteger(CompoundTags.TIME, getReloadTotal());
                     player.resetActiveHand();
-                    Helpers.playSound(player.world, player, reloadSound, 1.0f, 1.0f);
+                    Helpers.playSound(player.worldObj, player, reloadSound, 1.0f, 1.0f);
 
                     // prevent players from accidentally shooting immediately after reloading
                     if (player instanceof EntityPlayer)

@@ -60,7 +60,7 @@ public class ItemBlunderbuss extends AReloadable {
     public void shoot(World worldIn, EntityLivingBase playerIn, ItemStack stack) {
 
         for (int i = 1; i < 12; i++) {
-            worldIn.spawnEntity(new EntityBulletBlunderbuss(worldIn, playerIn));
+            worldIn.spawnEntityInWorld(new EntityBulletBlunderbuss(worldIn, playerIn));
         }
     }
 }

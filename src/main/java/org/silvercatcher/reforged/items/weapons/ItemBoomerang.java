@@ -81,7 +81,7 @@ public class ItemBoomerang extends ExtendedItem {
                 Helpers.playSound(worldIn, playerIn, "boomerang_throw", 0.5F, 1.0);
                 if (!worldIn.isRemote) {
                     EntityBoomerang boomerang = new EntityBoomerang(worldIn, playerIn, throwStack);
-                    worldIn.spawnEntity(boomerang);
+                    worldIn.spawnEntityInWorld(boomerang);
                 }
             }
             return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItemMainhand());

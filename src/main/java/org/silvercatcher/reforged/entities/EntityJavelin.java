@@ -82,7 +82,7 @@ public class EntityJavelin extends AReforgedThrowable {
                 entityDropItem(getItemStack(), 0.5f);
             }
         } else {
-            Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
+            Helpers.playSound(worldObj, this, "boomerang_break", 1.0F, 1.0F);
         }
         return true;
     }
@@ -99,7 +99,7 @@ public class EntityJavelin extends AReforgedThrowable {
                 entityDropItem(getItemStack(), 0.5f);
             }
         } else {
-            Helpers.playSound(world, this, "boomerang_break", 1.0F, 1.0F);
+            Helpers.playSound(worldObj, this, "boomerang_break", 1.0F, 1.0F);
         }
         return true;
     }

@@ -87,7 +87,7 @@ public class ItemJavelin extends ExtendedItem {
                     if (throwStack.stackSize > 1) {
                         throwStack = throwStack.splitStack(1);
                     }
-                    worldIn.spawnEntity(
+                    worldIn.spawnEntityInWorld(
                             new EntityJavelin(worldIn, playerIn, throwStack, stack.getMaxItemUseDuration() - timeLeft));
                 }
             }

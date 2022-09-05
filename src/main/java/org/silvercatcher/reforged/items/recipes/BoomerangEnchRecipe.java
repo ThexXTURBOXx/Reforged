@@ -16,7 +16,7 @@ public class BoomerangEnchRecipe implements IRecipe {
 
     private static void printInventory(String name, InventoryCrafting inventory) {
 
-        if (Minecraft.getMinecraft().world != null) {
+        if (Minecraft.getMinecraft().theWorld != null) {
 
             System.out.append(name);
             System.out.append(":\t[");

@@ -1,7 +1,6 @@
 package org.silvercatcher.reforged.props;
 
 import net.minecraft.nbt.NBTBase;
-import net.minecraft.nbt.NBTPrimitive;
 import net.minecraft.nbt.NBTTagByte;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
@@ -11,7 +10,7 @@ public class StorageStun implements IStorage<IStunProperty> {
 
     @Override
     public void readNBT(Capability<IStunProperty> capability, IStunProperty instance, EnumFacing side, NBTBase nbt) {
-        instance.setStunned(((NBTPrimitive) nbt).getByte() == 1);
+        instance.setStunned(((NBTBase.NBTPrimitive) nbt).getByte() == 1);
     }
 
     @Override

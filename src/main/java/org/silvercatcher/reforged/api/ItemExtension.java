@@ -33,9 +33,9 @@ public interface ItemExtension {
 
         Multimap<String, AttributeModifier> modifiers = HashMultimap.create();
 
-        modifiers.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
+        modifiers.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(),
                 new AttributeModifier(ATTACK_DAMAGE_MODIFIER_RF, "Weapon Damage", getHitDamage(stack), 0));
-        modifiers.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
+        modifiers.put(SharedMonsterAttributes.ATTACK_SPEED.getAttributeUnlocalizedName(),
                 new AttributeModifier(ATTACK_SPEED_MODIFIER_RF, "Weapon modifier", getAttackSpeed(stack), 0));
         return modifiers;
     }

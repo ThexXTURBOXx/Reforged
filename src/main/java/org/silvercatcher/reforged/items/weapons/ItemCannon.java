@@ -24,7 +24,7 @@ public class ItemCannon extends ExtendedItem {
                                       EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (player.capabilities.isCreativeMode || Helpers.consumeInventoryItem(player, this)) {
             if (!worldIn.isRemote) {
-                worldIn.spawnEntity(new EntityCannon(worldIn, pos.getX(), pos.getY(), pos.getZ()));
+                worldIn.spawnEntityInWorld(new EntityCannon(worldIn, pos.getX(), pos.getY(), pos.getZ()));
             }
         }
         return super.onItemUse(stack, player, worldIn, pos, hand, facing, hitX, hitY, hitZ);

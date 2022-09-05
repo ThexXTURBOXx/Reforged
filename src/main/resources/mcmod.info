@@ -5,8 +5,7 @@
     "description": "A successor (not port) of Balkon's Weapon Mod, will add primitive, medieval and some gunpowder weapons.",
     "version": "${version}",
     "mcversion": [
-      "1.10",
-      "1.10.2"
+      "1.9.4"
     ],
     "url": "https://www.curseforge.com/minecraft/mc-mods/reforged",
     "updateUrl": "https://github.com/ThexXTURBOXx/Reforged/releases",

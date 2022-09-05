@@ -39,9 +39,9 @@ public abstract class ExtendedItem extends Item implements ItemExtension {
         Multimap<String, AttributeModifier> multimap = super.getItemAttributeModifiers(equipmentSlot);
 
         if (equipmentSlot == EntityEquipmentSlot.MAINHAND && isWeapon()) {
-            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getName(),
+            multimap.put(SharedMonsterAttributes.ATTACK_DAMAGE.getAttributeUnlocalizedName(),
                     new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", getHitDamage(), 0));
-            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getName(),
+            multimap.put(SharedMonsterAttributes.ATTACK_SPEED.getAttributeUnlocalizedName(),
                     new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", getAttackSpeed(null), 0));
         }
 
