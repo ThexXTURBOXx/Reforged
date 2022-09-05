@@ -489,7 +489,7 @@ public class EntityCrossbowBolt extends Entity implements IProjectile {
                 }
             }
 
-            if (raytraceresult != null && !ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
+            if (raytraceresult != null) {
                 this.onHit(raytraceresult);
             }
 
