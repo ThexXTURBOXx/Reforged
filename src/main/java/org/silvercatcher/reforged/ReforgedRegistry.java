@@ -25,6 +25,7 @@ import org.silvercatcher.reforged.items.others.ItemBulletBlunderbuss;
 import org.silvercatcher.reforged.items.others.ItemBulletMusket;
 import org.silvercatcher.reforged.items.others.ItemCrossbowBolt;
 import org.silvercatcher.reforged.items.others.ItemDart;
+import org.silvercatcher.reforged.items.others.ItemDummy;
 import org.silvercatcher.reforged.items.weapons.ItemBattleAxe;
 import org.silvercatcher.reforged.items.weapons.ItemBlowGun;
 import org.silvercatcher.reforged.items.weapons.ItemBlunderbuss;
@@ -205,6 +206,10 @@ public class ReforgedRegistry {
             registrationList.add(ReforgedAdditions.CANNON_BALL = new Item().setTranslationKey("cannon_ball")
                     .setCreativeTab(ReforgedMod.tabReforged));
         }*/
+
+        if (GlobalValues.DUMMY) {
+            registrationList.add(ReforgedAdditions.DUMMY = new ItemDummy());
+        }
     }
 
     /**

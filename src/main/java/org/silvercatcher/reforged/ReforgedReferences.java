@@ -34,6 +34,7 @@ public class ReforgedReferences {
         public static final boolean MACE = CommonProxy.mace;
         public static final boolean DIRK = CommonProxy.dirk;
         //public static final boolean CANNON = CommonProxy.cannon;
+        public static final boolean DUMMY = CommonProxy.dummy;
     }
 
     /**
@@ -82,6 +83,9 @@ public class ReforgedReferences {
 
         public static final ResourceLocation CANNON_BALL = new ResourceLocation(ReforgedMod.ID,
                 "textures/entity/cannon_ball.png");
+
+        public static final ResourceLocation DUMMY = new ResourceLocation(ReforgedMod.ID,
+                "textures/entity/dummy.png");
     }
 
 }

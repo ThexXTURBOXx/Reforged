@@ -20,6 +20,7 @@ import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
 import org.silvercatcher.reforged.entities.EntityDart;
+import org.silvercatcher.reforged.entities.EntityDummy;
 import org.silvercatcher.reforged.entities.EntityDynamite;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.entities.TileEntityCaltrop;
@@ -29,6 +30,7 @@ import org.silvercatcher.reforged.render.RenderBulletBlunderbuss;
 import org.silvercatcher.reforged.render.RenderBulletMusket;
 import org.silvercatcher.reforged.render.RenderCrossbowBolt;
 import org.silvercatcher.reforged.render.RenderDart;
+import org.silvercatcher.reforged.render.RenderDummy;
 import org.silvercatcher.reforged.render.RenderDynamite;
 import org.silvercatcher.reforged.render.RenderJavelin;
 import org.silvercatcher.reforged.render.RenderTileEntityCaltrop;
@@ -80,14 +82,16 @@ public class ClientProxy extends CommonProxy {
         if (GlobalValues.CALTROP)
             ClientRegistry.bindTileEntitySpecialRenderer(TileEntityCaltrop.class, new RenderTileEntityCaltrop());
         if (GlobalValues.DYNAMITE)
-            RenderingRegistry.registerEntityRenderingHandler(EntityDynamite.class,
-                    RenderDynamite::new);
+            RenderingRegistry.registerEntityRenderingHandler(EntityDynamite.class, RenderDynamite::new);
 
         /*if (GlobalValues.CANNON) {
             RenderingRegistry.registerEntityRenderingHandler(EntityCannon.class, RenderCannon::new);
             RenderingRegistry.registerEntityRenderingHandler(EntityCannonBall.class,
                     RenderCannonBall::new);
         }*/
+
+        if (GlobalValues.DUMMY)
+            RenderingRegistry.registerEntityRenderingHandler(EntityDummy.class, RenderDummy::new);
     }
 
     @Override

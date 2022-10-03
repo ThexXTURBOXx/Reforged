@@ -28,6 +28,7 @@ import org.silvercatcher.reforged.entities.EntityBulletBlunderbuss;
 import org.silvercatcher.reforged.entities.EntityBulletMusket;
 import org.silvercatcher.reforged.entities.EntityCrossbowBolt;
 import org.silvercatcher.reforged.entities.EntityDart;
+import org.silvercatcher.reforged.entities.EntityDummy;
 import org.silvercatcher.reforged.entities.EntityDynamite;
 import org.silvercatcher.reforged.entities.EntityJavelin;
 import org.silvercatcher.reforged.entities.TileEntityCaltrop;
@@ -42,7 +43,7 @@ public class CommonProxy {
 
     // Items for Config
     public static boolean battleaxe, blowgun, boomerang, firerod, javelin, katana, knife, musket, nestOfBees, sabre,
-            keris, caltrop, dynamite, crossbow, pike, mace, dirk/*, cannon*/;
+            keris, caltrop, dynamite, crossbow, pike, mace, dirk/*, cannon*/, dummy;
 
     // General stuff for Config
     public static float damageMusket, damageCaltrop;
@@ -87,6 +88,7 @@ public class CommonProxy {
         mace = config.getBoolean("Mace", items, true, "Enable the Mace");
         dirk = config.getBoolean("Dirk", items, true, "Enable the Dirk");
         //cannon = config.getBoolean("Cannon", items, true, "Enable the Cannon");
+        dummy = config.getBoolean("Dummy", items, true, "Enable the Dummy");
 
         // General
         damageMusket = config.getFloat("Musket Damage", general, 10, 1, 5000, "Damage of the Musket");
@@ -147,6 +149,8 @@ public class CommonProxy {
             ReforgedRegistry.registerEntity(EntityCannon.class, "Cannon");
             ReforgedRegistry.registerEntity(EntityCannonBall.class, "CannonBall");
         }*/
+        if (GlobalValues.DUMMY)
+            ReforgedRegistry.registerEntity(EntityDummy.class, "Dummy");
     }
 
     protected void registerEntityRenderers() {
