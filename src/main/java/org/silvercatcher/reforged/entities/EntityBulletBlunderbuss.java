@@ -4,6 +4,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 import org.silvercatcher.reforged.api.AReforgedThrowable;
+import org.silvercatcher.reforged.proxy.CommonProxy;
 
 public class EntityBulletBlunderbuss extends AReforgedThrowable {
 
@@ -38,12 +39,14 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 
     @Override
     protected float getImpactDamage(Entity target) {
-        return (((30 - ticksExisted) / 4f) + 4f);
+        return CommonProxy.damageBlunderbuss * (((30 - ticksExisted) / 4f) + 4f);
     }
 
     @Override
     protected boolean onEntityHit(Entity entity) {
-        entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity));
+        int prevResistantTime = entity.hurtResistantTime;
+        if (entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity)))
+            entity.hurtResistantTime = prevResistantTime;
         return true;
     }
 
@@ -53,4 +56,5 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
             setDead();
         }
     }
+
 }

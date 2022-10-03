@@ -53,7 +53,9 @@ public abstract class ReforgedAdditions {
 
     WOODEN_DIRK, STONE_DIRK, GOLDEN_DIRK, IRON_DIRK, DIAMOND_DIRK,
 
-    CANNON, CANNON_BALL;
+    /*CANNON, CANNON_BALL,*/
+
+    DUMMY;
 
     // Blocks
     public static Block CALTROP;

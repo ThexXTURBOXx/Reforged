@@ -62,7 +62,7 @@ public class EntityCannon extends EntityBoat {
 
     @Override
     public Item getItemBoat() {
-        return ReforgedAdditions.CANNON;
+        return null;//ReforgedAdditions.CANNON;
     }
 
 }
