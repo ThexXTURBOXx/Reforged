@@ -24,6 +24,7 @@ public abstract class AReforgedThrowable extends EntityThrowable {
 
     public AReforgedThrowable(World worldIn, EntityLivingBase thrower, String damageName) {
         super(worldIn, thrower);
+        this.ignoreEntity = thrower;
         this.damageName = damageName;
         setLocationAndAngles(thrower.posX, thrower.posY + thrower.getEyeHeight(), thrower.posZ, thrower.rotationYaw,
                 thrower.rotationPitch);
