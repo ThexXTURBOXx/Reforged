@@ -46,7 +46,7 @@ public class CommonProxy {
             keris, caltrop, dynamite, crossbow, pike, mace, dirk/*, cannon*/, dummy;
 
     // General stuff for Config
-    public static float damageMusket, damageCaltrop;
+    public static float damageMusket, damageBlunderbuss, damageCaltrop;
     public static int zombieSpawn;
 
     public static final String items = "Items", ids = "IDs", general = "General";
@@ -91,8 +91,9 @@ public class CommonProxy {
         dummy = config.getBoolean("Dummy", items, true, "Enable the Dummy");
 
         // General
-        damageMusket = config.getFloat("Musket Damage", general, 10, 1, 5000, "Damage of the Musket");
-        damageCaltrop = config.getFloat("Caltrop Damage", general, 8, 1, 5000, "Damage of the Caltrop");
+        damageMusket = config.getFloat("Musket Damage", general, 10, 0, 5000, "Damage of the Musket");
+        damageBlunderbuss = config.getFloat("Blunderbuss Damage Multiplier", general, 1, 0, 5000, "Damage Multiplier for the Blunderbuss");
+        damageCaltrop = config.getFloat("Caltrop Damage", general, 8, 0, 5000, "Damage of the Caltrop");
         zombieSpawn = config.getInt("Zombie Weapon Chance", general, 50, 0, 500000,
                 "Chance that a Zombie spawns with a Reforged weapon. Set to 0 to disable. A value of n means that a "
                         + "Zombie has a chance of 1/n to hold a weapon.");
