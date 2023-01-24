@@ -44,7 +44,9 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
 
     @Override
     protected boolean onEntityHit(Entity entity) {
-        entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity));
+        int prevResistantTime = entity.hurtResistantTime;
+        if (entity.attackEntityFrom(causeImpactDamage(entity, getThrower()), getImpactDamage(entity)))
+            entity.hurtResistantTime = prevResistantTime;
         return true;
     }
 
@@ -54,4 +56,5 @@ public class EntityBulletBlunderbuss extends AReforgedThrowable {
             setDead();
         }
     }
+
 }
